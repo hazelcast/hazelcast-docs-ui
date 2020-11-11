@@ -2,28 +2,24 @@
   /* colors */
   --neutral-white: #fff;
   --neutral-lighter: #fafafa;
-  --neutral: #DBDBDB;
-  --neutral-light: #B7C1CB;
+  --neutral: #dbdbdb;
+  --neutral-light: #b7c1cb;
   --secondary-text: #707482;
-  --text: #041A3B;
-
-  --primary-light: #2D7DE4;
-  --primary: #2160C0;
-  --primary-dark: #003B87;
-
-  --info-light: #CBDBFF;
-  --info: #4A71C4;
-  --info-dark: #4A71C4;
-
-  --accessibility-outline: #9648BD;
-  --error: #B00020;
-  --warning-light: #F9B721;
-  --warning: #F47027;
-  --warning-dark: #AD6200;
-  --success-light: #68C200;
-  --success: #008A00;
-  --success-dark: #005C09;
-
+  --text: #041a3b;
+  --primary-light: #2d7de4;
+  --primary: #2160c0;
+  --primary-dark: #003b87;
+  --info-light: #cbdbff;
+  --info: #4a71c4;
+  --info-dark: #4a71c4;
+  --accessibility-outline: #9648bd;
+  --error: #b00020;
+  --warning-light: #f9b721;
+  --warning: #f47027;
+  --warning-dark: #ad6200;
+  --success-light: #68c200;
+  --success: #008a00;
+  --success-dark: #005c09;
   --color-gray-30: #8e8e8e;
   --color-gray-50: #808080;
   --color-gray-70: #5d5d5d;
@@ -103,8 +99,8 @@
   --heading-font-weight: normal;
   --alt-heading-font-weight: var(--body-font-weight-bold);
   --section-divider-color: var(--panel-border-color);
-  --link-font-color: #2160C0;
-  --link_hover-font-color: #2160C0;
+  --link-font-color: var(--primary);
+  --link_hover-font-color: var(--primary);
   --link_unresolved-font-color: var(--important-color);
   --abstract-background: var(--neutral-light);
   --abstract-font-color: var(--text);

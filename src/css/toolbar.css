@@ -46,10 +46,12 @@
   .edit-this-page {
     display: block;
   }
+
   .git {
     background: transparent url(../img/github.svg) center left no-repeat;
     padding-left: 1.75rem;
   }
+
   .nav-toggle {
     display: none;
   }
@@ -62,7 +64,7 @@
     padding: 0;
     width: 2.5rem;
   }
-  
+
   .home-link:hover,
   .home-link.is-current {
     background-image: url(../img/home.svg);
