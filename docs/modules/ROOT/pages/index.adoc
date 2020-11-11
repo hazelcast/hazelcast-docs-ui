@@ -17,7 +17,7 @@
 :uri-git: https://git-scm.com
 :uri-git-dl: {uri-git}/downloads
 
-This project produces the {uri-preview}[default UI bundle] for documentation sites generated with {uri-antora}[Antora].
+This **project** produces the {uri-preview}[default UI bundle] for documentation sites generated with {uri-antora}[Antora].
 It contains the UI assets (page templates, CSS, JavaScript, images, etc.) and a Gulp build script.
 The build can be used to preview the UI locally (featuring live updates), or to package it for consumption by the Antora site generator.
 

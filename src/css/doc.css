@@ -24,6 +24,7 @@
 .doc h4,
 .doc h5,
 .doc h6 {
+  font-family: var(--heading-font-family);
   color: var(--heading-font-color);
   font-weight: var(--heading-font-weight);
   hyphens: none;
@@ -659,4 +660,63 @@
 .doc th.tableblock,
 .doc td.tableblock {
   word-break: break-word; /* overflow-wrap for table cells; gives space higher precedence than hyphen opportunity */
+}
+
+.doc .tabs ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0 -0.25rem 0 0;
+  padding: 0;
+}
+
+.doc .tabs li {
+  align-items: center;
+  border: 1px solid var(--neutral-light);
+  border-radius: 5px;
+  border-bottom: 0;
+  cursor: pointer;
+  display: flex;
+  font-weight: var(--weight-bold);
+  height: 2.5rem;
+  line-height: 1;
+  margin-right: 0.25rem;
+  padding: 0 1.5rem;
+  position: relative;
+}
+
+.doc .tabs li + li {
+  margin-top: 0;
+}
+
+.doc .tabset.is-loading .tabs li:not(:first-child),
+.doc .tabset:not(.is-loading) .tabs li:not(.is-active) {
+  background-color: var(--color-text);
+  color: var(--color-brand-white);
+}
+
+.doc .tabset.is-loading .tabs li:first-child::after,
+.doc .tabs li.is-active::after {
+  background-color: var(--primary-dark);
+  content: "";
+  display: block;
+  height: 3px; /* Chrome doesn't always paint the line accurately, so add a little extra */
+  position: absolute;
+  bottom: -1.5px;
+  left: 0;
+  right: 0;
+}
+
+.doc .tabset > .content {
+  border: 1px solid var(--neutral-light);
+  padding: 1.25rem;
+}
+
+.doc .tabset.is-loading .tab-pane:not(:first-child),
+.doc .tabset:not(.is-loading) .tab-pane:not(.is-active) {
+  display: none;
+}
+
+.doc .tab-pane > :first-child {
+  margin-top: 0;
 }

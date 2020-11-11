@@ -271,7 +271,7 @@ body {
   align-items: center;
   background: var(--navbar-button-background);
   border: 1px solid var(--navbar-button-border-color);
-  border-radius: 0.15rem;
+  border-radius: 5px;
   height: 1.75rem;
   color: var(--navbar-button-font-color);
   padding: 0 0.75em;

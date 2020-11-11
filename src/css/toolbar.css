@@ -28,29 +28,9 @@
   margin-right: -0.25rem;
 }
 
-@media screen and (min-width: 1024px) {
-  .nav-toggle {
-    display: none;
-  }
-}
-
 .nav-toggle.is-active {
   background-image: url(../img/back.svg);
   background-size: 41.5%;
-}
-
-.home-link {
-  background: url(../img/home-o.svg) no-repeat 50% 45%;
-  background-size: 50%;
-  display: block;
-  height: 2.5rem;
-  padding: 0;
-  width: 2.5rem;
-}
-
-.home-link:hover,
-.home-link.is-current {
-  background-image: url(../img/home.svg);
 }
 
 .edit-this-page {
@@ -58,12 +38,33 @@
   padding-right: 0.5rem;
 }
 
+.toolbar .edit-this-page a {
+  color: var(--toolbar-muted-color);
+}
+
 @media screen and (min-width: 1024px) {
   .edit-this-page {
     display: block;
   }
-}
+  .git {
+    background: transparent url(../img/github.svg) center left no-repeat;
+    padding-left: 1.75rem;
+  }
+  .nav-toggle {
+    display: none;
+  }
 
-.toolbar .edit-this-page a {
-  color: var(--toolbar-muted-color);
+  .home-link {
+    background: url(../img/home-o.svg) no-repeat 50% 45%;
+    background-size: 50%;
+    display: block;
+    height: 2.5rem;
+    padding: 0;
+    width: 2.5rem;
+  }
+  
+  .home-link:hover,
+  .home-link.is-current {
+    background-image: url(../img/home.svg);
+  }
 }
