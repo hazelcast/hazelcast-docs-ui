@@ -5,7 +5,7 @@
   src:
     local("Open Sans"),
     local("Open Sans-Regular"),
-    url(~fontsource-open-sans/files/open-sans-all-400-normal.woff) format("woff");
+    url(../font/open-sans-all-400-normal.woff) format("woff");
 }
 
 @font-face {
@@ -15,7 +15,7 @@
   src:
     local("Open Sans"),
     local("Open Sans-Italic"),
-    url(~fontsource-open-sans/files/open-sans-all-400-italic.woff) format("woff");
+    url(../font/open-sans-all-400-italic.woff) format("woff");
 }
 
 @font-face {
@@ -25,5 +25,5 @@
   src:
     local("Open Sans"),
     local("Open Sans-Bold"),
-    url(~fontsource-open-sans/files/open-sans-all-600-normal.woff) format("woff");
+    url(../font/open-sans-all-600-normal.woff) format("woff");
 }

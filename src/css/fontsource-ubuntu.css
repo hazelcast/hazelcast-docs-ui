@@ -5,7 +5,7 @@
   src:
     local("Ubuntu"),
     local("Ubuntu-Regular"),
-    url(~fontsource-ubuntu/files/ubuntu-all-400-normal.woff) format("woff");
+    url(../font/ubuntu-all-400-normal.woff) format("woff");
 }
 
 @font-face {
@@ -15,5 +15,5 @@
   src:
     local("Ubuntu"),
     local("Ubuntu-Italic"),
-    url(~fontsource-ubuntu/files/ubuntu-all-400-italic.woff) format("woff");
+    url(../font/ubuntu-all-400-italic.woff) format("woff");
 }

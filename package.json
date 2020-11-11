@@ -55,8 +55,5 @@
     "vinyl-buffer": "~1.0",
     "vinyl-fs": "~3.0"
   },
-  "dependencies": {
-    "fontsource-open-sans": "^3.0.9",
-    "fontsource-ubuntu": "^3.0.9"
-  }
+  "dependencies": {}
 }
