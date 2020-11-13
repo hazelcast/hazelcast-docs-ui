@@ -89,7 +89,7 @@
   --warning-color: var(--warning);
   --warning-on-color: var(--neutral-white);
   /* doc */
-  --doc-font-color: var(--secondary-text);
+  --doc-font-color: var(--text);
   --doc-font-size: inherit;
   --doc-font-size--desktop: calc(17 / var(--rem-base) * 1rem);
   --doc-line-height: 1.4;
