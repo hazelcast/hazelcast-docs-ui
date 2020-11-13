@@ -31,11 +31,6 @@ jobs:
       run: |
         git config --global user.name 'JakeSCahill'
         git config --global user.email '45230295+JakeSCahill@users.noreply.github.com'
-        git add -f build
+        git add build
         git commit -m "Bundle UI"
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.BUNDLE }}
-        branch: master
-        repository: JakeSCahill/docs-poc
+        git push
