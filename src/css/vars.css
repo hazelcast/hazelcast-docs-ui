@@ -35,7 +35,7 @@
   --body-font-size--desktop: 1.125em; /* 18px */
   --body-font-size--print: 0.9375em; /* 15px */
   --body-line-height: 1.4;
-  --body-font-color: var(--secondary-text);
+  --body-font-color: var(--text);
   --body-font-family: "Open Sans", sans-serif;
   --body-font-weight-bold: 600;
   --monospace-font-family: "Roboto Mono", monospace;
@@ -93,8 +93,8 @@
   --doc-font-size: inherit;
   --doc-font-size--desktop: calc(17 / var(--rem-base) * 1rem);
   --doc-line-height: 1.4;
-  --doc-margin: 0 auto;
-  --doc-margin--desktop: 0 2rem;
+  --doc-margin: auto;
+  --doc-margin--desktop: auto;
   --heading-font-color: var(--text);
   --heading-font-weight: normal;
   --alt-heading-font-weight: var(--body-font-weight-bold);
@@ -103,11 +103,11 @@
   --link_hover-font-color: var(--primary);
   --link_unresolved-font-color: var(--important-color);
   --abstract-background: var(--neutral-light);
-  --abstract-font-color: var(--text);
+  --abstract-font-color: var(--secondary-text);
   --abstract-border-color: var(--panel-border-color);
   --admonition-background: var(--panel-background);
   --admonition-label-font-weight: var(--body-font-weight-bold);
-  --caption-font-color: var(--color-gray-70);
+  --caption-font-color: var(--secondary-text);
   --caption-font-weight: var(--body-font-weight-bold);
   --code-background: var(--panel-background);
   --code-font-color: var(--body-font-color);
@@ -120,8 +120,8 @@
   --pre-annotation-font-color: var(--neutral-light);
   --quote-background: var(--panel-background);
   --quote-border-color: var(--color-gray-70);
-  --quote-font-color: var(--color-gray-70);
-  --quote-attribution-font-color: var(--color-gray-30);
+  --quote-font-color: var(--secondary-text);
+  --quote-attribution-font-color: var(--csecondary-text);
   --sidebar-background: var(--panel-background);
   --table-border-color: var(--panel-border-color);
   /* footer */
@@ -142,7 +142,7 @@
   --nav-width: calc(270 / var(--rem-base) * 1rem);
   --toc-top: calc(var(--body-top) + var(--toolbar-height));
   --toc-height: calc(100vh - var(--toc-top) - 2.5rem);
-  --toc-width: calc(162 / var(--rem-base) * 1rem);
+  --toc-width: calc(200 / var(--rem-base) * 1rem);
   --toc-width--widescreen: calc(216 / var(--rem-base) * 1rem);
   --doc-max-width: calc(720 / var(--rem-base) * 1rem);
   --doc-max-width--desktop: calc(828 / var(--rem-base) * 1rem);
