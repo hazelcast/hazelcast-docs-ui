@@ -3,7 +3,7 @@
   top: var(--navbar-height);
   left: 0;
   width: 100%;
-  font-size: calc(17 / var(--rem-base) * 1rem);
+  font-size: calc(20 / var(--rem-base) * 1rem);
   z-index: var(--z-index-nav);
   visibility: hidden;
 }

@@ -673,7 +673,7 @@
 .doc .tabs li {
   align-items: center;
   border: 1px solid var(--neutral-light);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   border-bottom: 0;
   cursor: pointer;
   display: flex;
