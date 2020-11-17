@@ -3,8 +3,10 @@
 :!sectids:
 
 ++++
-<div class="container">
+<div class="content-container">
+<div class="home-search">
 <input id="search-input-home" type="text" placeholder="Search docs">
+</div>
 <div class="cards">
 ++++
 

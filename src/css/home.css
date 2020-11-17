@@ -12,11 +12,19 @@
   font-size: 2rem;
 }
 
-.container {
+.content-container {
   padding-top: 2rem;
   padding-bottom: 8.7rem;
   max-width: 1100px;
   margin: 0 auto;
+}
+
+.home-search {
+  position: relative;
+  z-index: 1000;
+  width: 70%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #search-input-home {
@@ -27,7 +35,8 @@
   color: #041a3b;
   font-family: inherit;
   font-size: 1rem;
-  width: 70%;
+  width: 100%;
+  z-index: -1;
   line-height: 1.5;
   padding: 1em;
   margin-bottom: 3rem;
@@ -35,27 +44,16 @@
 
 .search-result-dropdown-menu-home {
   position: absolute;
-  z-index: 100;
   display: block;
-  right: 0;
-  left: inherit;
+  left: 0;
   top: 100%;
   border-radius: var(--border-radius);
   margin: 6px 0 0;
   padding: 0;
-  text-align: left;
   height: auto;
   background: transparent;
   border: none;
-  max-width: 600px;
-  min-width: 500px;
-  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.2), 0 2px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-@media screen and (max-width: 768px) {
-  .search-result-dropdown-menu-home {
-    min-width: calc(100vw - 3.75rem);
-  }
+  width: 100%;
 }
 
 .search-result-dataset {
@@ -114,6 +112,7 @@
 .cards {
   display: -webkit-flex;
   display: flex;
+  z-index: -1;
   -webkit-justify-content: center;
   justify-content: center;
   -webkit-flex-wrap: wrap;
@@ -129,7 +128,7 @@
   position: relative;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  background: #fefff9;
+  background: var(--neutral-white);
   color: var(--text);
   text-decoration: none;
   -moz-box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
