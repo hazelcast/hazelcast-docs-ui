@@ -312,10 +312,14 @@
   display: block;
 }
 
+.doc .image > img {
+  display: block;
+}
+
 .doc .imageblock img,
 .doc .image > img {
   height: auto;
-  max-width: 100%;
+  max-width: var(--doc-max-width);
 }
 
 #preamble .abstract blockquote {
