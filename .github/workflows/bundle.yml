@@ -28,6 +28,7 @@ jobs:
       run: |
         git config --global user.name 'JakeSCahill'
         git config --global user.email '45230295+JakeSCahill@users.noreply.github.com'
+        git pull origin master
         git add build
         git commit -m "Bundle UI"
         git push origin HEAD:master
