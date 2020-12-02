@@ -26,6 +26,7 @@
 
 #feedback-response {
   width: 100%;
+  font-size: calc(15 / var(--rem-base) * 1rem);
   display: none;
 }
 
