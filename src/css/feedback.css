@@ -7,9 +7,11 @@
 #feedback-prompt a {
   display: inline-block;
   text-align: center;
-  padding: 5px;
+  padding: 2px;
   border-radius: var(--border-radius);
   text-decoration: none;
+  font-size: calc(15 / var(--rem-base) * 1rem);
+  color: var(--toc-heading-font-color);
 }
 
 #yes-button:hover {
@@ -18,7 +20,7 @@
 }
 
 #no-button:hover {
-  background-color: var(--warning-light);
+  background-color: var(--error);
   color: var(--neutral-white);
 }
 
@@ -29,6 +31,7 @@
 
 #additional-feedback {
   width: 100%;
+  margin-top: 1rem;
   color: var(--toc-heading-font-color);
   font-size: calc(16 / var(--rem-base) * 1rem);
 }
