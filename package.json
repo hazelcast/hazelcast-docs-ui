@@ -1,11 +1,11 @@
 {
-  "name": "@antora/ui-default",
-  "description": "An archetype project that produces a UI for creating documentation sites with Antora",
-  "homepage": "https://gitlab.com/antora/antora-ui-default",
+  "name": "hazelcast-docs-ui",
+  "description": "A modified version of the default Antora UI, which includes design components for the Hazelcast documentation site",
+  "homepage": "https://github.com/JakeSCahill/docs-poc-ui",
   "license": "MPL-2.0",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/antora/antora-ui-default.git"
+    "url": "https://github.com/JakeSCahill/docs-poc-ui.git"
   },
   "engines": {
     "node": ">= 8.0.0"
@@ -19,7 +19,7 @@
     "browser-pack-flat": "~3.4",
     "browserify": "~16.5",
     "cssnano": "~4.1",
-    "eslint": "~6.8",
+    "eslint": "^6.2.2",
     "eslint-config-standard": "~14.1",
     "eslint-plugin-import": "~2.20",
     "eslint-plugin-node": "~11.1",
@@ -47,7 +47,7 @@
     "prettier-eslint": "~9.0",
     "require-directory": "~2.1",
     "require-from-string": "~2.0",
-    "stylelint": "~13.3",
+    "stylelint": "^10.1.0",
     "stylelint-config-standard": "~20.0",
     "typeface-roboto": "0.0.75",
     "typeface-roboto-mono": "0.0.75",

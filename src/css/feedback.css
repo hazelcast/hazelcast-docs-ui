@@ -1,0 +1,40 @@
+/* Feedback question and buttons */
+
+#feedback-prompt {
+  width: 100%;
+}
+
+#feedback-prompt a {
+  display: inline-block;
+  text-align: center;
+  padding: 5px;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+}
+
+#yes-button:hover {
+  background-color: var(--success-dark);
+  color: var(--neutral-white);
+}
+
+#no-button:hover {
+  background-color: var(--warning-light);
+  color: var(--neutral-white);
+}
+
+#feedback-response {
+  width: 100%;
+  display: none;
+}
+
+#additional-feedback {
+  width: 100%;
+  color: var(--toc-heading-font-color);
+  font-size: calc(16 / var(--rem-base) * 1rem);
+}
+
+@media screen and (min-width: 1024px) {
+  #additional-feedback {
+    font-size: calc(15 / var(--rem-base) * 1rem);
+  }
+}

@@ -11,41 +11,40 @@
   var headings
   var headingSelector = []
   for (var l = 0; l <= levels; l++) headingSelector.push(l ? '.sect' + l + '>h' + (l + 1) + '[id]' : 'h1[id].sect0')
-  if (!(headings = find(headingSelector.join(','), article)).length) return sidebar.parentNode.removeChild(sidebar)
+  if ((headings = find(headingSelector.join(','), article)).length) {
+    var lastActiveFragment
+    var links = {}
+    var list = headings.reduce(function (accum, heading) {
+      var link = document.createElement('a')
+      link.textContent = heading.textContent
+      links[(link.href = '#' + heading.id)] = link
+      var listItem = document.createElement('li')
+      listItem.dataset.level = parseInt(heading.nodeName.slice(1)) - 1
+      listItem.appendChild(link)
+      accum.appendChild(listItem)
+      return accum
+    }, document.createElement('ul'))
 
-  var lastActiveFragment
-  var links = {}
-  var list = headings.reduce(function (accum, heading) {
-    var link = document.createElement('a')
-    link.textContent = heading.textContent
-    links[(link.href = '#' + heading.id)] = link
-    var listItem = document.createElement('li')
-    listItem.dataset.level = parseInt(heading.nodeName.slice(1)) - 1
-    listItem.appendChild(link)
-    accum.appendChild(listItem)
-    return accum
-  }, document.createElement('ul'))
+    var menu = sidebar.querySelector('.toc-menu')
+    if (!menu) (menu = document.createElement('div')).className = 'toc-menu'
 
-  var menu = sidebar.querySelector('.toc-menu')
-  if (!menu) (menu = document.createElement('div')).className = 'toc-menu'
+    var title = document.createElement('h3')
+    title.textContent = sidebar.dataset.title || 'Contents'
+    menu.appendChild(title)
+    menu.appendChild(list)
 
-  var title = document.createElement('h3')
-  title.textContent = sidebar.dataset.title || 'Contents'
-  menu.appendChild(title)
-  menu.appendChild(list)
-
-  var startOfContent = !document.getElementById('toc') && article.querySelector('h1.page ~ :not(.is-before-toc)')
-  if (startOfContent) {
-    var embeddedToc = document.createElement('aside')
-    embeddedToc.className = 'toc embedded'
-    embeddedToc.appendChild(menu.cloneNode(true))
-    startOfContent.parentNode.insertBefore(embeddedToc, startOfContent)
+    var startOfContent = !document.getElementById('toc') && article.querySelector('h1.page ~ :not(.is-before-toc)')
+    if (startOfContent) {
+      var embeddedToc = document.createElement('aside')
+      embeddedToc.className = 'toc embedded'
+      embeddedToc.appendChild(menu.cloneNode(true))
+      startOfContent.parentNode.insertBefore(embeddedToc, startOfContent)
+    }
+    window.addEventListener('load', function () {
+      onScroll()
+      window.addEventListener('scroll', onScroll)
+    })
   }
-
-  window.addEventListener('load', function () {
-    onScroll()
-    window.addEventListener('scroll', onScroll)
-  })
 
   function onScroll () {
     var scrolledBy = window.pageYOffset

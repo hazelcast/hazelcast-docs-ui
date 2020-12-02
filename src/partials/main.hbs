@@ -2,6 +2,12 @@
 {{> toolbar}}
   <div class="content">
 {{> article}}
+{{#if (eq page.layout '404')}}
+  </div>
+</main>
+{{else}}
 {{> toc}}
   </div>
 </main>
+{{/if}}
+
