@@ -18,7 +18,7 @@
   }
 }
 
-@media screen  and (min-width: 1400px) {
+/* @media screen  and (min-width: 1400px) {
   .doc {
     flex: auto;
     font-size: var(--doc-font-size--desktop);
@@ -26,7 +26,7 @@
     max-width: var(--doc-max-width--desktop-large);
     min-width: 0;
   }
-}
+} */
 
 .doc h1,
 .doc h2,
@@ -275,6 +275,7 @@
   text-transform: uppercase;
   border-radius: 0.45rem;
   transform: translate(-0.5rem, -50%);
+  font-family: var(--body-font-family) !important;
 }
 
 .doc .admonitionblock.caution .icon {
@@ -306,6 +307,7 @@
   display: inline-flex;
   align-items: center;
   height: 100%;
+  font-family: var(--body-font-family) !important;
 }
 
 .doc .admonitionblock .icon i::after {
@@ -329,7 +331,21 @@
 .doc .imageblock img,
 .doc .image > img {
   height: auto;
-  max-width: var(--doc-max-width);
+  max-width: 25rem;
+}
+
+@media screen and (min-width: 1224px) {
+  .doc .imageblock img,
+  .doc .image > img {
+    max-width: 35rem;
+  }
+}
+
+@media screen  and (min-width: 1450px) {
+  .doc .imageblock img,
+  .doc .image > img {
+    max-width: 40rem;
+  }
 }
 
 #preamble .abstract blockquote {
@@ -477,7 +493,6 @@
   color: var(--caption-font-color);
   font-size: calc(16 / var(--rem-base) * 1rem);
   font-weight: var(--caption-font-weight);
-  font-style: italic;
   hyphens: none;
   letter-spacing: 0.01em;
   padding-bottom: 0.075rem;
