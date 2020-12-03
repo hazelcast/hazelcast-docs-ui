@@ -33,25 +33,7 @@
   background-size: 41.5%;
 }
 
-.edit-this-page {
-  display: none;
-  padding-right: 0.5rem;
-}
-
-.toolbar .edit-this-page a {
-  color: var(--toolbar-muted-color);
-}
-
 @media screen and (min-width: 1024px) {
-  .edit-this-page {
-    display: block;
-  }
-
-  .git {
-    background: transparent url(../img/github.svg) center left no-repeat;
-    padding-left: 1.75rem;
-  }
-
   .nav-toggle {
     display: none;
   }
