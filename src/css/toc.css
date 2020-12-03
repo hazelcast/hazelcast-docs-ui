@@ -6,6 +6,7 @@
   margin-right: 0.75rem;
   position: sticky;
   top: var(--toc-top);
+  align-self: flex-start;
 }
 
 .toc.sidebar h3 {

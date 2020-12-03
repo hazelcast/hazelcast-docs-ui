@@ -18,6 +18,16 @@
   }
 }
 
+@media screen  and (min-width: 1400px) {
+  .doc {
+    flex: auto;
+    font-size: var(--doc-font-size--desktop);
+    margin: var(--doc-margin--desktop-large);
+    max-width: var(--doc-max-width--desktop-large);
+    min-width: 0;
+  }
+}
+
 .doc h1,
 .doc h2,
 .doc h3,

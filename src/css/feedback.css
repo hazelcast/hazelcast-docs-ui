@@ -30,15 +30,34 @@
   display: none;
 }
 
-#additional-feedback {
-  width: 100%;
+.additional-feedback {
+  display: block;
+  padding-right: 0.5rem;
   margin-top: 1rem;
-  color: var(--toc-heading-font-color);
-  font-size: calc(16 / var(--rem-base) * 1rem);
 }
 
-@media screen and (min-width: 1024px) {
-  #additional-feedback {
-    font-size: calc(15 / var(--rem-base) * 1rem);
-  }
+.additional-feedback a {
+  color: var(--primary-light);
+  font-size: calc(15 / var(--rem-base) * 1rem);
+}
+
+.edit-this-page {
+  display: block;
+  padding-right: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.edit-this-page a {
+  color: var(--primary-light);
+  font-size: calc(15 / var(--rem-base) * 1rem);
+}
+
+.git {
+  background: transparent url(../img/github.svg) center left no-repeat;
+  padding-left: 1.75rem;
+}
+
+.git-pull {
+  background: transparent url(../img/pull.svg) center left no-repeat;
+  padding-left: 1.75rem;
 }

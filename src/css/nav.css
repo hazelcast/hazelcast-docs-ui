@@ -24,6 +24,18 @@
   }
 }
 
+@media screen  and (min-width: 1400px) {
+  .nav-container {
+    font-size: calc(15.5 / var(--rem-base) * 1rem);
+    flex: none;
+    position: static;
+    top: 0;
+    visibility: visible;
+    left: auto;
+    margin-left: calc(var(--doc-max-width--desktop-large) / 9);
+  }
+}
+
 .nav-container.is-active {
   visibility: visible;
 }
