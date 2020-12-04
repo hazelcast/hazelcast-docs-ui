@@ -147,11 +147,10 @@
   --toc-width--widescreen: calc(216 / var(--rem-base) * 1rem);
   --doc-max-width: calc(720 / var(--rem-base) * 1rem);
   --doc-max-width--desktop: calc(828 / var(--rem-base) * 1rem);
-  --doc-max-width--desktop-large: calc(920 / var(--rem-base) * 1rem);
   --border-radius: 5px;
   /* stacking */
   --z-index-nav: 1;
   --z-index-toolbar: 2;
   --z-index-page-version-menu: 3;
-  --z-index-navbar: 4;
+  --z-index-navbar: 10000;
 }
