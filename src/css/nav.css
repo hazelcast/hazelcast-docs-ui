@@ -24,7 +24,7 @@
   }
 }
 
-@media screen  and (min-width: 1400px) {
+@media screen  and (min-width: 1920px) {
   .nav-container {
     font-size: calc(15.5 / var(--rem-base) * 1rem);
     flex: none;
@@ -32,7 +32,7 @@
     top: 0;
     visibility: visible;
     left: auto;
-    margin-left: calc(var(--doc-max-width--desktop-large) / 9);
+    margin-left: calc(var(--doc-max-width--desktop) / 9);
   }
 }
 
