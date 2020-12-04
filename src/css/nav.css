@@ -3,7 +3,7 @@
   top: var(--navbar-height);
   left: 0;
   width: 100%;
-  font-size: calc(20 / var(--rem-base) * 1rem);
+  font-size: calc(15.5 / var(--rem-base) * 1rem);
   z-index: var(--z-index-nav);
   visibility: hidden;
 }
@@ -16,7 +16,7 @@
 
 @media screen and (min-width: 1024px) {
   .nav-container {
-    font-size: calc(15.5 / var(--rem-base) * 1rem);
+    font-size: calc(16 / var(--rem-base) * 1rem);
     flex: none;
     position: static;
     top: 0;
@@ -26,7 +26,7 @@
 
 @media screen  and (min-width: 1920px) {
   .nav-container {
-    font-size: calc(15.5 / var(--rem-base) * 1rem);
+    font-size: calc(18 / var(--rem-base) * 1rem);
     flex: none;
     position: static;
     top: 0;
