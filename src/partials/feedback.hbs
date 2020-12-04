@@ -9,7 +9,7 @@
 </div>
 <div class="additional-feedback"><a href="{{{page.attributes.ghissue}}}?title=Docs: Feedback for {{{page.title}}}&body=Hi, I have some feedback about [this page]({{{page.editUrl}}})%0D%0A" class ="git" target="_blank">Report an issue</a></div>
 {{#if (and page.fileUri (not env.CI))}}
-<div class="edit-this-page"><a class="git-pull" href="{{page.fileUri}}" target="_blank">Edit this Page</a></div>
+<div class="edit-this-page"><a class="git-pull" href="{{page.fileUri}}" onclick="window.open(this.href,'_blank');return false;">Edit this Page</a></div>
 {{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
-<div class="edit-this-page"><a class="git-pull" href="{{page.editUrl}}" target="_blank">Edit this Page</a></div>
+<div class="edit-this-page"><a class="git-pull" href="{{page.editUrl}}" onclick="window.open(this.href,'_blank');return false;">Edit this Page</a></div>
 {{/if}}
