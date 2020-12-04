@@ -173,6 +173,7 @@ body {
     box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
     max-height: var(--nav-height);
     overflow-y: auto;
+    z-index: -1;
   }
 
   .navbar-menu a.navbar-item:hover,
