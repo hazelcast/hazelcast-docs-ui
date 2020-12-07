@@ -1,0 +1,103 @@
+.copy-code-button {
+  color: var(--pre-annotation-font-color);
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+a.copy-code-button:focus,
+a.copy-code-button:hover {
+  color: var(--neutral-lighter);
+}
+
+.copy-code-button:hover::after {
+  content: attr(data-title);
+  color: var(--pre-annotation-font-color);
+  line-height: 1;
+  position: absolute;
+  top: -8px;
+  right: 0%;
+  left: auto;
+  margin: 0;
+  padding: 3px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
+  background: var(--neutral-lighter);
+  border: 1px solid var(--pre-border-color);
+  box-sizing: border-box;
+  border-radius: 3px;
+  min-width: 80px;
+}
+
+.copy-code-button:hover::before {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 10px solid var(--pre-border-color);
+  position: absolute;
+  content: "";
+  box-shadow: inset 0 0 1px #bec0c1;
+  bottom: -27px;
+  right: auto;
+  left: auto;
+}
+
+.doc .listingblock code[data-lang] + .source-type-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  z-index: 1;
+  padding-top: 12px;
+}
+
+.doc .listingblock code[data-lang] + .source-type-box .data-source {
+  content: attr(data-lang);
+  color: var(--pre-annotation-font-color);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  line-height: 18px;
+  text-transform: uppercase;
+  padding-right: 0.5rem;
+  border-right: 1px solid var(--pre-border-color);
+}
+
+.doc .listingblock:hover code[data-lang] + .source-type-box {
+  display: flex;
+}
+
+.doc .listingblock pre .fade-shadow {
+  display: none;
+  background:
+    transparent
+    linear-gradient(
+      180deg,
+      #f1f7fe0d 0%,
+      #f1f7fe40 18%,
+      #f1f7fe 68%,
+      #f1f7fe 100%
+    )
+    0% 0% no-repeat padding-box;
+  width: 65px;
+  height: 80%;
+  position: absolute;
+  right: 1px;
+  top: 0;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* Safari and Chrome */
+  .doc .listingblock pre .fade-shadow {
+    height: calc(100% - 8px);
+  }
+}
+
+code::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 5px;
+}
+
+code::-webkit-scrollbar-thumb {
+  background-color: var(--primary-dark);
+}

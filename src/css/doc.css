@@ -551,6 +551,7 @@
   display: block;
   overflow-x: auto;
   padding: 0.75rem;
+  padding-top: 2rem;
 }
 
 /* NOTE assume pre.highlight contains code[data-lang] */
@@ -558,7 +559,7 @@
   position: relative;
 }
 
-.doc .listingblock code[data-lang]::before {
+/* .doc .listingblock code[data-lang]::before {
   content: attr(data-lang);
   display: none;
   color: var(--pre-annotation-font-color);
@@ -569,7 +570,7 @@
   position: absolute;
   top: 0.25rem;
   right: 0.25rem;
-}
+} */
 
 .doc .listingblock:hover code[data-lang]::before {
   display: block;

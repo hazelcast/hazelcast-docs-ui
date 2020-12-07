@@ -6,6 +6,8 @@
 @import "base.css";
 @import "body.css";
 @import "nav.css";
+@import "clipboard.css";
+@import "expanded-image.css";
 @import "feedback";
 @import "home.css";
 @import "main.css";
