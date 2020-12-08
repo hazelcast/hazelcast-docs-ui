@@ -1,7 +1,18 @@
 <script src="{{{uiRootPath}}}/js/site.js"></script>
-{{#if (eq env.DOCSEARCH_ENGINE 'lunr')}}
-<script src="{{uiRootPath}}/js/vendor/lunr.js"></script>
-<script src="{{uiRootPath}}/js/vendor/search.js" id="search-script" data-base-path="{{or siteRootPath (or site.url siteRootUrl)}}" data-page-path="{{@root.page.url}}"></script>
-<script async src="{{uiRootPath}}/../search-index.js"></script>
-{{/if}}
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
+<!-- Before the closing </body> -->
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script>
+  docsearch({
+    // Your apiKey and indexName will be given to you once
+    // we create your config
+    apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+    indexName: 'dev_docs',
+    appId: 'QK2EAH8GB0', // Should be only included if you are running DocSearch on your own.
+    // Replace inputSelector with a CSS selector
+    // matching your search input
+    inputSelector: '#search-input',
+    // Set debug to true to inspect the dropdown
+    debug: false,
+  });
+</script>
