@@ -1,0 +1,61 @@
+#search-close {
+  display: none;
+  padding-left: 3px;
+  color: white;
+}
+
+#search-open {
+  display: none;
+  padding-left: 3px;
+  color: white;
+}
+
+@media screen and (min-width: 555px) {
+  #search-open {
+    display: block;
+  }
+}
+
+.navbar-item > span.algolia-autocomplete > input#search-input {
+  display: none;
+  border: 1px solid #b7c1cb;
+  box-sizing: border-box;
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  width: 200px;
+}
+
+.content-container > span.algolia-autocomplete > input#search-input {
+  border: 1px solid #b7c1cb;
+  box-sizing: border-box;
+  font-family: inherit;
+  text-align: center;
+  font-size: larger;
+  padding: 0.5em;
+}
+
+.content-container > span.algolia-autocomplete,
+.content-container > span.algolia-autocomplete > input#search-input,
+.content-container > span.algolia-autocomplete .ds-dropdown-menu {
+  border-radius: var(--border-radius);
+  min-width: 300px;
+  width: 300px;
+}
+
+/* Main category (eg. Getting Started) */
+.algolia-autocomplete .algolia-docsearch-suggestion--category-header {
+  border: none;
+}
+
+/* Highlighted text */
+.algolia-autocomplete .algolia-docsearch-suggestion--highlight {
+  color: var(--primary-blue);
+}
+
+@media screen and (min-width: 500px) {
+  .content-container > span.algolia-autocomplete,
+  .content-container > span.algolia-autocomplete > input#search-input.ds-input,
+  .content-container > span.algolia-autocomplete .ds-dropdown-menu {
+    width: 500px;
+  }
+}

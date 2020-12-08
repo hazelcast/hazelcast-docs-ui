@@ -3,10 +3,13 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</a>
       {{#if env.DOCSEARCH_ENABLED}}
-        {{#if (not page.layout 'home')}}
-          <div class="navbar-item">
-            <input id="search-input" type="text" placeholder="Search docs">
-          </div>
+        {{#if (eq page.component.name 'home')}}
+        {{else}}
+            <div class="navbar-item">
+                <input id="search-input" type="text" placeholder="Search docs">
+                <a id="search-open" ><i class="fa fa-search" aria-hidden="true"></i></a>
+                <a id="search-close"><i class="fa fa-times"  aria-hidden="true"></i></a>
+            </div>
         {{/if}}
       {{/if}}
       <button class="navbar-burger" data-target="topbar-nav">
