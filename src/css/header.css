@@ -185,6 +185,11 @@ body {
   .navbar-menu .navbar-link:hover {
     background-color: var(--navbar-menu_hover-background);
   }
+
+  .dropdown-caret {
+    width: 1.3em;
+    padding-left: 0.5em;
+  }
 }
 
 @media screen and (max-width: 470px) {

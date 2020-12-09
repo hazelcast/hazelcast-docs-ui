@@ -18,7 +18,6 @@
 }
 
 .home h1 {
-  font-size: 2rem;
   color: white;
   padding-top: 87px;
 }
@@ -45,26 +44,67 @@
 
 .card {
   position: relative;
+  flex: 1 1 auto;
+  width: 380px;
   margin-bottom: 20px;
   padding-bottom: 20px;
   background: var(--neutral-white);
   color: var(--text);
   text-decoration: none;
-  -moz-box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
-  box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
-  -moz-border-radius: var(--border-radius);
-  -webkit-border-radius: var(--border-radius);
-  border-radius: var(--border-radius);
+  box-shadow: 0 1px 4px rgba(53, 61, 73, 0.202551);
+  -moz-box-shadow: 0 1px 4px rgba(53, 61, 73, 0.202551);
+  -webkit-box-shadow: 0 1px 4px rgba(53, 61, 73, 0.202551);
+  border-radius: 5px 5px 50px 5px;
+  -webkit-border-radius: 5px 5px 40px 5px;
 }
 
 .card ul {
-  text-align: left;
+  text-align: center;
+  list-style-type: none;
+  padding-inline-start: 0;
+  color: var(--primary);
+}
+
+.card ul li {
+  margin-bottom: 2em;
+}
+
+.card ul li a {
+  color: var(--primary);
+}
+
+.get-started-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 40px;
+  border: 1px solid var(--primary);
+  box-sizing: border-box;
+  border-radius: var(--border-radius);
+  margin-left: 2em;
+}
+
+.get-started-home a {
+  font-size: calc(18 / var(--rem-base) * 1rem);
+  line-height: 25px;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  color: var(--primary);
+  flex: none;
+  order: 1;
+  align-self: center;
+  flex-grow: 0;
+  padding-top: 5px;
 }
 
 @media (max-width: 700px) {
   .card {
     width: 100%;
+  }
+
+  .get-started-home {
+    margin-left: 4em;
   }
 }
 
@@ -85,9 +125,9 @@
     margin-right: 20px;
   }
 
-  .card:nth-child(3n) {
+  /* .card:nth-child(3n) {
     margin-right: 0;
-  }
+  } */
 }
 
 .card span {
@@ -95,12 +135,13 @@
 }
 
 .card .card-summary {
-  padding: 5% 5% 3% 5%;
+  padding: 3% 5% 3% 5%;
+  font-size: calc(16 / var(--rem-base) * 1rem);
 }
 
 .card .card-header {
   position: relative;
-  height: 175px;
+  height: 100px;
   overflow: hidden;
   background-repeat: no-repeat;
   background-size: auto;
@@ -110,42 +151,10 @@
   -moz-border-radius: var(--border-radius) var(--border-radius) 0 0;
   -webkit-border-radius: var(--border-radius);
   border-radius: var(--border-radius) var(--border-radius) 0 0;
+  border-bottom: 1px solid var(--section-divider-color);
 }
 
 .card .card-header:hover,
 .card .card-header:focus {
   background-color: rgba(255, 255, 255, 0);
-}
-
-.card .card-title {
-  background: var(--success-dark);
-  color: white;
-  text-transform: uppercase;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-.card .card-title h3 {
-  padding: 0 3.5%;
-  margin: 0;
-}
-
-.card:hover,
-.card:focus {
-  background: white;
-  text-decoration: none;
-  -moz-box-shadow: rgba(0, 0, 0, 0.45) 0 0 20px 0;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.45) 0 0 20px 0;
-  box-shadow: rgba(0, 0, 0, 0.45) 0 0 20px 0;
-}
-
-.card:hover .card-title,
-.card:focus .card-title {
-  background: var(--success-light);
-}
-
-.card:hover .card-meta,
-.card:focus {
-  max-height: 1em;
 }
