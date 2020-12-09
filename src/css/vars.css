@@ -126,9 +126,8 @@
   --table-border-color: var(--panel-border-color);
   /* footer */
   --footer-line-height: var(--doc-line-height);
-  --footer-background: var(--neutral);
-  --footer-font-color: var(--color-gray-70);
-  --footer-link-font-color: var(--color-jet-80);
+  --footer-background: var(--neutral-white);
+  --footer-font-color: var(--secondary-text);
   /* dimensions and positioning */
   --navbar-height: calc(63 / var(--rem-base) * 1rem);
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);
