@@ -1,13 +1,13 @@
 #search-close {
   display: none;
   padding-left: 3px;
-  color: white;
+  color: var(--primary);
 }
 
 #search-open {
   display: none;
   padding-left: 3px;
-  color: white;
+  color: var(--primary);
 }
 
 @media screen and (min-width: 555px) {
