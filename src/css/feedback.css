@@ -57,6 +57,11 @@
   padding-left: 1.75rem;
 }
 
+.survey {
+  background: transparent url(../img/survey.svg) center left no-repeat;
+  padding-left: 1.75rem;
+}
+
 .git-pull {
   background: transparent url(../img/pull.svg) center left no-repeat;
   padding-left: 1.75rem;
