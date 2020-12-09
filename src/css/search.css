@@ -22,24 +22,18 @@
   box-sizing: border-box;
   border-radius: var(--border-radius);
   font-family: inherit;
+  font-size: large;
+  padding: 0.5em;
   width: 200px;
 }
 
-.content-container > span.algolia-autocomplete > input#search-input {
+.search-container > span.algolia-autocomplete > input#search-input {
   border: 1px solid #b7c1cb;
   box-sizing: border-box;
   font-family: inherit;
   text-align: center;
   font-size: larger;
   padding: 0.5em;
-}
-
-.content-container > span.algolia-autocomplete,
-.content-container > span.algolia-autocomplete > input#search-input,
-.content-container > span.algolia-autocomplete .ds-dropdown-menu {
-  border-radius: var(--border-radius);
-  min-width: 300px;
-  width: 300px;
 }
 
 /* Main category (eg. Getting Started) */
@@ -52,10 +46,21 @@
   color: var(--primary-blue);
 }
 
-@media screen and (min-width: 500px) {
-  .content-container > span.algolia-autocomplete,
-  .content-container > span.algolia-autocomplete > input#search-input.ds-input,
-  .content-container > span.algolia-autocomplete .ds-dropdown-menu {
-    width: 500px;
+@media only screen and (max-width: 600px) {
+  .search-container > span.algolia-autocomplete,
+  .search-container > span.algolia-autocomplete > input#search-input,
+  .search-container > span.algolia-autocomplete .ds-dropdown-menu {
+    min-width: 300px;
+    border-radius: var(--border-radius);
+    width: 300px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .search-container > span.algolia-autocomplete,
+  .search-container > span.algolia-autocomplete > input#search-input.ds-input,
+  .search-container > span.algolia-autocomplete .ds-dropdown-menu {
+    width: 600px;
+    border-radius: var(--border-radius);
   }
 }

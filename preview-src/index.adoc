@@ -3,7 +3,7 @@
 :!sectids:
 
 ++++
-<div class="content-container">
+<div class="search-container">
 <div class="home-search">
 <input id="search-input-home" type="text" placeholder="Search docs">
 </div>
