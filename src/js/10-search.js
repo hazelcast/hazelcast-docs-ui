@@ -11,6 +11,7 @@
       open.style.display = 'none'
       close.style.display = 'block'
       searchBox.style.display = 'block'
+      searchBox.focus()
     })
     close.addEventListener('click', function (e) {
       // NOTE: ignore event on pseudo-element
@@ -18,6 +19,7 @@
       open.style.display = 'block'
       close.style.display = 'none'
       searchBox.style.display = 'none'
+      searchBox.blur()
     })
   }
 })()
