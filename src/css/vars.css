@@ -47,11 +47,10 @@
   --panel-border-color: var(--neutral);
   --scrollbar-thumb-color: var(--neutral-light);
   /* navbar */
-  --navbar-background: var(--primary-dark);
-  --navbar-font-color: var(--neutral-white);
-  --navbar_hover-background: var(--primary-dark);
-  --navbar-button-background: var(--success);
-  --navbar-button-border-color: var(--panel-border-color);
+  --navbar-background: var(--neutral-white);
+  --navbar-font-color: #24292e;
+  --navbar_hover-background: var(--neutral-lighter);
+  --navbar-button-background: var(--primary);
   --navbar-button-font-color: var(--neutral-white);
   --navbar-menu-border-color: var(--panel-border-color);
   --navbar-menu-background: var(--neutral-white);
@@ -127,9 +126,8 @@
   --table-border-color: var(--panel-border-color);
   /* footer */
   --footer-line-height: var(--doc-line-height);
-  --footer-background: var(--neutral);
-  --footer-font-color: var(--color-gray-70);
-  --footer-link-font-color: var(--color-jet-80);
+  --footer-background: var(--neutral-white);
+  --footer-font-color: var(--secondary-text);
   /* dimensions and positioning */
   --navbar-height: calc(63 / var(--rem-base) * 1rem);
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);
