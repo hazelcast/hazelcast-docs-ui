@@ -52,6 +52,11 @@
   font-size: calc(15 / var(--rem-base) * 1rem);
 }
 
+.survey {
+  background: transparent url(../img/survey.svg) center left no-repeat;
+  padding-left: 1.75rem;
+}
+
 .git {
   background: transparent url(../img/github.svg) center left no-repeat;
   padding-left: 1.75rem;
