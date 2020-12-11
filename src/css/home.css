@@ -37,7 +37,6 @@
   justify-content: space-evenly;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding: 1.5%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -45,6 +44,7 @@
 
 .cards-first {
   margin-top: 15px;
+  padding: 1.5%;
 }
 
 .card {
@@ -96,6 +96,8 @@
   text-align: center;
   list-style-type: none;
   padding-inline-start: 0;
+  padding-left: 5%;
+  padding-right: 5%;
   color: var(--primary);
 }
 
@@ -137,7 +139,7 @@
   }
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1190px) {
   .cards {
     flex-direction: column;
     align-items: center;
@@ -146,6 +148,14 @@
   .card {
     width: 600px;
     align-self: center;
+  }
+}
+
+@media (min-width: 1650px) {
+  .cards {
+    -webkit-justify-content: center;
+    justify-content: center;
+    gap: 20px;
   }
 }
 
