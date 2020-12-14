@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}"><img src="{{{uiRootPath}}}/img/hazelcast-logo.svg"></img></a>
-      <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</img></a>
+      <a class="navbar-item" id="documentation-header" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</img></a>
       {{#if env.DOCSEARCH_ENABLED}}
         {{#if (eq page.component.name 'home')}}
         {{else}}
