@@ -1,6 +1,5 @@
 .breadcrumbs {
   display: none;
-  flex: 1 1;
   padding: 0 0.5rem 0 0.75rem;
   line-height: var(--nav-line-height);
 }
@@ -29,7 +28,7 @@ a + .breadcrumbs {
 }
 
 .breadcrumbs li::after {
-  content: "/";
+  content: ">";
   padding: 0 0.5rem;
 }
 
