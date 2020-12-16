@@ -34,6 +34,11 @@
   text-align: center;
   font-size: larger;
   padding: 0.5em;
+  border-radius: 50px;
+}
+
+.search-container > span.algolia-autocomplete > input#search-input:focus {
+  outline: none;
 }
 
 /* Main category (eg. Getting Started) */
@@ -51,7 +56,6 @@
   .search-container > span.algolia-autocomplete > input#search-input,
   .search-container > span.algolia-autocomplete .ds-dropdown-menu {
     min-width: 300px;
-    border-radius: var(--border-radius);
     width: 300px;
   }
 }
@@ -61,6 +65,5 @@
   .search-container > span.algolia-autocomplete > input#search-input.ds-input,
   .search-container > span.algolia-autocomplete .ds-dropdown-menu {
     width: 600px;
-    border-radius: var(--border-radius);
   }
 }
