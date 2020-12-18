@@ -7,19 +7,20 @@
   var no = document.getElementById('no-button')
   var response = document.getElementById('feedback-response')
   var options = document.getElementById('feedback-prompt')
+  var url = window.location.href
 
   if (yes !== null && no !== null) {
     yes.onclick = function () {
       options.innerHTML = ''
       response.style.display = 'block'
-      //Can use Google Analytics to track these clicks and keep track of feedback
+      // Use Google Analytics to track these clicks and keep track of feedback
       //https://developers.google.com/analytics/devguides/collection/analyticsjs/sending-hits
-      ga('send', 'event', 'Positive Feedback', 'click')
+      ga('send', 'event', 'Positive Feedback', url /* page as action */)
     }
     no.onclick = function () {
       options.innerHTML = ''
       response.style.display = 'block'
-      ga('send', 'event', 'Negative Feedback', 'click')
+      ga('send', 'event', 'Negative Feedback', url /* page as action */)
     }
   }
 })()
