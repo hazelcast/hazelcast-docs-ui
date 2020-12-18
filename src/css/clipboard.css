@@ -42,7 +42,7 @@ a.copy-code-button:hover {
   left: auto;
 }
 
-.doc .listingblock code[data-lang] + .source-type-box {
+.doc .listingblock code /*[data-lang]*/ + .source-type-box {
   position: absolute;
   top: 0;
   right: 0;
@@ -52,7 +52,7 @@ a.copy-code-button:hover {
   padding-top: 12px;
 }
 
-.doc .listingblock code[data-lang] + .source-type-box .data-source {
+.doc .listingblock code /*[data-lang]*/ + .source-type-box .data-source {
   content: attr(data-lang);
   color: var(--pre-annotation-font-color);
   font-size: 0.75rem;
@@ -63,7 +63,7 @@ a.copy-code-button:hover {
   border-right: 1px solid var(--pre-border-color);
 }
 
-.doc .listingblock:hover code[data-lang] + .source-type-box {
+.doc .listingblock:hover code /*[data-lang]*/ + .source-type-box {
   display: flex;
 }
 
