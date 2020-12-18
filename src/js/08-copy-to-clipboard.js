@@ -9,7 +9,11 @@
     copyButton.appendChild(document.createElement('i')).className = 'far fa-copy'
     var dataSource = document.createElement('span')
     dataSource.className = 'data-source'
-    dataSource.innerHTML += codeBlock.dataset.lang
+    if (codeBlock.dataset.lang) {
+      dataSource.innerHTML += codeBlock.dataset.lang
+    } else {
+      dataSource.innerHTML += ' '
+    }
     var fadeShadow = document.createElement('span')
     fadeShadow.className = 'fade-shadow'
 
