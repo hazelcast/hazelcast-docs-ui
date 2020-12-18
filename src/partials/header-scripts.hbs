@@ -1,1 +1,12 @@
 {{!-- Add header scripts here --}}
+{{#if (eq page.attributes.type 'howto')}}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "HowTo",
+    "name": "{{{page.title}}}",
+    "description": "{{{page.description}}}",
+    "totalTime": "{{page.attributes.time}}"
+  }
+</script>
+{{/if}}
