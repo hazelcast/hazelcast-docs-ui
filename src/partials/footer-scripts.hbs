@@ -2,6 +2,7 @@
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
 <!-- Before the closing </body> -->
 <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+{{#if (not-eq page.component.name 'home')}}
 <script>
   docsearch({
     // Your apiKey and indexName will be given to you once
@@ -16,3 +17,4 @@
     debug: false,
   });
 </script>
+{{/if}}
