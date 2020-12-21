@@ -12,3 +12,17 @@ ga('send', 'pageview')
 <!-- End Google Analytics -->
 {{/with}}
 <script src="https://kit.fontawesome.com/097f7829d8.js" crossorigin="anonymous"></script>
+{{#if (eq page.attributes.type 'howto')}}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "HowTo",
+    "name": "{{{page.title}}}",
+    "description": "{{{page.description}}}",
+    "totalTime": "{{page.attributes.time}}"
+  }
+</script>
+{{/if}}
+{{#if (eq page.attributes.type 'faq')}}
+<script type="application/ld+json" src="{{{uiRootPath}}}/js/google/faq.json"></script>
+{{/if}}
