@@ -1,4 +1,4 @@
-# This workflow creates a draft release with the ui-bundle.zip file attached
+# This workflow creates a draft release
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     tags:
     - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
-name: Upload Release Asset
+name: Start a draft release
 
 jobs:
   build:
@@ -20,13 +20,3 @@ jobs:
         uses: ecampidoglio/auto-release-draft@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload UI bundle
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create-release-draft.outputs.release-url }}
-          asset_path: ./build/ui-bundle.zip
-          asset_name: ui-bundle.zip
-          asset_content_type: application/zip
