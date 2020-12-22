@@ -1,0 +1,23 @@
+.cookie-banner {
+  position: fixed;
+  display: none;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 14px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--neutral-lighter);
+  border-radius: var(--border-radius);
+  border-top: 1px solid var(--primary);
+  z-index: 1000;
+}
+
+#cookie-close {
+  background-color: var(--accessibility-outline);
+  font-size: 1.2em;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 2px;
+  cursor: pointer;
+}
