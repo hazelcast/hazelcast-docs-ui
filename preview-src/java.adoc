@@ -1,0 +1,81 @@
+= Java Client
+[[java-client]]
+
+The Java client is the most full featured Hazelcast native client.
+It is offered both with Hazelcast IMDG and Hazelcast IMDG Enterprise.
+The main idea behind the Java client is to provide the same Hazelcast
+functionality by proxying each operation through a Hazelcast member.
+It can access and change distributed data and it can listen to distributed
+events of an already established Hazelcast cluster from another Java application.
+
+Hundreds or even thousands of clients can be connected to the cluster.
+By default, there are `core count * 20` threads on the server side that
+handle all the requests, e.g., if the server has 4 cores, there will be 80 threads.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members. Swing/Web applications
+at the traders' desktops can use clients to access and modify the data in the Hazelcast cluster.
+
+== Getting Started with Java Client
+
+NOTE: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Simply include the `hazelcast.jar` dependency in your classpath to start using
+the Hazelcast Java client. Once included, you can start using this client as if
+you are using the Hazelcast API. The differences are discussed in the below sections.
+
+If you prefer to use Maven, simply add the `hazelcast` dependency
+to your `pom.xml`, which you may already have done to start using
+Hazelcast IMDG:
+
+[source,xml,subs="attributes+"]
+----
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast</artifactId>
+    <version>{page-component-display-version}</version>
+</dependency>
+----
+
+You can find Hazelcast Java client's code samples https://github.com/hazelcast/hazelcast-code-samples/tree/master/clients[here^].
+
+=== Client API
+
+The first step is the configuration. You can configure the Java client declaratively or
+programmatically. We use the programmatic approach for this section, as shown below.
+
+[source,java]
+----
+ClientConfig clientConfig = new ClientConfig();
+clientConfig.setClusterName("dev");
+clientConfig.getNetworkConfig().addAddress("10.90.0.1", "10.90.0.2:5702");
+----
+
+See the <<configuring-java-client, Configuring Java Client section>> for more information.
+
+The second step is initializing the `HazelcastInstance` to be connected to the cluster.
+
+```
+HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
+```
+
+*This client interface is your gateway to access all Hazelcast distributed objects.*
+
+Let's create a map and populate it with some data.
+
+[source,java]
+----
+IMap<String, Customer> mapCustomers = client.getMap("customers"); //creates the map proxy
+
+mapCustomers.put("1", new Customer("Joe", "Smith"));
+mapCustomers.put("2", new Customer("Ali", "Selam"));
+mapCustomers.put("3", new Customer("Avi", "Noyan"));
+----
+
+As the final step, if and when you are done with your client, you can shut it down as shown below:
+
+```
+client.shutdown();
+```
