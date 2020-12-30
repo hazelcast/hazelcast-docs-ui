@@ -3,6 +3,7 @@
   var open = document.getElementById('search-open')
   var close = document.getElementById('search-close')
   var searchBox = document.getElementById('search-input')
+  var is404 = document.title.includes('Page Not Found')
 
   if (open !== null && close !== null) {
     open.addEventListener('click', function (e) {
