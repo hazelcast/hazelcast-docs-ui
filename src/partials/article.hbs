@@ -2,11 +2,33 @@
 {{#if (eq page.layout '404')}}
 <h1 class="page">{{{or page.title 'Page Not Found'}}}</h1>
 <div class="paragraph">
-<p>The page you&#8217;re looking for does not exist. It may have been moved.</p>
+  <p>The page you&#8217;re looking for does not exist. It may have been moved.</p>
 </div>
 <div class="paragraph">
-<p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
-If you typed the URL of this page manually, please double check that you entered the address correctly.</p>
+  <p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
+If you entered the URL of this page manually, please double check that you entered the address correctly.</p>
+</div>
+<div class=" paragraph help">
+  <h2><img src="{{{uiRootPath}}}/img/search-404.svg">Find what you're looking for</h2>
+</div>
+<div class="paragraph find">
+  <div class="find-item">
+    <p>Useful Links</p>
+    <ul>
+      <li><a href="https://jakescahill.github.io/hazelcast-docs/imdg/latest/getting-started.html">IMDG Quickstart</a></li>
+      <li><a href="https://jakescahill.github.io/hazelcast-docs/imdg/latest/installation/installing-upgrading.html">Installing and Upgrading IMDG</a></li>
+      <li><a href="https://jakescahill.github.io/hazelcast-docs/imdg/latest/configuration/understanding-configuration.html">Understanding Configuration</a></li>
+      <li><a href="https://jakescahill.github.io/hazelcast-docs/imdg/latest/data-structures/distributed-data-structures.html">Distributed Data Structures</a></li>
+      <li><a href="https://jakescahill.github.io/hazelcast-docs/imdg/latest/storage/storage.html">Storage</a></li>
+      <li><a href="https://jakescahill.github.io/hazelcast-docs/imdg/latest/security/security.html">Security</a></li>
+    </ul>
+    <div class="search-box-404">
+      {{#with site.homeUrl}}
+        <img src="{{{@root.uiRootPath}}}/img/home.svg"><a href="{{{relativize this}}}" class="{{#if @root.page.home}} is-current{{/if}}">Check the home page</a>
+      {{/with}}
+      <p id="search-404"><i class="fa fa-search" aria-hidden="true"></i><input id="search-input" type="text" placeholder="Search the IMDG docs "></p>
+    </div>
+  </div>
 </div>
 {{else}}
 {{#with page.title}}
