@@ -1,0 +1,247 @@
+= Contributing to the Hazelcast Docs UI
+:url-imdg-docs: https://github.com/JakeSCahill/imdg-docs
+:url-docs-playbook: https://github.com/JakeSCahill/hazelcast-docs
+:url-docs-ui: https://github.com/JakeSCahill/hazelcast-docs-ui
+:url-hazelcast: https://hazelcast.com
+:url-antora: https://antora.org
+:url-git: https://git-scm.com
+:url-git-dl: {url-git}/downloads
+:url-gulp: http://gulpjs.com
+:url-node: https://nodejs.org
+:url-node-dl: https://nodejs.org/en/download/
+
+The Hazelcast documentation UI is open source, and we welcome your contributions!
+
+== Development Quickstart
+
+This section is a tutorial for setting up a development environment for the UI project, previewing the UI locally, and bundling it for use with the {url-docs-playbook}[documentation playbook].
+
+=== Prerequisites
+
+To preview and bundle the UI, you need the following software on your computer:
+
+* {url-git}[git] (command: `git`)
+* {url-node}[Node.js 10] (command: `node`)
+* {url-gulp}[Gulp CLI] (command: `gulp`)
+
+==== git
+
+First, make sure you have git installed.
+
+```bash
+git --version
+```
+
+If not, {url-git-dl}[download and install] the git package for your system.
+
+==== Node.js 10
+
+Next, make sure that you have Node.js 10 installed. To check if you have Node.js installed, do the following:
+
+```bash
+node --version
+```
+
+If you see a 10 version on your device, you’re ready to build the docs.
+
+If no version number is displayed in the output, you need to {url-node}[install Node.js].
+
+Now that you have version 10 installed, you can proceed with installing the Gulp CLI.
+
+==== Gulp CLI
+
+To build and bundle the UI, you need the Gulp command-line interface (CLI).
+
+You should install the Gulp CLI globally (which resolves to a location in your user directory if you're using nvm) using the following command:
+
+```bash
+npm install -g gulp-cli
+```
+
+Make sure that the Gulp CLI is installed and on your PATH by running:
+
+```bash
+gulp -v
+```
+
+Now that you have the prerequisites installed, you can fetch and build the UI project.
+
+=== Clone and Initialize the UI Project
+
+Clone the UI repository using git and change into it:
+
+```bash
+git clone {url-docs-ui}
+cd hazelcast-docs-ui
+```
+
+Stay in this folder when executing all subsequent commands.
+
+Use npm to install the project's dependencies inside the project.
+In your terminal, execute the following command:
+
+```bash
+npm i
+```
+
+This command installs the dependencies listed in the `package.json` file into the `node_modules/` folder.
+This folder does not get included in the UI bundle and should *not* be committed to the source control repository.
+
+=== Preview the UI
+
+The files in the `preview-src/` folder provide the sample content that allow you to see the UI in action.
+
+To build the UI and preview it in a local web server, run the `preview` command:
+
+```bash
+gulp preview
+```
+
+You'll see a URL listed in the output of this command:
+
+....
+[17:32:55] Starting 'preview:serve'...
+[17:32:55] Starting server...
+[17:32:55] Server started http://localhost:5252 and http://192.168.1.3:5252
+[17:32:55] Running server
+....
+
+Go to this URL to preview the site locally.
+
+While this command is running, any changes you make to the source files will be instantly reflected in the browser.
+
+Press kbd:[Ctrl+C] to stop the preview server.
+
+[[package]]
+=== Package for Use with Antora
+
+If you need to package the UI so you can use it to generate the documentation site locally, run the following command:
+
+```bash
+gulp bundle
+```
+
+If any errors are reported by the linter, you'll need to fix them.
+
+When the command completes successfully, the UI bundle will be available at the following location: `build/ui-bundle.zip`.
+You can point the {url-docs-playbook}[documentation playbook] to this bundle using the `--ui-bundle-url` command-line option, for example `--ui-bundle-url=../docs-ui/build/ui-bundle.zip`.
+
+== Control the Visual Appearance of Pages
+
+To control the visual appearance of pages, the UI bundle provides a CSS stylesheet (for changing the CSS style rules) and any number of layouts in the form of Handlebars templates (for changing the HTML).
+Although most styles are used on all pages, it's possible to configure styles to target certain pages either based on the layout or page role.
+This section will introduce these various options and explain how they work.
+
+=== UI Layouts
+
+The most drastic way to change the appearance of the page is to change the HTML.
+The HTML is controlled by layouts, which are Handlebars templates located in the `src/layouts` folder.
+A layout typically includes partials, located in the `src/partials` folder, which are reusable template fragments.
+Partials may, in turn, include other partials.
+
+This project currently has three layouts:
+
+* `default.hbs`
+* `404.hbs`
+* `home.hbs`
+
+If a page doesn't specify a layout, the `default.hbs` layout is used.
+
+To specify a layout, the page file must declare the `page-layout` document attribute in the AsciiDoc header.
+The value of that attribute should match the stem of the layout file (the filename minus the file extension, e.g., `home`).
+
+For example, the home page declares the following document attribute in the AsciiDoc header:
+
+[source,asciidoc]
+----
+= What are you looking for?
+:page-layout: home
+----
+
+In this case, Antora will select the `home.hbs` layout for this page instead of `default.hbs`.
+
+The home page likely requires additional styles that are only relevant for that page.
+You can organize these styles inside a namespace by adding a dedicated class to the `<body>` tag.
+
+[source,html]
+----
+<body class="home">
+  ...
+</body>
+----
+
+You can now define styles that are scoped to that page as follows:
+
+[source,css]
+----
+.home h1,
+.home h2,
+.home h3 {
+  line-height: 1.2;
+  margin: 0;
+}
+----
+
+To make these styles easier to find and manage, they should be organized in a dedicated file. For example the home styles are located in the `src/css/home.css` file and included in the `src/css/site.css` file.
+
+When you run the preview, you can see the home page by visiting the URL \http://localhost:5252/home.html.
+
+The `404.hbs` layout is similar to other layouts, except Antora selects it automatically to make the 404 page (404.html).
+For this page, the `page` variable in the UI model is reduced to `page.layout` and `page.title`.
+None of the other data in the `page` variable is applicable for this page.
+
+When you run the preview, you can see the 404 page by visiting the URL \http://localhost:5252/404.html.
+
+=== Tabs
+
+The {url-docs-playbook}[documentation playbook] includes a tabs block extension.
+The extension takes care of converting the AsciiDoc for the tabs to HTML.
+The UI provides the interaction (JavaScript) and styles (CSS) that power these tabs.
+
+The JavaScript for the tabs is in the `src/js/05-tabset.js` file.
+The styles for the tabs are the `src/css/doc.css` file.
+
+=== Content Preview
+
+If you want to preview content that isn't included in the default preview,you can create any number of new AsciiDoc files inside the `preview-src/` folder.
+
+To access the page in the preview site, use the URL pattern \http://localhost:5252/<stem>.html, where `<stem>` is the stem of the source file (the filename minus the file extension).
+
+These preview pages allow you to test the page layout and content styling.
+Each page may declare a layout, role, or both.
+
+NOTE: The navigational elements are controlled by the UI model (`preview-src/ui-model.yml`). For information about what goes in the UI model, refer the https://docs.antora.org/antora-ui-default/templates/[Handlebars templates page] in the Antora documentation.
+
+== Algolia Search
+
+This UI provides integration with Algolia search.
+The Algolia client is configured in the `src/partials/footer-scripts.hbs` file.
+To test the search from the preview site, set the following environment variables in your shell (you can point to any index that is publicly accessible):
+
+* `ALGOLIA_APP_ID` - the application ID that hosts the search index (optional if you're using docsearch)
+* `ALGOLIA_API_KEY` - your API key for Algolia
+* `ALGOLIA_INDEX_NAME` - the name of the index
+
+=== View Latest
+
+If the version of the current page does not match the latest version of the component, a banner is displayed to notify the user.
+If the version is a prerelease, the banner states that you're viewing a prerelease version.
+If the version is an older stable release, the banner states that a newer version is available.
+
+The "View Latest" button tries to preserve the current page when switching versions.
+If the page is no longer available, then the button directs the user to the start page for the component.
+
+== Release the UI Bundle
+
+When you're happy with the changes you've made to the UI and would like to make those changes available to Antora, you'll need to publish the UI as a bundle by making a release.
+
+You can see a list of all past releases on the {url-project}/releases[releases page].
+
+=== Release Task Workflow
+
+Releasing the UI bundle consists of the following tasks:
+
+. Pack the UI bundle. 
+. Create a GitHub release, using the next version number in the sequence.
+. Attach the UI bundle to that release as an asset in zip format.
+. Update the README and the {url-docs-playbook}[documentation playbook] to reference the URL of the lastest bundle and commit that update to the repository.
