@@ -9,8 +9,6 @@
 :url-gulp: http://gulpjs.com
 :url-node: https://nodejs.org
 :url-node-dl: https://nodejs.org/en/download/
-:url-nvm: https://github.com/creationix/nvm
-:url-nvm-install: {url-nvm}#installation
 
 The Hazelcast documentation UI is open source, and we welcome your contributions!
 
@@ -72,11 +70,10 @@ Now that you have the prerequisites installed, you can fetch and build the UI pr
 
 Clone the UI repository using git and change into it:
 
-[source,bash]
-----
+```bash
 git clone {url-docs-ui}
 cd hazelcast-docs-ui
-----
+```
 
 Stay in this folder when executing all subsequent commands.
 
@@ -115,6 +112,7 @@ While this command is running, any changes you make to the source files will be 
 
 Press kbd:[Ctrl+C] to stop the preview server.
 
+[[package]]
 === Package for Use with Antora
 
 If you need to package the UI so you can use it to generate the documentation site locally, run the following command:
@@ -143,9 +141,9 @@ Partials may, in turn, include other partials.
 
 This project currently has three layouts:
 
-* default.hbs
-* 404.hbs
-* home.hbs
+* `default.hbs`
+* `404.hbs`
+* `home.hbs`
 
 If a page doesn't specify a layout, the `default.hbs` layout is used.
 
