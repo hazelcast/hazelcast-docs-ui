@@ -24,7 +24,7 @@
   position: relative;
   flex: 1 100%;
   margin-top: 10px;
-  border: 1px solid var(--neutral-light);;
+  border: 1px solid var(--neutral-light);
   padding: 5%;
   border-radius: var(--border-radius);
 }
@@ -42,7 +42,7 @@
   font-size: inherit;
 }
 
-.find-item:first-child > ul{
+.find-item:first-child > ul {
   margin-top: 20px;
 }
 
@@ -68,7 +68,7 @@ p#search-404 {
     flex: 1 50%;
   }
 
-  .find-item:first-child > ul{
+  .find-item:first-child > ul {
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
