@@ -8,9 +8,9 @@
   var response = document.getElementById('feedback-response')
   var options = document.getElementById('feedback-prompt')
   var url = window.location.href
-  var ga = document.getElementById('google-script')
+  var googleScript = document.getElementById('google-script')
 
-  if (yes !== null && no !== null && ga !== null) {
+  if (yes !== null && no !== null && googleScript !== null) {
     yes.onclick = function () {
       options.innerHTML = ''
       response.style.display = 'block'
