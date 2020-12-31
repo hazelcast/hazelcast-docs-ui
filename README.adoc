@@ -7,9 +7,10 @@
 :url-docs-playbook: https://github.com/JakeSCahill/hazelcast-docs
 :url-contributing: .github/CONTRIBUTING.adoc
 :url-antora: https://antora.org
+:url-hazelcast: https://hazelcast.com
 
 
-https://img.shields.io/github/v/release/JakeSCahill/hazelcast-docs-ui?label=Release
+image:https://img.shields.io/github/v/release/JakeSCahill/hazelcast-docs-ui?label=Release[Release version]
 
 This repository hosts the UI project for the {url-docs-playbook}[documentation playbook].
 
