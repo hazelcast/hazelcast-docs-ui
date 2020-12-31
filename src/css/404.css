@@ -34,7 +34,17 @@
   display: block;
 }
 
-.search-box-404 #search-input {
+/* Main dropdown wrapper */
+.algolia-autocomplete.algolia-autocomplete-left .ds-dropdown-menu {
+  position: relative !important;
+}
+
+/* Remove arrow from dropdown */
+.search-box-404 .algolia-autocomplete .ds-dropdown-menu::before {
+  display: none !important;
+}
+
+.search-box-404 .algolia-autocomplete #search-input {
   border-radius: var(--border-radius);
   padding: 2%;
   display: inline;

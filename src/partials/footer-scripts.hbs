@@ -18,3 +18,23 @@
   });
 </script>
 {{/if}}
+{{#contains 'Page Not Found' page.title}}
+<!-- Move the search results dropdown above the search box -->
+<script>
+  //document.addEventListener("load", restyleDropdown);
+  var algoliaBox = document.getElementsByClassName('algolia-autocomplete')[0]
+  //var searchIcon = document.getElementById('search-icon-404')
+  //var searchBox =  document.getElementById('search-input')
+  var dropdown = document.getElementById('algolia-autocomplete-listbox-0')
+
+  algoliaBox.insertBefore(dropdown, algoliaBox.childNodes[0])
+  //algoliaBox.insertBefore(searchIcon, searchBox)
+
+  /* function restyleDropdown() {
+    var dropdown = document.getElementById('algolia-autocomplete-listbox-0')
+    dropdown.style.removeProperty('top')
+    dropdown.style.removeProperty('right')
+    dropdown.style.removeProperty('left')
+  } */
+</script>
+{{/contains}}
