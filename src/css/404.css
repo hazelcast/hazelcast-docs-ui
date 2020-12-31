@@ -42,6 +42,12 @@
   font-size: inherit;
 }
 
+input[type='text'] {
+  width: 200px;
+  height: 40px;
+  font-size: inherit;
+}
+
 .find-item:first-child > ul {
   margin-top: 20px;
 }
