@@ -3,7 +3,6 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://hazelcast.org/"><img src="{{{uiRootPath}}}/img/hazelcast-logo.svg"></img></a>
       <a class="navbar-item" id="documentation-header" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</img></a>
-      {{#if env.DOCSEARCH_ENABLED}}
         {{#if (not-eq page.component.name 'home')}}
           {{#if (not-eq page.layout '404')}}
             <div class="navbar-item">
@@ -13,7 +12,6 @@
             </div>
             {{/if}}
         {{/if}}
-      {{/if}}
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
