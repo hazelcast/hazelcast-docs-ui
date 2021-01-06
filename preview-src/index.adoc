@@ -33,7 +33,7 @@
 		<li><a href="https://guides.hazelcast.org/home/">Tutorials</a></li>
 		<li><a href="https://hazelcast.com/resources/hazelcast-deployment-operations-guide/">Operations Guide</a></li>
 		<li class="get-started-home">
-			<a href="https://jakescahill.github.io/hazelcast-docs/imdg/latest/getting-started.html">Get Started <img src="right-arrow.svg"></a>
+			<a href="https://laughing-jepsen-c9f089.netlify.app//imdg/latest/getting-started.html">Get Started <img src="right-arrow.svg"></a>
 		</li>
 	</ul>
 	
