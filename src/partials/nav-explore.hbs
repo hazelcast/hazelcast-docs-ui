@@ -9,7 +9,7 @@
     {{#each site.components}}
     <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
        {{#if (not-eq this.name 'home')}}
-      <span class="title">{{{./title}}} <a id="more-versions">See all versions</a><a id="fewer-versions">See fewer versions</a></span>
+      <span class="title">{{{./title}}} <a class="more-versions">See all versions</a><a class="fewer-versions">See fewer versions</a></span>
       {{else}}
       <span class="title">{{{./title}}}</span>
       {{/if}}
