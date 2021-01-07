@@ -1,25 +1,34 @@
 ;(function () {
   'use strict'
-  var versions = document.getElementsByClassName('version hidden')
-  var seeMoreButton = document.getElementById('more-versions')
-  var seeLessButton = document.getElementById('fewer-versions')
+  var seeMoreButtons = document.getElementsByClassName('more-versions')
+  var seeLessButtons = document.getElementsByClassName('fewer-versions')
 
-  if (seeMoreButton !== null && versions !== null) {
-    seeMoreButton.addEventListener('click', function (e) {
-      seeMoreButton.style.display = 'none'
-      seeLessButton.style.display = 'block'
-      for (var i = 0; i < versions.length; i++) {
-        versions[i].style.display = 'block'
-        console.log(versions[i])
-      }
-      console.log('hello')
-    })
-    seeLessButton.addEventListener('click', function (e) {
-      seeMoreButton.style.display = 'block'
-      seeLessButton.style.display = 'none'
-      for (var i = 0; i < versions.length; i++) {
-        versions[i].style.display = 'none'
-      }
-    })
+  if (seeMoreButtons !== null) {
+    for (var i = 0; i < seeMoreButtons.length; i++) {
+      seeMoreButtons[i].addEventListener('click', function (e) {
+        var seeLessButton = this.nextElementSibling
+        this.style.display = 'none'
+        seeLessButton.style.display = 'block'
+        var versions = this.parentElement.nextElementSibling.childNodes
+        for (var j = 0; j < versions.length; j++) {
+          if (versions[j].className === 'version hidden') {
+            versions[j].style.display = 'block'
+          }
+        }
+      })
+    }
+    for (var l = 0; l < seeLessButtons.length; l++) {
+      seeLessButtons[l].addEventListener('click', function (e) {
+        var seeMoreButton = this.previousElementSibling
+        seeMoreButton.style.display = 'block'
+        this.style.display = 'none'
+        var versions = this.parentElement.nextElementSibling.childNodes
+        for (var t = 0; t < versions.length; t++) {
+          if (versions[t].className === 'version hidden') {
+            versions[t].style.display = 'none'
+          }
+        }
+      })
+    }
   }
 })()
