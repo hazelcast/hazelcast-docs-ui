@@ -6,7 +6,6 @@
 
 @media screen and (min-width: 1024px) {
   main {
-    flex: auto;
     /* min-width: 0 required for flexbox to constrain overflowing elements */
     min-width: 0;
   }
@@ -27,5 +26,11 @@
 @media screen and (min-width: 1216px) {
   aside.toc.sidebar {
     flex-basis: var(--toc-width--widescreen);
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  aside.toc.sidebar {
+    flex-basis: auto;
   }
 }

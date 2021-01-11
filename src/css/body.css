@@ -7,3 +7,10 @@
     display: flex;
   }
 }
+
+@media screen and (min-width: 1920px) {
+  .body {
+    display: flex;
+    justify-content: center;
+  }
+}

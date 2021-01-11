@@ -16,7 +16,7 @@ a.copy-code-button:hover {
   color: var(--pre-annotation-font-color);
   line-height: 1;
   position: absolute;
-  top: -8px;
+  top: -20px;
   right: 0%;
   left: auto;
   margin: 0;
@@ -44,12 +44,11 @@ a.copy-code-button:hover {
 
 .doc .listingblock code /*[data-lang]*/ + .source-type-box {
   position: absolute;
-  top: 0;
+  top: -20px;
   right: 0;
   display: none;
   align-items: center;
   z-index: 1;
-  padding-top: 12px;
 }
 
 .doc .listingblock code /*[data-lang]*/ + .source-type-box .data-source {
