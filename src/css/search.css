@@ -27,9 +27,34 @@
   width: 200px;
 }
 
-/* Main category (eg. Getting Started) */
-.algolia-autocomplete .algolia-docsearch-suggestion--category-header {
-  border: none;
+.algolia-autocomplete .ds-dropdown-menu {
+  border: 1px solid #d9d9d9;
+  border-radius: var(--border-radius);
+  box-shadow: none;
+  margin-top: 0.75rem;
+  max-width: none;
+  width: 100%;
+}
+
+.algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
+  border: 0;
+  border-radius: 0;
+}
+
+.algolia-autocomplete .ds-dropdown-menu .ds-suggestions {
+  overflow: auto;
+  height: 500px;
+  margin: 0 -0.5rem;
+  padding: 0.5rem;
+}
+
+.algolia-autocomplete .ds-dropdown-menu .ds-suggestions::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 5px;
+}
+
+.algolia-autocomplete .ds-dropdown-menu .ds-suggestions::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
 }
 
 /* Highlighted text */
