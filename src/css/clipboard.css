@@ -98,5 +98,5 @@ code::-webkit-scrollbar {
 }
 
 code::-webkit-scrollbar-thumb {
-  background-color: var(--primary-dark);
+  background-color: var(--primary);
 }
