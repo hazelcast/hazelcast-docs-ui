@@ -1,7 +1,7 @@
 = Contributing to the Hazelcast Docs UI
-:url-imdg-docs: https://github.com/JakeSCahill/imdg-docs
-:url-docs-playbook: https://github.com/JakeSCahill/hazelcast-docs
-:url-docs-ui: https://github.com/JakeSCahill/hazelcast-docs-ui
+:url-imdg-docs: https://github.com/hazelcast/imdg-docs
+:url-docs-playbook: https://github.com/hazelcast/hazelcast-docs
+:url-docs-ui: https://github.com/hazelcast/hazelcast-docs-ui
 :url-hazelcast: https://hazelcast.com
 :url-antora: https://antora.org
 :url-git: https://git-scm.com

@@ -4,7 +4,7 @@
 :hide-uri-scheme:
 // Project URLs:
 :url-docs: https://docs.hazelcast.com
-:url-docs-playbook: https://github.com/JakeSCahill/hazelcast-docs
+:url-docs-playbook: https://github.com/hazelcast/hazelcast-docs
 :url-contributing: .github/CONTRIBUTING.adoc
 :url-antora: https://antora.org
 :url-hazelcast: https://hazelcast.com
