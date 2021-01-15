@@ -1,11 +1,11 @@
 {
   "name": "hazelcast-docs-ui",
   "description": "A modified version of the default Antora UI, which includes design components for the Hazelcast documentation site",
-  "homepage": "https://github.com/JakeSCahill/hazelcast-docs-ui",
+  "homepage": "https://github.com/hazelcast/hazelcast-docs-ui",
   "license": "MPL-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JakeSCahill/hazelcast-docs-ui.git"
+    "url": "https://github.com/hazelcast/hazelcast-docs-ui.git"
   },
   "engines": {
     "node": ">= 8.0.0"

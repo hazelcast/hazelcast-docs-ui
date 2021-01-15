@@ -35,7 +35,7 @@ page:
   displayVersion: '4.1'
   module: ROOT
   relativeSrcPath: java.adoc
-  editUrl: https://github.com/JakeSCahill/hazelcast-docs-ui/blob/master/preview-src/java.adoc
+  editUrl: https://github.com/hazelcast/hazelcast-docs-ui/blob/master/preview-src/java.adoc
   origin:
     private: false
   previous:
