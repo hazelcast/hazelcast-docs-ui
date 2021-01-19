@@ -1,11 +1,31 @@
 <main class="article">
+{{#if (eq page.layout '404')}}
 {{> toolbar}}
   <div class="content">
 {{> article}}
-{{#if (eq page.layout '404')}}
   </div>
 </main>
 {{else}}
+{{#unless (or (not-eq page.attributes.hide-view-latest undefined) (eq page.componentVersion page.component.latest))}}
+  {{#with (latest-page-url)}}
+  <div class="article-banner">
+    {{#if (and @root.page.componentVersion.prerelease (not @root.page.latest.prerelease))}}
+    <p>You are viewing the documentation for a prerelease version.</p>
+    <a class="btn" href="{{relativize this}}">View the latest stable version</a>
+    {{else}}
+    <p>A newer version of this documentation is available.</p>
+    <a class="btn" href="{{relativize this}}">View the latest version</a>
+    {{/if}}
+  </div>
+  {{else if (and page.componentVersion.prerelease (not page.latest.prerelease))}}
+  <div class="article-banner">
+    <p>You are viewing the documentation for a prerelease version.</p>
+  </div>
+  {{/with}}
+  {{/unless}}
+  {{> toolbar}}
+  <div class="content">
+{{> article}}
 {{> toc}}
   </div>
 </main>
