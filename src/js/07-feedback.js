@@ -1,5 +1,5 @@
-/*global ga*/
-// Tells the linter that ga is available
+
+// /*global ga*/ Tells the linter that ga is available
 ;(function () {
   'use strict'
 
