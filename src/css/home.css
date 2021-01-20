@@ -93,13 +93,19 @@
   margin-top: 50px;
 }
 
-.card:first-child .card-header > img {
+.card:first-child .card-header > a > img {
   width: 30px;
   vertical-align: top;
+  margin-right: 5px;
 }
 
-.card .card-header.imdg > img {
+.card .card-header.imdg > a > img {
   width: 25px;
+}
+
+.card .card-header > a {
+  text-decoration: none;
+  color: var(--text);
 }
 
 .card .card-header.imdg::after {
