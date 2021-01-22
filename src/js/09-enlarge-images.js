@@ -18,7 +18,6 @@
       console.log(modal)
       img.addEventListener('click', function (e) {
         e.preventDefault()
-        console.log(this)
         modal.style.display = 'block'
       })
       modalClose.onclick = function () {
