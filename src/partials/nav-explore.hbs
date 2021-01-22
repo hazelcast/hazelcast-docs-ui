@@ -19,7 +19,11 @@
           <li class="version
             {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
             {{~#if (eq this ../latest)}} is-latest{{/if}}">
+            {{#if (eq ./displayVersion 'master')}}
+            <a href="{{{relativize ./url}}}">Back to Home</a>
+            {{else}}
             <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+            {{/if}}
           </li>
         {{else}}
           <li class="version hidden
