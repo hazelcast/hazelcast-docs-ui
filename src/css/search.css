@@ -1,23 +1,11 @@
-#search-close {
-  display: none;
-  padding-left: 3px;
-  color: var(--primary);
-}
-
 #search-open {
-  display: none;
+  display: inline-block;
   padding-left: 3px;
   color: var(--primary);
-}
-
-@media screen and (min-width: 555px) {
-  #search-open {
-    display: block;
-  }
 }
 
 .navbar-item > span.algolia-autocomplete > input#search-input {
-  display: none;
+  display: block;
   border: 1px solid #b7c1cb;
   box-sizing: border-box;
   border-radius: var(--border-radius);
@@ -34,6 +22,10 @@
   margin-top: 0.75rem;
   max-width: none;
   width: 100%;
+}
+
+.algolia-autocomplete.algolia-autocomplete-left .ds-dropdown-menu {
+  position: absolute !important;
 }
 
 .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
