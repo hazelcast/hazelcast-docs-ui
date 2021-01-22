@@ -3,15 +3,6 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://hazelcast.org/"><img src="{{{uiRootPath}}}/img/hazelcast-logo.svg"></img></a>
       <a class="navbar-item" id="documentation-header" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</img></a>
-        {{#if (not-eq page.component.name 'home')}}
-          {{#if (not-eq page.layout '404')}}
-            <div class="navbar-item">
-                <input id="search-input" type="text" placeholder="Search docs">
-                <a id="search-open" ><i class="fa fa-search" aria-hidden="true"></i></a>
-                <a id="search-close"><i class="fa fa-times"  aria-hidden="true"></i></a>
-            </div>
-            {{/if}}
-        {{/if}}
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -20,6 +11,14 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
+        {{#if (not-eq page.component.name 'home')}}
+          {{#if (not-eq page.layout '404')}}
+          <div class="navbar-item">
+              <input id="search-input" type="text" placeholder="Search docs">
+              <a id="search-open" ><i class="fa fa-search" aria-hidden="true"></i></a>
+          </div>
+          {{/if}}
+        {{/if}}
         <a class="navbar-item" href="{{{siteRootPath}}}/home/index.html">Home</a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">Products<img class="dropdown-caret" src="{{{uiRootPath}}}/img/caret-blue.svg"></img></a>

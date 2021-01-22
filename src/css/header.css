@@ -43,7 +43,7 @@ body {
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1250px) {
   .navbar-end > .navbar-item,
   .navbar-end .navbar-link {
     color: var(--navbar-font-color);
@@ -168,7 +168,7 @@ body {
   margin: 0.25rem 0;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1250px) {
   .navbar-brand .navbar-item {
     align-items: center;
     display: flex;
@@ -198,13 +198,13 @@ body {
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 1250px) {
   .navbar-burger {
     display: block;
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1250px) {
   .navbar,
   .navbar-menu,
   .navbar-end {
