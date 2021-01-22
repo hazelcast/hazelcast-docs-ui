@@ -7,34 +7,40 @@
   {{/if}}
   <ul class="components">
     {{#each site.components}}
-    <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
-       {{#if (not-eq this.name 'home')}}
-      <span class="title">{{{./title}}} <a class="more-versions">See all versions</a><a class="fewer-versions">See fewer versions</a></span>
-      {{else}}
-      <span class="title">{{{./title}}}</span>
-      {{/if}}
-      <ul class="versions">
-        {{#each ./versions}}
-        {{#if (lte @index 6)}}
-          <li class="version
-            {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-            {{~#if (eq this ../latest)}} is-latest{{/if}}">
-            {{#if (eq ./displayVersion 'master')}}
-            <a href="{{{relativize ./url}}}">Back to Home</a>
-            {{else}}
-            <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-            {{/if}}
-          </li>
+      <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
+        {{#if (not-eq this.name 'home')}}
+          <span class="title">{{{./title}}} <a class="more-versions">See all versions</a><a class="fewer-versions">See fewer versions</a></span>
         {{else}}
-          <li class="version hidden
-            {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-            {{~#if (eq this ../latest)}} is-latest{{/if}}">
-            <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-          </li>
+          <span class="title">{{{./title}}}</span>
         {{/if}}
-        {{/each}}
-      </ul>
-    </li>
+        <ul class="versions">
+          {{#if (eq this @root.page.component)}}
+            {{#each ./versions}}
+              {{#if (lte @index 6)}}
+                <li class="version
+                  {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
+                  {{~#if (eq this ../latest)}} is-latest{{/if}}">
+                  <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+                </li>
+              {{/if}}
+            {{/each}}
+          {{/if}}
+          {{#if (eq this.name 'home')}}
+            <li class="version
+              {{~#if (eq this ../latest)}} is-latest{{/if}}">
+              <a href="{{{relativize ./url}}}">Back to Home</a>
+           </li>
+          {{else}}
+            {{#each ./versions}}
+              <li class="version hidden
+                {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
+                {{~#if (eq this ../latest)}} is-latest{{/if}}">
+                <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+              </li>
+            {{/each}}
+          {{/if}}
+        </ul>
+      </li>
     {{/each}}
   </ul>
 </div>

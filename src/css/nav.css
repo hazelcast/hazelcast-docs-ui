@@ -201,7 +201,8 @@ html.is-clipped--nav {
 .nav-panel-explore .context {
   font-size: calc(15 / var(--rem-base) * 1rem);
   flex-shrink: 0;
-  color: var(--nav-muted-color);
+  color: var(--text);
+  font-weight: var(--body-font-weight-bold);
   box-shadow: 0 -1px 0 var(--nav-panel-divider-color);
   padding: 0 0.25rem 0 0.5rem;
   display: flex;
@@ -213,10 +214,9 @@ html.is-clipped--nav {
 }
 
 .nav-panel-explore .context .version {
-  background-image: url(../img/chevron.svg);
+  background-image: url(../img/caret-blue.svg);
   background-repeat: no-repeat;
   background-position: right 0.5rem top 50%;
-  background-size: auto 0.75em;
   padding: 0 1.5rem 0 0;
 }
 
@@ -246,10 +246,6 @@ html.is-clipped--nav {
 
 .nav-panel-explore .component:last-child {
   margin-bottom: 0.75rem;
-}
-
-.nav-panel-explore .component .title {
-  font-weight: var(--body-font-weight-bold);
 }
 
 .nav-panel-explore .versions {
