@@ -8,7 +8,7 @@
 {{else}}
 {{#unless (or (not-eq page.attributes.hide-view-latest undefined) (eq page.componentVersion page.component.latest))}}
   {{#with (latest-page-url)}}
-  <div class="article-banner">
+  <div class="article-banner" id="latest-banner">
     {{#if (and @root.page.componentVersion.prerelease (not @root.page.latest.prerelease))}}
     <p>You are viewing the documentation for a prerelease version.</p>
     <a class="btn" href="{{relativize this}}">View the latest stable version</a>
@@ -16,7 +16,13 @@
     <p>A newer version of this documentation is available.</p>
     <a class="btn" href="{{relativize this}}">View the latest version</a>
     {{/if}}
+    <button onclick="closeBanner()" style="color:white; margin-left: 5%; font-size: 2em; background:none; border:none;">&times;</button>
   </div>
+  <script>
+    function closeBanner() {
+      document.getElementById('latest-banner').style.display = 'none'
+    }
+  </script>
   {{else if (and page.componentVersion.prerelease (not page.latest.prerelease))}}
   <div class="article-banner">
     <p>You are viewing the documentation for a prerelease version.</p>
