@@ -36,6 +36,10 @@
   width: 100%;
 }
 
+.algolia-autocomplete.algolia-autocomplete-left .ds-dropdown-menu {
+  position: absolute !important;
+}
+
 .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
   border: 0;
   border-radius: 0;
