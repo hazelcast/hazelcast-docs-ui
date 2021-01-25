@@ -23,6 +23,10 @@ body {
   text-decoration: none;
 }
 
+a.navbar-link {
+  cursor: default;
+}
+
 .navbar-brand .navbar-item:nth-child(2),
 .navbar-brand .navbar-item:nth-child(2) a {
   color: var(--secondary-text);
