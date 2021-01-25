@@ -100,7 +100,7 @@
 }
 
 .card .card-header.imdg > a > img {
-  width: 25px;
+  margin-right: 5px;
 }
 
 .card .card-header > a {
@@ -225,13 +225,5 @@
 
   .card:first-child .card-summary {
     padding-left: 65px;
-  }
-
-  .card:first-child .card-header.imdg + .card-summary {
-    padding-left: 60px;
-  }
-
-  .card:first-child .card-header.imdg + .card-summary + ul {
-    padding-inline-start: 60px;
   }
 }

@@ -22,6 +22,13 @@
   margin-top: 0.75rem;
   max-width: none;
   width: 100%;
+  min-width: 300px;
+}
+
+@media (min-width: 515px) {
+  .algolia-autocomplete .ds-dropdown-menu {
+    min-width: 500px;
+  }
 }
 
 .algolia-autocomplete.algolia-autocomplete-left .ds-dropdown-menu {
