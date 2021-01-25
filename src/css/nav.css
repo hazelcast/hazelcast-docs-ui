@@ -43,14 +43,8 @@
 .nav {
   background: var(--nav-background);
   position: relative;
-  top: var(--toolbar-height);
+  top: 2rem;
   height: var(--nav-height);
-}
-
-@media screen and (min-width: 769px) {
-  .nav {
-    box-shadow: 0.5px 0 3px var(--nav-border-color);
-  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -76,7 +70,7 @@ html.is-clipped--nav {
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 7rem);
+  height: calc(100vh - 6rem);
 }
 
 @media screen and (min-width: 1024px) {
