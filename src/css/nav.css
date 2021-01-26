@@ -34,6 +34,18 @@
     left: -1000%;
     height: 100%;
   }
+
+  .nav-container {
+    width: 20rem;
+  }
+
+  .nav-panel-explore .context .version {
+    padding: 0;
+  }
+
+  .nav-panel-explore .context .title {
+    padding-right: 50px;
+  }
 }
 
 .nav-container.is-active {
