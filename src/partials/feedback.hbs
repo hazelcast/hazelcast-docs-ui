@@ -1,11 +1,16 @@
 </br>
 <div id="feedback-prompt">
-  <h3>Was this page helpful?</h3>
-  <a href="#yes-feedback" id="yes-button"><i class="far fa-check-circle"></i>  Yes </a>
-  <a href="#no-feedback" id="no-button"><i class="far fa-times-circle"></i>  No </a>
-</div>
-<div id="feedback-response">
-<p class="feedback-response">Thanks for the feedback!</p>
+  <form name="feedback for {{page.title}}" id="feedback-form" method="POST" data-netlify="true">
+    <label>Was this page helpful?</label><br>
+    <input type="radio" id="yes-button" name="helpful" value="yes">
+    <label for="yes-button" style="font-size: 1em;"><i class="far fa-check-circle"></i> Yes</label><br>
+    <input type="radio" id="no-button" name="helpful" value="no">
+    <label for="no-button" style="font-size: 1em;"><i class="far fa-times-circle"></i> No</label><br>
+    </select>
+  <p>
+    <button type="submit" id="submit-feedback">Send feedback</button>
+  </p>
+</form>
 </div>
 <div class="additional-feedback"><a href="{{page.attributes.ghissue}}?title=Docs: Feedback for {{{page.title}}}&body=Hi, I have some feedback about [this page]({{{page.editUrl}}})%0D%0A" class ="git" target="_blank">Report an issue</a></div>
 {{#if (and page.fileUri (not env.CI))}}
