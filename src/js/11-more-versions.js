@@ -11,7 +11,7 @@
         seeLessButton.style.display = 'block'
         var versions = this.parentElement.nextElementSibling.childNodes
         for (var j = 0; j < versions.length; j++) {
-          if (versions[j].className === 'version hidden') {
+          if (versions[j].className === 'version hidden' || versions[j].className === 'version hidden is-latest') {
             versions[j].style.display = 'block'
           }
         }
@@ -24,7 +24,7 @@
         this.style.display = 'none'
         var versions = this.parentElement.nextElementSibling.childNodes
         for (var t = 0; t < versions.length; t++) {
-          if (versions[t].className === 'version hidden') {
+          if (versions[t].className === 'version hidden' || versions[t].className === 'version hidden is-latest') {
             versions[t].style.display = 'none'
           }
         }
