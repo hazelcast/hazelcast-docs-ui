@@ -4,7 +4,11 @@
   width: 100%;
 }
 
-#feedback-prompt a {
+#feedback-prompt .hidden {
+  display: none;
+}
+
+#feedback-prompt button {
   display: inline-block;
   text-align: center;
   padding: 2px;
@@ -14,19 +18,34 @@
   color: var(--toc-heading-font-color);
 }
 
+#feedback-prompt label {
+  display: inline-block;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-size: calc(15 / var(--rem-base) * 1rem);
+  color: var(--toc-heading-font-color);
+}
+
+#feedback-prompt label#yes-button,
+#feedback-prompt label#no-button {
+  padding: 5px;
+}
+
+#feedback-prompt input[type="radio"]:checked + label#yes-button,
 #yes-button:hover {
   background-color: var(--success-dark);
   color: var(--neutral-white);
+  cursor: grab;
 }
 
+#feedback-prompt input[type="radio"]:checked + label#no-button,
 #no-button:hover {
   background-color: var(--error);
   color: var(--neutral-white);
+  cursor: grab;
 }
 
-#feedback-response {
-  width: 100%;
-  font-size: calc(15 / var(--rem-base) * 1rem);
+#feedback-prompt input[type="radio"] {
   display: none;
 }
 
