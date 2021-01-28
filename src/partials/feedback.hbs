@@ -5,16 +5,18 @@
     <p class="hidden">
     <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
     </p>
-    <input type="radio" id="yes-button" name="helpful" value="yes">
-    <label for="yes-button" style="font-size: .9em;"><i class="far fa-check-circle"></i> Yes</label><br>
-    <input type="radio" id="no-button" name="helpful" value="no">
-    <label for="no-button" style="font-size: .9em;"><i class="far fa-times-circle"></i> No</label><br>
+    <input type="radio" id="yes" name="helpful" value="yes">
+    <label for="yes" id="yes-button" onclick="submitForm()"><i class="far fa-check-circle"></i> Yes</label>
+    <input type="radio" id="no" name="helpful" value="no">
+    <label for="no" id="no-button" onclick="submitForm()"><i class="far fa-times-circle"></i> No</label><br>
     </select>
-  <p>
-    <button type="submit" id="submit-feedback">Send feedback</button>
-  </p>
 </form>
 </div>
+<script>
+  function submitForm() {
+    document.getElementById("feedback-form").submit();
+  }
+</script>
 <div class="additional-feedback"><a href="{{page.attributes.ghissue}}?title=Docs: Feedback for {{{page.title}}}&body=Hi, I have some feedback about [this page]({{{page.editUrl}}})%0D%0A" class ="git" target="_blank">Report an issue</a></div>
 {{#if (and page.fileUri (not env.CI))}}
   <div class="edit-this-page"><a class="git-pull" href="{{page.fileUri}}" onclick="window.open(this.href,'_blank');return false;">Edit this Page</a></div>
