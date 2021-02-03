@@ -12,7 +12,7 @@
 
 .home-background {
   top: 0;
-  height: 200px /* Height when the search bar is displayed 260px */;
+  height: 250px /* Height when the search bar is displayed 260px */;
   width: 100%;
   background: url('../img/home-background.svg') no-repeat right top, var(--text);
 }
@@ -132,6 +132,12 @@
 
 .get-started-home a > img {
   vertical-align: middle;
+}
+
+@media (min-width: 421px) {
+  .home-background {
+    height: 200px /* Height when the search bar is displayed 260px */;
+  }
 }
 
 @media (min-width: 1400px) {
