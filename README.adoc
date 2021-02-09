@@ -8,6 +8,7 @@
 :url-contributing: .github/CONTRIBUTING.adoc
 :url-antora: https://antora.org
 :url-hazelcast: https://hazelcast.com
+:toc: preamble
 
 
 image:https://img.shields.io/github/v/release/JakeSCahill/hazelcast-docs-ui?label=Release[Release version]
