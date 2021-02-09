@@ -22,10 +22,10 @@
                   {{~#if (eq this ../latest)}} is-latest{{/if}}">
                   <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
                 </li>
-                {{else}}
+              {{else}}
                 <li class="version hidden">
-                <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-              </li>
+                  <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+                </li>
               {{/if}}
             {{/each}}
           {{/if}}
@@ -35,13 +35,15 @@
               <a href="{{{relativize ./url}}}">Back to Home</a>
            </li>
           {{else}}
-            {{#each ./versions}}
-              <li class="version hidden
-                {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-                {{~#if (eq this ../latest)}} is-latest{{/if}}">
-                <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-              </li>
-            {{/each}}
+            {{#if (not-eq this @root.page.component)}}
+              {{#each ./versions}}
+                <li class="version hidden
+                  {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
+                  {{~#if (eq this ../latest)}} is-latest{{/if}}">
+                  <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+                </li>
+              {{/each}}
+              {{/if}}
           {{/if}}
         </ul>
       </li>
