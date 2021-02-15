@@ -699,10 +699,10 @@
   display: flex;
   font-weight: var(--weight-bold);
   height: 2.5rem;
-  line-height: 1;
   margin-right: 0.25rem;
   padding: 0 1.5rem;
   position: relative;
+  padding-bottom: 5px;
 }
 
 .doc .tabs li + li {

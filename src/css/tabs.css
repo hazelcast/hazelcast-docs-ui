@@ -1,0 +1,25 @@
+a[id$='mac']::before {
+  content: url('/_/img/mac.svg');
+  position: relative;
+  z-index: 100000;
+  width: 25px;
+  left: -9px;
+  top: 3px;
+}
+
+a[id$='windows']::before {
+  content: url('/_/img/windows.svg');
+  position: relative;
+  z-index: 100000;
+  width: 25px;
+  left: -9px;
+  top: 3px;
+}
+
+a[id$='linux']::before {
+  content: url('/_/img/linux.svg');
+  position: relative;
+  z-index: 100000;
+  left: -9px;
+  top: 3px;
+}
