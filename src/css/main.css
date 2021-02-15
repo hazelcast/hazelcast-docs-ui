@@ -53,14 +53,9 @@
   }
 }
 
-@media screen and (min-width: 1216px) {
-  aside.toc.sidebar {
-    flex-basis: var(--toc-width--widescreen);
-  }
-}
-
 @media screen and (min-width: 1920px) {
   aside.toc.sidebar {
-    flex-basis: auto;
+    flex: none;
+    width: 250px;
   }
 }
