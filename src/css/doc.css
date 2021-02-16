@@ -694,7 +694,6 @@
   align-items: center;
   border: 1px solid var(--neutral-light);
   border-radius: var(--border-radius);
-  border-bottom: 0;
   cursor: pointer;
   display: flex;
   font-weight: var(--weight-bold);
@@ -703,6 +702,11 @@
   padding: 0 1.5rem;
   position: relative;
   padding-bottom: 5px;
+}
+
+.doc .tabs li a {
+  text-decoration: none;
+  color: var(--text);
 }
 
 .doc .tabs li + li {
