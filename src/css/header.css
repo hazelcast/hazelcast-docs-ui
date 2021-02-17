@@ -288,7 +288,8 @@ a.navbar-link {
   }
 }
 
-.navbar .button {
+.navbar .button,
+.doc .interactive-button a {
   display: inline-flex;
   align-items: center;
   background: var(--navbar-button-background);
@@ -297,6 +298,7 @@ a.navbar-link {
   color: var(--navbar-button-font-color);
   padding: 0 0.75em;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .nav-button {
