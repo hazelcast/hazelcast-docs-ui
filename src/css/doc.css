@@ -110,6 +110,12 @@
   font-size: inherit;
 }
 
+.doc a[href*="//"]:not([href*="docs.hazelcast.com"])::after {
+  content: url('/_/img/external-link.svg');
+  position: relative;
+  margin-left: 2px;
+}
+
 .doc a {
   color: var(--link-font-color);
 }
