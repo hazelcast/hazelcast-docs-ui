@@ -1,39 +1,51 @@
 <div class="nav-panel-explore{{#unless page.navigation}} is-active{{/unless}}" data-panel="explore">
   {{#if page.component}}
-  <div class="context">
-    <span class="title">{{page.component.title}}</span>
-    <span class="version">{{page.componentVersion.displayVersion}}</span>
-  </div>
+    <div class="context">
+      <span class="title">{{page.component.title}}</span>
+      {{#if (eq page.component.name 'cloud')}}
+        <span class="version">&nbsp;</span>
+      {{else}}
+        <span class="version">{{page.componentVersion.displayVersion}}</span>
+      {{/if}}
+    </div>
   {{/if}}
   <ul class="components">
     {{#each site.components}}
       <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
-        {{#if (not-eq this.name 'home')}}
+        {{#if (and (not-eq this.name 'home') (not-eq this.name 'cloud'))}}
           <span class="title">{{{./title}}} <a class="more-versions">See all versions</a><a class="fewer-versions">See fewer versions</a></span>
         {{else}}
           <span class="title">{{{./title}}}</span>
         {{/if}}
         <ul class="versions">
           {{#if (eq this @root.page.component)}}
-            {{#each ./versions}}
-              {{#if (lte @index 6)}}
-                <li class="version
-                  {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-                  {{~#if (eq this ../latest)}} is-latest{{/if}}">
-                  <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-                </li>
-              {{else}}
-                <li class="version hidden">
-                  <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-                </li>
-              {{/if}}
-            {{/each}}
+            {{#if (and (not-eq this.name 'home') (not-eq this.name 'cloud'))}}
+              {{#each ./versions}}
+                {{#if (lte @index 6)}}
+                  <li class="version
+                    {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
+                    {{~#if (eq this ../latest)}} is-latest{{/if}}">
+                    <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+                  </li>
+                {{else}}
+                  <li class="version hidden">
+                    <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+                  </li>
+                {{/if}}
+              {{/each}}
+            {{/if}}
           {{/if}}
-          {{#if (eq this.name 'home')}}
+          {{#if (or (eq this.name 'home') (eq this.name 'cloud'))}}
             <li class="version
               {{~#if (eq this ../latest)}} is-latest{{/if}}">
+              {{#if (eq this.name 'cloud')}}
+                <a href="{{{relativize ./url}}}">Go to Cloud docs</a>
+            </li>
+              {{/if}}
+              {{#if (eq this.name 'home')}}
               <a href="{{{relativize ./url}}}">Back to Home</a>
-           </li>
+            </li>
+              {{/if}}
           {{else}}
             {{#if (not-eq this @root.page.component)}}
               {{#each ./versions}}
