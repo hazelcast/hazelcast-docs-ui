@@ -38,6 +38,11 @@
   #search-open {
     top: 20px;
   }
+
+  .filter.checkbox {
+    display: block;
+    padding-top: 8px;
+  }
 }
 
 @media (min-width: 1350px) {
