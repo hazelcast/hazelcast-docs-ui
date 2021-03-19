@@ -1,11 +1,14 @@
 #search-open {
   display: inline-block;
-  padding-left: 3px;
+  padding-left: 8px;
   color: var(--primary);
+  position: absolute;
+  z-index: 1;
 }
 
 .navbar-item > span.algolia-autocomplete > input#search-input {
   display: block;
+  text-indent: 30px;
   border: 1px solid #b7c1cb;
   box-sizing: border-box;
   border-radius: var(--border-radius);
@@ -28,6 +31,40 @@
 @media (min-width: 515px) {
   .algolia-autocomplete .ds-dropdown-menu {
     min-width: 500px;
+  }
+}
+
+@media (max-width: 1350px) {
+  #search-open {
+    top: 20px;
+  }
+}
+
+@media (min-width: 1350px) {
+  .filter.checkbox {
+    background: var(--color-white) linear-gradient(to bottom, var(--navbar-button-border-color) 0%, var(--navbar-button-border-color) 100%) no-repeat left center / 1px 50%;
+    border: 1px solid var(--navbar-button-border-color);
+    border-left: none;
+    border-radius: 0 0.1em 0.1em 0;
+    color: var(--toolbar-font-color);
+    cursor: pointer;
+    font-size: 0.875em;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    right: 30px;
+  }
+
+  .filter.checkbox input {
+    margin: 0 0.25rem 0 0;
+    cursor: inherit;
+  }
+
+  .navbar-item > span.algolia-autocomplete > input#search-input {
+    width: 350px;
   }
 }
 

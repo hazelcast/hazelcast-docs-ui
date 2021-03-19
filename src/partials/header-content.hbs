@@ -14,8 +14,11 @@
         {{#if (not-eq page.component.name 'home')}}
           {{#if (not-eq page.layout '404')}}
           <div class="navbar-item">
-              <input id="search-input" type="text" placeholder="Search docs">
               <a id="search-open" ><i class="fa fa-search" aria-hidden="true"></i></a>
+              <input id="search-input" type="text" placeholder="Search docs">
+              <label class="filter checkbox">
+                <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Only this product
+              </label>
           </div>
           {{/if}}
         {{/if}}

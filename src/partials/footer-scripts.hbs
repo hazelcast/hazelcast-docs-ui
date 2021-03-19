@@ -4,19 +4,24 @@
 <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
 {{#if (not-eq page.component.name 'home')}}
 <script>
-  docsearch({
+  const search = window.docsearch({
     apiKey: '{{site.keys.docsearchApi}}',
     indexName: '{{site.keys.docsearchIndex}}',
-    // Should be only included if you are running DocSearch on your own.
     appId: '{{site.keys.docsearchId}}',
-    // Replace inputSelector with a CSS selector
-    // matching your search input
     inputSelector: '#search-input',
     // Set debug to true to inspect the dropdown
     debug: false,
     // Display 25 results in the dropdown
     algoliaOptions: { hitsPerPage: 25 },
   });
+function applyFacetedSearch(){
+    var checkbox = document.getElementById('facet')
+    if (checkbox.checked) {
+      search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] }
+    } else {
+      search.algoliaOptions = { hitsPerPage: 25 }
+    }
+  }
 </script>
 {{/if}}
 {{#contains 'Page Not Found' page.title}}
