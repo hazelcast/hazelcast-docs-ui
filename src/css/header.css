@@ -47,7 +47,7 @@ a.navbar-link {
   }
 }
 
-@media screen and (min-width: 1250px) {
+@media screen and (min-width: 1350px) {
   .navbar-end > .navbar-item,
   .navbar-end .navbar-link {
     color: var(--navbar-font-color);
@@ -172,7 +172,7 @@ a.navbar-link {
   margin: 0.25rem 0;
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1350px) {
   .navbar-brand .navbar-item {
     align-items: center;
     display: flex;
@@ -202,13 +202,13 @@ a.navbar-link {
   }
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1350px) {
   .navbar-burger {
     display: block;
   }
 }
 
-@media screen and (min-width: 1250px) {
+@media screen and (min-width: 1350px) {
   .navbar,
   .navbar-menu,
   .navbar-end {
