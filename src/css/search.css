@@ -15,6 +15,7 @@
   font-size: large;
   border: none;
   height: inherit;
+  outline: none;
 }
 
 .algolia-autocomplete .ds-dropdown-menu {
@@ -51,6 +52,7 @@
     display: flex;
     align-self: center;
     width: 350px;
+    height: 47px !important;
     margin-bottom: 0;
   }
 
@@ -71,6 +73,7 @@
     text-indent: 5px;
     margin-left: 8px;
     width: 150px;
+    height: fit-content;
   }
 }
 
