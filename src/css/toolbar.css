@@ -12,13 +12,6 @@
   z-index: var(--z-index-toolbar);
 }
 
-@media screen and (min-width: 1920px) {
-  .toolbar {
-    width: 130%;
-    flex: none;
-  }
-}
-
 .toolbar a {
   color: inherit;
 }

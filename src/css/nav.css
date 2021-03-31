@@ -8,46 +8,6 @@
   visibility: hidden;
 }
 
-@media screen and (min-width: 769px) {
-  .nav-container {
-    width: var(--nav-width);
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .nav-container {
-    font-size: calc(16 / var(--rem-base) * 1rem);
-    flex: none;
-    position: static;
-    top: 0;
-    visibility: visible;
-  }
-}
-
-@media screen and (min-width: 1920px) {
-  .nav::before {
-    content: "";
-    position: absolute;
-    background-color: var(--nav-background);
-    width: 1000%;
-    top: 0;
-    left: -1000%;
-    height: 100%;
-  }
-
-  .nav-container {
-    width: 20rem;
-  }
-
-  .nav-panel-explore .context .version {
-    padding: 0;
-  }
-
-  .nav-panel-explore .context .title {
-    padding-right: 50px;
-  }
-}
-
 .nav-container.is-active {
   visibility: visible;
 }
@@ -57,15 +17,6 @@
   position: relative;
   top: 2rem;
   height: var(--nav-height);
-}
-
-@media screen and (min-width: 1024px) {
-  .nav {
-    top: var(--navbar-height);
-    box-shadow: none;
-    position: sticky;
-    height: var(--nav-height--desktop);
-  }
 }
 
 .nav .panels {
@@ -83,12 +34,6 @@ html.is-clipped--nav {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 6rem);
-}
-
-@media screen and (min-width: 1024px) {
-  .nav-panel-menu {
-    height: calc(100vh - 4rem);
-  }
 }
 
 .nav-panel-menu:not(.is-active) .nav-menu {
@@ -311,8 +256,39 @@ html.is-clipped--nav {
   font-weight: var(--body-font-weight-bold);
 }
 
-/*
-.nav-panel-explore .component .is-latest a::after {
-  content: " (latest)";
+@media screen and (min-width: 769px) {
+  .nav-container {
+    width: var(--nav-width);
+  }
 }
-*/
+
+@media screen and (min-width: 1024px) {
+  .nav-container {
+    font-size: calc(16 / var(--rem-base) * 1rem);
+    position: static;
+    top: 0;
+    visibility: visible;
+    flex: 1 0.5 25rem;
+  }
+
+  .nav {
+    top: var(--navbar-height);
+    box-shadow: none;
+    position: sticky;
+    height: var(--nav-height--desktop);
+  }
+
+  .nav-panel-menu {
+    height: calc(100vh - 4rem);
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .nav-container {
+    width: 20rem;
+  }
+
+  .nav-panel-explore .context .title {
+    padding-right: 50px;
+  }
+}
