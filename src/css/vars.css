@@ -38,6 +38,8 @@
   --body-font-color: var(--text);
   --body-font-family: "Open Sans", sans-serif;
   --body-font-weight-bold: 600;
+  --nav-font-family: "Roboto", sans-serif;
+  --nav-font-weight: 500;
   --monospace-font-family: "Roboto Mono", monospace;
   --heading-font-family: "Ubuntu", sans-serif;
   --monospace-font-weight-bold: 500;

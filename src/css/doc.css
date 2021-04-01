@@ -333,7 +333,7 @@
 .doc .imageblock img,
 .doc .image > img {
   height: auto;
-  max-width: 25rem;
+  max-width: 20rem;
 }
 
 @media screen and (min-width: 1224px) {

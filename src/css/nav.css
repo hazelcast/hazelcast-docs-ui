@@ -6,17 +6,26 @@
   font-size: calc(15.5 / var(--rem-base) * 1rem);
   z-index: var(--z-index-nav);
   visibility: hidden;
+  font-family: var(--nav-font-family);
 }
 
 .nav-container.is-active {
   visibility: visible;
 }
 
+#separator {
+  display: block;
+  background-color: var(--nav-background);
+  width: 3.5rem;
+}
+
 .nav {
-  background: var(--nav-background);
+  background-color: #fff;
   position: relative;
   top: 2rem;
   height: var(--nav-height);
+  padding-left: 20px;
+  padding-top: 40px;
 }
 
 .nav .panels {
@@ -33,7 +42,6 @@ html.is-clipped--nav {
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 6rem);
 }
 
 .nav-panel-menu:not(.is-active) .nav-menu {
@@ -54,24 +62,32 @@ html.is-clipped--nav {
 .nav-panel-menu,
 .nav-panel-explore .components {
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb-color) transparent;
+  scrollbar-color: var(--primary) transparent;
+  padding-right: 10px;
 }
 
 .nav-panel-menu::-webkit-scrollbar,
 .nav-panel-explore .components::-webkit-scrollbar {
-  width: 0.25rem;
+  width: 0.15rem;
 }
 
 .nav-panel-menu::-webkit-scrollbar-thumb,
 .nav-panel-explore .components::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-thumb-color);
+  background-color: var(--primary);
+}
+
+.nav-panel-menu::-webkit-scrollbar-track,
+.nav-panel-explore .components::-webkit-scrollbar-track {
+  background-color: var(--nav-background);
+  height: 100%;
 }
 
 .nav-menu {
   flex-grow: 1;
   min-height: 0;
   width: 100%;
-  padding: 0.75rem 0.75rem 0.25rem 0.75rem;
+  padding: 0.75rem;
+  padding-left: 0;
   line-height: var(--nav-line-height);
   position: relative;
 }
@@ -99,12 +115,16 @@ html.is-clipped--nav {
 
 .nav-item {
   list-style: none;
-  margin-top: 0.5em;
+  margin-top: 1em;
 }
 
 /* adds some breathing room below a nested list */
 .nav-item-toggle ~ .nav-list {
   padding-bottom: 0.125rem;
+}
+
+.nav-item[data-depth="1"] {
+  margin-top: 1.5em;
 }
 
 /* matches list without a title */
@@ -113,29 +133,60 @@ html.is-clipped--nav {
   margin: 0;
 }
 
+/* matches top level navigation */
+.nav-item[data-depth="1"] > .nav-link {
+  font-weight: var(--nav-font-weight);
+}
+
+/* matches top level navigation */
+.nav-item[data-depth="2"] > .nav-link,
+.nav-item[data-depth="3"] > .nav-link,
+.nav-item[data-depth="4"] > .nav-link,
+.nav-item[data-depth="5"] > .nav-link,
+.nav-item[data-depth="2"] > .nav-text,
+.nav-item[data-depth="3"] > .nav-text,
+.nav-item[data-depth="4"] > .nav-text,
+.nav-item[data-depth="5"] > .nav-text {
+  font-family: var(--body-font-family);
+  font-weight: 400;
+}
+
 .nav-item:not(.is-active) > .nav-list {
   display: none;
 }
 
 .nav-item-toggle {
-  background: transparent url(../img/caret.svg) no-repeat center / 50%;
+  background: transparent url(../img/caret-blue.svg) no-repeat center / 40%;
   border: none;
   outline: none;
   line-height: inherit;
   position: absolute;
   height: calc(var(--nav-line-height) * 1em);
   width: calc(var(--nav-line-height) * 1em);
-  margin-top: -0.05em;
-  margin-left: calc(var(--nav-line-height) * -1em);
+  margin-top: 0.05em;
+  margin-left: 5px;
+  padding-right: 30px;
 }
 
-.nav-item.is-active > .nav-item-toggle {
-  transform: rotate(90deg);
+.nav-panel-explore .context .nav-item-toggle {
+  right: 1.5px;
+}
+
+.nav-panel-explore .context .version {
+  margin-right: 30px;
+  font-size: small;
+  max-width: 70px;
+}
+
+.nav-item.is-active > .nav-item-toggle,
+.nav-panel-explore.is-active > .context > .nav-item-toggle {
+  transform: rotate(-180deg);
 }
 
 .is-current-page > .nav-link,
 .is-current-page > .nav-text {
   font-weight: var(--body-font-weight-bold);
+  color: var(--primary);
 }
 
 .nav-panel-explore {
@@ -147,6 +198,7 @@ html.is-clipped--nav {
   top: 0;
   left: 0;
   max-height: calc(50% + var(--drawer-height));
+  padding-left: 5px;
 }
 
 .nav-panel-explore .context {
@@ -155,20 +207,13 @@ html.is-clipped--nav {
   color: var(--text);
   font-weight: var(--body-font-weight-bold);
   box-shadow: 0 -1px 0 var(--nav-panel-divider-color);
-  padding: 0 0.25rem 0 0.5rem;
+  padding-right: 0.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   line-height: 1;
   height: var(--drawer-height);
-}
-
-.nav-panel-explore .context .version {
-  background-image: url(../img/caret-blue.svg);
-  background-repeat: no-repeat;
-  background-position: right 0.5rem top 50%;
-  padding: 0 1.5rem 0 0;
 }
 
 .nav-panel-explore .components {
@@ -256,12 +301,6 @@ html.is-clipped--nav {
   font-weight: var(--body-font-weight-bold);
 }
 
-@media screen and (min-width: 769px) {
-  .nav-container {
-    width: var(--nav-width);
-  }
-}
-
 @media screen and (min-width: 1024px) {
   .nav-container {
     font-size: calc(16 / var(--rem-base) * 1rem);
@@ -269,17 +308,22 @@ html.is-clipped--nav {
     top: 0;
     visibility: visible;
     flex: 1 0.5 25rem;
+    padding-bottom: 60px;
   }
 
   .nav {
     top: var(--navbar-height);
     box-shadow: none;
     position: sticky;
-    height: var(--nav-height--desktop);
   }
 
   .nav-panel-menu {
     height: calc(100vh - 4rem);
+    padding-right: 10px;
+  }
+
+  .nav-item-toggle {
+    right: 0;
   }
 }
 
