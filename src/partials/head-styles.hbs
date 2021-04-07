@@ -8,10 +8,16 @@ href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
 <style type="text/css">
 /* matches top level navigation */
 .nav-item[data-depth="0"] > .nav-link,
-.nav-item[data-depth="0"] > .nav-text,
-.nav-item[data-depth="1"] > .nav-link[href="index.html"] {
+.nav-item[data-depth="0"] > .nav-text {
   font-weight: 600;
   font-family: "Roboto", sans-serif;
+}
+
+.nav-item[data-depth="0"] {
+  margin-bottom: 4em;
+  margin-top: 0;
+  padding-bottom: 20px;
+  border-bottom: thin solid darkgray;
 }
 
 /* matches top level navigation */
