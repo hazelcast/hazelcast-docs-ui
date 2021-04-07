@@ -149,6 +149,7 @@ html.is-clipped--nav {
 .nav-item[data-depth="5"] > .nav-text {
   font-family: var(--body-font-family);
   font-weight: 400;
+  font-size: 0.95em;
 }
 
 .nav-item:not(.is-active) > .nav-list {
