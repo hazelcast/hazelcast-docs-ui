@@ -38,6 +38,8 @@
   --body-font-color: var(--text);
   --body-font-family: "Open Sans", sans-serif;
   --body-font-weight-bold: 600;
+  --nav-font-family: "Roboto", sans-serif;
+  --nav-font-weight: 500;
   --monospace-font-family: "Roboto Mono", monospace;
   --heading-font-family: "Ubuntu", sans-serif;
   --monospace-font-weight-bold: 500;
@@ -141,10 +143,9 @@
   --nav-width: calc(270 / var(--rem-base) * 1rem);
   --toc-top: calc(var(--body-top) + var(--toolbar-height));
   --toc-height: calc(100vh - var(--toc-top) - 2.5rem);
-  --toc-width: calc(200 / var(--rem-base) * 1rem);
-  --toc-width--widescreen: calc(216 / var(--rem-base) * 1rem);
+  --toc-width: 14rem;
   --doc-max-width: calc(720 / var(--rem-base) * 1rem);
-  --doc-max-width--desktop: calc(828 / var(--rem-base) * 1rem);
+  --doc-max-width--desktop: calc(1500 / var(--rem-base) * 1rem);
   --border-radius: 5px;
   /* stacking */
   --z-index-nav: 1;

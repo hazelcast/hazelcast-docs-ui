@@ -28,13 +28,15 @@
   color: white;
 }
 
-@media screen and (max-width: 1023px) {
-  aside.toc.sidebar {
-    display: none;
-  }
+aside.toc.sidebar {
+  display: none;
 }
 
 @media screen and (min-width: 1024px) {
+  .article {
+    flex-grow: 2;
+  }
+
   main {
     /* min-width: 0 required for flexbox to constrain overflowing elements */
     min-width: 0;
@@ -49,13 +51,14 @@
   }
 
   aside.toc.sidebar {
+    display: block;
     flex: 0 0 var(--toc-width);
+    min-width: 200px;
   }
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1800px) {
   aside.toc.sidebar {
-    flex: none;
-    width: 250px;
+    min-width: 300px;
   }
 }
