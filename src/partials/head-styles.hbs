@@ -4,5 +4,31 @@ href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
 />
 <!-- Apply the site styles after the docsearch ones -->
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site.css">
+{{#if (eq page.component.name 'platform')}}
+<style type="text/css">
+/* matches top level navigation */
+.nav-item[data-depth="0"] > .nav-link,
+.nav-item[data-depth="0"] > .nav-text,
+.nav-item[data-depth="1"] > .nav-link[href="index.html"] {
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+}
+
+/* matches top level navigation */
+.nav-item[data-depth="1"] > .nav-link,
+.nav-item[data-depth="2"] > .nav-link,
+.nav-item[data-depth="3"] > .nav-link,
+.nav-item[data-depth="4"] > .nav-link,
+.nav-item[data-depth="5"] > .nav-link,
+.nav-item[data-depth="1"] > .nav-text,
+.nav-item[data-depth="2"] > .nav-text,
+.nav-item[data-depth="3"] > .nav-text,
+.nav-item[data-depth="4"] > .nav-text,
+.nav-item[data-depth="5"] > .nav-text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+}
+</style>
+{{/if}}
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
