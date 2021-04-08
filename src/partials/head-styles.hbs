@@ -6,6 +6,10 @@ href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site.css">
 {{#if (eq page.component.name 'platform')}}
 <style type="text/css">
+.nav-container {
+  max-width: 400px;
+}
+
 /* matches top level navigation */
 .nav-item[data-depth="0"] > .nav-link,
 .nav-item[data-depth="0"] > .nav-text {
