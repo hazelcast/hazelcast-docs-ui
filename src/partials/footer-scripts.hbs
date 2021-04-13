@@ -12,14 +12,16 @@
     // Set debug to true to inspect the dropdown
     debug: false,
     // Display 25 results in the dropdown
-    algoliaOptions: { hitsPerPage: 25 },
+    // and search only the current product
+    algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] },
   });
 function applyFacetedSearch(){
     var checkbox = document.getElementById('facet')
     if (checkbox.checked) {
-      search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] }
+      // Search all products
+      search.algoliaOptions = { hitsPerPage: 25, facetFilters: [""] }
     } else {
-      search.algoliaOptions = { hitsPerPage: 25 }
+      search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] }
     }
   }
 </script>
