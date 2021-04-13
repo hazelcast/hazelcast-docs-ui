@@ -15,7 +15,6 @@
       modal.appendChild(modalClose)
       modal.appendChild(modalImage)
       parent.appendChild(modal)
-      console.log(modal)
       img.addEventListener('click', function (e) {
         e.preventDefault()
         modal.style.display = 'block'
