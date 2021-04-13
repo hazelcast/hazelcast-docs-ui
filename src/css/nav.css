@@ -26,6 +26,7 @@
   height: var(--nav-height);
   padding-left: 20px;
   padding-top: 40px;
+  overflow-y: scroll;
 }
 
 .nav .panels {
