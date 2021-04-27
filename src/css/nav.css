@@ -39,7 +39,6 @@ html.is-clipped--nav {
 }
 
 .nav-panel-menu {
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
@@ -57,29 +56,6 @@ html.is-clipped--nav {
   right: 0;
   bottom: 0;
   left: 0;
-}
-
-.nav-panel-menu,
-.nav-panel-explore .components {
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary) transparent;
-  padding-right: 10px;
-}
-
-.nav-panel-menu::-webkit-scrollbar,
-.nav-panel-explore .components::-webkit-scrollbar {
-  width: 0.15rem;
-}
-
-.nav-panel-menu::-webkit-scrollbar-thumb,
-.nav-panel-explore .components::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-}
-
-.nav-panel-menu::-webkit-scrollbar-track,
-.nav-panel-explore .components::-webkit-scrollbar-track {
-  background-color: var(--nav-background);
-  height: 100%;
 }
 
 .nav-menu {
