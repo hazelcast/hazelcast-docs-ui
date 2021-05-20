@@ -4,7 +4,7 @@ href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
 />
 <!-- Apply the site styles after the docsearch ones -->
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site.css">
-{{#if (eq page.component.name 'platform')}}
+{{#if (or eq page.component.name 'platform' eq page.component.name 'turbine')}}
 <style type="text/css">
 .nav-container {
   max-width: 400px;
