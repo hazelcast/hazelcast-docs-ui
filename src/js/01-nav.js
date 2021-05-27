@@ -33,6 +33,16 @@
       }
     })
 
+    find(menuPanel, '.nav-text').forEach(function (btn) {
+      var li = btn.parentElement
+      btn.addEventListener('click', toggleActive.bind(li))
+      var navItemSpan = findNextElement(btn, '.nav-list')
+      if (navItemSpan) {
+        navItemSpan.style.cursor = 'pointer'
+        navItemSpan.addEventListener('click', toggleActive.bind(li))
+      }
+    })
+
     nav.querySelector('.context').addEventListener('click', function () {
       var currentPanel = nav.querySelector('.is-active[data-panel]')
       var activatePanel = currentPanel.dataset.panel === 'menu' ? 'explore' : 'menu'

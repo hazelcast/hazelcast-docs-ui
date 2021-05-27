@@ -5,45 +5,9 @@ href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
 <!-- Apply the site styles after the docsearch ones -->
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site.css">
 {{#if (or eq page.component.name 'platform' eq page.component.name 'turbine')}}
-<style type="text/css">
-.nav-container {
-  max-width: 400px;
-}
-
-.nav {
-  height: calc(100vh - 5rem);
-  overflow-y: scroll;
-}
-
-/* matches top level navigation */
-.nav-item[data-depth="0"] > .nav-link,
-.nav-item[data-depth="0"] > .nav-text {
-  font-weight: 600;
-  font-family: "Roboto", sans-serif;
-}
-
-.nav-item[data-depth="0"] {
-  margin-bottom: 2em;
-  margin-top: 0;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  border-bottom: thin solid darkgray;
-}
-
-/* matches top level navigation */
-.nav-item[data-depth="1"] > .nav-link,
-.nav-item[data-depth="2"] > .nav-link,
-.nav-item[data-depth="3"] > .nav-link,
-.nav-item[data-depth="4"] > .nav-link,
-.nav-item[data-depth="5"] > .nav-link,
-.nav-item[data-depth="1"] > .nav-text,
-.nav-item[data-depth="2"] > .nav-text,
-.nav-item[data-depth="3"] > .nav-text,
-.nav-item[data-depth="4"] > .nav-text,
-.nav-item[data-depth="5"] > .nav-text {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 400;
-  font-size: 0.95em;
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
 }
 </style>
 {{/if}}

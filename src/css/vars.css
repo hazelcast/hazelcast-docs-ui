@@ -44,7 +44,7 @@
   --heading-font-family: "Ubuntu", sans-serif;
   --monospace-font-weight-bold: 500;
   /* base */
-  --body-background: var(--neutral-white);
+  --body-background: #f2f5f9;
   --panel-background: var(--neutral-lighter);
   --panel-border-color: var(--neutral);
   --scrollbar-thumb-color: var(--neutral-light);
@@ -60,7 +60,7 @@
   --navbar-menu_hover-background: var(--neutral-lighter);
   /* nav */
   --nav-background: var(--panel-background);
-  --nav-border-color: var(--neutral-light);
+  --nav-border-color: #dadada;
   --nav-line-height: 1.35;
   --nav-heading-font-color: var(--color-jet-30);
   --nav-muted-color: var(--color-gray-70);
@@ -71,7 +71,6 @@
   --toolbar-border-color: var(--panel-border-color);
   --toolbar-font-color: var(--color-gray-70);
   --toolbar-muted-color: var(--color-gray-30);
-  --page-version-menu-background: var(--neutral-lighter);
   --page-version-missing-font-color: var(--color-gray-30);
   /* toc */
   --toc-font-color: var(--nav-muted-color);
@@ -131,7 +130,7 @@
   --footer-background: var(--neutral-white);
   --footer-font-color: var(--secondary-text);
   /* dimensions and positioning */
-  --navbar-height: calc(63 / var(--rem-base) * 1rem);
+  --navbar-height: 50px;
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);
   --drawer-height: var(--toolbar-height);
   --body-top: var(--navbar-height);
