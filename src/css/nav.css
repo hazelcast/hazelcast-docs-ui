@@ -1,6 +1,6 @@
 .nav-container {
   position: fixed;
-  margin-top: -(var(--navbar-height));
+  margin-top: 30px;
   left: 0;
   width: 100%;
   font-size: calc(14 / var(--rem-base) * 1rem);
@@ -265,6 +265,7 @@ html.is-clipped--nav {
     position: static;
     visibility: visible;
     flex: 1 0.5 25rem;
+    margin-top: 0;
     padding-bottom: 60px;
   }
 
