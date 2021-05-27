@@ -2,7 +2,7 @@
   position: relative;
   line-height: 1;
   width: 13em;
-  font-size: 14px;
+  font-size: calc(14 / var(--rem-base) * 1rem);
 }
 
 @media screen and (min-width: 1024px) {
@@ -26,7 +26,7 @@
 
 .page-versions .version-menu {
   border: 1px solid transparent;
-  font-size: 14px;
+  font-size: calc(14 / var(--rem-base) * 1rem);
   z-index: 1;
   background-color: #fff;
   position: absolute;

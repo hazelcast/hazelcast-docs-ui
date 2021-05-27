@@ -5,7 +5,8 @@
   display: block;
   width: 250px;
   height: 30px !important;
-  font-size: 14px;
+  font-size: calc(14 / var(--rem-base) * 1rem);
+  background: #fafafa;
 }
 
 #search-open {
@@ -17,13 +18,14 @@
   font-family: inherit;
   border: none;
   outline: none;
+  background: #fafafa;
 }
 
 .algolia-autocomplete .ds-dropdown-menu {
+  margin-top: 50px;
   border: 1px solid #d9d9d9;
   border-radius: var(--border-radius);
   box-shadow: none;
-  margin-top: 0.75rem;
   max-width: none;
   width: 100%;
   min-width: 300px;
@@ -62,6 +64,10 @@
     align-self: center;
     width: 250px;
     margin-bottom: 0;
+  }
+
+  .algolia-autocomplete .ds-dropdown-menu {
+    margin-top: 0.75rem;
   }
 
   .filter.checkbox {

@@ -16,7 +16,7 @@
   padding: 2px;
   border-radius: var(--border-radius);
   text-decoration: none;
-  font-size: 14px;
+  font-size: calc(14 / var(--rem-base) * 1rem);
   color: var(--toc-heading-font-color);
 }
 
@@ -24,7 +24,7 @@
   display: inline-block;
   border-radius: var(--border-radius);
   text-decoration: none;
-  font-size: 14px;
+  font-size: calc(14 / var(--rem-base) * 1rem);
   color: var(--toc-heading-font-color);
 }
 
@@ -61,7 +61,7 @@
 
 .additional-feedback a {
   color: var(--primary-light);
-  font-size: 14px;
+  font-size: calc(14 / var(--rem-base) * 1rem);
 }
 
 .edit-this-page {
@@ -74,7 +74,7 @@
 
 .edit-this-page a {
   color: var(--primary-light);
-  font-size: 14px;
+  font-size: calc(14 / var(--rem-base) * 1rem);
 }
 
 .survey {

@@ -3,7 +3,7 @@
   margin-top: -(var(--navbar-height));
   left: 0;
   width: 100%;
-  font-size: calc(15.5 / var(--rem-base) * 1rem);
+  font-size: calc(14 / var(--rem-base) * 1rem);
   z-index: var(--z-index-nav);
   visibility: hidden;
   font-family: var(--nav-font-family);
@@ -173,7 +173,7 @@ html.is-clipped--nav {
 }
 
 .nav-panel-explore .components {
-  font-size: 14px;
+  font-size: calc(14 / var(--rem-base) * 1rem);
   margin-top: 0;
   margin-bottom: 0;
   padding: 20px;
