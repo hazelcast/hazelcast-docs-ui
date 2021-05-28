@@ -12,12 +12,12 @@
   <div class="article-banner" id="latest-banner">
     {{#if (and @root.page.componentVersion.prerelease (not @root.page.latest.prerelease))}}
     <p>You are viewing the documentation for a prerelease version.</p>
-    <a class="btn" href="{{relativize this}}">View the latest stable version</a>
+    <a class="btn" href="{{relativize this}}">View latest</a>
     {{else}}
-    <p>A newer version of this documentation is available.</p>
-    <a class="btn" href="{{relativize this}}">View the latest version</a>
+    <p>A newer version of Hazelcast is available.</p>
+    <a class="btn" href="{{relativize this}}">View latest</a>
     {{/if}}
-    <button onclick="closeBanner()" style="color:white; margin-left: 5%; font-size: 2em; background:none; border:none;">&times;</button>
+    <button onclick="closeBanner()" style="color:white; margin-left: 3px; font-size: 17px; background:none; border:none;">&times;</button>
   </div>
   <script>
     function closeBanner() {
@@ -26,7 +26,7 @@
   </script>
   {{else if (and page.componentVersion.prerelease (not page.latest.prerelease))}}
   <div class="article-banner">
-    <p>You are viewing the documentation for a prerelease version.</p>
+    <p>This documentation is a prerelease version.</p>
   </div>
   {{/with}}
   {{/unless}}

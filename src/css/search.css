@@ -1,8 +1,12 @@
 .navbar-item.searchbox {
-  margin-bottom: 40px;
+  position: absolute;
+  right: 0;
+  top: 50px;
   display: block;
   width: 250px;
-  height: 40px !important;
+  height: 30px !important;
+  font-size: calc(14 / var(--rem-base) * 1rem);
+  background: #fafafa;
 }
 
 #search-open {
@@ -12,17 +16,16 @@
 .navbar-item > span.algolia-autocomplete > input#search-input {
   display: flex;
   font-family: inherit;
-  font-size: large;
   border: none;
-  height: inherit;
   outline: none;
+  background: #fafafa;
 }
 
 .algolia-autocomplete .ds-dropdown-menu {
+  margin-top: 50px;
   border: 1px solid #d9d9d9;
   border-radius: var(--border-radius);
   box-shadow: none;
-  margin-top: 0.75rem;
   max-width: none;
   width: 100%;
   min-width: 300px;
@@ -44,16 +47,27 @@
   }
 }
 
-@media (min-width: 1350px) {
+@media (max-width: 375px) {
   .navbar-item.searchbox {
+    width: 160px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .navbar-item.searchbox {
+    position: relative;
+    top: 0;
     border: 1px solid #b7c1cb;
     box-sizing: border-box;
     border-radius: var(--border-radius);
     display: flex;
     align-self: center;
-    width: 350px;
-    height: 47px !important;
+    width: 250px;
     margin-bottom: 0;
+  }
+
+  .algolia-autocomplete .ds-dropdown-menu {
+    margin-top: 0.75rem;
   }
 
   .filter.checkbox {
@@ -69,10 +83,13 @@
     margin: 0 0.25rem 0 0;
   }
 
+  .searchbox .algolia-autocomplete {
+    height: 22px;
+  }
+
   .navbar-item > span.algolia-autocomplete > input#search-input[type=text] {
-    text-indent: 5px;
     margin-left: 8px;
-    width: 150px;
+    width: 100px;
     height: fit-content;
   }
 }

@@ -17,6 +17,8 @@
   });
 function applyFacetedSearch(){
     var checkbox = document.getElementById('facet')
+    var input = document.getElementById('search-input')
+    input.value = '';
     if (checkbox.checked) {
       // Search all products
       search.algoliaOptions = { hitsPerPage: 25, facetFilters: [""] }

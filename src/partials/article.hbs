@@ -26,14 +26,17 @@ If you entered the URL of this page manually, please double check that you enter
       {{#with site.homeUrl}}
         <img src="{{{@root.uiRootPath}}}/img/home.svg"><a href="{{{relativize this}}}" class="{{#if @root.page.home}} is-current{{/if}}">Check the home page</a>
       {{/with}}
-      <p id="search-404"><i class="fa fa-search" id="search-icon-404" aria-hidden="true"></i><input id="search-input" type="text" placeholder="Search the IMDG docs "></p>
+      <p id="search-404"><i class="fa fa-search" id="search-icon-404" aria-hidden="true"></i><input id="search-input" type="text" placeholder="Search docs "></p>
     </div>
   </div>
 </div>
 {{else}}
+{{> breadcrumbs}}
+{{>nav-toggle}}
 {{#with page.title}}
 <h1 class="page">{{{this}}}</h1>
 {{/with}}
+{{> page-versions}}
 {{{page.contents}}}
 {{/if}}
 {{> pagination}}

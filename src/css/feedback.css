@@ -2,6 +2,8 @@
 
 #feedback-prompt {
   width: 100%;
+  font-family: var(--body-font-family);
+  color: var(--secondary-text);
 }
 
 #feedback-prompt .hidden {
@@ -14,7 +16,7 @@
   padding: 2px;
   border-radius: var(--border-radius);
   text-decoration: none;
-  font-size: calc(15 / var(--rem-base) * 1rem);
+  font-size: calc(14 / var(--rem-base) * 1rem);
   color: var(--toc-heading-font-color);
 }
 
@@ -22,7 +24,7 @@
   display: inline-block;
   border-radius: var(--border-radius);
   text-decoration: none;
-  font-size: calc(15 / var(--rem-base) * 1rem);
+  font-size: calc(14 / var(--rem-base) * 1rem);
   color: var(--toc-heading-font-color);
 }
 
@@ -53,22 +55,26 @@
   display: block;
   padding-right: 0.5rem;
   margin-top: 1rem;
+  font-family: var(--body-font-family);
+  color: var(--secondary-text);
 }
 
 .additional-feedback a {
   color: var(--primary-light);
-  font-size: calc(15 / var(--rem-base) * 1rem);
+  font-size: calc(14 / var(--rem-base) * 1rem);
 }
 
 .edit-this-page {
   display: block;
   padding-right: 0.5rem;
   margin-top: 0.5rem;
+  font-family: var(--body-font-family);
+  color: var(--secondary-text);
 }
 
 .edit-this-page a {
   color: var(--primary-light);
-  font-size: calc(15 / var(--rem-base) * 1rem);
+  font-size: calc(14 / var(--rem-base) * 1rem);
 }
 
 .survey {

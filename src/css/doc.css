@@ -10,6 +10,10 @@
   padding: 0 1rem 4rem;
 }
 
+.doc > h1.page {
+  font-size: 2em;
+}
+
 @media screen and (min-width: 1024px) {
   .doc {
     flex: auto;
@@ -35,7 +39,6 @@
 }
 
 .doc > h1.page:first-child {
-  font-size: calc(36 / var(--rem-base) * 1rem);
   margin: 1.5rem 0;
 }
 
@@ -713,6 +716,7 @@
   padding: 0 1.5rem;
   position: relative;
   padding-bottom: 5px;
+  z-index: 0;
 }
 
 .doc .tabs li a {
