@@ -134,7 +134,6 @@ html.is-clipped--nav {
 
 .nav-panel-explore .context .version {
   margin-right: 30px;
-  font-size: small;
 }
 
 .nav-item.is-active > .nav-item-toggle,
@@ -155,6 +154,7 @@ html.is-clipped--nav {
   top: 0;
   left: 0;
   z-index: 1;
+  font-size: calc(14 / var(--rem-base) * 1rem);
   border-bottom: 1px solid var(--nav-background);
 }
 
@@ -266,6 +266,10 @@ html.is-clipped--nav {
     flex: 1 0.5 25rem;
     margin-top: 0;
     padding-bottom: 60px;
+  }
+
+  .nav-panel-explore {
+    font-size: 15px;
   }
 
   .nav {
