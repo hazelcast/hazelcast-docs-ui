@@ -113,7 +113,8 @@
   font-size: inherit;
 }
 
-.doc a[href*="//"]:not([href*="docs.hazelcast.com"])::after {
+.doc a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
+.nav-item a[href*="//"]:not([href*="docs.hazelcast.com"])::after {
   content: url('/_/img/external-link.svg');
   position: relative;
   margin-left: 2px;
