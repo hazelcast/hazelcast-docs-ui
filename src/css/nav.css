@@ -135,7 +135,6 @@ html.is-clipped--nav {
 .nav-panel-explore .context .version {
   margin-right: 30px;
   font-size: small;
-  max-width: 70px;
 }
 
 .nav-item.is-active > .nav-item-toggle,
