@@ -193,7 +193,7 @@ a.navbar-link {
   }
 }
 
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1225px) {
   .navbar-start > .navbar-item,
   .navbar-start .navbar-link {
     color: var(--navbar-font-color);
