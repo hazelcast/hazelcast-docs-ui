@@ -66,7 +66,8 @@ html.is-clipped--nav {
 
 .nav-item[data-depth="1"],
 .nav-item[data-depth="2"],
-.nav-item[data-depth="3"] {
+.nav-item[data-depth="3"],
+.nav-item[data-depth="4"]{
   text-indent: 0;
   line-height: 1.5;
   padding-top: 10px;
