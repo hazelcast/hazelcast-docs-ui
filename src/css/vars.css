@@ -36,12 +36,12 @@
   --body-font-size--print: 0.9375em; /* 15px */
   --body-line-height: 1.4;
   --body-font-color: var(--text);
-  --body-font-family: "Open Sans", sans-serif;
+  --body-font-family: "Roboto", sans-serif;
   --body-font-weight-bold: 600;
   --nav-font-family: "Roboto", sans-serif;
   --nav-font-weight: 500;
   --monospace-font-family: "Roboto Mono", monospace;
-  --heading-font-family: "Ubuntu", sans-serif;
+  --heading-font-family: "Roboto", sans-serif;
   --monospace-font-weight-bold: 500;
   /* base */
   --body-background: #f2f5f9;
