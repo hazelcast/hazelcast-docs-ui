@@ -1,98 +1,144 @@
 <div class="home">
   <div class="home-background">
     <h1>{{{page.title}}}</h1>
-    <!-- Remove search bar on home page
-    until we have search integrated for other docs
+		<!--
     <div class="search-container">
       <input id="search-input" type="text" placeholder="">
-    </div>-->
+    </div>
+		-->
   </div>
-<main data-ceiling="topbar">
-<article class="article">
+	<main data-ceiling="topbar">
+		<article class="article">
+			<div class="cards">
+				<div class="row">
+					<div class="card">
+					<h3 class="card-header cloud"><a href="https://docs.hazelcast.com/cloud/"><img src="{{{uiRootPath}}}/img/cloud.svg"></a>
+					</h3>
+					<p class="card-summary">
+						Use Hazelcast as a managed service.
+					</p>
+					<ul>
+						<li class="get-started-home">
+							<a href="https://docs.hazelcast.com/cloud/getting-started">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
+						</li>
+					</ul>
+					</div>
 
-<div class="cards">
+					<div class="card">
+					<h3 class="card-header imdg"><a href="{{{siteRootPath}}}/imdg/latest/"><img src="{{{uiRootPath}}}/img/imdg.svg"></img></a>
+					</h3>
+					<p class="card-summary">
+						Run a Hazelcast IMDG cluster.
+					</p>
+					<ul>
+						<li><a href="https://guides.hazelcast.org/home/">Tutorials</a></li>
+						<li><a href="https://hazelcast.com/resources/hazelcast-deployment-operations-guide/">Operations Guide</a></li>
+						<li class="get-started-home">
+							<a href="{{{siteRootPath}}}/imdg/latest/getting-started.html">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
+						</li>
+					</ul>
+					</div>
+					
+					<div class="card">
+					<h3 class="card-header jet"><a href="https://jet-start.sh/docs/"><img src="{{{uiRootPath}}}/img/jet.svg"></a>
+					</h3>
+					<p class="card-summary">
+						Run stateful computations over data.
+					</p>
+					<ul>
+						<li><a href="https://jet-start.sh/docs/tutorials/kafka">Tutorials</a></li>
+						<li><a href="https://jet-start.sh/docs/operations/installation">Operations Guide</a></li>
+						<li class="get-started-home">
+							<a href="https://jet-start.sh/docs/get-started/intro">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
+						</li>
+					</ul>
+					</div>
 
-<div class="card">
-	<h3 class="card-header cloud"><a href="https://docs.hazelcast.com/cloud/"><img src="{{{siteRootPath}}}/home/_images/cloud.svg">hazelcast</a>
-	</h3>
-	<p class="card-summary">
-		Use Hazelcast as a managed service.
-	</p>
-	<ul>
-		<li class="get-started-home">
-			<a href="https://docs.hazelcast.com/cloud/getting-started">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
-		</li>
-	</ul>
+					<div class="card">
+						<h3 class="card-header hazelcast"><a href="{{{siteRootPath}}}/hazelcast/latest/index.html"><img src="{{{uiRootPath}}}/img/hazelcast-5.0.svg"></a>
+						<button disabled class="new">new</button>
+						</h3>
+						<p class="card-summary">
+							Leverage the power of Jet (data processing engine) and IMDG (storage engine) in a single application.
+						</p>
+						<ul>
+							<li><a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/install-hazelcast.html">Tutorials</a></li>
+							<li><a href="{{{siteRootPath}}}/hazelcast/latest/production-checklist.html">Operations Guide</a></li>
+							<li class="get-started-home">
+								<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/quickstart.html">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
 
-	<h3 class="card-header imdg"><a href="{{{siteRootPath}}}/imdg/latest/"><img src="{{{siteRootPath}}}/home/_images/imdg.svg"></img>hazelcast</a>
-	</h3>
-	<p class="card-summary">
-		Run a Hazelcast IMDG cluster.
-	</p>
-	<ul>
-		<li><a href="https://guides.hazelcast.org/home/">Tutorials</a></li>
-		<li><a href="https://hazelcast.com/resources/hazelcast-deployment-operations-guide/">Operations Guide</a></li>
-		<li class="get-started-home">
-			<a href="{{{siteRootPath}}}/imdg/latest/getting-started.html">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
-		</li>
-	</ul>
-	
-	<h3 class="card-header jet"><a href="https://jet-start.sh/docs/"><img src="{{{siteRootPath}}}/home/_images/jet.svg">hazelcast</a>
-	</h3>
-	<p class="card-summary">
-		Run stateful computations over data.
-	</p>
-	<ul>
-		<li><a href="https://jet-start.sh/docs/tutorials/kafka">Tutorials</a></li>
-		<li><a href="https://jet-start.sh/docs/operations/installation">Operations Guide</a></li>
-		<li class="get-started-home">
-			<a href="https://jet-start.sh/docs/get-started/intro">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
-		</li>
-	</ul>
-</div>
+				<div class="row">
+					<div class="card">
+						<h3 class="card-header">Hazelcast Clients
+						</h3>
+						<p class="card-summary">
+							Connect your applications to Hazelcast clusters.
+						</p>
+					</div>
+					<div class="card clients">
+						<figure class="item">
+								<a href="https://hazelcast.com/clients/java/"><img src="{{{uiRootPath}}}/img/language-logo-java.png">
+								<figcaption class="caption">Java</figcaption></a>
+						</figure>
+						<figure class="item">
+								<a href="https://hazelcast.com/clients/dotnet/"><img src="{{{uiRootPath}}}/img/dotnet.png">
+								<figcaption class="caption">.Net</figcaption></a>
+						</figure>
+						<figure class="item">
+								<a href="https://hazelcast.com/clients/cplusplus/"><img src="{{{uiRootPath}}}/img/cpp.svg"/>
+								<figcaption class="caption">C++</figcaption></a>
+						</figure>
+						<figure class="item">
+								<a href="https://hazelcast.com/clients/node-js/"><img src="{{{uiRootPath}}}/img/language-logo-node.png"/>
+								<figcaption class="caption">Node.js</figcaption></a>
+						</figure>
+						<figure class="item">
+								<a href="https://hazelcast.com/clients/python/"><img src="{{{uiRootPath}}}/img/language-logo-python.png"/>
+								<figcaption class="caption">Python</figcaption></a>
+						</figure>
+						<figure class="item">
+								<a href="https://hazelcast.com/clients/go/"><img src="{{{uiRootPath}}}/img/go.svg"/>
+								<figcaption class="caption">Go</figcaption></a>
+						</figure>
+					</div>
+					<div class="card">
+					<h3 class="card-header"><a href="{{{siteRootPath}}}/management-center/latest/">Management Center</a>
+					</h3>
+					<p class="card-summary">
+						Monitor your Hazelcast clusters.
+					</p>
+					<ul>
+						<li class="get-started-home">
+							<a href="{{{siteRootPath}}}/management-center/latest/getting-started.html">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
+						</li>
+					</ul>
+					</div>
+					<div class="card">
+						<a href="{{{siteRootPath}}}/management-center/latest/"><img style="max-width: 250px;" src="{{{uiRootPath}}}/img/mc-dashboard.svg"></a>
+					</div>
+				</div>
 
-<div class="card">
-	<h3 class="card-header"><a href="{{{siteRootPath}}}/management-center/latest/">Management Center</a>
-	</h3>
-	<p class="card-summary">
-		Monitor your Hazelcast clusters.
-	</p>
-	<ul>
-		<li class="get-started-home">
-			<a href="{{{siteRootPath}}}/management-center/latest/getting-started.html">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
-		</li>
-	</ul>
-
-	<h3 class="card-header">Hazelcast Clients
-	</h3>
-	<p class="card-summary">
-		Connect your applications to Hazelcast clusters.
-	</p>
-	<ul>
-		<li><a href="https://hazelcast.com/clients/java/">Java (Client or Embedded)</a></li>
-		<li><a href="https://hazelcast.com/clients/dotnet/">.Net</a></li>
-		<li><a href="https://hazelcast.com/clients/cplusplus/">C++</a></li>
-		<li><a href="https://hazelcast.com/clients/node-js/">Node.js</a></li>
-		<li><a href="https://hazelcast.com/clients/python/">Python</a></li>
-		<li><a href="https://hazelcast.com/clients/go/">Go</a></li>
-		<li><a href="https://docs.hazelcast.com/imdg/latest/clients/rest.html">REST</a></li>
-		<li><a href="https://docs.hazelcast.com/imdg/latest/clients/memcache.html">Memcache</a></li>
-	</ul>
-</div>
-
-<div class="card">
-	<h3 class="card-header">See Also
-	</h3>
-	<p class="card-summary">
-		Other helpful documentation resources.
-	</p>
-	<ul>
-		<li><a href="https://hazelcast.com/hub/">Integration Hub</a>Explore our connectors and plugins for integrating Hazelcast with various data systems, application frameworks, and cloud runtimes.</li>
-		<li><a href="https://training.hazelcast.com/">Online Training</a>Learn Hazelcast by following self-paced online training courses.</li>
-		<li><a href="https://hazelcast.com/resources/mastering-hazelcast/">Mastering Hazelcast eBook</a>Get in-depth knowledge of the important features of Hazelcast.</li>
-	</ul>
-</div>
-</div>
-</article>
-</main>
+				<div class="row">
+					<div class="card">
+					<h3 class="card-header">See Also
+					</h3>
+						<a href="https://hazelcast.com/hub/">Integration Hub: </a>Explore our connectors and plugins for integrating Hazelcast with various data systems, application frameworks, and cloud runtimes.</li>
+					</div>
+					<div class="card">
+						<a href="https://guides.hazelcast.org/home/">Guides: </a>Get up and running with Hazelcast integrations such as Spring Boot, Kubernetes, and AWS.</li>
+					</div>
+					<div class="card">
+						<a href="https://training.hazelcast.com/">Online Training: </a>Learn Hazelcast by following self-paced online training courses.</li>
+					</div>
+					<div class="card">
+						<a href="https://hazelcast.com/resources/mastering-hazelcast/">Mastering Hazelcast eBook: </a>Get in-depth knowledge of the important features of Hazelcast.</li>
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
 </div>

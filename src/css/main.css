@@ -8,6 +8,18 @@
   height: 30px;
 }
 
+.new {
+  border-radius: 10px;
+  border: none;
+  color: #041a3b;
+  background-color: var(--success-light);
+  font-size: 14px;
+}
+
+.new:hover {
+  cursor: default;
+}
+
 .article-banner p {
   font-size: calc(14 / var(--rem-base) * 1rem);
   margin: 0 1rem 0 0;

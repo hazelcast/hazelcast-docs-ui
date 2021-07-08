@@ -127,8 +127,8 @@
   --table-border-color: var(--panel-border-color);
   /* footer */
   --footer-line-height: var(--doc-line-height);
-  --footer-background: var(--neutral-white);
-  --footer-font-color: var(--secondary-text);
+  --footer-background: #424242;
+  --footer-font-color: #fafafa;
   /* dimensions and positioning */
   --navbar-height: 50px;
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);

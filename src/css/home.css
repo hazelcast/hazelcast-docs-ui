@@ -8,18 +8,21 @@
 .home .article {
   background-color: #f2f5f9;
   margin-top: -1.5em;
+  text-align: left;
 }
 
 .home-background {
   top: 0;
-  height: 250px /* Height when the search bar is displayed 260px */;
   width: 100%;
-  background: url('../img/home-background.svg') no-repeat right top, var(--text);
+  background: url('../img/banner-hz.svg') no-repeat center;
+  background-color: #141414;
+  border-bottom-right-radius: 50px;
 }
 
 .home h1 {
-  color: white;
-  padding-top: 70px /* 87px */;
+  color: #fafafa;
+  padding-top: 90px;
+  font-weight: 300;
 }
 
 .search-container {
@@ -28,105 +31,118 @@
 }
 
 .cards {
-  display: -webkit-flex;
-  display: flex;
-  flex: 0 70%;
-  z-index: -1;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  margin-top: 15px;
-  padding: 1.5%;
+  margin-top: 70px;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-bottom: 50px;
+  font-size: 16px;
 }
 
-.card {
-  position: relative;
-  flex: 1 100%;
-  flex-direction: column;
-  margin-bottom: 20px;
-  padding-bottom: 2%;
+.row:nth-child(2) {
+  background-color: #fafafa;
+}
+
+.row {
+  flex-direction: row;
+  display: flex;
   background: var(--neutral-white);
   color: var(--text);
   text-decoration: none;
+  padding-left: 50px;
+  padding-right: 50px;
+  flex-wrap: wrap;
 }
 
-.card:last-child {
-  padding-right: 2%;
-  border-radius: 0 0 40px 0;
-  -webkit-border-radius: 0 0 40px 0;
+.row > * {
+  flex: 1 1 25%;
+  min-width: 25ch;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
-.card ul {
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  padding-inline-start: 0;
-  color: var(--primary);
+.row .card.clients {
+  padding-top: 20px;
+  margin-top: 20px;
 }
 
-.card ul li {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  margin-bottom: 1em;
-  font-size: calc(16 / var(--rem-base) * 1rem);
-  color: var(--text);
+.row:first-child {
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
 }
 
-.card ul li a {
-  color: var(--primary);
-  font-size: calc(16 / var(--rem-base) * 1rem);
+.row:last-child {
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: var(--border-radius);
 }
 
-.card .card-summary {
-  text-align: center;
-  font-size: calc(16 / var(--rem-base) * 1rem);
+.row:last-child .card:nth-child(2),
+.row:last-child .card:nth-child(3),
+.row:last-child .card:last-child {
+  margin-top: 63px;
 }
 
-.card .card-header {
-  text-align: center;
-}
-
-.card .card-header:first-child {
-  margin-top: 50px;
-}
-
-.card:first-child .card-header > a > img {
-  width: 30px;
+.row:first-child .card-header > a > img {
   vertical-align: top;
+}
+
+.row .card-header.imdg > a > img {
   margin-right: 5px;
 }
 
-.card .card-header.imdg > a > img {
-  margin-right: 5px;
-}
-
-.card .card-header > a {
+.row .card a {
   text-decoration: none;
   color: var(--text);
 }
 
-.card .card-header.imdg::after {
-  content: ' imdg';
-  text-transform: uppercase;
+.row .card ul {
+  padding: 0;
+}
+
+.row .card li {
+  list-style: none;
+  padding-bottom: 15px;
+}
+
+.row .card li:last-child {
+  padding-bottom: 0;
+}
+
+.row .card li > a,
+.row:last-child .card a,
+.row .card.clients figure figcaption {
   color: var(--primary);
 }
 
-.card .card-header.cloud::after {
-  content: ' cloud';
-  text-transform: uppercase;
-  color: var(--primary);
+.row .card.clients figure.item {
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  margin-inline-start: 0;
+  margin-right: 30px;
 }
 
-.card .card-header.jet::after {
-  content: ' jet';
-  text-transform: uppercase;
-  color: var(--primary);
+.row:nth-child(2) .card:first-child {
+  flex-basis: 10%;
 }
 
-.get-started-home {
+.row:nth-child(2) .card:nth-child(2) {
+  flex-basis: 35%;
+}
+
+.row:nth-child(2) .card:nth-child(3) {
+  flex-basis: 10%;
+}
+
+.row .card.clients figure.item img {
+  height: 40px;
+}
+
+.row .card.clients .caption {
+  display: block;
+}
+
+.get-started-home,
+.row .card.clients figure figcaption {
   font-weight: 600;
 }
 
@@ -134,102 +150,34 @@
   vertical-align: middle;
 }
 
+@media (min-width: 1300px) {
+  .row:last-child .card:nth-child(2),
+  .row:last-child .card:nth-child(3),
+  .row:last-child .card:last-child {
+    padding-left: 40px;
+  }
+}
+
+@media (min-width: 840px) and (max-width: 1295px) {
+  .row > * {
+    flex-basis: 50%;
+  }
+
+  .row:nth-child(2) .card:first-child {
+    flex-basis: 50%;
+  }
+
+  .row:nth-child(2) .card:nth-child(2) {
+    flex-basis: 50%;
+  }
+
+  .row:nth-child(2) .card:nth-child(3) {
+    flex-basis: 50%;
+  }
+}
+
 @media (min-width: 421px) {
   .home-background {
-    height: 200px /* Height when the search bar is displayed 260px */;
-  }
-}
-
-@media (min-width: 1400px) {
-  .card:nth-child(2) ul {
-    padding-inline-start: 35px;
-  }
-
-  .card:nth-child(2) .card-summary {
-    padding-left: 35px;
-  }
-
-  .card:nth-child(2) .card-header {
-    padding-left: 35px;
-  }
-}
-
-@media (min-width: 1230px) {
-  .cards {
-    justify-content: center;
-  }
-
-  .card {
-    flex: 0 25%;
-  }
-
-  .card:first-child::after {
-    content: '';
-    border-right: 1px solid var(--neutral);
-    position: absolute;
-    height: 75%;
-    right: 25px;
-    top: 12.5%;
-  }
-
-  .card .card-header {
-    text-align: left;
-  }
-
-  .card ul li {
-    text-align: left;
-  }
-
-  .card .card-summary {
-    text-align: left;
-  }
-}
-
-@media (min-width: 820px) and (max-width: 1229px) {
-  .cards {
-    justify-content: flex-start;
-  }
-
-  .card {
-    flex: 1 50%;
-  }
-
-  .card .card-header {
-    text-align: left;
-  }
-
-  .card .card-summary {
-    text-align: left;
-  }
-
-  .card ul li {
-    text-align: left;
-  }
-
-  .card:first-child::after {
-    content: '';
-    border-right: 1px solid var(--neutral);
-    position: absolute;
-    height: 75%;
-    right: 70px;
-    top: 12.5%;
-  }
-}
-
-@media (min-width: 820px) {
-  .card:first-child {
-    padding-right: 3%;
-  }
-
-  .card:first-child ul {
-    padding-inline-start: 65px;
-  }
-
-  .card:first-child .card-header {
-    padding-left: 30px;
-  }
-
-  .card:first-child .card-summary {
-    padding-left: 65px;
+    height: 216px /* Height when the search bar is displayed 260px */;
   }
 }
