@@ -1,11 +1,32 @@
 .article-banner {
   align-items: center;
   background-color: var(--info);
-  display: flex;
+  display: none;
   line-height: 1.2;
-  padding: 1rem 1.25rem;
+  padding-top: 1rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 1rem;
   color: white;
-  height: 30px;
+  font-size: 0.75em;
+  flex-wrap: wrap;
+}
+
+.article-banner.beta {
+  justify-content: space-evenly;
+}
+
+.article-banner .beta-imdg {
+  max-width: 800px;
+  flex: 1 1 50%;
+}
+
+.article-banner .beta-imdg li > a {
+  color: #fff;
+}
+
+.article-banner .prerelease {
+  flex: 1 1;
 }
 
 .new {
@@ -23,17 +44,19 @@
 .article-banner p {
   font-size: calc(14 / var(--rem-base) * 1rem);
   margin: 0 1rem 0 0;
+  margin-bottom: 10px;
 }
 
 .article-banner a.btn {
   border: 1px solid var(--neutral);
-  display: flex;
   text-align: center;
   padding: 4px;
   text-decoration: none;
   border-radius: var(--border-radius);
   background-color: white;
-  font-size: 0.7em;
+  width: fit-content;
+  display: flex;
+  flex: 1 1 20%;
 }
 
 .article-banner a.btn:focus,
@@ -53,6 +76,10 @@ main > .content {
 @media screen and (min-width: 1024px) {
   .article {
     flex-grow: 2;
+  }
+
+  .article-banner {
+    justify-content: space-evenly;
   }
 
   main {
@@ -76,6 +103,12 @@ main > .content {
     display: block;
     flex: 0 0 var(--toc-width);
     min-width: 200px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .article-banner .beta-imdg {
+    max-width: 100%;
   }
 }
 
