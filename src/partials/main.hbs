@@ -31,6 +31,10 @@
     <p>This is a prerelease version.</p>
         <a class="btn" href="{{relativize this}}">View latest</a>
     </div>
+    {{else if (and @root.page.componentVersion.prerelease @root.page.latest.prerelease)}}
+      <div class="prerelease">
+        <p>This is a prerelease version.</p>
+    </div>
     {{else}}
     <div class="prerelease"prerelease>
     <p>A newer version of {{@root.page.component.title}} is available.</p>
