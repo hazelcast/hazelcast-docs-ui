@@ -9,9 +9,9 @@
     cookieBanner.style.display = 'flex'
   }
 
-  const itemStr = window.localStorage.getItem('latestBannerCookie')
-  if (itemStr) {
-    const item = JSON.parse(itemStr)
+  const bannerCookie = window.localStorage.getItem('latestBannerCookie')
+  if (bannerCookie && latestBanner) {
+    const item = JSON.parse(bannerCookie)
     const now = new Date()
     if (now.getTime() > item.expiry) {
       window.localStorage.removeItem('latestBannerCookie')

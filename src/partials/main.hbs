@@ -56,7 +56,9 @@
     {{/if}}
       <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
   </div>
-  <script>
+  {{/with}}
+  {{/unless}}
+    <script>
     function closeBanner() {
       document.getElementById('latest-banner').style.display = 'none'
       const now = new Date()
@@ -66,8 +68,6 @@
       localStorage.setItem('latestBannerCookie', JSON.stringify(item))
     }
   </script>
-  {{/with}}
-  {{/unless}}
   <div class="content">
 {{> article}}
 {{> toc}}
