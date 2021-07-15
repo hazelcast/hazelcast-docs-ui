@@ -17,7 +17,7 @@
       window.localStorage.removeItem('latestBannerCookie')
       latestBanner.style.display = 'flex'
     }
-  } else {
+  } else if (!bannerCookie && latestBanner) {
     latestBanner.style.display = 'flex'
   }
 
