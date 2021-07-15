@@ -27,6 +27,19 @@ function applyFacetedSearch(){
     }
   }
 </script>
+<script>
+  function closeBanner() {
+    var banner = document.getElementById('latest-banner')
+    if (banner) {
+      banner.style.display = 'none'
+      const now = new Date()
+      const item = {
+        expiry: now.getTime() + 86400,
+      }
+      localStorage.setItem('latestBannerCookie', JSON.stringify(item))
+    }
+  }
+</script>
 {{/if}}
 {{#contains 'Page Not Found' page.title}}
 {{/contains}}
