@@ -2,7 +2,6 @@
   'use strict'
 
   var article = document.querySelector('article.doc')
-  var toolbar = document.querySelector('.toolbar')
 
   function decodeFragment (hash) {
     return hash && (~hash.indexOf('%') ? decodeURIComponent(hash) : hash).slice(1)
@@ -21,7 +20,7 @@
       window.location.hash = '#' + this.id
       e.preventDefault()
     }
-    window.scrollTo(0, computePosition(this, 0) - toolbar.getBoundingClientRect().bottom)
+    window.scrollTo(0, computePosition(this, 0) - 50)
   }
 
   window.addEventListener('load', function jumpOnLoad (e) {

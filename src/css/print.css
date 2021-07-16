@@ -53,8 +53,7 @@
   }
 
   #topbar-nav,
-  .nav-container,
-  .toolbar {
+  .nav-container {
     display: none;
   }
 
