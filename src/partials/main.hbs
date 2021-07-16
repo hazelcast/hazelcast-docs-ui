@@ -1,12 +1,10 @@
 <main class="article">
 {{#if (eq page.layout '404')}}
-{{> toolbar}}
   <div class="content">
 {{> article}}
   </div>
 </main>
 {{else}}
-  {{> toolbar}}
   {{#if (and (eq page.component.name 'imdg') (eq page.componentVersion page.component.latest) (not @root.page.componentVersion.prerelease ))}}
     <div class="article-banner beta" id="latest-banner">
     <div class="beta-imdg">
