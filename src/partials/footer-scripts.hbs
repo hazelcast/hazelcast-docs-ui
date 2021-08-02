@@ -1,8 +1,244 @@
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
-<!-- Before the closing </body> -->
 <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
-{{#if (not-eq page.component.name 'home')}}
+{{#if (not-eq page.title 'Page Not Found')}}
+  {{#if (and (eq page.component.name 'imdg') (or (eq page.componentVersion.version '4') (lt page.componentVersion.version '3.12')))}}
+  <script>
+    const search = window.docsearch({
+      apiKey: '{{site.keys.docsearchApi}}',
+      indexName: '{{site.keys.docsearchIndex}}',
+      appId: '{{site.keys.docsearchId}}',
+      inputSelector: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      // Display 25 results in the dropdown
+      // and search only the current product
+      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"] },
+    });
+  </script>
+  <script>
+    function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}, management-center-{{site.components.management-center.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"] }
+      }
+    }
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+        const now = new Date()
+        const item = {
+          expiry: now.getTime() + 86400000,
+        }
+        localStorage.setItem('latestBannerCookie', JSON.stringify(item))
+      }
+    }
+  </script>
+  {{else if (and (eq page.component.name 'management-center') (lt page.componentVersion.version '4.2020.12'))}}
+    <script>
+    const search = window.docsearch({
+      apiKey: '{{site.keys.docsearchApi}}',
+      indexName: '{{site.keys.docsearchIndex}}',
+      appId: '{{site.keys.docsearchId}}',
+      inputSelector: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      // Display 25 results in the dropdown
+      // and search only the current product
+      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"] },
+    });
+  </script>
+  <script>
+    function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}, imdg-{{site.components.imdg.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"] }
+      }
+    }
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+        const now = new Date()
+        const item = {
+          expiry: now.getTime() + 86400000,
+        }
+        localStorage.setItem('latestBannerCookie', JSON.stringify(item))
+      }
+    }
+  </script>
+  {{else if (and (not-eq page.component.name 'home') (not-eq page.component.name 'cloud'))}}
+  <script>
+    const search = window.docsearch({
+      apiKey: '{{site.keys.docsearchApi}}',
+      indexName: '{{site.keys.docsearchIndex}}',
+      appId: '{{site.keys.docsearchId}}',
+      inputSelector: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      // Display 25 results in the dropdown
+      // and search only the current product
+      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] },
+    });
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+        const now = new Date()
+        const item = {
+          expiry: now.getTime() + 86400000,
+        }
+        localStorage.setItem('latestBannerCookie', JSON.stringify(item))
+      }
+    }
+  </script>
+  {{else if (eq page.component.name 'cloud')}}
+  <script>
+    const search = window.docsearch({
+      apiKey: '{{site.keys.docsearchApi}}',
+      indexName: '{{site.keys.docsearchIndex}}',
+      appId: '{{site.keys.docsearchId}}',
+      inputSelector: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      // Display 25 results in the dropdown
+      // and search only the current product
+      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] },
+    });
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}, management-center-{{site.components.management-center.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, imdg-{{site.components.imdg.latest.version}}"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] }
+      }
+    }
+  </script>
+  {{/if}}
+  {{#if (and (eq page.component.name 'imdg') page.attributes.latest-supported-mc)}}
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, management-center-{{page.attributes.latest-supported-mc}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+      }
+    }
+  </script>
+  {{else if (and (eq page.component.name 'imdg') (and (not-eq page.componentVersion.version '4') (gte page.componentVersion.version '3.12')))}}
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, management-center-{{site.components.management-center.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+      }
+    }
+  </script>
+  {{/if}}
+  {{#if (and (eq page.component.name 'hazelcast') page.attributes.latest-supported-mc)}}
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, management-center-{{page.attributes.latest-supported-mc}}, imdg-{{site.components.imdg.latest.version}}, cloud"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+      }
+    }
+  </script>
+  {{else if (eq page.component.name 'hazelcast')}}
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, management-center-{{site.components.management-center.latest.version}}, imdg-{{site.components.imdg.latest.version}}, cloud"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+      }
+    }
+  </script>
+  {{/if}}
+  {{#if (and (eq page.component.name 'management-center') page.attributes.latest-supported-imdg)}}
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, imdg-{{page.attributes.latest-supported-imdg}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+      }
+    }
+  </script>
+  {{else if (and (eq page.component.name 'management-center') page.attributes.latest-supported-hazelcast)}}
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, imdg-{{site.components.imdg.latest.version}}, hazelcast-{{page.attributes.latest-supported-hazelcast}}, cloud"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+      }
+    }
+  </script>
+  {{else if (and (eq page.component.name 'management-center') (gte page.componentVersion.version '4.2020.12'))}}
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, imdg-{{site.components.imdg.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+      }
+    }
+  </script>
+  {{/if}}
+{{else}}
 <script>
   const search = window.docsearch({
     apiKey: '{{site.keys.docsearchApi}}',
@@ -13,33 +249,7 @@
     debug: false,
     // Display 25 results in the dropdown
     // and search only the current product
-    algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] },
+    algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:hazelcast-{{site.components.hazelcast.latest.version}}, management-center-{{site.components.management-center.latest.version}}, imdg-{{site.components.imdg.latest.version}}, cloud"] },
   });
-function applyFacetedSearch(){
-    var checkbox = document.getElementById('facet')
-    var input = document.getElementById('search-input')
-    input.value = '';
-    if (checkbox.checked) {
-      // Search all products
-      search.algoliaOptions = { hitsPerPage: 25, facetFilters: [""] }
-    } else {
-      search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] }
-    }
-  }
-</script>
-<script>
-  function closeBanner() {
-    var banner = document.getElementById('latest-banner')
-    if (banner) {
-      banner.style.display = 'none'
-      const now = new Date()
-      const item = {
-        expiry: now.getTime() + 86400000,
-      }
-      localStorage.setItem('latestBannerCookie', JSON.stringify(item))
-    }
-  }
 </script>
 {{/if}}
-{{#contains 'Page Not Found' page.title}}
-{{/contains}}
