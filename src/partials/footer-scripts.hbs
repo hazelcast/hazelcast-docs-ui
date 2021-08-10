@@ -23,7 +23,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}, management-center-{{site.components.management-center.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"] }
       }
@@ -63,7 +63,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}, imdg-{{site.components.imdg.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"] }
       }
@@ -130,7 +130,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}, management-center-{{site.components.management-center.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, imdg-{{site.components.imdg.latest.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] }
       }
@@ -145,7 +145,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, management-center-{{page.attributes.latest-supported-mc}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{page.attributes.latest-supported-mc}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
       }
@@ -159,7 +159,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, management-center-{{site.components.management-center.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
       }
@@ -174,7 +174,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, management-center-{{page.attributes.latest-supported-mc}}, imdg-{{site.components.imdg.latest.version}}, cloud"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{page.attributes.latest-supported-mc}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
       }
@@ -188,7 +188,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, management-center-{{site.components.management-center.latest.version}}, imdg-{{site.components.imdg.latest.version}}, cloud"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
       }
@@ -203,7 +203,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, imdg-{{page.attributes.latest-supported-imdg}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:imdg-{{page.attributes.latest-supported-imdg}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
       }
@@ -217,7 +217,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, imdg-{{site.components.imdg.latest.version}}, hazelcast-{{page.attributes.latest-supported-hazelcast}}, cloud"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}", "tags:cloud"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
       }
@@ -231,7 +231,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}, imdg-{{site.components.imdg.latest.version}}, hazelcast-{{site.components.hazelcast.latest.version}}, cloud"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
       }
@@ -249,7 +249,7 @@
     debug: false,
     // Display 25 results in the dropdown
     // and search only the current product
-    algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:hazelcast-{{site.components.hazelcast.latest.version}}, management-center-{{site.components.management-center.latest.version}}, imdg-{{site.components.imdg.latest.version}}, cloud"] },
+    algoliaOptions: { hitsPerPage: 25, facetFilters: [["tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] },
   });
 </script>
 {{/if}}
