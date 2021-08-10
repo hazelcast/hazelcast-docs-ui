@@ -124,6 +124,10 @@
   color: var(--link-font-color);
 }
 
+.doc a > code {
+  color: var(--link-font-color) !important;
+}
+
 .doc a:hover {
   color: var(--link_hover-font-color);
 }
