@@ -13,7 +13,7 @@
       debug: false,
       // Display 25 results in the dropdown
       // and search only the current product
-      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"] },
+      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{site.components.imdg.latest.version}}"] },
     });
   </script>
   <script>
@@ -23,9 +23,9 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:{{page.component.name}}" AND "version:{{site.components.imdg.latest.version}}") OR ("tags:management-center" AND "version:{{site.components.management-center.latest.version}}") OR ("tags:hazelcast" AND "version:{{site.components.hazelcast.latest.version}}" OR "tags:cloud"' }
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{site.components.imdg.latest.version}}"] }
       }
     }
   </script>
@@ -53,7 +53,7 @@
       debug: false,
       // Display 25 results in the dropdown
       // and search only the current product
-      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"] },
+      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{site.components.management-center.latest.version}}"] },
     });
   </script>
   <script>
@@ -63,9 +63,9 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:{{page.component.name}}" AND "version:{{site.components.management-center.latest.version}}") OR ("tags:imdg" AND "version:{{site.components.imdg.latest.version}}") OR ("tags:hazelcast" AND "version:{{site.components.hazelcast.latest.version}}" OR "tags:cloud"' }
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{site.components.management-center.latest.version}}"] }
       }
     }
   </script>
@@ -93,7 +93,7 @@
       debug: false,
       // Display 25 results in the dropdown
       // and search only the current product
-      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] },
+      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{page.componentVersion.version}}"] }
     });
   </script>
   <script>
@@ -130,7 +130,7 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:imdg" AND "version:{{site.components.imdg.latest.version}}") OR ("tags:management-center" AND "version:{{site.components.management-center.latest.version}}") OR ("tags:hazelcast" AND "version:{{site.components.hazelcast.latest.version}}" OR "tags:cloud"' }
       } else {
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] }
       }
@@ -145,9 +145,9 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{page.attributes.latest-supported-mc}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:{{page.component.name}}" AND "version:{{page.componentVersion.version}}") OR ("tags:management-center" AND "version:{{page.attributes.latest-supported-mc}}") OR ("tags:hazelcast" AND "version:{{site.components.hazelcast.latest.version}}") OR "tags:cloud"' }
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{page.componentVersion.version}}"] }
       }
     }
   </script>
@@ -159,9 +159,9 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:{{page.component.name}}" AND "version:{{page.componentVersion.version}}") OR ("tags:management-center" AND "version:{{site.components.management-center.latest.version}}") OR ("tags:hazelcast" AND "version:{{site.components.hazelcast.latest.version}}") OR "tags:cloud"' }
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{page.componentVersion.version}}"] }
       }
     }
   </script>
@@ -174,9 +174,9 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{page.attributes.latest-supported-mc}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:{{page.component.name}}" AND "version:{{page.componentVersion.version}}") OR ("tags:management-center" AND "version:{{page.attributes.latest-supported-mc}}") OR ("tags:imdg" AND "version:{{site.components.imdg.latest.version}}") OR "tags:cloud"' }
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{page.componentVersion.version}}"] }
       }
     }
   </script>
@@ -188,9 +188,9 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:{{page.component.name}}" AND "version:{{page.componentVersion.version}}") OR ("tags:management-center" AND "version:{{site.components.management-center.latest.version}}") OR ("tags:imdg" AND "version:{{site.components.imdg.latest.version}}") OR "tags:cloud"' }
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{page.componentVersion.version}}"] }
       }
     }
   </script>
@@ -203,9 +203,9 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:imdg-{{page.attributes.latest-supported-imdg}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:{{page.component.name}}" AND "version:{{page.componentVersion.version}}") OR ("tags:imdg" AND "version:{{page.attributes.latest-supported-imdg}}") OR ("tags:hazelcast" AND "version:{{site.components.hazelcast.latest.version}}") OR "tags:cloud"' }
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{page.componentVersion.version}}"] }
       }
     }
   </script>
@@ -217,9 +217,9 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}", "tags:cloud"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:{{page.component.name}}" AND "version:{{page.componentVersion.version}}") OR ("tags:imdg" AND "version:{{site.components.imdg.latest.version}}") OR ("tags:hazelcast" AND "version:{{page.attributes.latest-supported-hazelcast}}") OR "tags:cloud"' }
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{page.componentVersion.version}}"] }
       }
     }
   </script>
@@ -231,9 +231,9 @@
       input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        search.algoliaOptions = { hitsPerPage: 25, filters: '("tags:{{page.component.name}}" AND "version:{{page.componentVersion.version}}") OR ("tags:imdg" AND "version:{{site.components.imdg.latest.version}}") OR ("tags:hazelcast" AND "version:{{site.components.hazelcast.latest.version}}") OR "tags:cloud"' }
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}", "version:{{page.componentVersion.version}}"] }
       }
     }
   </script>
@@ -249,7 +249,7 @@
     debug: false,
     // Display 25 results in the dropdown
     // and search only the current product
-    algoliaOptions: { hitsPerPage: 25, facetFilters: [["tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] },
+    algoliaOptions: { hitsPerPage: 25, filters: '("tags:hazelcast" AND "version:{{site.components.hazelcast.latest.version}}") OR ("tags:management-center" AND "version:{{site.components.management-center.latest.version}}") OR ("tags:imdg" AND "version:{{site.components.imdg.latest.version}}") OR "tags:cloud"' },
   });
 </script>
 {{/if}}
