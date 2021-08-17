@@ -341,20 +341,28 @@
 .doc .imageblock img,
 .doc .image > img {
   height: auto;
-  max-width: 20rem;
+  max-width: 250px;
+}
+
+@media screen and (min-width: 500px) {
+  .doc .imageblock img,
+  .doc .image > img {
+    height: auto;
+    max-width: 350px;
+  }
 }
 
 @media screen and (min-width: 1224px) {
   .doc .imageblock img,
   .doc .image > img {
-    max-width: 35rem;
+    max-width: 450px;
   }
 }
 
 @media screen  and (min-width: 1450px) {
   .doc .imageblock img,
   .doc .image > img {
-    max-width: 40rem;
+    max-width: 550px;
   }
 }
 
