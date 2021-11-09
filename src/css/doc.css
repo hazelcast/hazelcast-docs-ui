@@ -14,6 +14,11 @@
   font-size: 2em;
 }
 
+.doc details {
+  margin-top: 15px;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 1024px) {
   .doc {
     flex: auto;
