@@ -191,6 +191,11 @@ html.is-clipped--nav {
   display: none;
 }
 
+.nav-panel-explore .component.home {
+  text-align: right;
+  margin-top: 15px !important;
+}
+
 .nav-panel-explore .component {
   display: block;
 }
