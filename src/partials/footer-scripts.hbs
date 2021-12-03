@@ -136,6 +136,33 @@
       }
     }
   </script>
+  {{else if (eq page.component.name 'developer-guides')}}
+  <script>
+    const search = window.docsearch({
+      apiKey: '{{site.keys.docsearchApi}}',
+      indexName: '{{site.keys.docsearchIndex}}',
+      appId: '{{site.keys.docsearchId}}',
+      inputSelector: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      // Display 25 results in the dropdown
+      // and search only the current product
+      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:management-center-5.0"] },
+    });
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      var input = document.getElementById('search-input')
+      input.value = '';
+      if (checkbox.checked) {
+        // Search all products
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}"]] }
+      } else {
+        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:management-center-5.0"] }
+      }
+    }
+  </script>
   {{/if}}
   {{#if (and (eq page.component.name 'imdg') page.attributes.latest-supported-mc)}}
   <script>

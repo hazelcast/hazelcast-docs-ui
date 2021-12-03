@@ -1,0 +1,5 @@
+.dev.source-link {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.8em;
+}

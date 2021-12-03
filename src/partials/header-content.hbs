@@ -51,10 +51,14 @@
             {{~else}} href="http://hazelcast.github.io/hazelcast-nodejs-client/api/current/docs/"{{~/if}} onclick="window.open(this.href,'_blank');return false;">Node.js</a>
           </div>
         </div>
+        <div class="navbar-item">
+          <a class="navbar-link" href="{{site.url}}/developer-guides/">Developer Guides</a>
+        </div>
       </div>
       <div class="navbar-end">
         {{#if (not-eq page.component.name 'home')}}
         {{#if (not-eq page.layout '404')}}
+        {{#if (not-eq page.layout 'guides-landing')}}
         <div class="navbar-item searchbox">
             <a id="search-open" ><i class="fa fa-search" aria-hidden="true"></i></a>
             <input id="search-input" type="text" placeholder="Search docs">
@@ -62,6 +66,7 @@
               <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> All products
             </label>
         </div>
+        {{/if}}
         {{/if}}
         {{/if}}
         <div class="navbar-item">

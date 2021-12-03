@@ -32,7 +32,9 @@ If you entered the URL of this page manually, please double check that you enter
 </div>
 {{else}}
 {{> breadcrumbs}}
+{{#if (not-eq page.layout 'dev-guide')}}
 {{>nav-toggle}}
+{{/if}}
 {{#with page.title}}
 <h1 class="page">{{{this}}}</h1>
 {{/with}}
@@ -42,6 +44,13 @@ If you entered the URL of this page manually, please double check that you enter
     API docs
   </a>
 </div>
+{{/if}}
+{{#if (eq page.layout 'dev-guide')}}
+{{#with (get-page-info)}}
+<div class="dev source-link">
+  <a class="git" href="{{this.src.origin.webUrl}}/tree/{{this.asciidoc.attributes.page-origin-branch}}/modules/ROOT/examples">GitHub Source</a>
+</div>
+{{/with}}
 {{/if}}
 {{> page-versions}}
 {{{page.contents}}}
