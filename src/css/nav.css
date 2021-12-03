@@ -11,6 +11,30 @@
   background-color: #fff;
 }
 
+#hide-nav {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 10px;
+  z-index: 1;
+  left: 15px;
+}
+
+#hide-nav button {
+  width: 40px;
+  height: 40px;
+  outline-style: initial;
+  border-radius: 40px;
+  cursor: pointer;
+  border: 0.5px solid #dadada;
+  background-color: #fafafa;
+}
+
+#hide-nav button:hover {
+  border: 0.5px solid #fafafa;
+  background-color: #dadada;
+}
+
 .nav-container.is-active {
   visibility: visible;
 }
