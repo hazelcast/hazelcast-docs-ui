@@ -568,11 +568,13 @@
 .doc pre.highlight code,
 .doc .listingblock pre:not(.highlight),
 .doc .literalblock pre {
-  background: var(--pre-background);
+  color: var(--code-font-color);
+  background: var(--code-background);
   box-shadow: inset 0 0 1.75px var(--pre-border-color);
   display: block;
   overflow-x: auto;
   padding: 0.75rem;
+  border-radius: 3px;
 }
 
 /* NOTE assume pre.highlight contains code[data-lang] */
@@ -766,6 +768,7 @@
 .doc .tabset > .content {
   border: 1px solid var(--neutral-light);
   padding: 1.25rem;
+  border-radius: 3px;
 }
 
 .doc .tabset.is-loading .tab-pane:not(:first-child),
