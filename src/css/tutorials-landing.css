@@ -1,45 +1,45 @@
-.dev.home .home-background {
+.tut.home .home-background {
   height: 150px;
 }
 
-.dev.home h1 {
+.tut.home h1 {
   padding: 55px;
 }
 
-.dev.home .intro {
+.tut.home .intro {
   margin: 0 auto;
   max-width: 800px;
 }
 
-.dev.home .search-container {
+.tut.home .search-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.dev.home .search-container .algolia-autocomplete .ds-dropdown-menu {
+.tut.home .search-container .algolia-autocomplete .ds-dropdown-menu {
   top: 0 !important;
   margin-left: 0 auto !important;
   margin-top: 45px;
   max-width: 300px;
 }
 
-.dev.home .search-container #search-input[type='text'] {
+.tut.home .search-container #search-input[type='text'] {
   width: 300px;
 }
 
-.dev.home .intro p {
+.tut.home .intro p {
   padding: 20px;
 }
 
-.dev-cards {
+.tut-cards {
   display: flex;
   margin-top: 60px;
   flex-direction: column;
   align-items: center;
 }
 
-.dev-card {
+.tut-card {
   background: #fafafa;
   border-radius: 3px;
   border: 1px solid #dbdbdb;
@@ -51,7 +51,7 @@
   max-width: 500px;
 }
 
-.guides-dropdown-toggle {
+.tutorials-dropdown-toggle {
   -moz-appearance: none;
   -webkit-appearance: none;
   background-color: var(--neutral);
@@ -113,28 +113,20 @@
   z-index: 1;
 }
 
-.dev-card .card-header {
+.tut-card .card-header {
   width: 100%;
 }
 
-.dev-card .card-header h3 {
+.tut-card .card-header h3 {
   margin: 0;
 }
 
-.dev-card ul {
+.tut-card ul {
   list-style: none;
   padding: 0;
 }
 
-.dev-card .metadata {
-  display: flex;
-}
-
-.dev-card .metadata li {
-  padding-bottom: 3px;
-}
-
-.dev-card .get-started li {
+.tut-card .get-started li {
   border: 1px solid var(--primary);
   padding: 5px;
   color: var(--primary-dark);
@@ -143,11 +135,15 @@
   margin-right: 25px;
 }
 
-.dev-card .get-started li:hover {
+.tut-card .get-started {
+  white-space: nowrap;
+}
+
+.tut-card .get-started li:hover {
   background-color: var(--info-light);
 }
 
-.dev-card .metadata .get-started a {
+.tut-card .metadata .get-started a {
   text-decoration: none;
 }
 
@@ -155,23 +151,30 @@
   font-size: smaller;
   font-style: italic;
   margin-left: auto;
+  white-space: nowrap;
 }
 
-.dev-card .get-started {
+.tut-card .start {
   display: flex;
-  margin-left: auto;
+  align-items: center;
 }
 
-.dev-card .get-started a {
+.tut-card .summary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tut-card .get-started a {
   text-decoration: none;
 }
 
-.dev-card .source {
+.tut-card .source {
   width: 100%;
 }
 
 @media screen and (min-width: 900px) {
-  .dev-cards {
+  .tut-cards {
     flex-direction: row;
     align-items: stretch;
   }

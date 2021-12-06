@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+{{> head-prelude}}
+    <title>Tutorials</title>
+    {{#with page.canonicalUrl}}
+    <link rel="canonical" href="{{this}}">
+    {{/with}}
+{{> head-styles}}
+{{> head-meta}}
+{{> head-scripts}}
+<script>
+  function toggleDropdown() {
+  document.getElementById("use-cases").classList.toggle("show");
+  }
+  function showAll() {
+    var tutorialCards = document.getElementsByClassName("tut-card");
+    for (let i = 0; i < tutorialCards.length; i++) {
+      tutorialCards[i].style.display = 'flex';
+    }
+  }
+
+  function filterUseCases(event) {
+    var selection = event.target.getAttribute("value");
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('use-case', selection);
+    window.location.search = urlParams;
+  }
+</script>
+{{> head-icons}}
+  </head>
+  <body>
+  {{#with site.keys.googleAnalytics}}
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{this}}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  {{/with}}
+{{> header}}
+{{> body-tutorials-landing}}
+{{> footer}}
+<script>
+  ;(function () {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has("lang")) {
+      const lang = params.getAll("lang");
+      var tutorialCards = document.getElementsByClassName("tut-card");
+      for (let i = 0; i < tutorialCards.length; i++) {
+        if (tutorialCards[i].getAttribute("data-lang").toUpperCase() === lang.toString().toUpperCase()) {
+            tutorialCards[i].style.display = 'flex';
+        } else {
+          tutorialCards[i].style.display = 'none';
+        }
+      }
+    }
+
+    if (params.has("edition")) {
+      const edition = params.getAll("edition");
+      var tutorialCards = document.getElementsByClassName("tut-card");
+      for (let i = 0; i < tutorialCards.length; i++) {
+        if (tutorialCards[i].getAttribute("data-edition").toUpperCase() === edition.toString().toUpperCase()) {
+            tutorialCards[i].style.display = 'flex';
+        } else {
+          tutorialCards[i].style.display = 'none';
+        }
+      }
+    }
+
+    if (params.has("use-case")) {
+      const useCase = params.getAll("use-case");
+      var tutorialCards = document.getElementsByClassName("tut-card");
+      for (let i = 0; i < tutorialCards.length; i++) {
+        if (tutorialCards[i].getAttribute("data-use-case").toUpperCase() === useCase.toString().toUpperCase()) {
+            tutorialCards[i].style.display = 'flex';
+        } else {
+          tutorialCards[i].style.display = 'none';
+        }
+      }
+    }
+
+  })()
+</script>
+  </body>
+</html>

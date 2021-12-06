@@ -52,13 +52,13 @@
           </div>
         </div>
         <div class="navbar-item">
-          <a class="navbar-link" href="{{site.url}}/developer-guides/">Developer Guides</a>
+          <a class="navbar-link" href="{{site.url}}/tutorials/">Tutorials</a>
         </div>
       </div>
       <div class="navbar-end">
         {{#if (not-eq page.component.name 'home')}}
         {{#if (not-eq page.layout '404')}}
-        {{#if (not-eq page.layout 'guides-landing')}}
+        {{#if (not-eq page.layout 'tutorials-landing')}}
         <div class="navbar-item searchbox">
             <a id="search-open" ><i class="fa fa-search" aria-hidden="true"></i></a>
             <input id="search-input" type="text" placeholder="Search docs">

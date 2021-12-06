@@ -136,7 +136,7 @@
       }
     }
   </script>
-  {{else if (eq page.component.name 'developer-guides')}}
+  {{else if (eq page.component.name 'developer-tutorials')}}
   <script>
     const search = window.docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
@@ -280,6 +280,9 @@
   });
 </script>
 {{/if}}
+<!-- Used to inject swagger scripts with the post-processor.
+See https://github.com/hazelcast/hazelcast-docs/blob/main/lib/swagger-ui-block-macro.js
+-->
 {{#if page.attributes.content-scripts}}
 {{{page.attributes.content-scripts}}}
 {{/if}}

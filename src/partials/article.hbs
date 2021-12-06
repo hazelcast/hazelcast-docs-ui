@@ -32,7 +32,7 @@ If you entered the URL of this page manually, please double check that you enter
 </div>
 {{else}}
 {{> breadcrumbs}}
-{{#if (not-eq page.layout 'dev-guide')}}
+{{#if (not-eq page.layout 'tutorial')}}
 {{>nav-toggle}}
 {{/if}}
 {{#with page.title}}
@@ -45,9 +45,9 @@ If you entered the URL of this page manually, please double check that you enter
   </a>
 </div>
 {{/if}}
-{{#if (eq page.layout 'dev-guide')}}
+{{#if (eq page.layout 'tutorial')}}
 {{#with (get-page-info)}}
-<div class="dev source-link">
+<div class="tut source-link">
   <a class="git" href="{{this.src.origin.webUrl}}/tree/{{this.asciidoc.attributes.page-origin-branch}}/modules/ROOT/examples">GitHub Source</a>
 </div>
 {{/with}}
