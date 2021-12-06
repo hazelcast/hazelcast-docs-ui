@@ -1,0 +1,38 @@
+<div class="nav-panel-explore{{#unless page.navigation}} is-active{{/unless}}" data-panel="explore">
+  {{#if page.component}}
+    <div class="context">
+      <span class="title">{{page.component.title}}</span>
+        <span class="version">{{page.componentVersion.displayVersion}}</span>
+      <button class="nav-item-toggle nav-explore-toggle"></button>
+    </div>
+  {{/if}}
+  <ul class="components">
+    <li style="list-style: none;">Select a product version:</li>
+    </br>
+    <li class="component is-current">
+        <span class="title"><a class="more-versions">See all versions</a><a class="fewer-versions">See fewer versions</a></span>
+      <ul class="versions">
+        {{#each page.versions}}
+          {{#if (lte @index 6)}}
+            <li class="version
+              {{~#if (eq this page.componentVersion)}} is-current{{/if~}}
+              {{~#if (eq this ../latest)}} is-latest{{/if}}">
+              <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+              </li>
+            {{else}}
+              <li class="version hidden">
+                <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+            </li>
+          {{/if}}
+        {{/each}}
+      </ul>
+    </li>
+    {{#each site.components}}
+      {{#if (eq this.name 'home')}}
+        <li class="component home">
+        <a href="{{{relativize ./url}}}">Back to Home</a>
+        </li>
+      {{/if}}
+    {{/each}}
+  </ul>
+</div>
