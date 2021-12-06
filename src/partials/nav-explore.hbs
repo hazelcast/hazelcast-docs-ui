@@ -1,5 +1,5 @@
 <div class="nav-panel-explore{{#unless page.navigation}} is-active{{/unless}}" data-panel="explore">
-  {{#if page.component}}
+  {{#if (and page.component (not-eq page.component.name 'turbine'))}}
     <div class="context">
       <span class="title">{{page.component.title}}</span>
       {{#if (eq page.component.name 'cloud')}}
@@ -14,7 +14,7 @@
     <li style="list-style: none;">Select a different product or version:</li>
     </br>
     {{#each site.components}}
-      {{#if (not-eq this.name 'home')}}
+      {{#if (and (not-eq this.name 'home') (not-eq this.name 'turbine'))}}
         <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
           {{#if (and (not-eq this.name 'home') (not-eq this.name 'cloud'))}}
             <span class="title">{{{./title}}} <a class="more-versions">See all versions</a><a class="fewer-versions">See fewer versions</a></span>

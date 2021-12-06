@@ -1,6 +1,10 @@
 <div class="nav-container"{{#if page.component}} data-component="{{page.component.name}}" data-version="{{page.version}}"{{/if}}>
   <aside class="nav">
-    {{> nav-explore}}
+    {{#if (eq page.component.name 'turbine')}}
+      {{> turbine-nav-explore}}
+    {{else}}
+      {{> nav-explore}}
+    {{/if}}
     <div class="panels">
 {{> nav-menu}}
     </div>
