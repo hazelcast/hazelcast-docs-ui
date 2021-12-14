@@ -172,7 +172,7 @@ html.is-clipped--nav {
 }
 
 .nav-link.enterprise::after {
-  content: ' Enterprise';
+  content: 'Enterprise';
   background: var(--primary-dark);
   padding: 2px;
   margin-left: 5px;
