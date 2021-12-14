@@ -14,6 +14,16 @@
   font-size: 2em;
 }
 
+.doc > h1.page.enterprise::after {
+  content: 'Enterprise';
+  background: var(--primary-dark);
+  padding: 2px;
+  margin-left: 5px;
+  color: white;
+  border-radius: 3px;
+  font-size: small;
+}
+
 .doc details {
   margin-top: 15px;
   cursor: pointer;
