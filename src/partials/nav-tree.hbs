@@ -4,7 +4,7 @@
   <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}" data-depth="{{or ../level 0}}">
     {{#if ./content}}
     {{#if ./url}}
-    <a class="nav-link" href="
+    <a class="nav-link {{~#if (is-enterprise ./url)}} enterprise{{/if}}" href="
       {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
       {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
     {{#if ./items.length}}

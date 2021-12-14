@@ -171,6 +171,16 @@ html.is-clipped--nav {
   color: var(--primary);
 }
 
+.nav-link.enterprise::after {
+  content: ' Enterprise';
+  background: var(--primary-dark);
+  padding: 2px;
+  margin-left: 5px;
+  color: white;
+  border-radius: 3px;
+  font-size: small;
+}
+
 .nav-panel-explore {
   display: flex;
   flex-direction: column;
