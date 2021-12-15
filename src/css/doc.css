@@ -18,10 +18,11 @@
   content: 'Enterprise';
   background: var(--primary-dark);
   padding: 2px;
-  margin-left: 5px;
+  margin-left: 15px;
   color: white;
   border-radius: 3px;
-  font-size: small;
+  font-size: medium;
+  vertical-align: middle;
 }
 
 .doc details {
