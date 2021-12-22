@@ -14,6 +14,26 @@
   font-size: 2em;
 }
 
+strong.enterprise {
+  background: var(--primary-dark);
+  padding: 2px;
+  color: white;
+  border-radius: 3px;
+  font-size: medium;
+  vertical-align: middle;
+}
+
+.doc > h1.page.enterprise::after {
+  content: 'Enterprise';
+  background: var(--primary-dark);
+  padding: 2px;
+  margin-left: 15px;
+  color: white;
+  border-radius: 3px;
+  font-size: medium;
+  vertical-align: middle;
+}
+
 .doc details {
   margin-top: 15px;
   cursor: pointer;
