@@ -28,8 +28,8 @@
 .doc .modal-image {
   margin: auto;
   display: block;
-  width: 80%;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 2000px;
 }
 
 /* Add Animation - Zoom in the Modal */
