@@ -4,12 +4,18 @@
   <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}" data-depth="{{or ../level 0}}">
     {{#if ./content}}
     {{#if ./url}}
+    {{#if (eq @root.page.component.name 'management-center')}}
     <a class="nav-link
     <!--Labels Enterprise content in sidenav (only MC for now) -->
     {{~#if (is-enterprise ./url 'management-center')}} enterprise{{/if}}
     " href="
       {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
       {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
+    {{else}}
+    <a class="nav-link" href="
+      {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
+      {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
+    {{/if}}
     {{#if ./items.length}}
     <button class="nav-item-toggle"></button>
     {{/if}}
