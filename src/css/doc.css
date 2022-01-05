@@ -16,9 +16,10 @@
 
 strong.enterprise {
   background: var(--primary-dark);
-  padding: 2px;
+  padding: 4px;
   color: white;
-  border-radius: 3px;
+  border-radius: 10px;
+  font-weight: normal;
   font-size: medium;
   vertical-align: middle;
 }
@@ -26,12 +27,36 @@ strong.enterprise {
 .doc > h1.page.enterprise::after {
   content: 'Enterprise';
   background: var(--primary-dark);
-  padding: 2px;
+  padding: 4px;
   margin-left: 15px;
   color: white;
-  border-radius: 3px;
+  border-radius: 10px;
   font-size: medium;
   vertical-align: middle;
+}
+
+.doc > h1.page.beta::after {
+  content: 'Beta';
+  border-radius: 10px;
+  border: none;
+  font-size: medium;
+  vertical-align: middle;
+  color: #041a3b;
+  background: var(--success-light);
+  padding: 4px;
+  margin-left: 15px;
+}
+
+.doc > h1.page.enterprise.beta::after {
+  content: 'Enterprise Beta';
+  border-radius: 10px;
+  border: none;
+  font-size: medium;
+  vertical-align: middle;
+  color: #041a3b;
+  background: var(--success-light);
+  padding: 4px;
+  margin-left: 15px;
 }
 
 .doc details {

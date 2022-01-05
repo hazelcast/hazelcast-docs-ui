@@ -9,7 +9,7 @@ module.exports = (navUrl, { data: { root } }) => {
   }
   for (let i = 0; i < pages.length; i++) {
     if (pages[i].pub.url === navUrl &&
-      pages[i].asciidoc.attributes['page-enterprise'] === 'true') {
+      pages[i].asciidoc.attributes['page-beta'] === 'true') {
       return true
     }
   }
