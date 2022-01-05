@@ -33,9 +33,11 @@ If you entered the URL of this page manually, please double check that you enter
 {{else}}
 {{> breadcrumbs}}
 {{>nav-toggle}}
+{{#if (not-eq page.layout 'swagger')}}
 {{#with page.title}}
 <h1 class="page {{~#if (and (eq @root.page.attributes.enterprise 'true') (eq @root.page.component.name 'management-center'))}} enterprise{{/if}} {{~#if (eq @root.page.attributes.beta 'true')}} beta{{/if}}">{{{this}}}</h1>
 {{/with}}
+{{/if}}
 {{#if page.attributes.api-reference}}
 <div style="padding-top: 5px;">
   <a href="{{{page.attributes.api-reference}}}" onclick="window.open(this.href,'_blank');return false;">
