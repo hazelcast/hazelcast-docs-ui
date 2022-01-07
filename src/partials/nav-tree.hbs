@@ -1,28 +1,29 @@
 {{#if navigation.length}}
-<ul class="nav-list">
-  {{#each navigation}}
-  <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}" data-depth="{{or ../level 0}}">
-    {{#if ./content}}
-    {{#if ./url}}
-    <a class="nav-link
-    <!--Labels Enterprise content in sidenav (only MC for now) -->
-    {{~#if (is-enterprise ./url)}} enterprise{{/if}}
-    {{~#if (is-beta ./url)}} beta{{/if}}
-    " href="
-      {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
-      {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
-    {{#if ./items.length}}
-    <button class="nav-item-toggle"></button>
-    {{/if}}
-    {{else}}
-    <span class="nav-text">{{{./content}}}</span>
-    {{#if ./items.length}}
-    <button class="nav-item-toggle"></button>
-    {{/if}}
-    {{/if}}
-    {{/if}}
-{{> nav-tree navigation=./items level=(increment ../level)}}
-  </li>
-  {{/each}}
-</ul>
+  <ul class="nav-list">
+    {{#each navigation}}
+      <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}" data-depth="{{or ../level 0}}">
+        {{#if ./content}}
+          {{#if ./url}}
+            <a class="nav-link
+            {{#if (eq @root.page.component.name 'management-center')}}
+              {{~#if (is-enterprise ./url)}} enterprise{{/if}}
+              {{~#if (is-beta ./url)}} beta{{/if}}
+            {{/if}}
+            " href="
+            {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
+            {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
+            {{#if ./items.length}}
+              <button class="nav-item-toggle"></button>
+            {{/if}}
+            {{else}}
+              <span class="nav-text">{{{./content}}}</span>
+            {{#if ./items.length}}
+              <button class="nav-item-toggle"></button>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+        {{> nav-tree navigation=./items level=(increment ../level)}}
+      </li>
+    {{/each}}
+  </ul>
 {{/if}}
