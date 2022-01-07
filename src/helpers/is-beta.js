@@ -8,7 +8,6 @@ module.exports = (navUrl, { data: { root } }) => {
     pages = contentCatalog.findBy({ component: page.component.name, family: 'page' })
     contentCatalog.navGroup = pages
     contentCatalog.cp = page.component.name
-    console.log(contentCatalog.cp)
   }
   for (let i = 0; i < pages.length; i++) {
     if (pages[i].pub.url === navUrl &&
