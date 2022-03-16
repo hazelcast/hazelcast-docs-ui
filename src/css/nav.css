@@ -171,6 +171,39 @@ html.is-clipped--nav {
   color: var(--primary);
 }
 
+.nav-link.enterprise::after {
+  content: 'Enterprise';
+  background: var(--primary-dark);
+  padding: 4px;
+  margin-left: 5px;
+  color: white;
+  border-radius: 10px;
+  font-size: 0.7em;
+  vertical-align: middle;
+}
+
+.nav-link.beta::after {
+  content: 'Beta';
+  color: #041a3b;
+  background: var(--success-light);
+  padding: 4px;
+  margin-left: 5px;
+  border-radius: 10px;
+  font-size: 0.7em;
+  vertical-align: middle;
+}
+
+.nav-link.enterprise.beta::after {
+  content: 'Enterprise Beta';
+  color: #041a3b;
+  background: var(--success-light);
+  padding: 4px;
+  margin-left: 5px;
+  border-radius: 10px;
+  font-size: 0.7em;
+  vertical-align: middle;
+}
+
 .nav-panel-explore {
   display: flex;
   flex-direction: column;

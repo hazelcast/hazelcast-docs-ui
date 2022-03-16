@@ -241,7 +241,6 @@ You can see a list of all past releases on the {url-project}/releases[releases p
 
 Releasing the UI bundle consists of the following tasks:
 
-. Pack the UI bundle. 
+. Package the UI bundle. 
 . Create a GitHub release, using the next version number in the sequence.
 . Attach the UI bundle to that release as an asset in zip format.
-. Update the README and the {url-docs-playbook}[documentation playbook] to reference the URL of the lastest bundle and commit that update to the repository.
