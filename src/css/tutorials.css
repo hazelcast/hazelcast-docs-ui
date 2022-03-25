@@ -1,5 +1,20 @@
-.tut.source-link {
-  display: flex;
-  justify-content: flex-end;
+.tutorial .toc.sidebar {
+  margin-left: 5em;
+}
+
+.tutorial .toc.sidebar .source {
+  width: 100%;
+}
+
+.tutorial .git {
+  background: transparent url(../img/github.svg) 0 no-repeat;
   font-size: 0.8em;
+  margin-top: 20px;
+  color: #2d7de4;
+}
+
+@media screen and (min-width: 1024px) {
+  .tutorial .toc .toc-menu ul {
+    font-size: 0.9rem;
+  }
 }

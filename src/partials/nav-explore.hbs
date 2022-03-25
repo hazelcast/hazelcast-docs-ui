@@ -14,7 +14,7 @@
     <li style="list-style: none;">Select a different product or version:</li>
     </br>
     {{#each site.components}}
-      {{#if (and (not-eq this.name 'home') (not-eq this.name 'turbine'))}}
+      {{#if (and (and (not-eq this.name 'home') (not-eq this.name 'turbine'))(not-eq this.name 'templates') (not-eq this.name 'tutorials'))}}
         <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
           {{#if (and (not-eq this.name 'home') (not-eq this.name 'cloud'))}}
             <span class="title">{{{./title}}} <a class="more-versions">See all versions</a><a class="fewer-versions">See fewer versions</a></span>

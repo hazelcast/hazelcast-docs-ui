@@ -10,76 +10,124 @@
 {{> head-meta}}
 {{> head-scripts}}
 <script>
-  function toggleDropdown() {
-  document.getElementById("use-cases").classList.toggle("show");
-  }
-  function showAll() {
+
+    var params = {
+      product: 'all',
+      lang: 'all',
+      includeEnterprise: true,
+      category: 'All'
+    }
+
+  function updateCards(params) {
+
     var tutorialCards = document.getElementsByClassName("tut-card");
+
     for (let i = 0; i < tutorialCards.length; i++) {
-      tutorialCards[i].style.display = 'flex';
+      let include = false;
+
+      if (params.product !== 'all') {
+        if (tutorialCards[i].getAttribute("data-product") === params.product) {
+          include = true
+        }
+      } else {
+        include = true
+      }
+
+
+      if (include && params.category !== 'All') {
+        if (!tutorialCards[i].getAttribute("data-categories").includes(params.category)) {
+          include = false
+        }
+      } else if (include) {
+        include = true
+      }
+
+      if (include && params.lang !== 'all') {
+        if (!tutorialCards[i].getAttribute("data-lang").includes(params.lang)) {
+          include = false
+        }
+      }
+
+      if (include && !params.includeEnterprise) {
+        if (tutorialCards[i].getAttribute("data-edition") === 'enterprise') {
+          include = false
+        }
+      }
+
+      if (include) {
+        tutorialCards[i].style.display = 'flex';
+      } else {
+        tutorialCards[i].style.display = 'none';
+      }
     }
   }
 
-  function filterUseCases(event) {
-    var selection = event.target.getAttribute("value");
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('use-case', selection);
-    window.location.search = urlParams;
+
+  function toggleDropdown() {
+  document.getElementById("categories").classList.toggle("show");
   }
-</script>
-{{> head-icons}}
-  </head>
-  <body>
-  {{#with site.keys.googleAnalytics}}
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{this}}"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-  {{/with}}
-{{> header}}
-{{> body-tutorials-landing}}
-{{> footer}}
-<script>
-  ;(function () {
-    const params = new URLSearchParams(window.location.search);
 
-    if (params.has("lang")) {
-      const lang = params.getAll("lang");
-      var tutorialCards = document.getElementsByClassName("tut-card");
-      for (let i = 0; i < tutorialCards.length; i++) {
-        if (tutorialCards[i].getAttribute("data-lang").toUpperCase() === lang.toString().toUpperCase()) {
-            tutorialCards[i].style.display = 'flex';
-        } else {
-          tutorialCards[i].style.display = 'none';
-        }
+  function selectProduct(event) {
+    var products = ["cloud", "platform", "imdg", "mc"];
+
+    for (i=0;i<products.length;i++) {
+      let product = document.getElementById(products[i]);
+      if (product.id !== event.currentTarget.id) {
+        product.classList.remove("is-active");
       }
+    };
+    event.currentTarget.classList.toggle("is-active"); 
+    var product = event.currentTarget.id;
+    if (!event.currentTarget.classList.contains("is-active")) {
+      product = 'all'
     }
+    params.product = product;
+    updateCards(params);
+  }
 
-    if (params.has("edition")) {
-      const edition = params.getAll("edition");
-      var tutorialCards = document.getElementsByClassName("tut-card");
-      for (let i = 0; i < tutorialCards.length; i++) {
-        if (tutorialCards[i].getAttribute("data-edition").toUpperCase() === edition.toString().toUpperCase()) {
-            tutorialCards[i].style.display = 'flex';
-        } else {
-          tutorialCards[i].style.display = 'none';
-        }
+  function toggleEnterprise(enterprise) {
+    enterprise.checked ? params.includeEnterprise = true : params.includeEnterprise = false;
+    updateCards(params);
+  }
+
+  function filterCategories(event) {
+    var category = event.target.getAttribute("value");
+    toggleDropdown()
+    var current = document.getElementById("current-category");
+    current.innerText = category;
+    params.category = category;
+    updateCards(params);
+  }
+
+  function filterLangs(lang) {
+    var langs = ["all", "java", "python", "node", "go", "cplus", "csharp"];
+
+    for (i=0;i<langs.length;i++) {
+      let currentLang = document.getElementById(langs[i]);
+      if (currentLang.id !== lang.id) {
+        currentLang.classList.remove("is-active");
       }
+    };
+    lang.classList.toggle("is-active"); 
+    var selectedLang = lang.id;
+    if (!lang.classList.contains("is-active")) {
+      selectedLang = 'all'
     }
-
-    if (params.has("use-case")) {
-      const useCase = params.getAll("use-case");
-      var tutorialCards = document.getElementsByClassName("tut-card");
-      for (let i = 0; i < tutorialCards.length; i++) {
-        if (tutorialCards[i].getAttribute("data-use-case").toUpperCase() === useCase.toString().toUpperCase()) {
-            tutorialCards[i].style.display = 'flex';
-        } else {
-          tutorialCards[i].style.display = 'none';
-        }
-      }
-    }
-
-  })()
-</script>
+    params.lang = selectedLang;
+    updateCards(params)
+  }
+    </script>
+    {{> head-icons}}
+      </head>
+      <body>
+      {{#with site.keys.googleAnalytics}}
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{this}}"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      {{/with}}
+    {{> header}}
+    {{> body-tutorials-landing}}
+    {{> footer}}
   </body>
 </html>

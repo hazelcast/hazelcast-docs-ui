@@ -47,13 +47,6 @@ If you entered the URL of this page manually, please double check that you enter
   </a>
 </div>
 {{/if}}
-{{#if (eq page.layout 'tutorial')}}
-{{#with (get-page-info)}}
-<div class="tut source-link">
-  <a class="git" href="{{this.src.origin.webUrl}}/tree/{{this.asciidoc.attributes.page-origin-branch}}/modules/ROOT/examples">GitHub Source</a>
-</div>
-{{/with}}
-{{/if}}
 {{> page-versions}}
 {{{page.contents}}}
 {{/if}}

@@ -136,7 +136,7 @@
       }
     }
   </script>
-  {{else if (eq page.component.name 'developer-tutorials')}}
+  {{else if (eq page.component.name 'tutorials')}}
   <script>
     const search = window.docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
@@ -147,7 +147,7 @@
       debug: false,
       // Display 25 results in the dropdown
       // and search only the current product
-      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:management-center-5.0"] },
+      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:tutorials"] },
     });
   </script>
   <script>

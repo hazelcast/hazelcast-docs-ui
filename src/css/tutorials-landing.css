@@ -1,42 +1,15 @@
 .tut.home .home-background {
-  height: 150px;
+  height: 135px;
 }
 
 .tut.home h1 {
-  padding: 55px;
-}
-
-.tut.home .intro {
-  margin: 0 auto;
-  max-width: 800px;
-}
-
-.tut.home .search-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tut.home .search-container .algolia-autocomplete .ds-dropdown-menu {
-  top: 0 !important;
-  margin-left: 0 auto !important;
-  margin-top: 45px;
-  max-width: 300px;
-}
-
-.tut.home .search-container #search-input[type='text'] {
-  width: 300px;
-}
-
-.tut.home .intro p {
-  padding: 20px;
+  padding-top: 60px;
 }
 
 .tut-cards {
   display: flex;
-  margin-top: 60px;
   flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
 }
 
 .tut-card {
@@ -45,47 +18,157 @@
   border: 1px solid #dbdbdb;
   display: flex;
   flex: 1;
+  flex-direction: column;
   flex-wrap: wrap;
-  margin: 15px;
   padding: 20px;
-  max-width: 500px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  min-width: 300px;
+  max-width: 650px;
+  justify-content: space-between;
+}
+
+.tut-card .start {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.tut-card .start a {
+  text-decoration: none;
+}
+
+.button.git span {
+  background: transparent url(../img/github.svg) center left no-repeat;
+  width: 25px;
+  height: 25px;
+}
+
+.tut-cards .button.git {
+  justify-items: flex-end;
+  justify-content: space-between;
+  width: 165px;
+  color: #2160c0;
+  background: none;
+  border: 1px solid #2160c0;
+}
+
+.get-started .button img {
+  margin-right: -20px;
+  margin-left: 10px;
 }
 
 .tutorials-dropdown-toggle {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  background-color: var(--neutral);
-  border-radius: 3px;
-  box-shadow: none;
+  display: flex;
+  justify-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+  border: 1px solid #b7c1cb;
+  box-sizing: border-box;
+  border-radius: 5px;
   cursor: pointer;
-  display: inline-block;
   height: 36px;
-  line-height: 34px;
-  max-width: 340px;
-  min-width: 72px;
-  outline: 0;
+  width: 100%;
   overflow: hidden;
   text-align: left;
-  text-indent: 0.01px;
   text-overflow: ellipsis;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
   vertical-align: middle;
-  white-space: nowrap;
-  position: relative;
-  font-size: 0.8em;
+  font-size: 1.1em;
+  text-indent: 10px;
+}
+
+.product-boxes {
+  margin-top: 20px;
+  display: flex;
+  cursor: pointer;
+  text-align: left;
+  text-overflow: ellipsis;
+  font-size: 0.9em;
+  text-indent: 10px;
+}
+
+.product-box {
+  background: #fafafa;
+  border: 1px solid #b7c1cb;
+  box-sizing: border-box;
+  color: #707482;
+  border-bottom: 3px solid #707482;
+}
+
+.product-box:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: none;
+}
+
+.product-box:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-left: none;
+}
+
+.product-box.is-active {
+  border-bottom: 3px solid #68c200;
+  color: #041a3b;
+}
+
+.language-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.lang-filter-list {
+  background: #f1f1f1;
+  border: 1px solid #f1f1f1;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: middle;
+  padding: 4px 14px;
+  color: #333;
+  border-radius: 1em;
+  margin: 0 10px 10px 0;
+  align-self: center;
+  display: flex;
+}
+
+.lang-filter-list img {
+  width: 20px;
+  margin-left: 5px;
+}
+
+.lang-filter-list.is-active {
+  background: #68c200;
+  border: 1px solid #68c200;
+  font-weight: 500;
+}
+
+.lang-filter-list:hover {
+  cursor: pointer;
+}
+
+#current-category {
+  margin-left: 15px;
+}
+
+.tutorials-dropdown-toggle span {
+  background: url(../img/caret-blue.svg) no-repeat 40%/37%;
+  width: 40px;
+  height: 30px;
 }
 
 .dropdown {
-  position: absolute;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   right: 20px;
   margin-top: 20px;
 }
 
-.dropdown .dropdown-content {
+.dropdown .dropdown-content#categories {
   display: none;
-  position: absolute;
   background-color: #f6f6f6;
   min-width: 100px;
   border: 1px solid #ddd;
@@ -94,11 +177,10 @@
   font-size: 0.8em;
 }
 
-.dropdown .dropdown-content li {
+.dropdown .dropdown-content#categories li {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
-  display: block;
   list-style: none;
   cursor: pointer;
 }
@@ -108,13 +190,70 @@
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.dropdown .dropdown-content.show {
-  display: block;
+.dropdown .dropdown-content.show#categories {
+  display: flex;
   z-index: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.row.tutorials > * {
+  min-width: 25ch;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.row.tutorials.boxes {
+  background-color: inherit;
+  padding: 0;
+}
+
+.row.tutorials.search {
+  flex-direction: column;
+  align-items: center;
+}
+
+.row.tutorials .card {
+  display: flex;
+  flex-direction: column;
+}
+
+.row.tutorials.end .card {
+  max-width: 400px;
+  padding-right: 15px;
+}
+
+.row.tutorials h3 {
+  font-weight: 400;
+  margin: 0;
+}
+
+.row.tutorials.search .card {
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+.row.tutorials.end {
+  justify-content: space-between;
+}
+
+.row.tutorials.end .card-header {
+  display: flex;
+  align-items: center;
+}
+
+.row.tutorials.search .card:first-child {
+  padding-bottom: 0;
+}
+
+.row.tutorials:last-child {
+  box-shadow: none;
 }
 
 .tut-card .card-header {
-  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .tut-card .card-header h3 {
@@ -126,47 +265,16 @@
   padding: 0;
 }
 
-.tut-card .get-started li {
-  border: 1px solid var(--primary);
-  padding: 5px;
-  color: var(--primary-dark);
-  font-weight: bolder;
-  border-radius: 3px;
-  margin-right: 25px;
-}
-
-.tut-card .get-started {
-  white-space: nowrap;
-}
-
-.tut-card .get-started li:hover {
-  background-color: var(--info-light);
-}
-
-.tut-card .metadata .get-started a {
-  text-decoration: none;
-}
-
 .time {
-  font-size: smaller;
-  font-style: italic;
+  font-size: small;
+  color: #707482;
   margin-left: auto;
   white-space: nowrap;
 }
 
-.tut-card .start {
-  display: flex;
-  align-items: center;
-}
-
-.tut-card .summary {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.tut-card .get-started a {
-  text-decoration: none;
+.summary {
+  height: 100px;
+  overflow: scroll;
 }
 
 .tut-card .source {
@@ -176,6 +284,16 @@
 @media screen and (min-width: 900px) {
   .tut-cards {
     flex-direction: row;
-    align-items: stretch;
+    justify-content: space-between;
+  }
+
+  .tut-card {
+    flex: 1 1 25%;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .row.tutorials > * {
+    flex: 1 1 33%;
   }
 }

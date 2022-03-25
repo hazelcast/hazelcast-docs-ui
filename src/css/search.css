@@ -66,10 +66,6 @@
     margin-bottom: 0;
   }
 
-  .algolia-autocomplete .ds-dropdown-menu {
-    margin-top: 0.75rem;
-  }
-
   .filter.checkbox {
     display: flex;
     align-items: center;
@@ -124,8 +120,6 @@
   color: var(--primary-blue);
 }
 
-/* Styles for home page search bar
-
 .search-container > span.algolia-autocomplete > input#search-input {
   border: 1px solid #b7c1cb;
   box-sizing: border-box;
@@ -133,27 +127,15 @@
   text-align: center;
   font-size: larger;
   padding: 0.5em;
-  border-radius: 50px;
+  border-radius: 5px;
+  width: 100%;
+  background: #fafafa;
 }
 
 .search-container > span.algolia-autocomplete > input#search-input:focus {
   outline: none;
 }
 
-@media only screen and (max-width: 600px) {
-  .search-container > span.algolia-autocomplete,
-  .search-container > span.algolia-autocomplete > input#search-input,
-  .search-container > span.algolia-autocomplete .ds-dropdown-menu {
-    min-width: 300px;
-    width: 300px;
-  }
+.search-container > span.algolia-autocomplete .ds-dropdown-menu {
+  top: 0 !important;
 }
-
-@media only screen and (min-width: 600px) {
-  .search-container > span.algolia-autocomplete,
-  .search-container > span.algolia-autocomplete > input#search-input.ds-input,
-  .search-container > span.algolia-autocomplete .ds-dropdown-menu {
-    width: 600px;
-  }
-}
-*/
