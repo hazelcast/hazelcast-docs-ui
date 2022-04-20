@@ -35,7 +35,11 @@ If you entered the URL of this page manually, please double check that you enter
 {{>nav-toggle}}
 {{#if (not-eq page.layout 'swagger')}}
 {{#with page.title}}
-<h1 class="page {{~#if (eq @root.page.attributes.enterprise 'true')}} enterprise{{/if}} {{~#if (eq @root.page.attributes.beta 'true')}} beta{{/if}}">{{{this}}}</h1>
+<h1 class="page
+ {{~#if (eq @root.page.attributes.enterprise 'true')}} enterprise{{/if}}
+ {{~#if (eq @root.page.attributes.beta 'true')}} beta{{/if}}
+ {{~#if (eq @root.page.attributes.dedicated 'true')}} dedicated{{/if}}
+ {{~#if (eq @root.page.attributes.serverless 'true')}} serverless{{/if}}">{{{this}}}</h1>
 {{/with}}
 {{/if}}
 {{#if page.attributes.api-reference}}
