@@ -11,9 +11,12 @@
           </div>
           <div class="card search-container">
             <input id="search-input" type="text" placeholder="Search tutorials">
+            <button class="dropdown-toggle filters" onclick="toggleFilters(event)">
+              Filters<span></span>
+            </button>
           </div>
         </div>
-        <div class="row tutorials end">
+        <div id="filters" class="row tutorials filter end">
           <div class="card">
             <div class="card-header">
               <h3>
@@ -28,17 +31,20 @@
               </div>
             </div>
             <div class="product-boxes">
+              <button id="all" class="product-box is-active" onclick="selectProduct(event)">
+                All
+              </button>
               <button id="cloud" class="product-box" onclick="selectProduct(event)">
-                Cloud &amp; Cloud Native
+                Hazelcast Cloud
               </button>
               <button id="platform" class="product-box" onclick="selectProduct(event)">
-                Platform
+                Hazelcast Platform
+              </button>
+              <button id="operator" class="product-box" onclick="selectProduct(event)">
+                Hazelcast Platform Operator
               </button>
               <button id="imdg" class="product-box" onclick="selectProduct(event)">
-                IMDG
-              </button>
-              <button id="mc" class="product-box" onclick="selectProduct(event)">
-                Management Center
+                Hazelcast IMDG
               </button>
             </div>
           </div>
@@ -66,7 +72,7 @@
               <span id="current-category">All</span>
             </div>
             <div id="category-dropdown" class="dropdown">
-              <button onclick="toggleDropdown()" class="tutorials-dropdown-toggle">Select a category<span></span></button>
+              <button onclick="toggleDropdown()" class="dropdown-toggle">Select a category<span></span></button>
               <ul id="categories" class="dropdown-content" role="listbox">
                 <li role="option" value="All" onclick="filterCategories(event)">All</li>
                 {{#each (get-categories)}}

@@ -186,7 +186,7 @@
 }
 
 @media (min-width: 840px) and (max-width: 1295px) {
-  .row > * {
+  .home.row > * {
     flex-basis: 50%;
   }
 

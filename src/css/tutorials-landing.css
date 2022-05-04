@@ -6,6 +6,10 @@
   padding-top: 60px;
 }
 
+.tut .cards {
+  max-width: 1500px;
+}
+
 .tut-cards {
   display: flex;
   flex-direction: column;
@@ -59,7 +63,7 @@
   margin-left: 10px;
 }
 
-.tutorials-dropdown-toggle {
+.dropdown-toggle {
   display: flex;
   justify-items: flex-end;
   justify-content: space-between;
@@ -77,6 +81,15 @@
   vertical-align: middle;
   font-size: 1.1em;
   text-indent: 10px;
+}
+
+.dropdown-toggle.filters {
+  width: fit-content;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  height: 25px;
+  border: none;
 }
 
 .product-boxes {
@@ -154,7 +167,7 @@
   margin-left: 15px;
 }
 
-.tutorials-dropdown-toggle span {
+.dropdown-toggle span {
   background: url(../img/caret-blue.svg) no-repeat 40%/37%;
   width: 40px;
   height: 30px;
@@ -211,6 +224,8 @@
 .row.tutorials.search {
   flex-direction: column;
   align-items: center;
+  position: relative;
+  padding-bottom: 40px;
 }
 
 .row.tutorials .card {
@@ -218,7 +233,7 @@
   flex-direction: column;
 }
 
-.row.tutorials.end .card {
+.row.tutorials.filter .card {
   max-width: 400px;
   padding-right: 15px;
 }
@@ -234,11 +249,18 @@
   width: 100%;
 }
 
-.row.tutorials.end {
+.row.tutorials.filter {
   justify-content: space-between;
+  display: none;
+  padding-left: 15px;
 }
 
-.row.tutorials.end .card-header {
+.row.tutorials.filter.show {
+  justify-content: space-between;
+  display: flex;
+}
+
+.row.tutorials.filter .card-header {
   display: flex;
   align-items: center;
 }
@@ -295,5 +317,11 @@
 @media screen and (min-width: 1100px) {
   .row.tutorials > * {
     flex: 1 1 33%;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .tut .cards {
+    margin: auto;
   }
 }

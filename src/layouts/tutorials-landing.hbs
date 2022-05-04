@@ -64,11 +64,15 @@
 
 
   function toggleDropdown() {
-  document.getElementById("categories").classList.toggle("show");
+    document.getElementById("categories").classList.toggle("show");
+  }
+
+  function toggleFilters() {
+    document.getElementById("filters").classList.toggle("show");
   }
 
   function selectProduct(event) {
-    var products = ["cloud", "platform", "imdg", "mc"];
+    var products = ["cloud", "platform", "imdg", "all", "operator"];
 
     for (i=0;i<products.length;i++) {
       let product = document.getElementById(products[i]);
