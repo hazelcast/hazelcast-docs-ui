@@ -24,6 +24,29 @@ strong.enterprise {
   vertical-align: middle;
 }
 
+.doc > h1.page.serverless::after {
+  content: 'Serverless';
+  background: var(--success);
+  padding: 4px;
+  margin-left: 15px;
+  color: white;
+  border-radius: 10px;
+  font-size: medium;
+  vertical-align: middle;
+}
+
+.doc > h1.page.dedicated::after {
+  content: 'Dedicated';
+  border-radius: 10px;
+  border: none;
+  font-size: medium;
+  vertical-align: middle;
+  color: white;
+  background: var(--accessibility-outline);
+  padding: 4px;
+  margin-left: 15px;
+}
+
 .doc > h1.page.enterprise::after {
   content: 'Enterprise';
   background: var(--primary-dark);
