@@ -100,6 +100,7 @@
   text-overflow: ellipsis;
   font-size: 0.9em;
   text-indent: 10px;
+  flex-wrap: wrap;
 }
 
 .product-box {
@@ -108,18 +109,7 @@
   box-sizing: border-box;
   color: #707482;
   border-bottom: 3px solid #707482;
-}
-
-.product-box:first-child {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-right: none;
-}
-
-.product-box:last-child {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-left: none;
+  border-radius: 5px;
 }
 
 .product-box.is-active {

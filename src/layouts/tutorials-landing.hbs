@@ -12,8 +12,8 @@
 <script>
 
   let params = {
-    product: 'all',
-    lang: 'all',
+    product: 'all-products',
+    lang: 'all-langs',
     includeEnterprise: true,
     category: 'All'
   }
@@ -25,7 +25,7 @@
     for (let i = 0; i < tutorialCards.length; i++) {
       let include = false;
 
-      if (params.product !== 'all') {
+      if (params.product !== 'all-products') {
         if (tutorialCards[i].getAttribute("data-product") === params.product) {
           include = true
         }
@@ -42,7 +42,7 @@
         include = true
       }
 
-      if (include && params.lang !== 'all') {
+      if (include && params.lang !== 'all-langs') {
         if (!tutorialCards[i].getAttribute("data-lang").includes(params.lang)) {
           include = false
         }
@@ -72,19 +72,23 @@
   }
 
   function selectProduct(event) {
-    var products = ["cloud", "platform", "imdg", "all", "operator"];
+    var products = ["cloud", "platform", "imdg", "all-products", "operator"];
 
-    for (i=0;i<products.length;i++) {
+    for (i=0; i<products.length; i++) {
       let product = document.getElementById(products[i]);
-      if (product.id !== event.currentTarget.id) {
-        product.classList.remove("is-active");
-      }
-    };
+      product.classList.remove("is-active");
+    }
+    
     event.currentTarget.classList.toggle("is-active"); 
     var product = event.currentTarget.id;
-    if (!event.currentTarget.classList.contains("is-active")) {
-      product = 'all'
+    var enterpriseSwitch = document.getElementById("enterprise")
+
+    if (product == "cloud" || product == "operator") {
+      enterpriseSwitch.style.display = "none"
+    } else {
+      enterpriseSwitch.style.display = "inline-block"
     }
+    
     params.product = product;
     updateCards(params);
   }
@@ -104,20 +108,15 @@
   }
 
   function filterLangs(lang) {
-    var langs = ["all", "java", "python", "node", "go", "cplus", "csharp"];
+    var langs = ["all-langs", "java", "python", "node", "go", "cplus", "csharp"];
 
-    for (i=0;i<langs.length;i++) {
+    for (i=0; i<langs.length; i++) {
       let currentLang = document.getElementById(langs[i]);
-      if (currentLang.id !== lang.id) {
-        currentLang.classList.remove("is-active");
-      }
-    };
-    lang.classList.toggle("is-active"); 
-    var selectedLang = lang.id;
-    if (!lang.classList.contains("is-active")) {
-      selectedLang = 'all'
+      currentLang.classList.remove("is-active");
     }
-    params.lang = selectedLang;
+
+    lang.classList.toggle("is-active"); 
+    params.lang = lang.id;
     updateCards(params)
   }
   </script>

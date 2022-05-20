@@ -22,7 +22,7 @@
               <h3>
                 Filter by product
               </h3>
-              <div class="small-grey">
+              <div id="enterprise" class="small-grey">
                 <span>Include Enterprise</span>
                 <label class="switch">
                   <input id="enterprise-switch" type="checkbox" onclick="toggleEnterprise(this)" checked>
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="product-boxes">
-              <button id="all" class="product-box is-active" onclick="selectProduct(event)">
+              <button id="all-products" class="product-box is-active" onclick="selectProduct(event)">
                 All
               </button>
               <button id="cloud" class="product-box" onclick="selectProduct(event)">
@@ -55,7 +55,7 @@
               </h3>
             </div>
             <div class="language-list">
-              <a id="all" class="lang-filter-list is-active" onclick="filterLangs(this)">All</a>
+              <a id="all-langs" class="lang-filter-list is-active" onclick="filterLangs(this)">All</a>
               <a id="java" class="lang-filter-list" onclick="filterLangs(this)">Java <img src="{{{uiRootPath}}}/img/java.png"></a>
               <a id="python" class="lang-filter-list" onclick="filterLangs(this)">Python <img src="{{{uiRootPath}}}/img/python.png"></a>
               <a id="node" class="lang-filter-list" onclick="filterLangs(this)">Node.js <img src="{{{uiRootPath}}}/img/node.png"></a>

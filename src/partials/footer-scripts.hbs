@@ -5,11 +5,12 @@
   <script>
     var queryParams = new URLSearchParams(window.location.search);
     var product = queryParams.get("product");
-    params.product = product
-    document.getElementById(product).click()
-    updateCards(params)
+    if (product) {
+      params.product = product
+      document.getElementById(product).click()
+      updateCards(params)
+    }
   </script>
-
 {{/if}}
 {{#if (not-eq page.title 'Page Not Found')}}
   {{#if (and (eq page.component.name 'imdg') (or (eq page.componentVersion.version '4') (lt page.componentVersion.version '3.12')))}}
