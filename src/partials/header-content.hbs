@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://hazelcast.com/"><img src="{{{uiRootPath}}}/img/hazelcast-header.svg"></img></a>
-      <a class="navbar-item" id="documentation-header" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">Docs Home</img></a>
+      <a class="navbar-item" id="documentation-header" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">Home</img></a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -40,12 +40,10 @@
             {{~else}} href="http://hazelcast.github.io/hazelcast-nodejs-client/"{{~/if}} onclick="window.open(this.href,'_blank');return false;">Node.js</a>
           </div>
         </div>
-        <div class="navbar-item">
-          <a class="navbar-item" href="https://training.hazelcast.com/" onclick="window.open(this.href,'_blank');return false;">Online Training</a>
-        </div>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#" onclick="return false">Resources</a>
           <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://training.hazelcast.com/" onclick="window.open(this.href,'_blank');return false;">Online Training</a>
             <a class="navbar-item" href="https://hazelcast.com/hub/" onclick="window.open(this.href,'_blank');return false;">Integration Hub</a>
             <a class="navbar-item" href="https://hazelcast.com/use-cases/" onclick="window.open(this.href,'_blank');return false;">Use Cases</a>
             <a class="navbar-item" href="https://hazelcast.com/community/" onclick="window.open(this.href,'_blank');return false;">Community</a>

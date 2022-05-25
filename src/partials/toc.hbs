@@ -1,10 +1,31 @@
 <aside class="toc sidebar" data-title="{{or page.attributes.toctitle 'Contents'}}" data-levels="{{{or page.attributes.toclevels 2}}}">
   {{#if (eq page.layout 'tutorial')}}
-    <div class="source">
-      <a style="line-height: 1.6;" href="../tutorials"><img class="left-arrow" src="{{{siteRootPath}}}/home/_images/right-arrow.svg">Browse tutorials</a>
+    <div>
+      <a style="line-height: 1.6;"
+      href="../tutorials">
+      <img class="left-arrow"
+      src="{{{siteRootPath}}}/home/_images/right-arrow.svg">
+      All tutorials
+      </a>
     </div>
   {{/if}}
   <div class="toc-menu">
   </div>
-  {{> feedback}}
+  <div class="feedback-prompt">
+  {{#if (eq page.layout 'tutorial')}}
+    {{#with (get-page-info)}}
+      <div class="source">
+        <a class="git" href="{{this.src.origin.webUrl}}/tree/{{this.asciidoc.attributes.page-origin-branch}}">View source</a>
+      </div>
+    {{/with}}
+  {{/if}}
+  {{#if (and page.fileUri (not env.CI))}}
+    <div class="edit-this-page"><a class="git-pull" href="{{page.fileUri}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
+  {{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
+    {{#with (get-page-info)}}
+      <div class="additional-feedback"><a href="{{this.src.origin.webUrl}}/issues/new?title=Docs: Feedback for {{{this.title}}}&body=Hi, I have some feedback about [this page]({{{this.src.editUrl}}})%0D%0A" class ="git" target="_blank">Report an issue</a></div>
+    {{/with}}
+    <div class="edit-this-page"><a class="git-pull" href="{{page.editUrl}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
+  {{/if}}
+  </div>
 </aside>

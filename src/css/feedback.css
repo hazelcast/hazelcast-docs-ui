@@ -1,6 +1,6 @@
 /* Feedback question and buttons */
 
-#feedback-prompt {
+.feedback-prompt {
   width: 100%;
   font-family: var(--body-font-family);
   color: var(--secondary-text);
@@ -9,11 +9,11 @@
   gap: 15px;
 }
 
-#feedback-prompt .hidden {
+.feedback-prompt .hidden {
   display: none;
 }
 
-#feedback-prompt button {
+.feedback-prompt button {
   display: inline-block;
   text-align: center;
   padding: 2px;
@@ -23,7 +23,7 @@
   color: var(--toc-heading-font-color);
 }
 
-#feedback-prompt label {
+.feedback-prompt label {
   display: inline-block;
   border-radius: var(--border-radius);
   text-decoration: none;
@@ -31,26 +31,26 @@
   color: var(--toc-heading-font-color);
 }
 
-#feedback-prompt label#yes-button,
-#feedback-prompt label#no-button {
+.feedback-prompt label#yes-button,
+.feedback-prompt label#no-button {
   padding: 5px;
 }
 
-#feedback-prompt input[type="radio"]:checked + label#yes-button,
+.feedback-prompt input[type="radio"]:checked + label#yes-button,
 #yes-button:hover {
   background-color: var(--success-dark);
   color: var(--neutral-white);
   cursor: grab;
 }
 
-#feedback-prompt input[type="radio"]:checked + label#no-button,
+.feedback-prompt input[type="radio"]:checked + label#no-button,
 #no-button:hover {
   background-color: var(--error);
   color: var(--neutral-white);
   cursor: grab;
 }
 
-#feedback-prompt input[type="radio"] {
+.feedback-prompt input[type="radio"] {
   display: none;
 }
 

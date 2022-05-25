@@ -49,6 +49,26 @@ If you entered the URL of this page manually, please double check that you enter
 {{/if}}
 {{> page-versions}}
 {{{page.contents}}}
+{{#if (eq page.layout 'tutorial')}}
+<div class="feedback-prompt">
+  <form name="docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST" data-netlify="true">
+    <label>Was this page helpful?</label><br>
+    <p class="hidden">
+    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+    </p>
+    <input type="radio" id="yes" name="helpful" value="yes" onclick="submitForm()">
+    <label for="yes" id="yes-button"><i class="far fa-check-circle"></i> Yes</label>
+    <input type="radio" id="no" name="helpful" value="no" onclick="submitForm()">
+    <label for="no" id="no-button"><i class="far fa-times-circle"></i> No</label><br>
+    </select>
+  </form>
+</div>
+<script>
+  function submitForm() {
+    document.getElementById("feedback-form").submit();
+  }
+</script>
+{{/if}}
 {{/if}}
 {{> pagination}}
 </article>
