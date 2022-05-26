@@ -93,7 +93,7 @@
       }
     }
   </script>
-  {{else if (and (not-eq page.component.name 'home') (not-eq page.component.name 'cloud'))}}
+  {{else if (and (and (not-eq page.component.name 'home') (not-eq page.component.name 'tutorials')) (not-eq page.component.name 'cloud'))}}
   <script>
     const search = window.docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
@@ -146,20 +146,6 @@
         search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] }
       }
     }
-  </script>
-  {{else if (eq page.component.name 'tutorials')}}
-  <script>
-    const search = window.docsearch({
-      apiKey: '{{site.keys.docsearchApi}}',
-      indexName: '{{site.keys.docsearchIndex}}',
-      appId: '{{site.keys.docsearchId}}',
-      inputSelector: '#search-input',
-      // Set debug to true to inspect the dropdown
-      debug: false,
-      // Display 25 results in the dropdown
-      // and search only the current product
-      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:tutorials"] },
-    });
   </script>
   {{/if}}
   {{#if (and (eq page.component.name 'imdg') page.attributes.latest-supported-mc)}}
@@ -263,7 +249,7 @@
     }
   </script>
   {{/if}}
-{{else}}
+{{else if (not-eq page.component.name 'tutorials') }}
 <script>
   const search = window.docsearch({
     apiKey: '{{site.keys.docsearchApi}}',

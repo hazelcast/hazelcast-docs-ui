@@ -132,5 +132,18 @@
     {{> header}}
     {{> body-tutorials-landing}}
     {{> footer}}
+    <script>
+      const search = window.docsearch({
+        apiKey: '{{site.keys.docsearchApi}}',
+        indexName: '{{site.keys.docsearchIndex}}',
+        appId: '{{site.keys.docsearchId}}',
+        inputSelector: '#search-input',
+        // Set debug to true to inspect the dropdown
+        debug: false,
+        // Display 25 results in the dropdown
+        // and search only the current product
+        algoliaOptions: { hitsPerPage: 25, facetFilters: [["tags:tutorials"]] },
+      });
+    </script>
   </body>
 </html>

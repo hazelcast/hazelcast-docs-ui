@@ -6,7 +6,6 @@
   color: var(--secondary-text);
   display: flex;
   flex-direction: column;
-  gap: 15px;
 }
 
 .feedback-prompt .hidden {
@@ -91,4 +90,8 @@
 .git-pull {
   background: transparent url(../img/pull.svg) center left no-repeat;
   padding-left: 1.75rem;
+}
+
+form[name^=docs-feedback] {
+  padding-top: 20px;
 }
