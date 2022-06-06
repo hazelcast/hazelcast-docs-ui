@@ -3,11 +3,11 @@
   margin-top: 30px;
   left: 0;
   width: 100%;
-  font-size: calc(14 / var(--rem-base) * 1rem);
+  font-size: calc(16.5 / var(--rem-base) * 1rem);
   z-index: var(--z-index-nav);
   visibility: hidden;
   font-family: var(--nav-font-family);
-  max-width: 400px;
+  max-width: 300px;
   background-color: #fff;
 }
 
@@ -323,10 +323,8 @@ html.is-clipped--nav {
 
 @media screen and (min-width: 1024px) {
   .nav-container {
-    font-size: calc(16 / var(--rem-base) * 1rem);
     position: static;
     visibility: visible;
-    flex: 1 0.5 25rem;
     margin-top: 0;
     padding-bottom: 60px;
   }
@@ -351,15 +349,5 @@ html.is-clipped--nav {
 
   .nav-item-toggle {
     right: 0;
-  }
-}
-
-@media screen and (min-width: 1920px) {
-  .nav-container {
-    width: 20rem;
-  }
-
-  .nav-panel-explore .components {
-    max-width: 400px;
   }
 }

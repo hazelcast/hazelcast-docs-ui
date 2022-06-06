@@ -14,13 +14,46 @@
   font-size: 2em;
 }
 
-strong.enterprise {
-  background: var(--primary-dark);
+.doc > h1.page.serverless::after {
+  content: 'Serverless';
+  background: var(--success);
+  padding: 4px;
+  margin-left: 15px;
+  color: white;
+  border-radius: 10px;
+  font-size: medium;
+  vertical-align: middle;
+}
+
+strong.serverless {
+  background: var(--success);
   padding: 4px;
   color: white;
   border-radius: 10px;
   font-weight: normal;
+  font-size: smaller;
+  vertical-align: middle;
+}
+
+.doc > h1.page.dedicated::after {
+  content: 'Dedicated';
+  border-radius: 10px;
+  border: none;
   font-size: medium;
+  vertical-align: middle;
+  color: white;
+  background: var(--accessibility-outline);
+  padding: 4px;
+  margin-left: 15px;
+}
+
+strong.dedicated {
+  background: var(--accessibility-outline);
+  padding: 4px;
+  color: white;
+  border-radius: 10px;
+  font-weight: normal;
+  font-size: smaller;
   vertical-align: middle;
 }
 
@@ -32,6 +65,16 @@ strong.enterprise {
   color: white;
   border-radius: 10px;
   font-size: medium;
+  vertical-align: middle;
+}
+
+strong.enterprise {
+  background: var(--primary-dark);
+  padding: 4px;
+  color: white;
+  border-radius: 10px;
+  font-weight: normal;
+  font-size: smaller;
   vertical-align: middle;
 }
 
