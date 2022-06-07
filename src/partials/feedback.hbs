@@ -1,5 +1,20 @@
 </br>
-<div id="feedback-prompt">
+<div class="feedback-prompt">
+  {{#if (eq page.layout 'tutorial')}}
+    {{#with (get-page-info)}}
+      <div class="source">
+        <a class="git" href="{{this.src.origin.webUrl}}/tree/{{this.asciidoc.attributes.page-origin-branch}}">View source</a>
+      </div>
+    {{/with}}
+  {{/if}}
+  {{#if (and page.fileUri (not env.CI))}}
+    <div class="edit-this-page"><a class="git-pull" href="{{page.fileUri}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
+  {{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
+    {{#with (get-page-info)}}
+      <div class="additional-feedback"><a href="{{this.src.origin.webUrl}}/issues/new?title=Docs: Feedback for {{{this.title}}}&body=Hi, I have some feedback about [this page]({{{this.src.editUrl}}})%0D%0A" class ="git" target="_blank">Report an issue</a></div>
+    {{/with}}
+    <div class="edit-this-page"><a class="git-pull" href="{{page.editUrl}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
+  {{/if}}
   <form name="docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST" data-netlify="true">
     <label>Was this page helpful?</label><br>
     <p class="hidden">
@@ -10,18 +25,10 @@
     <input type="radio" id="no" name="helpful" value="no" onclick="submitForm()">
     <label for="no" id="no-button"><i class="far fa-times-circle"></i> No</label><br>
     </select>
-</form>
+  </form>
 </div>
 <script>
   function submitForm() {
     document.getElementById("feedback-form").submit();
   }
 </script>
-{{#if (and page.fileUri (not env.CI))}}
-  <div class="edit-this-page"><a class="git-pull" href="{{page.fileUri}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
-{{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
-  {{#with (get-page-info)}}
-    <div class="additional-feedback"><a href="{{this.src.origin.webUrl}}/issues/new?title=Docs: Feedback for {{{this.title}}}&body=Hi, I have some feedback about [this page]({{{this.src.editUrl}}})%0D%0A" class ="git" target="_blank">Report an issue</a></div>
-  {{/with}}
-  <div class="edit-this-page"><a class="git-pull" href="{{page.editUrl}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
-{{/if}}

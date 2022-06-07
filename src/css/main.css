@@ -105,6 +105,9 @@ main > .content {
     display: block;
     flex: 0 0 var(--toc-width);
     min-width: 200px;
+    overflow-y: scroll;
+    height: 500px;
+    overflow-x: hidden;
   }
 }
 

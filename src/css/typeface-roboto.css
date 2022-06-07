@@ -1,6 +1,17 @@
 @font-face {
   font-family: "Roboto";
   font-style: normal;
+  font-weight: 300;
+  src:
+    local("Roboto Regular"),
+    local("Roboto-Regular"),
+    url(~typeface-roboto/files/roboto-latin-300.woff2) format("woff2"),
+    url(~typeface-roboto/files/roboto-latin-300.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
   font-weight: 400;
   src:
     local("Roboto Regular"),

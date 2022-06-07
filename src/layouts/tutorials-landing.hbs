@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+{{> head-prelude}}
+    <title>Tutorials</title>
+    {{#with page.canonicalUrl}}
+    <link rel="canonical" href="{{this}}">
+    {{/with}}
+{{> head-styles}}
+{{> head-meta}}
+{{> head-scripts}}
+<script>
+
+  let params = {
+    product: 'all-products',
+    lang: 'all-langs',
+    includeEnterprise: true,
+    category: 'All'
+  }
+
+  function updateCards(params) {
+
+    var tutorialCards = document.getElementsByClassName("tut-card");
+
+    for (let i = 0; i < tutorialCards.length; i++) {
+      let include = false;
+
+      if (params.product !== 'all-products') {
+        if (tutorialCards[i].getAttribute("data-product") === params.product) {
+          include = true
+        }
+      } else {
+        include = true
+      }
+
+
+      if (include && params.category !== 'All') {
+        if (!tutorialCards[i].getAttribute("data-categories").includes(params.category)) {
+          include = false
+        }
+      } else if (include) {
+        include = true
+      }
+
+      if (include && params.lang !== 'all-langs') {
+        if (!tutorialCards[i].getAttribute("data-lang").includes(params.lang)) {
+          include = false
+        }
+      }
+
+      if (include && !params.includeEnterprise) {
+        if (tutorialCards[i].getAttribute("data-edition") === 'enterprise') {
+          include = false
+        }
+      }
+
+      if (include) {
+        tutorialCards[i].style.display = 'flex';
+      } else {
+        tutorialCards[i].style.display = 'none';
+      }
+    }
+  }
+
+
+  function toggleDropdown() {
+    document.getElementById("categories").classList.toggle("show");
+  }
+
+  function toggleFilters() {
+    document.getElementById("filters").classList.toggle("show");
+  }
+
+  function selectProduct(event) {
+    var products = ["cloud", "platform", "imdg", "all-products", "operator"];
+
+    for (i=0; i<products.length; i++) {
+      let product = document.getElementById(products[i]);
+      product.classList.remove("is-active");
+    }
+    
+    event.currentTarget.classList.toggle("is-active"); 
+    var product = event.currentTarget.id;
+    var enterpriseSwitch = document.getElementById("enterprise")
+
+    if (product == "cloud" || product == "operator") {
+      enterpriseSwitch.style.display = "none"
+    } else {
+      enterpriseSwitch.style.display = "inline-block"
+    }
+    
+    params.product = product;
+    updateCards(params);
+  }
+
+  function toggleEnterprise(enterprise) {
+    enterprise.checked ? params.includeEnterprise = true : params.includeEnterprise = false;
+    updateCards(params);
+  }
+
+  function filterCategories(event) {
+    var category = event.target.getAttribute("value");
+    toggleDropdown()
+    var current = document.getElementById("current-category");
+    current.innerText = category;
+    params.category = category;
+    updateCards(params);
+  }
+
+  function filterLangs(lang) {
+    var langs = ["all-langs", "java", "python", "node", "go", "cplus", "csharp"];
+
+    for (i=0; i<langs.length; i++) {
+      let currentLang = document.getElementById(langs[i]);
+      currentLang.classList.remove("is-active");
+    }
+
+    lang.classList.toggle("is-active"); 
+    params.lang = lang.id;
+    updateCards(params)
+  }
+  </script>
+    {{> head-icons}}
+      </head>
+      <body>
+      {{#with site.keys.googleAnalytics}}
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{this}}"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      {{/with}}
+    {{> header}}
+    {{> body-tutorials-landing}}
+    {{> footer}}
+    <script>
+      const search = window.docsearch({
+        apiKey: '{{site.keys.docsearchApi}}',
+        indexName: '{{site.keys.docsearchIndex}}',
+        appId: '{{site.keys.docsearchId}}',
+        inputSelector: '#search-input',
+        // Set debug to true to inspect the dropdown
+        debug: false,
+        // Display 25 results in the dropdown
+        // and search only the current product
+        algoliaOptions: { hitsPerPage: 25, facetFilters: [["tags:tutorials"]] },
+      });
+    </script>
+  </body>
+</html>

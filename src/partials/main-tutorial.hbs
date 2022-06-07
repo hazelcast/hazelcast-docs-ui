@@ -1,0 +1,14 @@
+<main class="article">
+{{#if (eq page.layout '404')}}
+  <div class="content">
+{{> article}}
+  </div>
+</main>
+{{else}}
+  <div class="content tutorial">
+    {{> toc}}
+    {{> article}}
+  </div>
+</main>
+{{/if}}
+

@@ -1,0 +1,317 @@
+.tut.home .home-background {
+  height: 135px;
+}
+
+.tut.home h1 {
+  padding-top: 60px;
+}
+
+.tut .cards {
+  max-width: 1500px;
+}
+
+.tut-cards {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.tut-card {
+  background: #fafafa;
+  border-radius: 3px;
+  border: 1px solid #dbdbdb;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  min-width: 300px;
+  max-width: 650px;
+  justify-content: space-between;
+}
+
+.tut-card .start {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.tut-card .start a {
+  text-decoration: none;
+}
+
+.button.git span {
+  background: transparent url(../img/github.svg) center left no-repeat;
+  width: 25px;
+  height: 25px;
+}
+
+.tut-cards .button.git {
+  justify-items: flex-end;
+  justify-content: space-between;
+  width: 165px;
+  color: #2160c0;
+  background: none;
+  border: 1px solid #2160c0;
+}
+
+.get-started .button img {
+  margin-right: -20px;
+  margin-left: 10px;
+}
+
+.dropdown-toggle {
+  display: flex;
+  justify-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+  border: 1px solid #b7c1cb;
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 36px;
+  width: 100%;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  font-size: 1.1em;
+  text-indent: 10px;
+}
+
+.dropdown-toggle.filters {
+  width: fit-content;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  height: 25px;
+  border: none;
+}
+
+.product-boxes {
+  margin-top: 20px;
+  display: flex;
+  cursor: pointer;
+  text-align: left;
+  text-overflow: ellipsis;
+  font-size: 0.9em;
+  text-indent: 10px;
+  flex-wrap: wrap;
+}
+
+.product-box {
+  background: #fafafa;
+  border: 1px solid #b7c1cb;
+  box-sizing: border-box;
+  color: #707482;
+  border-bottom: 3px solid #707482;
+  border-radius: 5px;
+}
+
+.product-box.is-active {
+  border-bottom: 3px solid #68c200;
+  color: #041a3b;
+}
+
+.language-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.lang-filter-list {
+  background: #f1f1f1;
+  border: 1px solid #f1f1f1;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: middle;
+  padding: 4px 14px;
+  color: #333;
+  border-radius: 1em;
+  margin: 0 10px 10px 0;
+  align-self: center;
+  display: flex;
+}
+
+.lang-filter-list img {
+  width: 20px;
+  margin-left: 5px;
+}
+
+.lang-filter-list.is-active {
+  background: #68c200;
+  border: 1px solid #68c200;
+  font-weight: 500;
+}
+
+.lang-filter-list:hover {
+  cursor: pointer;
+}
+
+#current-category {
+  margin-left: 15px;
+}
+
+.dropdown-toggle span {
+  background: url(../img/caret-blue.svg) no-repeat 40%/37%;
+  width: 40px;
+  height: 30px;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  right: 20px;
+  margin-top: 20px;
+}
+
+.dropdown .dropdown-content#categories {
+  display: none;
+  background-color: #f6f6f6;
+  min-width: 100px;
+  border: 1px solid #ddd;
+  padding: 0;
+  margin-top: 0;
+  font-size: 0.8em;
+}
+
+.dropdown .dropdown-content#categories li {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+}
+
+.dropdown .dropdown-content li:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.dropdown .dropdown-content.show#categories {
+  display: flex;
+  z-index: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.row.tutorials > * {
+  min-width: 25ch;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.row.tutorials.boxes {
+  background-color: inherit;
+  padding: 0;
+}
+
+.row.tutorials.search {
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.row.tutorials .card {
+  display: flex;
+  flex-direction: column;
+}
+
+.row.tutorials.filter .card {
+  max-width: 400px;
+  padding-right: 15px;
+}
+
+.row.tutorials h3 {
+  font-weight: 400;
+  margin: 0;
+}
+
+.row.tutorials.search .card {
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+.row.tutorials.filter {
+  justify-content: space-between;
+  display: none;
+  padding-left: 15px;
+}
+
+.row.tutorials.filter.show {
+  justify-content: space-between;
+  display: flex;
+}
+
+.row.tutorials.filter .card-header {
+  display: flex;
+  align-items: center;
+}
+
+.row.tutorials.search .card:first-child {
+  padding-bottom: 0;
+}
+
+.row.tutorials:last-child {
+  box-shadow: none;
+}
+
+.tut-card .card-header {
+  display: flex;
+  align-items: center;
+}
+
+.tut-card .card-header h3 {
+  margin: 0;
+}
+
+.tut-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.time {
+  font-size: small;
+  color: #707482;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.summary {
+  height: 100px;
+  overflow: scroll;
+}
+
+.tut-card .source {
+  width: 100%;
+}
+
+@media screen and (min-width: 900px) {
+  .tut-cards {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .tut-card {
+    flex: 1 1 25%;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .row.tutorials > * {
+    flex: 1 1 33%;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .tut .cards {
+    margin: auto;
+  }
+}

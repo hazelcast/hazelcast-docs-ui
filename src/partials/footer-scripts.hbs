@@ -1,6 +1,17 @@
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+{{#if (eq page.component.name 'tutorials')}}
+  <script>
+    var queryParams = new URLSearchParams(window.location.search);
+    var product = queryParams.get("product");
+    if (product) {
+      params.product = product
+      document.getElementById(product).click()
+      updateCards(params)
+    }
+  </script>
+{{/if}}
 {{#if (not-eq page.title 'Page Not Found')}}
   {{#if (and (eq page.component.name 'imdg') (or (eq page.componentVersion.version '4') (lt page.componentVersion.version '3.12')))}}
   <script>
@@ -82,7 +93,7 @@
       }
     }
   </script>
-  {{else if (and (not-eq page.component.name 'home') (not-eq page.component.name 'cloud'))}}
+  {{else if (and (and (not-eq page.component.name 'home') (not-eq page.component.name 'tutorials')) (not-eq page.component.name 'cloud'))}}
   <script>
     const search = window.docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
@@ -238,7 +249,7 @@
     }
   </script>
   {{/if}}
-{{else}}
+{{else if (not-eq page.component.name 'tutorials') }}
 <script>
   const search = window.docsearch({
     apiKey: '{{site.keys.docsearchApi}}',

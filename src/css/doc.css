@@ -748,6 +748,21 @@ strong.enterprise {
   padding-left: 0.25em;
 }
 
+.navbar .button,
+.doc .interactive-button a,
+.tut-cards .button {
+  display: inline-flex;
+  align-items: center;
+  background: var(--navbar-button-background);
+  border-radius: 50px;
+  height: 1.75rem;
+  color: var(--navbar-button-font-color);
+  padding: 0 0.75em;
+  white-space: nowrap;
+  text-decoration: none;
+  border-style: none;
+}
+
 .doc kbd {
   display: inline-block;
   font-size: calc(12 / var(--rem-base) * 1rem);
