@@ -14,15 +14,29 @@
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#" onclick="return false">Manuals</a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="{{{siteRootPath}}}/cloud/" onclick="window.open(this.href,'_blank');return false;">Hazelcast Cloud</a>
+            <a class="navbar-item" href="{{{siteRootPath}}}/cloud/" onclick="window.open(this.href,'_blank');return false;">Hazelcast Viridian</a>
             <a class="navbar-item" href="{{{siteRootPath}}}/hazelcast/latest/" onclick="window.open(this.href,'_blank');return false;">Hazelcast Platform</a> 
             <a class="navbar-item" href="{{{siteRootPath}}}/management-center/latest/" onclick="window.open(this.href,'_blank');return false;">Management Center</a>
             <a class="navbar-item" href="{{{siteRootPath}}}/operator/latest/" onclick="window.open(this.href,'_blank');return false;">Hazelcast Platform Kubernetes Operator</a>
+            <!--<a class="navbar-item" href="{{{siteRootPath}}}/clc/latest/" onclick="window.open(this.href,'_blank');return false;">Hazelcast Command-Line Client</a>-->
           </div>
         </div>
+        {{#if (not-eq page.component.name 'hazelcast')}}
+        {{#with page.component.name}}
+          <div class="navbar-item">
+            <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product={{{this}}}">Tutorials</a>
+          </div>
+        {{/with}}
+        {{else}}
+          <div class="navbar-item">
+            <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product=platform">Tutorials</a>
+          </div>
+        {{/if}}
+        {{#with page.attributes.code-samples}}
         <div class="navbar-item">
-          <a class="navbar-item" href="{{{siteRootPath}}}/tutorials">Tutorials</a>
+          <a class="navbar-item" href="{{{this}}}">Code Samples</a>
         </div>
+        {{/with}}
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#" onclick="return false">API Reference</a>
           <div class="navbar-dropdown">
@@ -65,11 +79,24 @@
         {{/if}}
         {{/if}}
         {{/if}}
-        <div class="navbar-item">
-          <a href="https://hazelcast.com/get-started" onclick="window.open(this.href,'_blank');return false;">
-          <button class="button">Get Hazelcast</button>
-          </a>
-        </div>
+        {{#if (eq page.component.name 'cloud')}}
+          <div class="navbar-item">
+            <a href="{{{page.attributes.cloud-console}}}" onclick="window.open(this.href,'_blank');return false;">
+              <button class="button">Sign In</button>
+            </a>
+          </div>
+          <div class="navbar-item">
+            <a href="{{{page.attributes.cloud-console}}}sign-up" onclick="window.open(this.href,'_blank');return false;">
+              <button class="button green">Try Free</button>
+            </a>
+          </div>
+        {{else}}
+          <div class="navbar-item try-free"></div>
+            <a href="https://hazelcast.com/get-started" onclick="window.open(this.href,'_blank');return false;">
+              <button class="button">Get Hazelcast</button>
+            </a>
+          </div>
+          {{/if}}
       </div>
     </div>
   </nav>

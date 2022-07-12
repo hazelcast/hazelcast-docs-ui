@@ -15,7 +15,7 @@
 }
 
 .doc > h1.page.serverless::after {
-  content: 'Serverless';
+  content: 'Serverless (beta)';
   background: var(--success);
   padding: 4px;
   margin-left: 15px;
@@ -88,6 +88,38 @@ strong.enterprise {
   background: var(--success-light);
   padding: 4px;
   margin-left: 15px;
+}
+
+strong.beta {
+  background: var(--success-light);
+  padding: 4px;
+  color: #041a3b;
+  border-radius: 10px;
+  font-weight: normal;
+  font-size: smaller;
+  vertical-align: middle;
+}
+
+strong.console {
+  background: var(--navbar-button-background);
+  padding: 4px;
+  border-radius: 50px;
+  font-weight: normal;
+  font-size: smaller;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+strong.console a,
+strong.console a:hover {
+  color: var(--navbar-button-font-color);
+  text-decoration: none;
+}
+
+strong.console a::after {
+  content: none;
 }
 
 .doc > h1.page.enterprise.beta::after {
