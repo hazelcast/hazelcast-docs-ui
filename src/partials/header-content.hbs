@@ -79,7 +79,7 @@
         {{/if}}
         {{/if}}
         {{/if}}
-        {{#if (eq page.component.name 'cloud')}}
+        {{#if (or (eq page.component.name 'cloud') (eq page.component.name 'tutorials'))}}
           <div class="navbar-item">
             <a href="{{{page.attributes.cloud-console}}}" onclick="window.open(this.href,'_blank');return false;">
               <button class="button">Sign In</button>
