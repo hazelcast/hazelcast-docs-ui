@@ -15,118 +15,85 @@
 }
 
 .doc > h1.page.serverless::after {
-  content: 'Serverless (beta)';
-  background: var(--success);
+  content: 'SERVERLESS (BETA)';
   padding: 4px;
   margin-left: 15px;
-  color: white;
-  border-radius: 10px;
+  font-weight: 600;
+  color: var(--success);
   font-size: medium;
   vertical-align: middle;
 }
 
 strong.serverless {
-  background: var(--success);
   padding: 4px;
-  color: white;
-  border-radius: 10px;
-  font-weight: normal;
+  color: var(--success);
   font-size: smaller;
+  font-weight: 600;
   vertical-align: middle;
 }
 
 .doc > h1.page.dedicated::after {
-  content: 'Dedicated';
-  border-radius: 10px;
+  content: 'DEDICATED';
   border: none;
   font-size: medium;
   vertical-align: middle;
-  color: white;
-  background: var(--accessibility-outline);
+  font-weight: 600;
+  color: var(--accessibility-outline);
   padding: 4px;
   margin-left: 15px;
 }
 
 strong.dedicated {
-  background: var(--accessibility-outline);
   padding: 4px;
-  color: white;
-  border-radius: 10px;
-  font-weight: normal;
+  color: var(--accessibility-outline);
   font-size: smaller;
+  font-weight: 600;
   vertical-align: middle;
 }
 
 .doc > h1.page.enterprise::after {
-  content: 'Enterprise';
-  background: var(--primary-dark);
+  content: 'ENTERPRISE';
   padding: 4px;
   margin-left: 15px;
-  color: white;
-  border-radius: 10px;
+  font-weight: 600;
+  color: var(--primary-dark);
   font-size: medium;
   vertical-align: middle;
 }
 
 strong.enterprise {
-  background: var(--primary-dark);
   padding: 4px;
-  color: white;
-  border-radius: 10px;
-  font-weight: normal;
+  color: var(--primary-dark);
   font-size: smaller;
+  font-weight: 600;
   vertical-align: middle;
 }
 
 .doc > h1.page.beta::after {
-  content: 'Beta';
-  border-radius: 10px;
+  content: 'BETA';
   border: none;
   font-size: medium;
+  font-weight: 600;
   vertical-align: middle;
-  color: #041a3b;
-  background: var(--success-light);
+  color: var(--success-light);
   padding: 4px;
   margin-left: 15px;
 }
 
 strong.beta {
-  background: var(--success-light);
   padding: 4px;
-  color: #041a3b;
-  border-radius: 10px;
-  font-weight: normal;
+  color: var(--success-light);
   font-size: smaller;
+  font-weight: 600;
   vertical-align: middle;
-}
-
-strong.console {
-  background: var(--navbar-button-background);
-  padding: 4px;
-  border-radius: 50px;
-  font-weight: normal;
-  font-size: smaller;
-  vertical-align: middle;
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-strong.console a,
-strong.console a:hover {
-  color: var(--navbar-button-font-color);
-  text-decoration: none;
-}
-
-strong.console a::after {
-  content: none;
 }
 
 .doc > h1.page.enterprise.beta::after {
-  content: 'Enterprise Beta';
+  content: 'ENTERPRISE (BETA)';
   border-radius: 10px;
   border: none;
   font-size: medium;
+  font-weight: 600;
   vertical-align: middle;
   color: #041a3b;
   background: var(--success-light);
@@ -243,6 +210,29 @@ strong.console a::after {
   content: url('/_/img/external-link.svg');
   position: relative;
   margin-left: 2px;
+}
+
+.doc a[href*="cloud.hazelcast.com"] {
+  background: var(--navbar-button-background);
+  padding: 0 10px;
+  color: var(--navbar-button-font-color);
+  border-radius: 35px;
+  font-weight: normal;
+  font-size: smaller;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.doc a[href*="cloud.hazelcast.com"]:hover {
+  text-decoration: none;
+  color: var(--navbar-button-font-color);
+}
+
+.doc a[href*="cloud.hazelcast.com"]::after {
+  content: url('/_/img/external-link-white.svg') !important;
+  background-size: 15px 16px !important;
 }
 
 .doc a {
@@ -370,6 +360,7 @@ strong.console a::after {
 
 .doc .admonitionblock {
   margin: 1.4rem 0 0;
+  max-width: 500px;
 }
 
 .doc .admonitionblock p,
@@ -411,6 +402,7 @@ strong.console a::after {
   border-radius: 0.45rem;
   transform: translate(-0.5rem, -50%);
   font-family: var(--body-font-family) !important;
+  width: 101.5%;
 }
 
 .doc .admonitionblock.caution .icon {
