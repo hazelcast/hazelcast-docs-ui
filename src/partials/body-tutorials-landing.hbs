@@ -35,7 +35,7 @@
                 All
               </button>
               <button id="cloud" class="product-box" onclick="selectProduct(event)">
-                Hazelcast Cloud
+                Hazelcast Viridian
               </button>
               <button id="platform" class="product-box" onclick="selectProduct(event)">
                 Hazelcast Platform
@@ -85,7 +85,7 @@
         </div>
         <div class="row tutorials boxes">
           <div class="tut-cards">
-            {{#each (get-tutorial-pages)}}
+            {{#each (get-tutorial-pages null)}}
               <div data-product="{{this.asciidoc.attributes.page-product}}" {{#if this.asciidoc.attributes.page-enterprise}} data-edition="enterprise" {{/if}} data-lang="{{this.asciidoc.attributes.page-lang}}" data-categories="{{this.asciidoc.attributes.page-categories}}" class="tut-card">
                 <div class="card-header">
                   <h3>

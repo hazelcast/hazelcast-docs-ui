@@ -1,58 +1,62 @@
 <article class="doc">
 {{#if (eq page.layout '404')}}
-<h1 class="page">{{{or page.title 'Page Not Found'}}}</h1>
-<div class="paragraph">
-  <p>The page you&#8217;re looking for does not exist. It may have been moved.</p>
-</div>
-<div class="paragraph">
-  <p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
-If you entered the URL of this page manually, please double check that you entered the address correctly.</p>
-</div>
-<div class=" paragraph help">
-  <h2><img src="{{{uiRootPath}}}/img/search-404.svg">Find what you're looking for</h2>
-</div>
-<div class="paragraph find">
-  <div class="find-item">
-    <p>Useful Links</p>
-    <ul>
-      <li><a href="https://docs.hazelcast.com/imdg/latest/getting-started.html">IMDG Quickstart</a></li>
-      <li><a href="https://docs.hazelcast.com/imdg/latest/installation/installing-upgrading.html">Installing and Upgrading IMDG</a></li>
-      <li><a href="https://docs.hazelcast.com/imdg/latest/configuration/understanding-configuration.html">Understanding Configuration</a></li>
-      <li><a href="https://docs.hazelcast.com/imdg/latest/data-structures/distributed-data-structures.html">Distributed Data Structures</a></li>
-      <li><a href="https://docs.hazelcast.com/imdg/latest/storage/storage.html">Storage</a></li>
-      <li><a href="https://docs.hazelcast.com/imdg/latest/security/security.html">Security</a></li>
-    </ul>
-    <div class="search-box-404">
-      {{#with site.homeUrl}}
-        <img src="{{{@root.uiRootPath}}}/img/home.svg"><a href="{{{relativize this}}}" class="{{#if @root.page.home}} is-current{{/if}}">Check the home page</a>
-      {{/with}}
-      <p id="search-404"><i class="fa fa-search" id="search-icon-404" aria-hidden="true"></i><input id="search-input" type="text" placeholder="Search docs "></p>
+  <h1 class="page">{{{or page.title 'Page Not Found'}}}</h1>
+  <div class="paragraph">
+    <p>The page you&#8217;re looking for does not exist. It may have been moved.</p>
+  </div>
+  <div class="paragraph">
+    <p>If you arrived on this page by clicking on a link, please notify the owner of the site that the link is broken.
+  If you entered the URL of this page manually, please double check that you entered the address correctly.</p>
+  </div>
+  <div class=" paragraph help">
+    <h2><img src="{{{uiRootPath}}}/img/search-404.svg">Find what you're looking for</h2>
+  </div>
+  <div class="paragraph find">
+    <div class="find-item">
+      <p>Useful Links</p>
+      <ul>
+        <li><a href="https://docs.hazelcast.com/hazelcast/latest/getting-started/get-started-cli">Quickstart</a></li>
+        <li><a href="https://docs.hazelcast.com/hazelcast/latest/getting-started/install-hazelcast">Installing Hazelcast Open Source</a></li>
+        <li><a href="https://docs.hazelcast.com/hazelcast/latest/configuration/understanding-configuration">Hazelcast Configuration</a></li>
+      </ul>
+      <div class="search-box-404">
+        {{#with site.homeUrl}}
+          <img src="{{{@root.uiRootPath}}}/img/home.svg"><a href="{{{relativize this}}}" class="{{#if @root.page.home}} is-current{{/if}}">Check the home page</a>
+        {{/with}}
+        <p id="search-404"><i class="fa fa-search" id="search-icon-404" aria-hidden="true"></i><input id="search-input" type="text" placeholder="Search docs "></p>
+      </div>
     </div>
   </div>
-</div>
 {{else}}
-{{> breadcrumbs}}
-{{#if (not-eq page.layout 'tutorial')}}
-{{>nav-toggle}}
-{{/if}}
-{{#if (not-eq page.layout 'swagger')}}
-{{#with page.title}}
-<h1 class="page
- {{~#if (eq @root.page.attributes.enterprise 'true')}} enterprise{{/if}}
- {{~#if (eq @root.page.attributes.beta 'true')}} beta{{/if}}
- {{~#if (eq @root.page.attributes.dedicated 'true')}} dedicated{{/if}}
- {{~#if (eq @root.page.attributes.serverless 'true')}} serverless{{/if}}">{{{this}}}</h1>
-{{/with}}
-{{/if}}
-{{#if page.attributes.api-reference}}
-<div style="padding-top: 5px;">
-  <a href="{{{page.attributes.api-reference}}}" onclick="window.open(this.href,'_blank');return false;">
-    API docs
-  </a>
-</div>
-{{/if}}
-{{> page-versions}}
-{{{page.contents}}}
+  {{> breadcrumbs}}
+  {{#if (not-eq page.layout 'tutorial')}}
+    {{>nav-toggle}}
+  {{/if}}
+  {{#if (not-eq page.layout 'swagger')}}
+    {{#with page.title}}
+      <h1 class="page
+      {{~#if (eq @root.page.attributes.enterprise 'true')}} enterprise{{/if}}
+      {{~#if (eq @root.page.attributes.beta 'true')}} beta{{/if}}
+      {{~#if (eq @root.page.attributes.dedicated 'true')}} dedicated{{/if}}
+      {{~#if (eq @root.page.attributes.serverless 'true')}} serverless{{/if}}">{{{this}}}</h1>
+    {{/with}}
+  {{/if}}
+  {{#if page.attributes.api-reference}}
+    <div style="padding-top: 5px;">
+      <a href="{{{page.attributes.api-reference}}}" onclick="window.open(this.href,'_blank');return false;">
+      API docs
+      </a>
+    </div>
+  {{/if}}
+  {{> page-versions}}
+  {{{page.contents}}}
+  {{#if page.attributes.include-tutorial-list}}
+    <ul style="padding-top:20px;">
+    {{#each (get-tutorial-pages 'cloud')}}
+      <li><a href="{{{this.pub.url}}}">{{this.asciidoc.attributes.doctitle}}</a></li>
+    {{/each}}
+    </ul> 
+  {{/if}}
 {{/if}}
 {{> pagination}}
 </article>

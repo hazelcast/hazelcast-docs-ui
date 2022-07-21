@@ -183,6 +183,10 @@ a.navbar-link {
   border-style: none;
 }
 
+.navbar .button.green {
+  background: var(--success);
+}
+
 .nav-button {
   width: 167px;
 }
@@ -193,7 +197,7 @@ a.navbar-link {
   }
 }
 
-@media screen and (min-width: 1225px) {
+@media screen and (min-width: 1400px) {
   .navbar-start > .navbar-item,
   .navbar-start .navbar-link {
     color: var(--navbar-font-color);
@@ -207,6 +211,10 @@ a.navbar-link {
 
   .navbar-start .navbar-link::after {
     border-color: var(--navbar-font-color);
+  }
+
+  .navbar-item.try-free {
+    padding-left: 0;
   }
 
   .navbar-item.has-dropdown:hover .navbar-link {

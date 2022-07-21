@@ -43,7 +43,7 @@
               <li class="version
                 {{~#if (eq this ../latest)}} is-latest{{/if}}">
                 {{#if (eq this.name 'cloud')}}
-                  <a href="{{{relativize ./url}}}">Go to Cloud Docs</a>
+                  <a href="{{{relativize ./url}}}">Hazelcast Viridian docs</a>
               </li>
                 {{/if}}
             {{else}}
@@ -64,7 +64,7 @@
     {{#each site.components}}
       {{#if (eq this.name 'home')}}
         <li class="component home">
-        <a href="{{{relativize ./url}}}">Back to Home</a>
+        <a href="{{{relativize ./url}}}">Docs home</a>
         </li>
       {{/if}}
     {{/each}}
