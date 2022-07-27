@@ -45,5 +45,5 @@ As such, use of the software is granted under the terms of the https://www.mozil
 
 === Branding and Design
 
-Copyright (C) {url-hazelcast}[Hazelcast] 2021.
+Copyright (C) {url-hazelcast}[Hazelcast] 2022.
 All rights reserved.
