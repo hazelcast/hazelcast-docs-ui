@@ -21,7 +21,11 @@
             <!--<a class="navbar-item" href="{{{siteRootPath}}}/clc/latest/" onclick="window.open(this.href,'_blank');return false;">Hazelcast Command-Line Client</a>-->
           </div>
         </div>
-        {{#if (not-eq page.component.name 'hazelcast')}}
+        {{#if (eq page.component.name 'hazelcast')}}
+          <div class="navbar-item">
+            <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product=platform">Tutorials</a>
+          </div>
+        {{else if (not-eq page.component.name 'tutorials')}}
         {{#with page.component.name}}
           <div class="navbar-item">
             <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product={{{this}}}">Tutorials</a>
@@ -29,7 +33,7 @@
         {{/with}}
         {{else}}
           <div class="navbar-item">
-            <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product=platform">Tutorials</a>
+            <a class="navbar-item" href="{{{siteRootPath}}}/tutorials">Tutorials</a>
           </div>
         {{/if}}
         {{#with page.attributes.code-samples}}
