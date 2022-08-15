@@ -21,7 +21,15 @@
             <!--<a class="navbar-item" href="{{{siteRootPath}}}/clc/latest/" onclick="window.open(this.href,'_blank');return false;">Hazelcast Command-Line Client</a>-->
           </div>
         </div>
-        {{#if (not-eq page.component.name 'hazelcast')}}
+        {{#if (eq page.component.name 'hazelcast')}}
+          <div class="navbar-item">
+            <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product=platform">Tutorials</a>
+          </div>
+        {{else if (eq page.layout '404')}}
+          <div class="navbar-item">
+            <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product={{{this}}}">Tutorials</a>
+          </div>
+        {{else if (not-eq page.component.name 'tutorials')}}
         {{#with page.component.name}}
           <div class="navbar-item">
             <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product={{{this}}}">Tutorials</a>
@@ -29,7 +37,7 @@
         {{/with}}
         {{else}}
           <div class="navbar-item">
-            <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product=platform">Tutorials</a>
+            <a class="navbar-item" href="{{{siteRootPath}}}/tutorials">Tutorials</a>
           </div>
         {{/if}}
         {{#with page.attributes.code-samples}}
@@ -67,15 +75,13 @@
       </div>
       <div class="navbar-end">
         {{#if (not-eq page.component.name 'home')}}
-        {{#if (not-eq page.layout '404')}}
         {{#if (not-eq page.layout 'tutorials-landing')}}
-        <div class="navbar-item searchbox">
-            <a id="search-open" ><i class="fa fa-search" aria-hidden="true"></i></a>
-            <input id="search-input" type="text" placeholder="Search docs">
-            <label class="filter checkbox">
-              <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> All docs
-            </label>
+        <div id="search-input" class="navbar-item searchbox">
         </div>
+        {{#if (not-eq page.layout '404')}}
+        <label class="filter checkbox">
+          <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+        </label>
         {{/if}}
         {{/if}}
         {{/if}}

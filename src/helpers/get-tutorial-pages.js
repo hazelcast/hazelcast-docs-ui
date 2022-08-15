@@ -3,11 +3,11 @@
 module.exports = (product, { data: { root } }) => {
   const { contentCatalog } = root
   const pages = contentCatalog.findBy({ component: 'tutorials', family: 'page' })
-  const tutorials = []
+  var tutorials = []
   for (let i = 0; i < pages.length; i++) {
     if (product) {
       if (pages[i].asciidoc.attributes['page-layout'] === 'tutorial' &&
-        pages[i].asciidoc.attributes['page-product'] === 'cloud') {
+        pages[i].asciidoc.attributes['page-product'] === product) {
         tutorials.push(pages[i])
       }
     } else {

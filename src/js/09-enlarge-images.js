@@ -1,21 +1,37 @@
 ;(function () {
-  var images = document.getElementsByClassName('image')
-  if (images.length > 0) {
-    for (var i = 0; i < images.length; i++) {
-      const img = images[i].children[0]
-      const parent = images[i].parentNode.parentElement
+  var imgs = []
+  var blocks = document.getElementsByClassName('image')
+  if (blocks.length > 0) {
+    for (var i = 0; i < blocks.length; i++) {
+      imgs.push(blocks[i].children[0])
+    }
+  }
+  /*
+  var kroki = document.getElementsByClassName('content')
+  if (kroki.length > 0) {
+    for (var o = 0; o < kroki.length; o++) {
+      imgs.push(kroki[o].children[0])
+    }
+  }
+  */
+
+  createModal(imgs)
+
+  function createModal (images) {
+    for (var j = 0; j < images.length; j++) {
+      const parent = images[j].parentNode.parentElement
       const modal = document.createElement('div')
       modal.className = 'modal'
       const modalClose = document.createElement('span')
       modalClose.className = 'close'
       modalClose.innerHTML = '&times;'
       const modalImage = document.createElement('img')
-      modalImage.src = img.getAttribute('src')
+      modalImage.src = images[j].getAttribute('src')
       modalImage.className = 'modal-image'
       modal.appendChild(modalClose)
       modal.appendChild(modalImage)
       parent.appendChild(modal)
-      img.addEventListener('click', function (e) {
+      images[j].addEventListener('click', function (e) {
         e.preventDefault()
         modal.style.display = 'block'
       })
