@@ -29,29 +29,6 @@
   border-radius: var(--border-radius);
 }
 
-.search-box-404 {
-  margin-top: 30px;
-  display: block;
-}
-
-/* Main dropdown wrapper */
-.algolia-autocomplete.algolia-autocomplete-left .ds-dropdown-menu {
-  position: relative !important;
-}
-
-/* Remove arrow from dropdown */
-.search-box-404 .algolia-autocomplete .ds-dropdown-menu::before {
-  display: none !important;
-}
-
-.search-box-404 .algolia-autocomplete #search-input {
-  border-radius: var(--border-radius);
-  padding: 2%;
-  display: inline;
-  vertical-align: middle !important;
-  font-size: inherit;
-}
-
 input[type='text'] {
   width: 200px;
   height: 40px;
@@ -59,23 +36,6 @@ input[type='text'] {
 }
 
 .find-item:first-child > ul {
-  margin-top: 20px;
-}
-
-#search-404 > i {
-  margin-top: 10px;
-  padding-right: 5px;
-  color: var(--primary);
-}
-
-.search-box-404 > img {
-  width: 25px;
-  vertical-align: text-bottom;
-  padding-right: 5px;
-  margin-left: -5px;
-}
-
-p#search-404 {
   margin-top: 20px;
 }
 

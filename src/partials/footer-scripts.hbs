@@ -1,6 +1,6 @@
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
 {{#if (eq page.component.name 'tutorials')}}
   <script>
     var queryParams = new URLSearchParams(window.location.search);
@@ -15,28 +15,51 @@
 {{#if (not-eq page.title 'Page Not Found')}}
   {{#if (and (eq page.component.name 'imdg') (or (eq page.componentVersion.version '4') (lt page.componentVersion.version '3.12')))}}
   <script>
-    const search = window.docsearch({
+    docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
       indexName: '{{site.keys.docsearchIndex}}',
       appId: '{{site.keys.docsearchId}}',
-      inputSelector: '#search-input',
+      container: '#search-input',
       // Set debug to true to inspect the dropdown
       debug: false,
       // Display 25 results in the dropdown
       // and search only the current product
-      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"] },
+      searchParameters: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"] },
     });
   </script>
   <script>
     function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters: 
+            [["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}", 
+            "tags:management-center-{{site.components.management-center.latest.version}}", 
+            "tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
+            "tags:cloud"]]
+          }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters:
+            ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"]
+          }
+        })
       }
     }
   </script>
@@ -55,28 +78,51 @@
   </script>
   {{else if (and (eq page.component.name 'management-center') (lt page.componentVersion.version '4.2020.12'))}}
     <script>
-    const search = window.docsearch({
+    docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
       indexName: '{{site.keys.docsearchIndex}}',
       appId: '{{site.keys.docsearchId}}',
-      inputSelector: '#search-input',
+      container: '#search-input',
       // Set debug to true to inspect the dropdown
       debug: false,
       // Display 25 results in the dropdown
       // and search only the current product
-      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"] },
+      searchParameters: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"] },
     });
   </script>
   <script>
     function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters:
+            [["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}",
+            "tags:imdg-{{site.components.imdg.latest.version}}",
+            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+            "tags:cloud"]]
+          }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters:
+          {
+            hitsPerPage: 25,
+            facetFilters:
+            ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]
+          }
+        })
       }
     }
   </script>
@@ -95,16 +141,16 @@
   </script>
   {{else if (and (and (not-eq page.component.name 'home') (not-eq page.component.name 'tutorials')) (not-eq page.component.name 'cloud'))}}
   <script>
-    const search = window.docsearch({
+    docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
       indexName: '{{site.keys.docsearchIndex}}',
       appId: '{{site.keys.docsearchId}}',
-      inputSelector: '#search-input',
+      container: '#search-input',
       // Set debug to true to inspect the dropdown
       debug: false,
       // Display 25 results in the dropdown
       // and search only the current product
-      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] },
+      searchParameters: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] },
     });
   </script>
   <script>
@@ -122,28 +168,50 @@
   </script>
   {{else if (eq page.component.name 'cloud')}}
   <script>
-    const search = window.docsearch({
+    docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
       indexName: '{{site.keys.docsearchIndex}}',
       appId: '{{site.keys.docsearchId}}',
-      inputSelector: '#search-input',
+      container: '#search-input',
       // Set debug to true to inspect the dropdown
       debug: false,
       // Display 25 results in the dropdown
       // and search only the current product
-      algoliaOptions: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] },
+      searchParameters: { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] },
     });
   </script>
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters:
+          { 
+            hitsPerPage: 25, 
+            facetFilters: 
+            [["tags:{{page.component.name}}", 
+            "tags:management-center-{{site.components.management-center.latest.version}}", 
+            "tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
+            "tags:imdg-{{site.components.imdg.latest.version}}"]]
+            }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          { 
+            hitsPerPage: 25, 
+            facetFilters: ["tags:{{page.component.name}}"]
+          }
+        })
       }
     }
   </script>
@@ -152,13 +220,35 @@
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{page.attributes.latest-supported-mc}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters:
+            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
+            "tags:management-center-{{page.attributes.latest-supported-mc}}",
+            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+            "tags:cloud"]]
+          }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
+          }
+        })
       }
     }
   </script>
@@ -166,13 +256,35 @@
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters:
+            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
+            "tags:management-center-{{site.components.management-center.latest.version}}",
+            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+            "tags:cloud"]]
+          }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
+          }
+        })
       }
     }
   </script>
@@ -181,13 +293,35 @@
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{page.attributes.latest-supported-mc}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters:
+            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
+            "tags:management-center-{{page.attributes.latest-supported-mc}}",
+            "tags:imdg-{{site.components.imdg.latest.version}}",
+            "tags:cloud"]]
+          }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
+          }
+        })
       }
     }
   </script>
@@ -195,13 +329,35 @@
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters:
+            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
+            "tags:management-center-{{site.components.management-center.latest.version}}",
+            "tags:imdg-{{site.components.imdg.latest.version}}",
+            "tags:cloud"]]
+          }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
+          }
+        })
       }
     }
   </script>
@@ -210,13 +366,35 @@
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:imdg-{{page.attributes.latest-supported-imdg}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          {
+            hitsPerPage: 25,
+            facetFilters:
+            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
+            "tags:imdg-{{page.attributes.latest-supported-imdg}}",
+            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+            "tags:cloud"]]
+          }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          { 
+            hitsPerPage: 25,
+            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
+          }
+        })
       }
     }
   </script>
@@ -224,13 +402,35 @@
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}", "tags:cloud"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          { 
+            hitsPerPage: 25,
+            facetFilters:
+            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
+            "tags:imdg-{{site.components.imdg.latest.version}}",
+            "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}",
+            "tags:cloud"]]
+          }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          { 
+            hitsPerPage: 25,
+            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
+          }
+        })
       }
     }
   </script>
@@ -238,29 +438,51 @@
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
-      var input = document.getElementById('search-input')
-      input.value = '';
       if (checkbox.checked) {
         // Search all products
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: [["tags:{{page.component.name}}-{{page.componentVersion.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:cloud"]] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          { 
+            hitsPerPage: 25,
+            facetFilters:
+            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
+            "tags:imdg-{{site.components.imdg.latest.version}}",
+            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+            "tags:cloud"]]
+          }
+        })
       } else {
-        search.algoliaOptions = { hitsPerPage: 25, facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] }
+        docsearch({
+          apiKey: '{{site.keys.docsearchApi}}',
+          indexName: '{{site.keys.docsearchIndex}}',
+          appId: '{{site.keys.docsearchId}}',
+          container: '#search-input',
+          searchParameters: 
+          { 
+            hitsPerPage: 25,
+            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
+          }
+        })
       }
     }
   </script>
   {{/if}}
 {{else if (not-eq page.component.name 'tutorials') }}
 <script>
-  const search = window.docsearch({
+  docsearch({
     apiKey: '{{site.keys.docsearchApi}}',
     indexName: '{{site.keys.docsearchIndex}}',
     appId: '{{site.keys.docsearchId}}',
-    inputSelector: '#search-input',
+    container: '#search-input',
     // Set debug to true to inspect the dropdown
     debug: false,
     // Display 25 results in the dropdown
     // and search only the current product
-    algoliaOptions: { hitsPerPage: 25, facetFilters: [["tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] },
+    searchParameters: { hitsPerPage: 25, facetFilters: [["tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] },
   });
 </script>
 {{/if}}
