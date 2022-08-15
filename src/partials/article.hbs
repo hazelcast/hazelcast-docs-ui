@@ -19,14 +19,10 @@
         <li><a href="https://docs.hazelcast.com/hazelcast/latest/getting-started/install-hazelcast">Installing Hazelcast Open Source</a></li>
         <li><a href="https://docs.hazelcast.com/hazelcast/latest/configuration/understanding-configuration">Hazelcast Configuration</a></li>
       </ul>
-      <div class="search-box-404">
-        {{#with site.homeUrl}}
-          <img src="{{{@root.uiRootPath}}}/img/home.svg"><a href="{{{relativize this}}}" class="{{#if @root.page.home}} is-current{{/if}}">Check the home page</a>
-        {{/with}}
-        <p id="search-404"><i class="fa fa-search" id="search-icon-404" aria-hidden="true"></i><input id="search-input" type="text" placeholder="Search docs "></p>
-      </div>
     </div>
   </div>
+  {{> nav-toggle}}
+  {{> page-versions}}
 {{else}}
   {{> breadcrumbs}}
   {{#if (not-eq page.layout 'tutorial')}}
