@@ -1,19 +1,102 @@
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
-{{#if (eq page.component.name 'tutorials')}}
-  <script>
-    var queryParams = new URLSearchParams(window.location.search);
-    var product = queryParams.get("product");
-    if (product) {
-      params.product = product
-      document.getElementById(product).click()
-      updateCards(params)
-    }
-  </script>
-{{/if}}
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
 {{#if (not-eq page.title 'Page Not Found')}}
-  {{#if (and (eq page.component.name 'imdg') (or (eq page.componentVersion.version '4') (lt page.componentVersion.version '3.12')))}}
+  <!-- TUTORIALS -->
+  {{#if (eq page.component.name 'tutorials')}}
+  <!-- Filter tutorials by product using the query parameters in the URL -->
+    <script>
+      var queryParams = new URLSearchParams(window.location.search);
+      var product = queryParams.get("product");
+      if (product) {
+        params.product = product
+        document.getElementById(product).click()
+        updateCards(params)
+      }
+    </script>
+    <!-- Unused feature that displays multi-path tutorial steps as a stream of boxes -->
+    {{#with page.attributes.box-number}}
+    <script>
+      if (document.getElementsByClassName('box').length > 0) {
+      var activeBox = document.getElementsByClassName('box box{{this}}')[0]
+      activeBox.classList.add('active')
+      }
+    </script>
+    {{/with}}
+    <script>
+      docsearch({
+        apiKey: '{{site.keys.docsearchApi}}',
+        indexName: '{{site.keys.docsearchIndex}}',
+        appId: '{{site.keys.docsearchId}}',
+        container: '#search-input',
+        // Set debug to true to inspect the dropdown
+        debug: false,
+        // Display 25 results in the dropdown
+        // and search only the current product
+        searchParameters: { hitsPerPage: 25, facetFilters: ["tags:tutorials"] },
+      });
+    </script>
+    <script>
+      function applyFacetedSearch(){
+          var checkbox = document.getElementById('facet')
+          if (checkbox.checked) {
+            // Search all products
+            docsearch({
+              apiKey: '{{site.keys.docsearchApi}}',
+              indexName: '{{site.keys.docsearchIndex}}',
+              appId: '{{site.keys.docsearchId}}',
+              container: '#search-input',
+              searchParameters:
+              {
+                hitsPerPage: 25,
+                facetFilters: 
+                [["tags:tutorials", 
+                "tags:imdg-{{site.components.imdg.latest.version}}", 
+                "tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
+                "tags:cloud"]] 
+              }
+            })
+          } else {
+            docsearch({
+              apiKey: '{{site.keys.docsearchApi}}',
+              indexName: '{{site.keys.docsearchIndex}}',
+              appId: '{{site.keys.docsearchId}}',
+              container: '#search-input',
+              searchParameters: 
+              {
+                hitsPerPage: 25,
+                facetFilters: ["tags:tutorials"]
+              }
+            })
+          }
+        }
+    </script>
+  <!--HOME PAGE-->
+  {{else if (eq page.component.name 'home')}}
+  <script>
+  docsearch({
+    apiKey: '{{site.keys.docsearchApi}}',
+    indexName: '{{site.keys.docsearchIndex}}',
+    appId: '{{site.keys.docsearchId}}',
+    container: '#search-input',
+    // Set debug to true to inspect the dropdown
+    debug: false,
+    // Display 25 results in the dropdown
+    // and search only the current product
+    searchParameters: { 
+      hitsPerPage: 25, 
+      facetFilters: 
+      [["tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
+      "tags:management-center-{{site.components.management-center.latest.version}}", 
+      "tags:imdg-{{site.components.imdg.latest.version}}", 
+      "tags:cloud"]] },
+  });
+  </script>
+  <!--DEAL WITH SPECIAL CASES -->
+  {{else if (and (eq page.component.name 'imdg') (or (eq page.componentVersion.version '4') (lt page.componentVersion.version '3.12')))}}
   <script>
     docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
@@ -139,7 +222,7 @@
       }
     }
   </script>
-  {{else if (and (and (not-eq page.component.name 'home') (not-eq page.component.name 'tutorials')) (not-eq page.component.name 'cloud'))}}
+  {{else if (and (not-eq page.component.name 'home') (not-eq page.component.name 'cloud'))}}
   <script>
     docsearch({
       apiKey: '{{site.keys.docsearchApi}}',
@@ -471,18 +554,4 @@
     }
   </script>
   {{/if}}
-{{else if (not-eq page.component.name 'tutorials') }}
-<script>
-  docsearch({
-    apiKey: '{{site.keys.docsearchApi}}',
-    indexName: '{{site.keys.docsearchIndex}}',
-    appId: '{{site.keys.docsearchId}}',
-    container: '#search-input',
-    // Set debug to true to inspect the dropdown
-    debug: false,
-    // Display 25 results in the dropdown
-    // and search only the current product
-    searchParameters: { hitsPerPage: 25, facetFilters: [["tags:hazelcast-{{site.components.hazelcast.latest.version}}", "tags:management-center-{{site.components.management-center.latest.version}}", "tags:imdg-{{site.components.imdg.latest.version}}", "tags:cloud"]] },
-  });
-</script>
 {{/if}}
