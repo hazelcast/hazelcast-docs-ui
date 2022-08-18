@@ -554,4 +554,24 @@
     }
   </script>
   {{/if}}
+{{else}}
+  <script>
+  docsearch({
+    apiKey: '{{site.keys.docsearchApi}}',
+    indexName: '{{site.keys.docsearchIndex}}',
+    appId: '{{site.keys.docsearchId}}',
+    container: '#search-input',
+    // Set debug to true to inspect the dropdown
+    debug: false,
+    // Display 25 results in the dropdown
+    // and search only the current product
+    searchParameters: { 
+      hitsPerPage: 25, 
+      facetFilters: 
+      [["tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
+      "tags:management-center-{{site.components.management-center.latest.version}}", 
+      "tags:imdg-{{site.components.imdg.latest.version}}", 
+      "tags:cloud"]] },
+  });
+  </script>
 {{/if}}
