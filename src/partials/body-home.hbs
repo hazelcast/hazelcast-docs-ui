@@ -1,11 +1,8 @@
 <div class="home">
   <div class="home-background">
     <h1>{{{page.title}}}</h1>
-		<!--
-    <div class="search-container">
-      <input id="search-input" type="text" placeholder="">
+    <div id="search-input" class="search-container">
     </div>
-		-->
   </div>
 	<main data-ceiling="topbar">
 		<article class="article">
@@ -13,46 +10,110 @@
 				<div class="row landing">
 
 					<div class="card">
-						<h3 class="card-header"><a href="{{{siteRootPath}}}/cloud/">HAZELCAST VIRIDIAN</a>
+						<h3 class="card-header"><a href="{{{siteRootPath}}}/cloud/">Hazelcast Viridian Cloud Managed Services</a>
 						<button disabled class="new">new</button>
 						</h3>
 						<p class="card-summary">
-							Abstract away the manual effort of managing physical servers so that you can focus on what matters: Building your application. Start for free and pay as you grow.
+							Simplify the development and deployment of your applications with a cloud managed service based on Hazelcast Platform. Start for free and pay as you grow.
 						</p>
-						<ul>
-							<li class="get-started-home">
-								<a href="{{{siteRootPath}}}/cloud/get-started">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
-							</li>
-						</ul>
+						<div class="section-content-columns">
+							<div class="section-content-column">
+								<h4 class="section-content-title">Get Started</h4>
+								<ul class="section-content-list">
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/get-started">Hello World</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/serverless-cluster">About Viridian Serverless</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/tutorials">Tutorials</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/support">Support</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/release-notes">Release Notes</a>
+									</li>
+								</ul>
+							</div>
+							<div class="section-content-column">
+								<h4 class="section-content-title">Quick Links</h4>
+								<ul class="section-content-list">
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/create-account">Create an Account</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/multi-factor-authentication">Multi-Factor Authentication</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/payment-method">Billing and Payments</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/developer-guide">Developer Guide</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/cloud/wan-replication">Replicate Data Between Clusters</a>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 
 					<div class="card">
-						<h3 class="card-header"><a href="{{{siteRootPath}}}/hazelcast/latest/">HAZELCAST PLATFORM</a>
+						<h3 class="card-header"><a href="{{{siteRootPath}}}/hazelcast/latest/">Hazelcast Platform</a>
 						</h3>
 						<p class="card-summary">
-							Leverage the power of data processing and storage in a single platform.
+							Manually deploy and manage a Hazelcast Platform cluster on your own hardware or in a public cloud environment.
 						</p>
-						<ul>
-							<li><a href="{{{siteRootPath}}}/hazelcast/latest/migrate/upgrading-from-imdg-4">Upgrade</a></li>
-							<li><a href="{{{siteRootPath}}}/hazelcast/latest/production-checklist">Deploy</a></li>
-							<li><a href="{{{siteRootPath}}}/operator/latest/">Deploy with Kubernetes Operator</a></li>
-							<li class="get-started-home">
-								<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/quickstart">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
-							</li>
-						</ul>
-						<div id="legacy">
-							<p>Looking for <b>IMDG</b> or <b>Jet</b>?</p>
-							<ul>
-								<li><a href="{{{siteRootPath}}}/imdg/latest/getting-started">IMDG Docs</a></li>
-								<li><a href="https://jet-start.sh/docs/get-started/intro">Jet Docs</a></li>
-							</ul>
+						<div class="section-content-columns">
+							<div class="section-content-column">
+								<h4 class="section-content-title">Get Started</h4>
+								<ul class="section-content-list">
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/install-hazelcast">Install Open Source</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/install-enterprise">Install Enterprise</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/enterprise-overview">Explore Enterprise Features</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/support">Support</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/hazelcast/latest/release-notes/releases">Release Notes</a>
+									</li>
+								</ul>
+							</div>
+							<div class="section-content-column">
+								<h4 class="section-content-title">Quick Links</h4>
+								<ul class="section-content-list">
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/hazelcast/latest/sql/sql-overview">SQL</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/hazelcast/latest/production-checklist">Production Checklist</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/operator/latest/">Kubernetes Operator Deployment Guide</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/hazelcast/latest/data-structures/map">Map Data Structure</a>
+									</li>
+									<li class="section-content-list-item">
+										<a href="{{{siteRootPath}}}/hazelcast/latest/clients/java">Java Client</a>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="row landing">
 					<div class="card clients-first">
-						<h3 class="card-header">Hazelcast Clients
+						<h3 class="card-header">Hazelcast Client Libraries
 						</h3>
 						<p class="card-summary">
 							Connect your applications to Hazelcast clusters.
@@ -90,8 +151,8 @@
 					<p class="card-summary">
 						Monitor your Hazelcast clusters.
 					</p>
-					<ul>
-						<li class="get-started-home">
+					<ul class="section-content-list">
+						<li class="get-started-home section-content-list-item">
 							<a href="{{{siteRootPath}}}/management-center/latest/getting-started.html">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
 						</li>
 					</ul>

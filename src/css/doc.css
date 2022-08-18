@@ -212,7 +212,8 @@ strong.beta {
   margin-left: 2px;
 }
 
-.doc a[href*="cloud.hazelcast.com"] {
+.doc a[href*="cloud.hazelcast.com"],
+.doc a[href*="viridian.hazelcast.cloud"] {
   background: var(--navbar-button-background);
   padding: 0 10px;
   color: var(--navbar-button-font-color);
@@ -225,12 +226,14 @@ strong.beta {
   white-space: nowrap;
 }
 
-.doc a[href*="cloud.hazelcast.com"]:hover {
+.doc a[href*="cloud.hazelcast.com"]:hover,
+.doc a[href*="viridian.hazelcast.cloud"]:hover {
   text-decoration: none;
   color: var(--navbar-button-font-color);
 }
 
-.doc a[href*="cloud.hazelcast.com"]::after {
+.doc a[href*="cloud.hazelcast.com"]::after,
+.doc a[href*="viridian.hazelcast.cloud"]::after {
   content: url('/_/img/external-link-white.svg') !important;
   background-size: 15px 16px !important;
 }
