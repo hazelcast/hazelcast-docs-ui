@@ -2,12 +2,21 @@
   height: 135px;
 }
 
+.tut.home .DocSearch-Button {
+  width: 100%;
+}
+
+.tut.home .filter > * {
+  font-size: medium;
+}
+
 .tut.home h1 {
   padding-top: 60px;
 }
 
-.tut .cards {
+.tut.home .cards {
   max-width: 1500px;
+  margin: auto;
 }
 
 .tut-cards {
@@ -241,13 +250,13 @@
 
 .row.tutorials.filter {
   justify-content: space-between;
-  display: none;
+  display: flex;
   padding-left: 15px;
 }
 
 .row.tutorials.filter.show {
   justify-content: space-between;
-  display: flex;
+  display: none;
 }
 
 .row.tutorials.filter .card-header {
