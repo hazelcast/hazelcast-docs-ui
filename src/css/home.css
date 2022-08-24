@@ -185,6 +185,10 @@
   .home .card-summary {
     height: 30px;
   }
+
+  .home .row:first-child .card:first-child {
+    flex: 1 1 25%;
+  }
 }
 
 @media (min-width: 840px) and (max-width: 1295px) {
