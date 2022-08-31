@@ -29,7 +29,7 @@
           <div class="navbar-item">
             <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product={{{this}}}">Tutorials</a>
           </div>
-        {{else if (or (not-eq page.component.name 'tutorials')(not-eq page.component.name 'home')}}
+        {{else if (or (not-eq page.component.name 'tutorials')(not-eq page.component.name 'home'))}}
         {{#with page.component.name}}
           <div class="navbar-item">
             <a class="navbar-item" href="{{{siteRootPath}}}/tutorials?product={{{this}}}">Tutorials</a>
