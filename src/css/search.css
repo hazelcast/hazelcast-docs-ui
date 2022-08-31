@@ -12,6 +12,16 @@
   z-index: 10000 !important;
 }
 
+.DocSearch-Button {
+  background: var(--neutral-lighter);
+  border-radius: 5px;
+  border: 1px solid var(--neutral-light);
+}
+
+.DocSearch-Button .DocSearch-Search-Icon {
+  color: var(--primary);
+}
+
 @media (min-width: 1100px) {
   .navbar-item.searchbox {
     position: relative;
