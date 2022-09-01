@@ -5,6 +5,15 @@
   </div>
 </main>
 {{else}}
+  {{#if (and (eq page.component.name 'cloud') (eq page.attributes.dedicated 'true'))}}
+    <div class="article-banner prerelease" id="latest-banner">
+      <div class="prerelease">
+        <p><i class="fa fa-info" aria-hidden="true"></i>
+        The Dedicated edition is not yet available. It will be available soon in an upcoming release.
+        </p>
+      </div>
+    </div>
+  {{/if}}
   {{#if (and (eq page.component.name 'imdg') (eq page.componentVersion page.component.latest) (not @root.page.componentVersion.prerelease ))}}
     <div class="article-banner beta" id="latest-banner">
     <div class="beta-imdg">

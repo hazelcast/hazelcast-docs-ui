@@ -25,8 +25,17 @@
   color: #fff;
 }
 
-.article-banner .prerelease {
+.article-banner.prerelease {
   flex: 1 1;
+  position: sticky;
+  top: 50px;
+  justify-content: flex-start;
+}
+
+.article-banner .prerelease .fa.fa-info {
+  font-size: 30px;
+  margin-right: 10px;
+  margin-left: 30px;
 }
 
 .new {
