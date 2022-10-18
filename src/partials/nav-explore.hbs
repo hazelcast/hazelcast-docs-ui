@@ -13,7 +13,7 @@
   <ul class="components">
     <li style="list-style: none;">Select a different product or version:</li>
     </br>
-    {{#each site.components}}
+    {{#each (sort-components site.components 'name' page.attributes.component-order)}}
       {{#if (and (and (not-eq this.name 'home') (not-eq this.name 'turbine'))(not-eq this.name 'templates') (not-eq this.name 'tutorials'))}}
         <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
           {{#if (and (not-eq this.name 'home') (not-eq this.name 'cloud'))}}
