@@ -48,7 +48,7 @@
             <a class="navbar-item" {{~#if page.attributes.latest-supported-go-client}}href="https://pkg.go.dev/github.com/hazelcast/hazelcast-go-client@v{{page.attributes.latest-supported-go-client}}"
             {{~else}}href="https://pkg.go.dev/github.com/hazelcast/hazelcast-go-client?tab=versions"{{~/if}} onclick="window.open(this.href,'_blank');return false;">Go</a>
             <a class="navbar-item" {{~#if page.attributes.latest-supported-csharp-client}}href="http://hazelcast.github.io/hazelcast-csharp-client/{{page.attributes.latest-supported-csharp-client}}/api/index.html"
-            {{~else}}href="http://hazelcast.github.io/hazelcast-csharp-client/api-index.html"{{~/if}} onclick="window.open(this.href,'_blank');return false;">C#</a>
+            {{~else}}href="https://hazelcast.github.io/hazelcast-csharp-client/versions.html"{{~/if}} onclick="window.open(this.href,'_blank');return false;">C#</a>
             <a class="navbar-item" {{~#if page.attributes.latest-supported-cplusplus-client}}href="http://hazelcast.github.io/hazelcast-cpp-client/{{page.attributes.latest-supported-cplusplus-client}}/index.html"
             {{~else}}href="http://hazelcast.github.io/hazelcast-cpp-client/api-index.html"{{~/if}} onclick="window.open(this.href,'_blank');return false;">C++</a>
             <a class="navbar-item" {{~#if page.attributes.latest-supported-python-client}} href="https://hazelcast.readthedocs.io/en/v{{page.attributes.latest-supported-python-client}}/index.html"
