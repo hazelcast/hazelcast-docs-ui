@@ -30,6 +30,7 @@
   position: sticky;
   top: 50px;
   justify-content: flex-start;
+  z-index: 1;
 }
 
 .article-banner .prerelease .fa.fa-info {
