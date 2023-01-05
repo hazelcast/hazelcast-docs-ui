@@ -15,7 +15,7 @@
 }
 
 .doc > h1.page.serverless::after {
-  content: 'SERVERLESS (BETA)';
+  content: 'SERVERLESS';
   padding: 4px;
   margin-left: 15px;
   font-weight: 600;
