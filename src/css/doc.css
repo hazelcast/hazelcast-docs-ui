@@ -14,6 +14,16 @@
   font-size: 2em;
 }
 
+.doc h4 {
+  font-family: var(--heading-font-family);
+  color: var(--heading-font-color);
+  font-weight: 450;
+  hyphens: none;
+  line-height: 1.3;
+  margin: 1rem 0 0;
+  font-size: 1.09em;
+}
+
 .doc > h1.page.serverless::after {
   content: 'SERVERLESS';
   padding: 4px;
@@ -119,7 +129,6 @@ strong.beta {
 .doc h1,
 .doc h2,
 .doc h3,
-.doc h4,
 .doc h5,
 .doc h6 {
   font-family: var(--heading-font-family);
