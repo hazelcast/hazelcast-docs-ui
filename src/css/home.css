@@ -31,7 +31,7 @@
 .home .home-background {
   top: 0;
   width: 100%;
-  background: url('../img/banner-hz.svg') no-repeat center;
+  background: url('../img/hazelcast-banner-back.png') no-repeat center;
   background-color: #141414;
   border-bottom-right-radius: 50px;
 }
