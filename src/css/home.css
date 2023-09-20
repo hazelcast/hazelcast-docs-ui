@@ -33,7 +33,7 @@
   width: 100%;
   background: url('../img/hazelcast-banner-back.png') no-repeat center;
   background-color: #141414;
-  border-bottom-right-radius: 50px;
+  border-bottom-right-radius: 1px;
 }
 
 .home .home-background h1 {
