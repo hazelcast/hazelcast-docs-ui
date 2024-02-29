@@ -241,6 +241,20 @@ You can see a list of all past releases on the {url-project}/releases[releases p
 
 Releasing the UI bundle consists of the following tasks:
 
-. Package the UI bundle. 
-. Create a GitHub release, using the next version number in the sequence.
-. Attach the UI bundle to that release as an asset in zip format.
+. Merge the PR including your UI changes (this makes no changes to the live UI)
+. Package the UI bundle (using `gulp bundle` on your local)
+. Create a GitHub release:
+** Go to https://github.com/hazelcast/hazelcast-docs-ui/releases, and click “Draft a new release”.
+** Click “Choose a tag” and type the next version number in the sequence to the “Find or create new tag” field.
+** Into the “Release title” field, type the change in a couple of words.
+** In the big  “Describe the release” box, follow the content from the previous release, editing the "What's Changed" text and the versions in the "Full Changelog" line.
+** Locate the “Attach binaries by dropping them here or selecting them.” further down the screen and click on it, to attach your ui-bundle.zip from your local UI branch.
+** Make sure “Set as the latest release” is checked.
+** Do “Publish release”
+
+To make it live:
+
+. Go to https://github.com/hazelcast/hazelcast-docs/actions/workflows/publish-to-production.yml
+. Click the “Run workflow” combo-boxy button, somewhere under the “Actor” column heading, and then click the green “Run workflow” button.
+
+
