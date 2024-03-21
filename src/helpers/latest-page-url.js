@@ -4,6 +4,7 @@ const VERSIONED_ROOT_RELATIVE_URL_RX = /^(\/[^/]+)\/[^/]+(?=\/)/
 
 module.exports = ({ data: { root } }) => {
   const { contentCatalog, env, page } = root
+  if (!contentCatalog) return ''
   let { url, version, missing } = page.latest || { url: page.url }
   if (missing) {
     const latestAlias = contentCatalog.getById({

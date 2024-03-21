@@ -2,6 +2,7 @@
 
 module.exports = (product, { data: { root } }) => {
   const { contentCatalog } = root
+  if (!contentCatalog) return []
   const pages = contentCatalog.findBy({ component: 'tutorials', family: 'page' })
   var tutorials = []
   for (let i = 0; i < pages.length; i++) {

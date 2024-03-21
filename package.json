@@ -2,6 +2,10 @@
   "name": "hazelcast-docs-ui",
   "description": "A modified version of the default Antora UI, which includes design components for the Hazelcast documentation site",
   "homepage": "https://github.com/hazelcast/hazelcast-docs-ui",
+  "scripts": {
+    "bundle": "gulp bundle",
+    "dev": "gulp preview"
+  },
   "license": "MPL-2.0",
   "repository": {
     "type": "git",
@@ -54,5 +58,7 @@
     "vinyl-buffer": "~1.0",
     "vinyl-fs": "~3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@asciidoctor/core": "^2.2.7"
+  }
 }

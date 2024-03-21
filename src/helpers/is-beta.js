@@ -2,6 +2,7 @@
 
 module.exports = (navUrl, { data: { root } }) => {
   const { contentCatalog, page } = root
+  if (!contentCatalog) return false
   var pages = contentCatalog.navGroup
   var cp = contentCatalog.cp
   if (!pages || cp !== page.component.name) {
