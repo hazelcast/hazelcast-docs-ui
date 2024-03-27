@@ -36,7 +36,7 @@
 			<a href="https://docs.hazelcast.com/imdg/latest/getting-started.html">Get Started <img src="right-arrow.svg"></a>
 		</li>
 	</ul>
-	
+
 ++++
 
 ++++
