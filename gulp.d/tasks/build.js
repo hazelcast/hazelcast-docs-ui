@@ -17,6 +17,7 @@ const postcssUrl = require('postcss-url')
 const postcssVar = require('postcss-custom-properties')
 const { Transform } = require('stream')
 const map = (transform) => new Transform({ objectMode: true, transform })
+const through = () => map((file, enc, next) => next(null, file))
 const uglify = require('gulp-uglify')
 const vfs = require('vinyl-fs')
 
@@ -102,14 +103,16 @@ module.exports = (src, dest, preview) => () => {
     vfs
       .src('img/**/*.{gif,ico,jpg,png,svg}', opts)
       .pipe(
-        imagemin(
-          [
-            imagemin.gifsicle(),
-            imagemin.jpegtran(),
-            imagemin.optipng(),
-            imagemin.svgo({ plugins: [{ removeViewBox: false }] }),
-          ].reduce((accum, it) => (it ? accum.concat(it) : accum), [])
-        )
+        preview
+          ? through()
+          : imagemin(
+            [
+              imagemin.gifsicle(),
+              imagemin.jpegtran(),
+              imagemin.optipng(),
+              imagemin.svgo({ plugins: [{ removeViewBox: false }] }),
+            ].reduce((accum, it) => (it ? accum.concat(it) : accum), [])
+          )
       ),
     vfs.src('helpers/*.js', opts),
     vfs.src('layouts/*.hbs', opts),
