@@ -3,6 +3,10 @@ site:
   url: http://localhost:5252
   title: Documentation Preview
   homeUrl: &home_url /index.html
+#  uncomment below to test analytics locally
+  keys:
+    googleAnalytics: 'GTM-MQ59XD6'
+    clarity: 'l8c076m4u9'
   components:
   - name: abc
     title: Hazelcast IMDG

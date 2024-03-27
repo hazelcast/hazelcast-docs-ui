@@ -78,8 +78,8 @@
       let product = document.getElementById(products[i]);
       product.classList.remove("is-active");
     }
-    
-    event.currentTarget.classList.toggle("is-active"); 
+
+    event.currentTarget.classList.toggle("is-active");
     var product = event.currentTarget.id;
     var enterpriseSwitch = document.getElementById("enterprise")
 
@@ -88,7 +88,7 @@
     } else {
       enterpriseSwitch.style.display = "inline-block"
     }
-    
+
     params.product = product;
     updateCards(params);
   }
@@ -115,7 +115,7 @@
       currentLang.classList.remove("is-active");
     }
 
-    lang.classList.toggle("is-active"); 
+    lang.classList.toggle("is-active");
     params.lang = lang.id;
     updateCards(params)
   }
@@ -123,12 +123,6 @@
     {{> head-icons}}
       </head>
       <body>
-      {{#with site.keys.googleAnalytics}}
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{this}}"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
-      {{/with}}
     {{> header}}
     {{> body-tutorials-landing}}
     {{> footer}}
