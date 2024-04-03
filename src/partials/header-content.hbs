@@ -70,16 +70,14 @@
         </div>
       </div>
       <div class="navbar-end">
-        {{#if (not-eq page.component.name 'home')}}
-        {{#if (not-eq page.layout 'tutorials-landing')}}
-        <div id="search-input" class="navbar-item searchbox">
-        </div>
-        {{#if (not-eq page.layout '404')}}
-        <label class="filter checkbox">
-          <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
-        </label>
-        {{/if}}
-        {{/if}}
+        {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing'))}}
+          <div id="search-input" class="navbar-item searchbox">
+          </div>
+          {{#if (not-eq page.layout '404')}}
+            <label class="filter checkbox">
+              <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+            </label>
+          {{/if}}
         {{/if}}
         {{#if (or (eq page.component.name 'cloud') (eq page.component.name 'tutorials'))}}
           <div class="navbar-item">

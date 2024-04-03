@@ -51,12 +51,12 @@
               container: '#search-input',
               searchParameters:
               {
-                
-                facetFilters: 
-                [["tags:tutorials", 
-                "tags:imdg-{{site.components.imdg.latest.version}}", 
-                "tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
-                "tags:cloud"]] 
+
+                facetFilters:
+                [["tags:tutorials",
+                "tags:imdg-{{site.components.imdg.latest.version}}",
+                "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+                "tags:cloud"]]
               }
             })
           } else {
@@ -65,9 +65,9 @@
               indexName: '{{site.keys.docsearchIndex}}',
               appId: '{{site.keys.docsearchId}}',
               container: '#search-input',
-              searchParameters: 
+              searchParameters:
               {
-                
+
                 facetFilters: ["tags:tutorials"]
               }
             })
@@ -75,7 +75,7 @@
         }
     </script>
   <!--HOME PAGE-->
-  {{else if (eq page.component.name 'home')}}
+  {{else if (or (eq page.component.name 'home') (eq page.layout 'home'))}}
   <script>
   docsearch({
     apiKey: '{{site.keys.docsearchApi}}',
@@ -84,14 +84,20 @@
     container: '#search-input',
     // Set debug to true to inspect the dropdown
     debug: false,
+    translations: {
+      button: {
+        buttonText: 'Search all docs...',
+        buttonAriaLabel: 'Search all docs',
+      },
+    },
     // Display 25 results in the dropdown
     // and search only the current product
-    searchParameters: { 
-       
-      facetFilters: 
-      [["tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
-      "tags:management-center-{{site.components.management-center.latest.version}}", 
-      "tags:imdg-{{site.components.imdg.latest.version}}", 
+    searchParameters: {
+
+      facetFilters:
+      [["tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+      "tags:management-center-{{site.components.management-center.latest.version}}",
+      "tags:imdg-{{site.components.imdg.latest.version}}",
       "tags:cloud"]] },
   });
   </script>
@@ -120,13 +126,13 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
-            facetFilters: 
-            [["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}", 
-            "tags:management-center-{{site.components.management-center.latest.version}}", 
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
+
+            facetFilters:
+            [["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}",
+            "tags:management-center-{{site.components.management-center.latest.version}}",
+            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
             "tags:cloud"]]
           }
         })
@@ -136,9 +142,15 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          translations: {
+            button: {
+              buttonText: 'Search all docs...',
+              buttonAriaLabel: 'Search all docs',
+            },
+          },
+          searchParameters:
           {
-            
+
             facetFilters:
             ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"]
           }
@@ -183,9 +195,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters:
             [["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}",
             "tags:imdg-{{site.components.imdg.latest.version}}",
@@ -199,9 +211,15 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
+          translations: {
+            button: {
+              buttonText: 'Search all docs...',
+              buttonAriaLabel: 'Search all docs',
+            },
+          },
           searchParameters:
           {
-            
+
             facetFilters:
             ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]
           }
@@ -274,12 +292,12 @@
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
           searchParameters:
-          { 
-             
-            facetFilters: 
-            [["tags:{{page.component.name}}", 
-            "tags:management-center-{{site.components.management-center.latest.version}}", 
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
+          {
+
+            facetFilters:
+            [["tags:{{page.component.name}}",
+            "tags:management-center-{{site.components.management-center.latest.version}}",
+            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
             "tags:imdg-{{site.components.imdg.latest.version}}"]]
             }
         })
@@ -289,9 +307,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
-          { 
-             
+          searchParameters:
+          {
+
             facetFilters: ["tags:{{page.component.name}}"]
           }
         })
@@ -310,9 +328,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters:
             [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
             "tags:management-center-{{page.attributes.latest-supported-mc}}",
@@ -326,9 +344,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
           }
         })
@@ -346,9 +364,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters:
             [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
             "tags:management-center-{{site.components.management-center.latest.version}}",
@@ -362,9 +380,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
           }
         })
@@ -383,9 +401,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters:
             [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
             "tags:management-center-{{page.attributes.latest-supported-mc}}",
@@ -399,9 +417,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
           }
         })
@@ -419,9 +437,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters:
             [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
             "tags:management-center-{{site.components.management-center.latest.version}}",
@@ -435,9 +453,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
           }
         })
@@ -456,9 +474,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
+          searchParameters:
           {
-            
+
             facetFilters:
             [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
             "tags:imdg-{{page.attributes.latest-supported-imdg}}",
@@ -472,9 +490,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
-          { 
-            
+          searchParameters:
+          {
+
             facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
           }
         })
@@ -492,9 +510,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
-          { 
-            
+          searchParameters:
+          {
+
             facetFilters:
             [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
             "tags:imdg-{{site.components.imdg.latest.version}}",
@@ -508,9 +526,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
-          { 
-            
+          searchParameters:
+          {
+
             facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
           }
         })
@@ -528,9 +546,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
-          { 
-            
+          searchParameters:
+          {
+
             facetFilters:
             [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
             "tags:imdg-{{site.components.imdg.latest.version}}",
@@ -544,9 +562,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
-          { 
-            
+          searchParameters:
+          {
+
             facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
           }
         })
@@ -565,9 +583,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
-          { 
-            
+          searchParameters:
+          {
+
             facetFilters:
             [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
             "tags:imdg-{{site.components.imdg.latest.version}}",
@@ -581,9 +599,9 @@
           indexName: '{{site.keys.docsearchIndex}}',
           appId: '{{site.keys.docsearchId}}',
           container: '#search-input',
-          searchParameters: 
-          { 
-            
+          searchParameters:
+          {
+
             facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
           }
         })
@@ -602,12 +620,12 @@
     debug: false,
     // Display 25 results in the dropdown
     // and search only the current product
-    searchParameters: { 
-       
-      facetFilters: 
-      [["tags:hazelcast-{{site.components.hazelcast.latest.version}}", 
-      "tags:management-center-{{site.components.management-center.latest.version}}", 
-      "tags:imdg-{{site.components.imdg.latest.version}}", 
+    searchParameters: {
+
+      facetFilters:
+      [["tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+      "tags:management-center-{{site.components.management-center.latest.version}}",
+      "tags:imdg-{{site.components.imdg.latest.version}}",
       "tags:cloud"]] },
   });
   </script>

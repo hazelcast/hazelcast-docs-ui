@@ -12,14 +12,26 @@
   background-position: center;
   background-size: cover;
   background-color: #061827;
-  padding: 40px;
+  padding: 3rem 0;
 }
 
-.home h1 {
+.home .home-background-heading {
   color: #fff;
   font-weight: 300;
   font-size: 1.2em;
-  margin: 0;
+  margin: 0 0 2rem;
+}
+
+.home .search-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.home .DocSearch-Button {
+  width: 40%;
+  border-radius: 50px;
 }
 
 .home .article {
