@@ -53,7 +53,7 @@
   --navbar-background: var(--neutral-white);
   --navbar-font-color: #24292e;
   --navbar_hover-background: var(--neutral-lighter);
-  --navbar-button-background: var(--primary);
+  --navbar-button-background: var(--accent-light);
   --navbar-button-font-color: var(--neutral-white);
   --navbar-menu-border-color: var(--panel-border-color);
   --navbar-menu-background: var(--neutral-white);

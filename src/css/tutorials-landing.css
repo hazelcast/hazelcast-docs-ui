@@ -116,8 +116,8 @@
   background: #fafafa;
   border: 1px solid #b7c1cb;
   box-sizing: border-box;
-  color: #707482;
-  border-bottom: 3px solid #707482;
+  color: var(--secondary-text);
+  border-bottom: 3px solid var(--secondary-text);
   border-radius: 5px;
 }
 
@@ -288,7 +288,7 @@
 
 .time {
   font-size: small;
-  color: #707482;
+  color: var(--secondary-text);
   margin-left: auto;
   white-space: nowrap;
 }

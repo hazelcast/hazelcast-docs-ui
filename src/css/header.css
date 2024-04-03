@@ -28,6 +28,17 @@ a.navbar-link {
   cursor: default;
 }
 
+.navbar-brand .navbar-item.navbar-logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navbar-logo-item-title {
+  margin: 0;
+  color: var(--accent);
+}
+
 .navbar-brand .navbar-item:nth-child(2),
 .navbar-brand .navbar-item:nth-child(2) a {
   color: var(--secondary-text);
@@ -46,7 +57,7 @@ a.navbar-link {
 
 .navbar-menu {
   background: var(--navbar-menu-background);
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
   display: none;
 }
 
@@ -132,7 +143,7 @@ a.navbar-link {
 
 .navbar-item,
 .navbar-link {
-  color: var(--navbar-menu-font-color);
+  color: var(--secondary-text);
   display: block;
   line-height: var(--doc-line-height);
   padding: 0.5rem 1rem;
@@ -200,7 +211,7 @@ a.navbar-link {
 @media screen and (min-width: 1400px) {
   .navbar-start > .navbar-item,
   .navbar-start .navbar-link {
-    color: var(--navbar-font-color);
+    color: var(--secondary-text);
   }
 
   .navbar-start > a.navbar-item:hover,
@@ -211,10 +222,6 @@ a.navbar-link {
 
   .navbar-start .navbar-link::after {
     border-color: var(--navbar-font-color);
-  }
-
-  .navbar-item.try-free {
-    padding-left: 0;
   }
 
   .navbar-item.has-dropdown:hover .navbar-link {
@@ -246,6 +253,10 @@ a.navbar-link {
 
   .navbar-item.is-hoverable:hover .navbar-dropdown {
     display: block;
+  }
+
+  .sign-in-btn a {
+    color: var(--primary-light);
   }
 
   .dropdown-caret {
@@ -300,10 +311,5 @@ a.navbar-link {
 
   .navbar-dropdown a.navbar-item:hover {
     background-color: var(--navbar-menu_hover-background);
-  }
-
-  .topbar-nav {
-    flex-grow: 1;
-    justify-content: flex-start;
   }
 }

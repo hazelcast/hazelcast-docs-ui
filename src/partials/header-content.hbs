@@ -1,8 +1,10 @@
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://hazelcast.com/"><img src="{{{uiRootPath}}}/img/hazelcast-logo.svg"></img></a>
-      <a class="navbar-item" id="documentation-header" href="{{{siteRootPath}}}/home">Home</img></a>
+      <a class="navbar-item navbar-logo-item" href="https://docs.hazelcast.com/">
+        <img src="{{{uiRootPath}}}/img/hazelcast-logo.svg" alt="Hazelcast Logo" />
+        <p class="navbar-logo-item-title">Documentation</p>
+      </a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -80,14 +82,14 @@
           {{/if}}
         {{/if}}
         {{#if (or (eq page.component.name 'cloud') (eq page.component.name 'tutorials'))}}
-          <div class="navbar-item">
+          <div class="navbar-item sign-in-btn">
             <a href="{{{page.attributes.cloud-console}}}" onclick="window.open(this.href,'_blank');return false;">
-              <button class="button">Sign In</button>
+              Sign In
             </a>
           </div>
-          <div class="navbar-item try-free">
+          <div class="navbar-item try-free-btn">
             <a href="{{{page.attributes.cloud-console}}}sign-up" onclick="window.open(this.href,'_blank');return false;">
-              <button class="button green">Try Free</button>
+              <button class="button">Try Free</button>
             </a>
           </div>
         {{else}}
@@ -96,7 +98,7 @@
               <button class="button">Get Hazelcast</button>
             </a>
           </div>
-          {{/if}}
+        {{/if}}
       </div>
     </div>
   </nav>
