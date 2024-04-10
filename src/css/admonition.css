@@ -1,0 +1,100 @@
+.admonitionblock {
+  --admonition-icon-block-width: 70px;
+
+  position: relative;
+  border-radius: 9px;
+  border-left-width: 8px;
+  border-left-style: solid;
+  padding: 10px 10px 10px var(--admonition-icon-block-width);
+}
+
+.admonitionblock table {
+  border-spacing: 0;
+}
+
+.admonitionblock td.icon {
+  display: none;
+}
+
+.admonitionblock::before {
+  display: block;
+  font-weight: 600;
+  padding: 0.5rem 0;
+}
+
+.admonitionblock::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--admonition-icon-block-width) * 0.15);
+  top: 0;
+  width: calc(var(--admonition-icon-block-width) * 0.7);
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.admonitionblock.note {
+  background-color: var(--info-light);
+  border-left-color: var(--accent);
+}
+
+.admonitionblock.note::before {
+  content: 'NOTE';
+}
+
+.admonitionblock.note::after {
+  background-image: url('../img/admonition/note.png');
+}
+
+.admonitionblock.tip {
+  background-color: var(--accent4-light);
+  border-left-color: var(--accent4);
+}
+
+.admonitionblock.tip::before {
+  content: 'TIP';
+}
+
+.admonitionblock.tip::after {
+  background-image: url('../img/admonition/tip.png');
+}
+
+.admonitionblock.important {
+  background-color: var(--accent5-light);
+  border-left-color: var(--accent5);
+}
+
+.admonitionblock.important::before {
+  content: 'IMPORTANT';
+}
+
+.admonitionblock.important::after {
+  background-image: url('../img/admonition/important.png');
+}
+
+.admonitionblock.caution {
+  background-color: var(--accent3-light);
+  border-left-color: var(--accent3);
+}
+
+.admonitionblock.caution::before {
+  content: 'CAUTION';
+}
+
+.admonitionblock.caution::after {
+  background-image: url('../img/admonition/caution.png');
+}
+
+.admonitionblock.warning {
+  background-color: var(--accent2-light);
+  border-left-color: var(--accent2);
+}
+
+.admonitionblock.warning::before {
+  content: 'WARNING';
+}
+
+.admonitionblock.warning::after {
+  background-image: url('../img/admonition/warning.png');
+}

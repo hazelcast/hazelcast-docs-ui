@@ -13,11 +13,11 @@
 }
 
 #cookie-close {
-  background-color: var(--accessibility-outline);
-  font-size: 1.2em;
+  background: var(--navbar-button-background);
+  border-radius: 10px;
+  font-size: 1em;
   border: none;
   padding: 10px;
   color: white;
-  border-radius: 2px;
   cursor: pointer;
 }

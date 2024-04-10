@@ -143,7 +143,7 @@ a.navbar-link {
 
 .navbar-item,
 .navbar-link {
-  font-family: "PP Telegraf", sans-serif;
+  font-family: var(--heading-font-family);
   color: var(--secondary-text);
   display: block;
   line-height: var(--doc-line-height);

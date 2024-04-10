@@ -22,6 +22,34 @@ NOTE: You do not need to set a license key for your Java clients for which you w
 use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
 required only for members.
 
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+TIP: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+IMPORTANT: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+CAUTION: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+WARNING: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
 Simply include the `hazelcast.jar` dependency in your classpath to start using
 the Hazelcast Java client. Once included, you can start using this client as if
 you are using the Hazelcast API. The differences are discussed in the below sections.

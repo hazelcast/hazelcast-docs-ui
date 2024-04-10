@@ -11,9 +11,16 @@
   --primary-dark: #003b87;
   --accent: #0080a9;
   --accent-light: #10a4b3;
-  --info-light: #cbdbff;
+  --accent2: #c91268;
+  --accent2-light: #ffe3e3;
+  --accent3: #f5911e;
+  --accent3-light: #ffe8da;
+  --accent4: #c6ff3a;
+  --accent4-light: #f7ffe4;
+  --accent5: #0019fe;
+  --accent5-light: #e0e8ff;
+  --info-light: #f0f6ff;
   --info: #4a71c4;
-  --info-dark: #4a71c4;
   --accessibility-outline: #2160c0;
   --error: #b00020;
   --warning-light: #f9b721;
@@ -39,10 +46,10 @@
   --body-font-color: var(--text);
   --body-font-family: "Open Sans", sans-serif;
   --body-font-weight-bold: 600;
-  --nav-font-family: "Telegraf", sans-serif;
+  --nav-font-family: "PP Telegraf", sans-serif;
   --nav-font-weight: 500;
   --monospace-font-family: "Roboto Mono", monospace;
-  --heading-font-family: "Telegraf", sans-serif;
+  --heading-font-family: "PP Telegraf", sans-serif;
   --monospace-font-weight-bold: 500;
   /* base */
   --body-background: #f2f5f9;

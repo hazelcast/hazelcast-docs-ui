@@ -1,3 +1,5 @@
+@import "admonition.css";
+
 .doc {
   color: var(--doc-font-color);
   font-size: var(--doc-font-size);
@@ -365,89 +367,6 @@ strong.beta {
 
 .doc .valign-middle {
   vertical-align: middle;
-}
-
-.doc .admonitionblock {
-  margin: 1.4rem 0 0;
-  max-width: 500px;
-}
-
-.doc .admonitionblock p,
-.doc .admonitionblock td.content {
-  font-size: calc(16 / var(--rem-base) * 1rem);
-}
-
-.doc .admonitionblock td.content > :first-child {
-  margin: 0;
-}
-
-.doc .admonitionblock pre {
-  font-size: calc(15 / var(--rem-base) * 1rem);
-}
-
-.doc .admonitionblock > table {
-  border-collapse: collapse;
-  table-layout: fixed;
-  position: relative;
-  width: 100%;
-}
-
-.doc .admonitionblock td.content {
-  padding: 1rem 1rem 0.75rem;
-  background: var(--admonition-background);
-  width: 100%;
-}
-
-.doc .admonitionblock .icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: calc(15 / var(--rem-base) * 1rem);
-  padding: 0 0.5rem;
-  height: 1.25rem;
-  line-height: 1;
-  font-weight: var(--admonition-label-font-weight);
-  text-transform: uppercase;
-  border-radius: 0.45rem;
-  transform: translate(-0.5rem, -50%);
-  font-family: var(--body-font-family) !important;
-  width: 101.5%;
-}
-
-.doc .admonitionblock.caution .icon {
-  background-color: var(--caution-color);
-  color: var(--caution-on-color);
-}
-
-.doc .admonitionblock.important .icon {
-  background-color: var(--important-color);
-  color: var(--important-on-color);
-}
-
-.doc .admonitionblock.note .icon {
-  background-color: var(--note-color);
-  color: var(--note-on-color);
-}
-
-.doc .admonitionblock.tip .icon {
-  background-color: var(--tip-color);
-  color: var(--tip-on-color);
-}
-
-.doc .admonitionblock.warning .icon {
-  background-color: var(--warning-color);
-  color: var(--warning-on-color);
-}
-
-.doc .admonitionblock .icon i {
-  display: inline-flex;
-  align-items: center;
-  height: 100%;
-  font-family: var(--body-font-family) !important;
-}
-
-.doc .admonitionblock .icon i::after {
-  content: attr(title);
 }
 
 .doc .imageblock {
