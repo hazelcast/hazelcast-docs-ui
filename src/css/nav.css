@@ -44,13 +44,12 @@
   position: relative;
   top: 0;
   height: var(--nav-height);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .nav .panels {
   display: flex;
   flex-direction: column;
-  height: inherit;
   margin-top: 30px;
 }
 
@@ -341,10 +340,6 @@ html.is-clipped--nav {
     top: var(--navbar-height);
     box-shadow: none;
     position: sticky;
-  }
-
-  .nav-panel-menu {
-    height: calc(100vh - 4rem);
   }
 
   .nav-item-toggle {

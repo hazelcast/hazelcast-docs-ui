@@ -77,10 +77,6 @@
   color: white;
 }
 
-aside.toc.sidebar {
-  display: none;
-}
-
 main > .content {
   background-color: #fff;
 }
@@ -106,29 +102,10 @@ main > .content {
     margin-right: 15px;
     border-radius: var(--border-radius);
   }
-
-  aside.toc.embedded {
-    display: none;
-  }
-
-  aside.toc.sidebar {
-    display: block;
-    flex: 0 0 var(--toc-width);
-    min-width: 200px;
-    overflow-y: scroll;
-    height: 500px;
-    overflow-x: hidden;
-  }
 }
 
 @media (min-width: 1600px) {
   .article-banner .beta-imdg {
     max-width: 100%;
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  aside.toc.sidebar {
-    min-width: 300px;
   }
 }

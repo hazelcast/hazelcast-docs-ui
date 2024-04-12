@@ -3,6 +3,7 @@
 }
 
 .toc.sidebar {
+  display: none;
   margin-right: 0.75rem;
   position: sticky;
   top: var(--toc-top);
@@ -42,12 +43,31 @@
 }
 
 @media screen and (min-width: 1024px) {
+  aside.toc.embedded {
+    display: none;
+  }
+
+  .toc.sidebar {
+    display: block;
+    flex: 0 0 var(--toc-width);
+    min-width: 200px;
+    overflow-y: auto;
+    height: 500px;
+    overflow-x: hidden;
+  }
+
   .toc.sidebar h3 {
     font-size: calc(15 / var(--rem-base) * 1rem);
   }
 
   .toc .toc-menu ul {
     font-size: calc(13.5 / var(--rem-base) * 1rem);
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  aside.toc.sidebar {
+    min-width: 300px;
   }
 }
 
@@ -81,8 +101,8 @@
 }
 
 .toc .toc-menu a.is-active {
-  border-left-color: var(--link-font-color);
-  color: var(--doc-font-color);
+  border-left-color: var(--accent);
+  color: var(--accent);
 }
 
 .sidebar.toc .toc-menu a:focus {
