@@ -66,17 +66,26 @@ page:
     url: '#'
   navigation:
   - root: true
+  - content: Quickstart
+    url: '#1'
+    urlType: internal
+  - content: Hazelcast Clients
+    url: '#2'
+    urlType: internal
     items:
-    - content: Quickstart
-      url: '#'
-      urlType: fragment
-    - content: Hazelcast Clients
-      url: '#'
+    - content: Java Client
+      url: '/java.html'
+      urlType: internal
+    - content: C++ Client
+      url: '#3'
+      urlType: internal
+    - content: Hazelcast Deep Clients
+      url: '#4'
       urlType: fragment
       items:
-      - content: Java Client
-        url: '/java.html'
-        urlType: internal
-      - content: C++ Client
-        url: '#'
-        urlType: internal
+       - content: Java Client 2
+         url: '/java2.html'
+         urlType: internal
+       - content: C++ Client
+         url: '#5'
+         urlType: internal

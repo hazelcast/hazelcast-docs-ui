@@ -13,7 +13,7 @@ body {
   font-size: 15px;
   height: var(--navbar-height);
   position: fixed;
-  border-bottom: 1px solid var(--neutral-lighter);
+  border-bottom: 1px solid var(--panel-border-color);
   top: 0;
   width: 100%;
   word-wrap: break-word;

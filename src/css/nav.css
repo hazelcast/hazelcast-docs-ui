@@ -39,6 +39,10 @@
   visibility: visible;
 }
 
+.nav-item.is-active > a {
+  color: var(--accent);
+}
+
 .nav {
   background-color: #fff;
   position: relative;
@@ -84,16 +88,19 @@ html.is-clipped--nav {
 }
 
 .nav-list {
-  padding: 0 0 0 0.75rem;
+  padding: 0;
 }
 
-.nav-item[data-depth="1"],
-.nav-item[data-depth="2"],
-.nav-item[data-depth="3"],
-.nav-item[data-depth="4"] {
+.nav-item {
   text-indent: 0;
-  line-height: 1.5;
-  padding-top: 10px;
+  line-height: 1.4;
+  position: relative;
+  list-style: none;
+  padding: 5px 12px;
+}
+
+.nav-item[data-depth="0"] {
+  line-height: 2.1;
 }
 
 .nav-menu > .nav-list {
@@ -101,30 +108,8 @@ html.is-clipped--nav {
   margin-top: 0;
 }
 
-.nav-item[data-depth="0"] {
-  text-indent: 15px;
-  background: #fafafa;
-  line-height: 2.7;
-  border-bottom: 1px solid #dadada;
-  color: var(--body-font-color);
-}
-
-.nav-item[data-depth="0"] > ul {
-  background: #fff;
-  padding-bottom: 10px;
-}
-
 .nav-item > .nav-text {
   cursor: pointer;
-}
-
-/* adds some breathing room below a nested list */
-.nav-item-toggle ~ .nav-list {
-  padding-bottom: 0.125rem;
-}
-
-.nav-item {
-  list-style: none;
 }
 
 .nav-item.top ul {
@@ -136,19 +121,18 @@ html.is-clipped--nav {
 }
 
 .nav-item-toggle {
-  background: transparent url(../img/caret-blue.svg) no-repeat 40% / 37%;
+  background: transparent url(../img/caret-blue.svg) center no-repeat;
   border: none;
   outline: none;
   line-height: inherit;
   position: absolute;
   height: calc(var(--nav-line-height) * 1em);
-  margin-top: 0.05em;
-  margin-left: 5px;
-  padding-right: 30px;
+  width: 30px;
+  padding: 0 5px;
 }
 
 .nav-item[data-depth="0"] > .nav-item-toggle {
-  margin-top: 10px;
+  top: 10px;
 }
 
 .nav-item-toggle.nav-explore-toggle {
@@ -165,9 +149,14 @@ html.is-clipped--nav {
   transform: rotate(-180deg);
 }
 
+.is-current-page {
+  background-color: var(--info-light);
+  border-radius: 10px;
+}
+
 .is-current-page > .nav-link,
 .is-current-page > .nav-text {
-  color: var(--primary);
+  color: var(--accent);
 }
 
 .nav-link.enterprise::after {
@@ -316,7 +305,7 @@ html.is-clipped--nav {
 }
 
 .nav-panel-explore .component .is-current a {
-  color: var(--primary);
+  color: var(--accent);
   opacity: 1;
 }
 

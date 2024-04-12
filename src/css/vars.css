@@ -138,7 +138,7 @@
   --footer-background: #424242;
   --footer-font-color: #fafafa;
   /* dimensions and positioning */
-  --navbar-height: 50px;
+  --navbar-height: 60px;
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);
   --drawer-height: var(--toolbar-height);
   --body-top: var(--navbar-height);
