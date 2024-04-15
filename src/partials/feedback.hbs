@@ -16,14 +16,14 @@
     <div class="edit-this-page"><a class="git-pull" href="{{page.editUrl}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
   {{/if}}
   <form name="docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST" data-netlify="true">
-    <label>Was this page helpful?</label><br>
     <p class="hidden">
-    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
     </p>
-    <input type="radio" id="yes" name="helpful" value="yes" onclick="submitForm()">
-    <label for="yes" id="yes-button"><i class="far fa-check-circle"></i> Yes</label>
-    <input type="radio" id="no" name="helpful" value="no" onclick="submitForm()">
-    <label for="no" id="no-button"><i class="far fa-times-circle"></i> No</label><br>
+    <label for="yes" id="yes-button" class="yes-button">
+      <img src="{{{uiRootPath}}}/img/feedback/like.png" alt="like" class="like-img" />
+      <span>Was this helpful?</span>
+      <input type="radio" id="yes" name="helpful" value="yes" onclick="submitForm()">
+    </label>
   </form>
 </div>
 <script>

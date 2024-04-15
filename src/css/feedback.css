@@ -3,7 +3,7 @@
 .feedback-prompt {
   width: 100%;
   font-family: var(--body-font-family);
-  color: var(--secondary-text);
+  color: var(--nav-muted-color);
   display: flex;
   flex-direction: column;
 }
@@ -12,52 +12,37 @@
   display: none;
 }
 
-.feedback-prompt button {
-  display: inline-block;
-  text-align: center;
-  padding: 2px;
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  font-size: calc(14 / var(--rem-base) * 1rem);
-  color: var(--toc-heading-font-color);
-}
-
-.feedback-prompt label {
-  display: inline-block;
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  font-size: calc(14 / var(--rem-base) * 1rem);
-  color: var(--toc-heading-font-color);
-}
-
-.feedback-prompt label#yes-button,
-.feedback-prompt label#no-button {
-  padding: 5px;
-}
-
-.feedback-prompt input[type="radio"]:checked + label#yes-button,
-#yes-button:hover {
-  background-color: var(--success-dark);
-  color: var(--neutral-white);
-  cursor: grab;
-}
-
-.feedback-prompt input[type="radio"]:checked + label#no-button,
-#no-button:hover {
-  background-color: var(--error);
-  color: var(--neutral-white);
-  cursor: grab;
-}
-
 .feedback-prompt input[type="radio"] {
   display: none;
+}
+
+.yes-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  font-family: var(--heading-font-family);
+  font-size: 1rem;
+  background-color: var(--info-light);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.yes-button:hover .like-img {
+  transform: translateY(-3px);
+}
+
+.like-img {
+  transition: transform 300ms;
+  width: 41px;
+  height: auto;
 }
 
 .additional-feedback {
   display: block;
   padding-right: 0.5rem;
   font-family: var(--body-font-family);
-  color: var(--secondary-text);
+  color: var(--nav-muted-color);
 }
 
 .additional-feedback a {
@@ -69,7 +54,7 @@
   display: block;
   padding-right: 0.5rem;
   font-family: var(--body-font-family);
-  color: var(--secondary-text);
+  color: var(--nav-muted-color);
 }
 
 .edit-this-page a {
