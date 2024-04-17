@@ -144,8 +144,7 @@ html.is-clipped--nav {
   margin-right: 30px;
 }
 
-.nav-item.is-active > .nav-item-toggle,
-.nav-panel-explore.is-active > .context > .nav-item-toggle {
+.nav-item.is-active > .nav-item-toggle {
   transform: rotate(-180deg);
 }
 
