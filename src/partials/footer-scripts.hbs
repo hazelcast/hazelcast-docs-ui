@@ -2,6 +2,26 @@
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
 
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: '{{site.keys.docsearchApi}}',
+      indexName: '{{site.keys.docsearchIndex}}',
+      appId: '{{site.keys.docsearchId}}',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
 <!-- SEARCH CONFIGURATIONS -->
 <!-- 404 is not a component, so we avoid reading the component versions and names from it -->
 {{#if (not-eq page.title 'Page Not Found')}}
@@ -27,134 +47,52 @@
     </script>
     {{/with}}
     <script>
-      docsearch({
-        apiKey: '{{site.keys.docsearchApi}}',
-        indexName: '{{site.keys.docsearchIndex}}',
-        appId: '{{site.keys.docsearchId}}',
-        container: '#search-input',
-        // Set debug to true to inspect the dropdown
-        debug: false,
-        // Display 25 results in the dropdown
-        // and search only the current product
-        searchParameters: {  facetFilters: ["tags:tutorials"] },
-      });
+      hzDocSearch(["tags:tutorials"]);
     </script>
     <script>
       function applyFacetedSearch(){
           var checkbox = document.getElementById('facet')
           if (checkbox.checked) {
-            // Search all products
-            docsearch({
-              apiKey: '{{site.keys.docsearchApi}}',
-              indexName: '{{site.keys.docsearchIndex}}',
-              appId: '{{site.keys.docsearchId}}',
-              container: '#search-input',
-              searchParameters:
-              {
-
-                facetFilters:
-                [["tags:tutorials",
-                "tags:imdg-{{site.components.imdg.latest.version}}",
-                "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-                "tags:cloud"]]
-              }
-            })
+            hzDocSearch([[
+              "tags:tutorials",
+              "tags:imdg-{{site.components.imdg.latest.version}}",
+              "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+              "tags:cloud",
+            ]], 'Search all docs...');
           } else {
-            docsearch({
-              apiKey: '{{site.keys.docsearchApi}}',
-              indexName: '{{site.keys.docsearchIndex}}',
-              appId: '{{site.keys.docsearchId}}',
-              container: '#search-input',
-              searchParameters:
-              {
-
-                facetFilters: ["tags:tutorials"]
-              }
-            })
+            hzDocSearch([
+              "tags:tutorials",
+            ]);
           }
         }
     </script>
   <!--HOME PAGE-->
   {{else if (or (eq page.component.name 'home') (eq page.layout 'home'))}}
   <script>
-  docsearch({
-    apiKey: '{{site.keys.docsearchApi}}',
-    indexName: '{{site.keys.docsearchIndex}}',
-    appId: '{{site.keys.docsearchId}}',
-    container: '#search-input',
-    // Set debug to true to inspect the dropdown
-    debug: false,
-    translations: {
-      button: {
-        buttonText: 'Search all docs...',
-        buttonAriaLabel: 'Search all docs',
-      },
-    },
-    // Display 25 results in the dropdown
-    // and search only the current product
-    searchParameters: {
-
-      facetFilters:
-      [["tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+    hzDocSearch([[
+      "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
       "tags:management-center-{{site.components.management-center.latest.version}}",
       "tags:imdg-{{site.components.imdg.latest.version}}",
-      "tags:cloud"]] },
-  });
+      "tags:cloud",
+    ]], 'Search all docs...');
   </script>
   <!--DEAL WITH SPECIAL CASES -->
   {{else if (and (eq page.component.name 'imdg') (or (eq page.componentVersion.version '4') (lt page.componentVersion.version '3.12')))}}
   <script>
-    docsearch({
-      apiKey: '{{site.keys.docsearchApi}}',
-      indexName: '{{site.keys.docsearchIndex}}',
-      appId: '{{site.keys.docsearchId}}',
-      container: '#search-input',
-      // Set debug to true to inspect the dropdown
-      debug: false,
-      // Display 25 results in the dropdown
-      // and search only the current product
-      searchParameters: {  facetFilters: ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"] },
-    });
+    hzDocSearch(["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"]);
   </script>
   <script>
     function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}",
-            "tags:management-center-{{site.components.management-center.latest.version}}",
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{site.components.imdg.latest.version}}",
+          "tags:management-center-{{site.components.management-center.latest.version}}",
+          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          translations: {
-            button: {
-              buttonText: 'Search all docs...',
-              buttonAriaLabel: 'Search all docs',
-            },
-          },
-          searchParameters:
-          {
-
-            facetFilters:
-            ["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"]);
       }
     }
   </script>
@@ -173,57 +111,20 @@
   </script>
   {{else if (and (eq page.component.name 'management-center') (lt page.componentVersion.version '4.2020.12'))}}
     <script>
-    docsearch({
-      apiKey: '{{site.keys.docsearchApi}}',
-      indexName: '{{site.keys.docsearchIndex}}',
-      appId: '{{site.keys.docsearchId}}',
-      container: '#search-input',
-      // Set debug to true to inspect the dropdown
-      debug: false,
-      // Display 25 results in the dropdown
-      // and search only the current product
-      searchParameters: {  facetFilters: ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"] },
-    });
+      hzDocSearch(["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]);
   </script>
   <script>
     function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}",
-            "tags:imdg-{{site.components.imdg.latest.version}}",
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{site.components.management-center.latest.version}}",
+          "tags:imdg-{{site.components.imdg.latest.version}}",
+          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          translations: {
-            button: {
-              buttonText: 'Search all docs...',
-              buttonAriaLabel: 'Search all docs',
-            },
-          },
-          searchParameters:
-          {
-
-            facetFilters:
-            ["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]);
       }
     }
   </script>
@@ -242,17 +143,7 @@
   </script>
   {{else if (and (not-eq page.component.name 'home') (not-eq page.component.name 'cloud'))}}
   <script>
-    docsearch({
-      apiKey: '{{site.keys.docsearchApi}}',
-      indexName: '{{site.keys.docsearchIndex}}',
-      appId: '{{site.keys.docsearchId}}',
-      container: '#search-input',
-      // Set debug to true to inspect the dropdown
-      debug: false,
-      // Display 25 results in the dropdown
-      // and search only the current product
-      searchParameters: {  facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"] },
-    });
+    hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
   </script>
   <script>
     function closeBanner() {
@@ -269,50 +160,20 @@
   </script>
   {{else if (eq page.component.name 'cloud')}}
   <script>
-    docsearch({
-      apiKey: '{{site.keys.docsearchApi}}',
-      indexName: '{{site.keys.docsearchIndex}}',
-      appId: '{{site.keys.docsearchId}}',
-      container: '#search-input',
-      // Set debug to true to inspect the dropdown
-      debug: false,
-      // Display 25 results in the dropdown
-      // and search only the current product
-      searchParameters: {  facetFilters: ["tags:{{page.component.name}}"] },
-    });
+    hzDocSearch(["tags:{{page.component.name}}"]);
   </script>
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}",
-            "tags:management-center-{{site.components.management-center.latest.version}}",
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-            "tags:imdg-{{site.components.imdg.latest.version}}"]]
-            }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}",
+          "tags:management-center-{{site.components.management-center.latest.version}}",
+          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+          "tags:imdg-{{site.components.imdg.latest.version}}",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters: ["tags:{{page.component.name}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}"]);
       }
     }
   </script>
@@ -322,34 +183,14 @@
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
-            "tags:management-center-{{page.attributes.latest-supported-mc}}",
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:management-center-{{page.attributes.latest-supported-mc}}",
+          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
@@ -358,34 +199,14 @@
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
-            "tags:management-center-{{site.components.management-center.latest.version}}",
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:management-center-{{site.components.management-center.latest.version}}",
+          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
@@ -395,34 +216,14 @@
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
-            "tags:management-center-{{page.attributes.latest-supported-mc}}",
-            "tags:imdg-{{site.components.imdg.latest.version}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:management-center-{{page.attributes.latest-supported-mc}}",
+          "tags:imdg-{{site.components.imdg.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
@@ -431,34 +232,14 @@
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
-            "tags:management-center-{{site.components.management-center.latest.version}}",
-            "tags:imdg-{{site.components.imdg.latest.version}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:management-center-{{site.components.management-center.latest.version}}",
+          "tags:imdg-{{site.components.imdg.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
@@ -466,36 +247,26 @@
   {{#if (and (eq page.component.name 'management-center') page.attributes.latest-supported-imdg)}}
   <script>
   function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
+      var checkbox = document.getElementById('facet');
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
-            "tags:imdg-{{page.attributes.latest-supported-imdg}}",
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:management-center-{{site.components.management-center.latest.version}}",
+          "tags:imdg-{{site.components.imdg.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
+      }
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:imdg-{{page.attributes.latest-supported-imdg}}",
+          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
@@ -504,34 +275,14 @@
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
-            "tags:imdg-{{site.components.imdg.latest.version}}",
-            "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:imdg-{{site.components.imdg.latest.version}}",
+          "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
@@ -540,34 +291,14 @@
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
-            "tags:imdg-{{site.components.imdg.latest.version}}",
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:imdg-{{site.components.imdg.latest.version}}",
+          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
@@ -577,56 +308,25 @@
       function applyFacetedSearch(){
       var checkbox = document.getElementById('facet')
       if (checkbox.checked) {
-        // Search all products
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters:
-            [["tags:{{page.component.name}}-{{page.componentVersion.version}}",
-            "tags:imdg-{{site.components.imdg.latest.version}}",
-            "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-            "tags:cloud"]]
-          }
-        })
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:imdg-{{site.components.imdg.latest.version}}",
+          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+          "tags:cloud",
+        ]], 'Search all docs...');
       } else {
-        docsearch({
-          apiKey: '{{site.keys.docsearchApi}}',
-          indexName: '{{site.keys.docsearchIndex}}',
-          appId: '{{site.keys.docsearchId}}',
-          container: '#search-input',
-          searchParameters:
-          {
-
-            facetFilters: ["tags:{{page.component.name}}-{{page.componentVersion.version}}"]
-          }
-        })
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
   {{/if}}
 {{else}}
   <script>
-  docsearch({
-    apiKey: '{{site.keys.docsearchApi}}',
-    indexName: '{{site.keys.docsearchIndex}}',
-    appId: '{{site.keys.docsearchId}}',
-    container: '#search-input',
-    // Set debug to true to inspect the dropdown
-    debug: false,
-    // Display 25 results in the dropdown
-    // and search only the current product
-    searchParameters: {
-
-      facetFilters:
-      [["tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+    hzDocSearch([[
+      "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
       "tags:management-center-{{site.components.management-center.latest.version}}",
       "tags:imdg-{{site.components.imdg.latest.version}}",
-      "tags:cloud"]] },
-  });
+      "tags:cloud",
+    ]], 'Search all docs...');
   </script>
 {{/if}}

@@ -1,12 +1,5 @@
 </br>
 <div class="feedback-prompt">
-  {{#if (eq page.layout 'tutorial')}}
-    {{#with (get-page-info)}}
-      <div class="source">
-        <a class="git" href="{{this.src.origin.webUrl}}/tree/{{this.asciidoc.attributes.page-origin-branch}}">View source</a>
-      </div>
-    {{/with}}
-  {{/if}}
   {{#if (and page.fileUri (not env.CI))}}
     <div class="edit-this-page"><a class="git-pull" href="{{page.fileUri}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
   {{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}

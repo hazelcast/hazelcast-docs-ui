@@ -74,6 +74,11 @@ a.navbar-link {
   background-color: var(--navbar-menu_hover-background);
 }
 
+.get-hazelcast-link {
+  display: flex;
+  align-items: center;
+}
+
 .dropdown-caret {
   width: 1.3em;
   padding-left: 0.5em;
