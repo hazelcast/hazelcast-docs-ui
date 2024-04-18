@@ -53,8 +53,8 @@
 }
 
 .home .card-header {
-  width: 33%;
   color: var(--accent);
+  flex: 0 33%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -96,6 +96,7 @@
   flex-direction: column;
   gap: 10px;
   justify-content: center;
+  flex: 1 66%;
 }
 
 .home .card-list-item {
