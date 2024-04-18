@@ -19,7 +19,8 @@
 .home .home-background-heading {
   color: #fff;
   font-weight: 300;
-  font-size: 1.2em;
+  font-size: 1.4em;
+  letter-spacing: 1px;
   margin: 0 0 2rem;
 }
 
@@ -100,6 +101,7 @@
 }
 
 .home .card-list-item {
+  font-size: var(--body-font-size);
   list-style: none;
 }
 
