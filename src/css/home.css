@@ -1,5 +1,6 @@
 .home {
   --cards-gap: 20px;
+  --cards-padding: 10px;
 
   width: 100%;
   margin: 0 auto;
@@ -46,7 +47,7 @@
 .home .card {
   border-radius: 10px;
   background-color: #fff;
-  padding: var(--cards-gap);
+  padding: var(--cards-padding);
   flex-basis: 100%;
   display: flex;
 }
@@ -58,17 +59,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding-right: var(--cards-padding);
   border-right: 3px solid var(--accent-light);
 }
 
 .home .card-title {
   font-weight: 400;
   margin: 0;
+  font-size: 20px;
 }
 
 .home .card-image {
-  padding: 20px 40px;
+  max-width: 70px;
 }
 
 .home .card-image img {
@@ -80,6 +82,12 @@
 @media (min-width: 840px) {
   .home .card {
     flex-basis: calc(50% - calc(var(--cards-gap) / 2));
+  }
+}
+
+@media (min-width: 1400px) {
+  .home .card {
+    flex-basis: calc(33% - calc(var(--cards-gap) / 2));
   }
 }
 
