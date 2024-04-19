@@ -53,7 +53,7 @@
 }
 
 .button.git span {
-  background: transparent url(../img/github.svg) center left no-repeat;
+  background: transparent url(../img/github.svg) center left / contain no-repeat;
   width: 25px;
   height: 25px;
 }

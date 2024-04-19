@@ -16,25 +16,47 @@
   display: none;
 }
 
-.yes-button {
+.feedback-button {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.8rem;
   font-family: var(--heading-font-family);
-  font-size: 1rem;
+  font-size: 14px;
   background-color: var(--info-light);
   border-radius: 10px;
   cursor: pointer;
+  margin-top: 16px;
+}
+
+a.feedback-button:hover {
+  text-decoration: none;
+}
+
+.helpful-feedback {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.helpful-feedback .feedback-button {
+  margin-top: 0;
 }
 
 .yes-button:hover .like-img {
   transform: translateY(-3px);
 }
 
+.no-button:hover .like-img {
+  transform: translateY(3px);
+}
+
 .like-img {
-  transition: transform 300ms;
-  width: 41px;
+  transition: transform 300ms ease-out;
+  width: 20px;
   height: auto;
 }
 
@@ -63,20 +85,17 @@
 }
 
 .survey {
-  background: transparent url(../img/survey.svg) center left no-repeat;
+  background: transparent url(../img/survey.svg) center left / contain no-repeat;
   padding-left: 1.75rem;
 }
 
 .git {
-  background: transparent url(../img/github.svg) center left no-repeat;
+  background: transparent url(../img/github.svg) center left / contain no-repeat;
   padding-left: 1.75rem;
 }
 
 .git-pull {
-  background: transparent url(../img/pull.svg) center left no-repeat;
+  background: transparent url(../img/edit.svg) center left / contain no-repeat;
   padding-left: 1.75rem;
 }
 
-form[name^=docs-feedback] {
-  padding-top: 20px;
-}
