@@ -29,6 +29,10 @@
   margin-top: 16px;
 }
 
+.feedback-button:hover {
+  background-color: var(--accent5-light);
+}
+
 a.feedback-button:hover {
   text-decoration: none;
 }
