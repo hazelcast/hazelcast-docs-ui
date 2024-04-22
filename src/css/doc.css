@@ -463,12 +463,6 @@ strong.beta {
   padding: 0;
 }
 
-.doc table.tableblock .admonitionblock,
-.doc .ulist .admonitionblock,
-.doc .olist .admonitionblock {
-  padding: 0;
-}
-
 .doc ol,
 .doc ul {
   margin: 0;
@@ -565,10 +559,6 @@ strong.beta {
 .doc .imageblock .title {
   margin-top: 0.5rem;
   padding-bottom: 0;
-}
-
-.doc .admonitionblock .title + .paragraph {
-  margin-top: 0;
 }
 
 .doc .exampleblock > .content {

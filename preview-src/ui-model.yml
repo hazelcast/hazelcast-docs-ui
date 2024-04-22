@@ -79,7 +79,7 @@ page:
     - content: C++ Client
       url: '#3'
       urlType: internal
-    - content: Hazelcast Deep Clients
+    - content: Hazelcast Deep Client. Pretty long
       url: '#4'
       urlType: fragment
       items:

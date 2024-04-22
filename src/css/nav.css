@@ -96,7 +96,7 @@ html.is-clipped--nav {
   line-height: 1.6;
   position: relative;
   list-style: none;
-  padding: 5px 12px;
+  padding: 5px 10px;
 }
 
 .nav-item[data-depth="0"] {
@@ -151,6 +151,11 @@ html.is-clipped--nav {
 .is-current-page {
   background-color: var(--info-light);
   border-radius: 10px;
+}
+
+.nav-link,
+.nav-text {
+  padding-right: 15px;
 }
 
 .is-current-page > .nav-link,

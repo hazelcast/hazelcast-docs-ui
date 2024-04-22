@@ -6,10 +6,19 @@
   border-left-width: 8px;
   border-left-style: solid;
   padding: 15px 10px 15px var(--admonition-icon-block-width);
+  margin-top: 1rem;
 }
 
 .admonitionblock table {
   border-spacing: 0;
+}
+
+.admonitionblock .content > :first-child {
+  margin-top: 0;
+}
+
+.doc .admonitionblock .title + .paragraph {
+  margin-top: 0;
 }
 
 .admonitionblock td.icon {

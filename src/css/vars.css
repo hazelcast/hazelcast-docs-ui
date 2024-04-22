@@ -99,7 +99,7 @@
   /* doc */
   --doc-font-color: var(--text);
   --doc-font-size: inherit;
-  --doc-font-size--desktop: 18px;
+  --doc-font-size--desktop: 16px;
   --doc-line-height: 1.5;
   --doc-margin: 0 auto;
   --doc-margin--desktop: 0 2rem;
