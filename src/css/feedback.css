@@ -46,6 +46,18 @@ a.feedback-button:hover {
   margin-top: 10px;
 }
 
+.helpful-feedback-buttons {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 8px;
+}
+
+.helpful-feedback-title {
+  width: 100%;
+  text-align: center;
+}
+
 .helpful-feedback .feedback-button {
   margin-top: 0;
 }
