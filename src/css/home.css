@@ -8,18 +8,31 @@
 }
 
 .home .home-background {
-  background-image: url('../img/hazelcast-banner-back.png'), linear-gradient(160deg, #061827 33%, #1b2939 66%, #0686b3 100%);
+  background-image: url('../img/home/hazelcast-banner-back.jpeg'), linear-gradient(160deg, #061827 33%, #1b2939 66%, #0686b3 100%);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top center;
   background-size: cover;
   background-color: #061827;
-  padding: 3rem 0;
+  padding: 1.5rem 0;
 }
 
 .home .home-background-heading {
   color: #fff;
+  font-weight: 500;
+  font-size: 50px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+  background: linear-gradient(270deg, var(--accent4), var(--accent));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home .home-background-subheading {
+  color: #fff;
+  font-size: var(--body-font-size);
+  font-family: var(--heading-font-family);
   font-weight: 300;
-  font-size: 1.4em;
   letter-spacing: 1px;
   margin: 0 0 2rem;
 }
@@ -61,6 +74,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-bottom: 15px;
 }
 
 .home .card-title {
@@ -95,25 +109,43 @@
 .home .card-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
   flex: 1 66%;
   padding: 0;
+  margin: 10px 0;
 }
 
 .home .card-list-item {
   font-size: 16px;
   list-style: none;
   text-align: left;
+  width: 100%;
 }
 
 .home .card-list-item a {
   color: var(--primary-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
-.additional-cards {
+.home .card-img {
+  width: 24px;
+  height: auto;
+  stroke-width: 1;
+}
+
+.home .additional-cards {
   padding: var(--cards-gap);
   display: flex;
   gap: var(--cards-gap);
   flex-wrap: wrap;
+}
+
+.home .card-list-item-description {
+  color: var(--secondary-text);
+  margin: 0 0 15px;
+  text-align: left;
 }

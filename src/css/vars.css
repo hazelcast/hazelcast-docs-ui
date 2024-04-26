@@ -44,6 +44,7 @@
   --body-font-size--print: 0.9375em; /* 15px */
   --body-line-height: 1.4;
   --body-font-color: var(--text);
+  --header-color: #071627;
   --body-font-family: "Open Sans", sans-serif;
   --body-font-weight-bold: 600;
   --nav-font-family: "PP Telegraf", sans-serif;
@@ -135,7 +136,6 @@
   --table-border-color: var(--panel-border-color);
   /* footer */
   --footer-line-height: var(--doc-line-height);
-  --footer-background: #424242;
   --footer-font-color: #fafafa;
   /* dimensions and positioning */
   --navbar-height: 60px;
