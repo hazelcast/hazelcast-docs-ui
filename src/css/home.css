@@ -108,7 +108,7 @@
     flex-basis: calc(33% - calc(var(--cards-gap) * 2 / 3));
   }
 
-  .additional-card {
+  .home .additional-card {
     flex-basis: calc(50% - calc(var(--cards-gap) * 1 / 2));
   }
 }
