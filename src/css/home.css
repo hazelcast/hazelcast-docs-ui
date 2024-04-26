@@ -10,10 +10,23 @@
 .home .home-background {
   background-image: url('../img/home/hazelcast-banner-back.jpeg'), linear-gradient(160deg, #061827 33%, #1b2939 66%, #0686b3 100%);
   background-repeat: no-repeat;
-  background-position: top center;
+  background-position-x: center;
+  background-position-y: 0;
   background-size: cover;
   background-color: #061827;
   padding: 1.5rem 0;
+}
+
+@media (min-width: 1120px) {
+  .home .home-background {
+    background-position-y: -50px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .home .home-background {
+    background-position-y: -90px;
+  }
 }
 
 .home .home-background-heading {
