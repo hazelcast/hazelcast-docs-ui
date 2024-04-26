@@ -12,7 +12,7 @@
     "url": "https://github.com/hazelcast/hazelcast-docs-ui.git"
   },
   "engines": {
-    "node": ">= 8.0.0"
+    "node": ">= 20.0.0"
   },
   "browserslist": [
     "last 2 versions"
