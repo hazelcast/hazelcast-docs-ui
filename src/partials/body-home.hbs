@@ -1,7 +1,7 @@
 <div class="home">
   <div class="home-background">
     <h1 class="home-background-heading">
-      Welcome to Hazelcast Documentation
+      Hazelcast Documentation
     </h1>
     <p class="home-background-subheading">
       Find user guides, code samples, tutorials, API reference, and more.
@@ -307,6 +307,31 @@
         </dl>
       </div>
     </aside>
+
+    <div class="feedback-card">
+      <div class="card-header">
+        <img class="card-img" src="{{{uiRootPath}}}/img/lifebuoy.svg" alt="lifebuoy" />
+        <h4 class="card-title">Help and support</h4>
+      </div>
+      {{> was-this-helpful-feedback }}
+      {{#with (get-page-info)}}
+        <a class="additional-feedback feedback-button" href="{{this.src.origin.webUrl}}/issues/new?title=Docs: Feedback for {{{this.title}}}&body=Hi, I have some feedback about [this page]({{{this.src.editUrl}}})%0D%0A" target="_blank">
+          <span class="git">
+            Report an issue
+          </span>
+        </a>
+      {{/with}}
+      <a class="additional-feedback feedback-button" href="https://hazelcastcommunity.slack.com/archives/C016E52N988" target="_blank">
+        <span class="command">
+          Ask Community
+        </span>
+      </a>
+      <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/" target="_blank">
+        <span class="mail">
+          Contact Support
+        </span>
+      </a>
+    </div>
 	</main>
 </div>
 

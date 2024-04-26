@@ -12,7 +12,7 @@
   display: none;
 }
 
-.feedback-prompt input[type="radio"] {
+.helpful-feedback input[type="radio"] {
   display: none;
 }
 
@@ -112,5 +112,15 @@ a.feedback-button:hover {
 
 .git-pull {
   background: transparent url(../img/edit.svg) center left / contain no-repeat;
+  padding-left: 1.75rem;
+}
+
+.command {
+  background: transparent url(../img/command.svg) center left / contain no-repeat;
+  padding-left: 1.75rem;
+}
+
+.mail {
+  background: transparent url(../img/mail.svg) center left / contain no-repeat;
   padding-left: 1.75rem;
 }

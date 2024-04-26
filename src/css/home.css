@@ -46,7 +46,6 @@
 
 .home .DocSearch-Button {
   width: 40%;
-  border-radius: 50px;
 }
 
 .home .article {
@@ -60,7 +59,8 @@
 }
 
 .home .card,
-.additional-card {
+.home .additional-card,
+.home .feedback-card {
   border-radius: 10px;
   background-color: #fff;
   padding: var(--cards-padding);
@@ -148,4 +148,29 @@
   color: var(--secondary-text);
   margin: 0 0 15px;
   text-align: left;
+}
+
+.home .feedback-card {
+  margin: 0 var(--cards-gap) var(--cards-gap);
+  display: flex;
+  padding: 15px 20px;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (min-width: 1120px) {
+  .home .feedback-card {
+    gap: 30px;
+  }
+}
+
+.home .feedback-card .card-header {
+  margin-bottom: 0;
+}
+
+.home .feedback-button,
+.home .helpful-feedback {
+  margin-top: 0;
 }
