@@ -21,7 +21,7 @@ This section is a tutorial for setting up a development environment for the UI p
 To preview and bundle the UI, you need the following software on your computer:
 
 * {url-git}[git] (command: `git`)
-* {url-node}[Node.js 10] (command: `node`)
+* {url-node}[Node.js 20] (command: `node`)
 * {url-gulp}[Gulp CLI] (command: `gulp`)
 
 ==== git
