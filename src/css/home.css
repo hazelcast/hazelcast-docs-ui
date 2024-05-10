@@ -1,5 +1,4 @@
 .home {
-  --cards-gap: 24px;
   --cards-padding: 15px;
 
   width: 100%;
@@ -73,7 +72,7 @@
 
 .home .card,
 .home .additional-card,
-.home .feedback-card {
+.feedback-footer {
   border-radius: 10px;
   background-color: #fff;
   padding: var(--cards-padding);
@@ -82,7 +81,8 @@
   box-sizing: border-box;
 }
 
-.home .card-header {
+.home .card-header,
+.feedback-footer .card-header {
   color: var(--doc-font-color);
   display: flex;
   align-items: center;
@@ -90,7 +90,8 @@
   margin-bottom: 15px;
 }
 
-.home .card-title {
+.home .card-title,
+.feedback-footer .card-title {
   font-weight: 600;
   margin: 0;
   font-size: 21px;
@@ -144,7 +145,8 @@
   width: 100%;
 }
 
-.home .card-img {
+.home .card-img,
+.feedback-footer .card-img {
   width: 24px;
   height: auto;
   stroke-width: 1;
@@ -163,7 +165,7 @@
   text-align: left;
 }
 
-.home .feedback-card {
+.feedback-footer {
   margin: 0 var(--cards-gap) var(--cards-gap);
   display: flex;
   padding: 15px 20px;
@@ -174,13 +176,17 @@
 }
 
 @media (min-width: 1120px) {
-  .home .feedback-card {
+  .feedback-footer {
     gap: 30px;
   }
 }
 
-.home .feedback-card .card-header {
+.feedback-footer .card-header {
   margin-bottom: 0;
+}
+
+.article .feedback-footer {
+  margin: 0 var(--cards-gap) var(--cards-gap);
 }
 
 .home .feedback-button,
