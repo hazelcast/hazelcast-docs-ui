@@ -33,7 +33,9 @@ body {
 }
 
 .navbar a {
+  color: var(--neutral-white);
   text-decoration: none;
+  letter-spacing: 1px;
 }
 
 .navbar-brand .navbar-item.navbar-logo-item {
@@ -101,6 +103,12 @@ body {
 
 @media (max-width: 650px) {
   .navbar-app-title {
+    display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .hazelcast-link {
     display: none;
   }
 }

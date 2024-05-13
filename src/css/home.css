@@ -13,7 +13,7 @@
   background-position-y: 0;
   background-size: cover;
   background-color: #061827;
-  padding: 1.5rem 0;
+  padding: 0 0 1.5rem;
 }
 
 @media (min-width: 1120px) {
@@ -34,7 +34,7 @@
   font-size: 50px;
   letter-spacing: 1px;
   line-height: 1.2;
-  margin: 0 0 1rem;
+  margin: 0;
   background: linear-gradient(270deg, var(--accent4), var(--accent));
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -46,7 +46,7 @@
   font-family: var(--heading-font-family);
   font-weight: 300;
   letter-spacing: 1px;
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
 }
 
 .home .search-container {
