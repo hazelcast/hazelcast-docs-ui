@@ -81,13 +81,21 @@
   box-sizing: border-box;
 }
 
+.home .additional-card .card-list {
+  gap: 5px;
+}
+
+.home .card-list-item-description:last-child {
+  margin-bottom: 0;
+}
+
 .home .card-header,
 .feedback-footer .card-header {
   color: var(--doc-font-color);
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .home .card-title,
@@ -123,15 +131,14 @@
 .home .card-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   justify-content: center;
   flex: 1 66%;
   padding: 0;
-  margin: 10px 0;
+  margin: 10px 0 0;
 }
 
 .home .card-list-item {
-  font-size: 16px;
   list-style: none;
   text-align: left;
   width: 100%;
@@ -161,7 +168,7 @@
 
 .home .card-list-item-description {
   color: var(--secondary-text);
-  margin: 0 0 15px;
+  margin: 0 0 0.5rem;
   text-align: left;
 }
 

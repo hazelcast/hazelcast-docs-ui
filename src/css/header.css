@@ -8,6 +8,7 @@ body {
   color: var(--neutral-white);
   font-size: var(--body-font-size);
   font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .filter.checkbox {
@@ -101,7 +102,7 @@ body {
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 750px) {
   .navbar-app-title {
     display: none;
   }
