@@ -6,7 +6,14 @@
     <p class="home-background-subheading">
       Find user guides, code samples, tutorials, API reference, and more.
     </p>
-    <div id="search-input" class="search-container searchbox">
+    <div class="search-buttons">
+      <div id="search-input" class="search-container searchbox"></div>
+      {{#with site.keys.aiSearchUrl}}
+        <button class="ai-button" onclick="window.open('{{this}}','_blank'); return false;">
+          <i data-feather="message-circle" class="ai-button-img"></i>
+          <span class="ai-button-text">Ask AI</span>
+        </button>
+      {{/with}}
     </div>
   </div>
 	<main data-ceiling="topbar">

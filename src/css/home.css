@@ -49,8 +49,36 @@
   margin: 0 0 1rem;
 }
 
+.home .search-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.ai-button {
+  color: var(--neutral-white);
+  background-color: var(--accent);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: calc(var(--body-font-size) * 0.9);
+  font-family: var(--heading-font-family);
+}
+
+.ai-button-img {
+  stroke-width: 1.5;
+}
+
 .home .search-container {
   max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -109,6 +137,14 @@
 @media (min-width: 480px) {
   .home .card {
     flex-basis: calc(50% - calc(var(--cards-gap) * 1 / 2));
+  }
+}
+
+@media (min-width: 550px) {
+  .ai-button {
+    position: absolute;
+    right: 40px;
+    top: 0;
   }
 }
 

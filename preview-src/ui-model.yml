@@ -4,7 +4,8 @@ site:
   title: Documentation Preview
   homeUrl: &home_url /index.html
 #  uncomment below to test analytics locally
-#  keys:
+  keys:
+    aiSearchUrl: 'https://chatgpt.com/'
 #    googleAnalytics: 'GTM-MQ59XD6'
 #    clarity: 'l8c076m4u9'
   components:
