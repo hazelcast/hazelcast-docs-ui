@@ -1,5 +1,6 @@
 .home {
   --cards-padding: 15px;
+  --search-container-height: 36px;
 
   width: 100%;
   margin: 0 auto;
@@ -51,6 +52,7 @@
 
 .home .search-buttons {
   width: 100%;
+  min-height: var(--search-container-height);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,7 +66,7 @@
   border: none;
   border-radius: 10px;
   padding: 10px;
-  height: 36px;
+  height: var(--search-container-height);
   display: flex;
   align-items: center;
   gap: 8px;

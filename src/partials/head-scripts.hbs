@@ -20,5 +20,24 @@
   <!-- End Clarity snippet -->
 {{/with}}
 
+{{#with site.keys.aiSearchId}}
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="{{this}}"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="https://avatars.githubusercontent.com/u/1453152?s=200&amp;v=4"
+    data-modal-disclaimer="This is a custom LLM for Hazelcast with access to all documentation (docs.hazelcast.com/) and support knowledge base (support.hazelcast.com/s/)"
+    data-modal-example-questions="How do I enable persistence on Kubernetes?,What is the minimum JDK version for Platform 5.3?"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0080a9"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+  ></script>
+  <!-- End Kapa snippet -->
+{{/with}}
+
 <script src="https://kit.fontawesome.com/11f046e3f7.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>

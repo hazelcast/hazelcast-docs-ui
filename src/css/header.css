@@ -1,5 +1,6 @@
 body {
-  padding-top: var(--navbar-height);
+  /* important so the Kapa widget does not overwrite it */
+  padding-top: var(--navbar-height) !important;
 }
 
 .navbar .button.navbar-button {
