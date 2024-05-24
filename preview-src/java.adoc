@@ -52,7 +52,7 @@ required only for members.
 Imagine a trading application where all the trading data are stored and
 managed in a Hazelcast cluster with tens of members.
 
-== Getting Started with Java Client
+== Getting Started with Java Client or Maybe some other client
 
 WARNING: You do not need to set a license key for your Java clients for which you want to
 use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are

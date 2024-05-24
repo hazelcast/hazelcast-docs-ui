@@ -26,7 +26,6 @@
   background-color: var(--info-light);
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .feedback-button:hover {
@@ -37,13 +36,17 @@ a.feedback-button:hover {
   text-decoration: none;
 }
 
+.feedback-prompt .feedback-button,
+.feedback-prompt .helpful-feedback {
+  margin-top: 10px;
+}
+
 .helpful-feedback {
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: space-between;
   font-size: 14px;
-  margin-top: 10px;
 }
 
 .helpful-feedback-buttons {
@@ -100,27 +103,26 @@ a.feedback-button:hover {
   font-size: calc(14 / var(--rem-base) * 1rem);
 }
 
-.survey {
-  background: transparent url(../img/survey.svg) center left / contain no-repeat;
+.feedback-button-text {
   padding-left: 1.75rem;
 }
 
 .git {
   background: transparent url(../img/github.svg) center left / contain no-repeat;
-  padding-left: 1.75rem;
 }
 
 .git-pull {
   background: transparent url(../img/edit.svg) center left / contain no-repeat;
-  padding-left: 1.75rem;
 }
 
 .command {
   background: transparent url(../img/command.svg) center left / contain no-repeat;
-  padding-left: 1.75rem;
+}
+
+.training {
+  background: transparent url(../img/training.png) center left / contain no-repeat;
 }
 
 .mail {
   background: transparent url(../img/mail.svg) center left / contain no-repeat;
-  padding-left: 1.75rem;
 }

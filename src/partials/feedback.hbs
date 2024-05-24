@@ -1,19 +1,19 @@
 <div class="feedback-prompt">
   {{#if (and page.fileUri (not env.CI))}}
     <a href="{{page.fileUri}}" target="_blank" class="edit-this-page feedback-button">
-      <span class="git-pull">
+      <span class="feedback-button-text git-pull">
         Edit this page
       </span>
     </a>
   {{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
     <a class="edit-this-page feedback-button" href="{{page.editUrl}}" target="_blank">
-      <span class="git-pull">
+      <span class="feedback-button-text git-pull">
         Edit this page
       </span>
     </a>
     {{#with (get-page-info)}}
       <a class="additional-feedback feedback-button" href="{{this.src.origin.webUrl}}/issues/new?title=Docs: Feedback for {{{this.title}}}&body=Hi, I have some feedback about [this page]({{{this.src.editUrl}}})%0D%0A" target="_blank">
-        <span class="git">
+        <span class="feedback-button-text git">
           Report an issue
         </span>
       </a>
