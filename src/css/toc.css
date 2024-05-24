@@ -1,5 +1,6 @@
 .toc-menu {
   color: var(--toc-font-color);
+  margin-bottom: 50px;
 }
 
 .toc.sidebar {
@@ -67,7 +68,7 @@
   color: inherit;
   border-left: 2px solid var(--toc-border-color);
   display: inline-block;
-  padding: 6px 0 6px 8px;
+  padding: 10px 0 10px 8px;
   text-decoration: none;
 }
 
