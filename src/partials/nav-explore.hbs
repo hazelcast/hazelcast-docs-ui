@@ -1,14 +1,14 @@
 <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
   <div class="navbar-product-name">
-    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product">
-      <span class="title">{{page.component.title}}</span>
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="{{page.component.title}}">
+      {{page.component.title}}
     </a>
   </div>
 
   {{#if (and page.component (not-eq page.component.name 'cloud') (not-eq page.component.name 'home'))}}
     <div class="navbar-product-version">
-      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version">
-        <span class="version">{{page.componentVersion.displayVersion}}</span>
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="{{page.componentVersion.displayVersion}}">
+        {{page.componentVersion.displayVersion}}
       </a>
     </div>
   {{/if}}
