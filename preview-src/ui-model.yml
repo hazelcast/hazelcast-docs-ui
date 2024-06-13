@@ -21,6 +21,18 @@ site:
       version: '4.0'
       displayVersion: '4.0'
     latestVersion: *latest_version_abc
+  - name: def
+    title: Management Center
+    url: '/java.html'
+    versions:
+      - &latest_version_abc
+        url: '/java.html'
+        version: '4.1'
+        displayVersion: '4.1'
+      - url: '/java.html'
+        version: '4.0'
+        displayVersion: '4.0'
+    latestVersion: *latest_version_abc
   - &component
     name: home
     title: &component_title Home
@@ -34,7 +46,8 @@ page:
   url: *home_url
   home: true
   title: Java Client
-  component: abc
+  component:
+    title: Dev Preview
   componentVersion: *latest_version_abc
   version: '4.1'
   displayVersion: '4.1'

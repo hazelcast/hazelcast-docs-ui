@@ -1,72 +1,44 @@
-<div class="nav-panel-explore{{#unless page.navigation}} is-active{{/unless}}" data-panel="explore">
-  {{#if (and page.component (not-eq page.component.name 'turbine'))}}
-    <div class="context">
+<div class="nav-version-picker">
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components">
       <span class="title">{{page.component.title}}</span>
-      {{#if (eq page.component.name 'cloud')}}
-        <span class="version">&nbsp;</span>
-      {{else}}
+    </a>
+
+
+    <ul class="nav-version-picker-components" id="navbarProductsList">
+      {{#each (sort-components site.components 'name' page.attributes.component-order)}}
+        {{#if (and (not-eq this.name 'home') (not-eq this.name 'templates'))}}
+          <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
+            {{#each ./versions}}
+              {{#if (eq this ../latest)}}
+                <a href="{{{relativize ./url}}}">
+                  {{{../title}}}
+                </a>
+              {{/if}}
+            {{/each}}
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+
+  {{#if (and (not-eq this.name 'cloud') (not-eq this.name 'home') (not-eq this.name 'templates') (eq this @root.page.component))}}
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions">
         <span class="version">{{page.componentVersion.displayVersion}}</span>
-      {{/if}}
-      <button class="nav-item-toggle nav-explore-toggle"></button>
+      </a>
+
+      {{#each (sort-components site.components 'name' page.attributes.component-order)}}
+          <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            {{#each ./versions}}
+              <li class="version
+                      {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
+                {{~#if (eq this ../latest)}} is-latest{{/if}}">
+                <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+              </li>
+            {{/each}}
+          </ul>
+      {{/each}}
     </div>
   {{/if}}
-  <ul class="components">
-    <li style="list-style: none;">Select a different product or version:</li>
-    </br>
-    {{#each (sort-components site.components 'name' page.attributes.component-order)}}
-      {{#if (and (and (not-eq this.name 'home') (not-eq this.name 'turbine'))(not-eq this.name 'templates') (not-eq this.name 'tutorials'))}}
-        <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
-          {{#if (and (not-eq this.name 'home') (not-eq this.name 'cloud'))}}
-            <span class="title">{{{./title}}} <a class="more-versions">See all versions</a><a class="fewer-versions">See fewer versions</a></span>
-          {{else}}
-            <span class="title">{{{./title}}}</span>
-          {{/if}}
-          <ul class="versions">
-            {{#if (eq this @root.page.component)}}
-              {{#if (and (not-eq this.name 'home') (not-eq this.name 'cloud'))}}
-                {{#each ./versions}}
-                  {{#if (lte @index 6)}}
-                    <li class="version
-                      {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-                      {{~#if (eq this ../latest)}} is-latest{{/if}}">
-                      <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-                    </li>
-                  {{else}}
-                    <li class="version hidden">
-                      <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-                    </li>
-                  {{/if}}
-                {{/each}}
-              {{/if}}
-            {{/if}}
-            {{#if (or (eq this.name 'home') (eq this.name 'cloud'))}}
-              <li class="version
-                {{~#if (eq this ../latest)}} is-latest{{/if}}">
-                {{#if (eq this.name 'cloud')}}
-                  <a href="{{{relativize ./url}}}">Hazelcast Cloud docs</a>
-              </li>
-                {{/if}}
-            {{else}}
-              {{#if (not-eq this @root.page.component)}}
-                {{#each ./versions}}
-                  <li class="version hidden
-                    {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-                    {{~#if (eq this ../latest)}} is-latest{{/if}}">
-                    <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-                  </li>
-                {{/each}}
-                {{/if}}
-            {{/if}}
-          </ul>
-        </li>
-      {{/if}}
-    {{/each}}
-    {{#each site.components}}
-      {{#if (eq this.name 'home')}}
-        <li class="component home">
-        <a href="{{{relativize ./url}}}">Docs home</a>
-        </li>
-      {{/if}}
-    {{/each}}
-  </ul>
 </div>
