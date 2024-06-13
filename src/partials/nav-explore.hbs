@@ -1,44 +1,45 @@
-<div class="nav-version-picker">
+<div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
   <div class="navbar-product-name">
-    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product">
       <span class="title">{{page.component.title}}</span>
     </a>
-
-
-    <ul class="nav-version-picker-components" id="navbarProductsList">
-      {{#each (sort-components site.components 'name' page.attributes.component-order)}}
-        {{#if (and (not-eq this.name 'home') (not-eq this.name 'templates'))}}
-          <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
-            {{#each ./versions}}
-              {{#if (eq this ../latest)}}
-                <a href="{{{relativize ./url}}}">
-                  {{{../title}}}
-                </a>
-              {{/if}}
-            {{/each}}
-          </li>
-        {{/if}}
-      {{/each}}
-    </ul>
   </div>
 
-  {{#if (and (not-eq this.name 'cloud') (not-eq this.name 'home') (not-eq this.name 'templates') (eq this @root.page.component))}}
+  {{#if (and page.component (not-eq page.component.name 'cloud') (not-eq page.component.name 'home'))}}
     <div class="navbar-product-version">
-      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version">
         <span class="version">{{page.componentVersion.displayVersion}}</span>
       </a>
-
-      {{#each (sort-components site.components 'name' page.attributes.component-order)}}
-          <ul class="nav-version-picker-versions" id="navbarVersionsList">
-            {{#each ./versions}}
-              <li class="version
-                      {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-                {{~#if (eq this ../latest)}} is-latest{{/if}}">
-                <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-              </li>
-            {{/each}}
-          </ul>
-      {{/each}}
     </div>
   {{/if}}
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+    {{#each (sort-components site.components 'name' page.attributes.component-order)}}
+      {{#if (and (not-eq this.name 'home') (not-eq this.name 'templates'))}}
+        <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
+          {{#each ./versions}}
+            {{#if (eq this ../latest)}}
+              <a href="{{{relativize ./url}}}">
+                {{{../title}}}
+              </a>
+            {{/if}}
+          {{/each}}
+        </li>
+      {{/if}}
+    {{/each}}
+  </ul>
+
+  {{#each (sort-components site.components 'name' page.attributes.component-order)}}
+    {{#if (and (not-eq this.name 'cloud') (not-eq this.name 'home') (not-eq this.name 'templates') (eq this @root.page.component))}}
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+        {{#each ./versions}}
+          <li class="version
+                    {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
+            {{~#if (eq this ../latest)}} is-latest{{/if}}">
+            <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  {{/each}}
 </div>

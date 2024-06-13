@@ -1,4 +1,7 @@
+
 .nav-container {
+  --nav-x-padding: 10px;
+
   position: fixed;
   margin-top: 30px;
   left: 0;
@@ -49,6 +52,7 @@
   top: 0;
   height: var(--nav-height);
   overflow-y: auto;
+  width: 100%;
 }
 
 .nav .panels {
@@ -222,6 +226,7 @@ html.is-clipped--nav {
 
 /* Version picker */
 .nav-version-picker {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -254,6 +259,11 @@ html.is-clipped--nav {
   height: 15px;
 }
 
+[data-active-toggle="product"] .nav-version-picker-toggle-components::after,
+[data-active-toggle="version"] .nav-version-picker-toggle-versions::after {
+  transform: translate(0, -50%) rotate(180deg);
+}
+
 .navbar-product-name {
   flex-basis: 100%;
 }
@@ -268,20 +278,25 @@ html.is-clipped--nav {
   position: relative;
 }
 
-.nav-version-picker-components:not(.is-active),
-.nav-version-picker-versions:not(.is-active) {
-  display: none;
+[data-active-toggle="product"] .nav-version-picker-components {
+  display: block;
+}
+
+[data-active-toggle="version"] .nav-version-picker-versions {
+  display: block;
 }
 
 .nav-version-picker-components,
 .nav-version-picker-versions {
+  display: none;
   position: absolute;
+  width: calc(300px - (var(--nav-x-padding) *2));
+  top: 100%;
   z-index: 100;
   list-style-type: none;
-  width: 100%;
   background-color: var(--info-light);
   border-radius: 5px;
-  border: 1px solid var(--accent);
+  border: 2px solid var(--accent);
   padding: 4px 6px;
 }
 
