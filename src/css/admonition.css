@@ -9,7 +9,8 @@
 
 .admonitionblock td,
 .admonitionblock th {
-  border-width: 0;
+  border-width: 0 !important;
+  padding: 0 !important;
 }
 
 .admonitionblock table {
