@@ -7,6 +7,11 @@
   margin-top: 1rem;
 }
 
+.admonitionblock td,
+.admonitionblock th {
+  border-width: 0;
+}
+
 .admonitionblock table {
   border-spacing: 0;
 }
