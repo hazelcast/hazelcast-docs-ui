@@ -7,6 +7,13 @@
   margin-top: 1rem;
 }
 
+/* to override CSS when admonition is inside a table */
+.admonitionblock td,
+.admonitionblock th {
+  border-width: 0 !important;
+  padding: 0 !important;
+}
+
 .admonitionblock table {
   border-spacing: 0;
 }

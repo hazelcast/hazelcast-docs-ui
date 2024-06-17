@@ -1,6 +1,18 @@
 /* eslint-disable no-inner-declarations */
 ;(function () {
   var SECT_CLASS_RX = /^sect(\d)$/
+  const VERSION_PICKER_ACTIVE_TOGGLE_NAME = 'data-active-toggle'
+  const VERSION_PICKER_TOGGLE_NAME = 'data-toggle-value'
+
+  function versionPickerToggleHandler () {
+    const value = this.getAttribute(VERSION_PICKER_TOGGLE_NAME)
+    const versionPicker = document.getElementById('navVersionPicker')
+    if (versionPicker.getAttribute(VERSION_PICKER_ACTIVE_TOGGLE_NAME) === value) {
+      versionPicker.setAttribute(VERSION_PICKER_ACTIVE_TOGGLE_NAME, '')
+    } else {
+      versionPicker.setAttribute(VERSION_PICKER_ACTIVE_TOGGLE_NAME, value)
+    }
+  }
 
   if (document.getElementsByClassName('nav-container').length > 0) {
     var navContainer = document.querySelector('.nav-container')
@@ -43,12 +55,12 @@
       }
     })
 
-    nav.querySelector('.context').addEventListener('click', function () {
-      var currentPanel = nav.querySelector('.is-active[data-panel]')
-      var activatePanel = currentPanel.dataset.panel === 'menu' ? 'explore' : 'menu'
-      currentPanel.classList.toggle('is-active')
-      nav.querySelector('[data-panel=' + activatePanel + ']').classList.toggle('is-active')
-    })
+    document.getElementById('navbarProductName').addEventListener('click', versionPickerToggleHandler)
+
+    const navbarProductVersionEl = document.getElementById('navbarProductVersion')
+    if (navbarProductVersionEl) {
+      navbarProductVersionEl.addEventListener('click', versionPickerToggleHandler)
+    }
 
     // NOTE prevent text from being selected by double click
     menuPanel.addEventListener('mousedown', function (e) {
