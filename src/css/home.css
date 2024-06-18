@@ -186,7 +186,6 @@
   color: var(--primary-light);
   display: flex;
   align-items: center;
-  gap: 10px;
   width: 100%;
 }
 
@@ -195,6 +194,7 @@
   width: 24px;
   height: auto;
   stroke-width: 1;
+  margin-right: 10px;
 }
 
 .home .additional-cards {
