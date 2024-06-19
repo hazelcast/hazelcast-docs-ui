@@ -19,9 +19,15 @@
         <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
           {{#each ./versions}}
             {{#if (eq this ../latest)}}
-              <a href="{{{relativize ./url}}}">
-                {{{../title}}}
-              </a>
+              {{#if (eq this.name 'tutorials')}}
+                <a href="https://docs.hazelcast.com/hazelcast/5.5-snapshot/tutorials/tutorials-index">
+                  {{{../title}}}
+                </a>
+              {{else}}
+                <a href="{{{relativize ./url}}}">
+                  {{{../title}}}
+                </a>
+              {{/if}}
             {{/if}}
           {{/each}}
         </li>
