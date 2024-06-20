@@ -6,7 +6,6 @@ site:
 #  uncomment below to test analytics locally
 #  keys:
 #    googleAnalytics: 'GTM-MQ59XD6'
-#    clarity: 'l8c076m4u9'
   components:
   - name: abc
     title: Hazelcast IMDG
