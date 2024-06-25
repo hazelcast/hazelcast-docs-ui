@@ -22,7 +22,7 @@
           hazelcast.com
         </a>
       {{/if}}
-      {{#if (or (eq page.component.name 'cloud') (eq page.component.name 'tutorials'))}}
+      {{#if (eq page.component.name 'cloud')}}
         <a class="navbar-item" href="{{{page.attributes.cloud-console}}}sign-up" target="_blank">
           <button class="button navbar-button">Try Free</button>
         </a>

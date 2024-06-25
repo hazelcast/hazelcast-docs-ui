@@ -1,17 +1,5 @@
-.tut.home .home-background {
-  height: 135px;
-}
-
-.tut.home .DocSearch-Button {
-  width: 100%;
-}
-
 .tut.home .filter > * {
   font-size: medium;
-}
-
-.tut.home h1 {
-  padding-top: 60px;
 }
 
 .tut.home .cards {
@@ -94,11 +82,16 @@
 
 .dropdown-toggle.filters {
   width: fit-content;
+  min-width: 25ch;
+  padding-top: 25px;
+  padding-bottom: 25px;
   bottom: 0;
-  left: 0;
+  left: 30px;
   position: absolute;
   height: 25px;
   border: none;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .product-boxes {
@@ -209,6 +202,12 @@
   flex-direction: row;
 }
 
+.tutorials-header {
+  color: var(--neutral-white);
+  font-weight: 400;
+  margin: 0;
+}
+
 .row.tutorials > * {
   min-width: 25ch;
   padding-top: 25px;
@@ -220,11 +219,14 @@
   padding: 0;
 }
 
-.row.tutorials.search {
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 40px;
+.tutorials.filter.end {
+  background-color: var(--neutral-lighter);
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 5px;
+  border: 1px solid var(--neutral-light);
+  padding-right: 50px;
+  padding-left: 15px;
+  margin: 0 30px;
 }
 
 .row.tutorials .card {

@@ -41,8 +41,8 @@
     {{#with page.attributes.box-number}}
     <script>
       if (document.getElementsByClassName('box').length > 0) {
-      var activeBox = document.getElementsByClassName('box box{{this}}')[0]
-      activeBox.classList.add('active')
+        var activeBox = document.getElementsByClassName('box box{{this}}')[0]
+        activeBox.classList.add('active')
       }
     </script>
     {{/with}}
@@ -62,7 +62,7 @@
           } else {
             hzDocSearch([
               "tags:tutorials",
-            ]);
+            ], 'Search all docs...');
           }
         }
     </script>

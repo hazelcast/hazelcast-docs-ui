@@ -21,6 +21,18 @@ site:
       version: '4.0'
       displayVersion: '4.0'
     latestVersion: *latest_version_abc
+  - name: tutorials
+    title: Tutorials
+    url: '/tutorials.html'
+    versions:
+      - &latest_version_abc
+        url: '/tutorials.html'
+        version: '4.1'
+        displayVersion: '4.1'
+      - url: '/tutorials.html'
+        version: '4.0'
+        displayVersion: '4.0'
+    latestVersion: *latest_version_abc
   - name: def
     title: Management Center
     url: '/java.html'

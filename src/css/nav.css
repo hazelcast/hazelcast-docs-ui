@@ -262,6 +262,10 @@ html.is-clipped--nav {
   height: 15px;
 }
 
+.nav-version-picker-toggle-versions {
+  max-width: 80px;
+}
+
 [data-active-toggle="product"] .nav-version-picker-toggle-components::after,
 [data-active-toggle="version"] .nav-version-picker-toggle-versions::after {
   transform: translate(0, -50%) rotate(180deg);
@@ -310,4 +314,8 @@ html.is-clipped--nav {
   color: var(--accent) !important;
   display: block;
   width: 100%;
+}
+
+.version.is-current {
+  font-weight: 600;
 }

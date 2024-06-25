@@ -19,15 +19,9 @@
         <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
           {{#each ./versions}}
             {{#if (eq this ../latest)}}
-              {{#if (eq this.name 'tutorials')}}
-                <a href="https://docs.hazelcast.com/hazelcast/5.5-snapshot/tutorials/tutorials-index">
-                  {{{../title}}}
-                </a>
-              {{else}}
-                <a href="{{{relativize ./url}}}">
-                  {{{../title}}}
-                </a>
-              {{/if}}
+              <a href="{{{relativize ./url}}}">
+                {{{../title}}}
+              </a>
             {{/if}}
           {{/each}}
         </li>
@@ -39,11 +33,13 @@
     {{#if (and (not-eq this.name 'cloud') (not-eq this.name 'home') (not-eq this.name 'templates') (eq this @root.page.component))}}
       <ul class="nav-version-picker-versions" id="navbarVersionsList">
         {{#each ./versions}}
-          <li class="version
-                    {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-            {{~#if (eq this ../latest)}} is-latest{{/if}}">
-            <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-          </li>
+          {{#if (lte @index 6)}}
+            <li class="version
+                      {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
+              {{~#if (eq this ../latest)}} is-latest{{/if}}">
+              <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+            </li>
+          {{/if}}
         {{/each}}
       </ul>
     {{/if}}
