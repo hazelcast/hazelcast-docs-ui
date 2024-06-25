@@ -34,6 +34,7 @@
   display: flex;
   align-items: center;
   padding-top: 15px;
+  justify-content: space-between;
 }
 
 .tut-card .start a {
@@ -42,8 +43,8 @@
 
 .button.git span {
   background: transparent url(../img/github.svg) center left / contain no-repeat;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 }
 
 .tut-cards .button.git {
@@ -297,11 +298,7 @@
 
 .summary {
   height: 100px;
-  overflow: scroll;
-}
-
-.tut-card .source {
-  width: 100%;
+  overflow: auto;
 }
 
 @media screen and (min-width: 900px) {
