@@ -20,30 +20,42 @@ site:
       version: '4.0'
       displayVersion: '4.0'
     latestVersion: *latest_version_abc
+  - name: tutorial
+    title: How to HZ
+    url: '/how-to-hz.html'
+    versions:
+    - &latest_version_hz
+      url: '/how-to-hz.html'
+      version: '4.1'
+      displayVersion: '4.1'
+    - url: '/how-to-hz.html'
+      version: '4.0'
+      displayVersion: '4.0'
+    latestVersion: *latest_version_hz
   - name: tutorials
     title: Tutorials
     url: '/tutorials.html'
     versions:
-      - &latest_version_abc
+      - &latest_version_tutorials
         url: '/tutorials.html'
         version: '4.1'
         displayVersion: '4.1'
       - url: '/tutorials.html'
         version: '4.0'
         displayVersion: '4.0'
-    latestVersion: *latest_version_abc
+    latestVersion: *latest_version_tutorials
   - name: def
     title: Management Center
     url: '/java.html'
     versions:
-      - &latest_version_abc
+      - &latest_version_def
         url: '/java.html'
         version: '4.1'
         displayVersion: '4.1'
       - url: '/java.html'
         version: '4.0'
         displayVersion: '4.0'
-    latestVersion: *latest_version_abc
+    latestVersion: *latest_version_def
   - &component
     name: home
     title: &component_title Home
@@ -94,6 +106,16 @@ page:
   - content: Quickstart
     url: '#1'
     urlType: internal
+    items:
+      - content: Java Client
+        url: '/java.html'
+        urlType: internal
+      - content: C++ Client
+        url: '#3'
+        urlType: internal
+      - content: How to HZ
+        url: '/how-to-hz.html#4'
+        urlType: internal
   - content: Hazelcast Clients
     url: '#2'
     urlType: internal
