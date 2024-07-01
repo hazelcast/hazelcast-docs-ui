@@ -1,120 +1,119 @@
 <div class="tut home">
-  <div class="tut home-background">
-    <h1>{{{page.title}}}</h1>
+  <div class="home-background">
+    <h1 class="home-background-heading">
+      Tutorials & Recipes
+    </h1>
+    <p class="home-background-subheading">
+      Learn how to build and run applications with Hazelcast.
+    </p>
+    <div id="search-input" class="search-container searchbox">
+    </div>
+    <button class="dropdown-toggle filters" onclick="toggleFilters(event)">
+      Filters<span></span>
+    </button>
   </div>
 	<main data-ceiling="topbar">
-		<article class="article">
-      <div class="cards">
-				<div class="row tutorials search">
-					<div class="card">
-          {{{page.contents}}}
+    <div id="filters" class="row tutorials filter end">
+      <div class="">
+        <div class="card-header">
+          <h3>
+            Filter by product
+          </h3>
+          <div id="enterprise" class="small-grey">
+            <span>Include Enterprise</span>
+            <label class="switch">
+              <input id="enterprise-switch" type="checkbox" onclick="toggleEnterprise(this)" checked>
+              <span class="slider round"></span>
+            </label>
           </div>
-          <div id="search-input" class="card search-container">
-          </div>
-          <button class="dropdown-toggle filters" onclick="toggleFilters(event)">
-            Filters<span></span>
+        </div>
+        <div class="product-boxes">
+          <button id="all-products" class="product-box is-active" onclick="selectProduct(event)">
+            All
+          </button>
+          <button id="cloud" class="product-box" onclick="selectProduct(event)">
+            Hazelcast Cloud
+          </button>
+          <button id="platform" class="product-box" onclick="selectProduct(event)">
+            Hazelcast Platform
+          </button>
+          <button id="operator" class="product-box" onclick="selectProduct(event)">
+            Hazelcast Platform Operator
+          </button>
+          <button id="imdg" class="product-box" onclick="selectProduct(event)">
+            Hazelcast IMDG
           </button>
         </div>
-        <div id="filters" class="row tutorials filter end">
-          <div class="card">
-            <div class="card-header">
-              <h3>
-                Filter by product
-              </h3>
-              <div id="enterprise" class="small-grey">
-                <span>Include Enterprise</span>
-                <label class="switch">
-                  <input id="enterprise-switch" type="checkbox" onclick="toggleEnterprise(this)" checked>
-                  <span class="slider round"></span>
-                </label>
-              </div>
-            </div>
-            <div class="product-boxes">
-              <button id="all-products" class="product-box is-active" onclick="selectProduct(event)">
-                All
-              </button>
-              <button id="cloud" class="product-box" onclick="selectProduct(event)">
-                Hazelcast Cloud
-              </button>
-              <button id="platform" class="product-box" onclick="selectProduct(event)">
-                Hazelcast Platform
-              </button>
-              <button id="operator" class="product-box" onclick="selectProduct(event)">
-                Hazelcast Platform Operator
-              </button>
-              <button id="imdg" class="product-box" onclick="selectProduct(event)">
-                Hazelcast IMDG
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h3>
-                Filter by language
-              </h3>
-            </div>
-            <div class="language-list">
-              <a id="all-langs" class="lang-filter-list is-active" onclick="filterLangs(this)">All</a>
-              <a id="sql" class="lang-filter-list" onclick="filterLangs(this)">SQL <img src="{{{uiRootPath}}}/img/database.svg"></a>
-              <a id="java" class="lang-filter-list" onclick="filterLangs(this)">Java <img src="{{{uiRootPath}}}/img/java.png"></a>
-              <a id="python" class="lang-filter-list" onclick="filterLangs(this)">Python <img src="{{{uiRootPath}}}/img/python.png"></a>
-              <a id="node" class="lang-filter-list" onclick="filterLangs(this)">Node.js <img src="{{{uiRootPath}}}/img/node.png"></a>
-              <a id="go" class="lang-filter-list" onclick="filterLangs(this)">Go <img src="{{{uiRootPath}}}/img/go.svg"></a>
-              <a id="cplus" class="lang-filter-list" onclick="filterLangs(this)">C++ <img src="{{{uiRootPath}}}/img/cpp.svg"></a>
-              <a id="csharp" class="lang-filter-list" onclick="filterLangs(this)">C# <img src="{{{uiRootPath}}}/img/dotnet.png"></a>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h3>
-                Filter by category
-              </h3>
-              <span id="current-category">All</span>
-            </div>
-            <div id="category-dropdown" class="dropdown">
-              <button onclick="toggleDropdown()" class="dropdown-toggle">Select a category<span></span></button>
-              <ul id="categories" class="dropdown-content" role="listbox">
-                <li role="option" value="All" onclick="filterCategories(event)">All</li>
-                {{#each (get-categories)}}
-                <li role="option" value="{{this}}" onclick="filterCategories(event)">{{this}}</li>
-                {{/each}}
-              </ul>
-            </div>
-            <span id="current-category"></span>
-          </div>
+      </div>
+      <div class="">
+        <div class="card-header">
+          <h3>
+            Filter by language
+          </h3>
         </div>
-        <div class="row tutorials boxes">
-          <div class="tut-cards">
-            {{#each (get-tutorial-pages null)}}
-              <div data-product="{{this.asciidoc.attributes.page-product}}" {{#if this.asciidoc.attributes.page-enterprise}} data-edition="enterprise" {{/if}} data-lang="{{this.asciidoc.attributes.page-lang}}" data-categories="{{this.asciidoc.attributes.page-categories}}" class="tut-card">
-                <div class="card-header">
-                  <h3>
-                    {{this.asciidoc.attributes.doctitle}}
-                  </h3>
-                  <div class="time">
-                    <p>
-                      {{this.asciidoc.attributes.page-est-time}}
-                    </p>
-                  </div>
-                </div>
-                <div class="summary">
-                  <div class="card-summary">
-                    <p>
-                      {{{this.asciidoc.attributes.description}}}
-                    </p>
-                  </div>
-                </div>
-                <div class="start">
-                  <div class="source">
-                    <a href="{{this.src.origin.webUrl}}/tree/{{this.asciidoc.attributes.page-origin-branch}}"><button class="button git">VIEW SOURCE<span></span></button></a></div>
-                  <div class="get-started">
-                    <a href="{{{this.pub.url}}}"><button class="button">START <img src="{{{siteRootPath}}}/home/_images/right-arrow-white.svg"></button></a>
-                  </div>
-                </div>
-              </div>
-            {{/each}}
+        <div class="language-list">
+          <a id="all-langs" class="lang-filter-list is-active" onclick="filterLangs(this)">All</a>
+          <a id="sql" class="lang-filter-list" onclick="filterLangs(this)">SQL <img src="{{{uiRootPath}}}/img/database.svg"></a>
+          <a id="java" class="lang-filter-list" onclick="filterLangs(this)">Java <img src="{{{uiRootPath}}}/img/java.png"></a>
+          <a id="python" class="lang-filter-list" onclick="filterLangs(this)">Python <img src="{{{uiRootPath}}}/img/python.png"></a>
+          <a id="node" class="lang-filter-list" onclick="filterLangs(this)">Node.js <img src="{{{uiRootPath}}}/img/node.png"></a>
+          <a id="go" class="lang-filter-list" onclick="filterLangs(this)">Go <img src="{{{uiRootPath}}}/img/go.svg"></a>
+          <a id="cplus" class="lang-filter-list" onclick="filterLangs(this)">C++ <img src="{{{uiRootPath}}}/img/cpp.svg"></a>
+          <a id="csharp" class="lang-filter-list" onclick="filterLangs(this)">C# <img src="{{{uiRootPath}}}/img/dotnet.png"></a>
         </div>
       </div>
-		</article>
+      <div class="">
+        <div class="card-header">
+          <h3>
+            Filter by category
+          </h3>
+          <span id="current-category">All</span>
+        </div>
+        <div id="category-dropdown" class="dropdown">
+          <button onclick="toggleDropdown()" class="dropdown-toggle">Select a category<span></span></button>
+          <ul id="categories" class="dropdown-content" role="listbox">
+            <li role="option" value="All" onclick="filterCategories(event)">All</li>
+            {{#each (get-categories)}}
+              <li role="option" value="{{this}}" onclick="filterCategories(event)">{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        <span id="current-category"></span>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="row tutorials boxes">
+        <div class="tut-cards">
+          {{#each (get-tutorial-pages null)}}
+            <div data-product="{{this.asciidoc.attributes.page-product}}" {{#if this.asciidoc.attributes.page-enterprise}} data-edition="enterprise" {{/if}} data-lang="{{this.asciidoc.attributes.page-lang}}" data-categories="{{this.asciidoc.attributes.page-categories}}" class="tut-card">
+              <div class="card-header">
+                <h3>
+                  {{this.asciidoc.attributes.doctitle}}
+                </h3>
+                <div class="time">
+                  <p>
+                    {{this.asciidoc.attributes.page-est-time}}
+                  </p>
+                </div>
+              </div>
+              <div class="summary">
+                <div class="card-summary">
+                  <p>
+                    {{{this.asciidoc.attributes.description}}}
+                  </p>
+                </div>
+              </div>
+              <div class="start">
+                <div class="source">
+                  <a href="{{this.src.origin.webUrl}}/tree/{{this.asciidoc.attributes.page-origin-branch}}"><button class="button git">VIEW SOURCE<span></span></button></a></div>
+                <div class="get-started">
+                  <a href="{{{this.pub.url}}}"><button class="button">START <img src="{{{siteRootPath}}}/home/_images/right-arrow-white.svg"></button></a>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+      </div>
+    </div>
+    </div>
 	</main>
 </div>

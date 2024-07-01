@@ -9,9 +9,18 @@
   --primary-light: #2d7de4;
   --primary: #2160c0;
   --primary-dark: #003b87;
-  --info-light: #cbdbff;
+  --accent: #0080a9;
+  --accent-light: #10a4b3;
+  --accent2: #c91268;
+  --accent2-light: #ffe3e3;
+  --accent3: #f5911e;
+  --accent3-light: #ffe8da;
+  --accent4: #c6ff3a;
+  --accent4-light: #f7ffe4;
+  --accent5: #0019fe;
+  --accent5-light: #e0e8ff;
+  --info-light: #f0f6ff;
   --info: #4a71c4;
-  --info-dark: #4a71c4;
   --accessibility-outline: #2160c0;
   --error: #b00020;
   --warning-light: #f9b721;
@@ -31,16 +40,17 @@
   --color-black: #000;
   /* fonts */
   --rem-base: 18; /* used to compute rem value from desired pixel value (e.g., calc(18 / var(--rem-base) * 1rem) = 18px) */
-  --body-font-size: 1.0625em; /* 17px */
+  --body-font-size: 1em; /* 16px */
   --body-font-size--print: 0.9375em; /* 15px */
   --body-line-height: 1.4;
   --body-font-color: var(--text);
-  --body-font-family: "Roboto", sans-serif;
+  --header-color: #071627;
+  --body-font-family: "Open Sans", sans-serif;
   --body-font-weight-bold: 600;
-  --nav-font-family: "Roboto", sans-serif;
+  --nav-font-family: "PP Telegraf", sans-serif;
   --nav-font-weight: 500;
   --monospace-font-family: "Roboto Mono", monospace;
-  --heading-font-family: "Roboto", sans-serif;
+  --heading-font-family: "PP Telegraf", sans-serif;
   --monospace-font-weight-bold: 500;
   /* base */
   --body-background: #f2f5f9;
@@ -51,7 +61,7 @@
   --navbar-background: var(--neutral-white);
   --navbar-font-color: #24292e;
   --navbar_hover-background: var(--neutral-lighter);
-  --navbar-button-background: var(--primary);
+  --navbar-button-background: var(--accent-light);
   --navbar-button-font-color: var(--neutral-white);
   --navbar-menu-border-color: var(--panel-border-color);
   --navbar-menu-background: var(--neutral-white);
@@ -90,8 +100,8 @@
   /* doc */
   --doc-font-color: var(--text);
   --doc-font-size: inherit;
-  --doc-font-size--desktop: calc(17 / var(--rem-base) * 1rem);
-  --doc-line-height: 1.4;
+  --doc-font-size--desktop: 16px;
+  --doc-line-height: 1.6;
   --doc-margin: 0 auto;
   --doc-margin--desktop: 0 2rem;
   --doc-margin--desktop-large: 0 3rem;
@@ -126,10 +136,9 @@
   --table-border-color: var(--panel-border-color);
   /* footer */
   --footer-line-height: var(--doc-line-height);
-  --footer-background: #424242;
   --footer-font-color: #fafafa;
   /* dimensions and positioning */
-  --navbar-height: 50px;
+  --navbar-height: 60px;
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);
   --drawer-height: var(--toolbar-height);
   --body-top: var(--navbar-height);
@@ -145,6 +154,7 @@
   --doc-max-width: calc(720 / var(--rem-base) * 1rem);
   --doc-max-width--desktop: calc(1500 / var(--rem-base) * 1rem);
   --border-radius: 5px;
+  --cards-gap: 24px;
   /* stacking */
   --z-index-nav: 1;
   --z-index-toolbar: 2;

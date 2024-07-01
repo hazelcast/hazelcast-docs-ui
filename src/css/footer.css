@@ -1,22 +1,15 @@
-footer.footer {
-  background-color: var(--footer-background);
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--header-color);
   color: var(--footer-font-color);
   font-size: calc(15 / var(--rem-base) * 1rem);
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  line-height: var(--footer-line-height);
-  text-align: center;
-  padding: 1em;
-  bottom: 0;
   height: 90px;
-  border-top: 1px solid var(--section-divider-color);
 }
 
 .footer a {
   color: var(--footer-font-color);
   padding-right: 8px;
-}
-
-.footer a:nth-child(3) {
-  padding-right: 0;
 }

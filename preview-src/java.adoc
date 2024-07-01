@@ -22,9 +22,93 @@ NOTE: You do not need to set a license key for your Java clients for which you w
 use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
 required only for members.
 
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+== Getting Started with Java Client
+
+TIP: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+== Getting Started with Java Client
+
+IMPORTANT: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+== Getting Started with Java Client
+
+CAUTION: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+== Getting Started with Java Client or Maybe some other client
+
+WARNING: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+
+== Getting Started with Java Client
+
+NOTE: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+== Getting Started with Java Client
+
+TIP: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+== Getting Started with Java Client
+
+IMPORTANT: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+== Getting Started with Java Client
+
+CAUTION: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+Imagine a trading application where all the trading data are stored and
+managed in a Hazelcast cluster with tens of members.
+
+== Getting Started with Java Client
+
+WARNING: You do not need to set a license key for your Java clients for which you want to
+use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
+required only for members.
+
+
+== Getting Started with Java Client
+
 Simply include the `hazelcast.jar` dependency in your classpath to start using
 the Hazelcast Java client. Once included, you can start using this client as if
 you are using the Hazelcast API. The differences are discussed in the below sections.
+
+== Getting Started with Java Client
 
 If you prefer to use Maven, simply add the `hazelcast` dependency
 to your `pom.xml`, which you may already have done to start using
@@ -55,6 +139,8 @@ clientConfig.getNetworkConfig().addAddress("10.90.0.1", "10.90.0.2:5702");
 
 See the <<configuring-java-client, Configuring Java Client section>> for more information.
 
+== Getting Started with Java Client
+
 The second step is initializing the `HazelcastInstance` to be connected to the cluster.
 
 ```
@@ -65,6 +151,8 @@ HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
 
 Let's create a map and populate it with some data.
 
+== Getting Started with Java Client
+
 [source,java]
 ----
 IMap<String, Customer> mapCustomers = client.getMap("customers"); //creates the map proxy
@@ -73,6 +161,8 @@ mapCustomers.put("1", new Customer("Joe", "Smith"));
 mapCustomers.put("2", new Customer("Ali", "Selam"));
 mapCustomers.put("3", new Customer("Avi", "Noyan"));
 ----
+
+== Getting Started with Java Client
 
 As the final step, if and when you are done with your client, you can shut it down as shown below:
 

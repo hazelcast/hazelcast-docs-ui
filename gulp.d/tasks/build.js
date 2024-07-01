@@ -101,7 +101,7 @@ module.exports = (src, dest, preview) => () => {
       .pipe(postcss((file) => ({ plugins: postcssPlugins, options: { file } }))),
     vfs.src('font/*.{ttf,woff*(2)}', opts),
     vfs
-      .src('img/**/*.{gif,ico,jpg,png,svg}', opts)
+      .src('img/**/*.{gif,ico,jpg,jpeg,png,svg,jpeg}', opts)
       .pipe(
         preview
           ? through()

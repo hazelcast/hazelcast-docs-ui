@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-{{> head defaultPageTitle='Hazelcast'}}
+    {{> head defaultPageTitle='Hazelcast'}}
   </head>
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
-{{> header}}
-{{> body}}
-{{> footer}}
+    {{> header}}
+    {{> body}}
+    {{> feedback-footer }}
+    {{> footer}}
   </body>
 </html>

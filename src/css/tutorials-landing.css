@@ -1,17 +1,5 @@
-.tut.home .home-background {
-  height: 135px;
-}
-
-.tut.home .DocSearch-Button {
-  width: 100%;
-}
-
 .tut.home .filter > * {
   font-size: medium;
-}
-
-.tut.home h1 {
-  padding-top: 60px;
 }
 
 .tut.home .cards {
@@ -46,6 +34,7 @@
   display: flex;
   align-items: center;
   padding-top: 15px;
+  justify-content: space-between;
 }
 
 .tut-card .start a {
@@ -53,9 +42,9 @@
 }
 
 .button.git span {
-  background: transparent url(../img/github.svg) center left no-repeat;
-  width: 25px;
-  height: 25px;
+  background: transparent url(../img/github.svg) center left / contain no-repeat;
+  width: 20px;
+  height: 20px;
 }
 
 .tut-cards .button.git {
@@ -94,11 +83,16 @@
 
 .dropdown-toggle.filters {
   width: fit-content;
+  min-width: 25ch;
+  padding-top: 25px;
+  padding-bottom: 25px;
   bottom: 0;
-  left: 0;
+  left: 30px;
   position: absolute;
   height: 25px;
   border: none;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .product-boxes {
@@ -116,8 +110,8 @@
   background: #fafafa;
   border: 1px solid #b7c1cb;
   box-sizing: border-box;
-  color: #707482;
-  border-bottom: 3px solid #707482;
+  color: var(--secondary-text);
+  border-bottom: 3px solid var(--secondary-text);
   border-radius: 5px;
 }
 
@@ -209,6 +203,12 @@
   flex-direction: row;
 }
 
+.tutorials-header {
+  color: var(--neutral-white);
+  font-weight: 400;
+  margin: 0;
+}
+
 .row.tutorials > * {
   min-width: 25ch;
   padding-top: 25px;
@@ -220,11 +220,14 @@
   padding: 0;
 }
 
-.row.tutorials.search {
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding-bottom: 40px;
+.tutorials.filter.end {
+  background-color: var(--neutral-lighter);
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 5px;
+  border: 1px solid var(--neutral-light);
+  padding-right: 50px;
+  padding-left: 15px;
+  margin: 0 30px;
 }
 
 .row.tutorials .card {
@@ -288,18 +291,14 @@
 
 .time {
   font-size: small;
-  color: #707482;
+  color: var(--secondary-text);
   margin-left: auto;
   white-space: nowrap;
 }
 
 .summary {
   height: 100px;
-  overflow: scroll;
-}
-
-.tut-card .source {
-  width: 100%;
+  overflow: auto;
 }
 
 @media screen and (min-width: 900px) {

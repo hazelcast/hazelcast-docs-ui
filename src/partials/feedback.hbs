@@ -1,30 +1,29 @@
-</br>
 <div class="feedback-prompt">
-  {{#if (eq page.layout 'tutorial')}}
-    {{#with (get-page-info)}}
-      <div class="source">
-        <a class="git" href="{{this.src.origin.webUrl}}/tree/{{this.asciidoc.attributes.page-origin-branch}}">View source</a>
-      </div>
-    {{/with}}
-  {{/if}}
   {{#if (and page.fileUri (not env.CI))}}
-    <div class="edit-this-page"><a class="git-pull" href="{{page.fileUri}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
+    <a href="{{page.fileUri}}" target="_blank" class="edit-this-page feedback-button">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
   {{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
+    <a class="edit-this-page feedback-button" href="{{page.editUrl}}" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
     {{#with (get-page-info)}}
-      <div class="additional-feedback"><a href="{{this.src.origin.webUrl}}/issues/new?title=Docs: Feedback for {{{this.title}}}&body=Hi, I have some feedback about [this page]({{{this.src.editUrl}}})%0D%0A" class ="git" target="_blank">Report an issue</a></div>
+      <a class="additional-feedback feedback-button" href="{{this.src.origin.webUrl}}/issues/new?title=Docs: Feedback for {{{this.title}}}&body=Hi, I have some feedback about [this page]({{{this.src.editUrl}}})%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
     {{/with}}
-    <div class="edit-this-page"><a class="git-pull" href="{{page.editUrl}}" onclick="window.open(this.href,'_blank');return false;">Edit this page</a></div>
   {{/if}}
   <form name="docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST" data-netlify="true">
-    <label>Was this page helpful?</label><br>
     <p class="hidden">
-    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
     </p>
-    <input type="radio" id="yes" name="helpful" value="yes" onclick="submitForm()">
-    <label for="yes" id="yes-button"><i class="far fa-check-circle"></i> Yes</label>
-    <input type="radio" id="no" name="helpful" value="no" onclick="submitForm()">
-    <label for="no" id="no-button"><i class="far fa-times-circle"></i> No</label><br>
-    </select>
+    {{> was-this-helpful-feedback }}
   </form>
 </div>
 <script>

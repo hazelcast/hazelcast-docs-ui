@@ -4,8 +4,9 @@ site:
   title: Documentation Preview
   homeUrl: &home_url /index.html
 #  uncomment below to test analytics locally
-#  keys:
+  keys:
 #    googleAnalytics: 'GTM-MQ59XD6'
+    aiSearchId: 'ad664bf0-07e2-42e7-9150-2e1b04b15cca'
   components:
   - name: abc
     title: Hazelcast IMDG
@@ -19,6 +20,42 @@ site:
       version: '4.0'
       displayVersion: '4.0'
     latestVersion: *latest_version_abc
+  - name: tutorial
+    title: How to HZ
+    url: '/how-to-hz.html'
+    versions:
+    - &latest_version_hz
+      url: '/how-to-hz.html'
+      version: '4.1'
+      displayVersion: '4.1'
+    - url: '/how-to-hz.html'
+      version: '4.0'
+      displayVersion: '4.0'
+    latestVersion: *latest_version_hz
+  - name: tutorials
+    title: Tutorials
+    url: '/tutorials.html'
+    versions:
+      - &latest_version_tutorials
+        url: '/tutorials.html'
+        version: '4.1'
+        displayVersion: '4.1'
+      - url: '/tutorials.html'
+        version: '4.0'
+        displayVersion: '4.0'
+    latestVersion: *latest_version_tutorials
+  - name: def
+    title: Management Center
+    url: '/java.html'
+    versions:
+      - &latest_version_def
+        url: '/java.html'
+        version: '4.1'
+        displayVersion: '4.1'
+      - url: '/java.html'
+        version: '4.0'
+        displayVersion: '4.0'
+    latestVersion: *latest_version_def
   - &component
     name: home
     title: &component_title Home
@@ -32,7 +69,8 @@ page:
   url: *home_url
   home: true
   title: Java Client
-  component: abc
+  component:
+    title: Dev Preview
   componentVersion: *latest_version_abc
   version: '4.1'
   displayVersion: '4.1'
@@ -65,17 +103,36 @@ page:
     url: '#'
   navigation:
   - root: true
+  - content: Quickstart
+    url: '#1'
+    urlType: internal
     items:
-    - content: Quickstart
-      url: '#'
-      urlType: fragment
-    - content: Hazelcast Clients
-      url: '#'
-      urlType: fragment
-      items:
       - content: Java Client
         url: '/java.html'
         urlType: internal
       - content: C++ Client
-        url: '#'
+        url: '#3'
         urlType: internal
+      - content: How to HZ
+        url: '/how-to-hz.html#4'
+        urlType: internal
+  - content: Hazelcast Clients
+    url: '#2'
+    urlType: internal
+    items:
+    - content: Java Client
+      url: '/java.html'
+      urlType: internal
+    - content: C++ Client
+      url: '#3'
+      urlType: internal
+    - content: Hazelcast Deep Client. Pretty long
+      url: '#4'
+      urlType: fragment
+      items:
+       - content: Java Client 2
+         url: '/java2.html'
+         urlType: internal
+       - content: C++ Client
+         url: '#5'
+         urlType: internal

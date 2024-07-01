@@ -9,6 +9,7 @@
 :url-gulp: http://gulpjs.com
 :url-node: https://nodejs.org
 :url-node-dl: https://nodejs.org/en/download/
+:feather-docs: https://feathericons.com/
 
 The Hazelcast documentation UI is open source, and we welcome your contributions!
 
@@ -221,6 +222,24 @@ To test the search from the preview site, set the following environment variable
 * `ALGOLIA_APP_ID` - the application ID that hosts the search index (optional if you're using docsearch)
 * `ALGOLIA_API_KEY` - your API key for Algolia
 * `ALGOLIA_INDEX_NAME` - the name of the index
+
+=== Icons
+
+There is the {feather-docs}[feather] icons pack added to the UI. To use it, just add the following element
+
+```
+<i data-feather="briefcase" class="card-img"></i>
+```
+
+Please note, that the previous HTML snippet is replaced with the real icon after page load with the JS snippet:
+
+```
+<script>
+feather.replace();
+</script>
+```
+
+That snippet is already included in each page globally in `footer-scripts.hbs`, so you don't need to add it. But if you experience a delay in icon loading, then you probably should add it also in your page template or partial.
 
 === View Latest
 

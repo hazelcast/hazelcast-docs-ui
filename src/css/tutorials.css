@@ -7,8 +7,7 @@
 }
 
 .tutorial .git {
-  background: transparent url(../img/github.svg) 0 no-repeat;
-  font-size: 0.8em;
+  background: transparent url(../img/github.svg) 0 / contain no-repeat;
   margin-top: 20px;
   color: #2d7de4;
 }

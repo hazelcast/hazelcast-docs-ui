@@ -25,7 +25,6 @@
 }
 
 .page-versions .version-menu {
-  border: 1px solid transparent;
   font-size: calc(14 / var(--rem-base) * 1rem);
   z-index: 1;
   background-color: #fff;
@@ -34,9 +33,9 @@
   top: 0;
   left: 0;
   width: 100%;
-  border-left: 1px solid #dadada;
-  border-right: 1px solid #dadada;
-  border-bottom: 1px solid #dadada;
+  border: 1px solid var(--nav-border-color);
+  border-top-color: transparent;
+  border-radius: 0 0 5px 5px;
 }
 
 .page-versions:not(.is-active) .version-menu {
@@ -45,7 +44,7 @@
 
 .page-versions .version {
   display: block;
-  padding-top: 0.5rem;
+  padding: 0.5rem;
 }
 
 .page-versions .version.is-current {

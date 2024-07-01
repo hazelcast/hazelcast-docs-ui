@@ -23,7 +23,7 @@
 
 #userMap .box:hover,
 #userMap .active {
-  background-color: var(--info-dark);
+  background-color: var(--info);
   color: white;
   font-weight: bold;
 }

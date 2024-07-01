@@ -1,183 +1,294 @@
 <div class="home">
   <div class="home-background">
-    <h1>{{{page.title}}}</h1>
-    <div id="search-input" class="search-container">
+    <h1 class="home-background-heading">
+      Hazelcast Documentation
+    </h1>
+    <p class="home-background-subheading">
+      Find user guides, code samples, tutorials, API reference, and more.
+    </p>
+    <div id="search-input" class="search-container searchbox">
     </div>
   </div>
 	<main data-ceiling="topbar">
 		<article class="article">
-			<div class="cards">
-				<div class="row landing">
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="zap" class="card-img"></i>
+          <h4 class="card-title">Get started</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/what-is-hazelcast">What is Hazelcast Platform?</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/get-started-docker">Start a local cluster</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/enterprise-overview">Get started with Enterprise Edition</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/install-hazelcast">Install Community Edition for free</a>
+          </li>
+        </ul>
+      </div>
 
-					<div class="card">
-						<h3 class="card-header"><a href="{{{siteRootPath}}}/cloud/">Hazelcast Cloud</a></h3>
-						<p class="card-summary">
-							Simplify the development and deployment of your applications with a cloud managed service based on Hazelcast Platform.
-						</p>
-						<div class="section-content-columns">
-							<div class="section-content-column">
-								<h4 class="section-content-title">Get Started</h4>
-								<ul class="section-content-list">
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/get-started">Hello World</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/overview">About Hazelcast Cloud</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/tutorials">Tutorials</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/support">Support</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/release-notes">Release Notes</a>
-									</li>
-								</ul>
-							</div>
-							<div class="section-content-column">
-								<h4 class="section-content-title">Quick Links</h4>
-								<ul class="section-content-list">
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/create-account">Create an Account</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/multi-factor-authentication">Multi-Factor Authentication</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/payment-methods">Billing and Payments</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/developer-guide">Developer Guide</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/cloud/management-center">Monitor Your Clusters</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="layers" class="card-img"></i>
+          <h4 class="card-title">Hazelcast Platform</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/whats-new">What’s new in 5.4</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/deploy/choosing-a-deployment-option">Available topologies</a>
+          </li>          
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/editions">Community vs. Enterprise</a>
+          </li>
+<!--      <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/getting-started/editions">Install and upgrade</a>
+          </li>                    
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/getting-started/editions">Feature overview</a>
+          </li>
+!-->
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/deploy/deploying-in-cloud">Cloud deployment</a>
+          </li>
+        </ul>
+      </div>
 
-					<div class="card">
-						<h3 class="card-header"><a href="{{{siteRootPath}}}/hazelcast/latest/">Hazelcast Platform</a>
-						</h3>
-						<p class="card-summary">
-							Manually deploy and manage a Hazelcast Platform cluster on your own hardware or in a public cloud environment.
-						</p>
-						<div class="section-content-columns">
-							<div class="section-content-column">
-								<h4 class="section-content-title">Get Started</h4>
-								<ul class="section-content-list">
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/install-hazelcast">Install Open Source</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/install-enterprise">Install Enterprise</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/enterprise-overview">Explore Enterprise Features</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/support">Support</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/hazelcast/latest/release-notes/releases">Release Notes</a>
-									</li>
-								</ul>
-							</div>
-							<div class="section-content-column">
-								<h4 class="section-content-title">Quick Links</h4>
-								<ul class="section-content-list">
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/hazelcast/latest/whats-new">What's New in the Latest Release</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/hazelcast/latest/sql/sql-overview">SQL</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/operator/latest/">Kubernetes Operator Deployment Guide</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/hazelcast/latest/data-structures/map">Map Data Structure</a>
-									</li>
-									<li class="section-content-list-item">
-										<a href="{{{siteRootPath}}}/hazelcast/latest/clients/java">Java Client</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="briefcase" class="card-img"></i>
+          <h4 class="card-title">Develop and build</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/clients/hazelcast-clients">Get started with a Hazelcast Client</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/architecture/architecture">Architecture</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/kubernetes/deploying-in-kubernetes">Deploying with Kubernetes</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/cluster-performance/best-practices">Best practices</a>
+        </ul>
+      </div>
 
-				<div class="row landing">
-					<div class="card clients-first">
-						<h3 class="card-header">Hazelcast Client Libraries
-						</h3>
-						<p class="card-summary">
-							Connect your applications to Hazelcast clusters.
-						</p>
-					</div>
-					<div class="card clients">
-						<figure class="item">
-								<a href="https://docs.hazelcast.com/hazelcast/latest/clients/java"><img src="{{{uiRootPath}}}/img/language-logo-java.png">
-								<figcaption class="caption">Java</figcaption></a>
-						</figure>
-						<figure class="item">
-								<a href="https://hazelcast.github.io/hazelcast-csharp-client/latest/doc/index.html"><img src="{{{uiRootPath}}}/img/dotnet.png">
-								<figcaption class="caption">.Net</figcaption></a>
-						</figure>
-						<figure class="item">
-								<a href="https://hazelcast.github.io/hazelcast-cpp-client/doc-index.html"><img src="{{{uiRootPath}}}/img/cpp.svg"/>
-								<figcaption class="caption">C++</figcaption></a>
-						</figure>
-						<figure class="item">
-								<a href="https://github.com/hazelcast/hazelcast-nodejs-client/blob/master/DOCUMENTATION.md"><img src="{{{uiRootPath}}}/img/language-logo-node.png"/>
-								<figcaption class="caption">Node.js</figcaption></a>
-						</figure>
-						<figure class="item">
-								<a href="https://hazelcast.readthedocs.io/en/stable/"><img src="{{{uiRootPath}}}/img/language-logo-python.png"/>
-								<figcaption class="caption">Python</figcaption></a>
-						</figure>
-						<figure class="item">
-								<a href="https://pkg.go.dev/github.com/hazelcast/hazelcast-go-client"><img src="{{{uiRootPath}}}/img/go.png"/>
-								<figcaption class="caption">Go</figcaption></a>
-						</figure>
-						<figure class="item">
-								<a href="https://docs.hazelcast.com/clc/latest/"><img src="{{{uiRootPath}}}/img/clc-logo.png"/>
-								<figcaption class="caption">CLC</figcaption></a>
-						</figure>
-					</div>
-					<div class="card mc">
-					<h3 class="card-header"><a href="{{{siteRootPath}}}/management-center/latest/">Management Center</a>
-					</h3>
-					<p class="card-summary">
-						Monitor your Hazelcast clusters.
-					</p>
-					<ul class="section-content-list">
-						<li class="get-started-home section-content-list-item">
-							<a href="{{{siteRootPath}}}/management-center/latest/getting-started.html">Get Started <img src="{{{siteRootPath}}}/home/_images/right-arrow.svg"></a>
-						</li>
-					</ul>
-					</div>
-					<div class="card">
-						<a href="{{{siteRootPath}}}/management-center/latest/"><img style="max-width: 250px;" src="{{{uiRootPath}}}/img/mc-dashboard.svg"></a>
-					</div>
-				</div>
+      <div class="card">
+        <div class="card-header">
+          <!-- <img class="card-img" src="{{{uiRootPath}}}/img/team.svg" alt="team" /> -->
+          <i data-feather="target" class="card-img"></i>          
+          <h4 class="card-title">Operate and manage</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/configuration/understanding-configuration">Configuration</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/security/overview">Security</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/cp-subsystem/cp-subsystem">CP Subsystem</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/wan/wan">WAN Replication</a>
+          </li>
+        </ul>
+      </div>
 
-				<div class="row landing end seealso">
-					<div class="card">
-					<h3 class="card-header">See Also
-					</h3>
-						<a href="https://hazelcast.com/hub/">Integration Hub: </a>Explore our connectors and plugins for integrating Hazelcast with various data systems, application frameworks, and cloud runtimes.</li>
-					</div>
-					<div class="card">
-						<a href="{{{siteRootPath}}}/tutorials">Tutorials: </a>Explore tutorials and sample apps that show you how to use Hazelcast for different use cases.</li>
-					</div>
-					<div class="card">
-						<a href="https://training.hazelcast.com/">Online Training: </a>Learn Hazelcast by following self-paced online training courses.</li>
-					</div>
-				</div>
-			</div>
+      <div class="card">
+        <div class="card-header">
+          <!-- <img class="card-img" src="{{{uiRootPath}}}/img/team.svg" alt="team" /> -->
+          <i data-feather="server" class="card-img"></i>             
+          <h4 class="card-title">Clients and APIs</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/clients/java/">
+              <img class="card-img" src="{{{uiRootPath}}}/img/java.png" alt="java" />
+              Java
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/clients/cplusplus">
+              <img class="card-img" src="{{{uiRootPath}}}/img/cpp.svg" alt="cpp" />
+              C++
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/clients/python">
+              <img class="card-img" src="{{{uiRootPath}}}/img/python.png" alt="python" />
+              Python
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/clients/hazelcast-clients/">All libraries & APIs (C#, Go...)</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <img class="card-img" src="{{{uiRootPath}}}/img/streaming.svg" alt="team" />
+          <h4 class="card-title">Connectors</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/integrate/kafka-connector">
+              Kafka
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/integrate/mongodb-connector">
+              MongoDB
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/integrate/jdbc-connector">
+              JDBC
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/integrate/connectors">All connectors (Redis, Custom)</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="tool" class="card-img"></i>
+          <h4 class="card-title">Tools</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/management-center/latest/getting-started/overview/">Management Center</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/operator/latest/">Platform Operator</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/clc/latest/overview/">Command Line Client (CLC)</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/plugins/hazelcast-plugins">Plugins</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="cloud" class="card-img"></i>
+          <h4 class="card-title">Cloud</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/cloud/overview">About Hazelcast Cloud</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/cloud/get-started">Hello World</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/cloud/tutorials">Cloud Tutorials</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/cloud/developer-guide">Developer Guide</a>
+          </li>
+        </ul>
+      </div>
+
+
 		</article>
+
+    <aside class="additional-cards">
+      <div class="additional-card">
+        <div class="card-header">
+          <i data-feather="book-open" class="card-img"></i>
+          <h4 class="card-title">Tutorials</h4>
+        </div>
+        <dl class="card-list">
+          <dt class="card-list-item">
+            <a href="{{{siteRootPath}}}/tutorials/java-client-getting-started">Get Started with Java Client</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Use Hazelcast Cloud to get started with a Java client and manipulate a map.
+          </dd>
+          <dt class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/tutorials/kubernetes">Deploy Hazelcast using Kubernetes</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Deploy a Hazelcast cluster to Kubernetes and connect it to a Kubernetes application.
+          </dd>
+          <dt class="card-list-item">
+            <a href="https://training.hazelcast.com/introduction-to-stream-processing-with-hazelcast?utm_source=docs-website">Free Training: Hazelcast Platform Essentials</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Learn how to use Hazelcast to create real-time applications using our fast data storage and distributed computing engine.
+          </dd>          
+          <dt class="card-list-item">
+            <a href="{{{siteRootPath}}}/tutorials/airline-connections">Build Airline Connections Demo using Hazelcast Cloud</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Create an application that uses streaming data to correlate flight details with stored data.
+          </dd>
+          <dt class="card-list-item">
+            <a href="{{{siteRootPath}}}/tutorials/spring-boot-client">Create a Spring Boot Application for Hazelcast Cloud</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Deploy a Spring Boot application that uses Hazelcast as a cache manager.
+          </dd>
+        </dl>
+      </div>
+
+      <div class="additional-card">
+        <div class="card-header">
+          <i data-feather="award" class="card-img"></i>
+          <h4 class="card-title">Popular</h4>
+        </div>
+        <dl class="card-list">
+          <dt class="card-list-item">
+            <a href="https://hazelcast.com/blog/announcing-hazelcast-platform-5-4-release">Blog: What’s New in Hazelcast 5.4</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Discover our latest improvements, including Tiered Storage, CP Map, Thread-Per-Core (TPC), User Code Namespaces, and much more.
+          </dd>
+          <dt class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/mapstore/working-with-external-data">Build a Cache with MapStore</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Deploy Hazelcast using Kubernetes and get up and running as quickly as possible.
+          </dd>
+          <dt class="card-list-item">
+            <a href="{{{siteRootPath}}}/tutorials/write-through-cache-serverless-mapstore/">Building a cache with MapStore</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Use the MapStore API to build a cache on top of Hazelcast.
+          </dd>
+          <dt class="card-list-item">
+            <a href="{{{siteRootPath}}}/tutorials/hazelcast-platform-operator-expose-externally/">Using Platform Operator</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Simplify working with Hazelcast clusters on Kubernetes and OpenShift.
+          </dd>
+          <dt class="card-list-item">
+            <a href="https://hazelcast.com/blog/spring-boot/">Blog: Caching with Spring Boot and Hazelcast</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Read this step-by-step blog on how to use Hazelcast as a cache manager for your Spring Boot application.
+          </dd>
+        </dl>
+      </div>
+    </aside>
+
+    {{> feedback-footer }}
 	</main>
 </div>
+
+<script>
+  feather.replace();
+</script>

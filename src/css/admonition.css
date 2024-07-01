@@ -1,0 +1,82 @@
+.admonitionblock {
+  position: relative;
+  border-radius: 9px;
+  border-left-width: 8px;
+  border-left-style: solid;
+  padding: 15px 10px 15px 20px;
+  margin-top: 1rem;
+}
+
+/* to override CSS when admonition is inside a table */
+.admonitionblock td,
+.admonitionblock th {
+  border-width: 0 !important;
+  padding: 0 !important;
+}
+
+.admonitionblock table {
+  border-spacing: 0;
+}
+
+.admonitionblock .content > :first-child {
+  margin-top: 0;
+}
+
+.doc .admonitionblock .title + .paragraph {
+  margin-top: 0;
+}
+
+.admonitionblock td.icon {
+  display: none;
+}
+
+.admonitionblock::before {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.admonitionblock.note {
+  background-color: var(--info-light);
+  border-left-color: var(--accent);
+}
+
+.admonitionblock.note::before {
+  content: 'NOTE';
+}
+
+.admonitionblock.tip {
+  background-color: var(--accent4-light);
+  border-left-color: var(--accent4);
+}
+
+.admonitionblock.tip::before {
+  content: 'TIP';
+}
+
+.admonitionblock.important {
+  background-color: var(--accent5-light);
+  border-left-color: var(--accent5);
+}
+
+.admonitionblock.important::before {
+  content: 'IMPORTANT';
+}
+
+.admonitionblock.caution {
+  background-color: var(--accent3-light);
+  border-left-color: var(--accent3);
+}
+
+.admonitionblock.caution::before {
+  content: 'CAUTION';
+}
+
+.admonitionblock.warning {
+  background-color: var(--accent2-light);
+  border-left-color: var(--accent2);
+}
+
+.admonitionblock.warning::before {
+  content: 'WARNING';
+}

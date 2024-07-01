@@ -1,0 +1,31 @@
+<div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="{{{uiRootPath}}}/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+    {{> was-this-helpful-feedback }}
+    {{#with (get-page-info)}}
+      <a class="additional-feedback feedback-button" href="{{this.src.origin.webUrl}}/issues/new?title=Docs: Feedback for {{{this.title}}}&body=Hi, I have some feedback about [this page]({{{this.src.editUrl}}})%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    {{/with}}
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
