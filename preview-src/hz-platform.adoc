@@ -1,0 +1,7 @@
+= Hazelcast Platform
+:page-layout: category-landing
+:page-can-do-list:
+  - title: Distributed Compute
+  - title: Advanced CP Subsystem
+
+
