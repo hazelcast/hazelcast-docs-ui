@@ -1,15 +1,14 @@
 .toc-menu {
   color: var(--toc-font-color);
-  margin-bottom: 50px;
 }
 
 .toc.sidebar {
   display: none;
-  margin-right: 0.75rem;
   position: sticky;
   top: var(--toc-top);
   align-self: flex-start;
   margin-left: 5em;
+  margin-right: var(--toc-margin-right);
 }
 
 .toc .toc-menu ul {
@@ -18,7 +17,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  max-height: var(--toc-height);
+  max-height: var(--toc-content-height);
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -35,9 +34,9 @@
   .toc.sidebar {
     display: block;
     flex: 0 0 var(--toc-width);
-    min-width: 200px;
+    min-width: 222px;
     overflow-y: auto;
-    height: 500px;
+    height: var(--toc-height);
     overflow-x: hidden;
   }
 

@@ -137,6 +137,11 @@
   text-align: center;
 }
 
+.home .card-title a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
 @media (min-width: 480px) {
   .home .card {
     flex-basis: calc(50% - calc(var(--cards-gap) * 1 / 2));

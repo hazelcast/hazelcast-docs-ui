@@ -1,11 +1,22 @@
 /* Feedback question and buttons */
 
 .feedback-prompt {
-  width: 100%;
+  width: var(--toc-width);
   font-family: var(--body-font-family);
   color: var(--nav-muted-color);
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: calc(var(--toc-top) + var(--toc-height));
+  margin-left: 5em;
+  margin-right: var(--toc-margin-right);
+  z-index: 999;
+}
+
+@media screen and (max-height: 670px) {
+  .feedback-prompt {
+    display: none;
+  }
 }
 
 .feedback-prompt .hidden {
