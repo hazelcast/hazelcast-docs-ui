@@ -1,5 +1,6 @@
 .DocSearch-Container {
   z-index: 10000 !important;
+  position: fixed !important;
 }
 
 .DocSearch-Button-Keys {
