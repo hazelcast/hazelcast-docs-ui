@@ -1,0 +1,25 @@
+
+
+.category-landing-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--section-divider-color);
+  padding: 1rem 0;
+}
+
+.doc h2.category-landing-title {
+  border: none;
+  color: var(--accent);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.category-landing-image {
+  height: auto;
+  align-self: center;
+}
+
+.category-landing-description-image {
+  width: 40%;
+}
