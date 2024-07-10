@@ -1,11 +1,15 @@
-
+.category-landing-content {
+  padding-top: 1rem;
+}
 
 .category-landing-section {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.category-landing-description-section {
   border-bottom: 1px solid var(--section-divider-color);
-  padding: 1rem 0;
 }
 
 .doc h2.category-landing-title {
@@ -22,4 +26,14 @@
 
 .category-landing-description-image {
   width: 40%;
+  max-width: 400px;
+}
+
+.category-landing-list-image {
+  width: 30%;
+  max-width: 300px;
+}
+
+.doc p.category-landing-text {
+  margin-bottom: 0.5rem;
 }
