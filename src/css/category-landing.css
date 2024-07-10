@@ -8,8 +8,20 @@
   gap: 1rem;
 }
 
+.category-landing-section.category-landing-features {
+  justify-content: space-around;
+  align-items: center;
+}
+
 .category-landing-description-section {
   border-bottom: 1px solid var(--section-divider-color);
+}
+
+.category-landing-features {
+  background-color: var(--info-light);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 1rem 2rem;
 }
 
 .doc h2.category-landing-title {
@@ -32,6 +44,11 @@
 .category-landing-list-image {
   width: 30%;
   max-width: 300px;
+}
+
+.category-landing-features-image {
+  width: 50%;
+  max-width: 500px;
 }
 
 .doc p.category-landing-text {
