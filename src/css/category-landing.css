@@ -81,9 +81,13 @@
 }
 
 .category-landing-tab-content {
-  display: flex;
   align-items: stretch;
   gap: 1rem;
+  display: none;
+}
+
+.category-landing-tab-content.active {
+  display: flex;
 }
 
 .category-landing-tab-description {

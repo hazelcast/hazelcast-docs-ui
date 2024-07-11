@@ -71,23 +71,24 @@
 
     <div class="category-landing-tabs">
       <div class="category-landing-tab-buttons">
-        <a href="#developer" class="category-landing-tab-button active">
+        <a href="#developer" class="category-landing-tab-button" data-category-landing-tab-button>
           Developer
         </a>
-        <a href="#operator" class="category-landing-tab-button">
+        <a href="#operator" class="category-landing-tab-button" data-category-landing-tab-button>
           Operator
         </a>
-        <a href="#architect" class="category-landing-tab-button">
+        <a href="#architect" class="category-landing-tab-button" data-category-landing-tab-button>
           Architect
         </a>
-        <a href="#devops" class="category-landing-tab-button">
+        <a href="#devops" class="category-landing-tab-button" data-category-landing-tab-button>
           DevOps
         </a>
-        <a href="#data-scientist" class="category-landing-tab-button">
+        <a href="#data-scientist" class="category-landing-tab-button" data-category-landing-tab-button>
           Data Scientist
         </a>
       </div>
-      <div class="category-landing-tab-content active" data-tab="developer">
+
+      <div class="category-landing-tab-content" data-tab="developer">
         <div class="category-landing-tab-description">
           <p class="category-landing-tab-description-item">
             Follow our tutorials to <a href="https://docs.hazelcast.com/hazelcast/latest/getting-started/enterprise-overview">get started with Hazelcast Enterprise</a>.
@@ -111,6 +112,19 @@
         </div>
         <img class="category-landing-image category-landing-tabs-image" src="{{{uiRootPath}}}/img/category-landing/develop-solutions.png" alt="develop" />
       </div>
+    </div>
+
+    <div class="category-landing-tab-content" data-tab="operator">
+      LET'S PUT SOME CONTENT FOR OPERATOR
+    </div>
+    <div class="category-landing-tab-content" data-tab="architect">
+      LET'S PUT SOME CONTENT FOR ARCHITECT
+    </div>
+    <div class="category-landing-tab-content" data-tab="devops">
+      LET'S PUT SOME CONTENT FOR DEVOPS
+    </div>
+    <div class="category-landing-tab-content" data-tab="data-scientist">
+      LET'S PUT SOME CONTENT FOR DATA SCIENTIST
     </div>
 
     <div>
@@ -142,5 +156,33 @@
 </article>
 
 <script>
+  (() => {
+    const DEFAULT_TAB = "developer";
 
+    const activateTab = (id) => {
+      const oldActiveButton = document.querySelector('[data-category-landing-tab-button].active');
+      const oldActiveSection = document.querySelector('[data-tab].active');
+
+      const newActiveButton = document.querySelector(`[data-category-landing-tab-button][href="#${id}"]`);
+      const newActiveSection = document.querySelector(`[data-tab="${id}"]`);
+      if (newActiveButton && newActiveSection) {
+        oldActiveButton?.classList.remove('active');
+        oldActiveSection?.classList.remove('active');
+        newActiveButton.classList.add('active');
+        newActiveSection.classList.add('active');
+      }
+    };
+
+    const activateInitialTab = () => {
+      const newHash = location.hash.slice(1) || DEFAULT_TAB;
+      activateTab(newHash);
+    };
+
+    window.addEventListener('hashchange', (event) => {
+      const newHash = new URL(event.newURL).hash.slice(1) || DEFAULT_TAB;
+      activateTab(newHash);
+    })
+
+    activateInitialTab();
+  })()
 </script>
