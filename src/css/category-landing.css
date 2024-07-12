@@ -34,6 +34,13 @@
 .category-landing-image {
   height: auto;
   align-self: center;
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .category-landing-image {
+    display: block;
+  }
 }
 
 .category-landing-description-image {
