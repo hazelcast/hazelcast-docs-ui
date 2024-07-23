@@ -14,6 +14,15 @@
     }
   }
 
+  function addVersionPickerEventListeners () {
+    document.getElementById('navbarProductName').addEventListener('click', versionPickerToggleHandler)
+
+    const navbarProductVersionEl = document.getElementById('navbarProductVersion')
+    if (navbarProductVersionEl) {
+      navbarProductVersionEl.addEventListener('click', versionPickerToggleHandler)
+    }
+  }
+
   if (document.getElementsByClassName('nav-container').length > 0) {
     var navContainer = document.querySelector('.nav-container')
     var navToggle = document.querySelector('.nav-toggle')
@@ -21,6 +30,8 @@
     navToggle.addEventListener('click', showNav)
     // NOTE don't let click events propagate outside of nav container
     navContainer.addEventListener('click', concealEvent)
+
+    addVersionPickerEventListeners()
 
     var menuPanel = navContainer.querySelector('[data-panel=menu]')
     if (!menuPanel) return
@@ -54,13 +65,6 @@
         navItemSpan.addEventListener('click', toggleActive.bind(li))
       }
     })
-
-    document.getElementById('navbarProductName').addEventListener('click', versionPickerToggleHandler)
-
-    const navbarProductVersionEl = document.getElementById('navbarProductVersion')
-    if (navbarProductVersionEl) {
-      navbarProductVersionEl.addEventListener('click', versionPickerToggleHandler)
-    }
 
     // NOTE prevent text from being selected by double click
     menuPanel.addEventListener('mousedown', function (e) {
