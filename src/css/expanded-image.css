@@ -6,7 +6,6 @@
   transition: 0.3s;
 }
 
-.doc .image,
 .doc .content > img:hover {
   opacity: 0.7;
 }
