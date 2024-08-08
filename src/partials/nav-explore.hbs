@@ -29,19 +29,19 @@
     {{/each}}
   </ul>
 
-  {{#each (sort-components site.components 'name' page.attributes.component-order)}}
-    {{#if (and (not-eq this.name 'cloud') (not-eq this.name 'home') (not-eq this.name 'templates') (eq this @root.page.component))}}
+  {{#with page.versions}}
+    {{#if (and (not-eq @root.page.component.name 'cloud') (not-eq @root.page.component.name 'home') (not-eq @root.page.component.name 'templates'))}}
       <ul class="nav-version-picker-versions" id="navbarVersionsList">
-        {{#each ./versions}}
-          {{#if (lte @index 6)}}
-            <li class="version
-                      {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-              {{~#if (eq this ../latest)}} is-latest{{/if}}">
+        {{#each this}}
+          {{#if (lte @index 10)}}
+            <li
+              class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
+            >
               <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
             </li>
           {{/if}}
         {{/each}}
       </ul>
     {{/if}}
-  {{/each}}
+  {{/with}}
 </div>
