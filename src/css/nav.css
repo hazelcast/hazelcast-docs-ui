@@ -1,7 +1,7 @@
 
 .nav-container {
   --nav-x-padding: 10px;
-  --nav-item-padding-left: 10px;
+  --nav-item-padding-left: 14px;
   --nav-line-left: 5px;
 
   position: fixed;
@@ -125,12 +125,8 @@ html.is-clipped--nav {
   bottom: 0;
 }
 
-.nav-link {
-  position: relative;
-}
-
-.nav-item.is-current-path:not([data-depth="0"]) > .nav-link::before,
-.nav-item.is-current-path:not([data-depth="0"]) > .nav-text::before {
+.nav-item.is-current-path[data-depth="0"] .nav-item.is-active:not(.is-current-page) > .nav-link::before,
+.nav-item.is-current-path[data-depth="0"] .nav-item.is-active:not(.is-current-page) > .nav-text::before {
   --nav-line-dot-width: 5px;
 
   content: '';
@@ -205,6 +201,7 @@ html.is-clipped--nav {
 .nav-link,
 .nav-text {
   padding-right: 15px;
+  position: relative;
 }
 
 .nav-link.enterprise::after {
