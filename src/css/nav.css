@@ -115,7 +115,7 @@ html.is-clipped--nav {
   font-weight: 400;
 }
 
-.nav-item.is-current-path > .nav-list:has(.nav-item.is-current-path)::before {
+.nav-item > .nav-list::before {
   content: '';
   position: absolute;
   width: 1px;
@@ -125,8 +125,8 @@ html.is-clipped--nav {
   bottom: 0;
 }
 
-.nav-item.is-current-path[data-depth="0"] .nav-item.is-active:not(.is-current-page) > .nav-link::before,
-.nav-item.is-current-path[data-depth="0"] .nav-item.is-active:not(.is-current-page) > .nav-text::before {
+.nav-item[data-depth="0"] .nav-item.is-active:not(.is-current-page) > .nav-link::before,
+.nav-item[data-depth="0"] .nav-item.is-active:not(.is-current-page) > .nav-text::before {
   --nav-line-dot-width: 5px;
 
   content: '';
