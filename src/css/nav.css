@@ -2,7 +2,7 @@
 .nav-container {
   --nav-x-padding: 10px;
   --nav-item-padding-left: 14px;
-  --nav-line-left: 5px;
+  --nav-transition-duration: 300ms;
 
   position: fixed;
   margin-top: 30px;
@@ -50,6 +50,7 @@
   top: 0;
   height: var(--nav-height);
   overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
 }
 
@@ -92,6 +93,16 @@ html.is-clipped--nav {
 .nav-list {
   padding: 0;
   position: relative;
+  height: 0;
+  overflow: hidden;
+  will-change: height;
+  transition: height var(--nav-transition-duration);
+}
+
+.nav-menu > .nav-list {
+  padding: 0;
+  margin-top: 0;
+  height: auto;
 }
 
 .nav-item {
@@ -115,46 +126,12 @@ html.is-clipped--nav {
   font-weight: 400;
 }
 
-.nav-item > .nav-list::before {
-  content: '';
-  position: absolute;
-  width: 1px;
-  background-color: var(--neutral-light);
-  left: var(--nav-line-left);
-  top: 0;
-  bottom: 0;
-}
-
-.nav-item[data-depth="0"] .nav-item.is-active:not(.is-current-page) > .nav-link::before,
-.nav-item[data-depth="0"] .nav-item.is-active:not(.is-current-page) > .nav-text::before {
-  --nav-line-dot-width: 5px;
-
-  content: '';
-  position: absolute;
-  width: var(--nav-line-dot-width);
-  height: var(--nav-line-dot-width);
-  border-radius: 50%;
-  background-color: var(--accent);
-  left: calc((-1 * var(--nav-item-padding-left)) + (var(--nav-line-dot-width) / 2));
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.nav-menu > .nav-list {
-  padding: 0;
-  margin-top: 0;
-}
-
 .nav-item > .nav-text {
   cursor: pointer;
 }
 
 .nav-item.top ul {
   background: #fff;
-}
-
-.nav-item:not(.is-active) > .nav-list {
-  display: none;
 }
 
 .components:not(.is-active),
@@ -165,13 +142,14 @@ html.is-clipped--nav {
 .nav-item-toggle {
   background: transparent url(../img/caret-blue.svg) center no-repeat;
   transform: rotate(-90deg);
+  transition: transform var(--nav-transition-duration);
   border: none;
   outline: none;
   line-height: inherit;
   position: absolute;
   height: calc(var(--nav-line-height) * 1em);
   width: 30px;
-  padding: 0 5px;
+  padding: 0;
 }
 
 .nav-item[data-depth="0"] > .nav-item-toggle {
