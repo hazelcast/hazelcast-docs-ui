@@ -69,7 +69,9 @@
 
     find(menuPanel, '.nav-item.is-active').forEach(function (navItem) {
       const list = navItem.querySelector('.nav-list')
-      list.style.height = 'auto'
+      if (list) {
+        list.style.height = 'auto'
+      }
     })
 
     // NOTE prevent text from being selected by double click
