@@ -3,6 +3,7 @@
   var SECT_CLASS_RX = /^sect(\d)$/
   const VERSION_PICKER_ACTIVE_TOGGLE_NAME = 'data-active-toggle'
   const VERSION_PICKER_TOGGLE_NAME = 'data-toggle-value'
+  let currentNavToggleTimer = 0
 
   function versionPickerToggleHandler () {
     const value = this.getAttribute(VERSION_PICKER_TOGGLE_NAME)
@@ -63,6 +64,13 @@
       if (navItemSpan) {
         navItemSpan.style.cursor = 'pointer'
         navItemSpan.addEventListener('click', toggleActive.bind(li))
+      }
+    })
+
+    find(menuPanel, '.nav-item.is-active').forEach(function (navItem) {
+      const list = navItem.querySelector('.nav-list')
+      if (list) {
+        list.style.height = 'auto'
       }
     })
 
@@ -127,7 +135,29 @@
     }
 
     function toggleActive () {
+      clearTimeout(currentNavToggleTimer)
+
       this.classList.toggle('is-active')
+
+      if (this.classList.contains('is-active')) {
+        const list = this.querySelector('.nav-list')
+        const height = list.scrollHeight
+        list.style.height = `${height}px`
+
+        // to support resizing
+        currentNavToggleTimer = setTimeout(() => {
+          if (this.classList.contains('is-active')) {
+            list.style.height = 'auto'
+          }
+        }, 300)
+      } else {
+        const list = this.querySelector('.nav-list')
+        const height = list.scrollHeight
+        list.style.height = `${height}px`
+        currentNavToggleTimer = setTimeout(() => {
+          this.querySelector('.nav-list').style.height = ''
+        }, 0)
+      }
     }
 
     function showNav (e) {
