@@ -5,7 +5,6 @@
   --nav-transition-duration: 300ms;
 
   position: fixed;
-  margin-top: 30px;
   left: 0;
   width: 100%;
   font-size: calc(16.5 / var(--rem-base) * 1rem);
@@ -14,6 +13,7 @@
   font-family: var(--nav-font-family);
   max-width: 300px;
   background-color: #fff;
+  border-right: 1px solid var(--panel-border-color);
 }
 
 #hide-nav {
@@ -220,8 +220,8 @@ html.is-clipped--nav {
   .nav-container {
     position: static;
     visibility: visible;
-    margin-top: 0;
     padding-bottom: 60px;
+    border-right: none;
   }
 
   #hide-nav {
