@@ -150,6 +150,7 @@ html.is-clipped--nav {
   height: calc(var(--nav-line-height) * 1em);
   width: 30px;
   padding: 0;
+  right: 0;
 }
 
 .nav-item[data-depth="0"] > .nav-item-toggle {
@@ -231,10 +232,6 @@ html.is-clipped--nav {
     top: var(--navbar-height);
     box-shadow: none;
     position: sticky;
-  }
-
-  .nav-item-toggle {
-    right: 0;
   }
 }
 
