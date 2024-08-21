@@ -1,0 +1,32 @@
+<script>
+  (() => {
+    const DEFAULT_TAB = document.querySelector('[data-is-default-tab="true"]')?.getAttribute('data-tab')
+      || document.querySelector('[data-tab]')?.getAttribute('data-tab');
+
+    const activateTab = (id) => {
+      const oldActiveButton = document.querySelector('[data-category-landing-tab-button].active');
+      const oldActiveSection = document.querySelector('[data-tab].active');
+
+      const newActiveButton = document.querySelector(`[data-category-landing-tab-button][href="#${id}"]`);
+      const newActiveSection = document.querySelector(`[data-tab="${id}"]`);
+      if (newActiveButton && newActiveSection) {
+        oldActiveButton?.classList.remove('active');
+        oldActiveSection?.classList.remove('active');
+        newActiveButton.classList.add('active');
+        newActiveSection.classList.add('active');
+      }
+    };
+
+    const activateInitialTab = () => {
+      const newHash = location.hash.slice(1) || DEFAULT_TAB;
+      activateTab(newHash);
+    };
+
+    window.addEventListener('hashchange', (event) => {
+      const newHash = new URL(event.newURL).hash.slice(1) || DEFAULT_TAB;
+      activateTab(newHash);
+    })
+
+    activateInitialTab();
+  })()
+</script>

@@ -87,7 +87,7 @@
         </a>
       </div>
 
-      <div class="category-landing-tab-content" data-tab="developer">
+      <div class="category-landing-tab-content" data-tab="developer" data-is-default-tab="true">
         <div class="category-landing-tab-description">
           <p class="category-landing-tab-description-item">
             Follow our tutorials to <a href="https://docs.hazelcast.com/hazelcast/latest/getting-started/enterprise-overview">get started with Hazelcast Enterprise</a>.
@@ -154,34 +154,4 @@
   </div>
 </article>
 
-<script>
-  (() => {
-    const DEFAULT_TAB = "developer";
-
-    const activateTab = (id) => {
-      const oldActiveButton = document.querySelector('[data-category-landing-tab-button].active');
-      const oldActiveSection = document.querySelector('[data-tab].active');
-
-      const newActiveButton = document.querySelector(`[data-category-landing-tab-button][href="#${id}"]`);
-      const newActiveSection = document.querySelector(`[data-tab="${id}"]`);
-      if (newActiveButton && newActiveSection) {
-        oldActiveButton?.classList.remove('active');
-        oldActiveSection?.classList.remove('active');
-        newActiveButton.classList.add('active');
-        newActiveSection.classList.add('active');
-      }
-    };
-
-    const activateInitialTab = () => {
-      const newHash = location.hash.slice(1) || DEFAULT_TAB;
-      activateTab(newHash);
-    };
-
-    window.addEventListener('hashchange', (event) => {
-      const newHash = new URL(event.newURL).hash.slice(1) || DEFAULT_TAB;
-      activateTab(newHash);
-    })
-
-    activateInitialTab();
-  })()
-</script>
+{{> category-landing-tabs-script}}
