@@ -202,6 +202,7 @@ E.g. for the Hazelcast Platform landing page use the following.
 :page-layout: platform-category-landing
 ----
 
+
 In the local build it will be available under `http://localhost:5252/hz-platform.html`.
 
 === Tabs
