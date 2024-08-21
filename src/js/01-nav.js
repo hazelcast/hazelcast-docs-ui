@@ -3,6 +3,7 @@
   var SECT_CLASS_RX = /^sect(\d)$/
   const VERSION_PICKER_ACTIVE_TOGGLE_NAME = 'data-active-toggle'
   const VERSION_PICKER_TOGGLE_NAME = 'data-toggle-value'
+  let currentNavToggleTimer = 0
 
   function versionPickerToggleHandler () {
     const value = this.getAttribute(VERSION_PICKER_TOGGLE_NAME)
@@ -14,6 +15,15 @@
     }
   }
 
+  function addVersionPickerEventListeners () {
+    document.getElementById('navbarProductName').addEventListener('click', versionPickerToggleHandler)
+
+    const navbarProductVersionEl = document.getElementById('navbarProductVersion')
+    if (navbarProductVersionEl) {
+      navbarProductVersionEl.addEventListener('click', versionPickerToggleHandler)
+    }
+  }
+
   if (document.getElementsByClassName('nav-container').length > 0) {
     var navContainer = document.querySelector('.nav-container')
     var navToggle = document.querySelector('.nav-toggle')
@@ -21,6 +31,8 @@
     navToggle.addEventListener('click', showNav)
     // NOTE don't let click events propagate outside of nav container
     navContainer.addEventListener('click', concealEvent)
+
+    addVersionPickerEventListeners()
 
     var menuPanel = navContainer.querySelector('[data-panel=menu]')
     if (!menuPanel) return
@@ -55,12 +67,12 @@
       }
     })
 
-    document.getElementById('navbarProductName').addEventListener('click', versionPickerToggleHandler)
-
-    const navbarProductVersionEl = document.getElementById('navbarProductVersion')
-    if (navbarProductVersionEl) {
-      navbarProductVersionEl.addEventListener('click', versionPickerToggleHandler)
-    }
+    find(menuPanel, '.nav-item.is-active').forEach(function (navItem) {
+      const list = navItem.querySelector('.nav-list')
+      if (list) {
+        list.style.height = 'auto'
+      }
+    })
 
     // NOTE prevent text from being selected by double click
     menuPanel.addEventListener('mousedown', function (e) {
@@ -123,7 +135,29 @@
     }
 
     function toggleActive () {
+      clearTimeout(currentNavToggleTimer)
+
       this.classList.toggle('is-active')
+
+      if (this.classList.contains('is-active')) {
+        const list = this.querySelector('.nav-list')
+        const height = list.scrollHeight
+        list.style.height = `${height}px`
+
+        // to support resizing
+        currentNavToggleTimer = setTimeout(() => {
+          if (this.classList.contains('is-active')) {
+            list.style.height = 'auto'
+          }
+        }, 300)
+      } else {
+        const list = this.querySelector('.nav-list')
+        const height = list.scrollHeight
+        list.style.height = `${height}px`
+        currentNavToggleTimer = setTimeout(() => {
+          this.querySelector('.nav-list').style.height = ''
+        }, 0)
+      }
     }
 
     function showNav (e) {
