@@ -193,6 +193,17 @@ None of the other data in the `page` variable is applicable for this page.
 
 When you run the preview, you can see the 404 page by visiting the URL \http://localhost:5252/404.html.
 
+There are special layouts for category landing pages.
+E.g. for the Hazelcast Platform landing page use the following.
+
+[source,asciidoc]
+----
+= Hazelcast Platform
+:page-layout: platform-category-landing
+----
+
+In the local build it will be available under `http://localhost:5252/hz-platform.html`.
+
 === Tabs
 
 The {url-docs-playbook}[documentation playbook] includes a tabs block extension.
