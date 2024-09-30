@@ -115,7 +115,7 @@ html.is-clipped--nav {
 
 .nav-item[data-depth="0"] {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 2.1;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -169,7 +169,7 @@ html.is-clipped--nav {
 .is-current-page {
   background-color: var(--info-light);
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .is-current-page > .nav-link,
@@ -258,7 +258,7 @@ html.is-clipped--nav {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  font-weight: 600;
+  font-weight: 500;
   user-select: none;
 }
 
@@ -329,5 +329,5 @@ html.is-clipped--nav {
 
 .nav-version-picker-components .component.is-current,
 .nav-version-picker-versions .version.is-current {
-  font-weight: 600;
+  font-weight: 500;
 }
