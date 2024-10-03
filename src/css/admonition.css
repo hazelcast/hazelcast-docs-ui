@@ -32,7 +32,7 @@
 
 .admonitionblock::before {
   display: block;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 10px;
 }
 

@@ -6,14 +6,6 @@
       imgs.push(blocks[i].children[0])
     }
   }
-  /*
-  var kroki = document.getElementsByClassName('content')
-  if (kroki.length > 0) {
-    for (var o = 0; o < kroki.length; o++) {
-      imgs.push(kroki[o].children[0])
-    }
-  }
-  */
 
   createModal(imgs)
 
