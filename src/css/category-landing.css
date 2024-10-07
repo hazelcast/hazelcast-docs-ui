@@ -1,0 +1,112 @@
+.category-landing-content {
+  padding-top: 1rem;
+}
+
+.category-landing-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.category-landing-section.category-landing-features {
+  justify-content: space-around;
+  align-items: center;
+}
+
+.category-landing-description-section {
+  border-bottom: 1px solid var(--section-divider-color);
+}
+
+.category-landing-features {
+  background-color: var(--info-light);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 1rem 2rem;
+}
+
+.doc h2.category-landing-title {
+  border: none;
+  color: var(--accent);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.category-landing-image {
+  height: auto;
+  align-self: center;
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .category-landing-image {
+    display: block;
+  }
+}
+
+.category-landing-description-image {
+  width: 40%;
+  max-width: 400px;
+}
+
+.category-landing-list-image {
+  width: 30%;
+  max-width: 300px;
+}
+
+.category-landing-features-image {
+  width: 50%;
+  max-width: 500px;
+}
+
+.category-landing-tabs-image {
+  width: 40%;
+  max-width: 500px;
+}
+
+.doc p.category-landing-text {
+  margin-bottom: 0.5rem;
+}
+
+.category-landing-tab-buttons {
+  display: flex;
+  margin: 2rem 0;
+}
+
+.category-landing-tab-button {
+  flex-grow: 1;
+  border-bottom: 1px solid var(--section-divider-color);
+  text-align: center;
+  text-decoration: none !important;
+  color: var(--neutral-light) !important;
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+}
+
+.category-landing-tab-button.active {
+  border-bottom: 3px solid var(--accent);
+  color: var(--accent) !important;
+}
+
+.category-landing-tab-content {
+  align-items: stretch;
+  gap: 1rem;
+  display: none;
+}
+
+.category-landing-tab-content.active {
+  display: flex;
+}
+
+.category-landing-tab-description {
+  background-color: var(--info-light);
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.doc .category-landing-tab-description-item {
+  margin-bottom: 0.5rem;
+}

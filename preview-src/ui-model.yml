@@ -32,6 +32,18 @@ site:
       version: '4.0'
       displayVersion: '4.0'
     latestVersion: *latest_version_hz
+  - name: HZ Platform
+    title: HZ Platform
+    url: '/hz-platform.html'
+    versions:
+    - &latest_version_hz_platform
+      url: '/hz-platform.html'
+      version: '4.1'
+      displayVersion: '4.1'
+    - url: '/hz-platform.html'
+      version: '4.0'
+      displayVersion: '4.0'
+    latestVersion: *latest_version_hz_platform
   - name: tutorials
     title: Tutorials
     url: '/tutorials.html'
@@ -115,6 +127,9 @@ page:
         urlType: internal
       - content: How to HZ
         url: '/how-to-hz.html#4'
+        urlType: internal
+      - content: HZ Platform
+        url: '/hz-platform.html'
         urlType: internal
   - content: Hazelcast Clients
     url: '#2'
