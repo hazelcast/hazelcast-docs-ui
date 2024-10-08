@@ -10,7 +10,7 @@
   top: calc(var(--toc-top) + var(--toc-height));
   margin-left: 5em;
   margin-right: var(--toc-margin-right);
-  z-index: 999;
+  z-index: 199;
 }
 
 @media screen and (max-height: 670px) {
