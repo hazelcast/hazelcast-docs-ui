@@ -58,6 +58,7 @@
               "tags:imdg-{{site.components.imdg.latest.version}}",
               "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
               "tags:cloud",
+              "tags:flow-{{site.components.flow.latest.version}}",    
             ]], 'Search all docs...');
           } else {
             hzDocSearch([
@@ -76,6 +77,7 @@
       "tags:clc-{{site.components.clc.latest.version}}",
       "tags:operator-{{site.components.operator.latest.version}}",
       "tags:cloud",
+      "tags:flow-{{site.components.flow.latest.version}}",      
     ]], 'Search all docs...');
   </script>
   <!--DEAL WITH SPECIAL CASES -->
@@ -92,6 +94,7 @@
           "tags:management-center-{{site.components.management-center.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"]);
@@ -124,6 +127,7 @@
           "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]);
@@ -173,6 +177,7 @@
           "tags:management-center-{{site.components.management-center.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:imdg-{{site.components.imdg.latest.version}}",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}"]);
@@ -190,6 +195,7 @@
           "tags:management-center-{{page.attributes.latest-supported-mc}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -206,6 +212,7 @@
           "tags:management-center-{{site.components.management-center.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -223,6 +230,7 @@
           "tags:management-center-{{page.attributes.latest-supported-mc}}",
           "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -239,6 +247,7 @@
           "tags:management-center-{{site.components.management-center.latest.version}}",
           "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -256,6 +265,7 @@
           "tags:management-center-{{site.components.management-center.latest.version}}",
           "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -266,6 +276,7 @@
           "tags:imdg-{{page.attributes.latest-supported-imdg}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -282,6 +293,7 @@
           "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -298,6 +310,7 @@
           "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -315,6 +328,7 @@
           "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -322,6 +336,24 @@
     }
   </script>
   {{/if}}
+  {{#if (eq page.component.name 'flow')}}
+    <script>
+      function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
+          "tags:imdg-{{site.components.imdg.latest.version}}",
+          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+          "tags:cloud",
+          "tags:flow-{{site.components.flow.latest.version}}",           
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
+      }
+    }
+  </script>
+  {{/if}}  
 {{else}}
   <script>
     hzDocSearch([[
@@ -329,6 +361,7 @@
       "tags:management-center-{{site.components.management-center.latest.version}}",
       "tags:imdg-{{site.components.imdg.latest.version}}",
       "tags:cloud",
+      "tags:flow-{{site.components.flow.latest.version}}",       
     ]], 'Search all docs...');
   </script>
 {{/if}}
