@@ -16,6 +16,13 @@
   z-index: 1000;
 }
 
+.cookie-banner-btns-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .cookie-banner p {
   margin: 0;
   letter-spacing: 0.4px;
@@ -56,4 +63,11 @@
 
 .decline-btn:hover {
   background-color: #061827;
+}
+
+.manage-cookies-link {
+  color: var(--accent);
+  white-space: nowrap;
+  margin: 0 18px;
+  font-size: 13px;
 }
