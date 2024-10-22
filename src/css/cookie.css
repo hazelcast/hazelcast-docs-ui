@@ -11,13 +11,13 @@
   background-color: var(--header-color);
   color: var(--neutral-white);
   font-size: 14px;
+  font-family: var(--heading-font-family);
   border-top: 1px solid var(--header-color);
   z-index: 1000;
 }
 
 .cookie-banner p {
   margin: 0;
-  font-family: var(--heading-font-family);
   letter-spacing: 0.4px;
 }
 
@@ -27,4 +27,33 @@
   font-size: 25px;
   border: none;
   color: var(--neutral-white);
+}
+
+.cookie-decision-btn {
+  border-radius: 9px;
+  border: 1px solid var(--accent4);
+  padding: 8px 24px;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0;
+  transition: all ease 0.3s;
+  white-space: nowrap;
+}
+
+.allow-btn {
+  background-color: var(--accent4);
+  color: var(--header-color);
+}
+
+.decline-btn {
+  color: var(--accent4);
+  background-color: var(--header-color);
+}
+
+.allow-btn:hover {
+  background-color: #c5ed65;
+}
+
+.decline-btn:hover {
+  background-color: #061827;
 }
