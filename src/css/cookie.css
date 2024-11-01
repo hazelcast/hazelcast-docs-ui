@@ -1,18 +1,19 @@
 .cookie-banner {
   position: fixed;
   display: none;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 18px 16px;
+  bottom: 20px;
+  left: 20px;
+  right: 112px;
+  padding: 20px 16px;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   background-color: var(--header-color);
   color: var(--neutral-white);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
   font-size: 14px;
   font-family: var(--heading-font-family);
-  border-top: 1px solid var(--header-color);
   z-index: 1000;
 }
 

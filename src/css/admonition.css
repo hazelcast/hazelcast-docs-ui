@@ -33,6 +33,7 @@
 .admonitionblock::before {
   display: block;
   font-weight: 500;
+  font-family: var(--heading-font-family);
   margin-bottom: 10px;
 }
 
