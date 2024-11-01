@@ -1,23 +1,74 @@
 .cookie-banner {
   position: fixed;
   display: none;
-  bottom: 0;
-  width: 100%;
-  padding: 20px 14px;
+  bottom: 20px;
+  left: 20px;
+  right: 112px;
+  padding: 20px 16px;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--neutral-lighter);
-  border-radius: var(--border-radius);
-  border-top: 1px solid var(--primary);
+  gap: 10px;
+  background-color: var(--header-color);
+  color: var(--neutral-white);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: var(--heading-font-family);
   z-index: 1000;
 }
 
-#cookie-close {
-  background: var(--navbar-button-background);
+.cookie-banner-btns-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cookie-banner p {
+  margin: 0;
+  letter-spacing: 0.4px;
+}
+
+.cookie-close {
   border-radius: 10px;
-  font-size: 1em;
+  background: transparent;
+  font-size: 25px;
   border: none;
-  padding: 10px;
-  color: white;
-  cursor: pointer;
+  color: var(--neutral-white);
+}
+
+.cookie-decision-btn {
+  border-radius: 9px;
+  border: 1px solid var(--accent4);
+  padding: 8px 24px;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0;
+  transition: all ease 0.3s;
+  white-space: nowrap;
+}
+
+.allow-btn {
+  background-color: var(--accent4);
+  color: var(--header-color);
+}
+
+.decline-btn {
+  color: var(--accent4);
+  background-color: var(--header-color);
+}
+
+.allow-btn:hover {
+  background-color: #c5ed65;
+}
+
+.decline-btn:hover {
+  background-color: #061827;
+}
+
+.manage-cookies-link {
+  color: var(--accent);
+  white-space: nowrap;
+  margin: 0 18px;
+  font-size: 13px;
 }

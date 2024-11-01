@@ -2,7 +2,7 @@
   'use strict'
 
   var cookieBanner = document.getElementById('cookie')
-  var cookieButton = document.getElementById('cookie-close')
+  var cookieButton = document.getElementById('closeCookies')
   var latestBanner = document.getElementById('latest-banner')
 
   if (window.localStorage.getItem('docsCookie') !== 'closed') {
