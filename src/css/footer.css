@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  background-color: var(--header-color);
+  background-color: var(--footer-color);
   color: var(--footer-font-color);
   font-size: calc(15 / var(--rem-base) * 1rem);
   height: 90px;
