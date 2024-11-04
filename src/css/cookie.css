@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  background-color: var(--header-color);
+  background-color: var(--footer-color);
   color: var(--neutral-white);
   border: 1px solid var(--accent);
   border-radius: 10px;
@@ -50,12 +50,12 @@
 
 .allow-btn {
   background-color: var(--accent4);
-  color: var(--header-color);
+  color: var(--footer-color);
 }
 
 .decline-btn {
   color: var(--accent4);
-  background-color: var(--header-color);
+  background-color: var(--footer-color);
 }
 
 .allow-btn:hover {
