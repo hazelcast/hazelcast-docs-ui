@@ -35,9 +35,9 @@ a.copy-code-button:hover {
   position: absolute;
   top: -20px;
   right: 0;
-  display: none;
   align-items: center;
   z-index: 1;
+  display: flex;
 }
 
 .doc .listingblock code /*[data-lang]*/ + .source-type-box .data-source {
@@ -49,10 +49,6 @@ a.copy-code-button:hover {
   text-transform: uppercase;
   padding-right: 0.5rem;
   border-right: 1px solid var(--pre-border-color);
-}
-
-.doc .listingblock code /*[data-lang]*/ + .source-type-box {
-  display: flex;
 }
 
 .doc .listingblock pre .fade-shadow {
