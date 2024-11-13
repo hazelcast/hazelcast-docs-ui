@@ -4,6 +4,7 @@
   display: inline-block;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+  position: relative;
 }
 
 a.copy-code-button:focus,
@@ -13,42 +14,30 @@ a.copy-code-button:hover {
 
 .copy-code-button:hover::after {
   content: attr(data-title);
-  color: var(--pre-annotation-font-color);
   line-height: 1;
   position: absolute;
-  top: -20px;
-  right: 0%;
-  left: auto;
+  top: -26px;
+  left: 50%;
+  transform: translate(-50%, 0);
   margin: 0;
-  padding: 3px;
+  padding: 5px;
   text-align: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
   background: var(--neutral-lighter);
+  color: var(--secondary-text);
   border: 1px solid var(--pre-border-color);
   box-sizing: border-box;
-  border-radius: 3px;
+  border-radius: 8px;
   min-width: 80px;
-}
-
-.copy-code-button:hover::before {
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-bottom: 10px solid var(--pre-border-color);
-  position: absolute;
-  content: "";
-  box-shadow: inset 0 0 1px #bec0c1;
-  bottom: -27px;
-  right: auto;
-  left: auto;
 }
 
 .doc .listingblock code /*[data-lang]*/ + .source-type-box {
   position: absolute;
   top: -20px;
   right: 0;
-  display: none;
   align-items: center;
   z-index: 1;
+  display: flex;
 }
 
 .doc .listingblock code /*[data-lang]*/ + .source-type-box .data-source {
@@ -60,10 +49,6 @@ a.copy-code-button:hover {
   text-transform: uppercase;
   padding-right: 0.5rem;
   border-right: 1px solid var(--pre-border-color);
-}
-
-.doc .listingblock:hover code /*[data-lang]*/ + .source-type-box {
-  display: flex;
 }
 
 .doc .listingblock pre .fade-shadow {
