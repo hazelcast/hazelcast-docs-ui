@@ -55,7 +55,7 @@
 
 .article-banner p {
   font-size: calc(14 / var(--rem-base) * 1rem);
-  margin: 0 1rem 0 0;
+  margin: 0 1.1rem 0 0;
   margin-bottom: 10px;
 }
 

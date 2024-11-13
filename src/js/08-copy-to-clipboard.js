@@ -6,7 +6,7 @@
     var copyButton = document.createElement('a')
     copyButton.className = 'copy-code-button'
     copyButton.dataset.title = 'Copy'
-    copyButton.appendChild(document.createElement('i')).className = 'far fa-copy'
+    copyButton.appendChild(document.createElement('i')).className = 'fa-regular fa-copy'
     var dataSource = document.createElement('span')
     dataSource.className = 'data-source'
     if (codeBlock.dataset.lang) {
