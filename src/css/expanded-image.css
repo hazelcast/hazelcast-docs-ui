@@ -6,6 +6,16 @@
   transition: 0.3s;
 }
 
+/* Style images floated right */
+.doc .image.right {
+  padding-left: 20px;
+}
+
+/* Style images floated left */
+.doc .image.left {
+  padding-right: 20px;
+}
+
 .doc .content > img:hover {
   opacity: 0.7;
 }
