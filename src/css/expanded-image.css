@@ -4,7 +4,16 @@
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
-  padding: 20px 20px 20px 20px;
+}
+
+/* Style images floated right */
+.doc .image.right {
+  padding-left: 20px;
+}
+
+/* Style images floated left */
+.doc .image.left {
+  padding-right: 20px;
 }
 
 .doc .content > img:hover {
