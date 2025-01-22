@@ -10,7 +10,7 @@
     </div>
 
     <div class="navbar-end">
-      {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing'))}}
+      {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing') (not-eq page.component.name 'imdg'))}}
         <div id="search-input" class="navbar-item searchbox"></div>
         {{#if (not-eq page.layout '404')}}
           <label class="filter checkbox">
