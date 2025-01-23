@@ -5,7 +5,7 @@
     </a>
   </div>
 
-  {{#if (and page.component (not-eq page.component.name 'cloud') (not-eq page.component.name 'home') (not-eq page.component.name 'imdg'))}}
+  {{#if (and page.component (not-eq page.component.name 'cloud') (not-eq page.component.name 'home'))}}
     <div class="navbar-product-version">
       <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="{{page.componentVersion.displayVersion}}">
         {{page.componentVersion.displayVersion}}
