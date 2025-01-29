@@ -93,11 +93,6 @@ body {
 }
 
 @media (max-width: 800px) {
-  .DocSearch-Button-Keys,
-  .DocSearch-Button-Placeholder {
-    display: none;
-  }
-
   .navbar-item {
     padding: 0 10px;
   }

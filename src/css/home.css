@@ -87,10 +87,6 @@
   justify-content: center;
 }
 
-.home .DocSearch-Button {
-  width: 40%;
-}
-
 .home .article {
   padding: var(--cards-gap) var(--cards-gap) 0;
   background-color: #f2f5f9;
