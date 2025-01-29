@@ -1,30 +1,49 @@
-.DocSearch-Container {
-  z-index: 10000 !important;
-  position: fixed !important;
-}
-
-.DocSearch-Button-Keys {
-  display: none;
-}
-
-.DocSearch-Button-Container {
-  width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-}
-
-.DocSearch-Button {
+.kapa-search-btn,
+.kapa-search-input {
   background: var(--neutral-lighter);
   border-radius: 5px;
   border: 1px solid var(--neutral-light);
   margin: 0;
 }
 
-.DocSearch-Button .DocSearch-Search-Icon {
+.kapa-search-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+}
+
+.home .kapa-search-input-container {
+  width: 40%;
+}
+
+.home .kapa-search-input {
+  width: 100%;
+}
+
+.home .kapa-search-form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.kapa-search-input {
+  padding-left: 15px;
+  padding-right: 40px;
+}
+
+.kapa-search-icon {
   color: var(--accent);
 }
 
-.DocSearch-Button .DocSearch-Button-Placeholder {
-  font-weight: 400;
+.kapa-search-input-container {
+  position: relative;
+}
+
+.kapa-search-input-container .kapa-search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
