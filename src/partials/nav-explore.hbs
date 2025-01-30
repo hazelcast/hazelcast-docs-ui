@@ -30,7 +30,7 @@
   </ul>
 
   {{#with page.versions}}
-    {{#if (and (not-eq @root.page.component.name 'cloud') (not-eq @root.page.component.name 'home') (not-eq @root.page.component.name 'imdg') (not-eq @root.page.component.name 'templates'))}}
+    {{#if (and (not-eq @root.page.component.name 'cloud') (not-eq @root.page.component.name 'home') (not-eq @root.page.component.name 'templates'))}}
       <ul class="nav-version-picker-versions" id="navbarVersionsList">
         {{#each this}}
           {{#if (lte @index 10)}}
