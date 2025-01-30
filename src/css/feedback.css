@@ -138,3 +138,46 @@ a.feedback-button:hover {
 .mail {
   background: transparent url(../img/mail.svg) center left / contain no-repeat;
 }
+
+.feedback-form-submit-container {
+  display: none;
+}
+
+.feedback-form-container:has(> label > input[name="feedback"]:checked) ~ .feedback-form-submit-container {
+  display: block;
+}
+
+input[name="feedback"] {
+  appearance: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--neutral-light);
+  transition: 0.2s border-width linear;
+  margin: 0;
+  position: relative;
+  top: 4px;
+}
+
+input[name="feedback"]:checked {
+  border: 4px solid var(--success-light);
+}
+
+.feedback-radio-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--secondary-text);
+}
+
+.radio-btn-title {
+  font-weight: var(--heading-font-weight);
+}
+
+.feedback-description {
+  display: flex;
+  flex-direction: column;
+}
