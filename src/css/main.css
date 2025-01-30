@@ -23,6 +23,7 @@
 
 .article-banner .beta-imdg a {
   color: #fff;
+  text-decoration: underline;
 }
 
 .article-banner.prerelease {
