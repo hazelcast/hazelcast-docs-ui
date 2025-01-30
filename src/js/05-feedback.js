@@ -1,5 +1,6 @@
 const feedbackForm = document.getElementById('feedback-form')
 const additionalTextualFeedback = document.getElementById('additional-textual-feedback')
+const overlay = document.getElementById('feedback-overlay')
 
 const handleSubmit = (event) => {
   event.preventDefault()
@@ -26,6 +27,7 @@ const openFormContainer = (containerToOpen, containerToClose, radioToCheck, radi
   document.getElementById(containerToClose).classList.add('hidden')
   document.getElementById(radioToCheck).setAttribute('checked', '')
   document.getElementById(radioToUncheck).removeAttribute('checked')
+  overlay.classList.add('open')
 }
 
 const showPositiveFeedbackForm = () => {
@@ -46,6 +48,11 @@ const showNegativeFeedbackForm = () => {
   )
 }
 
+const closeOverlay = () => {
+  overlay.classList.remove('open')
+}
+
 feedbackForm.addEventListener('submit', handleSubmit)
+document.getElementById('close-feedback-overlay').addEventListener('click', closeOverlay)
 document.getElementById('positive-feedback-starter').addEventListener('click', showPositiveFeedbackForm)
 document.getElementById('negative-feedback-starter').addEventListener('click', showNegativeFeedbackForm)
