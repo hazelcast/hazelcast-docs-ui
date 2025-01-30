@@ -55,10 +55,9 @@
           if (checkbox.checked) {
             hzDocSearch([[
               "tags:tutorials",
-              "tags:imdg-{{site.components.imdg.latest.version}}",
               "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
               "tags:cloud",
-              "tags:flow-{{site.components.flow.latest.version}}",    
+              "tags:flow-{{site.components.flow.latest.version}}",
             ]], 'Search all docs...');
           } else {
             hzDocSearch([
@@ -73,46 +72,11 @@
     hzDocSearch([[
       "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
       "tags:management-center-{{site.components.management-center.latest.version}}",
-      "tags:imdg-{{site.components.imdg.latest.version}}",
       "tags:clc-{{site.components.clc.latest.version}}",
       "tags:operator-{{site.components.operator.latest.version}}",
       "tags:cloud",
-      "tags:flow-{{site.components.flow.latest.version}}",      
+      "tags:flow-{{site.components.flow.latest.version}}",
     ]], 'Search all docs...');
-  </script>
-  <!--DEAL WITH SPECIAL CASES -->
-  {{else if (and (eq page.component.name 'imdg') (or (eq page.componentVersion.version '4') (lt page.componentVersion.version '3.12')))}}
-  <script>
-    hzDocSearch(["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"]);
-  </script>
-  <script>
-    function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{site.components.imdg.latest.version}}",
-          "tags:management-center-{{site.components.management-center.latest.version}}",
-          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
-        ]], 'Search all docs...');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{site.components.imdg.latest.version}}"]);
-      }
-    }
-  </script>
-  <script>
-    function closeBanner() {
-      var banner = document.getElementById('latest-banner')
-      if (banner) {
-        banner.style.display = 'none'
-        const now = new Date()
-        const item = {
-          expiry: now.getTime() + 86400000,
-        }
-        localStorage.setItem('latestBannerCookie', JSON.stringify(item))
-      }
-    }
   </script>
   {{else if (and (eq page.component.name 'management-center') (lt page.componentVersion.version '4.2020.12'))}}
     <script>
@@ -124,10 +88,9 @@
       if (checkbox.checked) {
         hzDocSearch([[
           "tags:{{page.component.name}}-{{site.components.management-center.latest.version}}",
-          "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]);
@@ -176,46 +139,10 @@
           "tags:{{page.component.name}}",
           "tags:management-center-{{site.components.management-center.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:imdg-{{site.components.imdg.latest.version}}",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}"]);
-      }
-    }
-  </script>
-  {{/if}}
-  {{#if (and (eq page.component.name 'imdg') page.attributes.latest-supported-mc)}}
-  <script>
-  function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:management-center-{{page.attributes.latest-supported-mc}}",
-          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
-        ]], 'Search all docs...');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-      }
-    }
-  </script>
-  {{else if (and (eq page.component.name 'imdg') (and (not-eq page.componentVersion.version '4') (gte page.componentVersion.version '3.12')))}}
-  <script>
-  function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:management-center-{{site.components.management-center.latest.version}}",
-          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
-        ]], 'Search all docs...');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
@@ -228,9 +155,8 @@
         hzDocSearch([[
           "tags:{{page.component.name}}-{{page.componentVersion.version}}",
           "tags:management-center-{{page.attributes.latest-supported-mc}}",
-          "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -245,9 +171,8 @@
         hzDocSearch([[
           "tags:{{page.component.name}}-{{page.componentVersion.version}}",
           "tags:management-center-{{site.components.management-center.latest.version}}",
-          "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -255,7 +180,7 @@
     }
   </script>
   {{/if}}
-  {{#if (and (eq page.component.name 'management-center') page.attributes.latest-supported-imdg)}}
+  {{#if (eq page.component.name 'management-center')}}
   <script>
   function applyFacetedSearch(){
       var checkbox = document.getElementById('facet');
@@ -263,9 +188,8 @@
         hzDocSearch([[
           "tags:{{page.component.name}}-{{page.componentVersion.version}}",
           "tags:management-center-{{site.components.management-center.latest.version}}",
-          "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -273,10 +197,9 @@
       if (checkbox.checked) {
         hzDocSearch([[
           "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:imdg-{{page.attributes.latest-supported-imdg}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -290,10 +213,9 @@
       if (checkbox.checked) {
         hzDocSearch([[
           "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}",
           "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -307,10 +229,9 @@
       if (checkbox.checked) {
         hzDocSearch([[
           "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -325,10 +246,9 @@
       if (checkbox.checked) {
         hzDocSearch([[
           "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
@@ -343,25 +263,23 @@
       if (checkbox.checked) {
         hzDocSearch([[
           "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:imdg-{{site.components.imdg.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",           
+          "tags:flow-{{site.components.flow.latest.version}}",
         ]], 'Search all docs...');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
     }
   </script>
-  {{/if}}  
+  {{/if}}
 {{else}}
   <script>
     hzDocSearch([[
       "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
       "tags:management-center-{{site.components.management-center.latest.version}}",
-      "tags:imdg-{{site.components.imdg.latest.version}}",
       "tags:cloud",
-      "tags:flow-{{site.components.flow.latest.version}}",       
+      "tags:flow-{{site.components.flow.latest.version}}",
     ]], 'Search all docs...');
   </script>
 {{/if}}
