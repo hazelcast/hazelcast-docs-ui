@@ -1,106 +1,120 @@
 <div class="feedback-form-container">
-  <div class="helpful-feedback">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
     <span class="helpful-feedback-title">Was this helpful?</span>
     <div class="helpful-feedback-buttons">
       <label for="positive-feedback-starter" class="feedback-button yes-button">
-        <img src="{{{uiRootPath}}}/img/thumbs-up.svg" alt="like" class="like-img" />
-        <input type="radio" id="positive-feedback-starter" value="yes">
+        <img src="{{{uiRootPath}}}/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
       </label>
       <label for="negative-feedback-starter" class="feedback-button no-button">
-        <img src="{{{uiRootPath}}}/img/thumbs-down.svg" alt="like" class="like-img" />
-        <input type="radio" id="negative-feedback-starter" value="no">
+        <img src="{{{uiRootPath}}}/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
       </label>
     </div>
   </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
 
-  <div id="feedback-overlay" class="feedback-overlay">
-    <div class="overlay-content">
-      <span id="close-feedback-overlay" class="close-feedback-overlay">&times;</span>
-      <div>
-        <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST" data-netlify="true">
-          <p class="hidden">
-            <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-          </p>
-          <div id="positive-feedback-form-container" class="feedback-form-container positive-feedback-form-container hidden">
-            <label for="yes" class="hidden">
-              <input type="radio" id="yes" name="helpful" value="yes">
-            </label>
-
-            <label for="accurate-radio-feedback" class="feedback-radio-button">
-              <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate">
-              <span class="feedback-description">
-          <span class="radio-btn-title">
-          Accurate
+          <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my Problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue.
+        </span>
+      </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Easy to follow and comprehend.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+        Helped me decide to use the product
         </span>
           <span class="radio-btn-description">
           Convinced me to adopt the product or feature.
         </span>
+      </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another reason">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Another reason
         </span>
-            </label>
-            <label for="solved-my-problem-feedback" class="feedback-radio-button">
-              <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my Problem">
-              <span class="feedback-description">
-          <span class="radio-btn-title">
-            Solved my problem
-          </span>
-            <span class="radio-btn-description">
-            Helped me resolve an issue.
-          </span>
-        </span>
-            </label>
-            <label for="easy-to-understand" class="feedback-radio-button">
-              <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
-              <span class="feedback-description">
-          <span class="radio-btn-title">
-            Easy to understand
-          </span>
-          <span class="radio-btn-description">
-            Easy to follow and comprehend.
-          </span>
-        </span>
-            </label>
-            <label for="helped-in-decision" class="feedback-radio-button">
-              <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
-              <span class="feedback-description">
-          <span class="radio-btn-title">
-          Helped me decide to use the product
-          </span>
-            <span class="radio-btn-description">
-            Convinced me to adopt the product or feature.
-          </span>
-        </span>
-            </label>
-            <label for="another-reason" class="feedback-radio-button">
-              <input type="radio" id="another-reason" name="feedback" value="Another reason">
-              <span class="feedback-description">
-          <span class="radio-btn-title">
-            Another reason
-          </span>
-        </span>
-            </label>
-          </div>
+      </span>
+          </label>
+        </div>
 
-          <div id="negative-feedback-form-container" class="feedback-form-container negative-feedback-form-container hidden">
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
 
-            <label for="no" class="hidden">
-              <input type="radio" id="no" name="helpful" value="no">
-            </label>
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
 
-            <label for="accurate-radio-feedback" class="feedback-radio-button">
-              <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate">
-              <span>Not Accurate</span>
-            </label>
-            <label for="solved-my-problem-feedback" class="feedback-radio-button">
-              <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my Problem">
-              <span>Not solved my problem</span>
-            </label>
-          </div>
-          <div class="feedback-form-submit-container">
-            <input type="text" id="additional-textual-feedback" name="additional-textual-feedback">
-            <button type="submit">SUBMIT</button>
-          </div>
-        </form>
-      </div>
+          <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate">
+            <span>Not Accurate</span>
+          </label>
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my Problem">
+            <span>Not solved my problem</span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="Additional comment (optional)"
+        ></textarea>
+      </form>
     </div>
   </div>
 </div>

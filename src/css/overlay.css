@@ -20,8 +20,7 @@
   }
 }
 
-/* The Overlay (background) */
-.feedback-overlay {
+.overlay {
   display: none;
   position: fixed;
   z-index: 1;
@@ -35,30 +34,37 @@
   animation-duration: 0.4s;
 }
 
-.feedback-overlay.open {
+.overlay.open {
   display: block;
 }
 
 .overlay-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 15vh auto 0;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 1000px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   animation-name: animatetop;
   animation-duration: 0.4s;
+  position: relative;
 }
 
-.close-feedback-overlay {
-  color: #aaa;
-  float: right;
+.close-overlay {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--neutral-light);
   font-size: 28px;
+  line-height: 0.5;
   font-weight: bold;
+  transition: color 300ms;
 }
 
-.close-feedback-overlay:hover,
-.close-feedback-overlay:focus {
+.close-overlay:hover,
+.close-overlay:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
