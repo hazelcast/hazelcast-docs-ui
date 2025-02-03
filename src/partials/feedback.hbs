@@ -19,15 +19,5 @@
       </a>
     {{/with}}
   {{/if}}
-  <form name="docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST" data-netlify="true">
-    <p class="hidden">
-      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-    </p>
-    {{> was-this-helpful-feedback }}
-  </form>
+  {{> was-this-helpful-feedback }}
 </div>
-<script>
-  function submitForm() {
-    document.getElementById("feedback-form").submit();
-  }
-</script>
