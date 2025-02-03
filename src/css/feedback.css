@@ -1,4 +1,10 @@
-/* Feedback question and buttons */
+@keyframes vertical-shaking {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(5px); }
+  50% { transform: translateY(-5px); }
+  75% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
+}
 
 .feedback-prompt {
   width: var(--toc-width);
@@ -251,7 +257,12 @@ input[name="feedback"]:checked ~ .feedback-description .radio-btn-title {
 
 .feedback-submit-success {
   background-color: var(--accent4-light);
+  border: 1px solid var(--accent4);
   font-size: 14px;
   padding: 10px 20px;
   border-radius: 10px;
+  animation-name: vertical-shaking;
+  animation-delay: 0.3s;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
 }

@@ -18,7 +18,7 @@ const handleSubmit = (event) => {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams(formData).toString(),
   })
-    .then(() => console.debug('Thank you for your submission'))
+    .then(() => console.debug('Thank you for your feedback'))
     .catch((error) => console.error(error))
   submitBtn.removeAttribute('disabled')
   overlay.classList.remove('open')
