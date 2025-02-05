@@ -12,6 +12,14 @@
   align-items: center;
   width: 38px;
   height: 38px;
+  background-color: transparent;
+  border-color: transparent;
+  transition: transform 300ms;
+  color: var(--neutral-white);
+}
+
+.kapa-search-btn:hover {
+  transform: translateY(-2px);
 }
 
 .home .kapa-search-input-container {
@@ -34,7 +42,7 @@
 }
 
 .kapa-search-icon {
-  color: var(--accent);
+  color: var(--neutral-white);
 }
 
 .kapa-search-input-container {
