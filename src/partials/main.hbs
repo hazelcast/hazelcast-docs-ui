@@ -1,55 +1,46 @@
 <main class="article">
 {{#if (eq page.layout '404')}}
   <div class="content">
-{{> article}}
+    {{> article}}
   </div>
-</main>
 {{else}}
-  {{#if (and (eq page.component.name 'imdg') (eq page.componentVersion page.component.latest) (not @root.page.componentVersion.prerelease ))}}
+  {{#if (eq page.component.name 'imdg')}}
     <div class="article-banner beta" id="latest-banner">
-    <div class="beta-imdg">
-    <p><b><a href="https://support.hazelcast.com/s/article/Version-Support-Windows">Hazelcast IMDG support has expired.</a></b></p>
-    <p><b>We recommend that you try <a href="https://docs.hazelcast.com/hazelcast/latest/">Hazelcast Platform</a>.</b></p>
-    </div>
+      <div class="beta-imdg">
+        <p>
+            <a href="https://support.hazelcast.com/s/article/Version-Support-Windows">Hazelcast IMDG support has expired.
+            </a>
+        </p>
+        <p>
+          We recommend that you try <a href="https://docs.hazelcast.com/hazelcast/latest/">Hazelcast Platform</a>.
+        </p>
+      </div>
     <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
     </div>
-    {{/if}}
+  {{/if}}
   {{#unless (or (not-eq page.attributes.hide-view-latest undefined) (eq page.componentVersion page.component.latest))}}
-  {{#with (latest-page-url)}}
-  <div class="article-banner prerelease" id="latest-banner">
-    {{#if (and @root.page.componentVersion.prerelease (not @root.page.latest.prerelease))}}
-    <div class="prerelease">
-    <p>This is a prerelease version.</p>
-        <a class="btn" href="{{relativize this}}">View latest</a>
-    </div>
-    {{else if (and @root.page.componentVersion.prerelease @root.page.latest.prerelease)}}
+    {{#with (latest-page-url)}}
+    <div class="article-banner prerelease" id="latest-banner">
+      {{#if (and @root.page.componentVersion.prerelease (not @root.page.latest.prerelease))}}
       <div class="prerelease">
-        <p>This is a prerelease version.</p>
-    </div>
-    {{else}}
-    <div class="prerelease"prerelease>
-    <p>A newer version of {{@root.page.component.title}} is available.</p>
-    <a class="btn" href="{{relativize this}}">View latest</a>
-    </div>
-    {{/if}}
-    {{#if (eq @root.page.component.name 'imdg')}}
-    <div class="beta-imdg">
-    <p><b>Want to try Hazelcast Platform?</b></p>
-    <p>We’ve combined the in-memory storage of IMDG
-      with the stream processing power of Jet
-      to bring you the all new Hazelcast Platform.</p>
-    <ul>
-      <li><a href="https://docs.hazelcast.com/hazelcast/latest/getting-started/install-hazelcast">Get started by setting up your first cluster on Hazelcast Platform</a>.</li>
-      <li><a href="https://docs.hazelcast.com/hazelcast/latest/sql/learn-sql.html">Try out the improved SQL engine</a>.</li>
-      <li><a href="https://docs.hazelcast.com/hazelcast/latest/migrate/migration-tool-imdg.html">Learn how to migrate to Hazelcast Platform</a>.</li>
-    </ul>
-    </div>
-    {{/if}}
+      <p>This is a prerelease version.</p>
+          <a class="btn" href="{{relativize this}}">View latest</a>
+      </div>
+      {{else if (and @root.page.componentVersion.prerelease @root.page.latest.prerelease)}}
+        <div class="prerelease">
+          <p>This is a prerelease version.</p>
+      </div>
+      {{else}}
+      <div class="prerelease">
+        <p>A newer version of {{@root.page.component.title}} is available.</p>
+        <a class="btn" href="{{relativize this}}">View latest</a>
+      </div>
+      {{/if}}
       <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
-  </div>
-  {{/with}}
+    </div>
+    {{/with}}
   {{/unless}}
-    <script>
+  <script>
     function closeBanner() {
       document.getElementById('latest-banner').style.display = 'none'
       const now = new Date()
@@ -60,9 +51,9 @@
     }
   </script>
   <div class="content">
-{{> article}}
-{{> toc}}
+    {{> article}}
+    {{> toc}}
   </div>
-</main>
 {{/if}}
+</main>
 

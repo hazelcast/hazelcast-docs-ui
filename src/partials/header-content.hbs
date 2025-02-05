@@ -10,7 +10,7 @@
     </div>
 
     <div class="navbar-end">
-      {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing'))}}
+      {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing') (not-eq page.component.name 'imdg'))}}
         <button id="kapa-search-btn" class="kapa-search-btn">
           <i data-feather="search" class="kapa-search-icon"></i>
         </button>
