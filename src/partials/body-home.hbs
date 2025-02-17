@@ -6,8 +6,12 @@
     <p class="home-background-subheading">
       Find user guides, code samples, tutorials, API reference, and more.
     </p>
-    <div id="search-input" class="search-container searchbox">
-    </div>
+    <form id="kapa-search-form" class="kapa-search-form">
+      <label class="kapa-search-input-container">
+        <input name="query" type="text" placeholder="Search docs..." class="kapa-search-input">
+        <i data-feather="search" class="kapa-search-icon"></i>
+      </label>
+    </form>
   </div>
   <main data-ceiling="topbar">
     <article class="article">
@@ -35,7 +39,7 @@
       <div class="card">
         <div class="card-header">
           <i data-feather="layers" class="card-img"></i>
-          <h4 class="card-title"><a href="{{{siteRootPath}}}/hazelcast/latest/what-is-hazelcast">Hazelcast Platform</a></h4>          
+          <h4 class="card-title"><a href="{{{siteRootPath}}}/hazelcast/latest/what-is-hazelcast">Hazelcast Platform</a></h4>
         </div>
         <ul class="card-list">
           <li class="card-list-item">
@@ -257,11 +261,11 @@
           <dd class="card-list-item-description">
             Every distributed system faces a critical question: should we prioritize consistency or availability?
           </dd>
-          <dt class="card-list-item">
-            <a href="https://docs.hazelcast.com/hazelcast/5.5/release-notes/5-5-3">5.5.3 Release Notes: Hazelcast Platform Enterprise Edition</a>
+         <dt class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/integrate/integrate-with-feast">Integrate with Feast</a>
           </dt>
           <dd class="card-list-item-description">
-            Includes IPv6 support for AWS discovery plugin, FIPS compliance with BouncyCastle update, and CVE-2023-45676 security fix.
+            Start using Feast integration to serve real-time online features.
           </dd>
           <dt class="card-list-item">
             <a href="https://hazelcast.com/blog/dynamic-configuration-no-restarts-required/?utm_source=docs-website">Blog: Dynamic Configuration: No Restarts Required</a>

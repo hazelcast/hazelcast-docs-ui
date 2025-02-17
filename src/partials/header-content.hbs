@@ -11,12 +11,9 @@
 
     <div class="navbar-end">
       {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing') (not-eq page.component.name 'imdg'))}}
-        <div id="search-input" class="navbar-item searchbox"></div>
-        {{#if (not-eq page.layout '404')}}
-          <label class="filter checkbox">
-            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
-          </label>
-        {{/if}}
+        <button id="kapa-search-btn" class="kapa-search-btn">
+          <i data-feather="search" class="kapa-search-icon"></i>
+        </button>
       {{else}}
         <a href="https://hazelcast.com/?utm_source=docs-website" class="hazelcast-link" target="_blank">
           hazelcast.com
