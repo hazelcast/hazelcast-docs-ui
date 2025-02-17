@@ -6,8 +6,12 @@
     <p class="home-background-subheading">
       Find user guides, code samples, tutorials, API reference, and more.
     </p>
-    <div id="search-input" class="search-container searchbox">
-    </div>
+    <form id="kapa-search-form" class="kapa-search-form">
+      <label class="kapa-search-input-container">
+        <input name="query" type="text" placeholder="Search docs..." class="kapa-search-input">
+        <i data-feather="search" class="kapa-search-icon"></i>
+      </label>
+    </form>
   </div>
   <main data-ceiling="topbar">
     <article class="article">
@@ -35,7 +39,7 @@
       <div class="card">
         <div class="card-header">
           <i data-feather="layers" class="card-img"></i>
-          <h4 class="card-title"><a href="{{{siteRootPath}}}/hazelcast/latest/what-is-hazelcast">Hazelcast Platform</a></h4>          
+          <h4 class="card-title"><a href="{{{siteRootPath}}}/hazelcast/latest/what-is-hazelcast">Hazelcast Platform</a></h4>
         </div>
         <ul class="card-list">
           <li class="card-list-item">

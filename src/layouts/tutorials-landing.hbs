@@ -126,18 +126,5 @@
     {{> header}}
     {{> body-tutorials-landing}}
     {{> footer}}
-    <script>
-      docsearch({
-        apiKey: '{{site.keys.docsearchApi}}',
-        indexName: '{{site.keys.docsearchIndex}}',
-        appId: '{{site.keys.docsearchId}}',
-        container: '#search-input',
-        // Set debug to true to inspect the dropdown
-        debug: false,
-        // Display 25 results in the dropdown
-        // and search only the current product
-        searchParameters: {  facetFilters: [["tags:tutorials"]] },
-      });
-    </script>
   </body>
 </html>

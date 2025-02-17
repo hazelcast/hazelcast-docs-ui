@@ -213,16 +213,6 @@ Each page may declare a layout, role, or both.
 
 NOTE: The navigational elements are controlled by the UI model (`preview-src/ui-model.yml`). For information about what goes in the UI model, refer the https://docs.antora.org/antora-ui-default/templates/[Handlebars templates page] in the Antora documentation.
 
-== Algolia Search
-
-This UI provides integration with Algolia search.
-The Algolia client is configured in the `src/partials/footer-scripts.hbs` file.
-To test the search from the preview site, set the following environment variables in your shell (you can point to any index that is publicly accessible):
-
-* `ALGOLIA_APP_ID` - the application ID that hosts the search index (optional if you're using docsearch)
-* `ALGOLIA_API_KEY` - your API key for Algolia
-* `ALGOLIA_INDEX_NAME` - the name of the index
-
 === Icons
 
 There is the {feather-docs}[feather] icons pack added to the UI. To use it, just add the following element
