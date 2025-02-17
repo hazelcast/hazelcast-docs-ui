@@ -36,7 +36,8 @@
     flex: 0 0 var(--toc-width);
     min-width: 222px;
     overflow-y: auto;
-    height: var(--toc-height);
+    height: max-content;
+    max-height: var(--toc-height);
     overflow-x: hidden;
   }
 
