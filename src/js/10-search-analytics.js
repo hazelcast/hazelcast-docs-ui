@@ -13,15 +13,19 @@
     const onSearchResultsCompletedHandler = ({ query, searchResults }) => {
       const metrics = ['SearchResultsCompleted', query, searchResults]
       console.debug('GTM', metrics)
-      window.dataLayer && window.dataLayer.push(metrics)
+      window.dataLayer.push(metrics)
     }
     const timeout = 5000
 
     const onSearchResultsCompletedHandlerDebounced = debounce(onSearchResultsCompletedHandler, timeout)
 
     if (window.Kapa) {
-      // eslint-disable-next-line no-undef
-      window.Kapa('onSearchResultsCompleted', onSearchResultsCompletedHandlerDebounced)
+      if (window.dataLayer) {
+        // eslint-disable-next-line no-undef
+        window.Kapa('onSearchResultsCompleted', onSearchResultsCompletedHandlerDebounced)
+      } else {
+        console.warn('GTM is not enabled!')
+      }
     } else {
       console.warn('Kapa was not detected!')
     }
