@@ -11,8 +11,9 @@
     }
 
     const onSearchResultsCompletedHandler = ({ query, searchResults }) => {
-      console.debug('GTM', ['SearchResultsCompleted', query, searchResults])
-      window.dataLayer && window.dataLayer.push(['SearchResultsCompleted', query, searchResults])
+      const metrics = ['SearchResultsCompleted', query, searchResults]
+      console.debug('GTM', metrics)
+      window.dataLayer && window.dataLayer.push(metrics)
     }
     const timeout = 5000
 

@@ -4,9 +4,6 @@
       <img class="card-img" src="{{{uiRootPath}}}/img/lifebuoy.svg" alt="lifebuoy" />
       <h4 class="card-title">Help and support</h4>
     </div>
-    {{#if (not-eq page.layout 'home')}}
-      {{> was-this-helpful-feedback }}
-    {{/if}}
     {{#with (get-page-info)}}
       <a class="additional-feedback feedback-button" href="{{this.src.origin.webUrl}}/issues/new?title=Docs: Feedback for {{{this.title}}}&body=Hi, I have some feedback about [this page]({{{this.src.editUrl}}})%0D%0A" target="_blank">
         <span class="feedback-button-text git">
