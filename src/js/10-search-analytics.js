@@ -1,7 +1,5 @@
 ;(function () {
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded')
-
     function debounce (func, timeout) {
       let timer
       return function (...args) {
