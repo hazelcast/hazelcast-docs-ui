@@ -9,7 +9,7 @@
     }
 
     const onSearchResultsCompletedHandler = ({ query, searchResults }) => {
-      const metrics = ['SearchResultsCompleted', query, searchResults]
+      const metrics = { event: 'kapa_search_results_completed', query, searchResults }
       console.debug('GTM', metrics)
       window.dataLayer.push(metrics)
     }
