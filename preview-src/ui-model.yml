@@ -5,7 +5,7 @@ site:
   homeUrl: &home_url /index.html
 #  uncomment below to test analytics locally
   keys:
-#    googleAnalytics: 'GTM-MQN543KB'
+#    googleAnalytics: 'GTM-MQ59XD6'
     aiSearchId: 'ad664bf0-07e2-42e7-9150-2e1b04b15cca'
   components:
   - name: abc
