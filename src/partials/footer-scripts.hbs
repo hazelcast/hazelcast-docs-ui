@@ -102,11 +102,6 @@
       var banner = document.getElementById('latest-banner')
       if (banner) {
         banner.style.display = 'none'
-        const now = new Date()
-        const item = {
-          expiry: now.getTime() + 86400000,
-        }
-        localStorage.setItem('latestBannerCookie', JSON.stringify(item))
       }
     }
   </script>
@@ -119,11 +114,6 @@
       var banner = document.getElementById('latest-banner')
       if (banner) {
         banner.style.display = 'none'
-        const now = new Date()
-        const item = {
-          expiry: now.getTime() + 86400000,
-        }
-        localStorage.setItem('latestBannerCookie', JSON.stringify(item))
       }
     }
   </script>
