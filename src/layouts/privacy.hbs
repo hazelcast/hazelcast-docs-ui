@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{> head-prelude}}
   <title>Privacy Policy</title>
+  {{#with page.canonicalUrl}}
+    <link rel="canonical" href="{{this}}">
+  {{/with}}
+  {{> head-styles}}
+  {{> head-icons}}
   <style>
     /* Load PP Telegraf (Make sure the font file is available) */
     @font-face {
