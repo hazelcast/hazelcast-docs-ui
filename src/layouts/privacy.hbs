@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{> head-prelude}}
+  <title>Privacy Policy</title>
+  {{#with page.canonicalUrl}}
+    <link rel="canonical" href="{{this}}">
+  {{/with}}
+  {{> head-styles}}
+  {{> head-icons}}
+  <style>
+    /* Load PP Telegraf (Make sure the font file is available) */
+    @font-face {
+      font-family: "PP Telegraf";
+      src: url("https://hazelcast.com/wp-content/themes/hazelcast/assets/fonts/PPTelegraf-Regular.woff2") format("woff2"),
+      url("https://hazelcast.com/wp-content/themes/hazelcast/assets/fonts/PPTelegraf-Regular.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+    /* Apply global font settings */
+    body {
+      font-family: "PP Telegraf", Arial, Helvetica, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #0b2b39;
+    }
+    .privacy {
+      margin: 40px;
+      padding: 20px;
+      max-width: 1800px;
+      margin: auto;
+    }
+    #privacy-policy {
+      margin-top: 20px;
+    }
+    .loading {
+      font-style: italic;
+      color: gray;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed; /* Ensures equal columns */
+      word-wrap: break-word;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd; /* Row borders */
+      white-space: normal; /* Allows text wrapping */
+      overflow-wrap: break-word; /* Break long words properly */
+    }
+
+    th {
+      background-color: #c6ff3a;
+      color: #0b2b39;
+      font-weight: bold;
+    }
+
+      /* Alternating row colors */
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin: 1em 0; /* Adds space above and below the list */
+      padding-left: 40px; /* Indents the list */
+    }
+
+    li {
+      margin-bottom: 0.5em; /* Adds spacing between list items */
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("table").forEach((table) => {
+        const firstRow = table.querySelector("tr");
+        if (!firstRow) return;
+
+        const colCount = firstRow.children.length;
+        const equalWidth = 100 / colCount + "%";
+
+        table.style.tableLayout = "fixed"; // Ensures equal columns
+        table.querySelectorAll("th, td").forEach((cell) => {
+          cell.style.width = equalWidth;
+        });
+      });
+    });
+
+  </script>
+</head>
+<body>
+{{> header-content}}
+<div class="privacy">
+  <p class="loading" id="loading-message">Loading privacy policy...</p>
+  <div id="privacy-policy"></div>
+</div>
+
+<script>
+  fetch("https://hazelcast.com/wp-json/wp/v2/pages?slug=privacy")
+    .then(response => response.json())
+    .then(data => {
+      if (data.length > 0) {
+        document.getElementById("privacy-policy").innerHTML = data[0].content.rendered;
+      } else {
+        document.getElementById("privacy-policy").innerHTML = "<p class='error'>Privacy policy not found.</p>";
+      }
+      document.getElementById("loading-message").style.display = "none";
+    })
+    .catch(error => {
+      console.error("Error fetching privacy policy:", error);
+      document.getElementById("privacy-policy").innerHTML = "<p class='error'>Error loading privacy policy.</p>";
+      document.getElementById("loading-message").style.display = "none";
+    });
+</script>
+
+</body>
+</html>

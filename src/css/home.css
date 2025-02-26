@@ -7,7 +7,7 @@
   text-align: center;
 }
 
-.home .home-background {
+.home .hero-background {
   background-image: url('../img/home/hazelcast-banner-back.jpeg'), linear-gradient(160deg, #061827 33%, #1b2939 66%, #0686b3 100%);
   background-repeat: no-repeat;
   background-position-x: center;
@@ -19,18 +19,18 @@
 }
 
 @media (min-width: 1120px) {
-  .home .home-background {
+  .home .hero-background {
     background-position-y: -50px;
   }
 }
 
 @media (min-width: 1600px) {
-  .home .home-background {
+  .home .hero-background {
     background-position-y: -160px;
   }
 }
 
-.home .home-background-heading {
+.home .hero-background-heading {
   color: #fff;
   font-weight: 500;
   font-size: 50px;
@@ -42,7 +42,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-.home .home-background-subheading {
+.home .hero-background-subheading {
   color: #fff;
   font-size: var(--body-font-size);
   font-family: var(--heading-font-family);
