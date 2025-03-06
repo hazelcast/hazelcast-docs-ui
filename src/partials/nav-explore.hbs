@@ -15,7 +15,7 @@
 
   <ul class="nav-version-picker-components" id="navbarProductsList">
     {{#each (sort-components site.components 'name' page.attributes.component-order)}}
-      {{#if (and (not-eq this.name 'home') (not-eq this.name 'templates') (not-eq this.name 'imdg'))}}
+      {{#if (and (not-eq this.name 'home') (not-eq this.name 'templates') (not-eq this.name 'imdg') (not-eq this.name 'privacy'))}}
         <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
           {{#each ./versions}}
             {{#if (eq this ../latest)}}
