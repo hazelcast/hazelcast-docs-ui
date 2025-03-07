@@ -1,0 +1,4707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Predicates API | Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/hazelcast/5.5/query/predicate-overview">
+    <link rel="prev" href="../pipelines/xa">
+    <link rel="next" href="../sql/sql-overview">
+    <meta name="description" content="The Predicates API is a programming interface for querying data in Hazelcast, which is similar to the Java Persistence Query Language (JPQL).">
+    <meta name="generator" content="Antora 3.1.10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../../../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../../../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <div id="search-input" class="navbar-item searchbox"></div>
+          <label class="filter checkbox">
+            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+          </label>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+  <div class="nav-container" data-component="hazelcast" data-version="5.1">
+  <aside class="nav">
+    <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="Hazelcast Platform">
+      Hazelcast Platform
+    </a>
+  </div>
+
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="5.1">
+        5.1
+      </a>
+    </div>
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+      <span>hazelcast</span>
+        <li class="component is-current">
+              <a href="../../5.5/">
+                Hazelcast Platform
+              </a>
+        </li>
+      <span>management-center</span>
+        <li class="component">
+              <a href="../../../management-center/5.7/">
+                Management Center
+              </a>
+        </li>
+      <span>home</span>
+      <span>privacy</span>
+      <span>templates</span>
+      <span>tutorials</span>
+        <li class="component">
+              <a href="../../../tutorials/">
+                Tutorials
+              </a>
+        </li>
+  </ul>
+
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            <li
+              class="version"
+            >
+              <a href="../../6.0-snapshot/query/predicate-overview">6.0-SNAPSHOT</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.5/query/predicate-overview">5.5</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.4/query/predicate-overview">5.4</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.3/query/predicate-overview">5.3</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.2/query/predicate-overview">5.2</a>
+            </li>
+            <li
+              class="version is-current"
+            >
+              <a href="predicate-overview">5.1</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.0/query/predicate-overview">5.0</a>
+            </li>
+      </ul>
+</div>
+    <div class="panels">
+  <div class="nav-panel-menu is-active" data-panel="menu">
+    <nav class="nav-menu">
+        <ul class="nav-list">
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Get Started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../">Hazelcast Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Start a Local Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-cli">CLI</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-docker">Docker</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-binary">Binary</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-java">Java Embedded</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Explore Enterprise Features</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/enterprise-overview">Get Started with Hazelcast Enterprise</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/persistence">Persist Map Entries on Disk</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/authenticate-clients">Authenticate Client Connections</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/wan">Replicate a Map over Clusters in a WAN</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/blue-green">Deploy Blue-Green Clusters</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../getting-started/support">Getting Support</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../getting-started/resources">Developer Resources</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../glossary">Glossary</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Develop Solutions</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Finding the Right Tool</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cache/overview">Caching Data</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../ingest/overview">Ingesting Data from External Sources</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../computing/distributed-computing">Distributed Computing</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="overview">Running Distributed Queries</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Connecting to a Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/hazelcast-clients">Getting Started with a Hazelcast Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/java">Java Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/cplusplus">C++ Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/dotnet">.NET Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/rest">REST Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/memcache">Memcache Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/python">Python Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/nodejs">Node.js Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/go">Go Client</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Distributed Data Structures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/distributed-data-structures">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Map</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/map">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/map-config">Configuring Maps</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/creating-a-map">Creating a Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/reading-a-map">Reading Data From a Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/updating-map-entries">Updating Map Entries</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/setting-data-format">Setting the In-Memory Format of Map Entries</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/backing-up-maps">Making Your Map Data Safe</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/managing-map-memory">Managing Map Memory</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/working-with-external-data">Working with an External Data Store</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/locking-maps">Locking Maps</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/listening-for-map-entries">Acting Upon Changes to a Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/reading-map-metrics">Reading Map Metrics</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">JCache</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/jcache">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/overview">JCache Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/setup">JCache Setup and Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/providers">JCache Providers</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/api">JCache API</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/hazelcast-integration">JCache - Hazelcast Instance Integration</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/icache">Hazelcast JCache Extension - ICache</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/tck">Testing for JCache Specification Compliance</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/queue">Queue</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/priority-queue">Priority Queue</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/multimap">MultiMap</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/set">Set</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/list">List</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/ringbuffer">Ringbuffer</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/topic">Topic</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/reliable-topic">Reliable Topic</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/fencedlock">FencedLock</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/iatomiclong">IAtomicLong</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/isemaphore">ISemaphore</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/iatomicreference">IAtomicReference</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/icountdownlatch">ICountDownLatch</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/pn-counter">PN Counter</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/flake-id-generator">Flake ID Generator</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/replicated-map">Replicated Map</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/cardinality-estimator-service">Cardinality Estimator Service</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/event-journal">Event Journal</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Building Data Pipelines</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/overview">About Data Pipelines</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Get Started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/stream-processing-embedded">Get Started with Stream Processing (Embedded)</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/stream-processing-client">Get Started with Stream Processing (Client/Server)</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Ingesting Data from Sources</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/ingesting-from-sources">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-stream-source">Creating a Custom Streaming Source</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-batch-source">Adding Batching to a Custom Source</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Processing Data</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/transforms">Transforms</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-aggregate-operation">Building a Custom Aggregate Operation</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/python">Apply a Custom Transform with Python</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Sending Results to Sinks</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/sending-data-to-sinks">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-sink">Create a Custom Sink</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Stream Processing</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/building-pipelines">About Stream Processing Pipelines</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/windowing">Apply Windowed Aggregation</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/stream-imap">Subscribe to Changes to a Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/map-join">Enrich a Stream</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-overview">Change Data Capture (CDC)</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-database-setup">Setting Up a Database for Change Data Capture</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc">Capture Changes from MySQL</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-postgres">Capture Changes from PostgreSQL</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-join">Join Change Data Capture Records</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/etl-overview">Extract Transform Load (ETL)</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/kafka">Connect to Apache Kafka</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/kinesis">Connect to Amazon Kinesis</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/pulsar">Group Messages from Apache Pulsar</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/serialization">Serializing Pipelines</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/configuring-jobs">Configuring Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-security">Securing Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/submitting-jobs">Submitting Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-management">Managing Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-update">Updating Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/xa">Testing Sources and Sinks for XA Transaction Support</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item is-current-page" data-depth="1">
+            <a class="nav-link
+
+            " href="predicate-overview">Predicates API</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">SQL</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/sql-overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL Over Maps</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/get-started-sql">Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/querying-maps-sql">Queries</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-maps">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL Over Kafka</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/learn-sql">Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-kafka">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL Over File Systems</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/get-started-sql-files">Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-a-file-system">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/working-with-json">Working with JSON</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/querying-streams">Stream Processing</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/parameterized-queries">Query Parameters</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/finding-mappings">Finding Mappings</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/improving-performance">Improving Performance</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/troubleshooting">Troubleshooting</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Statements</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/sql-statements">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/alter-job"><code>ALTER JOB</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-index"><code>CREATE INDEX</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-job"><code>CREATE JOB</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-mapping"><code>CREATE MAPPING</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-snapshot"><code>CREATE SNAPSHOT</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-view"><code>CREATE VIEW</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/delete"><code>DELETE</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-job"><code>DROP JOB</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-mapping"><code>DROP MAPPING</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-snapshot"><code>DROP SNAPSHOT</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-view"><code>DROP VIEW</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/explain"><code>EXPLAIN</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/sink-into"><code>INSERT INTO</code>/<code>SINK INTO</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/select"><code>SELECT</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/show-jobs"><code>SHOW JOBS</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/show-mappings"><code>SHOW MAPPINGS</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/update"><code>UPDATE</code></a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/functions-and-operators">Functions and Expressions</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/data-types">SQL Data Types</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Improving Query Performance</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="indexing-maps">Indexing Maps</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../performance/data-affinity">Data Affinity</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../performance/caching-deserialized-values">Caching Deserialized Values</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../performance/near-cache">Near Cache</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/preventing-out-of-memory">Preventing Out of Memory Exceptions when Querying a Map</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Connector Guides</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/connectors">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Files</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/file-connector">Unified File Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/legacy-file-connector">Legacy File Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Messaging System Connectors</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/messaging-system-connectors">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/kafka-connector">Apache Kafka Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/kinesis-connector">Amazon Kinesis Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/jms-connector">JMS Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/pulsar-connector">Apache Pulsar Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Data Structure Connectors</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/jcache-connector">JCache Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/list-connector">List Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/map-connector">Map Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/reliable-topic-connector">Reliable Topic Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Databases</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/database-connectors">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/jdbc-connector">JDBC Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/cdc-connectors">CDC Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/elasticsearch-connector">Elasticsearch Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/mongodb-connector">MongoDB Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/influxdb-connector">InfluxDB Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/redis-connector">Redis Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/test-connectors">Test Source Connectors</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/socket-connector">Socket Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/http-connector">HTTP Listener Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/twitter-connector">Twitter Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/custom-connectors">Custom Connectors</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Java Executor Service</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../computing/executor-service">Java Executor Service</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../computing/durable-executor-service">Durable Executor Service</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../computing/scheduled-executor-service">Scheduled Executor Service</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../computing/entry-processor">Entry Processor</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Adding Java Classes to Members</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/deploying-code-on-member">Deploying User Code on the Member</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/deploying-code-from-clients">Deploying User Code from Clients</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ beta
+            " href="../clusters/accessing-domain-objects">Accessing Domain Objects Without Domain Classes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Serialization</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/serialization">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/implementing-java-serializable">Java Serializable and Externalizable</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/implementing-dataserializable">DataSerializable</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/implementing-portable-serialization">Portable</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/serializing-json">HazelcastJsonValue</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ beta
+            " href="../serialization/compact-serialization">Compact Serialization</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/custom-serialization">Custom Serialization</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/global-serializer">Global Serializer</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/implementing-hazelcastinstanceaware">HazelcastInstanceAware</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/serialization-configuration">Configuring Serializers</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Listening to Events</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/distributed-events">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/cluster-events">Cluster Events</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/event-listeners-for-clients">Event Listeners for Hazelcast Clients</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/global-event-configuration">Global Event Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/object-events">Distributed Object Events</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Transactions</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../transactions/creating-a-transaction-interface">Creating a Transaction Interface</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../transactions/providing-xa-transactions">Providing XA Transactions</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Testing Applications</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../test/testing-apps">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../test/testing">Testing Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../simulator">Hazelcast Simulator</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Troubleshooting</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/troubleshooting">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/error-handling">Error Handling Strategies for Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/remedies-for-alerts">Actions and Remedies for Alerts</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/recovery-members">Recovery from a Partial or Total Failure</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/recovery-clients">Recovery from Client Connection Failures</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../common-exception-types">Common Exception Types</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Deploy Clusters</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../production-checklist">Production Checklist</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../capacity-planning">Capacity Planning</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Installation</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/choosing-a-deployment-option">Choosing an Application Topology</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/editions">Editions and Distributions</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/install-hazelcast">Open Source</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/install-enterprise">Enterprise</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Member/Client Discovery</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/discovery-mechanisms">Discovery Mechanisms</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/discovering-by-tcp">Discovering Members by TCP</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/discovering-by-multicast">Discovering Members by Multicast</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/discovering-native-clients">Discovering Java Clients</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Public Cloud</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-in-cloud">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-on-aws">Deploying a Cluster on Amazon AWS</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-on-azure">Deploying a Cluster on Microsoft Azure</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-on-gcp">Deploying a Cluster on Google Cloud Platform</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../deploy/deploying-with-docker">Deploying on Docker</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Kubernetes</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/deploying-in-kubernetes">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="#operator:ROOT:get-started.adoc">Hazelcast Platform Operator</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/kubernetes-auto-discovery">Kubernetes Auto Discovery</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/troubleshooting-and-limitations">Troubleshooting and Limitations</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Helm Charts</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-hazelcast-chart">Hazelcast Chart</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-hazelcast-enterprise-chart">Hazelcast Enterprise Edition Chart</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-upgrade-guide">Helm Upgrade Guide</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-adding-custom-jar">Adding Custom Jar</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-enabling-external-access">Enabling External Access</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-configuring-ssl">Configuring SSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-dynamic-persistence-configuration">Dynamic Persistence Configuration</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Configure and Manage Clusters</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../configuration/understanding-configuration">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Static Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-declaratively">Member Configuration Files</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-programmatically">Configuring Hazelcast in Embedded Mode</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-with-system-properties">System Props and Environment Variables</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/jvm-parameters">JVM Parameters</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-within-spring">Configuring Hazelcast in Spring</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/pattern-matcher">Configuration Pattern Matcher</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/using-wildcards">Using Wildcards</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Dynamic Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config-programmatic-api">Programmatic API</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config-update-and-reload">Update and Reload with REST</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config-persistence">Configuration Options</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../deploy/enterprise-licenses">Managing Enterprise License Keys</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../maintain-cluster/logging">Configuring Logging</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Maintaining a Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/rolling-upgrades">Rolling Upgrades</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/monitoring">Monitoring</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/cluster-member-states">Cluster and Member States</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/member-attributes">Filtering Members with Attributes</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/lite-members">Lite Members</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/shutdown">Shutting Down</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/rest-api">REST API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../management/cluster-utilities">Cluster Utilities</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Partition Groups and Networking</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/creating-clusters">Grouping Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/partition-group-configuration">Grouping Partitions</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/network-configuration">Networking</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Improving Cluster Performance</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/performance-tuning">Performance Tuning</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/best-practices">Best Practices</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../storage/high-density-memory">High-Density Memory Store</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Securing a Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/overview">Security Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../secure-cluster/security-defaults">Security Defaults</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../secure-cluster/hardening-recommendations">Security Hardening Recommendations</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/enabling-jaas">Enabling JAAS Security</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">TLS/SSL</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/tls-ssl">TLS/SSL Basics</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/integrating-openssl">Integrating OpenSSL / BoringSSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/tls-configuration">Other TLS-Related Configurations</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Authentication Types</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/default-authentication">Default authentication</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/simple-authentication">Simple Authentication</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/jaas-authentication">JAAS authentication</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/security-realms">Security Realms</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/cluster-member-security">Cluster Member Security</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/native-client-security">Client Security</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/socket-interceptor">Socket Interceptor</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/security-interceptor">Security Interceptor</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Advanced Security Features</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/logging-auditable-events">Logging Auditable Events</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/validating-secrets">Validating Secrets Using Strength Policy</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/fips-140-2">FIPS 140-2</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/security-debugging">Security Debugging</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/encryption">Encryption</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Configuring for Fault Tolerance</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../fault-tolerance/backups">Backups</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Persistence</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/persistence">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/configuring-persistence">Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/backing-up-persistence">Backups</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/triggering-force-start">Force-start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/triggering-partial-start">Partial-start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/copying-persistence">Copying Data</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/persistence-on-intel">Intel Optane DC</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/performance">Performance Benchmark</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/persistence-design">Design Details</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Detecting Failures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../clusters/failure-detector-configuration">Failure Detectors</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../clusters/deadline-detector">Deadline Failure Detector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../clusters/phi-accrual-detector">Phi Accrual Failure Detector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../clusters/ping-detector">Ping Failure Detector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../fault-tolerance/timeouts">Connection Timeouts</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../fault-tolerance/fault-tolerance">Fault Tolerance for Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Handling Network Partitions</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/network-partitioning">Network Partitioning</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/partial-network-partitions">Partial Network Partitions</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/dealing-with-network-partitions">Dealing with Network Partitions</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/split-brain-protection">Split-Brain Protection</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/split-brain-recovery">Split-Brain Recovery</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Tiered Storage</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ beta
+            " href="../tiered-storage/overview">Tiered Storage</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ beta
+            " href="../tiered-storage/configuration">Configuring Tiered Storage</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">CP Subsystem</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/cp-subsystem">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/configuration">Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/management">Management</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/best-practices">Best Practices</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Synchronizing Data Across Clusters</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/wan">WAN Replication Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/modes">WAN Replication Modes</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/quick-start">WAN Quickstart</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/defining-wan-replication">Configuring WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/configuring-for-map-and-cache">Configuring for IMap and ICache</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/advanced-features">Advanced Features</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/tuning">Fine-Tuning WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/failures">Failure Detection and Recovery</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/rest-api">REST API for WAN Wrap-Up</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/extending-hazelcast">Extending Hazelcast</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/operationparker">OperationParker</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/discovery-spi">Discovery SPI</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/config-properties-spi">Config Properties SPI</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../osgi/osgi">OSGI</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/osgi-support">OSGI Support</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/api">API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/configuring-osgi-support">Configuring Hazelcast OSGI Support</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/design">Design</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/using-osgi-service">Using Hazelcast OSGI Service</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Upgrade</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../deploy/versioning-compatibility">Versioning and Compatibility</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/upgrading-from-jet">Upgrading from Jet</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/upgrading-from-imdg-4">Upgrading from IMDG 4.x</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/upgrading-from-imdg-3">Upgrading from IMDG 3.12.x</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/evaluation-tool">Evaluating 5.x (For IMDG 3.x Users)</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/migration-tool-imdg">Migrating Data from IMDG 3.12.x</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Reference</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Architecture</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/architecture">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/data-partitioning">Data Partitioning and Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/distributed-computing">How Hazelcast Models and Executes Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/execution-engine">Cooperative Multithreading</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/event-time-processing">How Hazelcast Handles Event Disorder</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/sliding-window">Sliding Window Aggregation</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/in-memory-storage">In-Memory Storage</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../system-properties">System Properties</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../faq">Frequently Asked Questions</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../list-of-metrics">Metrics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../phone-homes">Phone Homes</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../plugins/hazelcast-plugins">Hazelcast Plugins</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/cloud-discovery">Cloud Discovery Plugins</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/web-session-replication">Web Session Replication Plugins</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/framework-integration">Framework Integration Plugins</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/other-integrations">Other Integrations</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Release Notes</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../release-notes/releases">Releases</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-1-7">5.1.7</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-1-6">5.1.6</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-1-5">5.1.5</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-1-4">5.1.4</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-1-3">5.1.3</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-1-2">5.1.2</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-1-1">5.1.1</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-1">5.1</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+  </div>
+    </div>
+  </aside>
+</div>
+<div id="hide-nav">
+  <button>
+    <span>
+      ᐸ
+    </span>
+  </button>
+</div>
+  <main class="article">
+    <div class="article-banner prerelease" id="latest-banner">
+      <div class="prerelease">
+        <p>A newer version of Hazelcast Platform is available.</p>
+        <a class="btn" href="../../5.5/query/predicate-overview">View latest</a>
+      </div>
+            <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
+    </div>
+  <div class="content">
+    <article class="doc">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../">Platform</a></li>
+    <li>Develop Solutions</li>
+    <li><a href="predicate-overview">Predicates API</a></li>
+  </ul>
+</nav>
+    <button class="nav-toggle"></button>
+      <h1 class="page">Predicates API</h1>
+    <div class="page-versions">
+    <button class="version-menu-toggle" title="Show other versions of page">Version 5.1</button>
+    <div class="version-menu">
+          <a class="version" href="../../6.0-snapshot/query/predicate-overview">6.0-SNAPSHOT</a>
+          <a class="version" href="../../5.5/query/predicate-overview">5.5</a>
+          <a class="version" href="../../5.4/query/predicate-overview">5.4</a>
+          <a class="version" href="../../5.3/query/predicate-overview">5.3</a>
+          <a class="version" href="../../5.2/query/predicate-overview">5.2</a>
+          <a class="version is-current" href="predicate-overview">5.1</a>
+          <a class="version" href="../../5.0/query/predicate-overview">5.0</a>
+    </div>
+  </div>
+  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Predicates API is a programming interface for querying data in Hazelcast, which is similar to the Java Persistence Query Language (JPQL).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In addition to the Java-based Predicates API, Hazelcast also supports <a href="../sql/sql-overview" class="xref page">SQL</a> statements and functions, and streaming SQL queries.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="how-the-predicates-api-works"><a class="anchor" href="#how-the-predicates-api-works"></a>How the Predicates API Works</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The predicate is sent to each member in the cluster.
+Each member looks at its own local entries and filters them according
+to the predicate. At this stage, key/value pairs of the entries are
+deserialized and then passed to the predicate.
+The predicate requester merges all the results coming from each
+member into a single set.</p>
+</div>
+<div class="paragraph">
+<p>Distributed query is highly scalable. If you add new members to the
+cluster, the partition count for each member is reduced and thus the
+time spent by each member on iterating its entries is reduced. In addition,
+the pool of partition threads evaluates the entries concurrently in each
+member and the network traffic is also reduced since only filtered data
+is sent to the requester.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="querying-maps-with-the-predicate-api"><a class="anchor" href="#querying-maps-with-the-predicate-api"></a>Querying Maps with the Predicate API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Predicates API offers built-in methods for creating queries as well as an <code>sql()</code> method for SQL-like queries.</p>
+</div>
+<div class="paragraph">
+<p>Assume that you have a map called <code>employee</code> that contains values of
+<code>Employee</code> objects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class Employee implements Serializable {
+    private String name;
+    private int age;
+    private boolean active;
+    private double salary;
+
+    public Employee(String name, int age, boolean active, double salary) {
+        this.name = name;
+        this.age = age;
+        this.active = active;
+        this.salary = salary;
+    }
+
+    public Employee() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, look for employees who are active and have an age less
+than 30.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When using Portable objects, if one field of an object exists
+on one member but does not exist on another one, Hazelcast does not
+throw an unknown field exception.
+Instead, Hazelcast treats that predicate, which tries to perform a
+query on an unknown field, as an always false predicate.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">IMap&lt;String, Employee&gt; map = hazelcastInstance.getMap( "employee" );
+
+EntryObject e = Predicates.newPredicateBuilder().getEntryObject();
+Predicate predicate = e.is( "active" ).and( e.get( "age" ).lessThan( 30 ) );
+
+Collection&lt;Employee&gt; employees = map.values( predicate );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above example code, <code>predicate</code> verifies whether the entry is
+active and its <code>age</code> value is less than 30. This <code>predicate</code> is
+applied to the <code>employee</code> map using the <code>map.values(predicate)</code> method.
+This method sends the predicate to all cluster members
+and merges the results coming from them. Since the predicate is
+communicated between the members, it needs to
+be serializable.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Predicates can also be applied to <code>keySet()</code>, <code>entrySet()</code> and
+<code>localKeySet()</code> methods of distributed maps.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="predicates-class-operators"><a class="anchor" href="#predicates-class-operators"></a>Predicates Class Operators</h3>
+<div class="paragraph">
+<p>The <code>Predicates</code> class includes many operators for your query requirements.
+The following are descriptions for some of them:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>equal</code>: Checks if the result of an expression is equal to a given value.</p>
+</li>
+<li>
+<p><code>notEqual</code>: Checks if the result of an expression is not equal to a given value.</p>
+</li>
+<li>
+<p><code>instanceOf</code>: Checks if the result of an expression has a certain type.</p>
+</li>
+<li>
+<p><code>like</code>: Checks if the result of an expression matches some string pattern. %
+(percentage sign) is the placeholder for many characters,  (underscore) is
+placeholder for only one character.</p>
+</li>
+<li>
+<p><code>ilike</code>: A case-insensitive variant of <code>like</code>.</p>
+</li>
+<li>
+<p><code>greaterThan</code>: Checks if the result of an expression is greater than a
+certain value.</p>
+</li>
+<li>
+<p><code>greaterEqual</code>: Checks if the result of an expression is greater than or
+equal to a certain value.</p>
+</li>
+<li>
+<p><code>lessThan</code>: Checks if the result of an expression is less than a certain
+value.</p>
+</li>
+<li>
+<p><code>lessEqual</code>: Checks if the result of an expression is less than or equal
+to a certain value.</p>
+</li>
+<li>
+<p><code>between</code>: Checks if the result of an expression is between two values
+(this is inclusive).</p>
+</li>
+<li>
+<p><code>in</code>: Checks if the result of an expression is an element of a certain
+collection.</p>
+</li>
+<li>
+<p><code>isNot</code>: Checks if the result of an expression is false.</p>
+</li>
+<li>
+<p><code>regex</code>: Checks if the result of an expression matches some regular
+expression.</p>
+</li>
+<li>
+<p><code>alwaysTrue</code>: The result of an expression always matches.</p>
+</li>
+<li>
+<p><code>alwaysFalse</code>: The result of an expression ever matches.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+See the
+<a href="https://docs.hazelcast.org/docs/5.1.7/javadoc/com/hazelcast/query/Predicates.html" target="_blank" rel="noopener">Predicates Javadoc</a>
+for all predicates provided.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="combining-predicates-with-and-or-not"><a class="anchor" href="#combining-predicates-with-and-or-not"></a>Combining Predicates with AND, OR, NOT</h3>
+<div class="paragraph">
+<p>You can combine predicates using the <code>and</code>, <code>or</code> and <code>not</code> operators,
+as shown in the below examples.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public Collection&lt;Employee&gt; getWithNameAndAge( String name, int age ) {
+    Predicate namePredicate = Predicates.equal( "name", name );
+    Predicate agePredicate = Predicates.equal( "age", age );
+    Predicate predicate = Predicates.and( namePredicate, agePredicate );
+    return employeeMap.values( predicate );
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public Collection&lt;Employee&gt; getWithNameOrAge( String name, int age ) {
+    Predicate namePredicate = Predicates.equal( "name", name );
+    Predicate agePredicate = Predicates.equal( "age", age );
+    Predicate predicate = Predicates.or( namePredicate, agePredicate );
+    return employeeMap.values( predicate );
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public Collection&lt;Employee&gt; getNotWithName( String name ) {
+    Predicate namePredicate = Predicates.equal( "name", name );
+    Predicate predicate = Predicates.not( namePredicate );
+    return employeeMap.values( predicate );
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="simplifying-with-predicatebuilder"><a class="anchor" href="#simplifying-with-predicatebuilder"></a>Simplifying with PredicateBuilder</h3>
+<div class="paragraph">
+<p>You can simplify predicate usage with the <code>PredicateBuilder</code> interface,
+which offers simpler predicate building. See the
+below example code which selects all people with a certain name and age.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public Collection&lt;Employee&gt; getWithNameAndAgeSimplified( String name, int age ) {
+    EntryObject e = Predicates.newPredicateBuilder().getEntryObject();
+    Predicate agePredicate = e.get( "age" ).equal( age );
+    Predicate predicate = e.get( "name" ).equal( name ).and( agePredicate );
+    return employeeMap.values( predicate );
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="querying-with-sql-like-predicates"><a class="anchor" href="#querying-with-sql-like-predicates"></a>Querying with SQL-like Predicates</h3>
+<div class="paragraph">
+<p><code>Predicates.sql()</code> takes the regular SQL <code>where</code> clause.
+Here is an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">IMap&lt;String, Employee&gt; map = hazelcastInstance.getMap( "employee" );
+Set&lt;Employee&gt; employees = map.values( Predicates.sql( "active AND age &lt; 30" ) );</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Hazelcast offers a SQL service that allows you to execute SQL queries,
+as opposed to SQL-like predicates in case of <code>Predicates.sql()</code>. See
+<a href="../sql/sql-overview" class="xref page">SQL</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>SQL-like predicates support the following syntax:</p>
+</div>
+<div class="paragraph">
+<p><strong>AND/OR:</strong> <code>&lt;expression&gt; AND &lt;expression&gt; AND &lt;expression&gt;&#8230;&#8203;</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>active AND age&gt;30</code></p>
+</li>
+<li>
+<p><code>active=false OR age = 45 OR name = 'Joe'</code></p>
+</li>
+<li>
+<p><code>active AND ( age &gt; 20 OR salary &lt; 60000 )</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Equality:</strong> <code>=, !=, &lt;, &#8656;, &gt;, &gt;=</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;expression&gt; = value</code></p>
+</li>
+<li>
+<p><code>age &#8656; 30</code></p>
+</li>
+<li>
+<p><code>name = 'Joe'</code></p>
+</li>
+<li>
+<p><code>salary != 50000</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>BETWEEN: </strong> <code>&lt;attribute&gt; [NOT] BETWEEN &lt;value1&gt; AND &lt;value2&gt;</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>age BETWEEN 20 AND 33 ( same as age &gt;= 20  AND age &#8656; 33 )</code></p>
+</li>
+<li>
+<p><code>age NOT BETWEEN 30 AND 40 ( same as age &lt; 30 OR age &gt; 40 )</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>IN:</strong> <code>&lt;attribute&gt; [NOT] IN (val1, val2,&#8230;&#8203;)</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>age IN ( 20, 30, 40 )</code></p>
+</li>
+<li>
+<p><code>age NOT IN ( 60, 70 )</code></p>
+</li>
+<li>
+<p><code>active AND ( salary &gt;= 50000 OR ( age NOT BETWEEN 20 AND 30 ) )</code></p>
+</li>
+<li>
+<p><code>age IN ( 20, 30, 40 ) AND salary BETWEEN ( 50000, 80000 )</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>LIKE:</strong> <code>&lt;attribute&gt; [NOT] LIKE "expression"</code></p>
+</div>
+<div class="paragraph">
+<p>The <code>%</code> (percentage sign) is placeholder for multiple characters,
+an <code>_</code> (underscore) is placeholder for only one character.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>name LIKE 'Jo%'</code> (true for 'Joe', 'Josh', 'Joseph' etc.)</p>
+</li>
+<li>
+<p><code>name LIKE 'Jo_'</code> (true for 'Joe'; false for 'Josh')</p>
+</li>
+<li>
+<p><code>name NOT LIKE 'Jo_'</code> (true for 'Josh'; false for 'Joe')</p>
+</li>
+<li>
+<p><code>name LIKE 'J_s%'</code> (true for 'Josh', 'Joseph'; false 'John', 'Joe')</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>ILIKE:</strong> <code>&lt;attribute&gt; [NOT] ILIKE 'expression'</code></p>
+</div>
+<div class="paragraph">
+<p>Similar to LIKE predicate but in a case-insensitive manner.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>name ILIKE 'Jo%'</code> (true for 'Joe', 'joe', 'jOe','Josh','joSH', etc.)</p>
+</li>
+<li>
+<p><code>name ILIKE 'Jo_'</code> (true for 'Joe' or 'jOE'; false for 'Josh')</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>REGEX</strong>: <code>&lt;attribute&gt; [NOT] REGEX 'expression'</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>name REGEX 'abc-.*'</code> (true for 'abc-123'; false for 'abx-123')</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can escape the <code>%</code> and <code>_</code> placeholder characters in your
+SQL queries with predicates using the
+backslash (<code>\</code>) character. The apostrophe (<code>'</code>) can be escaped with another
+apostrophe, i.e., <code>''</code>. If you use REGEX, you need to escape characters
+according to the normal Java escape syntax; see the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Oracle API docs</a>
+for details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="querying-entry-keys-with-predicates"><a class="anchor" href="#querying-entry-keys-with-predicates"></a>Querying Entry Keys with Predicates</h3>
+<div class="paragraph">
+<p>You can use <code>__key</code> attribute to perform a predicated search for entry
+keys. See the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">IMap&lt;String, Person&gt; personMap = hazelcastInstance.getMap(persons);
+personMap.put("Alice", new Person("Alice", 35, Gender.FEMALE));
+personMap.put("Andy",  new Person("Andy",  37, Gender.MALE));
+personMap.put("Bob",   new Person("Bob",   22, Gender.MALE));
+[...]
+Predicate predicate = Predicates.sql("__key like A%");
+Collection&lt;Person&gt; startingWithA = personMap.values(predicate);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the code creates a collection with the entries whose
+keys start with the letter "A”.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="querying-json-strings"><a class="anchor" href="#querying-json-strings"></a>Querying JSON Strings</h3>
+<div class="paragraph">
+<p>You can query JSON strings stored inside your Hazelcast clusters. To
+query a JSON string,
+you first need to create a <a href="../serialization/serializing-json" class="xref page"><code>HazelcastJsonValue</code></a> from the JSON string.
+You can use <code>HazelcastJsonValue</code> objects both as keys and values in
+distributed data structures. Then, it is
+possible to query these objects using the Hazelcast query methods
+explained in this section.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">String person1 = "{ \"name\": \"John\", \"age\": 35 }";
+String person2 = "{ \"name\": \"Jane\", \"age\": 24 }";
+String person3 = "{ \"name\": \"Trey\", \"age\": 17 }";
+
+IMap&lt;Integer, HazelcastJsonValue&gt; idPersonMap = instance.getMap("jsonValues");
+
+idPersonMap.put(1, new HazelcastJsonValue(person1));
+idPersonMap.put(2, new HazelcastJsonValue(person2));
+idPersonMap.put(3, new HazelcastJsonValue(person3));
+
+Collection&lt;HazelcastJsonValue&gt; peopleUnder21 = idPersonMap.values(Predicates.lessThan("age", 21));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When running the queries, Hazelcast treats values extracted from
+the JSON documents as Java types so they
+can be compared with the query attribute. JSON specification
+defines five primitive types to be used in the JSON
+documents: <code>number</code>,<code>string</code>, <code>true</code>, <code>false</code> and <code>null</code>. The <code>string</code>,
+<code>true/false</code> and <code>null</code> types are treated
+as <code>String</code>, <code>boolean</code> and <code>null</code>, respectively. We treat the extracted
+<code>number</code> values as <code>long</code> where possible. Otherwise, <code>number</code> types are treated
+as <code>double</code>.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to query nested attributes and arrays in JSON documents, using the Predicates API.
+The query syntax is the same
+as <a href="#collections">querying collections and arrays</a> in other Hazelcast objects.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">/**
+ * Sample JSON object
+ *
+ * {
+ *     "departmentId": 1,
+ *     "room": "alpha",
+ *     "people": [
+ *         {
+ *             "name": "Peter",
+ *             "age": 26,
+ *             "salary": 50000
+ *         },
+ *         {
+ *             "name": "Jonah",
+ *             "age": 50,
+ *             "salary": 140000
+ *         }
+ *     ]
+ * }
+ *
+ *
+ * The following query finds all the departments that have a person named "Peter" working in them.
+ */
+Collection&lt;HazelcastJsonValue&gt; departmentWithPeter = departments.values(Predicates.equal("people[any].name", "Peter"));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filtering-with-paging-predicates"><a class="anchor" href="#filtering-with-paging-predicates"></a>Filtering with Paging Predicates</h3>
+<div class="paragraph">
+<p>Hazelcast provides paging for defined predicates. With its <code>PagingPredicate</code>
+interface, you can
+get a collection of keys, values, or entries page by page by filtering
+them with predicates and giving the size of the pages. Also, you
+can sort the entries by specifying comparators. In this case, the comparator
+should be <code>Serializable</code> and the serialization factory implementations you use,
+e.g., <code>PortableFactory</code> and <code>DataSerializableFactory</code>, should be registered.
+See the <a href="../serialization/serialization" class="xref page">Serialization chapter</a> on how to register these
+factories.</p>
+</div>
+<div class="paragraph">
+<p>Paging predicates require the objects to be deserialized both on the calling
+side (either a member or client) and the member side from which the collection
+is retrieved. Therefore, you need to register the serialization factories
+you use on all the members and clients on which the paging predicates are used.
+See the <a href="../serialization/serialization" class="xref page">Serialization chapter</a> on how to register these
+factories.</p>
+</div>
+<div class="paragraph">
+<p>In the example code below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>greaterEqual</code> predicate gets values from the "students" map. This
+predicate has a filter
+to retrieve the objects with an "age" greater than or equal to 18.</p>
+</li>
+<li>
+<p>Then a <code>PagingPredicate</code> is constructed in which the page size is 5,
+so that there are five objects in each page.
+The first time the <code>values()</code> method is called, the first page is fetched.</p>
+</li>
+<li>
+<p>Finally, the subsequent page is fetched by calling the <code>nextPage()</code>
+method of <code>PagingPredicate</code> and querying the map again with the
+updated <code>PagingPredicate</code>.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">IMap&lt;Integer, Student&gt; map = hazelcastInstance.getMap( "students" );
+Predicate greaterEqual = Predicates.greaterEqual( "age", 18 );
+PagingPredicate pagingPredicate = Predicates.pagingPredicate( greaterEqual, 5 );
+// Retrieve the first page
+Collection&lt;Student&gt; values = map.values( pagingPredicate );
+...
+// Set up next page
+pagingPredicate.nextPage();
+// Retrieve next page
+values = map.values( pagingPredicate );
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a comparator is not specified for <code>PagingPredicate</code>, but you want
+to get a collection of keys or values page by page, keys or values must
+be instances of <code>Comparable</code> (i.e., they must implement <code>java.lang.Comparable</code>).
+Otherwise, the <code>java.lang.IllegalArgument</code> exception is thrown.</p>
+</div>
+<div class="paragraph">
+<p>You can also access a specific page more
+easily with the help of the <code>setPage()</code> method. This way, if you make
+a query for the hundredth page, for example, it gets all 100 pages at
+once instead of reaching the hundredth page one by one using the <code>nextPage()</code> method.
+Note that this feature tires the memory and see the
+<a href="https://docs.hazelcast.org/docs/5.1.7/javadoc/com/hazelcast/query/PagingPredicate.html" target="_blank" rel="noopener">PagingPredicate Javadoc</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Paging Predicate, also known as Order &amp; Limit, is not supported in
+Transactional Context.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filtering-with-partition-predicate"><a class="anchor" href="#filtering-with-partition-predicate"></a>Filtering with Partition Predicate</h3>
+<div class="paragraph">
+<p>You can run queries on a single partition in your cluster using
+the partition predicate (<code>PartitionPredicate</code>).</p>
+</div>
+<div class="paragraph">
+<p>The <code>Predicates.partitionPredicate()</code> method takes a predicate and partition key
+as parameters, gets the partition ID using the key and  runs that predicate only
+on the partition where that key belongs.</p>
+</div>
+<div class="paragraph">
+<p>See the following code snippet:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">...
+Predicate predicate = Predicates.partitionPredicate(partitionKey, Predicates.alwaysTrue());
+
+Collection&lt;Integer&gt; values = map.values(predicate);
+Collection&lt;String&gt; keys = map.keySet(predicate);
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default there are 271 partitions, and using a regular predicate,
+each partition needs to be accessed. However, if the
+partition predicate only accesses a single partition, this can lead
+to a big performance gain.</p>
+</div>
+<div class="paragraph">
+<p>For the partition predicate to work correctly, you need to know which
+partition your data belongs to so that you can send the
+request to the correct partition. One of the ways of doing it is to
+make use of the <code>PartitionAware</code> interface when data is
+inserted, thereby controlling the owning partition. See the
+<a href="../performance/data-affinity#partitionaware" class="xref page">PartitionAware section</a> for more information and examples.</p>
+</div>
+<div class="paragraph">
+<p>A concrete example may be a web shop that sells phones and accessories.
+To find all the accessories of a phone,
+a query could be executed that selects all accessories for that phone.
+This query is executed on all members in the cluster and
+therefore could generate quite a lot of load. However, if we would store
+the accessories in the same partition as the phone, the
+partition predicate could use the <code>partitionKey</code> of the phone to select
+the right partition and then it queries for
+the accessories for that phone; and this reduces the load on the system
+and get faster query results.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-the-query-thread-pool"><a class="anchor" href="#configuring-the-query-thread-pool"></a>Configuring the Query Thread Pool</h3>
+<div class="paragraph">
+<p>You can change the size of thread pool dedicated to query operations
+using the <code>pool-size</code> property. Each query consumes a single thread
+from a Generic Operations ThreadPool on each Hazelcast member - let&#8217;s
+call it the query-orchestrating thread.  That thread is blocked throughout
+the whole execution-span of a query on the member.</p>
+</div>
+<div class="paragraph">
+<p>The query-orchestrating thread uses the threads from the query-thread
+pool in the following cases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>if you run a <code>PagingPredicate</code> (since each page runs as a separate task)</p>
+</li>
+<li>
+<p>if you set the system property <code>hazelcast.query.predicate.parallel.evaluation</code>
+to true (since the predicates are evaluated in parallel)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="#filtering-with-paging-predicates">Filtering with Paging Predicates section</a>
+and <a href="../system-properties#parallel-predicates" class="xref page">System Properties appendix</a> for information about paging
+predicates and for description of the above system property.</p>
+</div>
+<div class="paragraph">
+<p>Below is an example of that declarative configuration.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset1_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;executor-service name="hz:query"&gt;
+        &lt;pool-size&gt;100&lt;/pool-size&gt;
+    &lt;/executor-service&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  ...
+  executor-service:
+    "hz:query":
+      pool-size: 100</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Below is the equivalent programmatic configuration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Config cfg = new Config();
+cfg.getExecutorConfig("hz:query").setPoolSize(100);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When dealing with the query requests coming from the clients to your
+members, Hazelcast offers the following system properties to tune your
+thread pools:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>hazelcast.clientengine.thread.count</code> which is the number of threads
+to process non-partition-aware client requests, like <code>map.size()</code> and
+executor tasks. Its default value is the number of cores multiplied by 20.</p>
+</li>
+<li>
+<p><code>hazelcast.clientengine.query.thread.count</code> which is the number of
+threads to process query requests coming from the clients. Its default
+value is the number of cores.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If there are a lot of query request from the clients, you may want to
+increase the value of <code>hazelcast.clientengine.query.thread.count</code>. In
+addition to this tuning, you may also consider increasing the value of
+<code>hazelcast.clientengine.thread.count</code> if the CPU load in your system is
+not high and there is plenty of free memory.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-custom-query-attributes"><a class="anchor" href="#creating-custom-query-attributes"></a>Creating Custom Query Attributes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Custom attributes allow you to use the Predicates API to query fields, using complex calculations.</p>
+</div>
+<div class="paragraph">
+<p>For example, imagine a map whose values are <code>Person</code> objects that contain a list of children in a <code>children</code> field.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-pseudocode hljs" data-lang="pseudocode">class Person {
+  String name;
+  String[] children;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may want to query for <code>Person</code> objects that have more than one child. But, you neither have a field with the total number of childen nor does the Predicates API have a <code>count()</code> method that you can call.</p>
+</div>
+<div class="paragraph">
+<p>In this case, you can create a custom attribute called <code>childrenCount</code> that returns the number of children for each <code>Person</code> object.</p>
+</div>
+<div class="sect2">
+<h3 id="implementing-a-valueextractor"><a class="anchor" href="#implementing-a-valueextractor"></a>Implementing a ValueExtractor</h3>
+<div class="paragraph">
+<p>A custom attribute is a "synthetic" attribute that does not exist as a field or a getter in the object that it is extracted from.
+Thus, it is necessary to define the policy on how the attribute is supposed to be extracted.</p>
+</div>
+<div class="paragraph">
+<p>In order to implement a <code>ValueExtractor</code>, implement the
+<code>com.hazelcast.query.extractor.ValueExtractor</code> interface
+and the <code>extract()</code> method. This method does not return any values
+since the extracted value is collected by the <code>ValueCollector</code>.
+In order to return multiple results from a single extraction, invoke the
+<code>ValueCollector.collect()</code> method
+multiple times, so that the collector collects all results.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://docs.hazelcast.org/docs/5.1.7/javadoc/com/hazelcast/query/extractor/ValueExtractor.html" target="_blank" rel="noopener">ValueExtractor</a> and
+<a href="https://docs.hazelcast.org/docs/5.1.7/javadoc/com/hazelcast/query/extractor/ValueCollector.html" target="_blank" rel="noopener">ValueCollector</a> Javadocs.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Custom attributes are compatible with all Hazelcast <a href="../serialization/serialization" class="xref page">serialization methods</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="valueextractor-with-portable-serialization"><a class="anchor" href="#valueextractor-with-portable-serialization"></a>ValueExtractor with Portable Serialization</h4>
+<div class="paragraph">
+<p>Portable serialization is a special kind of serialization where there
+is no need to have the class of the serialized object on the
+classpath of a member in order to read its attributes. That is the reason why the
+target object passed to the <code>ValueExtractor.extract()</code>
+method is not of the exact type that has been stored. Instead, an instance
+of a <code>com.hazelcast.query.extractor.ValueReader</code> is passed.
+<code>ValueReader</code> enables reading the attributes of a Portable object in a
+generic and type-agnostic way.
+It contains two methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>read(String path, ValueCollector&lt;T&gt; collector)</code> - enables passing all
+results directly to the <code>ValueCollector</code>.</p>
+</li>
+<li>
+<p><code>read(String path, ValueCallback&lt;T&gt; callback)</code> - enables filtering, transforming
+and grouping the result of the read operation and manually passing it to the
+<code>ValueCollector</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://docs.hazelcast.org/docs/5.1.7/javadoc/com/hazelcast/query/extractor/ValueReader.html" target="_blank" rel="noopener">ValueReader</a> Javadoc.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="returning-multiple-values-from-a-single-extraction"><a class="anchor" href="#returning-multiple-values-from-a-single-extraction"></a>Returning Multiple Values from a Single Extraction</h4>
+<div class="paragraph">
+<p>It sounds counter-intuitive, but a single extraction may return multiple
+values when arrays or collections are
+involved.
+Let&#8217;s have a look at the following data structure in pseudo-code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class Motorbike {
+    Wheel[] wheel;
+}
+
+class Wheel {
+    String name;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume that we want to extract the names of all wheels from a
+single motorbike object. Each motorbike has two
+wheels so there are two names for each bike. In order to return both
+values from the extraction operation, collect them
+separately using the <code>ValueCollector</code>. Collecting multiple values in
+this way allows you to operate on these multiple
+values as if they were single values during the evaluation of the predicates.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume that we registered a custom extractor with the name <code>wheelName</code>
+and executed the following query:
+<code>wheelName = front-wheel</code>.</p>
+</div>
+<div class="paragraph">
+<p>The extraction may return up to two wheel names for each <code>Motorbike</code> since
+each <code>Motorbike</code> has up to two wheels.
+In such a case, it is enough if a single value evaluates the predicate&#8217;s
+condition to true to return a match, so
+it returns a <code>Motorbike</code> if "any" of the wheels matches the expression.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="extraction-arguments"><a class="anchor" href="#extraction-arguments"></a>Extraction Arguments</h3>
+<div class="paragraph">
+<p>A <code>ValueExtractor</code> may use a custom argument if it is specified in the query.
+The custom argument may be passed within the square brackets located after the
+name of the custom attribute,
+e.g., <code>customAttribute[argument]</code>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s have a look at the following query: <code>currency[incoming] == EUR</code>
+The <code>currency</code> is a custom attribute that uses a <code>com.test.CurrencyExtractor</code>
+for extraction.</p>
+</div>
+<div class="paragraph">
+<p>The string <code>incoming</code> is an argument that is passed to the <code>ArgumentParser</code>
+during the extraction.
+The parser parses the string according to its custom logic and it returns a
+parsed object.
+The parsed object may be a single object, array, collection, or any arbitrary
+object.
+It is up to the <code>ValueExtractor</code> implementation to understand the semantics of
+the parsed argument object.</p>
+</div>
+<div class="paragraph">
+<p>For now it is <strong>not</strong> possible to register a custom <code>ArgumentParser</code>, thus a
+default parser is used.
+It follows a <code>pass-through</code> semantic, which means that the string located in
+the square brackets is passed "as is" to
+the <code>ValueExtractor.extract()</code> method.</p>
+</div>
+<div class="paragraph">
+<p>Please note that using square brackets within the argument string are not allowed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-a-custom-attribute-programmatically"><a class="anchor" href="#configuring-a-custom-attribute-programmatically"></a>Configuring a Custom Attribute Programmatically</h3>
+<div class="paragraph">
+<p>The following snippet demonstrates how to define a custom attribute using a <code>ValueExtractor</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">AttributeConfig attributeConfig = new AttributeConfig();
+attributeConfig.setName("currency");
+attributeConfig.setExtractorClassName("com.bank.CurrencyExtractor");
+
+MapConfig mapConfig = new MapConfig();
+mapConfig.addAttributeConfig(attributeConfig);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>currency</code> is the name of the custom attribute that will be extracted using
+the <code>CurrencyExtractor</code> class.</p>
+</div>
+<div class="paragraph">
+<p>Keep in mind that an extractor may not be added after the map has been instantiated.
+All extractors have to be defined upfront in the map&#8217;s initial configuration.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-a-custom-attribute-declaratively"><a class="anchor" href="#configuring-a-custom-attribute-declaratively"></a>Configuring a Custom Attribute Declaratively</h3>
+<div class="paragraph">
+<p>The following snippet demonstrates how to define a custom attribute in the
+Hazelcast XML Configuration.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset2_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;map name="trades"&gt;
+        &lt;attributes&gt;
+            &lt;attribute extractor-class-name="com.bank.CurrencyExtractor"&gt;currency&lt;/attribute&gt;
+        &lt;/attributes&gt;
+    &lt;/map&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  map:
+    trades:
+      attributes:
+        currency:
+          extractor-class-name: com.bank.CurrencyExtractor</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Analogous to the example above, <code>currency</code> is the name of the custom attribute
+that will be extracted using the
+<code>CurrencyExtractor</code> class.</p>
+</div>
+<div class="paragraph">
+<p>Please note that an attribute name may begin with an ASCII letter [A-Za-z] or
+digit [0-9] and may contain
+ASCII letters [A-Za-z], digits [0-9] or underscores later on.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="indexing-custom-attributes"><a class="anchor" href="#indexing-custom-attributes"></a>Indexing Custom Attributes</h3>
+<div class="paragraph">
+<p>You can create an index using a custom attribute.</p>
+</div>
+<div class="paragraph">
+<p>The name of the attribute used in the index definition has to match the one
+used in the attributes configuration.</p>
+</div>
+<div class="paragraph">
+<p>Defining indexes with extraction arguments is allowed, as shown in the example
+below:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset3_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset3_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset3_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;indexes&gt;
+        &lt;!-- custom attribute without an extraction argument --&gt;
+        &lt;index&gt;
+            &lt;attributes&gt;
+                &lt;attribute&gt;currency&lt;/attribute&gt;
+            &lt;/attributes&gt;
+        &lt;/index&gt;
+        &lt;!-- custom attribute using an extraction argument --&gt;
+        &lt;index&gt;
+            &lt;attributes&gt;
+                &lt;attribute&gt;currency[incoming]&lt;/attribute&gt;
+            &lt;/attributes&gt;
+        &lt;/index&gt;
+    &lt;/indexes&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  ...
+  indexes:
+    attributes:
+      - "currency"
+      - "currency[incoming]"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="querying-in-collections-and-arrays"><a class="anchor" href="#querying-in-collections-and-arrays"></a>Querying in Collections and Arrays</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hazelcast allows querying in collections and arrays.
+Querying in collections and arrays is compatible with all Hazelcast
+serialization methods, including the Portable serialization.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s have a look at the following data structure expressed in pseudo-code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class Motorbike {
+    Wheel[] wheels;
+}
+
+class Wheel {
+   String name;
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order to query a single element of a collection/array, you can execute the following query:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// it matches all motorbikes where the zero wheel's name is 'front-wheel'
+Predicate p = Predicates.equal("wheels[0].name", "front-wheel");
+Collection&lt;Motorbike&gt; result = map.values(p);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is also possible to query a collection/array using the <code>any</code> semantic as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// it matches all motorbikes where any wheel's name is 'front-wheel'
+Predicate p = Predicates.equal("wheels[any].name", "front-wheel");
+Collection&lt;Motorbike&gt; result = map.values(p);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The exact same query may be executed using the <code>SQL</code> predicate as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Predicate p = Predicates.sql("wheels[any].name = 'front-wheel'");
+Collection&lt;Motorbike&gt; result = map.values(p);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>[]</code> notation applies to both collections and arrays.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Hazelcast requires all elements of a collection to have the same type. Considering
+and expanding the above example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you have a <code>wheels</code> collection attribute, all its elements must be of
+the <code>Wheel</code> type, subclasses of <code>Wheel</code> are not allowed.</p>
+</li>
+<li>
+<p>Let’s say you have added a <code>seats</code> collection attribute, which is a <code>Seat</code>
+object.  Then all its elements must of this concrete <code>Seat</code> type.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So, you may have collections of different types in your map. However, each
+collection’s elements must be of the same concrete type within that collection
+attribute.</p>
+</div>
+<div class="paragraph">
+<p>Consider custom attribute extractors if it is impossible or undesirable to reduce
+the variety of types to a single type. See the <a href="predicate-overview" class="xref page">Custom Attributes section</a>
+for information about them.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="indexing-in-collections-and-arrays"><a class="anchor" href="#indexing-in-collections-and-arrays"></a>Indexing in Collections and Arrays</h3>
+<div class="paragraph">
+<p>You can also create an index using a query in collections and arrays.</p>
+</div>
+<div class="paragraph">
+<p>Please note that in order to leverage the index, the attribute name used
+in the query has to be the same as the one used
+in the index definition.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume you have the following index definition:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset4_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset4_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset4_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;indexes&gt;
+        &lt;index type="HASH"&gt;
+            &lt;attributes&gt;
+                &lt;attribute&gt;wheels[any].name&lt;/attribute&gt;
+            &lt;/attributes&gt;
+        &lt;/index&gt;
+    &lt;/indexes&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset4_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  ...
+  indexes:
+    - type: HASH
+      attributes:
+        - wheels.[any].name</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The following query uses the index:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Predicate p = Predicates.equal("wheels[any].name", "front-wheel");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following query, however, does NOT leverage the index, since it does
+not use exactly the same attribute name that
+was used in the index:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Predicates.equal("wheels[0].name", "front-wheel")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order to use the index in the case mentioned above, you have to create
+another index, as shown below:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset5_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset5_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset5_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;indexes&gt;
+        &lt;index type="HASH"&gt;
+            &lt;attributes&gt;
+                &lt;attribute&gt;wheels[0].name&lt;/attribute&gt;
+            &lt;/attributes&gt;
+        &lt;/index&gt;
+    &lt;/indexes&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset5_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  ...
+  indexes:
+    - type: HASH
+      attributes:
+        - wheels.[0].name</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="corner-cases"><a class="anchor" href="#corner-cases"></a>Corner cases</h3>
+<div class="paragraph">
+<p>Handling of corner cases may be a bit different than in a programming
+language like <code>Java</code>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s have a look at the following examples in order to understand the differences.
+To make the analysis simpler, let&#8217;s assume that there is only one <code>Motorbike</code>
+object stored in a Hazelcast Map.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 45.4545%;">
+<col style="width: 27.2727%;">
+<col style="width: 9.0909%;">
+<col style="width: 9.091%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Id</th>
+<th class="tableblock halign-left valign-top">Query</th>
+<th class="tableblock halign-left valign-top">Data State</th>
+<th class="tableblock halign-left valign-top">Extraction Result</th>
+<th class="tableblock halign-left valign-top">Match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Predicates.equal("wheels[7].name", "front-wheel")</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wheels.size() == 1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Predicates.equal("wheels[7].name", null)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wheels.size() == 1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Predicates.equal("wheels[0].name", "front-wheel")</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wheels[0].name == null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Predicates.equal("wheels[0].name", null)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wheels[0].name == null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Predicates.equal("wheels[0].name", "front-wheel")</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wheels[0] == null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Predicates.equal("wheels[0].name", null)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wheels[0] == null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Predicates.equal("wheels[0].name", "front-wheel")</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wheels == null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Predicates.equal("wheels[0].name", null)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wheels == null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>As you can see, <strong>no</strong> <code>NullPointerException</code>s or <code>IndexOutOfBoundException</code>s
+are thrown in the extraction process, even
+though parts of the expression are <code>null</code>.</p>
+</div>
+<div class="paragraph">
+<p>Looking at examples 4, 6 and 8, we can also easily notice that it is impossible to
+distinguish which part of the
+expression was null.
+If we execute the following query <code>wheels[1].name = null</code>, it may be evaluated to
+true because:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>wheels</code> collection/array is null</p>
+</li>
+<li>
+<p><code>index == 1</code> is out of bound</p>
+</li>
+<li>
+<p><code>name</code> attribute of the wheels[1] object is <code>null</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In order to make the query unambiguous, extra conditions would have to be added, e.g.,
+<code>wheels != null AND wheels[1].name = null</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="aggregations"><a class="anchor" href="#aggregations"></a>Aggregations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Aggregations allow you to compute a value of some function (e.g sum or max) over the
+stored map entries. The computation is performed in a fully distributed manner,
+so no data other than the computed function value is transferred to a caller,
+making the computation fast.</p>
+</div>
+<div class="paragraph">
+<p>Aggregations are available on <code>com.hazelcast.map.IMap</code> only.
+IMap offers the method <code>aggregate</code> to apply the aggregation logic on
+the map entries. This method can be called with or without a predicate. You can refer
+to its <a href="https://docs.hazelcast.org/docs/5.1.7/javadoc/com/hazelcast/map/IMap.html#aggregate-com.hazelcast.aggregation.Aggregator-" target="_blank" rel="noopener">Javadoc</a>
+to see the method details.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the <a href="../data-structures/distributed-data-structures#setting-in-memory-format" class="xref page">in-memory format</a> of your data is <code>NATIVE</code>,
+aggregations always run on the partition threads. If the data is of type <code>BINARY</code>
+or <code>OBJECT</code>, they also mostly run on the partition threads, however, they may run on
+the separate query threads to avoid blocking partition threads (if there are no ongoing migrations).
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="aggregator-api"><a class="anchor" href="#aggregator-api"></a>Aggregator API</h3>
+<div class="paragraph">
+<p>The aggregation is split into three phases represented by three methods:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>accumulate()</code></p>
+</li>
+<li>
+<p><code>combine()</code></p>
+</li>
+<li>
+<p><code>aggregate()</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>There are also the following callbacks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>onAccumulationFinished()</code> called when the accumulation phase finishes</p>
+</li>
+<li>
+<p><code>onCombinationFinished()</code> called when the combination phase finishes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These callbacks enable releasing the state that might have been initialized and
+stored in the Aggregator - to reduce the network traffic.</p>
+</div>
+<div class="paragraph">
+<p>Each phase is described below. See also the
+<a href="https://docs.hazelcast.org/docs/5.1.7/javadoc/com/hazelcast/aggregation/Aggregator.html" target="_blank" rel="noopener">Aggregator Javadoc</a>
+for the API&#8217;s details.</p>
+</div>
+<div class="paragraph">
+<p><strong>Accumulation:</strong></p>
+</div>
+<div class="paragraph">
+<p>During the accumulation phase each Aggregator accumulates all entries passed
+to it by the query engine.
+It accumulates only those pieces of information that are required to calculate
+the aggregation result in the last phase - that&#8217;s implementation specific.</p>
+</div>
+<div class="paragraph">
+<p>In case of the <code>DoubleAverage</code> aggregation the Aggregator would accumulate:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the sum of the elements it accumulated</p>
+</li>
+<li>
+<p>the count of the elements it accumulated</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Combination:</strong></p>
+</div>
+<div class="paragraph">
+<p>Since aggregation is executed in parallel on each partition of the cluster,
+the results need to be combined after the accumulation phase in order to be able
+to calculate the final result.</p>
+</div>
+<div class="paragraph">
+<p>In case of the <code>DoubleAverage</code> aggregation, the aggregator would sum up all
+the sums of the elements and all the counts.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aggregation:</strong></p>
+</div>
+<div class="paragraph">
+<p>Aggregation is the last phase that calculates the final result from the
+results accumulated and combined in the preceding phases.</p>
+</div>
+<div class="paragraph">
+<p>In case of the <code>DoubleAverage</code> aggregation, the Aggregator would just
+divide the sum of the elements by their count (if non-zero).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example-implementation"><a class="anchor" href="#example-implementation"></a>Example Implementation</h3>
+<div class="paragraph">
+<p>Here&#8217;s an example implementation of the Aggregator:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">    private static void simpleCustomAverageAggregation(IMap&lt;String, FAEmployee&gt; employees) {
+        System.out.println("Calculating salary average");
+
+        double avgSalary = employees.aggregate(new Aggregator&lt;Map.Entry&lt;String, FAEmployee&gt;, Double&gt;() {
+
+            protected long sum;
+            protected long count;
+
+            @Override
+            public void accumulate(Map.Entry&lt;String, FAEmployee&gt; entry) {
+                count++;
+                sum += entry.getValue().getSalaryPerMonth();
+            }
+
+            @Override
+            public void combine(Aggregator aggregator) {
+
+                this.sum += this.getClass().cast(aggregator).sum;
+                this.count += this.getClass().cast(aggregator).count;
+            }
+
+            @Override
+            public Double aggregate() {
+                if (count == 0) {
+                    return null;
+                }
+                return ((double) sum / (double) count);
+            }
+
+        });
+
+        System.out.println("Overall average salary: " + avgSalary);
+        System.out.println("\n");
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>accumulate()</code> method calculates the sum and count of the elements</p>
+</li>
+<li>
+<p>the <code>combine()</code> method combines the results from all the accumulations</p>
+</li>
+<li>
+<p>the <code>aggregate()</code> method calculates the final result.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="built-in-aggregations"><a class="anchor" href="#built-in-aggregations"></a>Built-In Aggregations</h3>
+<div class="paragraph">
+<p>The <code>com.hazelcast.aggregation.Aggregators</code> class provides a wide variety of built-in Aggregators.
+The full list is presented below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>count</code></p>
+</li>
+<li>
+<p><code>distinct</code></p>
+</li>
+<li>
+<p><code>bigDecimal</code> <code>sum</code>/<code>avg</code>/<code>min</code>/<code>max</code></p>
+</li>
+<li>
+<p><code>bigInteger</code> <code>sum</code>/<code>avg</code>/<code>min</code>/<code>max</code></p>
+</li>
+<li>
+<p><code>double</code> <code>sum</code>/<code>avg</code>/<code>min</code>/<code>max</code></p>
+</li>
+<li>
+<p><code>integer</code> <code>sum</code>/<code>avg</code>/<code>min</code>/<code>max</code></p>
+</li>
+<li>
+<p><code>long</code> <code>sum</code>/<code>avg</code>/<code>min</code>/<code>max</code></p>
+</li>
+<li>
+<p><code>number</code> <code>avg</code></p>
+</li>
+<li>
+<p><code>comparable</code> <code>min</code>/<code>max</code></p>
+</li>
+<li>
+<p><code>fixedPointSum</code>, <code>floatingPointSum</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To use the any of these Aggregators, instantiate them using the <code>Aggregators</code>
+factory class.</p>
+</div>
+<div class="paragraph">
+<p>Each built-in Aggregator can also navigate to an attribute of the object passed
+to the <code>accumulate()</code> method (via reflection). For example, <code>Aggregators.distinct("address.city")</code>
+extracts the <code>address.city</code> attribute from the object passed to the Aggregator and
+accumulate the extracted value.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration-options"><a class="anchor" href="#configuration-options"></a>Configuration Options</h3>
+<div class="paragraph">
+<p>On each partition, after the entries have been passed to the aggregator, the
+accumulation runs in parallel.
+It means that each aggregator is cloned and receives a sub-set of the entries
+received from a partition.
+Then, it runs the accumulation phase in all the cloned aggregators - at the
+end, the result is combined into a single accumulation result.
+It speeds up the processing by at least the factor of two - even in case of simple
+aggregations. If the accumulation logic is more "heavy", the speed-up may be more significant.</p>
+</div>
+<div class="paragraph">
+<p>In order to switch the accumulation into a sequential mode just set the
+<code>hazelcast.aggregation.accumulation.parallel.evaluation</code> property to <code>false</code>
+(it&#8217;s set to <code>true</code> by default).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="projections"><a class="anchor" href="#projections"></a>Projections</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are cases where instead of sending all the data returned by a query from
+a member, you want to transform (strip down) each result object in order to avoid
+redundant network traffic.</p>
+</div>
+<div class="paragraph">
+<p>For example, you select all employees based on some criteria, but you just want to
+return their name instead of the whole Employee object. It is easily doable with the
+Projection API.</p>
+</div>
+<div class="paragraph">
+<p>Projections are available on <code>com.hazelcast.map.IMap</code> only. IMap offers the method
+<code>project</code> to apply the projection logic on the map entries. This method can be called
+with or without a predicate. See its
+<a href="https://docs.hazelcast.org/docs/5.1.7/javadoc/com/hazelcast/map/IMap.html#project-com.hazelcast.projection.Projection-" target="_blank" rel="noopener">Javadoc</a>
+to see the method details.</p>
+</div>
+<div class="sect2">
+<h3 id="projection-api"><a class="anchor" href="#projection-api"></a>Projection API</h3>
+<div class="paragraph">
+<p>The Projection API provides the method <code>transform()</code> which is called on each result
+object. Its result is then gathered as the final query result entity. You can refer
+to the <a href="https://docs.hazelcast.org/docs/5.1.7/javadoc/com/hazelcast/projection/Projection.html" target="_blank" rel="noopener">Projection Javadoc</a>
+for the API&#8217;s details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example-implementation-2"><a class="anchor" href="#example-implementation-2"></a>Example implementation</h3>
+<div class="paragraph">
+<p>Let&#8217;s consider the following domain object stored in an IMap:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class Employee implements Serializable {
+
+    private String name;
+
+    public Employee() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String firstName) {
+        this.name = name;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To return just the names of the Employees, you can run the query in the following way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Collection&lt;String&gt; names = employees.project(new Projection&lt;Map.Entry&lt;String, Employee&gt;, String&gt;() {
+
+    @Override
+    public String transform(Map.Entry&lt;String, Employee&gt; entry) {
+        return entry.getValue().getName();
+    }
+}, somePredicate);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="built-in-projections"><a class="anchor" href="#built-in-projections"></a>Built-In Projections</h3>
+<div class="paragraph">
+<p>The <code>com.hazelcast.projection.Projections</code> class provides two built-in
+Projections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>singleAttribute</code></p>
+</li>
+<li>
+<p><code>multiAttribute</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>singleAttribute</code> Projection enables extracting a single attribute
+from an object (via reflection). For example, <code>Projection.singleAttribute("address.city")</code>
+extracts the <code>address.city</code> attribute from the object passed to the Projection.</p>
+</div>
+<div class="paragraph">
+<p>The <code>multiAttribute</code> Projection enables extracting multiples attributes from an
+object (via reflection). For example, <code>Projection.multiAttribute("address.city", "postalAddress.city")</code>
+extracts both attributes from the object passed to the Projection and return them in an <code>Object[]</code> array.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="continuous-query-cache"><a class="anchor" href="#continuous-query-cache"></a>Continuous Query Cache</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A CQC allows you to create a map that has a continuous query attached to it. Whenever a new entry is added to the map, the query runs and if the entry matches the query, it is added to the query cache. By using a CQC, you do not need to query a map for the same data all the time and all the query results are kept locally.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Queries must be written using the Predicate API. CQC does not support SQL queries.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can create a CQC either from a Java client or on a member.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You cannot create a CQC from any client other than Java.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="accessing-a-continuous-query-cache-from-a-member"><a class="anchor" href="#accessing-a-continuous-query-cache-from-a-member"></a>Accessing a Continuous Query Cache from a Member</h3>
+<div class="paragraph">
+<p>The following code snippet shows how you can access a continuous query cache
+from a member.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">        QueryCacheConfig queryCacheConfig = new QueryCacheConfig("cache-name");
+        queryCacheConfig.getPredicateConfig().setImplementation(new OddKeysPredicate());
+
+        MapConfig mapConfig = new MapConfig("map-name");
+        mapConfig.addQueryCacheConfig(queryCacheConfig);
+
+        Config config = new Config();
+        config.addMapConfig(mapConfig);
+
+        HazelcastInstance node = Hazelcast.newHazelcastInstance(config);
+        IMap&lt;Integer, String&gt; map = (IMap) node.getMap("map-name");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="accessing-a-continuous-query-cache-from-a-java-client"><a class="anchor" href="#accessing-a-continuous-query-cache-from-a-java-client"></a>Accessing a Continuous Query Cache from a Java Client</h3>
+<div class="paragraph">
+<p>The following code snippet shows how you can access a continuous query cache
+from the client side.
+The difference in this code from the member side code is that you configure
+and instantiate
+a client instance instead of a member instance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">        QueryCacheConfig queryCacheConfig = new QueryCacheConfig("cache-name");
+        queryCacheConfig.getPredicateConfig().setImplementation(new OddKeysPredicate());
+
+        ClientConfig clientConfig = new ClientConfig();
+        clientConfig.addQueryCacheConfig("map-name", queryCacheConfig);
+
+        HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
+        IMap&lt;Integer, Integer&gt; clientMap = (IMap) client.getMap("map-name");
+
+        QueryCache&lt;Integer, Integer&gt; cache = clientMap.getQueryCache("cache-name");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="features-of-continuous-query-cache"><a class="anchor" href="#features-of-continuous-query-cache"></a>Features of Continuous Query Cache</h3>
+<div class="paragraph">
+<p>The following features of continuous query cache are valid for both
+the member and client:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The initial query that is run on the existing map entries during the
+continuous query cache construction can be enabled/disabled according to
+the supplied predicate via <code>QueryCacheConfig.setPopulate()</code>.</p>
+</li>
+<li>
+<p>Continuous query cache allows you to run queries with indexes and perform
+event batching and coalescing.</p>
+</li>
+<li>
+<p>A continuous query cache is evictable. Note that a continuous query cache
+has a default maximum capacity of 10000. If you need a non-evictable cache, you
+should configure the eviction via <code>QueryCacheConfig.setEvictionConfig()</code>.</p>
+</li>
+<li>
+<p>A listener can be added to a continuous query cache using <code>QueryCache.addEntryListener()</code>.</p>
+</li>
+<li>
+<p><code>IMap</code> events are reflected in continuous query cache in the same order as
+they were generated on map entries. Since events are created on entries stored
+in partitions, ordering of events is maintained based on the ordering within
+the partition. You can add listeners to capture lost events using <code>EventLostListener</code>
+and you can recover lost events with the method <code>QueryCache.tryRecover()</code>.
+Recovery of lost events largely depends on the size of the buffer on Hazelcast members.
+Default buffer size is 16 per partition, i.e., 16 events per partition can be maintained
+in the buffer. If the event generation is high, setting the buffer size to a higher
+number provides better chances of recovering lost events. You can set buffer size
+with <code>QueryCacheConfig.setBufferSize()</code>. You can use the following example code for a
+recovery case.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">QueryCache queryCache = map.getQueryCache("cache-name", Predicates.sql("this &gt; 20"), true);
+queryCache.addEntryListener(new EventLostListener() {
+@Override
+public void eventLost(EventLostEvent event) {
+       queryCache.tryRecover();
+      }
+}, false);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You can populate a continuous query cache with only the keys of its entries and
+retrieve the subsequent values directly via <code>QueryCache.get()</code> from the underlying
+<code>IMap</code>. This helps to decrease the initial population time when the values are very
+large.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-a-continuous-query-cache"><a class="anchor" href="#configuring-a-continuous-query-cache"></a>Configuring a Continuous Query Cache</h3>
+<div class="paragraph">
+<p>You can configure a continuous query cache declaratively or programmatically; the
+latter is mostly explained in the previous section. The parent configuration element
+is <code>&lt;query-caches&gt;</code> which should be placed within your <code>&lt;map&gt;</code> configuration. You can
+create your query caches using the  <code>&lt;query-cache&gt;</code> sub-element under <code>&lt;query-caches&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you use mutable keys in maps, consider setting the
+<code>serialize-keys</code> option to <code>true</code> so that Hazelcast clones
+the keys rather than using an internal reference. Otherwise,
+Hazelcast may store references to outdated versions of your keys.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Setting the <code>serialize-keys</code> option to
+<code>true</code> has a negative impact on performance.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following is an example declarative configuration.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset6_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset6_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset6_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;map&gt;
+        &lt;query-caches&gt;
+            &lt;query-cache name="myContQueryCache"&gt;
+                &lt;serialize-keys&gt;false&lt;/serialize-keys&gt;
+                &lt;include-value&gt;true&lt;/include-value&gt;
+                &lt;predicate type="class-name"&gt;com.hazelcast.examples.ExamplePredicate&lt;/predicate&gt;
+                &lt;entry-listeners&gt;
+                    &lt;entry-listener&gt;...&lt;/entry-listener&gt;
+                &lt;/entry-listeners&gt;
+                &lt;in-memory-format&gt;BINARY&lt;/in-memory-format&gt;
+                &lt;populate&gt;true&lt;/populate&gt;
+                &lt;coalesce&gt;false&lt;/coalesce&gt;
+                &lt;batch-size&gt;2&lt;/batch-size&gt;
+                &lt;delay-seconds&gt;3&lt;/delay-seconds&gt;
+                &lt;buffer-size&gt;32&lt;/buffer-size&gt;
+                &lt;eviction size="1000" max-size-policy="ENTRY_COUNT" eviction-policy="LFU"/&gt;
+                &lt;indexes&gt;
+                    &lt;index&gt;
+                        &lt;attributes&gt;
+                            &lt;attribute&gt;age&lt;/attribute&gt;
+                        &lt;/attributes&gt;
+                    &lt;/index&gt;
+                &lt;/indexes&gt;
+            &lt;/query-cache&gt;
+        &lt;/query-caches&gt;
+    &lt;/map&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset6_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  map:
+    query-caches:
+        myContQueryCache:
+          serialize-keys: false
+          include-value: true
+          predicate:
+            class-name: com.hazelcast.examples.ExamplePredicate
+          entry-listeners:
+            - class-name: "..."
+          in-memory-format: BINARY
+          populate: true
+          coalesce: false
+          batch-size: 2
+          delay-seconds: 3
+          buffer-size: 32
+          eviction:
+            size: 1000
+            max-size-policy: ENTRY_COUNT
+            eviction-policy: LFU
+          indexes:
+            - attributes:
+              - "age"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Continuous query caches have the following configuration elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>name</code>: Name of your continuous query cache.</p>
+</li>
+<li>
+<p><code>serialize-keys</code>: Whether Hazelcast serializes the query
+cache keys. Keys should be serialized if they are mutable and
+need to be cloned via serialization. Default value is false.</p>
+</li>
+<li>
+<p><code>include-value</code>: Specifies whether the value will be cached too. Its default
+value is true.</p>
+</li>
+<li>
+<p><code>predicate</code>: Predicate to filter events which are applied to the query cache.</p>
+</li>
+<li>
+<p><code>entry-listeners</code>: Adds listeners (listener classes) for your query cache entries.
+See the <a href="../events/distributed-events#registering-map-listeners" class="xref page">Registering Map Listeners section</a>.</p>
+</li>
+<li>
+<p><code>in-memory-format</code>: Type of the data to be stored in your query cache.
+See the <a href="../data-structures/distributed-data-structures#setting-in-memory-format" class="xref page">in-memory format section</a>.
+Its default value is BINARY.</p>
+</li>
+<li>
+<p><code>populate</code>: Specifies whether the initial population of your query cache is
+enabled. Its default value is true.</p>
+</li>
+<li>
+<p><code>coalesce</code>: Specifies whether the coalescing of your query cache is enabled.
+Its default value is false.</p>
+</li>
+<li>
+<p><code>delay-seconds</code>: Minimum time in seconds that an event waits in the member&#8217;s
+buffer. Its default value is 0.</p>
+</li>
+<li>
+<p><code>batch-size</code>: Batch size used to determine the number of events sent in a
+batch to your query cache. Its default value is 1.</p>
+</li>
+<li>
+<p><code>buffer-size</code>: Maximum number of events which can be stored in a partition
+buffer. Its default value is 16.</p>
+</li>
+<li>
+<p><code>eviction</code>: Configuration for the eviction of your query cache. See the
+<a href="../data-structures/distributed-data-structures#configuring-map-eviction" class="xref page">Configuring Map Eviction section</a>.</p>
+</li>
+<li>
+<p><code>indexes</code>: Indexes for your query cache defined by using this element&#8217;s <code>&lt;index&gt;</code>
+sub-elements. See the <a href="indexing-maps#configuring-imap-indexes" class="xref page">Configuring IMap Indexes section</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Please take the following configuration considerations and publishing logic into account:</p>
+</div>
+<div class="paragraph">
+<p>If  <code>delay-seconds</code> is equal to or smaller than <strong>0</strong>, then <code>batch-size</code> loses its
+function. Each time there is an event, all the entries in the buffer are pushed to the subscriber.</p>
+</div>
+<div class="paragraph">
+<p>If <code>delay-seconds</code> is bigger than <strong>0</strong>, the following logic applies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If <code>coalesce</code> is set to <strong>true</strong>, the buffer is checked for an event with the
+same key; if so, it is overridden by the current event. Then:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The current size of the buffer is checked: if the current size of the buffer
+is equal to or larger than <code>batch-size</code>, then the events counted as much as the
+<code>batch-size</code> are pushed to the subscriber. Otherwise, no events are sent.</p>
+</li>
+<li>
+<p>After finishing with checking <code>batch-size</code>, the <code>delay-seconds</code> is checked.
+The buffer is scanned from the oldest to youngest entries; all the entries that are
+older than <code>delay-seconds</code> are pushed to the subscriber.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../pipelines/xa">Testing Sources and Sinks for XA Transaction Support</a></span>
+  <span class="next"><a href="../sql/sql-overview">Overview</a></span>
+</nav>
+</article>
+    <div class="toc-container">
+  <aside class="toc sidebar" data-title="Contents" data-levels="1">
+    <div class="toc-menu"></div>
+  </aside>
+  <div class="feedback-prompt">
+    <a class="edit-this-page feedback-button" href="https://github.com/hazelcast/hz-docs/edit/v/5.1/docs/modules/query/pages/predicate-overview.adoc" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/hz-docs/issues/new?title=Docs: Feedback for Predicates API&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/hz-docs/edit/main/docs/modules/query/pages/predicate-overview.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <div class="feedback-form-container">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
+    <span class="helpful-feedback-title">Was this helpful?</span>
+    <div class="helpful-feedback-buttons">
+      <label for="positive-feedback-starter" class="feedback-button yes-button">
+        <img src="../../../_/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
+      </label>
+      <label for="negative-feedback-starter" class="feedback-button no-button">
+        <img src="../../../_/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
+      </label>
+    </div>
+  </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
+
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue or answer a question.
+        </span>
+      </span>
+          </label>
+                <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Precisely describes the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Well written and easy to follow.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Helped me decide to use the product
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to try or adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another positive reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
+
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
+
+          <label for="could-not-find" class="feedback-radio-button-label">
+            <input type="radio" id="could-not-find" name="feedback" value="Couldn't find what I was looking for">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Couldn't find what I was looking for
+              </span>
+              <span class="radio-btn-description">
+                Missing important information or didn't answer my question.
+              </span>
+            </span>
+          </label>
+          <label for="inaccurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="inaccurate-radio-feedback" name="feedback" value="Inaccurate">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Inaccurate
+              </span>
+              <span class="radio-btn-description">
+                Doesn't accurately describe the product or feature.
+              </span>
+            </span>
+          </label>
+
+          <label for="hard-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="hard-to-understand" name="feedback" value="Hard to understand">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Hard to understand
+              </span>
+              <span class="radio-btn-description">
+                Too complicated or badly written.
+              </span>
+            </span>
+          </label>
+          <label for="code-sample-errors" class="feedback-radio-button-label">
+            <input type="radio" id="code-sample-errors" name="feedback" value="Code sample errors">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Code sample error
+              </span>
+              <span class="radio-btn-description">
+                Incorrect or missing code sample(s).
+               </span>
+            </span>
+          </label>
+          <label for="another-negative-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-negative-reason" name="feedback" value="Another negative reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="(Optional) Please provide specific examples or suggestions!"
+          rows="6"
+        ></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</main>
+
+</div>
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../../../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/hz-docs/issues/new?title=Docs: Feedback for Predicates API&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/hz-docs/edit/main/docs/modules/query/pages/predicate-overview.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+    <footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch(["tags:hazelcast-5.1"]);
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+      }
+    }
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:hazelcast-5.1",
+          "tags:management-center-5.1",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:hazelcast-5.1"]);
+      }
+    }
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>

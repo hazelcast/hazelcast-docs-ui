@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/home/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <a href="https://hazelcast.com/?utm_source=docs-website" class="hazelcast-link" target="_blank">
+          hazelcast.com
+        </a>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+<div class="home">
+  <div class="hero-background">
+    <h1 class="hero-background-heading">
+      Hazelcast Documentation
+    </h1>
+    <p class="hero-background-subheading">
+      Find user guides, code samples, tutorials, API reference, and more.
+    </p>
+    <div id="search-input" class="search-container searchbox">
+    </div>
+  </div>
+  <main data-ceiling="topbar">
+    <article class="article">
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="zap" class="card-img"></i>
+          <h4 class="card-title">Get started</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/what-is-hazelcast">What is Hazelcast Platform?</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/getting-started/get-started-docker">Start a local cluster</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/getting-started/install-hazelcast">Install Community Edition for free</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/ask-ai">Ask AI</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="layers" class="card-img"></i>
+          <h4 class="card-title"><a href="../hazelcast/latest/what-is-hazelcast">Hazelcast Platform</a></h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="../hazelcast/5.5/whats-new">What’s new in 5.5</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/deploy/choosing-a-deployment-option">Available topologies</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/getting-started/editions">Community vs. Enterprise</a>
+          </li>
+<!--      <li class="card-list-item">
+            <a href="../getting-started/editions">Install and upgrade</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../getting-started/editions">Feature overview</a>
+          </li>
+!-->
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/deploy/deploying-in-cloud">Cloud deployment</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="briefcase" class="card-img"></i>
+          <h4 class="card-title">Develop and build</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/clients/hazelcast-clients">Get started with a Hazelcast Client</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/architecture/architecture">Architecture</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/kubernetes/deploying-in-kubernetes">Deploying with Kubernetes</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/cluster-performance/best-practices">Best practices</a>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <!-- <img class="card-img" src="../_/img/team.svg" alt="team" /> -->
+          <i data-feather="target" class="card-img"></i>
+          <h4 class="card-title">Operate and manage</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/configuration/understanding-configuration">Configuration</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/security/overview">Security</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/cp-subsystem/cp-subsystem">CP Subsystem</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/wan/wan">WAN Replication</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <!-- <img class="card-img" src="../_/img/team.svg" alt="team" /> -->
+          <i data-feather="server" class="card-img"></i>
+          <h4 class="card-title">Clients and APIs</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/clients/java">
+              <img class="card-img" src="../_/img/java.png" alt="java" />
+              Java
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/clients/cplusplus">
+              <img class="card-img" src="../_/img/cpp.svg" alt="cpp" />
+              C++
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/clients/python">
+              <img class="card-img" src="../_/img/python.png" alt="python" />
+              Python
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/clients/hazelcast-clients">All libraries & APIs (C#, Go...)</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <img class="card-img" src="../_/img/streaming.svg" alt="team" />
+          <h4 class="card-title">Connectors</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/integrate/kafka-connector">
+              Kafka
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/integrate/mongodb-connector">
+              MongoDB
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/integrate/jdbc-connector">
+              JDBC
+            </a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/integrate/connectors">All connectors (Redis, Custom)</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="tool" class="card-img"></i>
+          <h4 class="card-title">Tools</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="../management-center/latest/getting-started/overview">Management Center</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../operator/latest/">Platform Operator</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../clc/latest/overview">Command Line Client (CLC)</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../hazelcast/latest/plugins/hazelcast-plugins">Plugins</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <i data-feather="cloud" class="card-img"></i>
+          <h4 class="card-title"><a href="../cloud/">Hazelcast Cloud</a></h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="../cloud/overview">About Hazelcast Cloud</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../cloud/get-started">Hello World</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../cloud/tutorials">Cloud Tutorials</a>
+          </li>
+          <li class="card-list-item">
+            <a href="../cloud/developer-guide">Developer Guide</a>
+          </li>
+        </ul>
+      </div>
+
+
+    </article>
+
+    <aside class="additional-cards">
+      <div class="additional-card">
+        <div class="card-header">
+          <i data-feather="book-open" class="card-img"></i>
+          <h4 class="card-title"><a href="../tutorials">Tutorials</a></h4>
+        </div>
+        <dl class="card-list">
+          <dt class="card-list-item">
+            <a href="../tutorials/java-client-getting-started">Get Started with Java Client</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Use Hazelcast Cloud to get started with a Java client and manipulate a map.
+          </dd>
+          <dt class="card-list-item">
+            <a href="../hazelcast/latest/tutorials/kubernetes">Deploy Hazelcast using Kubernetes</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Deploy a Hazelcast cluster to Kubernetes and connect it to a Kubernetes application.
+          </dd>
+          <dt class="card-list-item">
+            <a href="https://training.hazelcast.com/vector-search-on-hazelcast?utm_source=docs-website">Free Training: Vector Search on Hazelcast</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Learn how to use Hazelcast to create real-time applications using our fast data storage and distributed computing engine.
+          </dd>
+          <dt class="card-list-item">
+            <a href="../tutorials/airline-connections">Build Airline Connections Demo using Hazelcast Cloud</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Create an application that uses streaming data to correlate flight details with stored data.
+          </dd>
+          <dt class="card-list-item">
+            <a href="../tutorials/spring-boot-client">Create a Spring Boot Application for Hazelcast Cloud</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Deploy a Spring Boot application that uses Hazelcast as a cache manager.
+          </dd>
+        </dl>
+      </div>
+
+      <div class="additional-card">
+        <div class="card-header">
+          <i data-feather="award" class="card-img"></i>
+          <h4 class="card-title">New and Popular</h4>
+        </div>
+        <dl class="card-list">
+          <dt class="card-list-item">
+            <a href="https://hazelcast.com/blog/navigating-consistency-in-distributed-systems-choosing-the-right-trade-offs/?utm_source=docs-website">Blog: Navigating Consistency in Distributed Systems</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Every distributed system faces a critical question: should we prioritize consistency or availability?
+          </dd>
+         <dt class="card-list-item">
+            <a href="../hazelcast/latest/integrate/integrate-with-feast">Integrate with Feast</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Start using Feast integration to serve real-time online features.
+          </dd>
+          <dt class="card-list-item">
+            <a href="https://hazelcast.com/blog/dynamic-configuration-no-restarts-required/?utm_source=docs-website">Blog: Dynamic Configuration: No Restarts Required</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Dynamic configuration enables you to add new data structure configurations at runtime without restarting the cluster.
+          </dd>
+          <dt class="card-list-item">
+            <a href="https://hazelcast.com/blog/get-instant-answers-with-ask-ai-on-hazelcast-documentation/?utm_source=docs-website">Blog: Get Instant Answers with Ask AI on Hazelcast Documentation</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Get instant answers to all your questions about Hazelcast with our new Ask AI feature on docs.hazelcast.com.
+          </dd>
+          <dt class="card-list-item">
+            <a href="https://hazelcast.com/blog/announcing-hazelcast-platform-5-5-release/?utm_source=docs-website">Blog: What’s New in Hazelcast 5.5</a>
+          </dt>
+          <dd class="card-list-item-description">
+            Discover our latest improvements, including vector search, compute isolation, multi-member routing, dynamic configuration using REST API, and much more.
+          </dd>
+        </dl>
+      </div>
+    </aside>
+
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/hazelcast-docs/issues/new?title=Docs: Feedback for Hazelcast Documentation&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/hazelcast-docs/edit/main/home/modules/ROOT/pages/index.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+  </main>
+</div>
+
+<script>
+  feather.replace();
+</script>
+
+<footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch([[
+      "tags:hazelcast-5.5",
+      "tags:management-center-5.7",
+      "tags:clc-",
+      "tags:operator-",
+      "tags:cloud",
+      "tags:flow-",
+    ]], 'Search all docs...');
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>

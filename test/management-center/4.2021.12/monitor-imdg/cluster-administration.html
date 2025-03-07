@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Cluster Administration | Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/management-center/5.7/clusters/administration">
+    <link rel="prev" href="console">
+    <link rel="next" href="../sql-browser">
+    <meta name="generator" content="Antora 3.1.10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../../../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../../../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <div id="search-input" class="navbar-item searchbox"></div>
+          <label class="filter checkbox">
+            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+          </label>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+  <div class="nav-container" data-component="management-center" data-version="4.2021.12">
+  <aside class="nav">
+    <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="Management Center">
+      Management Center
+    </a>
+  </div>
+
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="4.2021.12">
+        4.2021.12
+      </a>
+    </div>
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+      <span>hazelcast</span>
+        <li class="component">
+              <a href="../../../hazelcast/5.5/">
+                Hazelcast Platform
+              </a>
+        </li>
+      <span>management-center</span>
+        <li class="component is-current">
+              <a href="../../5.7/">
+                Management Center
+              </a>
+        </li>
+      <span>home</span>
+      <span>privacy</span>
+      <span>templates</span>
+      <span>tutorials</span>
+        <li class="component">
+              <a href="../../../tutorials/">
+                Tutorials
+              </a>
+        </li>
+  </ul>
+
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            <li
+              class="version"
+            >
+              <a href="../../6.0-snapshot/clusters/administration">6.0-SNAPSHOT</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.7/clusters/administration">5.7</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.6/clusters/administration">5.6</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.5/clusters/administration">5.5</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.4/clusters/administration">5.4</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.3/clusters/administration">5.3</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.2/clusters/administration">5.2</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.1/clusters/administration">5.1</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.0/clusters/administration">5.0</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../4.2022.01/monitor-imdg/cluster-administration">4.2022.01</a>
+            </li>
+            <li
+              class="version is-current"
+            >
+              <a href="cluster-administration">4.2021.12</a>
+            </li>
+      </ul>
+</div>
+    <div class="panels">
+  <div class="nav-panel-menu is-active" data-panel="menu">
+    <nav class="nav-menu">
+        <ul class="nav-list">
+      <li class="nav-item" data-depth="0">
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../">Hazelcast Management Center Reference Manual</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../supported-environments">Supported Environments</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started">Getting Started</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../configuring">Configuring Management Center</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../launching/launching">Launching the Management Center User Interface</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../launching/auth-options">Authentication Options</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../launching/dev-mode">Dev Mode</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../connecting-members">Connecting to the Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../user-interface">User Interface Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../managing-clusters">Managing Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../managing-users">Managing Users</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../managing-licenses">Managing Licenses</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../managing-security-providers">Managing Security Providers</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="monitor-imdg">Monitoring an IMDG Cluster</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="dashboard">Dashboard Page</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="widget">Widget</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-members">Monitoring Members</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-clients">Monitoring Clients</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-dds">Monitoring Data Structures</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-wan-replication">Monitoring WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="scripting">Scripting</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="console">Executing Console Commands</a>
+              </li>
+      <li class="nav-item is-current-page" data-depth="2">
+            <a class="nav-link
+
+
+            " href="cluster-administration">Cluster Administration</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../sql-browser">SQL Browser</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../config-healthcheck">Configuration Health Check</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../metric-persistence">Metrics Persistence</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../clustered-rest">Clustered REST</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../jmx/jmx">Clustered JMX</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../jmx/configuring">Configuring Clustered JMX</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../jmx/jmx-api">Clustered JMX API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../jmx/new-relic">Integrating with New Relic</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../jmx/appdynamics">Integrating with AppDynamics</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-jet/monitor-jet">Monitoring a Jet Cluster</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../monitor-jet/dashboard">Dashboard Page</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../monitor-jet/jobs">Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../monitor-jet/snapshots">Snapshots</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../prometheus">Prometheus Exporter</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../mc-conf">Management Center Configuration Tool</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../high-availability">High Availability Setup</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../phone-home">Phone Home</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../troubleshooting">Troubleshooting</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../migration-guides">Appendix A: Migration Guides</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../ui-logs">Appendix B: User Interface Logs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../automated-security-scan">Appendix C: Automated Security Scanning</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+  </div>
+    </div>
+  </aside>
+</div>
+<div id="hide-nav">
+  <button>
+    <span>
+      ᐸ
+    </span>
+  </button>
+</div>
+  <main class="article">
+    <div class="article-banner prerelease" id="latest-banner">
+      <div class="prerelease">
+        <p>A newer version of Management Center is available.</p>
+        <a class="btn" href="../../5.7/clusters/administration">View latest</a>
+      </div>
+            <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
+    </div>
+  <div class="content">
+    <article class="doc">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../">Hazelcast Management Center</a></li>
+    <li><a href="monitor-imdg">Monitoring an IMDG Cluster</a></li>
+    <li><a href="cluster-administration">Cluster Administration</a></li>
+  </ul>
+</nav>
+    <button class="nav-toggle"></button>
+      <h1 class="page">Cluster Administration</h1>
+    <div class="page-versions">
+    <button class="version-menu-toggle" title="Show other versions of page">Version 4.2021.12</button>
+    <div class="version-menu">
+          <a class="version" href="../../6.0-snapshot/clusters/administration">6.0-SNAPSHOT</a>
+          <a class="version" href="../../5.7/clusters/administration">5.7</a>
+          <a class="version" href="../../5.6/clusters/administration">5.6</a>
+          <a class="version" href="../../5.5/clusters/administration">5.5</a>
+          <a class="version" href="../../5.4/clusters/administration">5.4</a>
+          <a class="version" href="../../5.3/clusters/administration">5.3</a>
+          <a class="version" href="../../5.2/clusters/administration">5.2</a>
+          <a class="version" href="../../5.1/clusters/administration">5.1</a>
+          <a class="version" href="../../5.0/clusters/administration">5.0</a>
+          <a class="version" href="../../4.2022.01/monitor-imdg/cluster-administration">4.2022.01</a>
+          <a class="version is-current" href="cluster-administration">4.2021.12</a>
+    </div>
+  </div>
+  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Using the "Administration" menu item, you can change the
+state of your cluster, shut down it, update your Management Center
+license and perform Rolling Upgrade or Hot Restart
+on your cluster.</p>
+</div>
+<div class="paragraph">
+<p>When you click on the "Administration" menu item, the following
+page shows up:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/Administration.png" alt="Administration Menu"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This menu item is available only to admin users.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can perform the aforementioned administrative tasks using
+the tabs on this page. Below sections explain each tab.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cluster-state"><a class="anchor" href="#cluster-state"></a>Cluster State</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The admin user can see and change the cluster state and shut
+down the cluster using the buttons listed in this page as shown below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ClusterState.png" alt="Cluster State Operations"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Cluster States:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Active</strong>: The cluster continues to operate without any
+restriction. All operations are allowed. This is the default
+state of a cluster.</p>
+</li>
+<li>
+<p><strong>No Migration</strong>: Migrations (partition rebalancing) and backup
+replications are not allowed. The cluster continues to operate without
+any restriction. All other operations are allowed.</p>
+</li>
+<li>
+<p><strong>Frozen</strong>: New members are not allowed to join, except the members
+left in <strong>this</strong> or the <strong>Passive</strong> state. All other operations except
+migrations are allowed and the cluster operates without any restriction.</p>
+</li>
+<li>
+<p><strong>Passive</strong>: New members are not allowed to join, except the members
+left in <strong>this</strong> or the <strong>Frozen</strong> state. All operations, except the
+ones marked with <code>AllowedDuringPassiveState</code>, are rejected immediately.</p>
+</li>
+<li>
+<p><strong>In Transition</strong>: Shows that the cluster state is in transition. This
+is a temporary and intermediate state. It is not allowed to set it explicitly.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Changing the Cluster State</strong></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ChangeClusterState.png" alt="Changing Cluster state"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click the dropdown menu and choose the state to which you want your cluster
+to change. A pop-up appears and stays on the screen until the state is successfully changed.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ChangeClusterState-wait.png" alt="Waiting the State Change"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Shutting Down the Cluster</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click the <strong>Shutdown</strong> button. A pop-up appears and stays on the screen
+until the cluster is successfully shutdown.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ShutdownCluster.png" alt="Shutdown Cluster"></span></p>
+</div>
+<div class="paragraph">
+<p>If an exception occurs during the state change or shutdown operation on the
+cluster, this exception message is shown on the screen as a notification.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rolling-upgrade"><a class="anchor" href="#rolling-upgrade"></a>Rolling Upgrade</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The admin user can upgrade the cluster version once all members of
+the cluster have been upgraded to the intended
+codebase version as described in the Rolling Upgrade Procedure section
+of the <a href="#imdg:installation:rolling-upgrades.adoc#rolling-upgrade-procedure" class="xref unresolved">Hazelcast IMDG Reference Manual</a>.</p>
+</div>
+<div class="paragraph">
+<p>Open the <strong>Rolling Upgrade</strong> tab to perform a Rolling Upgrade
+and change the cluster&#8217;s version.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/RollingUpgrade.png" alt="RollingUpgradeMenu"></span></p>
+</div>
+<div class="paragraph">
+<p>Enter the password of the cluster if security is enabled on the cluster
+(leave it empty if not), and click on the <strong>Change Version</strong> button.</p>
+</div>
+<div class="paragraph">
+<p>Once the operation succeeds, you will see the following notification:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/UpgradeClusterVersionSuccess.png" alt="UpgradeClusterVersionSuccess"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="hot-restart"><a class="anchor" href="#hot-restart"></a>Hot Restart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Using the Hot Restart tab, you can perform force and partial start of
+the cluster and see the Hot Restart status of the cluster members. You
+can also take snapshots of the Hot Restart Store (Hot Backup). When you
+click on this tab, the following page is shown:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/HotRestartTab.png" alt="Hot Restart Tab"></span></p>
+</div>
+<div class="paragraph">
+<p>Below sections explain each operation.</p>
+</div>
+<div class="sect2">
+<h3 id="force-start"><a class="anchor" href="#force-start"></a>Force Start</h3>
+<div class="paragraph">
+<p>Restart process cannot be completed if a member crashes permanently and
+cannot recover from the failure since it cannot start or it fails to load
+its own data. In that case, you can force the cluster to clean its persisted
+data and make a fresh start. This process is called <strong>force start</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+See the <a href="#imdg:storage:hot-restart-persistence.adoc#force-start" class="xref unresolved">Force Start section</a>
+in the Hazelcast IMDG Reference Manual for more information on this operation.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To perform a force start on the cluster, click on the <strong>Force Start</strong> button.
+A confirmation dialog appears as shown below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ForceStartConfirmation.png" alt="Force Start Confirmation"></span></p>
+</div>
+<div class="paragraph">
+<p>Once you click on the <strong>Force Start</strong> button on this dialog, the cluster
+starts the force start process and the following progress dialog shows
+up while doing so.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ForceStart.png" alt="Force Starting"></span></p>
+</div>
+<div class="paragraph">
+<p>This dialog stays on the screen until the operation is triggered. Once
+it is done, the success of force start operation is shown as a notice
+dialog, as shown below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ForceStartSuccessful.png" alt="Force Start Success"></span></p>
+</div>
+<div class="paragraph">
+<p>If an exception occurs, this exception message is shown on the
+screen as a notification.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="partial-start"><a class="anchor" href="#partial-start"></a>Partial Start</h3>
+<div class="paragraph">
+<p>When one or more members fail to start or have incorrect Hot Restart
+data (stale or corrupted data) or fail to load their Hot Restart data,
+the cluster becomes incomplete and the restart mechanism cannot proceed.
+One solution is to use Force Start and make a fresh start with the existing
+members, as explained above. Another solution is to do a partial start.</p>
+</div>
+<div class="paragraph">
+<p>Partial start means that the cluster will start with an incomplete set of
+members. Data belonging to the missing members is assumed lost and
+the Management Center tries to recover the missing data using the restored
+backups. For example, if you have minimum two backups configured for all
+the maps and caches, then a partial start up to two missing members is
+safe against data loss. If there are more than two missing members or there
+are maps/caches with less than two backups, then data loss is expected.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+See the <a href="#imdg:storage:hot-restart-persistence.adoc#partial-start" class="xref unresolved">Partial Start section</a>
+in the Hazelcast IMDG Reference Manual for more information on this
+operation and how to enable it.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To perform a partial start on the cluster, click on the <strong>Partial Start</strong>
+button. A notice dialog appears as shown below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/PartialStartTriggered.png" alt="Partial Start Triggered"></span></p>
+</div>
+<div class="paragraph">
+<p>You can also see two fields related to Partial Start operation:
+"Remaining Data Load Time" and "Remaining Validation Time", as shown
+in the above screenshot.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Remaining Validation Time</strong>: When partial start is enabled, Hazelcast
+can perform a partial start automatically or manually, in case of some members
+are unable to restart successfully. Partial start proceeds automatically when
+some members fail to start and join to the cluster in <code>validation-timeout-seconds</code>,
+which you can configure. After this duration is passed, Hot Restart chooses to perform
+a partial start with the members present in the cluster. This field, i.e.,
+"Remaining Validation Time" shows how much time is left to the automatic partial
+start, in seconds. You can always request a manual partial start, by clicking on
+the <strong>Partial Start</strong> button, before this duration passes.</p>
+</li>
+<li>
+<p><strong>Remaining Data Load Time</strong>: The other situation to decide to perform a partial
+start is the failures during the data loading phase. When Hazelcast learns the data loading
+result of all members which have passed the validation step, it automatically performs
+a partial start with the ones which have successfully restored their Hot Restart data.
+Note that partial start does not expect every member to succeed in the data
+loading step. It completes the process when it learns the data loading result for every
+member and there is at least one member which has successfully restored its Hot
+Restart data. Relatedly, if it cannot learn the data loading result of all members
+before <code>data-load-timeout-seconds</code> duration, it proceeds with the ones which have
+already completed the data loading process. This field, i.e., "Remaining Data Load Time"
+shows how much time (in seconds) is left for Hazelcast to know at least one member
+has successfully restored its Hot Restart data and perform an automatic partial start.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+See the <a href="#imdg:storage:hot-restart-persistence.adoc#configuring-hot-restart" class="xref unresolved">Configuring Hot Restart section</a>
+in the Hazelcast IMDG Reference Manual for more information on the configuration elements <code>validation-timeout-seconds</code>
+and <code>data-load-timeout-seconds</code> mentioned above and how to configure them.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Force and partial start operations can also be performed using the REST
+API and the script <code>cluster.sh</code>. See the
+<a href="#imdg:management:cluster-utilities.adoc#using-rest-api-for-cluster-management" class="xref unresolved">Using REST API for Cluster Management section</a>
+and <a href="#imdg:management:cluster-utilities.adoc#using-the-script-cluster-sh" class="xref unresolved">Using the Script cluster.sh section</a>
+in the Hazelcast IMDG Reference Manual.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="hot-backup"><a class="anchor" href="#hot-backup"></a>Hot Backup</h3>
+<div class="paragraph">
+<p>During Hot Restart operations, you can take a snapshot of the Hot
+Restart data at a certain point in time. This is useful when you
+wish to bring up a new cluster with the same data or parts of the data.
+The new cluster can then be used to share load with the original cluster,
+to perform testing, quality assurance or reproduce an issue on the production data.</p>
+</div>
+<div class="paragraph">
+<p>Note that you must first configure the Hot Backup directory programmatically
+(using the method <code>setBackupDir()</code>) or declaratively (using the element <code>backup-dir</code>)
+to be able to take a backup of the Hot Restart data. See the
+<a href="#imdg:storage:hot-restart-persistence.adoc#configuring-hot-backup" class="xref unresolved">Configuring Hot Backup section</a>
+in the Hazelcast IMDG Reference Manual.</p>
+</div>
+<div class="paragraph">
+<p>If the backup directory is configured, you can start to perform the backup by
+clicking on the <strong>Hot Backup</strong> button. The Management Center first asks
+the cluster password as shown in the following dialog.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/HotBackupAskPassword.png" alt="Hot Backup Ask Cluster Password"></span></p>
+</div>
+<div class="paragraph">
+<p>Once you entered the password correctly and click on the "Start" button on
+this dialog, you will see a notification dialog stating that the backup process
+starts. You can see the progress of the backup operation under the "Last Hot
+Backup Task Status" part of the page, as shown below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/HotBackupProgress.png" alt="Hot Backup Progress"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="status-information"><a class="anchor" href="#status-information"></a>Status Information</h3>
+<div class="paragraph">
+<p>At the bottom of "Hot Restart" tab, you can see the Hot Restart and
+Hot Backup statuses of cluster members, as shown below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/StatusInformation.png" alt="Status"></span></p>
+</div>
+<div class="paragraph">
+<p>You can see the status and progress of your Hot Backup operation under
+"Last Hot Backup Task Status". It can be IN_PROGRESS and SUCCESS/FAILURE
+according to the result of the operation.</p>
+</div>
+<div class="paragraph">
+<p>You can also see the status of Hot Restart operation of your cluster members,
+under "Hot Restart Status". It can be PENDING and SUCCESSFUL/FAILED according
+to the result of Hot Restart operation.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cp-subsystem"><a class="anchor" href="#cp-subsystem"></a>CP Subsystem</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+CP subsystem management operations require enabled REST API in the IMDG cluster. See the <a href="#imdg:clients:rest.adoc" class="xref unresolved">IMDG documentation</a>
+for more information.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <strong>CP Subsystem</strong> tab can be used to monitor overall status of the
+<a href="#imdg:cp-subsystem:cp-subsystem.adoc" class="xref unresolved">CP subsystem</a>
+in the current cluster and perform certain management operations.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/CPSubsystemTab.png" alt="Status"></span></p>
+</div>
+<div class="sect2">
+<h3 id="monitoring-cp-subsystem"><a class="anchor" href="#monitoring-cp-subsystem"></a>Monitoring CP Subsystem</h3>
+<div class="paragraph">
+<p>The <strong>Status</strong> field shows a summary of the current CP subsystem status. It may have one of
+the following values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>CP Subsystem is not supported by this cluster:</strong> Shown for IMDG clusters with version prior to 3.12.</p>
+</li>
+<li>
+<p><strong>CP Subsystem is not enabled:</strong> Shown if CP subsystem is not enabled for the current cluster.</p>
+</li>
+<li>
+<p><strong>All CP members are accessible:</strong> Shown if there are at least the same amount of accessible CP members
+as the configured CP member count.</p>
+</li>
+<li>
+<p><strong>CP Subsystem warning: one CP member is not accessible:</strong> Shown if there is one missing
+CP member and the minority count in the CP subsystem is greater than 1. For example, this value is shown
+when there are 6 accessible CP members and the configured count is 7. In this example, the minority
+count is 3 members and the majority count is 4 members.</p>
+</li>
+<li>
+<p><strong>CP Subsystem alert:  multiple CP members are not accessible:</strong> Shown if there are multiple missing
+CP members, but their count is less than the minority.</p>
+</li>
+<li>
+<p><strong>CP Subsystem error: minority of the CP members are not accessible:</strong> Shown if the minority of CP
+members are missing.</p>
+</li>
+<li>
+<p><strong>CP Subsystem error: majority of the CP members are not accessible:</strong> Shown if the majority of CP
+members are missing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <strong>CP Members (Accessible/Configured)</strong> field shows the current count of accessible CP members and the
+<a href="#imdg:cp-subsystem:configuration.adoc#cp-subsystem-configuration" class="xref unresolved">configured CP members count</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You may promote additional members or remove inaccessible CP members,
+so the total count of members that participate in the CP subsystem may be greater or less than the
+configured CP member count. As the Status field considers the configured CP member count as the total
+CP member count, it should be treated only as a basic health indicator for the CP subsystem.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="managing-cp-subsystem"><a class="anchor" href="#managing-cp-subsystem"></a>Managing CP Subsystem</h3>
+<div class="paragraph">
+<p>You can also use the CP Subsystem tab to start the following management operations.</p>
+</div>
+<div class="paragraph">
+<p><strong>Promote Member to CP Subsystem</strong></p>
+</div>
+<div class="paragraph">
+<p>To promote one of the AP members to become a CP member, click on the <strong>Promote</strong> button. A confirmation
+dialog appears as shown below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/CPPromoteDialog.png" alt="Promote Member to CP Confirmation"></span></p>
+</div>
+<div class="paragraph">
+<p>It asks you to choose one of AP members, i.e., one of the members that do not participate in the CP subsystem.
+Note that lite members are not shown in the dropdown list as lite members do not store data.
+Once you press the <strong>Promote</strong> button, the CP subsystem starts the promote operation for the given member.</p>
+</div>
+<div class="paragraph">
+<p><strong>Remove CP Member</strong></p>
+</div>
+<div class="paragraph">
+<p>To remove one of the inaccessible CP members from the CP subsystem, click on the <strong>Remove</strong> button. A confirmation
+dialog appears as shown below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/CPRemoveDialog.png" alt="Remove CP Member Confirmation"></span></p>
+</div>
+<div class="paragraph">
+<p>It asks you to choose one of the members that is not connected to the Management Center, but is known by
+the cluster&#8217;s CP subsystem. Once you press the <strong>Remove</strong> button, the CP subsystem starts the remote
+operation for the given member.</p>
+</div>
+<div class="paragraph">
+<p><strong>Restart CP Subsystem</strong></p>
+</div>
+<div class="paragraph">
+<p>To wipe and restart the whole CP subsystem of the cluster, click on the <strong>Restart</strong> button. A confirmation
+dialog appears as shown below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/CPRestartDialog.png" alt="Restart CP Subsystem Confirmation"></span></p>
+</div>
+<div class="paragraph">
+<p>Once you press the <strong>Restart</strong> button, CP subsystem proceeds with the restart operation.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The CP subsystem restart operation is <strong>NOT</strong> idempotent and multiple invocations can break the
+whole system! After using this dialog, you must observe the system to see if the restart process is
+successfully completed or failed before starting this operation again.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="console">Executing Console Commands</a></span>
+  <span class="next"><a href="../sql-browser">SQL Browser</a></span>
+</nav>
+</article>
+    <div class="toc-container">
+  <aside class="toc sidebar" data-title="Contents" data-levels="1">
+    <div class="toc-menu"></div>
+  </aside>
+  <div class="feedback-prompt">
+    <a class="edit-this-page feedback-button" href="https://github.com/hazelcast/management-center-docs/edit/v/4.2021.12/docs/modules/monitor-imdg/pages/cluster-administration.adoc" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Cluster Administration&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/v/4.2020.12/docs/modules/monitor-imdg/pages/cluster-administration.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <div class="feedback-form-container">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
+    <span class="helpful-feedback-title">Was this helpful?</span>
+    <div class="helpful-feedback-buttons">
+      <label for="positive-feedback-starter" class="feedback-button yes-button">
+        <img src="../../../_/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
+      </label>
+      <label for="negative-feedback-starter" class="feedback-button no-button">
+        <img src="../../../_/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
+      </label>
+    </div>
+  </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
+
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue or answer a question.
+        </span>
+      </span>
+          </label>
+                <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Precisely describes the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Well written and easy to follow.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Helped me decide to use the product
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to try or adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another positive reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
+
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
+
+          <label for="could-not-find" class="feedback-radio-button-label">
+            <input type="radio" id="could-not-find" name="feedback" value="Couldn't find what I was looking for">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Couldn't find what I was looking for
+              </span>
+              <span class="radio-btn-description">
+                Missing important information or didn't answer my question.
+              </span>
+            </span>
+          </label>
+          <label for="inaccurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="inaccurate-radio-feedback" name="feedback" value="Inaccurate">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Inaccurate
+              </span>
+              <span class="radio-btn-description">
+                Doesn't accurately describe the product or feature.
+              </span>
+            </span>
+          </label>
+
+          <label for="hard-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="hard-to-understand" name="feedback" value="Hard to understand">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Hard to understand
+              </span>
+              <span class="radio-btn-description">
+                Too complicated or badly written.
+              </span>
+            </span>
+          </label>
+          <label for="code-sample-errors" class="feedback-radio-button-label">
+            <input type="radio" id="code-sample-errors" name="feedback" value="Code sample errors">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Code sample error
+              </span>
+              <span class="radio-btn-description">
+                Incorrect or missing code sample(s).
+               </span>
+            </span>
+          </label>
+          <label for="another-negative-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-negative-reason" name="feedback" value="Another negative reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="(Optional) Please provide specific examples or suggestions!"
+          rows="6"
+        ></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</main>
+
+</div>
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../../../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Cluster Administration&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/v/4.2020.12/docs/modules/monitor-imdg/pages/cluster-administration.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+    <footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch(["tags:management-center-4.2021.12"]);
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+      }
+    }
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet');
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-4.2021.12",
+          "tags:management-center-5.7",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-4.2021.12"]);
+      }
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-4.2021.12",
+          "tags:hazelcast-5.5",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-4.2021.12"]);
+      }
+    }
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>

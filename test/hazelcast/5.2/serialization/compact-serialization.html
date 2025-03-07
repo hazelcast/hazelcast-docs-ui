@@ -1,0 +1,4717 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Compact Serialization | Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/hazelcast/5.5/serialization/compact-serialization">
+    <link rel="prev" href="serialization">
+    <link rel="next" href="serializing-json">
+    <meta name="generator" content="Antora 3.1.10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../../../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../../../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <div id="search-input" class="navbar-item searchbox"></div>
+          <label class="filter checkbox">
+            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+          </label>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+  <div class="nav-container" data-component="hazelcast" data-version="5.2">
+  <aside class="nav">
+    <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="Hazelcast Platform">
+      Hazelcast Platform
+    </a>
+  </div>
+
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="5.2">
+        5.2
+      </a>
+    </div>
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+      <span>hazelcast</span>
+        <li class="component is-current">
+              <a href="../../5.5/">
+                Hazelcast Platform
+              </a>
+        </li>
+      <span>management-center</span>
+        <li class="component">
+              <a href="../../../management-center/5.7/">
+                Management Center
+              </a>
+        </li>
+      <span>home</span>
+      <span>privacy</span>
+      <span>templates</span>
+      <span>tutorials</span>
+        <li class="component">
+              <a href="../../../tutorials/">
+                Tutorials
+              </a>
+        </li>
+  </ul>
+
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            <li
+              class="version"
+            >
+              <a href="../../6.0-snapshot/serialization/compact-serialization">6.0-SNAPSHOT</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.5/serialization/compact-serialization">5.5</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.4/serialization/compact-serialization">5.4</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.3/serialization/compact-serialization">5.3</a>
+            </li>
+            <li
+              class="version is-current"
+            >
+              <a href="compact-serialization">5.2</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.1/serialization/compact-serialization">5.1</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.0/serialization/compact-serialization">5.0</a>
+            </li>
+      </ul>
+</div>
+    <div class="panels">
+  <div class="nav-panel-menu is-active" data-panel="menu">
+    <nav class="nav-menu">
+        <ul class="nav-list">
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Get Started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../">Hazelcast Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Start a Local Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-cli">CLI</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-docker">Docker</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-binary">Binary</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-java">Java Embedded</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Explore Enterprise Features</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/enterprise-overview">Get Started with Hazelcast Enterprise</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/persistence">Persist Map Entries on Disk</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/authenticate-clients">Authenticate Client Connections</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/wan">Replicate a Map over Clusters in a WAN</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/blue-green">Deploy Blue-Green Clusters</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../getting-started/support">Getting Support</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../getting-started/resources">Developer Resources</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../glossary">Glossary</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Develop Solutions</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Finding the Right Tool</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../ingest/overview">Ingesting Data from External Sources</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../computing/distributed-computing">Distributed Computing</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../query/overview">Running Distributed Queries</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Connecting to a Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/hazelcast-clients">Getting Started with a Hazelcast Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/java">Java Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/cplusplus">C++ Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/dotnet">.NET Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/rest">REST Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/memcache">Memcache Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/python">Python Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/nodejs">Node.js Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/go">Go Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ beta
+            " href="../clients/clc">Hazelcast Command-Line Client</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Distributed Data Structures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/distributed-data-structures">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Map</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/map">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/map-config">Configuring Maps</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/creating-a-map">Creating a Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/reading-a-map">Reading Data From a Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/updating-map-entries">Updating Map Entries</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/setting-data-format">Setting the In-Memory Format of Map Entries</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/backing-up-maps">Making Your Map Data Safe</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/managing-map-memory">Managing Map Memory</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/locking-maps">Locking Maps</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/listening-for-map-entries">Acting Upon Changes to a Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/reading-map-metrics">Reading Map Metrics</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">JCache</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/jcache">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/overview">JCache Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/setup">JCache Setup and Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/providers">JCache Providers</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/api">JCache API</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/hazelcast-integration">JCache - Hazelcast Instance Integration</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/icache">Hazelcast JCache Extension - ICache</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../jcache/tck">Testing for JCache Specification Compliance</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/queue">Queue</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/priority-queue">Priority Queue</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/multimap">MultiMap</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/set">Set</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/list">List</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/ringbuffer">Ringbuffer</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/topic">Topic</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/reliable-topic">Reliable Topic</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/fencedlock">FencedLock</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/iatomiclong">IAtomicLong</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/isemaphore">ISemaphore</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/iatomicreference">IAtomicReference</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/icountdownlatch">ICountDownLatch</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/pn-counter">PN Counter</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/flake-id-generator">Flake ID Generator</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/replicated-map">Replicated Map</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/cardinality-estimator-service">Cardinality Estimator Service</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/event-journal">Event Journal</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../cache/overview">Caching Data</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../mapstore/working-with-external-data">Building a Cache with MapStore</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ beta
+            " href="../mapstore/configuring-a-generic-mapstore">Configuring a Map with the Generic MapStore</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../mapstore/implement-a-mapstore">Implementing a Custom MapStore</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../mapstore/configuration-guide">Configuring a MapStore</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../mapstore/mapstore-triggers">Map Operations that Trigger Methods on a MapStore</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Building Data Pipelines</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/overview">About Data Pipelines</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Get Started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/stream-processing-embedded">Get Started with Stream Processing (Embedded)</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/stream-processing-client">Get Started with Stream Processing (Client/Server)</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Ingesting Data from Sources</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/ingesting-from-sources">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-stream-source">Creating a Custom Streaming Source</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-batch-source">Adding Batching to a Custom Source</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Processing Data</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/transforms">Transforms</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-aggregate-operation">Building a Custom Aggregate Operation</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/python">Apply a Custom Transform with Python</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Sending Results to Sinks</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/sending-data-to-sinks">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-sink">Create a Custom Sink</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Stream Processing</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/building-pipelines">About Stream Processing Pipelines</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/windowing">Apply Windowed Aggregation</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/stream-imap">Subscribe to Changes to a Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/map-join">Enrich a Stream</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-overview">Change Data Capture (CDC)</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-database-setup">Setting Up a Database for Change Data Capture</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc">Capture Changes from MySQL</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-postgres">Capture Changes from PostgreSQL</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-join">Join Change Data Capture Records</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/etl-overview">Extract Transform Load (ETL)</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/kafka">Connect to Apache Kafka</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/kinesis">Connect to Amazon Kinesis</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/pulsar">Group Messages from Apache Pulsar</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/serialization">Serializing Pipelines</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/configuring-jobs">Configuring Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-security">Securing Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/submitting-jobs">Submitting Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-management">Managing Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-update">Updating Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/xa">Testing Sources and Sinks for XA Transaction Support</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../query/predicate-overview">Predicates API</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">SQL</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/sql-overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL Over Maps</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/get-started-sql">Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/querying-maps-sql">Queries</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-maps">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL Over Kafka</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/learn-sql">Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-kafka">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL Over File Systems</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/get-started-sql-files">Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-a-file-system">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL Over JDBC</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ beta
+            " href="../sql/mapping-to-jdbc">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/working-with-json">Working with JSON</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/querying-streams">Stream Processing</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/parameterized-queries">Query Parameters</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/finding-mappings">Finding Mappings</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/improving-performance">Improving Performance</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/troubleshooting">Troubleshooting</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Statements</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/sql-statements">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/alter-job"><code>ALTER JOB</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-index"><code>CREATE INDEX</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-job"><code>CREATE JOB</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-mapping"><code>CREATE MAPPING</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-snapshot"><code>CREATE SNAPSHOT</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-view"><code>CREATE VIEW</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/delete"><code>DELETE</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-job"><code>DROP JOB</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-mapping"><code>DROP MAPPING</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-snapshot"><code>DROP SNAPSHOT</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-view"><code>DROP VIEW</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/explain"><code>EXPLAIN</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/sink-into"><code>INSERT INTO</code>/<code>SINK INTO</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/select"><code>SELECT</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/show-jobs"><code>SHOW JOBS</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/show-mappings"><code>SHOW MAPPINGS</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/update"><code>UPDATE</code></a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/functions-and-operators">Functions and Expressions</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/data-types">SQL Data Types</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/user-defined-types">User-Defined Types in SQL</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Improving Query Performance</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../query/indexing-maps">Indexing Maps</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../performance/data-affinity">Data Affinity</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../performance/caching-deserialized-values">Caching Deserialized Values</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../performance/near-cache">Near Cache</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/preventing-out-of-memory">Preventing Out of Memory Exceptions when Querying a Map</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Connector Guides</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/connectors">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Files</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/file-connector">Unified File Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/legacy-file-connector">Legacy File Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Messaging System Connectors</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/messaging-system-connectors">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/kafka-connector">Apache Kafka Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/kinesis-connector">Amazon Kinesis Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/jms-connector">JMS Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/pulsar-connector">Apache Pulsar Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Data Structure Connectors</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/jcache-connector">JCache Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/list-connector">List Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/map-connector">Map Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/reliable-topic-connector">Reliable Topic Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Databases</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/database-connectors">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/jdbc-connector">JDBC Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/cdc-connectors">CDC Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/elasticsearch-connector">Elasticsearch Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/mongodb-connector">MongoDB Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/influxdb-connector">InfluxDB Connector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../integrate/redis-connector">Redis Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/test-connectors">Test Source Connectors</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/socket-connector">Socket Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/http-connector">HTTP Listener Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/twitter-connector">Twitter Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/custom-connectors">Custom Connectors</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Integrating with Spring</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/configuration">Configuring Hazelcast in Spring</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/springaware">Enabling SpringAware Objects</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/add-caching">Adding Caching to Spring</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/hibernate">Configuring Hibernate Second-Level Cache</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/transaction-manager">Configuring Hazelcast Transaction Manager</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/best-practices">Spring Best Practices</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Java Executor Service</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../computing/executor-service">Java Executor Service</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../computing/durable-executor-service">Durable Executor Service</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../computing/scheduled-executor-service">Scheduled Executor Service</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../computing/entry-processor">Entry Processor</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Adding Java Classes to Members</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/deploying-code-on-member">Deploying User Code on the Member</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/deploying-code-from-clients">Deploying User Code from Clients</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/accessing-domain-objects">Accessing Domain Objects Without Domain Classes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Serialization</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="serialization">Overview</a>
+              </li>
+      <li class="nav-item is-current-page" data-depth="2">
+            <a class="nav-link
+
+            " href="compact-serialization">Compact Serialization</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="serializing-json">HazelcastJsonValue</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="implementing-identifieddataserializable">IdentifiedDataSerializable</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Other Serialization Options</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="implementing-java-serializable">Java Serializable and Externalizable</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="implementing-dataserializable">DataSerializable</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="implementing-portable-serialization">Portable</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="custom-serialization">Custom Serialization</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="global-serializer">Global Serializer</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="implementing-hazelcastinstanceaware">HazelcastInstanceAware</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="serialization-configuration">Configuring Serializers</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Listening to Events</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/distributed-events">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/cluster-events">Cluster Events</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/event-listeners-for-clients">Event Listeners for Hazelcast Clients</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/global-event-configuration">Global Event Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/object-events">Distributed Object Events</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Transactions</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../transactions/creating-a-transaction-interface">Creating a Transaction Interface</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../transactions/providing-xa-transactions">Providing XA Transactions</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Testing Applications</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../test/testing-apps">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../test/testing">Testing Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../simulator">Hazelcast Simulator</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Troubleshooting</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/troubleshooting">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/error-handling">Error Handling Strategies for Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/remedies-for-alerts">Actions and Remedies for Alerts</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/recovery-members">Recovery from a Partial or Total Failure</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/recovery-clients">Recovery from Client Connection Failures</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../common-exception-types">Common Exception Types</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Deploy Clusters</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../production-checklist">Production Checklist</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../capacity-planning">Capacity Planning</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Installation</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/choosing-a-deployment-option">Choosing an Application Topology</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/editions">Editions and Distributions</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/install-hazelcast">Open Source</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/install-enterprise">Enterprise</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Member/Client Discovery</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/discovery-mechanisms">Discovery Mechanisms</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/discovering-by-tcp">Discovering Members by TCP</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/discovering-by-multicast">Discovering Members by Multicast</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/discovering-native-clients">Discovering Java Clients</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Public Cloud</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-in-cloud">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-on-aws">Deploying a Cluster on Amazon AWS</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-on-azure">Deploying a Cluster on Microsoft Azure</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-on-gcp">Deploying a Cluster on Google Cloud Platform</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../deploy/deploying-with-docker">Deploying on Docker</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Kubernetes</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/deploying-in-kubernetes">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="#operator:ROOT:get-started.adoc">Hazelcast Platform Operator</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/kubernetes-auto-discovery">Kubernetes Auto Discovery</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/troubleshooting-and-limitations">Troubleshooting and Limitations</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Helm Charts</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-hazelcast-chart">Hazelcast Chart</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-hazelcast-enterprise-chart">Hazelcast Enterprise Chart</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-adding-custom-jar">Adding Custom Jar</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-enabling-external-access">Enabling External Access</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-configuring-ssl">Configuring SSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-dynamic-persistence-configuration">Dynamic Persistence Configuration</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Configure and Manage Clusters</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../configuration/understanding-configuration">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Static Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-declaratively">Member Configuration Files</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-programmatically">Configuring Hazelcast in Embedded Mode</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-with-system-properties">System Props and Environment Variables</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/jvm-parameters">JVM Parameters</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-within-spring">Configuring Hazelcast in Spring</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/pattern-matcher">Configuration Pattern Matcher</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/using-wildcards">Using Wildcards</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Dynamic Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config-programmatic-api">Programmatic API</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config-update-and-reload">Update and Reload with REST</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config-persistence">Configuration Options</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../deploy/enterprise-licenses">Managing Enterprise License Keys</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../maintain-cluster/logging">Configuring Logging</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Maintaining a Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/rolling-upgrades">Rolling Upgrades</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/monitoring">Monitoring</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/cluster-member-states">Cluster and Member States</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/member-attributes">Filtering Members with Attributes</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/lite-members">Lite Members</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/shutdown">Shutting Down</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/rest-api">REST API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../management/cluster-utilities">Cluster Utilities</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Partition Groups and Networking</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/creating-clusters">Grouping Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/partition-group-configuration">Grouping Partitions</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clusters/network-configuration">Networking</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Improving Cluster Performance</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/performance-tuning">Performance Tuning</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/best-practices">Best Practices</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../storage/high-density-memory">High-Density Memory Store</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Securing a Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/overview">Security Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../secure-cluster/security-defaults">Security Defaults</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../secure-cluster/hardening-recommendations">Security Hardening Recommendations</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/enabling-jaas">Enabling JAAS Security</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">TLS/SSL</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/tls-ssl">TLS/SSL Basics</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/integrating-openssl">Integrating OpenSSL / BoringSSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/tls-configuration">Other TLS-Related Configurations</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Authentication Types</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/default-authentication">Default authentication</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/simple-authentication">Simple Authentication</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/jaas-authentication">JAAS authentication</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/security-realms">Security Realms</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/cluster-member-security">Cluster Member Security</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/native-client-security">Client Security</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/socket-interceptor">Socket Interceptor</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/security-interceptor">Security Interceptor</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Advanced Security Features</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/logging-auditable-events">Logging Auditable Events</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/validating-secrets">Validating Secrets Using Strength Policy</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/fips-140-2">FIPS 140-2</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/security-debugging">Security Debugging</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/encryption">Encryption</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Configuring for Fault Tolerance</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../fault-tolerance/backups">Backups</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Persistence</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/persistence">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/configuring-persistence">Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/backing-up-persistence">Backups</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/triggering-force-start">Force-start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/triggering-partial-start">Partial-start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/persistence-on-intel">Intel Optane DC</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/copying-persistence">Copying Data</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/performance">Performance Benchmark</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/persistence-design">Design Details</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Detecting Failures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../clusters/failure-detector-configuration">Failure Detectors</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../clusters/deadline-detector">Deadline Failure Detector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../clusters/phi-accrual-detector">Phi Accrual Failure Detector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../clusters/ping-detector">Ping Failure Detector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../fault-tolerance/timeouts">Connection Timeouts</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../fault-tolerance/fault-tolerance">Fault Tolerance for Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Handling Network Partitions</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/network-partitioning">Network Partitioning</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/partial-network-partitions">Partial Network Partitions</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/dealing-with-network-partitions">Dealing with Network Partitions</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/split-brain-protection">Split-Brain Protection</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/split-brain-recovery">Split-Brain Recovery</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Tiered Storage</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ beta
+            " href="../tiered-storage/overview">Tiered Storage</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ beta
+            " href="../tiered-storage/configuration">Configuring Tiered Storage</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">CP Subsystem</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/cp-subsystem">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/configuration">Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/management">Management</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/best-practices">Best Practices</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">External Data Stores</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ beta
+            " href="../external-data-stores/external-data-stores">Connections to External Data Stores</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Synchronizing Data Across Clusters</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/wan">WAN Replication Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/modes">WAN Replication Modes</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/quick-start">WAN Quickstart</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/defining-wan-replication">Configuring WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/configuring-for-map-and-cache">Configuring for IMap and ICache</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/advanced-features">Advanced Features</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/tuning">Fine-Tuning WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/failures">Failure Detection and Recovery</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/rest-api">REST API for WAN Wrap-Up</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/extending-hazelcast">Extending Hazelcast</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/operationparker">OperationParker</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/discovery-spi">Discovery SPI</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/config-properties-spi">Config Properties SPI</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../osgi/osgi">OSGI</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/osgi-support">OSGI Support</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/api">API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/configuring-osgi-support">Configuring Hazelcast OSGI Support</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/design">Design</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/using-osgi-service">Using Hazelcast OSGI Service</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Upgrade</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../deploy/versioning-compatibility">Versioning and Compatibility</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/upgrading-from-jet">Upgrading from Jet</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/upgrading-from-imdg-4">Upgrading from IMDG 4.x</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/upgrading-from-imdg-3">Upgrading from IMDG 3.12.x</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/migration-tool-imdg">Migrating Data from IMDG 3.12.x</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Reference</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Architecture</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/architecture">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/data-partitioning">Data Partitioning and Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/distributed-computing">How Hazelcast Models and Executes Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/execution-engine">Cooperative Multithreading</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/event-time-processing">How Hazelcast Handles Event Disorder</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/sliding-window">Sliding Window Aggregation</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/in-memory-storage">In-Memory Storage</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../system-properties">System Properties</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../faq">Frequently Asked Questions</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../list-of-metrics">Metrics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../phone-homes">Phone Homes</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../compact-binary-specification">Compact Serialization Binary Specification</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../plugins/hazelcast-plugins">Hazelcast Plugins</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/cloud-discovery">Cloud Discovery Plugins</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/web-session-replication">Web Session Replication Plugins</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/framework-integration">Framework Integration Plugins</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/other-integrations">Other Integrations</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Release Notes</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../release-notes/releases">Releases</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-2-5">5.2.5</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-2-4">5.2.4</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-2-3">5.2.3</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-2-2">5.2.2</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-2-1">5.2.1</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../release-notes/5-2-0">5.2.0</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+  </div>
+    </div>
+  </aside>
+</div>
+<div id="hide-nav">
+  <button>
+    <span>
+      ᐸ
+    </span>
+  </button>
+</div>
+  <main class="article">
+    <div class="article-banner prerelease" id="latest-banner">
+      <div class="prerelease">
+        <p>A newer version of Hazelcast Platform is available.</p>
+        <a class="btn" href="../../5.5/serialization/compact-serialization">View latest</a>
+      </div>
+            <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
+    </div>
+  <div class="content">
+    <article class="doc">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../">Platform</a></li>
+    <li>Develop Solutions</li>
+    <li>Serialization</li>
+    <li><a href="compact-serialization">Compact Serialization</a></li>
+  </ul>
+</nav>
+    <button class="nav-toggle"></button>
+      <h1 class="page">Compact Serialization</h1>
+    <div class="page-versions">
+    <button class="version-menu-toggle" title="Show other versions of page">Version 5.2</button>
+    <div class="version-menu">
+          <a class="version" href="../../6.0-snapshot/serialization/compact-serialization">6.0-SNAPSHOT</a>
+          <a class="version" href="../../5.5/serialization/compact-serialization">5.5</a>
+          <a class="version" href="../../5.4/serialization/compact-serialization">5.4</a>
+          <a class="version" href="../../5.3/serialization/compact-serialization">5.3</a>
+          <a class="version is-current" href="compact-serialization">5.2</a>
+          <a class="version" href="../../5.1/serialization/compact-serialization">5.1</a>
+          <a class="version" href="../../5.0/serialization/compact-serialization">5.0</a>
+    </div>
+  </div>
+  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>As an enhancement to existing serialization methods, Hazelcast offers Compact
+serialization, with the following main features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Separates the schema from the data and stores it per type, not per object which
+results in less memory and bandwidth usage compared to other formats</p>
+</li>
+<li>
+<p>Does not require a class to implement an interface or change the source code of
+the class in any way</p>
+</li>
+<li>
+<p>Supports schema evolution which permits adding or removing fields, or changing
+the types of fields</p>
+</li>
+<li>
+<p>Can work with no configuration or any kind of factory/serializer registration for
+Java classes, Java records, and .NET classes</p>
+</li>
+<li>
+<p>Platform and language independent</p>
+</li>
+<li>
+<p>Supports partial deserialization of fields during queries or indexing</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Hazelcast achieves these features by having well-known schemas of objects and replicating
+them across the cluster which enables members and clients to fetch schemas they don&#8217;t
+have in their local registries. Each serialized object carries just a schema identifier and
+relies on the schema distribution service or configuration to match identifiers with the
+actual schema. Once the schemas are fetched, they are cached locally on the members and clients
+so that the next operations that use the schema do not incur extra costs.</p>
+</div>
+<div class="paragraph">
+<p>Schemas help Hazelcast to identify the locations of the fields on the serialized binary data.
+With this information, Hazelcast can deserialize individual fields of the data, without deserializing
+the whole binary. This results in a better query and indexing performance.</p>
+</div>
+<div class="paragraph">
+<p>Schemas can evolve freely by adding or removing fields. Even, the types of the fields can be changed.
+Multiple versions of the schema may live in the same cluster and both the old and new readers
+may read the compatible parts of the data. This feature is especially useful in rolling upgrade
+scenarios.</p>
+</div>
+<div class="paragraph">
+<p>The Compact serialization does not require any changes in the user classes as it doesn&#8217;t need
+a class to implement a particular interface. Serializers might be implemented and registered
+separately from the classes.</p>
+</div>
+<div class="paragraph">
+<p>It also supports zero-configuration use cases by automatically extracting schemas out of the
+Java classes and records, and .NET classes which are cached and reused later, with no extra cost.</p>
+</div>
+<div class="paragraph">
+<p>The underlying format of the Compact serialized objects is platform and language independent.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Compact serialization is promoted to the stable status in the 5.2 Hazelcast release.
+The older versions released under the BETA status are not compatible with the stable 5.2 version.<br>
+For future versions, the backward compatibility will be maintained, just like any other
+Hazelcast feature.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The configuration can be used to register either</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>an explicit <code>CompactSerializer</code></p>
+</li>
+<li>
+<p>a zero-config serializer for a class to override other serialization mechanisms,
+for languages that provide zero-config Compact serialization.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In case of an explicit serializer, you have to supply a unique type name for the class
+in the serializer.</p>
+</div>
+<div class="paragraph">
+<p>Choosing a type name will associate that name with the schema and will make the
+polyglot use cases, where there are multiple clients from different languages,
+possible. Serializers in different languages can work on the same data, provided
+that their read and write methods are compatible, and they have the same type name.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you evolve your class in the later versions of your application, by adding
+or removing fields, you should continue using the same type name for that class.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To register an explicit serializer for a certain class, add the following configuration:</p>
+</div>
+<div class="paragraph">
+<p><strong>Programmatic Configuration:</strong></p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_java-member"></a>Java - Member</p>
+</li>
+<li>
+<p><a id="tabset1_java-client"></a>Java - Client</p>
+</li>
+<li>
+<p><a id="tabset1_net"></a>.NET</p>
+</li>
+<li>
+<p><a id="tabset1_node-js"></a>Node.js</p>
+</li>
+<li>
+<p><a id="tabset1_python"></a>Python</p>
+</li>
+<li>
+<p><a id="tabset1_go"></a>Go</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_java-member">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Config config = new Config();
+config.getSerializationConfig()
+        .getCompactSerializationConfig()
+        .addSerializer(new FooSerializer());</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_java-client">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ClientConfig clientConfig = new ClientConfig();
+clientConfig.getSerializationConfig()
+        .getCompactSerializationConfig()
+        .addSerializer(new FooSerializer());</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_net">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">HazelcastOptions options = ...;
+options
+    .Serialization
+    .Compact
+    .AddSerializer(new FooSerializer());</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_node-js">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">Client.newHazelcastClient(
+    compact: {
+        serializers: [
+            new FooSerializer()
+        ]
+)</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_python">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">hazelcast.HazelcastClient(
+    compact_serializers=[
+        FooSerializer(),
+    ],
+)</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_go">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">var cfg hazelcast.Config
+cfg.Serialization.Compact.SetSerializers(&amp;FooSerializer{})</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Declarative Configuration:</strong></p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_java-member-xml"></a>Java - Member - XML</p>
+</li>
+<li>
+<p><a id="tabset2_java-member-yaml"></a>Java - Member - YAML</p>
+</li>
+<li>
+<p><a id="tabset2_java-client-xml"></a>Java - Client - XML</p>
+</li>
+<li>
+<p><a id="tabset2_java-client-yaml"></a>Java - Client - YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_java-member-xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    &lt;serialization&gt;
+        &lt;compact-serialization&gt;
+            &lt;serializers&gt;
+                &lt;serializer&gt;
+                    com.example.FooSerializer
+                &lt;/serializer&gt;
+            &lt;/serializers&gt;
+        &lt;/compact-serialization&gt;
+    &lt;/serialization&gt;
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_java-member-yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  serialization:
+    compact-serialization:
+      serializers:
+        - serializer: com.example.FooSerializer</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_java-client-xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast-client&gt;
+    &lt;serialization&gt;
+        &lt;compact-serialization&gt;
+            &lt;serializers&gt;
+                &lt;serializer&gt;
+                    com.example.FooSerializer
+                &lt;/serializer&gt;
+            &lt;/serializers&gt;
+        &lt;/compact-serialization&gt;
+    &lt;/serialization&gt;
+&lt;/hazelcast-client&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_java-client-yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast-client:
+  serialization:
+    compact-serialization:
+      serializers:
+        - serializer: com.example.FooSerializer</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, the following is a sample configuration that registers zero-config
+serializer for a certain class, without implementing an explicit serializer.</p>
+</div>
+<div class="paragraph">
+<p>This way, one can override other the serializer of a certain class such as Java
+<code>Serializable</code> serializer with the zero-config serializer.</p>
+</div>
+<div class="paragraph">
+<p>When a class is serialized using the zero-config Compact serializer, Hazelcast will choose the
+fully qualified class name for Java as the type name automatically.</p>
+</div>
+<div class="paragraph">
+<p><strong>Programmatic Configuration:</strong></p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset3_java-member"></a>Java - Member</p>
+</li>
+<li>
+<p><a id="tabset3_java-client"></a>Java - Client</p>
+</li>
+<li>
+<p><a id="tabset3_net"></a>.NET</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset3_java-member">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Config config = new Config();
+config.getSerializationConfig()
+        .getCompactSerializationConfig()
+        .addClass(Bar.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_java-client">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ClientConfig clientConfig = new ClientConfig();
+clientConfig.getSerializationConfig()
+        .getCompactSerializationConfig()
+        .addClass(Bar.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_net">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">HazelcastOptions options = ...;
+options
+    .Serialization
+    .Compact
+    .AddType&lt;Bar&gt;();</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Declarative Configuration:</strong></p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset4_java-member-xml"></a>Java - Member - XML</p>
+</li>
+<li>
+<p><a id="tabset4_java-member-yaml"></a>Java - Member - YAML</p>
+</li>
+<li>
+<p><a id="tabset4_java-client-xml"></a>Java - Client - XML</p>
+</li>
+<li>
+<p><a id="tabset4_java-client-yaml"></a>Java - Client - YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset4_java-member-xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    &lt;serialization&gt;
+        &lt;compact-serialization&gt;
+            &lt;classes&gt;
+                &lt;class&gt;
+                    com.example.Bar
+                &lt;/class&gt;
+            &lt;/classes&gt;
+        &lt;/compact-serialization&gt;
+    &lt;/serialization&gt;
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset4_java-member-yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  serialization:
+    compact-serialization:
+      classes:
+        - class: com.example.Bar</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset4_java-client-xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast-client&gt;
+    &lt;serialization&gt;
+        &lt;compact-serialization&gt;
+            &lt;classes&gt;
+                &lt;class&gt;
+                    com.example.Bar
+                &lt;/class&gt;
+            &lt;/classes&gt;
+        &lt;/compact-serialization&gt;
+    &lt;/serialization&gt;
+&lt;/hazelcast-client&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset4_java-client-yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast-client:
+  serialization:
+    compact-serialization:
+      classes:
+        - class: com.example.Bar</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to override the serialization mechanism used for <code>Serializable</code> or
+<code>Externalizable</code> classes and use Compact serialization without writing any
+serializer in Java, you must add those classes to the configuration.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="implementing-compactserializer"><a class="anchor" href="#implementing-compactserializer"></a>Implementing CompactSerializer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Compact serialization can be used by implementing a <code>CompactSerializer</code> for a class
+and registering it in the configuration.</p>
+</div>
+<div class="paragraph">
+<p>For example, assume that you have the following <code>Employee</code> class.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset5_java"></a>Java</p>
+</li>
+<li>
+<p><a id="tabset5_net"></a>.NET</p>
+</li>
+<li>
+<p><a id="tabset5_c"></a>C++</p>
+</li>
+<li>
+<p><a id="tabset5_node-js"></a>Node.js</p>
+</li>
+<li>
+<p><a id="tabset5_python"></a>Python</p>
+</li>
+<li>
+<p><a id="tabset5_go"></a>Go</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset5_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class Employee {
+    private long id;
+    private String name;
+
+    public Employee(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset5_net">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">public record Employee(long Id, string Name);</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset5_c">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cpp hljs" data-lang="cpp">struct employee
+{
+    int64_t id;
+    std::string name;
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset5_node-js">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">class Employee {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset5_python">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">class Employee:
+    def __init__(self, id: int, name: str):
+        self.id = id
+        self.name = name</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset5_go">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type Employee struct {
+    ID int64
+    Name *string
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, a Compact serializer can be implemented as below.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset6_java"></a>Java</p>
+</li>
+<li>
+<p><a id="tabset6_net"></a>.NET</p>
+</li>
+<li>
+<p><a id="tabset6_c"></a>C++</p>
+</li>
+<li>
+<p><a id="tabset6_node-js"></a>Node.js</p>
+</li>
+<li>
+<p><a id="tabset6_python"></a>Python</p>
+</li>
+<li>
+<p><a id="tabset6_go"></a>Go</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset6_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class EmployeeSerializer implements CompactSerializer&lt;Employee&gt; {
+    @Override
+    public Employee read(CompactReader reader) {
+        long id = reader.readInt64("id");
+        String name = reader.readString("name");
+        return new Employee(id, name);
+    }
+
+    @Override
+    public void write(CompactWriter writer, Employee employee) {
+        writer.writeInt64("id", employee.getId());
+        writer.writeString("name", employee.getName());
+    }
+
+    @Override
+    public Class&lt;Employee&gt; getCompactClass() {
+        return Employee.class;
+    }
+
+    @Override
+    public String getTypeName() {
+        return "employee";
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset6_net">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">public class EmployeeSerializer : ICompactSerializer&lt;Employee&gt;
+{
+    public string TypeName =&gt; "employee";
+
+    public Employee Read(ICompactReader reader)
+    {
+        var id = reader.ReadInt64("id");
+        var name = reader.ReadString("name");
+        return new Employee(id, name);
+    }
+
+    public void Write(ICompactWriter writer, Employee value)
+    {
+        writer.WriteInt64("id", value.Id);
+        writer.WriteString("name", value.Name);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset6_c">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cpp hljs" data-lang="cpp">template&lt;&gt;
+struct hz_serializer&lt;employee&gt; : public compact_serializer
+{
+    static employee read(compact_reader&amp; reader)
+    {
+        employee e;
+
+        e.id = reader.read_int64("id");
+        e.name = reader.read_string("name");
+
+        return e;
+    }
+
+    static void write(const employee&amp; e, compact_writer&amp; writer)
+    {
+        writer.write_int64("id", e.id);
+        writer.write_string("name", e.name);
+    }
+
+    static std::string type_name() { return "employee"; }
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset6_node-js">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">class EmployeeSerializer extends CompactSerializer {
+    read(reader) {
+        const id = reader.readInt64('id');
+        const name = reader.readString('name');
+        return new Employee(id, name);
+    }
+
+    write(writer, employee) {
+        writer.writeInt64('id', employee.id);
+        writer.writeString('name', employee.name);
+    }
+
+    getClass() {
+        return Employee;
+    }
+
+    getTypeName() {
+        return 'employee';
+    }
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset6_python">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">class EmployeeSerializer(CompactSerializer[Employee]):
+    def read(self, reader: CompactReader):
+        id = reader.read_int64("id")
+        name = reader.read_string("name")
+        return Employee(id, name)
+
+    def write(self, writer: CompactWriter, employee: Employee):
+        writer.write_int64("id", employee.id)
+        writer.write_string("name", employee.name)
+
+    def get_type_name(self):
+        return "employee"
+
+    def get_class(self):
+        return Employee</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset6_go">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (em EmployeeSerializer) Read(reader serialization.CompactReader) any {
+    id := reader.ReadInt64("id")
+    name := reader.ReadString("name")
+    return &amp;Employee{ID: id, Name: name}
+}
+
+func (em EmployeeSerializer) Write(writer serialization.CompactWriter, value any) {
+    employee := value.(*Employee)
+    writer.WriteInt64(employee.ID)
+    writer.WriteString(employee.Name)
+}
+
+func (em EmployeeSerializer) TypeName() string {
+    return "employee"
+}
+
+func (em EmployeeSerializer) Type() reflect.Type {
+    var e *Employee
+    return reflect.TypeOf(e)
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The last step is to register the serializer in the member or client configuration, as shown
+in the <a href="#configuration">Configuration</a> section.</p>
+</div>
+<div class="paragraph">
+<p>Upon serialization, a schema will be created from the serializer, and a unique schema identifier
+will be assigned to it automatically.</p>
+</div>
+<div class="paragraph">
+<p>After the configuration registration, Hazelcast will serialize instances of the <code>Employee</code>
+class using the <code>EmployeeSerializer</code>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Hazelcast uses the <code>write</code> method of the <code>CompactSerializer</code> to generate a schema
+for Compact serializable classes. When you implement the <code>write</code> method for this purpose,
+this implementation should be able generate the same schema regardless of the parameters
+you pass; it should not contain any conditional code. This means, your <code>write</code> implementation
+should be repeatable, such that it should call the same methods of <code>CompactWriter</code> no matter
+the provided instance. Failing to follow this rule might result in an undefined behavior.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="supported-types"><a class="anchor" href="#supported-types"></a>Supported Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Compact serialization supports the following list as first class types. Any other type
+can be implemented on top of these, by using these types as building blocks.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Java</th>
+<th class="tableblock halign-left valign-top">.NET</th>
+<th class="tableblock halign-left valign-top">C++</th>
+<th class="tableblock halign-left valign-top">Node.js</th>
+<th class="tableblock halign-left valign-top">Python</th>
+<th class="tableblock halign-left valign-top">Go</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True or false represented by a single bit as either 1 or 0.
+Up to eight booleans are packed into a single byte.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_BOOLEAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;bool&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[bool]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of booleans or null. Up to eight boolean array items are packed into a single byte.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NULLABLE_BOOLEAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;bool&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[bool]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A boolean that can also be null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_NULLABLE_BOOLEAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool?[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;bool&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(boolean | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[bool]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of nullable booleans or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sbyte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int8_t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8-bit two&#8217;s complement signed integer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_INT8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sbyte[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;int8_t&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Buffer | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[int]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]int8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of int8s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NULLABLE_INT8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Byte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sbyte?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;int8_t&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[int]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*int8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An int8 that can also be null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_NULLABLE_INT8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Byte[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sbyte?[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;int8_t&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(number | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[int]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*int8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of nullable int8s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">short</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">short</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int16_t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16-bit two&#8217;s complement signed integer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_INT16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">short[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">short[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;int16_t&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[int]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]int16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of int16s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NULLABLE_INT16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">short?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;int16_t&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[int]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*int16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An int16 that can also be null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_NULLABLE_INT16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">short?[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;int16_t&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(number | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[int]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*int16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of nullable int16s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32_t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit two&#8217;s complement signed integer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_INT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;int32_t&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[int]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]int32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of int32s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NULLABLE_INT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;int32_t&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[int]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*int32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An int32 that can also be null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_NULLABLE_INT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int?[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;int32_t&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(number | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[int]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*int32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of nullable int32s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64_t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit two&#8217;s complement signed integer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_INT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;int64_t&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[int]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]int64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of int64s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NULLABLE_INT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;int64_t&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[int]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*int64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An int64 that can also be null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_NULLABLE_INT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long?[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;int64_t&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(Long | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[int]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*int64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of nullable int64s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLOAT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit IEEE 754 floating point number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_FLOAT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;float&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[float]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]float32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of float32s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NULLABLE_FLOAT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;float&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[float]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*float32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A float32 that can also be null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_NULLABLE_FLOAT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Float[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float?[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;float&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(number | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[float]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*float32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of nullable float32s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLOAT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit IEEE 754 floating point number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_FLOAT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;double&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[float]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]float64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of float64s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NULLABLE_FLOAT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;double&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[float]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*float64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A float64 that can also be null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_NULLABLE_FLOAT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double?[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;double&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(number | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[float]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*float64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of nullable float64s or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">std::string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[str]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A UTF-8 encoded string or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;std::string&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(string | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[str]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of strings or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DECIMAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigDecimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HBigDecimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;hazelcast::client::big_decimal&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigDecimal | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[decimal.Decimal]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*types.Decimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arbitrary precision and scale floating point number or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_DECIMAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigDecimal[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HBigDecimal[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;hazelcast::client::big_decimal&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(BigDecimal | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[decimal.Decimal]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*types.Decimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of decimals or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HLocalTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;hazelcast::client::local_time&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalTime | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[datetime.time]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*types.LocalTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time consisting of hours, minutes, seconds, and nanoseconds or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalTime[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HLocalTime[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;local_time&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(LocalTime | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[datetime.time]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*types.LocalTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of times or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HLocalDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;hazelcast::client::local_date&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDate | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[datetime.date]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*types.LocalDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date consisting of year, month, and day of the month or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_DATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDate[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HLocalDate[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;local_date&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(LocalDate | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[datetime.date]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*types.LocalDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of dates or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HLocalDateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;hazelcast::client::local_date_time&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDateTime | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[datetime.datetime]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*types.LocalDateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp consisting of year, month, day of the month, hour, minutes, seconds,
+and nanoseconds or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_TIMESTAMP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDateTime[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HLocalDateTime[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;hazelcast::client::local_date_time&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(LocalDateTime | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[datetime.datetime]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*types.LocalDateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of timestamps or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP_WITH_TIMEZONE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OffsetDateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOffsetDateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;hazelcast::client::offset_date_time&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OffsetDateTime | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[datetime.datetime]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*types.OffsetDateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp with timezone consisting of year, month, day of the month, hour, minutes, seconds,
+nanoseconds, and offset seconds or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_TIMESTAMP_WITH_TIMEZONE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OffsetDateTime[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOffsetDateTime[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boost::optional&lt;std::vector&lt;boost::optional&lt;hazelcast::client::offset_date_time&gt;&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(OffsetDateTime | null)[] | null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional[list[Optional[datetime.datetime]]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]*types.OffsetDateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of timestamp with timezones or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COMPACT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user defined nested Compact serializable object or null.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARRAY_OF_COMPACT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be an array of any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be an array of any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be an array of any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be an array of any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be an array of any user type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[]any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of user defined Compact serializable objects or null.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Compact serialization supports circularly-dependent types, provided that the cycle
+ends at some point on runtime by some null value.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-compact-serialization-with-zero-configuration"><a class="anchor" href="#using-compact-serialization-with-zero-configuration"></a>Using Compact Serialization With Zero-Configuration</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The ability to use Compact serialization with no configuration is only available in
+Java and .NET.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Using zero-config Compact serialization is not recommended for performance-critical
+applications, as the feature relies heavily on reflection to read and write data.<br>
+It is recommended to use explicit Compact serializers in production for performance
+considerations.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Compact serialization can also be used without registering a serializer in the member
+or client configuration.</p>
+</div>
+<div class="paragraph">
+<p>When Hazelcast cannot associate a class with any other serialization mechanism, instead of
+throwing an exception directly, it tries to use zero-configuration Compact serialization
+as a last effort.</p>
+</div>
+<div class="paragraph">
+<p>Hazelcast tries to extract a schema out of the class. If successful, it registers the
+zero-config serializer associated with the extracted schema and uses it while serializing
+and deserializing instances of that class. If the automatic schema extraction fails,
+Hazelcast throws an exception.</p>
+</div>
+<div class="paragraph">
+<p>For example, assume that you have the same <code>Employee</code> class.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t perform any kind of configuration change and use the instances of the class
+directly, no exceptions will be thrown. Hazelcast will generate a schema out of the
+<code>Employee</code> class the first time you try to serialize an object, cache it, and reuse it
+for the subsequent serializations and deserializations.</p>
+</div>
+<div class="paragraph">
+<p>The same holds true for the Java records. Hazelcast supports serializing and deserializing
+Java records, without an extra configuration as well.</p>
+</div>
+<div class="paragraph">
+<p>Assuming the <code>Employee</code> class was a Java record:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public record Employee(long id, String name) {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code would work for both of them.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset7_java"></a>Java</p>
+</li>
+<li>
+<p><a id="tabset7_net"></a>.NET</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset7_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HazelcastInstance client = HazelcastClient.newHazelcastClient();
+IMap&lt;Long, Employee&gt; map = client.getMap("employees");
+Employee employee = new Employee(1L, "John Doe");
+map.set(1L, employee);
+Employee employeeFromMap = map.get(1L);</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset7_net">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">HazelcastOptions options = ...;
+var client = await HazelcastClientFactory.StartNewClientAsync(options);
+var map = await client.GetMap&lt;long, Employee&gt;("employees");
+var employee = new Employee(1, "John Doe");
+await map.SetAsync(1, employee);
+var employeeFromMap = await map.GetAsync(1);</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Currently, Hazelcast supports extracting schemas out of classes that have the field types shown
+above and some others, for user convenience.</p>
+</div>
+<div class="paragraph">
+<p>For Java, the zero-config serializer supports the following extra field types on top of the
+first class types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>char</code>, represented as an <code>INT16</code></p>
+</li>
+<li>
+<p><code>Character</code>, represented as a <code>NULLABLE_INT16</code></p>
+</li>
+<li>
+<p>Enum, represented as a <code>STRING</code>, using the names of the enum members.</p>
+</li>
+<li>
+<p>Arrays of the types listed above, represented by their respective arrays. *</p>
+</li>
+<li>
+<p><code>List</code> or <code>ArrayList</code> of the types listed above and first class types, represented by their
+respective arrays with the same field name. Fields of type <code>List</code> are deserialized as
+<code>ArrayList</code> upon reads. *</p>
+</li>
+<li>
+<p><code>Set</code> or <code>HashSet</code> of the types listed above and first class types, represented by their
+respective arrays with the same field name. Fields of type <code>Set</code> are deserialized as
+<code>HashSet</code> upon reads. *</p>
+</li>
+<li>
+<p><code>Map</code> or <code>HashMap</code> or the types listed above and first class types, represented by two arrays,
+one for keys and one for values, represented by their respective arrays for key and
+value types. The names of those arrays are of the form <code>fieldName + '!keys'</code> and
+<code>fieldName + '!values'</code>. Fields of type <code>Map</code> are deserialized as <code>HashMap</code> upon reads. *</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+* Arrays of arrays, or collections of collections are not supported by default. An explicit
+serializer must be written to support such field types. In that serializer, the inner array
+type must be defined as a separate class which stores the array type as a field. Then, the
+array of array type can be serialized/deserialized as an array of that separate class.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For Java APIs, a zero-config Compact serializer uses reflection to read and write to fields of
+objects, regardless of whether those fields are public. If you use Java 9 onwards, you must
+enable reflective access for packages of your module by using the <code>opens</code> statement in the
+module declaration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">module org.example.Foo {
+    opens org.example to com.hazelcast.core;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="schema-evolution"><a class="anchor" href="#schema-evolution"></a>Schema Evolution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Compact serialization permits schemas and classes to evolve by adding or removing fields, or
+by changing the types of fields. More than one version of a class may live in the same cluster
+and different clients or members might use different versions of the class.</p>
+</div>
+<div class="paragraph">
+<p>Hazelcast handles the versioning internally. So, you don&#8217;t have to change anything in the classes
+or serializers apart from the added, removed, or changed fields.</p>
+</div>
+<div class="paragraph">
+<p>Hazelcast achieves this by identifying each version of the class by a unique fingerprint. Any change
+in a class results in a different fingerprint. Hazelcast uses a 64-bit
+<a href="https://en.wikipedia.org/wiki/Rabin_fingerprint">Rabin Fingerprint</a> to assign identifiers to schemas,
+which has an extremely low collision rate.</p>
+</div>
+<div class="paragraph">
+<p>Different versions of the schema with different identifiers are replicated in the cluster and can be
+fetched by clients or members internally. That allows old readers to read fields of the classes they
+know when they try to read data serialized by a new writer. Similarly, new readers might read
+fields of the classes available in the data, when they try to read data serialized by an old writer.</p>
+</div>
+<div class="paragraph">
+<p>Assume that the two versions of the following <code>Employee</code> class lives in the cluster.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset8_java"></a>Java</p>
+</li>
+<li>
+<p><a id="tabset8_net"></a>.NET</p>
+</li>
+<li>
+<p><a id="tabset8_c"></a>C++</p>
+</li>
+<li>
+<p><a id="tabset8_node-js"></a>Node.js</p>
+</li>
+<li>
+<p><a id="tabset8_python"></a>Python</p>
+</li>
+<li>
+<p><a id="tabset8_go"></a>Go</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset8_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class Employee {
+    private long id;
+    private String name;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset8_net">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">public record Employee(long Id, string Name);</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset8_c">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cpp hljs" data-lang="cpp">struct employee
+{
+    int64_t id;
+    std::string name;
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset8_node-js">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">class Employee {
+    id;
+    name;
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset8_python">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">class Employee:
+    def __init__(self, id: int, name: str):
+        self.id = id
+        self.name = name</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset8_go">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type Employee struct {
+    ID int64
+    Name *string
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset9_java"></a>Java</p>
+</li>
+<li>
+<p><a id="tabset9_net"></a>.NET</p>
+</li>
+<li>
+<p><a id="tabset9_c"></a>C++</p>
+</li>
+<li>
+<p><a id="tabset9_node-js"></a>Node.js</p>
+</li>
+<li>
+<p><a id="tabset9_python"></a>Python</p>
+</li>
+<li>
+<p><a id="tabset9_go"></a>Go</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset9_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class Employee {
+    private long id;
+    private String name;
+    private int age; // Newly added field
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset9_net">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">public record Employee(
+    long Id,
+    string Name,
+    int Age // newly-added field
+);</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset9_c">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cpp hljs" data-lang="cpp">struct employee
+{
+    int64_t id;
+    std::string name;
+    int32_t age; // Newly added field
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset9_node-js">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">class Employee {
+    id;
+    name;
+    age; // Newly added field
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset9_python">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">class Employee:
+    def __init__(self, id: int, name: str, age: int):
+        self.id = id
+        self.name = name
+        self.age = age # Newly added field</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset9_go">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">type Employee struct {
+    ID int64
+    Name *string
+    Age int32 // Newly added field
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, when faced with binary data serialized by the new writer, old readers will be able to
+read the following fields.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset10_java"></a>Java</p>
+</li>
+<li>
+<p><a id="tabset10_net"></a>.NET</p>
+</li>
+<li>
+<p><a id="tabset10_c"></a>C++</p>
+</li>
+<li>
+<p><a id="tabset10_node-js"></a>Node.js</p>
+</li>
+<li>
+<p><a id="tabset10_python"></a>Python</p>
+</li>
+<li>
+<p><a id="tabset10_go"></a>Go</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset10_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class EmployeeSerializer implements CompactSerializer&lt;Employee&gt; {
+    @Override
+    public Employee read(CompactReader reader) {
+        long id = reader.readInt64("id");
+        String name = reader.readString("name");
+        // The new "age" field is there, but the old reader does not
+        // know anything about it. Hence, it will simply ignore that field.
+        return new Employee(id, name);
+    }
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset10_net">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">public class EmployeeSerializer : ICompactSerializer&lt;Employee&gt;
+{
+    public Employee Read(ICompactReader reader)
+    {
+        var id = reader.ReadInt64("id");
+        var name = reader.ReadString("name");
+        // the new 'age' field is there, but the old reader does not
+        // know anything about it, and ignores the field.
+        return new Employee(id, name);
+    }
+
+    // ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset10_c">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cpp hljs" data-lang="cpp">template&lt;&gt;
+struct hz_serializer&lt;employee&gt; : compact_serializer
+{
+    employee&amp; read(compact_reader&amp; reader)
+    {
+        employee e;
+
+        e.id = reader.read_int32("id");
+        e.name = reader.read_string("name");
+        // The new "age" field is there, but the old reader does not
+        // know anything about it. Hence, it will simply ignore that field.
+        return e;
+    }
+
+    // ...
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset10_node-js">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">class EmployeeSerializer extends CompactSerializer {
+    read(reader){
+        const id = reader.readInt64('id');
+        const name = reader.readString('name');
+        // The new "age" field is there, but the old reader does not
+        // know anything about it. Hence, it will simply ignore that field.
+        return new Employee(id, name);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset10_python">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">class EmployeeSerializer(CompactSerializer[Employee]):
+    def read(self, reader: CompactReader):
+        id = reader.read_int64("id")
+        name = reader.read_string("name")
+        # The new "age" field is there, but the old reader does not
+        # know anything about it. Hence, it will simply ignore that field.
+        return Employee(id, name)
+    ...</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset10_go">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (em EmployeeSerializer) Read(reader serialization.CompactReader) any {
+    id := reader.ReadInt64("id")
+    name := reader.ReadString("name")
+    // The new "age" field is there, but the old reader does not
+    // know anything about it. Hence, it will simply ignore that field.
+    return &amp;Employee{ID: id, Name: name}
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, when faced with binary data serialized by the old writer, new readers will be able to
+read the following fields. Also, Hazelcast provides convenient APIs to check the
+existence of fields in the data when there is no such field.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset11_java"></a>Java</p>
+</li>
+<li>
+<p><a id="tabset11_net"></a>.NET</p>
+</li>
+<li>
+<p><a id="tabset11_c"></a>C++</p>
+</li>
+<li>
+<p><a id="tabset11_node-js"></a>Node.js</p>
+</li>
+<li>
+<p><a id="tabset11_python"></a>Python</p>
+</li>
+<li>
+<p><a id="tabset11_go"></a>Go</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset11_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class EmployeeSerializer implements CompactSerializer&lt;Employee&gt; {
+    @Override
+    public Employee read(CompactReader reader) {
+        long id = reader.readInt64("id");
+        String name = reader.readString("name");
+        // Read the "age" if it exists, or use the default value 0.
+        // reader.readInt32("age") would throw if the "age" field
+        // does not exist in data.
+        int age;
+        if (reader.getFieldKind("age") == FieldKind.INT32) {
+            age = reader.readInt32("age");
+        } else {
+            age = 0;
+        }
+        return new Employee(id, name, age);
+    }
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset11_net">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">public class EmployeeSerializer : ICompactSerializer&lt;Employee&gt;
+{
+    public Employee Read(ICompactReader reader)
+    {
+        var id = reader.ReadInt64("id");
+        var name = reader.ReadString("name");
+        // read the "age" field if it exists, else use the default value 0
+        // reader.readInt32("age") would throw if the "age" field
+        // does not exist in data.
+        var age = reader.GetFieldKind("age") == FieldKind.Int32
+            ? reader.ReadInt32("age")
+            : 0;
+        return new Employee(id, name, age);
+    }
+
+    // ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset11_c">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cpp hljs" data-lang="cpp">template&lt;&gt;
+struct hz_serializer&lt;employee&gt; : compact_serializer
+{
+    employee&amp; read(compact_reader&amp; reader)
+    {
+        employee e;
+
+        e.id = reader.read_int64("id");
+        e.name = reader.read_string("name");
+
+        // read the "age" field if it exists, else use the default value 0
+        // reader.read_int32("age") would throw if the "age" field
+        // does not exist in data.
+        if (reader.get_field_kind("age") == field_kind::INT32)
+        {
+            e.age = reader.read_int32("age");
+        } else {
+            e.age = 0;
+        }
+
+        return e;
+    }
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset11_node-js">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">class EmployeeSerializer extends CompactSerializer {
+    read(reader){
+        const id = reader.readInt64('id');
+        const name = reader.readString('name');
+        // Read the "age" if it exists, or use the default value 0.
+        // reader.readInt32("age") would throw if the "age" field
+        // does not exist in data.
+        let age;
+        if (reader.getFieldKind("age") == FieldKind.INT32) {
+            age = reader.readInt32("age");
+        } else {
+            age = 0;
+        }
+        return new Employee(id, name, age);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset11_python">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">class EmployeeSerializer(CompactSerializer[Employee]):
+    def read(self, reader: CompactReader):
+        id = reader.read_int64("id")
+        name = reader.read_string("name")
+        # Read the "age" if it exists, or use the default value 0.
+        # reader.read_int32("age") would throw if the "age" field
+        # does not exist in data.
+        if reader.get_field_kind("age") == FieldKind.INT32:
+            age = reader.read_int32("age")
+        else:
+            age = 0
+        return Employee(id, name, age)
+    ...</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset11_go">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">func (em EmployeeSerializer) Read(reader serialization.CompactReader) any {
+    id := reader.ReadInt64("id")
+    name := reader.ReadString("name")
+    // Read the "age" if it exists, or use the default value 0.
+    // reader.ReadInt32("age") would panic if the "age" field
+    // does not exist in data.
+    var age int32
+    if reader.getFieldKind("age") == serialization.FieldKindInt32 {
+        age = reader.ReadInt32("age")
+    }
+    return &amp;Employee{ID: id, Name: name, Age: age}
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that, when an old reader reads data written by an old writer, or a new reader reads a data
+written by a new writer, they will be able to read all fields written.</p>
+</div>
+<div class="paragraph">
+<p>One thing to be careful while evolving the class is to not have any conditional code
+in the <code>write</code> method. That method must write all the fields available in the current version
+of the class to the writer, with appropriate field names and types. Hazelcast uses the <code>write</code>
+method of the serializer to extract a schema out of the object, hence any conditional code
+that may or may not run depending on the object in that method might result in an undefined
+behavior.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="genericrecord-representation"><a class="anchor" href="#genericrecord-representation"></a>GenericRecord Representation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Compact serialized objects can also be represented by a <code>GenericRecord</code>, without requiring
+the class in the classpath. See <a href="../clusters/accessing-domain-objects" class="xref page">Accessing Domain Objects Without Domain Classes</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sql-support"><a class="anchor" href="#sql-support"></a>SQL Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Compact serialized objects can be used in SQL statements, provided that mappings are created,
+similar to other serialization formats. See
+<a href="../sql/mapping-to-maps#compact-objects" class="xref page">Compact Object mappings</a> section to learn more.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="wan-support"><a class="anchor" href="#wan-support"></a>WAN Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hazelcast supports WAN replication of the Compact serialized objects between different clusters.</p>
+</div>
+<div class="paragraph">
+<p>However, since the Compact serialization is promoted to the stable status in 5.2, and it is not
+compatible with the previous BETA versions, one has to make sure that the whole WAN cluster
+topology members, including all senders and receivers, are at least as new as 5.2, before starting to
+replicate data structures containing Compact serialized objects.</p>
+</div>
+<div class="paragraph">
+<p>Since the Compact serialization has promoted to the stable status, it will be possible to
+replicate Compact serialized objects between different WAN clusters in the future releases.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="persistence-support"><a class="anchor" href="#persistence-support"></a>Persistence Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hazelcast supports persisting Compact serialized objects and reading the persisted data on startup.</p>
+</div>
+<div class="paragraph">
+<p>However, since the Compact serialization is promoted to the stable status in 5.2, and it is not
+compatible with the previous BETA versions, it is not possible to recover the Hazelcast members
+with the persisted data of Compact serialized objects of the previous Hazelcast versions, where
+this feature was in BETA.</p>
+</div>
+<div class="paragraph">
+<p>Since it has promoted to the stable status, it will be possible in the future releases to
+persist and recover Compact-serialized objects of different Hazelcast versions, at least as
+new as 5.2.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="serialization-priority"><a class="anchor" href="#serialization-priority"></a>Serialization Priority</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Compact serialization has the highest <a href="serialization#steps" class="xref page">priority</a> of
+all serialization mechanisms that are supported by Hazelcast. As a result, you can override other serialization
+mechanisms with Compact serialization.</p>
+</div>
+<div class="paragraph">
+<p>That is especially useful when an interface signature forces you to implement other serialization
+mechanisms in Java. For example, you can define the following <code>Employee</code> class and still use
+the Compact serializer that you registered in your configuration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class Employee implements Serializable {
+    ...
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="compact-serialization-binary-specification"><a class="anchor" href="#compact-serialization-binary-specification"></a>Compact Serialization Binary Specification</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The binary specification of compact serialization is publicly available at <a href="../compact-binary-specification" class="xref page">this page</a>.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="serialization">Overview</a></span>
+  <span class="next"><a href="serializing-json">HazelcastJsonValue</a></span>
+</nav>
+</article>
+    <div class="toc-container">
+  <aside class="toc sidebar" data-title="Contents" data-levels="1">
+    <div class="toc-menu"></div>
+  </aside>
+  <div class="feedback-prompt">
+    <a class="edit-this-page feedback-button" href="https://github.com/hazelcast/hz-docs/edit/v/5.2/docs/modules/serialization/pages/compact-serialization.adoc" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/hz-docs/issues/new?title=Docs: Feedback for Compact Serialization&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/hz-docs/edit/main/docs/modules/serialization/pages/compact-serialization.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <div class="feedback-form-container">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
+    <span class="helpful-feedback-title">Was this helpful?</span>
+    <div class="helpful-feedback-buttons">
+      <label for="positive-feedback-starter" class="feedback-button yes-button">
+        <img src="../../../_/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
+      </label>
+      <label for="negative-feedback-starter" class="feedback-button no-button">
+        <img src="../../../_/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
+      </label>
+    </div>
+  </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
+
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue or answer a question.
+        </span>
+      </span>
+          </label>
+                <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Precisely describes the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Well written and easy to follow.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Helped me decide to use the product
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to try or adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another positive reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
+
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
+
+          <label for="could-not-find" class="feedback-radio-button-label">
+            <input type="radio" id="could-not-find" name="feedback" value="Couldn't find what I was looking for">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Couldn't find what I was looking for
+              </span>
+              <span class="radio-btn-description">
+                Missing important information or didn't answer my question.
+              </span>
+            </span>
+          </label>
+          <label for="inaccurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="inaccurate-radio-feedback" name="feedback" value="Inaccurate">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Inaccurate
+              </span>
+              <span class="radio-btn-description">
+                Doesn't accurately describe the product or feature.
+              </span>
+            </span>
+          </label>
+
+          <label for="hard-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="hard-to-understand" name="feedback" value="Hard to understand">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Hard to understand
+              </span>
+              <span class="radio-btn-description">
+                Too complicated or badly written.
+              </span>
+            </span>
+          </label>
+          <label for="code-sample-errors" class="feedback-radio-button-label">
+            <input type="radio" id="code-sample-errors" name="feedback" value="Code sample errors">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Code sample error
+              </span>
+              <span class="radio-btn-description">
+                Incorrect or missing code sample(s).
+               </span>
+            </span>
+          </label>
+          <label for="another-negative-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-negative-reason" name="feedback" value="Another negative reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="(Optional) Please provide specific examples or suggestions!"
+          rows="6"
+        ></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</main>
+
+</div>
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../../../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/hz-docs/issues/new?title=Docs: Feedback for Compact Serialization&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/hz-docs/edit/main/docs/modules/serialization/pages/compact-serialization.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+    <footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch(["tags:hazelcast-5.2"]);
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+      }
+    }
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:hazelcast-5.2",
+          "tags:management-center-5.2",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:hazelcast-5.2"]);
+      }
+    }
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>

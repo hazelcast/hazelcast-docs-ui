@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Triggering a Partial-Start | Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/management-center/5.7/clusters/triggering-partial-start">
+    <link rel="prev" href="triggering-force-start">
+    <link rel="next" href="triggering-hot-backup">
+    <meta name="description" content="You can trigger a partial-start to allow a cluster with persistence enabled to restart even if some members are missing after a cluster-wide restart.">
+    <meta name="generator" content="Antora 3.1.10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../../../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../../../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <div id="search-input" class="navbar-item searchbox"></div>
+          <label class="filter checkbox">
+            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+          </label>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+  <div class="nav-container" data-component="management-center" data-version="5.4">
+  <aside class="nav">
+    <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="Management Center">
+      Management Center
+    </a>
+  </div>
+
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="5.4">
+        5.4
+      </a>
+    </div>
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+      <span>hazelcast</span>
+        <li class="component">
+              <a href="../../../hazelcast/5.5/">
+                Hazelcast Platform
+              </a>
+        </li>
+      <span>management-center</span>
+        <li class="component is-current">
+              <a href="../../5.7/">
+                Management Center
+              </a>
+        </li>
+      <span>home</span>
+      <span>privacy</span>
+      <span>templates</span>
+      <span>tutorials</span>
+        <li class="component">
+              <a href="../../../tutorials/">
+                Tutorials
+              </a>
+        </li>
+  </ul>
+
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            <li
+              class="version"
+            >
+              <a href="../../6.0-snapshot/clusters/triggering-partial-start">6.0-SNAPSHOT</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.7/clusters/triggering-partial-start">5.7</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.6/clusters/triggering-partial-start">5.6</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.5/clusters/triggering-partial-start">5.5</a>
+            </li>
+            <li
+              class="version is-current"
+            >
+              <a href="triggering-partial-start">5.4</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.3/clusters/triggering-partial-start">5.3</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.2/clusters/triggering-partial-start">5.2</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.1/clusters/triggering-partial-start">5.1</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.0/clusters/triggering-partial-start">5.0</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../4.2022.01/">4.2022.01</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../4.2021.12/">4.2021.12</a>
+            </li>
+      </ul>
+</div>
+    <div class="panels">
+  <div class="nav-panel-menu is-active" data-panel="menu">
+    <nav class="nav-menu">
+        <ul class="nav-list">
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Get Started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../whats-new">What&#8217;s New in 5.4</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/install">Installing and Starting</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/get-started">Docker Compose Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">User Interface Overview</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/user-interface">Top Bar and Side Bar</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/graphs">Graphs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/tables">Tables</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Deploy and Manage</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/production-checklist">Production Checklist</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/configuring">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/system-properties">System Properties and Environment Variables</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/mc-conf">Management Center Configuration Tool</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/variable-replacers">Variable Replacers</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Cluster Connections</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/cluster-connections">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/connecting-to-clusters-mc-conf">Connecting to a Cluster with the hz-mc conf Tool</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/connecting-to-clusters-ui">Connecting to a Cluster from the UI</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">License Management</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/license-management">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/updating-mc-license-ui">Updating an Enterprise License for Management Center</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Security</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/security">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">TLS</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/tls-security">TLS/SSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/serving-https">Serving Management Center over HTTPS</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/serve-mc-over-https">Tutorial</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">User Authentication</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/security-providers">Security Providers</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/dev-mode">Dev Mode</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/local-security-provider">Local Security Provider</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/active-directory">Active Directory</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/ldap">LDAP</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/jaas">JAAS</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/saml">SAML</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/openid">OpenID Connect</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/switching-security-provider">Switching to a New Security Provider</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/sessions">Securing User Sessions</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/user-management">User Management</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/historical-metrics">Historical Metrics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/phone-homes">Phone Homes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Integrate</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../integrate/integrations">Integrations</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/prometheus-monitoring">Prometheus Monitoring</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Clustered JMX</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/jmx">Get Started</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/jmx-api">Clustered JMX Objects and Attributes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Clustered REST</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/clustered-rest">Get Started</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/client-filtering">Client Filtering API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/cluster-metrics">Cluster Metrics API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/cluster-connections">Cluster Connections API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/wan-replication">WAN Replication API</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Tools</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/sql-browser">Executing SQL Queries</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/console">Executing Console Commands</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/scripting">Scripting</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="dashboard">Dashboard</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="clients">Clients</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="client-filtering">Client Filtering</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="create-filter-lists-ui">Deploying a Client Filter List from the UI</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="create-filter-lists-rest">Deploying a Client Filter List with the REST API</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="members">Members</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Administration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="administration">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Cluster States</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="cluster-state">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="changing-cluster-state">Changing the Cluster State</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="shutting-down-cluster">Shutting Down Members and Clusters</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="cluster-license">Viewing a Cluster License</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="triggering-rolling-upgrade">Rolling Upgrade</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="update-config">Update Config</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Persistence</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="persistence">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="triggering-force-start">Triggering a Force-Start</a>
+              </li>
+      <li class="nav-item is-current-page" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="triggering-partial-start">Triggering a Partial-Start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="triggering-hot-backup">Triggering Hot Backups</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="wan-replication">WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="healthcheck">Healthcheck</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Storage, Compute &amp; Messaging</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/map">Maps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/replicated-map">Replicated Maps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/cache">Caches</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/multimap">MultiMaps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/list">Lists</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/set">Sets</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/queue">Queues</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/topic">Topics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/reliable-topic">Reliable Topics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/executor">Executors</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/pn-counter">PN Counters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/flake-id-gen">Flake ID Generators</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Streaming</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/dashboard">Dashboard Page</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/jobs">Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/snapshots">Snapshots</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/sql-tasks">SQL Tasks</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">CP Subsystem</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/dashboard">Dashboard</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/cpmap">CPMaps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/atomic-long">Atomic Longs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/semaphore">Semaphores</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/atomic-ref">Atomic References</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/countdown-latch">Countdown Latches</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/fenced-lock">Fenced Locks</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Troubleshoot</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../troubleshoot/hazelcast-clusters">Hazelcast Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../troubleshoot/management-center">Management Center</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Upgrade</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../migration-guides">Upgrading to Management Center 5.2.x</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Release Notes</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-4-1">5.4.1</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-4-0">5.4.0</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+  </div>
+    </div>
+  </aside>
+</div>
+<div id="hide-nav">
+  <button>
+    <span>
+      ᐸ
+    </span>
+  </button>
+</div>
+  <main class="article">
+    <div class="article-banner prerelease" id="latest-banner">
+      <div class="prerelease">
+        <p>A newer version of Management Center is available.</p>
+        <a class="btn" href="../../5.7/clusters/triggering-partial-start">View latest</a>
+      </div>
+            <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
+    </div>
+  <div class="content">
+    <article class="doc">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../">Management Center</a></li>
+    <li>Cluster</li>
+    <li>Administration</li>
+    <li>Persistence</li>
+    <li><a href="triggering-partial-start">Triggering a Partial-Start</a></li>
+  </ul>
+</nav>
+    <button class="nav-toggle"></button>
+      <h1 class="page enterprise">Triggering a Partial-Start</h1>
+    <div class="page-versions">
+    <button class="version-menu-toggle" title="Show other versions of page">Version 5.4</button>
+    <div class="version-menu">
+          <a class="version" href="../../6.0-snapshot/clusters/triggering-partial-start">6.0-SNAPSHOT</a>
+          <a class="version" href="../../5.7/clusters/triggering-partial-start">5.7</a>
+          <a class="version" href="../../5.6/clusters/triggering-partial-start">5.6</a>
+          <a class="version" href="../../5.5/clusters/triggering-partial-start">5.5</a>
+          <a class="version is-current" href="triggering-partial-start">5.4</a>
+          <a class="version" href="../../5.3/clusters/triggering-partial-start">5.3</a>
+          <a class="version" href="../../5.2/clusters/triggering-partial-start">5.2</a>
+          <a class="version" href="../../5.1/clusters/triggering-partial-start">5.1</a>
+          <a class="version" href="../../5.0/clusters/triggering-partial-start">5.0</a>
+          <a class="version is-missing" href="../../4.2022.01/">4.2022.01</a>
+          <a class="version is-missing" href="../../4.2021.12/">4.2021.12</a>
+    </div>
+  </div>
+  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can trigger a partial-start to allow a cluster with persistence enabled to restart even if some members are missing after a cluster-wide restart.</p>
+</div>
+<div class="paragraph">
+<p>Partial-Start is a procedure where a cluster starts without all members.
+Data belonging to those missing members is assumed lost and Hazelcast tries
+to recover missing data, using the restored backups. For example, if you have a minimum of two backups configured for all maps, then having at most two missing members will be safe against data loss. If more
+than two members are missing or maps have fewer than two backups,
+then data loss is expected.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="before-you-begin"><a class="anchor" href="#before-you-begin"></a>Before you Begin</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To trigger a partial start, your cluster must be configured with one of the following data recovery policies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>PARTIAL_RECOVERY_MOST_RECENT</code></p>
+</li>
+<li>
+<p><code>PARTIAL_RECOVERY_MOST_COMPLETE</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Go to <strong>Administration</strong> &gt; <strong>Persistence</strong> and check the <strong>Cluster Status</strong> field. Only trigger a partial-start if the cluster status is <strong>In_Progress</strong>, which means your cluster is missing a member.</p>
+</div>
+<div class="paragraph">
+<p>To learn more about persistence in Hazelcast and what happens after a cluster-wide restart, see <a href="../../../hazelcast/5.4/storage/configuring-persistence#what-happens-when-the-whole-cluster-restarts" class="xref page">What Happens When the Whole Cluster Restarts</a> in the Platform documentation.</p>
+</div>
+<div class="paragraph">
+<p>This page is available only to admin users.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="trigger-a-partial-start"><a class="anchor" href="#trigger-a-partial-start"></a>Trigger a Partial-Start</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <strong>Administration</strong> &gt; <strong>Persistence</strong>, and click <strong>Partial-Start</strong>.</p>
+</li>
+<li>
+<p>Confirm that you want to continue by clicking <strong>Confirm</strong> in the dialog.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If everything goes well, a success message is displayed.</p>
+</div>
+<div class="paragraph">
+<p>If an exception occurs, an error notification is displayed.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="triggering-force-start">Triggering a Force-Start</a></span>
+  <span class="next"><a href="triggering-hot-backup">Triggering Hot Backups</a></span>
+</nav>
+</article>
+    <div class="toc-container">
+  <aside class="toc sidebar" data-title="Contents" data-levels="1">
+    <div class="toc-menu"></div>
+  </aside>
+  <div class="feedback-prompt">
+    <a class="edit-this-page feedback-button" href="https://github.com/hazelcast/management-center-docs/edit/v/5.4/docs/modules/clusters/pages/triggering-partial-start.adoc" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Triggering a Partial-Start&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/clusters/pages/triggering-partial-start.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <div class="feedback-form-container">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
+    <span class="helpful-feedback-title">Was this helpful?</span>
+    <div class="helpful-feedback-buttons">
+      <label for="positive-feedback-starter" class="feedback-button yes-button">
+        <img src="../../../_/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
+      </label>
+      <label for="negative-feedback-starter" class="feedback-button no-button">
+        <img src="../../../_/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
+      </label>
+    </div>
+  </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
+
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue or answer a question.
+        </span>
+      </span>
+          </label>
+                <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Precisely describes the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Well written and easy to follow.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Helped me decide to use the product
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to try or adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another positive reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
+
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
+
+          <label for="could-not-find" class="feedback-radio-button-label">
+            <input type="radio" id="could-not-find" name="feedback" value="Couldn't find what I was looking for">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Couldn't find what I was looking for
+              </span>
+              <span class="radio-btn-description">
+                Missing important information or didn't answer my question.
+              </span>
+            </span>
+          </label>
+          <label for="inaccurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="inaccurate-radio-feedback" name="feedback" value="Inaccurate">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Inaccurate
+              </span>
+              <span class="radio-btn-description">
+                Doesn't accurately describe the product or feature.
+              </span>
+            </span>
+          </label>
+
+          <label for="hard-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="hard-to-understand" name="feedback" value="Hard to understand">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Hard to understand
+              </span>
+              <span class="radio-btn-description">
+                Too complicated or badly written.
+              </span>
+            </span>
+          </label>
+          <label for="code-sample-errors" class="feedback-radio-button-label">
+            <input type="radio" id="code-sample-errors" name="feedback" value="Code sample errors">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Code sample error
+              </span>
+              <span class="radio-btn-description">
+                Incorrect or missing code sample(s).
+               </span>
+            </span>
+          </label>
+          <label for="another-negative-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-negative-reason" name="feedback" value="Another negative reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="(Optional) Please provide specific examples or suggestions!"
+          rows="6"
+        ></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</main>
+
+</div>
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../../../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Triggering a Partial-Start&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/clusters/pages/triggering-partial-start.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+    <footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch(["tags:management-center-5.4"]);
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+      }
+    }
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet');
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-5.4",
+          "tags:management-center-5.7",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-5.4"]);
+      }
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-5.4",
+          "tags:hazelcast-5.5",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-5.4"]);
+      }
+    }
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>

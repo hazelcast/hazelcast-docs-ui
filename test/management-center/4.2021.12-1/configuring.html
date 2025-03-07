@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Configuring Management Center | Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/management-center/5.7/deploy-manage/system-properties">
+    <link rel="prev" href="getting-started">
+    <link rel="next" href="launching/launching">
+    <meta name="generator" content="Antora 3.1.10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <div id="search-input" class="navbar-item searchbox"></div>
+          <label class="filter checkbox">
+            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+          </label>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+  <div class="nav-container" data-component="management-center" data-version="4.2021.12-1">
+  <aside class="nav">
+    <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="Management Center">
+      Management Center
+    </a>
+  </div>
+
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="4.2021.12-1">
+        4.2021.12-1
+      </a>
+    </div>
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+      <span>hazelcast</span>
+        <li class="component">
+              <a href="../../hazelcast/5.5/">
+                Hazelcast Platform
+              </a>
+        </li>
+      <span>management-center</span>
+        <li class="component is-current">
+              <a href="../5.7/">
+                Management Center
+              </a>
+        </li>
+      <span>home</span>
+      <span>privacy</span>
+      <span>templates</span>
+      <span>tutorials</span>
+        <li class="component">
+              <a href="../../tutorials/">
+                Tutorials
+              </a>
+        </li>
+  </ul>
+
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            <li
+              class="version"
+            >
+              <a href="../6.0-snapshot/deploy-manage/system-properties">6.0-SNAPSHOT</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../5.7/deploy-manage/system-properties">5.7</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../5.6/deploy-manage/system-properties">5.6</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../5.5/deploy-manage/system-properties">5.5</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../5.4/deploy-manage/system-properties">5.4</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../5.3/deploy-manage/system-properties">5.3</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../5.2/deploy-manage/system-properties">5.2</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../5.1/deploy-manage/system-properties">5.1</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../5.0/deploy-manage/system-properties">5.0</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../4.2022.01/configuring">4.2022.01</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../4.2021.12/configuring">4.2021.12</a>
+            </li>
+      </ul>
+</div>
+    <div class="panels">
+  <div class="nav-panel-menu is-active" data-panel="menu">
+    <nav class="nav-menu">
+        <ul class="nav-list">
+      <li class="nav-item" data-depth="0">
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="./">Hazelcast Management Center Reference Manual</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="supported-environments">Supported Environments</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="getting-started">Getting Started</a>
+              </li>
+      <li class="nav-item is-current-page" data-depth="1">
+            <a class="nav-link
+
+
+            " href="configuring">Configuring Management Center</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="launching/launching">Launching the Management Center User Interface</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="launching/auth-options">Authentication Options</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="launching/dev-mode">Dev Mode</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="connecting-members">Connecting to the Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="user-interface">User Interface Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="managing-clusters">Managing Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="managing-users">Managing Users</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="managing-licenses">Managing Licenses</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="managing-security-providers">Managing Security Providers</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/monitor-imdg">Monitoring an IMDG Cluster</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/dashboard">Dashboard Page</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/widget">Widget</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/monitor-members">Monitoring Members</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/monitor-clients">Monitoring Clients</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/monitor-dds">Monitoring Data Structures</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/monitor-wan-replication">Monitoring WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/scripting">Scripting</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/console">Executing Console Commands</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-imdg/cluster-administration">Cluster Administration</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="sql-browser">SQL Browser</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="config-healthcheck">Configuration Health Check</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="metric-persistence">Metrics Persistence</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="clustered-rest">Clustered REST</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="jmx/jmx">Clustered JMX</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="jmx/configuring">Configuring Clustered JMX</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="jmx/jmx-api">Clustered JMX API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="jmx/new-relic">Integrating with New Relic</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="jmx/appdynamics">Integrating with AppDynamics</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="monitor-jet/monitor-jet">Monitoring a Jet Cluster</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-jet/dashboard">Dashboard Page</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-jet/jobs">Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="monitor-jet/snapshots">Snapshots</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="prometheus">Prometheus Exporter</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="mc-conf">Management Center Configuration Tool</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="high-availability">High Availability Setup</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="phone-home">Phone Home</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="troubleshooting">Troubleshooting</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="migration-guides">Appendix A: Migration Guides</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="ui-logs">Appendix B: User Interface Logs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="automated-security-scan">Appendix C: Automated Security Scanning</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+  </div>
+    </div>
+  </aside>
+</div>
+<div id="hide-nav">
+  <button>
+    <span>
+      ᐸ
+    </span>
+  </button>
+</div>
+  <main class="article">
+    <div class="article-banner prerelease" id="latest-banner">
+      <div class="prerelease">
+        <p>A newer version of Management Center is available.</p>
+        <a class="btn" href="../5.7/deploy-manage/system-properties">View latest</a>
+      </div>
+            <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
+    </div>
+  <div class="content">
+    <article class="doc">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="./">Hazelcast Management Center</a></li>
+    <li><a href="configuring">Configuring Management Center</a></li>
+  </ul>
+</nav>
+    <button class="nav-toggle"></button>
+      <h1 class="page">Configuring Management Center</h1>
+    <div class="page-versions">
+    <button class="version-menu-toggle" title="Show other versions of page">Version 4.2021.12-1</button>
+    <div class="version-menu">
+          <a class="version" href="../6.0-snapshot/deploy-manage/system-properties">6.0-SNAPSHOT</a>
+          <a class="version" href="../5.7/deploy-manage/system-properties">5.7</a>
+          <a class="version" href="../5.6/deploy-manage/system-properties">5.6</a>
+          <a class="version" href="../5.5/deploy-manage/system-properties">5.5</a>
+          <a class="version" href="../5.4/deploy-manage/system-properties">5.4</a>
+          <a class="version" href="../5.3/deploy-manage/system-properties">5.3</a>
+          <a class="version" href="../5.2/deploy-manage/system-properties">5.2</a>
+          <a class="version" href="../5.1/deploy-manage/system-properties">5.1</a>
+          <a class="version" href="../5.0/deploy-manage/system-properties">5.0</a>
+          <a class="version" href="../4.2022.01/configuring">4.2022.01</a>
+          <a class="version" href="../4.2021.12/configuring">4.2021.12</a>
+    </div>
+  </div>
+  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This chapter explains how you can configure Hazelcast Management Center according to your needs
+if you are running it without Docker. For the Docker configuration please see
+<a href="https://hub.docker.com/r/hazelcast/management-center">DockerHub</a>.</p>
+</div>
+<div class="paragraph">
+<p>The communication between
+the IMDG/Jet cluster members and the Management Center instance is based
+on Hazelcast open binary client <a href="https://docs.hazelcast.org/docs/protocol/1.0-developer-preview/client-protocol-implementation-guide.html" target="_blank" rel="noopener">protocol</a>. The clusters that Management Center
+should connect to are configured within Management Center as described in the
+<a href="connecting-members" class="xref page">Connecting Management Center to IMDG Members chapter</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In previous versions, the URL of the Management Center instance was
+configured within the <code>&lt;hazelcast&gt;&lt;/hazelcast&gt;</code> section of <code>hazelcast.xml</code>.
+This configuration is now deprecated and ignored.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="starting-with-a-license"><a class="anchor" href="#starting-with-a-license"></a>Providing a License</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When starting the Management Center from the command line, a
+license can be provided using the system property <code>hazelcast.mc.license</code>.
+For example by using the command line parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java -Dhazelcast.mc.license=&lt;key&gt; -jar hazelcast-management-center-4.2021.12-1.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When this option is used, the license provided takes precedence
+over any license set and stored previously using the user interface.
+Previously stored licenses are not affected and will be used again
+when the Management Center is started without the <code>hazelcast.mc.license</code> property.
+This also means no new license can be stored when the property is used.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="starting-with-an-extra-classpath"><a class="anchor" href="#starting-with-an-extra-classpath"></a>Providing an Extra Classpath</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can also start the Management Center with an extra classpath
+entry (for example, when using JAAS authentication) by using the
+following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java -cp "hazelcast-management-center-4.2021.12-1.jar:/path/to/an/extra.jar" com.hazelcast.webmonitor.Launcher</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On Windows, the command becomes as follows (semicolon instead of colon):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java -cp "hazelcast-management-center-4.2021.12-1.jar;/path/to/an/extra.jar" com.hazelcast.webmonitor.Launcher</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="client-config"><a class="anchor" href="#client-config"></a>Configuring the Client Used by Management Center</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can configure the client instance that is used for connecting to the cluster
+by using the following command line parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-Dhazelcast.mc.client.initial.backoff.millis</code>: Duration, in milliseconds, to wait after the first
+failure before retrying. It is in milliseconds. The default value is <code>1000</code> ms.
+Set values have to be in range of <code>1000</code> to <code>60000</code> ms.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.client.backoff.multiplier</code>: Factor with which to multiply backoff after
+a failed retry. Default value is <code>2</code>. Set values have to be in range of <code>1</code> to <code>10</code>.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.client.max.backoff.millis</code>: When backoff reaches this upper bound,
+it does not increase any more. It is in milliseconds. Default value is <code>32000</code> ms.
+Set values have to be in range of <code>32000</code> to <code>600000</code> ms.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note that these parameters apply to all clients that are started by Management Center.</p>
+</div>
+<div class="paragraph">
+<p>You can also pass in a custom client configuration file to Management Center. These parameters
+override any configuration you pass as part of adding a new cluster connection. Following is a list
+of all other client configuration parameters that are overriden by Management Center when creating
+clients to connect to clusters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>InstanceName</code>: Generated based on the cluster name.</p>
+</li>
+<li>
+<p><code>ConnectionStrategyConfig.asyncStart</code>: Set to <code>true</code>. It means that the client starts without
+waiting to get a cluster connection.</p>
+</li>
+<li>
+<p><code>ConnectionStrategyConfig.clusterConnectTimeoutMillis</code>: Set to infinity. The client
+never gives up trying to connect to the cluster.</p>
+</li>
+<li>
+<p><code>NetworkConfig.smartRouting</code>: Set to <code>true</code>. It means that client will open connections to all
+members.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="metadata-polling-config"><a class="anchor" href="#metadata-polling-config"></a>Configuring Metadata Polling Period of Management Center</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Management Center polls the cluster members periodically for their metadata, which includes the
+list of data structures it has and their configurations. You can change the polling frequency by
+using the <code>hazelcast.mc.state.reschedule.delay.millis</code> command line parameter. Its default value
+is <code>1000</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="disk-usage-config"><a class="anchor" href="#disk-usage-config"></a>Configuring Disk Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can control the disk space used by the Management Center to avoid exceeding
+available disk space. That can be done by configuring the <a href="metric-persistence" class="xref page">Metrics Persistence</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can use the <code>hazelcast.mc.metrics.disk.ttl.days</code> system property
+to configure the Management Center&#8217;s metrics persistence. This property
+specifies Time-to-Live (TTL) setting for each record in the metrics persistence.
+It is in days and its default value is <code>1</code>.</p>
+</div>
+<div class="paragraph">
+<p>It is important to understand that the TTL setting acts as a <em>soft</em> limit and
+gives you an indirect control over Management Center disk usage. The final
+disk usage depends on the volume of metrics persistence data generated by your clusters, i.e.,
+the number of cluster members and data structures with enabled statistics that
+you have in the connected clusters.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You may want to decrease the TTL setting in situations when the Management
+Center uses too much disk space.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-health-check-endpoint"><a class="anchor" href="#enabling-health-check-endpoint"></a>Enabling Health Check Endpoint</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When running the Management Center from the command line, you can enable
+the Health Check endpoint. This endpoint responds with <code>200 OK</code> HTTP
+status code once the Management Center web application has started. The
+endpoint is available on port <code>&lt;Management Center HTTP port&gt; + 1</code> with
+context path <code>&lt;Management Center context path&gt;/health</code> (by default, its
+URL is <code>http://localhost:8081/health</code>). Note that the
+HTTP protocol is always used for the Health Check endpoint, independently
+of TLS/SSL settings, and no additional authentication is enforced for it.</p>
+</div>
+<div class="paragraph">
+<p>If you want to enable the Health Check endpoint, use the following command line argument:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">-Dhazelcast.mc.healthCheck.enable=true</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-sessions"><a class="anchor" href="#configuring-sessions"></a>Configuring Sessions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section provides information on how to configure the Management Center
+sessions for various aspects including timeouts and login/logout operations.</p>
+</div>
+<div class="sect2">
+<h3 id="configuring-session-timeout"><a class="anchor" href="#configuring-session-timeout"></a>Configuring Session Timeout</h3>
+<div class="paragraph">
+<p>If you have started the Management Center from the command line
+by using the JAR file, by default, the sessions that are inactive for
+30 minutes are invalidated. To change this, you can use the
+<code>-Dhazelcast.mc.session.timeout.seconds</code> command line parameter.</p>
+</div>
+<div class="paragraph">
+<p>For example, the following command starts the Management Center with
+a session timeout period of 1 minute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java -Dhazelcast.mc.session.timeout.seconds=60 -jar hazelcast-management-center-4.2021.12-1.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you have deployed the Management Center on an application
+server/container, you can configure the default session timeout
+period of the application server/container to change the session
+timeout period for the Management Center. If your server/container
+allows application specific configuration, you can use it to configure
+the session timeout period for the Management Center.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="disabling-multiple-simultaneous-login-attempts"><a class="anchor" href="#disabling-multiple-simultaneous-login-attempts"></a>Disabling Multiple Simultaneous Login Attempts</h3>
+<div class="paragraph">
+<p>Normally, a user account on the Management Center can be used from
+multiple locations at the same time. If you want to forbid
+others from logging in, when there&#8217;s already someone logged in with the
+same username, you can start the Management Center with
+the <code>-Dhazelcast.mc.allowMultipleLogin=false</code> command line parameter.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="disable-login-configuration"><a class="anchor" href="#disable-login-configuration"></a>Disable Login Configuration</h3>
+<div class="paragraph">
+<p>In order to prevent password guessing attacks, logging in is
+disabled temporarily after a number of failed login attempts. When
+not configured explicitly, the default values are used, i.e., logging
+in is disabled for 5 seconds when a username is failed to log in
+consecutively 3 times. During this 5 seconds of period, logging in is
+not allowed even when the correct credentials are used. After 5 seconds,
+the user will be able to log in using the correct credentials.</p>
+</div>
+<div class="paragraph">
+<p>Assuming the configuration with the default values, if the failed
+attempts continue (consecutively 3 times) after the period of disabled
+login passes, this time the disable period is multiplied by 10:
+logging in is disabled for 50 seconds. The whole process repeats
+itself until the user logs in successfully. By default, there&#8217;s no upper
+limit to the disable period, but can be configured by using the
+<code>-Dhazelcast.mc.maxDisableLoginPeriod</code> parameter.</p>
+</div>
+<div class="paragraph">
+<p>Here is a scenario, in the given order, with the default values:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You try to login with your credentials consecutively 3 times but failed.</p>
+</li>
+<li>
+<p>Logging in is disabled and you have to wait for 5 seconds.</p>
+</li>
+<li>
+<p>After 5 seconds have passed, logging in is enabled.</p>
+</li>
+<li>
+<p>You try to login with your credentials consecutively 3 times but again
+failed.</p>
+</li>
+<li>
+<p>Logging in is disabled again and this time you have to wait for 50
+seconds until your next login attempt.</p>
+</li>
+<li>
+<p>And so on; each 3 consecutive login failures causes the disable
+period to be multiplied by 10.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You can configure the number of failed login attempts, initial
+and maximum duration of the disabled login and the multiplier
+using the following command line parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-Dhazelcast.mc.failedAttemptsBeforeDisableLogin</code>: Number of failed
+login attempts that cause the logging in to be disabled temporarily. Default
+value is <code>3</code>.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.initialDisableLoginPeriod</code>: Initial duration for the disabled
+login in seconds. Default value is <code>5</code>.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.disableLoginPeriodMultiplier</code>: Multiplier used for extending
+the disable period in case the failed login attempts continue after disable
+period passes. Default value is <code>10</code>.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.maxDisableLoginPeriod</code>: Maximum amount of time for the disable
+login period.  This parameter does not have a default value. By default,
+disabled login period is not limited.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="forcing-logout-on-multiple-simultaneous-login-attempts"><a class="anchor" href="#forcing-logout-on-multiple-simultaneous-login-attempts"></a>Forcing Logout on Multiple Simultaneous Login Attempts</h3>
+<div class="paragraph">
+<p>If you haven&#8217;t allowed multiple simultaneous login attempts explicitly,
+the first user to login with a username stays
+logged in until that username explicitly logs out or its session expires.
+In the meantime, no one else can login with the same
+username. If you want to force logout for the first user and let the
+newcomer login, you need to start Management
+Center with the <code>-Dhazelcast.mc.forceLogoutOnMultipleLogin=true</code> command
+line parameter.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-and-enabling-security"><a class="anchor" href="#configuring-and-enabling-security"></a>Configuring and Enabling Security</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section provides information on how to use and manage the
+Management Center with TLS/SSL and mutual authentication.
+You will also learn how to force the users to specify passwords
+that are hard to guess.</p>
+</div>
+<div class="sect2">
+<h3 id="using-management-center-with-tlsssl-only"><a class="anchor" href="#using-management-center-with-tlsssl-only"></a>Using Management Center with TLS/SSL Only</h3>
+<div class="paragraph">
+<p>To encrypt data transmitted over all channels of the Management Center
+using TLS/SSL, make sure you do all of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deploy the Management Center on a TLS/SSL enabled container or start it from
+the command line with TLS/SSL enabled. See the <a href="#enabling-tslssl-when-starting-with-jar-file">Enabling TLS/SSL section</a> below.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Another option is to place the Management Center behind a TLS-enabled
+reverse proxy. In that case, make sure your reverse proxy sets the necessary
+HTTP header (<code>X-Forwarded-Proto</code>) for resolving the correct protocol.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enable TLS/SSL communication to the Management Center for your Hazelcast
+cluster. See the <a href="connecting-members" class="xref page">Connecting Members chapter</a>.</p>
+</li>
+<li>
+<p>If you&#8217;re using Clustered JMX on the Management center, enable TLS/SSL
+for it. See <a href="jmx/jmx" class="xref page">Enabling TLS/SSL for Clustered JMX section</a>.</p>
+</li>
+<li>
+<p>If you&#8217;re using LDAP authentication, make sure you use LDAPS or
+enable the "Start TLS" field. See the <a href="launching/auth-options" class="xref page">LDAP Authentication section</a>.</p>
+</li>
+<li>
+<p>If you&#8217;re using Active Directory authentication, make sure you use Java&#8217;s
+truststore related system properties. See the <a href="launching/auth-options" class="xref page">Active Directory Authentication section</a>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can configure how Management Center treats <code>X-Forwarded-*</code>
+headers using the system property <code>hazelcast.mc.forwarded.requests.enabled</code>.
+If its value is set to <code>true</code>, Management Center accepts and treats them
+as set by a reverse proxy in front of it, otherwise, they are ignored.
+Its default value is <code>true</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enabling-tslssl-when-starting-with-jar-file"><a class="anchor" href="#enabling-tslssl-when-starting-with-jar-file"></a>Enabling TLS/SSL When Starting with JAR File</h3>
+<div class="paragraph">
+<p>When you start the Management Center from the command line, it serves
+the pages unencrypted by using "http", by default. To enable TLS/SSL,
+use the following command line parameters when starting the Management Center:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-Dhazelcast.mc.tls.enabled</code>: Specifies whether TLS/SSL is enabled. Its default value is false (disabled).</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.tls.keyStore</code>: Path to the keystore.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.tls.keyStorePassword</code>: Password of the keystore.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.tls.trustStore</code>: Path to the truststore.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.tls.trustStorePassword</code>: Password of the truststore.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can leave the truststore and truststore password values empty to use
+the system JVM&#8217;s own truststore.</p>
+</div>
+<div class="paragraph">
+<p>The following is an example on how to start the Management Center with
+TLS/SSL enabled from the command line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java -Dhazelcast.mc.tls.enabled=true
+-Dhazelcast.mc.tls.keyStore=/some/dir/selfsigned.jks
+-Dhazelcast.mc.tls.keyStorePassword=yourpassword -jar hazelcast-management-center-4.2021.12-1.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can access the Management Center from the following HTTPS URL on
+port 8443: <code>https://localhost:8443</code>.</p>
+</div>
+<div class="paragraph">
+<p>On the member side, you need to configure the Management Center URL
+as <code>https://localhost:8443</code> and also set the
+following JVM arguments when starting the member:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">-Djavax.net.ssl.trustStore=path to your truststore
+-Djavax.net.ssl.trustStorePassword=yourpassword</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you plan to use a self-signed certificate, make sure
+to create a certificate with the hostname of the machine you will
+deploy the Management Center on. Otherwise, you will see a line similar
+to the following in the member logs:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">javax.net.ssl.SSLHandshakeException: java.security.cert.CertificateException:
+No subject alternative names matching IP address 127.0.0.1 found</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To override the HTTPS port, you can use the <code>-Dhazelcast.mc.https.port</code>
+command line option when starting the Management Center. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java -Dhazelcast.mc.tls.enabled=true \
+     -Dhazelcast.mc.tls.keyStore=/dir/to/certificate.jks \
+     -Dhazelcast.mc.tls.keyStorePassword=yourpassword \
+     -Dhazelcast.mc.https.port=443 \
+     -jar hazelcast-management-center-4.2021.12-1.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This starts the Management Center on HTTPS port 443.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can encrypt the keystore/truststore passwords and pass them
+as command line arguments in encrypted form for improved security.
+See the <a href="#variable-replacers">Variable Replacers section</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="enabling-http-port"><a class="anchor" href="#enabling-http-port"></a>Enabling HTTP Port</h4>
+<div class="paragraph">
+<p>By default, HTTP port is disabled when you enable TLS. If you want to
+have an open HTTP port that redirects to the HTTPS port, use the following
+command line argument:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">-Dhazelcast.mc.tls.enableHttpPort=true</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="managing-tls-enabled-clusters"><a class="anchor" href="#managing-tls-enabled-clusters"></a>Managing TLS Enabled Clusters</h4>
+<div class="paragraph">
+<p>If a Hazelcast cluster is configured to use TLS for communication between
+its members using a self-signed certificate, the Management Center will not be
+able to perform some of the operations that use the cluster&#8217;s HTTP endpoints
+(such as shutting down a member or getting the thread dump of a member). This is
+so because self-signed certificates are not trusted by default by the JVM. For
+these operations to work, you need to configure a truststore containing the public
+key of the self-signed certificate when starting the JVM of the Management Center using
+the following command line parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-Dhazelcast.mc.httpClient.tls.trustStore</code>: Path to the truststore.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.httpClient.tls.trustStorePassword</code>: Password of the truststore.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.httpClient.tls.trustStoreType</code>: Type of the truststore. Its default
+value is JKS.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.httpClient.tls.trustManagerAlgorithm</code>: Name of the algorithm
+based on which the authentication keys are provided. System default is used
+if none is provided. You can find out the default by calling the
+<code>javax.net.ssl.TrustManagerFactory#getDefaultAlgorithm</code> method.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can encrypt the truststore password and pass it as a command line
+argument in encrypted form for improved security. See the
+<a href="#variable-replacers">Variable Replacers section</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>By default, JVM also checks for the validity of the hostname of the
+certificate. If this test fails, you will see a line similar to the
+following in the Management Center logs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">javax.net.ssl.SSLHandshakeException: java.security.cert.CertificateException:
+No subject alternative names matching IP address 127.0.0.1 found</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to disable this check, start the Management Center with
+the following command line parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">-Dhazelcast.mc.disableHostnameVerification=true</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mutual-authentication"><a class="anchor" href="#mutual-authentication"></a>Mutual Authentication</h3>
+<div class="paragraph">
+<p>You can configure Management Center to require mutual authentication. With this setup,
+any client (be it a Web browser or an HTTP client such as curl) needs to present their TLS
+certificate and the Management Center needs to have its truststore configured so that the
+Management Center can know which clients it can trust. To enable mutual authentication,
+you need to use the following command line parameters when starting the Management Center:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">-Dhazelcast.mc.tls.mutualAuthentication=REQUIRED</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See the below snippet to see the full command to start the Management Center:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java -Dhazelcast.mc.tls.enabled=true \
+     -Dhazelcast.mc.tls.trustStore=path to your truststore \
+     -Dhazelcast.mc.tls.trustStorePassword=password for your truststore \
+     -Dhazelcast.mc.tls.mutualAuthentication=REQUIRED \
+     -jar hazelcast-management-center-4.2021.12-1.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The parameter <code>-Dhazelcast.mc.tls.mutualAuthentication</code> has two options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>REQUIRED</code>: If the client does not provide a keystore or the provided keys are
+not included in the Management Center&#8217;s truststore, the client will not be authenticated.</p>
+</li>
+<li>
+<p><code>OPTIONAL</code>: If the client does not provide a keystore, it will be authenticated.
+But if the client provides keys that are not included in the Management Center&#8217;s truststore,
+the client will not be authenticated.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="managing-mutual-authentication-enabled-clusters"><a class="anchor" href="#managing-mutual-authentication-enabled-clusters"></a>Managing Mutual Authentication Enabled Clusters</h4>
+<div class="paragraph">
+<p>If mutual authentication is enabled for the cluster (as described <a href="https://docs.hazelcast.org/docs/latest/manual/html-single/index.html#mutual-authentication">here</a>),
+the Management Center needs to have a keystore to identify itself.
+For this, you need to start the Management Center with the
+following command line parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-Dhazelcast.mc.httpClient.tls.keyStore</code>: Path to the keystore.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.httpClient.tls.keyStorePassword</code>: Password of the keystore.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.httpClient.tls.keyStoreType</code>: Type of the keystore. Its default value is JKS.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.httpClient.tls.keyManagerAlgorithm</code>: Name of the algorithm based on which the authentication
+keys are provided. System default is used if none is provided. You can find out the default by calling the
+<code>javax.net.ssl.KeyManagerFactory#getDefaultAlgorithm</code> method.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="excluding-specific-tlsssl-procotols"><a class="anchor" href="#excluding-specific-tlsssl-procotols"></a>Excluding Specific TLS/SSL Protocols</h4>
+<div class="paragraph">
+<p>When you enable TLS on the Management Center, it will support the clients
+connecting with any of the TLS/SSL protocols that the JVM supports by default.
+In order to disable specific protocols, you need to set the <code>-Dhazelcast.mc.tls.excludeProtocols</code>
+command line argument to a comma separated list of protocols to be excluded from the
+list of supported protocols. For example, to allow only TLSv1.2, you need to add
+the following command line argument when starting the Management Center:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">-Dhazelcast.mc.tls.excludeProtocols=SSLv3,SSLv2Hello,TLSv1,TLSv1.1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you specify the above argument, you should see a line similar
+to the following in the Management Center log:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">2017-06-21 12:35:54.856:INFO:oejus.SslContextFactory:Enabled Protocols
+[TLSv1.2] of [SSLv2Hello, SSLv3, TLSv1, TLSv1.1, TLSv1.2]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-openssl"><a class="anchor" href="#using-openssl"></a>Using OpenSSL</h4>
+<div class="paragraph">
+<p>To use OpenSSL with Management Center, you need to add
+the following command line argument when starting the Management Center:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">-Dhazelcast.mc.tls.openSsl=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you specify the above argument, Management Center uses <a href="https://github.com/google/conscrypt/">Google&#8217;s Conscrypt SSL</a>
+that is built on their fork of OpenSSL, BoringSSL.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are using Java 8 and your JVM doesn&#8217;t support TLSv1.3, you must exclude
+TLSv1.3 protocol by passing <code>-Dhazelcast.mc.tls.excludeProtocols="TLSv1.3"</code> command line argument.
+We recommend that you upgrade your JVM to the latest version of Java 8. Many vendors
+including Oracle and AdoptOpenJDK (Eclipse Adoptium as its new name) support TLSv1.3
+in their latest Java 8 implementations.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-a-dictionary-to-prevent-weak-passwords"><a class="anchor" href="#using-a-dictionary-to-prevent-weak-passwords"></a>Using a Dictionary to Prevent Weak Passwords</h3>
+<div class="paragraph">
+<p>In order to prevent certain words from being included in the user
+passwords, you can start the Management Center with <code>-Dhazelcast.mc.security.dictionary.path</code>
+command line parameter which points to a text file that contains a word
+on each line. As a result, the user passwords will not contain any dictionary
+words, making them harder to guess.</p>
+</div>
+<div class="paragraph">
+<p>The words in the dictionary need to be at least three characters long in order to
+be used for checking the passwords. The shorter
+words are ignored to prevent them from blocking the usage of many password
+combinations. You can configure
+the minimum length of words by starting the Management Center with
+<code>-Dhazelcast.mc.security.dictionary.minWordLength</code>
+command line parameter and setting it to a number.</p>
+</div>
+<div class="paragraph">
+<p>An example to start the Management Center using the aforementioned parameters
+is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java -Dhazelcast.mc.security.dictionary.path=/usr/MCtext/pwd.txt \
+     -Dhazelcast.mc.security.dictionary.minWordLength=3 \
+     -jar hazelcast-management-center-4.2021.12-1.jar</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="including-excluding-specific-cipher-suites"><a class="anchor" href="#including-excluding-specific-cipher-suites"></a>Including and/or Excluding Specific Cipher Suites</h3>
+<div class="paragraph">
+<p>When you configure TLS you also can provide which cipher suites Management Center can use
+for establishing TLS connection. You can include cipher suites with <code>-Dhazelcast.mc.include.cipher.suites</code>
+and exclude with <code>-Dhazelcast.mc.exclude.cipher.suites</code> system properties during
+Management Center startup. You can use the exact cipher suite name or a regular expression.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">"-Dhazelcast.mc.include.cipher.suites=^SSL_.*$"
+"-Dhazelcast.mc.exclude.cipher.suites=^.*_(MD5|SHA|SHA1)$,^TLS_RSA_.*$,^.*_NULL_.*$"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-logging"><a class="anchor" href="#configuring-logging"></a>Configuring Logging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Starting with version 4.2020.11, Management Center uses <a href="https://logging.apache.org/log4j/2.x/">Log4j 2</a>
+for its logging. By default, it uses the following configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">appender.console.type = Console
+appender.console.name = STDOUT
+appender.console.layout.type = PatternLayout
+appender.console.layout.pattern = %d [%highlight{%5p}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=magenta}] [%style{%t{1.}}{cyan}] [%style{%c{1.}}{blue}]: %m%n
+appender.console.filter.threshold.type = ThresholdFilter
+appender.console.filter.threshold.level = ${sys:hazelcast.mc.log.level:-all}
+
+logger.hazelcast.name = com.hazelcast
+logger.hazelcast.level = ${sys:hazelcast.mc.log.level:-error}
+logger.hazelcast.additivity = false
+logger.hazelcast.appenderRef.rolling.ref = STDOUT
+
+logger.mc.name = com.hazelcast.webmonitor
+logger.mc.level = ${sys:hazelcast.mc.log.level:-info}
+logger.mc.additivity = false
+logger.mc.appenderRef.rolling.ref = STDOUT
+
+logger.jetty.name = org.eclipse.jetty
+logger.jetty.level = ${sys:hazelcast.mc.log.level:-warn}
+logger.jetty.additivity = false
+logger.jetty.appenderRef.rolling.ref = STDOUT
+
+logger.spring.name = org.springframework
+logger.spring.level = ${sys:hazelcast.mc.log.level:-warn}
+logger.spring.additivity = false
+logger.spring.appenderRef.rolling.ref = STDOUT
+
+logger.hibernatevalidator.name = org.hibernate.validator
+logger.hibernatevalidator.level = ${sys:hazelcast.mc.log.level:-warn}
+logger.hibernatevalidator.additivity = false
+logger.hibernatevalidator.appenderRef.rolling.ref = STDOUT
+
+logger.flywaydb.name = org.flywaydb
+logger.flywaydb.level = ${sys:hazelcast.mc.log.level:-warn}
+logger.flywaydb.additivity = false
+logger.flywaydb.appenderRef.rolling.ref = STDOUT
+
+logger.hikari.name = com.zaxxer.hikari
+logger.hikari.level = ${sys:hazelcast.mc.log.level:-warn}
+logger.hikari.additivity = false
+logger.hikari.appenderRef.rolling.ref = STDOUT
+
+# Otherwise every resolved exception is logged
+logger.springerror.name = org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver
+logger.springerror.level = ${sys:hazelcast.mc.log.level:-error}
+logger.springerror.additivity = false
+logger.springerror.appenderRef.rolling.ref = STDOUT
+
+rootLogger.level = ${sys:hazelcast.mc.log.level:-info}
+rootLogger.appenderRef.stdout.ref = STDOUT</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To change the logging level for all loggers, e.g., enabling debug logs, you can start
+Management Center with <code>-Dhazelcast.mc.log.level</code> command line option. For example, to enable
+debug logs, start Management Center with <code>-Dhazelcast.mc.log.level=debug</code> command line parameter.</p>
+</div>
+<div class="paragraph">
+<p>To further customize the logging configuration, you can create a custom
+Log4j configuration file and start Management Center with
+the <code>-Dlog4j.configurationFile</code> option pointing to your configuration file.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can create a file named <code>log4j2-custom.properties</code> with the following
+content and set logging level to <code>DEBUG</code>.
+To use this file as the logging configuration, you need to start Management Center with the
+<code>-Dlog4j.configurationFile=/path/to/your/log4j2-custom.properties</code> command line parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">appender.console.type = Console
+appender.console.name = STDOUT
+appender.console.layout.type = PatternLayout
+appender.console.layout.pattern = %d [%highlight{%5p}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=magenta}] [%style{%t{1.}}{cyan}] [%style{%c{1.}}{blue}]: %m%n
+appender.console.filter.threshold.type = ThresholdFilter
+appender.console.filter.threshold.level = ${sys:hazelcast.mc.log.level:-all}
+
+rootLogger.level = debug
+rootLogger.appenderRef.stdout.ref = STDOUT</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To write log messages into rolling log files (in parallel with printing them
+into the console), you can use a similar Log4j configuration file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">appender.console.type=Console
+appender.console.name=STDOUT
+appender.console.layout.type=PatternLayout
+appender.console.layout.pattern=%d [%highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=magenta}] [%style{%t{1.}}{cyan}] [%style{%c{1.}}{blue}]: %m%n
+
+appender.rolling.type=RollingFile
+appender.rolling.name=RollingFile
+appender.rolling.fileName=${sys:user.home}/mc-logs/mc.log
+appender.rolling.filePattern=${sys:user.home}/mc-logs/mc.%d{yyyy-MM-dd}.log
+appender.rolling.layout.type=PatternLayout
+appender.rolling.layout.pattern=%d [%5p] [%t] [%c{.1}]: %m%n
+appender.rolling.policies.type = Policies
+appender.rolling.policies.time.type = TimeBasedTriggeringPolicy
+
+rootLogger.level=info
+rootLogger.appenderRef.stdout.ref=STDOUT
+rootLogger.appenderRef.rolling.ref=RollingFile</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="skipping-lock-file-check"><a class="anchor" href="#skipping-lock-file-check"></a>Skipping Lock File Check</h3>
+<div class="paragraph">
+<p>When you run <code>mc-conf.sh</code> or <code>mc-conf.bat</code>, the script checks if there is any running Management Center instance by looking for a lock file called <code>mc.lock</code> in the Management Center home directory, and exits with an error if the file exists. You can turn this behavior off by passing the <code>-Dhazelcast.mc.lock.skip=true</code> system property. Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export JAVA_OPTS='-Dhazelcast.mc.lock.skip=true'
+./mc-conf.sh ...</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This feature can be useful when you run Management Center on Kubernetes, and the home directory is on a mounted persistent volume. In this case when Kubernetes restarts the container for any reason, then the <code>mc.lock</code> file won&#8217;t be deleted, therefore the next startup will be prevented due to the lock file, unless the <code>hazelcast.mc.lock.skip</code> system property is set to <code>true</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enabling-audit-logging"><a class="anchor" href="#enabling-audit-logging"></a>Enabling Audit Logging</h3>
+<div class="paragraph">
+<p>You may enable additional security audit logging by using the <code>-Dhazelcast.mc.auditlog.enabled=true</code>
+command line argument. Log entries from the audit logging will be marked with the
+<code>hazelcast.auditlog</code> logging category, abbreviated as <code>h.auditlog</code> in logs.</p>
+</div>
+<div class="paragraph">
+<p>An example log entry looks like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">2020-10-13 09:57:54,803 [ INFO] [qtp973576304-35] [h.auditlog]: MC-2001 [Auth]:User logged in:{username=JohnHallaign}n}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>MC-2001 [Auth]</code> you see in this example represents the log&#8217;s type.
+The following table lists the current log categories along with their
+types:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 71.4286%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Event Category</th>
+<th class="tableblock halign-left valign-top">Log Type/Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Management Center Configuration Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-0001 [Config]</code>: Metrics Persistence is enabled.</p>
+</li>
+<li>
+<p><code>MC-0002 [Config]</code>: Metrics Persistence is disabled.</p>
+</li>
+<li>
+<p><code>MC-0003 [Config]</code>: User is created.</p>
+</li>
+<li>
+<p><code>MC-0004 [Config]</code>: User is edited.</p>
+</li>
+<li>
+<p><code>MC-0005 [Config]</code>: User&#8217;s password is changed.</p>
+</li>
+<li>
+<p><code>MC-0006 [Config]</code>: User is deleted.</p>
+</li>
+<li>
+<p><code>MC-0009 [Config]</code>: License is set.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Cluster Configuration Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-1001 [Cluster Config]</code>: Map&#8217;s configuration is changed.</p>
+</li>
+<li>
+<p><code>MC-1003 [Cluster Config]</code>: Cluster&#8217;s state is changed.</p>
+</li>
+<li>
+<p><code>MC-1004 [Cluster Config]</code>: Cluster is shut down.</p>
+</li>
+<li>
+<p><code>MC-1005 [Cluster Config]</code>: Member is shut down.</p>
+</li>
+<li>
+<p><code>MC-1006 [Cluster Config]</code>: Lite member is promoted.</p>
+</li>
+<li>
+<p><code>MC-1007 [Cluster Config]</code>: Cluster version is changed.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Authentication Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-2001 [Auth]</code>: User logs in.</p>
+</li>
+<li>
+<p><code>MC-2002 [Auth]</code>: User logs out.</p>
+</li>
+<li>
+<p><code>MC-2003 [Auth]</code>: Login failures.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Scripting Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-3001 [Script]</code>: Script is executed on a member.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Console Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-4001 [Console]</code>: Console command is executed on the cluster.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map/Cache Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-5001 [Browser]</code>: User browses through a map screen in Management Center.</p>
+</li>
+<li>
+<p><code>MC-5002 [Browser]</code>: User browses through a cache screen in Management Center.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Hot Restart Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-6001 [Hot Restart]</code>: Force start is run.</p>
+</li>
+<li>
+<p><code>MC-6002 [Hot Restart]</code>: Partial start is run.</p>
+</li>
+<li>
+<p><code>MC-6003 [Hot Restart]</code>: Hot Restart backup operation is triggered.</p>
+</li>
+<li>
+<p><code>MC-6004 [Hot Restart]</code>: Hot Restart backup operation is interrupted.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>WAN Replication Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-7001 [WAN]</code>: WAN configuration is added.</p>
+</li>
+<li>
+<p><code>MC-7002 [WAN]</code>: WAN consistency check operation is run.</p>
+</li>
+<li>
+<p><code>MC-7003 [WAN]</code>: WAN synchronization on a map is run.</p>
+</li>
+<li>
+<p><code>MC-7004 [WAN]</code>: State of the WAN publisher is changed.</p>
+</li>
+<li>
+<p><code>MC-7005 [WAN]</code>: Clear operation for the WAN events queue is run.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>CP Subsystem Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-8001 [CP Subsystem]</code>: Member is promoted to be a CP subsystem member.</p>
+</li>
+<li>
+<p><code>MC-8002 [CP Subsystem]</code>: Member is removed from CP subsystem.</p>
+</li>
+<li>
+<p><code>MC-8003 [CP Subsystem]</code>: CP subsystem is reset.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Jet Logs</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>MC-9001 [Jet]</code>: Jet job is restarted.</p>
+</li>
+<li>
+<p><code>MC-9002 [Jet]</code>: Jet job is suspended.</p>
+</li>
+<li>
+<p><code>MC-9003 [Jet]</code>: Jet job is resumed.</p>
+</li>
+<li>
+<p><code>MC-9004 [Jet]</code>: Jet job is cancelled.</p>
+</li>
+<li>
+<p><code>MC-9005 [Jet]</code>: Jet snapshot is deleted.</p>
+</li>
+<li>
+<p><code>MC-9006 [Jet]</code>: Jet snapshot is exported.</p>
+</li>
+<li>
+<p><code>MC-9007 [Jet]</code>: Jet job is cancelled and snapshot is exported.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To write security audit logging into separate rolling log files, you can use a similar Log4j configuration file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">appender.console.type=Console
+appender.console.name=STDOUT
+appender.console.layout.type=PatternLayout
+appender.console.layout.pattern=%d [%highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=magenta}] [%style{%t{1.}}{cyan}] [%style{%c{1.}}{blue}]: %m%n
+
+appender.audit.type=RollingFile
+appender.audit.name=AuditFile
+appender.audit.fileName=${sys:user.home}/mc-logs/audit.log
+appender.audit.filePattern=${sys:user.home}/mc-logs/audit.%d{yyyy-MM-dd}.log
+appender.audit.layout.type=PatternLayout
+appender.audit.layout.pattern=%d [%5p] [%t] [%c{.1}]: %m%n
+appender.audit.policies.type = Policies
+appender.audit.policies.time.type = TimeBasedTriggeringPolicy
+
+logger.audit.name=hazelcast.auditlog
+logger.audit.level=info
+logger.audit.additivity=false
+logger.audit.appenderRef.audit.ref=AuditFile
+
+rootLogger.level=info
+rootLogger.appenderRef.stdout.ref=STDOUT</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="variable-replacers"><a class="anchor" href="#variable-replacers"></a>Using Variable Replacers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Variable replacers are used to replace custom strings during loading the configuration,
+either passed as command line arguments, used during UI based Management Center configuration,
+or configured with <a href="mc-conf" class="xref page">Configuration tool</a>.
+They can be used to mask sensitive information such as usernames and passwords.
+Of course their usage is not limited to security related information.</p>
+</div>
+<div class="paragraph">
+<p>Variable replacers implement the interface <code>com.hazelcast.webmonitor.configreplacer.spi.ConfigReplacer</code>
+and they are configured via the following command line arguments:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-Dhazelcast.mc.configReplacer.class</code>: Full class name of the replacer.</p>
+</li>
+<li>
+<p><code>-Dhazelcast.mc.configReplacer.failIfValueMissing</code>: Specifies whether the loading
+configuration process stops when a replacement value is missing. It is an optional
+attribute and its default value is <code>true</code>.</p>
+</li>
+<li>
+<p>Additional command line arguments specific to each replacer implementation.
+All of the properties for the built-in
+replacers are explained in the upcoming sections.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following replacer classes are provided by Hazelcast as example
+implementations of the <code>ConfigReplacer</code> interface.
+Note that you can also implement your own replacers.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>EncryptionReplacer</code></p>
+</li>
+<li>
+<p><code>PropertyReplacer</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each example replacer is explained in the following sections.</p>
+</div>
+<div class="sect2">
+<h3 id="encryptionreplacer"><a class="anchor" href="#encryptionreplacer"></a>EncryptionReplacer</h3>
+<div class="paragraph">
+<p>This example <code>EncryptionReplacer</code> replaces the encrypted variables with
+its plain form. The secret key for encryption/decryption is generated from a
+password which can be a value in a file and/or environment specific values,
+such as MAC address and actual user data.</p>
+</div>
+<div class="paragraph">
+<p>Its full class name is <code>com.hazelcast.webmonitor.configreplacer.EncryptionReplacer</code>
+and the replacer prefix is <code>ENC</code>. Here are the properties used to configure
+this example replacer:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>hazelcast.mc.configReplacer.prop.cipherAlgorithm</code>: Cipher algorithm used for
+the encryption/decryption. Its default value is AES.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.configReplacer.prop.keyLengthBits</code>: Length (in bits) of the
+secret key to be generated. Its default value is 128.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.configReplacer.prop.passwordFile</code>: Path to a file whose content
+should be used as a part of the encryption password. When the property
+is not provided, no file is used as a part of the password. Its default value is null.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.configReplacer.prop.passwordNetworkInterface</code>: Name of the network interface
+whose MAC address should be used as a part of the encryption password. When the
+property is not provided no network interface property is used as a part of the password.
+Its default value is null.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.configReplacer.prop.passwordUserProperties</code>: Specifies whether
+the current user properties (<code>user.name</code> and <code>user.home</code>) should be used
+as a part of the encryption password. Its default value is true.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.configReplacer.prop.saltLengthBytes</code>: Length (in bytes) of a
+random password salt. Its default value is 8.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.configReplacer.prop.secretKeyAlgorithm</code>:  Name of the secret key
+algorithm to be associated with the generated secret key. Its default
+value is AES.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.configReplacer.prop.secretKeyFactoryAlgorithm</code>: Algorithm used
+to generate a secret key from a password. Its default value is
+PBKDF2WithHmacSHA256.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.configReplacer.prop.securityProvider</code>: Name of a Java Security
+Provider to be used for retrieving the configured secret key factory and
+the cipher. Its default value is null.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Older Java versions may not support all the algorithms used as defaults.
+Use the property values supported by your Java version.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As a usage example, let&#8217;s create a password file and generate the encrypted strings out
+of this file as shown below:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the password file: <code>echo '/Za-uG3dDfpd,5.-' &gt; /opt/master-password</code></p>
+</li>
+<li>
+<p>Define the encrypted variables:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java -cp hazelcast-management-center-4.2021.12-1.jar \
+     -Dhazelcast.mc.configReplacer.prop.passwordFile=/opt/master-password \
+     -Dhazelcast.mc.configReplacer.prop.passwordUserProperties=false \
+     com.hazelcast.webmonitor.configreplacer.EncryptionReplacer \
+     "aPasswordToEncrypt"
+
+Output:
+
+$ENC{wJxe1vfHTgg=:531:WkAEdSi//YWEbwvVNoU9mUyZ0DE49acJeaJmGalHHfA=}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Configure the replacer and provide the encrypted variables as command
+line arguments while starting the Management Center:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">java \
+ -Dhazelcast.mc.configReplacer.class=com.hazelcast.webmonitor.configreplacer.EncryptionReplacer \
+ -Dhazelcast.mc.configReplacer.prop.passwordFile=/opt/master-password \
+ -Dhazelcast.mc.configReplacer.prop.passwordUserProperties=false \
+ -Dhazelcast.mc.tls.enabled=true \
+ -Dhazelcast.mc.tls.keyStore=/opt/mc.keystore \
+ -Dhazelcast.mc.tls.keyStorePassword='$ENC{wJxe1vfHTgg=:531:WkAEdSi//YWEbwvVNoU9mUyZ0DE49acJeaJmGalHHfA=}' \
+ -jar hazelcast-management-center-4.2021.12-1.jar</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="propertyreplacer"><a class="anchor" href="#propertyreplacer"></a>PropertyReplacer</h3>
+<div class="paragraph">
+<p><code>PropertyReplacer</code> replaces variables by properties with the given name.
+Usually the system properties are used, e.g., <code>${user.name}</code>.</p>
+</div>
+<div class="paragraph">
+<p>Its full class name is <code>com.hazelcast.webmonitor.configreplacer.PropertyReplacer</code>
+and the replacer prefix is empty string ("").</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="implementing-custom-replacers"><a class="anchor" href="#implementing-custom-replacers"></a>Implementing Custom Replacers</h3>
+<div class="paragraph">
+<p>You can also provide your own replacer implementations. All replacers
+have to implement the three methods that have the same signatures as
+the methods of the following interface:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import java.util.Properties;
+
+public interface ConfigReplacer {
+    void init(Properties properties);
+    String getPrefix();
+    String getReplacement(String maskedValue);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="getting-started">Getting Started</a></span>
+  <span class="next"><a href="launching/launching">Launching the Management Center User Interface</a></span>
+</nav>
+</article>
+    <div class="toc-container">
+  <aside class="toc sidebar" data-title="Contents" data-levels="1">
+    <div class="toc-menu"></div>
+  </aside>
+  <div class="feedback-prompt">
+    <a class="edit-this-page feedback-button" href="https://github.com/hazelcast/management-center-docs/edit/v/4.2021.12-1/docs/modules/ROOT/pages/configuring.adoc" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Configuring Management Center&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/deploy-manage/pages/configuring.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <div class="feedback-form-container">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
+    <span class="helpful-feedback-title">Was this helpful?</span>
+    <div class="helpful-feedback-buttons">
+      <label for="positive-feedback-starter" class="feedback-button yes-button">
+        <img src="../../_/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
+      </label>
+      <label for="negative-feedback-starter" class="feedback-button no-button">
+        <img src="../../_/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
+      </label>
+    </div>
+  </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
+
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue or answer a question.
+        </span>
+      </span>
+          </label>
+                <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Precisely describes the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Well written and easy to follow.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Helped me decide to use the product
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to try or adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another positive reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
+
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
+
+          <label for="could-not-find" class="feedback-radio-button-label">
+            <input type="radio" id="could-not-find" name="feedback" value="Couldn't find what I was looking for">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Couldn't find what I was looking for
+              </span>
+              <span class="radio-btn-description">
+                Missing important information or didn't answer my question.
+              </span>
+            </span>
+          </label>
+          <label for="inaccurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="inaccurate-radio-feedback" name="feedback" value="Inaccurate">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Inaccurate
+              </span>
+              <span class="radio-btn-description">
+                Doesn't accurately describe the product or feature.
+              </span>
+            </span>
+          </label>
+
+          <label for="hard-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="hard-to-understand" name="feedback" value="Hard to understand">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Hard to understand
+              </span>
+              <span class="radio-btn-description">
+                Too complicated or badly written.
+              </span>
+            </span>
+          </label>
+          <label for="code-sample-errors" class="feedback-radio-button-label">
+            <input type="radio" id="code-sample-errors" name="feedback" value="Code sample errors">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Code sample error
+              </span>
+              <span class="radio-btn-description">
+                Incorrect or missing code sample(s).
+               </span>
+            </span>
+          </label>
+          <label for="another-negative-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-negative-reason" name="feedback" value="Another negative reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="(Optional) Please provide specific examples or suggestions!"
+          rows="6"
+        ></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</main>
+
+</div>
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Configuring Management Center&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/deploy-manage/pages/configuring.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+    <footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch(["tags:management-center-4.2021.12-1"]);
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+      }
+    }
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet');
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-4.2021.12-1",
+          "tags:management-center-5.7",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-4.2021.12-1"]);
+      }
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-4.2021.12-1",
+          "tags:hazelcast-5.5",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-4.2021.12-1"]);
+      }
+    }
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>

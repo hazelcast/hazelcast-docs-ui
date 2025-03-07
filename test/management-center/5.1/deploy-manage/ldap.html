@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>LDAP | Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/management-center/5.7/deploy-manage/ldap">
+    <link rel="prev" href="active-directory">
+    <link rel="next" href="jaas">
+    <meta name="description" content="You can use your existing LDAP server for authentication/authorization on the Management Center.">
+    <meta name="generator" content="Antora 3.1.10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../../../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../../../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <div id="search-input" class="navbar-item searchbox"></div>
+          <label class="filter checkbox">
+            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+          </label>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+  <div class="nav-container" data-component="management-center" data-version="5.1">
+  <aside class="nav">
+    <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="Management Center">
+      Management Center
+    </a>
+  </div>
+
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="5.1">
+        5.1
+      </a>
+    </div>
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+      <span>hazelcast</span>
+        <li class="component">
+              <a href="../../../hazelcast/5.5/">
+                Hazelcast Platform
+              </a>
+        </li>
+      <span>management-center</span>
+        <li class="component is-current">
+              <a href="../../5.7/">
+                Management Center
+              </a>
+        </li>
+      <span>home</span>
+      <span>privacy</span>
+      <span>templates</span>
+      <span>tutorials</span>
+        <li class="component">
+              <a href="../../../tutorials/">
+                Tutorials
+              </a>
+        </li>
+  </ul>
+
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            <li
+              class="version"
+            >
+              <a href="../../6.0-snapshot/deploy-manage/ldap">6.0-SNAPSHOT</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.7/deploy-manage/ldap">5.7</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.6/deploy-manage/ldap">5.6</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.5/deploy-manage/ldap">5.5</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.4/deploy-manage/ldap">5.4</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.3/deploy-manage/ldap">5.3</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.2/deploy-manage/ldap">5.2</a>
+            </li>
+            <li
+              class="version is-current"
+            >
+              <a href="ldap">5.1</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.0/deploy-manage/ldap">5.0</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../4.2022.01/">4.2022.01</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../4.2021.12/">4.2021.12</a>
+            </li>
+      </ul>
+</div>
+    <div class="panels">
+  <div class="nav-panel-menu is-active" data-panel="menu">
+    <nav class="nav-menu">
+        <ul class="nav-list">
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Get Started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/install">Installing and Starting</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/get-started">Docker Compose Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">User Interface Overview</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/user-interface">Menu and Toolbar</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/graphs">Graphs</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Deploy and Manage</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="production-checklist">Production Checklist</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="configuring">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="system-properties">System Properties and Environment Variables</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="mc-conf">Management Center Configuration Tool</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="variable-replacers">Variable Replacers</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Cluster Connections</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="cluster-connections">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="connecting-to-clusters-mc-conf">Connecting to a Cluster with the hz-mc conf Tool</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="connecting-to-clusters-ui">Connecting to a Cluster from the UI</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">License Management</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="license-management">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="updating-mc-license-ui">Updating an Enterprise License for Management Center</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Security</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="security">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">TLS</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="tls-security">TLS/SSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="serving-https">Serving Management Center over HTTPS</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="serve-mc-over-https">Tutorial</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">User Authentication</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="security-providers">Security Providers</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="dev-mode">Dev Mode</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="local-security-provider">Local Security Provider</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="active-directory">Active Directory</a>
+              </li>
+      <li class="nav-item is-current-page" data-depth="3">
+            <a class="nav-link
+
+
+            " href="ldap">LDAP</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="jaas">JAAS</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="saml">SAML</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="openid">OpenID Connect</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="switching-security-provider">Switching to a New Security Provider</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="sessions">Securing User Sessions</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="user-management">User Management</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="historical-metrics">Historical Metrics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="phone-homes">Phone Homes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Integrate</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../integrate/integrations">Integrations</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/prometheus-monitoring">Prometheus Monitoring</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Clustered JMX</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/jmx">Get Started</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/jmx-api">Clustered JMX Objects and Attributes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Clustered REST</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/clustered-rest">Get Started</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/client-filtering">Client Filtering API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/cluster-metrics">Cluster Metrics API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/cluster-connections">Cluster Connections API</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Tools</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/sql-browser">Executing SQL Queries</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/console">Executing Console Commands</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/scripting">Scripting</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../clusters/dashboard">Dashboard</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../clusters/clients">Clients</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/client-filtering">Client Filtering</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../clusters/members">Members</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Administration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../clusters/administration">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Cluster States</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../clusters/cluster-state">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../clusters/changing-cluster-state">Changing the Cluster State</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../clusters/shutting-down-cluster">Shutting Down Members and Clusters</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../clusters/cluster-license">Viewing a Cluster License</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/triggering-rolling-upgrade">Rolling Upgrade</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/update-config">Update Config</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Persistence</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/persistence">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/triggering-force-start">Triggering a Force-Start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/triggering-partial-start">Triggering a Partial-Start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/triggering-hot-backup">Triggering Hot Backups</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/wan-replication">WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/healthcheck">Config Healthcheck</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Storage, Compute &amp; Messaging</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/map">Maps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/replicated-map">Replicated Maps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/cache">Caches</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/multimap">MultiMaps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/queue">Queues</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/topic">Topics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/reliable-topic">Reliable Topics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/executor">Executors</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/lock">Locks</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/pn-counter">PN Counters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/flake-id-gen">Flake ID Generators</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Streaming</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/dashboard">Dashboard Page</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/jobs">Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/snapshots">Snapshots</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">CP Subsystem</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/dashboard">Dashboard</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/atomic-long">Atomic Longs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/semaphore">Semaphores</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/atomic-ref">Atomic References</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/countdown-latch">Countdown Latches</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/fenced-lock">Fenced Locks</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Troubleshoot</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../troubleshoot/hazelcast-clusters">Hazelcast Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../troubleshoot/management-center">Management Center</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Upgrade</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../migration-guides">Upgrading to Management Center 5.1.x</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Release Notes</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/releases">Releases</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-1-4">5.1.4</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-1-3">5.1.3</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-1-2">5.1.2</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-1-1">5.1.1</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+  </div>
+    </div>
+  </aside>
+</div>
+<div id="hide-nav">
+  <button>
+    <span>
+      ᐸ
+    </span>
+  </button>
+</div>
+  <main class="article">
+    <div class="article-banner prerelease" id="latest-banner">
+      <div class="prerelease">
+        <p>A newer version of Management Center is available.</p>
+        <a class="btn" href="../../5.7/deploy-manage/ldap">View latest</a>
+      </div>
+            <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
+    </div>
+  <div class="content">
+    <article class="doc">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../">Management Center</a></li>
+    <li>Deploy and Manage</li>
+    <li>Security</li>
+    <li>User Authentication</li>
+    <li><a href="ldap">LDAP</a></li>
+  </ul>
+</nav>
+    <button class="nav-toggle"></button>
+      <h1 class="page">LDAP</h1>
+    <div class="page-versions">
+    <button class="version-menu-toggle" title="Show other versions of page">Version 5.1</button>
+    <div class="version-menu">
+          <a class="version" href="../../6.0-snapshot/deploy-manage/ldap">6.0-SNAPSHOT</a>
+          <a class="version" href="../../5.7/deploy-manage/ldap">5.7</a>
+          <a class="version" href="../../5.6/deploy-manage/ldap">5.6</a>
+          <a class="version" href="../../5.5/deploy-manage/ldap">5.5</a>
+          <a class="version" href="../../5.4/deploy-manage/ldap">5.4</a>
+          <a class="version" href="../../5.3/deploy-manage/ldap">5.3</a>
+          <a class="version" href="../../5.2/deploy-manage/ldap">5.2</a>
+          <a class="version is-current" href="ldap">5.1</a>
+          <a class="version" href="../../5.0/deploy-manage/ldap">5.0</a>
+          <a class="version is-missing" href="../../4.2022.01/">4.2022.01</a>
+          <a class="version is-missing" href="../../4.2021.12/">4.2021.12</a>
+    </div>
+  </div>
+  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can use your existing LDAP server for authentication/authorization on the Management Center.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting-up-the-ldap-security-provider"><a class="anchor" href="#setting-up-the-ldap-security-provider"></a>Setting Up the LDAP Security Provider</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To set up LDAP, you need to configure settings either in the UI or the <code>hz-mc conf</code> tool.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_ui"></a>UI</p>
+</li>
+<li>
+<p><a id="tabset1_mc-conf"></a>mc-conf</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_ui">
+<div class="paragraph">
+<p>To set up the LDAP security provider in the UI, go to <strong>Settings</strong> &gt; <strong>Security Providers</strong> &gt; <strong>LDAP</strong>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ConfigureLDAP.png" alt="LDAP Configuration"></span></p>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_mc-conf">
+<div class="paragraph">
+<p>Use the <code>ldap configure</code> task. For help, use the <code>-h</code> flag or see <a href="mc-conf" class="xref page">Management Center Configuration Tool</a>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Linux and Mac</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">hz-mc conf ldap configure</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Windows</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mc-conf.bat ldap configure</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>URL:</strong> URL of your LDAP server, including schema
+(<code>ldap://</code> or <code>ldaps://</code>) and port.</p>
+</li>
+<li>
+<p><strong>Distinguished name (DN) of user:</strong> DN of a user that has admin
+privileges on the LDAP server. It is used to connect to the server
+when authenticating users.</p>
+</li>
+<li>
+<p><strong>User DN:</strong> DN to be used for searching users.</p>
+</li>
+<li>
+<p><strong>Group DN:</strong> DN to be used for searching groups.</p>
+</li>
+<li>
+<p><strong>Admin Group(s):</strong> Members of this group and its nested groups
+have admin privileges on the Management Center. To use more than one group,
+separate them with a semicolon (;).</p>
+</li>
+<li>
+<p><strong>User Group(s):</strong> Members of this group and its nested groups have
+read and write privileges on the Management Center. To use more than one
+group, separate them with a semicolon (;).</p>
+</li>
+<li>
+<p><strong>Read-only User Group(s):</strong> Members of this group and its nested groups
+have only read privilege on the Management Center. To use more than
+one group, separate them with a semicolon (;).</p>
+</li>
+<li>
+<p><strong>Metrics-only Groups:</strong> Members of this group and its nested groups
+have the privilege to see only the metrics on the Management Center.
+To use more than one group, separate them with a semicolon (;).</p>
+</li>
+<li>
+<p><strong>Start TLS:</strong> Enable if your LDAP server uses <strong>Start TLS</strong> operation.</p>
+</li>
+<li>
+<p><strong>User Search Filter:</strong> LDAP search filter expression to search for
+the users. For example, <code>uid={0}</code> searches for a username that matches with
+the <code>uid</code> attribute.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can use the <a href="system-properties#hazelcast-mc-ldap-timeout" class="xref page"><code>hazelcast.mc.ldap.timeout</code> property</a> to
+specify connect and read timeout values for LDAP search queries.
+It is in milliseconds and its default value is <code>3000</code> milliseconds.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><strong>Group Search Filter:</strong> LDAP search filter expression to search for
+the groups. For example, <code>uniquemember={0}</code> searches for a group that
+matches with the <code>uniquemember</code> attribute.</p>
+</li>
+<li>
+<p><strong>Nested Group Search:</strong> Disable if you have a large LDAP group structure
+and it takes a long time to query all nested groups during login.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Values for <strong>Admin</strong>, <strong>User</strong>, <strong>Read-only</strong> and <strong>Metrics-Only</strong> group names must
+be given as plain names. They should not contain any LDAP attributes such
+as <code>CN</code>, <code>OU</code> and <code>DC</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-and-managing-users"><a class="anchor" href="#creating-and-managing-users"></a>Creating and Managing Users</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create and manage additional users, you must configure them on the LDAP server.</p>
+</div>
+<div class="paragraph">
+<p>When creating users, be sure to give them a valid role. See <a href="user-management" class="xref page">User Management</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="updating-ldap-settings"><a class="anchor" href="#updating-ldap-settings"></a>Updating LDAP Settings</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once configured, LDAP settings are saved in a local database managed by Management Center.
+If you need to update your settings afterwards, you need to provide the import properties file under <code>&lt;hazelcast-mc&gt;/import/securityHotReload.properties</code>, and then click on the <strong>Reload Security Config</strong> button on the login page.
+The <code>securityHotReload.properties</code> should contain the following properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">url=&lt;Ldap URL&gt;
+username=&lt;Distinguished name (DN) of user&gt;
+password=&lt;password&gt;
+userDn=&lt;User DN&gt;
+groupDn&lt;Group DN&gt;
+startTls=&lt;true|false&gt;
+adminGroup=&lt;Admin group(s). Use ';' to separate multiple groups&gt;
+userGroup=&lt;Read-write group(s). Use ';' to separate multiple groups&gt;
+readonlyUserGroup&lt;Read-only group(s). Use ';' to separate multiple groups&gt;
+metricsOnlyGroup&lt;Metrics-only group(s). Use ';' to separate multiple groups&gt;
+userSearchFilter=&lt;User Search Filter&gt;
+groupSearchFilter=&lt;Group Search Filter&gt;
+nestedGroupSearch=&lt;true|false&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <strong>Reload Security Config</strong> button will only appear
+when the <code>&lt;hazelcast-mc&gt;/import/securityHotReload.properties</code> file is present.
+After a successful import, the file will be renamed as <code>importedSecurityHotReload-&lt;import_timestamp&gt;.properties.bak</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can use the <code>hz-mc conf</code> tool&#8217;s <code>security reset</code> and <code>ldap configure</code> tasks to
+configure the LDAP security provider from scratch,
+but you need to stop Management Center for this configuration option.
+See <a href="mc-conf" class="xref page">Management Center Configuration Tool</a> for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ldap-ssl"><a class="anchor" href="#ldap-ssl"></a>Enabling TLS/SSL for LDAP</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If your LDAP server is using <code>ldaps</code> (LDAP over SSL) protocol or the <strong>Start TLS</strong> operation, use the following system properties for your Management Center deployment:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>hazelcast.mc.ldap.ssl.trustStore</code>: Path to the truststore. This
+truststore needs to contain the public key of your LDAP server.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.ldap.ssl.trustStorePassword</code>: Password of the truststore.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.ldap.ssl.trustStoreType</code>: Type of the truststore. Its default value is JKS.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.ldap.ssl.trustManagerAlgorithm</code>: Name of the algorithm
+based on which the authentication keys are provided. System default is used
+if none is provided. You can find out the default by calling the
+<code>javax.net.ssl.TrustManagerFactory#getDefaultAlgorithm</code> method.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="password-encryption"><a class="anchor" href="#password-encryption"></a>Password Encryption</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, the password that you use in the LDAP configuration is stored in a plain text in a local database.
+This might pose a security risk.
+To store the LDAP password in an encrypted form, we offer the following options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Provide a keystore password:</strong> This creates and manages a Java
+keystore under the Management Center home directory. The LDAP password
+is stored in this keystore in an encrypted form.</p>
+</li>
+<li>
+<p><strong>Configure an external Java keystore:</strong> This uses an existing Java
+keystore. This option might also be used to store the password in an HSM
+that provides a Java keystore API.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the case of using either one of the options, the LDAP password you enter
+on the initial configuration UI dialog will be stored in an encrypted form in a
+Java keystore instead of the local database.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can also encrypt the password, and provide it in an encrypted form,
+when configuring LDAP security provider.
+See <a href="variable-replacers" class="xref page">Variable Replacers</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="providing-a-master-key-for-encryption"><a class="anchor" href="#providing-a-master-key-for-encryption"></a>Providing a Master Key for Encryption</h3>
+<div class="paragraph">
+<p>There are two ways to provide a master key for encryption:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you deploy Management Center on an application server,
+set the <code>MC_KEYSTORE_PASS</code> environment variable before starting Management
+Center. This option is less secure. You should clear the environment
+variable once you make sure you can log in with your LDAP credentials
+to minimize the security risk.</p>
+</li>
+<li>
+<p>If you&#8217;re starting Management Center from the command line, you can
+start it with the <code>hazelcast.mc.askKeyStorePassword</code> property. Management Center
+asks for the keystore password upon start and uses it as a password
+for the keystore it creates. This option is more secure as it only stores
+the keystore password in memory.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By default, the Management Center creates a Java keystore file under the
+Management Center home directory with the name <code>mc.jceks</code>. You can
+change the location of this file by using the
+<code>hazelcast.mc.keyStore.path</code> property.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-an-external-java-keystore"><a class="anchor" href="#configuring-an-external-java-keystore"></a>Configuring an External Java KeyStore</h3>
+<div class="paragraph">
+<p>If you don&#8217;t want Management Center to create a keystore for you and
+use an existing one that you&#8217;ve created before (or an HSM), set the
+following system properties when starting Management Center:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>hazelcast.mc.useExistingKeyStore=true</code>: Enables use of an existing keystore.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.existingKeyStore.path=/path/to/existing/keyStore.jceks</code>: Path
+to the keystore. You do not have to set it if you use an HSM.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.existingKeyStore.pass=somepass</code>: Password for the keystore.
+You do not have to set it if HSM provides another means to unlock HSM.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.existingKeyStore.type=JCEKS</code>: Type of the keystore.</p>
+</li>
+<li>
+<p><code>hazelcast.mc.existingKeyStore.provider=com.yourprovider.MyProvider</code>: Provider
+of the keystore. Leave empty to use the system provider. Specify the class name
+of your HSM&#8217;s <code>java.security.Provider</code> implementation if you use an HSM.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Make sure your keystore supports storing secret keys.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="updating-encrypted-passwords"><a class="anchor" href="#updating-encrypted-passwords"></a>Updating Encrypted Passwords</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can use the ` ldap update-password` task in the <code>hz-mc conf</code> tool to update
+the encrypted LDAP password stored in the keystore.</p>
+</div>
+<div class="paragraph">
+<p>This command expects information about the keystore such as its location and
+password and the new LDAP password that you want to use. After updating the LDAP password, you need to click
+on the <strong>Reload Security Config</strong> button on the Management Center login page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="next-steps"><a class="anchor" href="#next-steps"></a>Next Steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For details about the <code>hz-mc conf</code> tool, see <a href="mc-conf" class="xref page">Management Center Configuration Tool</a>.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="active-directory">Active Directory</a></span>
+  <span class="next"><a href="jaas">JAAS</a></span>
+</nav>
+</article>
+    <div class="toc-container">
+  <aside class="toc sidebar" data-title="Contents" data-levels="1">
+    <div class="toc-menu"></div>
+  </aside>
+  <div class="feedback-prompt">
+    <a class="edit-this-page feedback-button" href="https://github.com/hazelcast/management-center-docs/edit/v/5.1/docs/modules/deploy-manage/pages/ldap.adoc" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for LDAP&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/deploy-manage/pages/ldap.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <div class="feedback-form-container">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
+    <span class="helpful-feedback-title">Was this helpful?</span>
+    <div class="helpful-feedback-buttons">
+      <label for="positive-feedback-starter" class="feedback-button yes-button">
+        <img src="../../../_/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
+      </label>
+      <label for="negative-feedback-starter" class="feedback-button no-button">
+        <img src="../../../_/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
+      </label>
+    </div>
+  </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
+
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue or answer a question.
+        </span>
+      </span>
+          </label>
+                <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Precisely describes the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Well written and easy to follow.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Helped me decide to use the product
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to try or adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another positive reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
+
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
+
+          <label for="could-not-find" class="feedback-radio-button-label">
+            <input type="radio" id="could-not-find" name="feedback" value="Couldn't find what I was looking for">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Couldn't find what I was looking for
+              </span>
+              <span class="radio-btn-description">
+                Missing important information or didn't answer my question.
+              </span>
+            </span>
+          </label>
+          <label for="inaccurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="inaccurate-radio-feedback" name="feedback" value="Inaccurate">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Inaccurate
+              </span>
+              <span class="radio-btn-description">
+                Doesn't accurately describe the product or feature.
+              </span>
+            </span>
+          </label>
+
+          <label for="hard-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="hard-to-understand" name="feedback" value="Hard to understand">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Hard to understand
+              </span>
+              <span class="radio-btn-description">
+                Too complicated or badly written.
+              </span>
+            </span>
+          </label>
+          <label for="code-sample-errors" class="feedback-radio-button-label">
+            <input type="radio" id="code-sample-errors" name="feedback" value="Code sample errors">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Code sample error
+              </span>
+              <span class="radio-btn-description">
+                Incorrect or missing code sample(s).
+               </span>
+            </span>
+          </label>
+          <label for="another-negative-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-negative-reason" name="feedback" value="Another negative reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="(Optional) Please provide specific examples or suggestions!"
+          rows="6"
+        ></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</main>
+
+</div>
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../../../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for LDAP&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/deploy-manage/pages/ldap.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+    <footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch(["tags:management-center-5.1"]);
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+      }
+    }
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet');
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-5.1",
+          "tags:management-center-5.7",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-5.1"]);
+      }
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-5.1",
+          "tags:hazelcast-5.5",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-5.1"]);
+      }
+    }
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>

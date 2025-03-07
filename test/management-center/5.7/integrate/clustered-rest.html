@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Clustered REST | Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/management-center/5.7/integrate/clustered-rest">
+    <link rel="prev" href="jmx-api">
+    <link rel="next" href="client-filtering">
+    <meta name="description" content="The clustered REST API can be enabled to allow you to monitor clustered statistics of distributed objects through HTTP endpoints.">
+    <meta name="generator" content="Antora 3.1.10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../../../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../../../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <div id="search-input" class="navbar-item searchbox"></div>
+          <label class="filter checkbox">
+            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+          </label>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+  <div class="nav-container" data-component="management-center" data-version="5.7">
+  <aside class="nav">
+    <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="Management Center">
+      Management Center
+    </a>
+  </div>
+
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="5.7">
+        5.7
+      </a>
+    </div>
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+      <span>hazelcast</span>
+        <li class="component">
+              <a href="../../../hazelcast/5.5/">
+                Hazelcast Platform
+              </a>
+        </li>
+      <span>management-center</span>
+        <li class="component is-current">
+              <a href="../">
+                Management Center
+              </a>
+        </li>
+      <span>home</span>
+      <span>privacy</span>
+      <span>templates</span>
+      <span>tutorials</span>
+        <li class="component">
+              <a href="../../../tutorials/">
+                Tutorials
+              </a>
+        </li>
+  </ul>
+
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            <li
+              class="version"
+            >
+              <a href="../../6.0-snapshot/integrate/clustered-rest">6.0-SNAPSHOT</a>
+            </li>
+            <li
+              class="version is-current"
+            >
+              <a href="clustered-rest">5.7</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.6/integrate/clustered-rest">5.6</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.5/integrate/clustered-rest">5.5</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.4/integrate/clustered-rest">5.4</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.3/integrate/clustered-rest">5.3</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.2/integrate/clustered-rest">5.2</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.1/integrate/clustered-rest">5.1</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.0/integrate/clustered-rest">5.0</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../4.2022.01/clustered-rest">4.2022.01</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../4.2021.12/clustered-rest">4.2021.12</a>
+            </li>
+      </ul>
+</div>
+    <div class="panels">
+  <div class="nav-panel-menu is-active" data-panel="menu">
+    <nav class="nav-menu">
+        <ul class="nav-list">
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Get Started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../whats-new">What&#8217;s new in 5.7</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../ask-ai">Ask AI</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/install">Installing and Starting</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/get-started">Docker Compose Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">User Interface Overview</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/user-interface">Top Bar and Side Bar</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/graphs">Graphs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/tables">Tables</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Deploy and Manage</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/production-checklist">Production Checklist</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/configuring">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/system-properties">System Properties and Environment Variables</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/mc-conf">Management Center Configuration Tool</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/variable-replacers">Variable Replacers</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/logging">Logging</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Cluster Connections</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/cluster-connections">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/connecting-to-clusters-mc-conf">Connecting to a Cluster with the hz-mc conf Tool</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/connecting-to-clusters-ui">Connecting to a Cluster from the UI</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">License Management</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/license-management">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/updating-mc-license-ui">Updating an Enterprise License for Management Center</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Security</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/security">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">TLS</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/tls-security">TLS/SSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/serving-https">Serving Management Center over HTTPS</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/serve-mc-over-https">Tutorial</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">User Authentication</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/security-providers">Security Providers</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/dev-mode">Dev Mode</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/local-security-provider">Local Security Provider</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/active-directory">Active Directory</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/ldap">LDAP</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/jaas">JAAS</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/saml">SAML</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/openid">OpenID Connect</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/switching-security-provider">Switching to a New Security Provider</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/sessions">Securing User Sessions</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/user-management">User Management</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/historical-metrics">Historical Metrics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/phone-homes">Phone Homes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Integrate</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="integrations">Integrations</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="prometheus-monitoring">Prometheus Monitoring</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="prometheus-metrics">Prometheus metrics</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Clustered JMX</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="jmx">Get Started</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="jmx-api">Clustered JMX Objects and Attributes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Clustered REST</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item is-current-page" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="clustered-rest">Get Started</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="client-filtering">Client Filtering API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="cluster-metrics">Cluster Metrics API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="cluster-connections">Cluster Connections API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="wan-replication">WAN Replication API</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Tools</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/sql-browser">Executing SQL Queries</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/console">Executing Console Commands</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/scripting">Scripting</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../clusters/dashboard">Dashboard</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../clusters/clients">Clients</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/client-filtering">Client Filtering</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../clusters/create-filter-lists-ui">Deploying a Client Filter List from the UI</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../clusters/create-filter-lists-rest">Deploying a Client Filter List with the REST API</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../clusters/members">Members</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Administration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../clusters/administration">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Cluster States</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../clusters/cluster-state">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../clusters/changing-cluster-state">Changing the Cluster State</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../clusters/shutting-down-cluster">Shutting Down Members and Clusters</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../clusters/cluster-license">Viewing a Cluster License</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/triggering-rolling-upgrade">Rolling Upgrade</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/update-config">Update Config</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Persistence</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/persistence">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/triggering-force-start">Triggering a Force-Start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/triggering-partial-start">Triggering a Partial-Start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/triggering-hot-backup">Triggering Hot Backups</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/wan-replication">WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="../clusters/healthcheck">Healthcheck</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../clusters/namespaces">Namespaces</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Storage, Compute &amp; Messaging</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/vector-collection">Vector Collections</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/map">Maps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/replicated-map">Replicated Maps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/cache">Caches</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/multimap">MultiMaps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/list">Lists</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/set">Sets</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/queue">Queues</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/topic">Topics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/reliable-topic">Reliable Topics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/executor">Executors</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/pn-counter">PN Counters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/flake-id-gen">Flake ID Generators</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Streaming</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/dashboard">Dashboard Page</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/jobs">Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/snapshots">Snapshots</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/sql-tasks">SQL Tasks</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">CP Subsystem</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/dashboard">Dashboard</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/cpmap">CPMaps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/atomic-long">Atomic Longs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/semaphore">Semaphores</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/atomic-ref">Atomic References</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/countdown-latch">Countdown Latches</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/fenced-lock">Fenced Locks</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Troubleshoot</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../troubleshoot/hazelcast-clusters">Hazelcast Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../troubleshoot/management-center">Management Center</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Upgrade</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../migration-guides">Upgrading Management Center</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Release Notes</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/releases">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-7-1">5.7.1</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-7-0">5.7.0</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+  </div>
+    </div>
+  </aside>
+</div>
+<div id="hide-nav">
+  <button>
+    <span>
+      ᐸ
+    </span>
+  </button>
+</div>
+  <main class="article">
+  <div class="content">
+    <article class="doc">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../">Management Center</a></li>
+    <li>Integrate</li>
+    <li>Clustered REST</li>
+    <li><a href="clustered-rest">Get Started</a></li>
+  </ul>
+</nav>
+    <button class="nav-toggle"></button>
+      <h1 class="page enterprise">Clustered REST</h1>
+    <div class="page-versions">
+    <button class="version-menu-toggle" title="Show other versions of page">Version 5.7</button>
+    <div class="version-menu">
+          <a class="version" href="../../6.0-snapshot/integrate/clustered-rest">6.0-SNAPSHOT</a>
+          <a class="version is-current" href="clustered-rest">5.7</a>
+          <a class="version" href="../../5.6/integrate/clustered-rest">5.6</a>
+          <a class="version" href="../../5.5/integrate/clustered-rest">5.5</a>
+          <a class="version" href="../../5.4/integrate/clustered-rest">5.4</a>
+          <a class="version" href="../../5.3/integrate/clustered-rest">5.3</a>
+          <a class="version" href="../../5.2/integrate/clustered-rest">5.2</a>
+          <a class="version" href="../../5.1/integrate/clustered-rest">5.1</a>
+          <a class="version" href="../../5.0/integrate/clustered-rest">5.0</a>
+          <a class="version" href="../../4.2022.01/clustered-rest">4.2022.01</a>
+          <a class="version" href="../../4.2021.12/clustered-rest">4.2021.12</a>
+    </div>
+  </div>
+  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The clustered REST API can be enabled to allow you to monitor clustered statistics of distributed objects through HTTP endpoints.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-clustered-rest"><a class="anchor" href="#enabling-clustered-rest"></a>Enabling Clustered REST</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The REST API is disabled by default.</p>
+</div>
+<div class="paragraph">
+<p>To enable clustered REST in Management Center, use the
+<a href="../deploy-manage/system-properties#hazelcast-mc-rest-enabled" class="xref page"><code>hazelcast.mc.rest.enabled</code> property</a> at startup.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="root-endpoint"><a class="anchor" href="#root-endpoint"></a>Root Endpoint</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The entry point for the clustered REST API is <code>/rest</code>. This
+resource does not have any attributes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All parameters that are used in the REST endpoints, such as
+cluster names and distributed data structure names, must be
+<a href="https://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a>.
+Such parameters are marked in braces (<code>{</code> and <code>}</code>) in the URL description
+for each endpoint. For example, <code>name.with/special@chars</code>
+parameter value would be encoded as <code>name.with%2Fspecial%40chars</code>.</p>
+</div>
+<div class="paragraph">
+<p>If no data can be
+found for an endpoint, that endpoint returns a 404 HTTP status code.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="authentication"><a class="anchor" href="#authentication"></a>Authentication</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unless the security provider is set to dev mode, users need an authentication (auth) token to send requests to the REST API.</p>
+</div>
+<div class="paragraph">
+<p>The auth token must be included in the following header:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Authorization: Bearer &lt;user_auth_token&gt;</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="generating-auth-tokens"><a class="anchor" href="#generating-auth-tokens"></a>Generating Auth Tokens</h3>
+<div class="paragraph">
+<p>The way in which you generate an auth token depends on the security provider that you use. See <a href="../deploy-manage/security-providers" class="xref page">Security Providers</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+All auth tokens inherit roles from the user.
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Security Provider</th>
+<th class="tableblock halign-left valign-top">Method for issuing tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local Security Provider</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Use the <code>user issue-token</code> task of the <code>hz-mc conf</code> tool.</p>
+</div>
+<div class="paragraph">
+<p>Send a <code>POST</code> request to the <code>/api/tokens</code> endpoint.</p>
+</div>
+<div class="paragraph">
+<p>Use Auth <code>Settings/API</code> screen on the UI.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>All other security providers other than dev mode</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send a <code>POST</code> request to the <code>/api/tokens</code> endpoint.</p>
+</div>
+<div class="paragraph">
+<p>Use Auth <code>Settings/API</code> screen on the UI.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="using-apitokens-endpoint"><a class="anchor" href="#using-apitokens-endpoint"></a>Using <code>api/tokens</code> Endpoint</h4>
+<div class="paragraph">
+<p>To use the /api/tokens endpoint for security providers except SAML and OIDC, run the following command. Replace the &lt;username&gt; and &lt;password&gt; placeholders with the credentials of a user logged in to the Management Center.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -u &lt;username&gt;:&lt;password&gt; -d '{"username":"&lt;username&gt;"}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/tokens</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use the /api/tokens endpoint for SAML and OIDC, run the following command.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -d '{"username":"&lt;username&gt;"}' -H "X-CSRF-TOKEN: &lt;x-csrf-token&gt;" -H "Cookie: &lt;cookie&gt;" -H "Content-Type: application/json" -X POST http://localhost:8080/api/tokens</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, replace the <code>&lt;username&gt;</code> placeholders with the username of a user logged in to the Management Center, and replace the <code>&lt;x-csrf-token&gt;</code> and <code>&lt;cookie&gt;</code> with X-CSRF-TOKEN and Cookie headers. You can get the headers from any request on Network tab in Developer Tools when you are logged into Management Center:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ClusteredRestProvideHeaders.png" alt="Clustered Rest Provide Headers"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-hz-mc-conf-tool"><a class="anchor" href="#using-hz-mc-conf-tool"></a>Using <code>hz-mc conf</code> Tool</h4>
+<div class="paragraph">
+<p>To use the <code>hz-mc conf</code> tool, do the following:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_linux-and-mac"></a>Linux and Mac</p>
+</li>
+<li>
+<p><a id="tabset1_windows"></a>Windows</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_linux-and-mac">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">hz-mc conf user issue-token -n &lt;username&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_windows">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mc-conf.bat user issue-token -n &lt;username&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The created token is displayed in the output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Successfully issued a token for user 'test_user'.
+Token: 'mJMMDfaSWZ1MuqhmGhA8m4erCNZtPi_A4_VyR_y8eH0'
+Label: 'test_user_2021-07-07T17:24 EEST'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-auth-token-management-ui"><a class="anchor" href="#using-auth-token-management-ui"></a>Using Auth Token Management UI</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click <strong>Settings</strong> in the Top Bar.</p>
+</li>
+<li>
+<p>Navigate to the <strong>API</strong> tab.</p>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/AuthTokenManagementPage.png" alt="Auth Token Management Page"></span></p>
+</div>
+</li>
+<li>
+<p>Select the user that you want to create a token for. Only admin can create tokens for other users.</p>
+</li>
+<li>
+<p>Enter the label of the token that you want to create. Default value has the <code>username_creationTime</code> format.</p>
+</li>
+<li>
+<p>Click <strong>Create Token</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You will see the created token on the right side.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/AuthTokenManagementPage_createdToken.png" alt="Created Token"></span></p>
+</div>
+<div class="paragraph">
+<p>You can copy your token to the clipboard.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The token will not be displayed again, so make sure you note it before leaving the page or creating a new one.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can see the list of existing tokens in the table, bottom of the page.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/AuthTokenManagementPage_TokenList.png" alt="Created Token List"></span></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Time Issued</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Date and time when the token was created.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>User</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Username which the token is created for.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Token Label</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Label of the token.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Action</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Action for revoking a token.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="revoking-all-auth-tokens"><a class="anchor" href="#revoking-all-auth-tokens"></a>Revoking All Auth Tokens</h3>
+<div class="paragraph">
+<p>To revoke all auth tokens for a user, use the <code>user revoke-tokens</code> task.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_linux-and-mac"></a>Linux and Mac</p>
+</li>
+<li>
+<p><a id="tabset2_windows"></a>Windows</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_linux-and-mac">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">hz-mc conf user revoke-tokens -n &lt;username&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_windows">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mc-conf.bat user revoke-tokens -n &lt;username&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="openapi-definitions"><a class="anchor" href="#openapi-definitions"></a>OpenAPI Definitions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Clustered REST endpoints are documented in OpenAPI format. See the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="client-filtering" class="xref page">Client Filtering API</a></p>
+</li>
+<li>
+<p><a href="cluster-metrics" class="xref page">Cluster Metrics API</a></p>
+</li>
+<li>
+<p><a href="cluster-connections" class="xref page">Cluster Connections API</a></p>
+</li>
+<li>
+<p><a href="wan-replication" class="xref page">WAN Replication API</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This documentation is also accessible at the <code>/swagger-ui/index.html</code> endpoint of Management Center. For example <code>http://localhost:8080/swagger-ui/index.html</code>.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="jmx-api">Clustered JMX Objects and Attributes</a></span>
+  <span class="next"><a href="client-filtering">Client Filtering API</a></span>
+</nav>
+</article>
+    <div class="toc-container">
+  <aside class="toc sidebar" data-title="Contents" data-levels="1">
+    <div class="toc-menu"></div>
+  </aside>
+  <div class="feedback-prompt">
+    <a class="edit-this-page feedback-button" href="https://github.com/hazelcast/management-center-docs/edit/v/5.7/docs/modules/integrate/pages/clustered-rest.adoc" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Clustered REST&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/integrate/pages/clustered-rest.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <div class="feedback-form-container">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
+    <span class="helpful-feedback-title">Was this helpful?</span>
+    <div class="helpful-feedback-buttons">
+      <label for="positive-feedback-starter" class="feedback-button yes-button">
+        <img src="../../../_/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
+      </label>
+      <label for="negative-feedback-starter" class="feedback-button no-button">
+        <img src="../../../_/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
+      </label>
+    </div>
+  </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
+
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue or answer a question.
+        </span>
+      </span>
+          </label>
+                <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Precisely describes the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Well written and easy to follow.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Helped me decide to use the product
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to try or adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another positive reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
+
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
+
+          <label for="could-not-find" class="feedback-radio-button-label">
+            <input type="radio" id="could-not-find" name="feedback" value="Couldn't find what I was looking for">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Couldn't find what I was looking for
+              </span>
+              <span class="radio-btn-description">
+                Missing important information or didn't answer my question.
+              </span>
+            </span>
+          </label>
+          <label for="inaccurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="inaccurate-radio-feedback" name="feedback" value="Inaccurate">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Inaccurate
+              </span>
+              <span class="radio-btn-description">
+                Doesn't accurately describe the product or feature.
+              </span>
+            </span>
+          </label>
+
+          <label for="hard-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="hard-to-understand" name="feedback" value="Hard to understand">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Hard to understand
+              </span>
+              <span class="radio-btn-description">
+                Too complicated or badly written.
+              </span>
+            </span>
+          </label>
+          <label for="code-sample-errors" class="feedback-radio-button-label">
+            <input type="radio" id="code-sample-errors" name="feedback" value="Code sample errors">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Code sample error
+              </span>
+              <span class="radio-btn-description">
+                Incorrect or missing code sample(s).
+               </span>
+            </span>
+          </label>
+          <label for="another-negative-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-negative-reason" name="feedback" value="Another negative reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="(Optional) Please provide specific examples or suggestions!"
+          rows="6"
+        ></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</main>
+
+</div>
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../../../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Clustered REST&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/integrate/pages/clustered-rest.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+    <footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch(["tags:management-center-5.7"]);
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+      }
+    }
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet');
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-5.7",
+          "tags:management-center-5.7",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-5.7"]);
+      }
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-5.7",
+          "tags:hazelcast-5.5",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-5.7"]);
+      }
+    }
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>

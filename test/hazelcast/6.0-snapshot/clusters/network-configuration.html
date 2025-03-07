@@ -1,0 +1,4600 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Network Configurations | Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/hazelcast/5.5/clusters/network-configuration">
+    <link rel="prev" href="partition-group-configuration">
+    <link rel="next" href="../security/overview">
+    <meta name="generator" content="Antora 3.1.10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../../../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../../../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <div id="search-input" class="navbar-item searchbox"></div>
+          <label class="filter checkbox">
+            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+          </label>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+  <div class="nav-container" data-component="hazelcast" data-version="6.0-snapshot">
+  <aside class="nav">
+    <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="Hazelcast Platform">
+      Hazelcast Platform
+    </a>
+  </div>
+
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="6.0-SNAPSHOT">
+        6.0-SNAPSHOT
+      </a>
+    </div>
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+      <span>hazelcast</span>
+        <li class="component is-current">
+              <a href="../../5.5/">
+                Hazelcast Platform
+              </a>
+        </li>
+      <span>management-center</span>
+        <li class="component">
+              <a href="../../../management-center/5.7/">
+                Management Center
+              </a>
+        </li>
+      <span>home</span>
+      <span>privacy</span>
+      <span>templates</span>
+      <span>tutorials</span>
+        <li class="component">
+              <a href="../../../tutorials/">
+                Tutorials
+              </a>
+        </li>
+  </ul>
+
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            <li
+              class="version is-current"
+            >
+              <a href="network-configuration">6.0-SNAPSHOT</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.5/clusters/network-configuration">5.5</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.4/clusters/network-configuration">5.4</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.3/clusters/network-configuration">5.3</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.2/clusters/network-configuration">5.2</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.1/clusters/network-configuration">5.1</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.0/clusters/network-configuration">5.0</a>
+            </li>
+      </ul>
+</div>
+    <div class="panels">
+  <div class="nav-panel-menu is-active" data-panel="menu">
+    <nav class="nav-menu">
+        <ul class="nav-list">
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Get started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../whats-new">What&#8217;s new</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../what-is-hazelcast">What is Hazelcast Platform</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../getting-started/editions">Available versions</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Start a local cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-docker">Docker</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-cli">CLI</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-binary">Binary</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-java">Java embedded</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../getting-started/enterprise-overview">Get started with Enterprise Edition</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/persistence">Persist Map Entries on Disk</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/authenticate-clients">Authenticate Client Connections</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/wan">Replicate a Map over Clusters in a WAN</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../getting-started/blue-green">Deploy Blue-Green Clusters</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Get started with SQL</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/get-started-sql">Get Started with SQL Over Maps</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/learn-sql">Get Started with SQL Over Kafka</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/get-started-sql-files">Get Started with SQL Over Files</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../clients/hazelcast-clients">Get started with a Hazelcast Client</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../getting-started/support">Getting Support</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../ask-ai">Ask AI</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Install and upgrade</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Overview</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/choosing-a-deployment-option">Available topologies</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/versioning-compatibility">Versioning and compatibility</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-in-cloud">Deploying in cloud environments</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../deploy/deploying-on-aws">Deploying a Cluster on Amazon AWS</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../deploy/deploying-on-azure">Deploying a Cluster on Microsoft Azure</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../deploy/deploying-on-gcp">Deploying a Cluster on Google Cloud Platform</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/deploying-with-docker">Deploying on Docker</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../getting-started/install-enterprise">Install Enterprise Edition</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../deploy/enterprise-licenses">Managing Enterprise license keys</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../getting-started/install-hazelcast">Install Community Edition</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/lts">Long-term Support Releases</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/community-to-enterprise">Move to Enterprise from Community/OSS</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../migrate/rolling-restart">Upgrade Cluster to Enterprise Edition</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../migrate/data-migration-tool">Using the Data Migration Tool</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Upgrades</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../migrate/upgrading-from-jet">Upgrading from Jet</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../migrate/upgrading-from-imdg-4">Upgrading from IMDG 4.x</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../migrate/upgrading-from-imdg-3">Upgrading from IMDG 3.12.x</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../migrate/migration-tool-imdg">Migrating Data from IMDG 3.12.x</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../migrate/dmt-command-reference">DMT Command Reference</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../release-notes/releases">Release notes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Develop and build</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Architecture</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/architecture">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/data-partitioning">Data Partitioning and Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/distributed-computing">Jet: How Hazelcast Models and Executes Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/execution-engine">Cooperative Multithreading</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/event-time-processing">How Hazelcast Handles Event Disorder</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/sliding-window">Jet: Sliding Window Aggregation</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../architecture/in-memory-storage">In-Memory Storage</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../cluster-performance/best-practices">Best practices</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../capacity-planning">Capacity Planning</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/performance-tips">Performance Tips</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/back-pressure">Back Pressure</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/pipelining">Pipelining</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/aws-deployments">AWS Deployments</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/threading">Threading</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/near-cache">Near Cache</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/imap-bulk-read-operations">IMap bulk read operations</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cluster-performance/data-affinity">Data Affinity</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Member and client discovery</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="discovery-mechanisms">Discovery Mechanisms</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="discovering-by-tcp">Discovering Members by TCP</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="discovering-by-multicast">Discovering Members by Multicast</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="discovering-native-clients">Discovering Java Clients</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Kubernetes</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/deploying-in-kubernetes">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../tutorials/kubernetes">Deploy Hazelcast using Kubernetes</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/deploying-in-kubernetes#hazelcast-platform-operator-for-kubernetesopenshift">Hazelcast Platform Operator</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/kubernetes-auto-discovery">Discovery and partitioning</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/kubernetes-persistence">Persistence</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../kubernetes/troubleshooting-and-limitations">Troubleshooting and limitations</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Helm charts</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-hazelcast-chart">Hazelcast chart</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-hazelcast-enterprise-chart">Hazelcast Enterprise Edition chart</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-upgrade-guide">Helm upgrade guide</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-adding-custom-jar">Adding Custom Jar</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-enabling-external-access">Enabling External Access</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-configuring-ssl">Configuring SSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../kubernetes/helm-dynamic-persistence-configuration">Dynamic Persistence Configuration</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Distributed data structures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/distributed-data-structures">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cache/overview">Caching Data</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">AP data structures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+              <span class="nav-text">Map</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/map">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/map-config">Configuring Maps</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/creating-a-map">Creating a Map</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/reading-a-map">Reading Data From a Map</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/updating-map-entries">Updating Map Entries</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/setting-data-format">Setting the In-Memory Format of Map Entries</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/backing-up-maps">Making Your Map Data Safe</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/managing-map-memory">Managing Map Memory</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/locking-maps">Locking Maps</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/listening-for-map-entries">Acting Upon Changes to a Map</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/reading-map-metrics">Reading Map Metrics</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../data-structures/entry-processor">Entry Processor</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="3">
+              <span class="nav-text">JCache</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../jcache/jcache">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../jcache/overview">JCache Overview</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../jcache/setup">JCache Setup and Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../jcache/providers">JCache Providers</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../jcache/api">JCache API</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../jcache/hazelcast-integration">JCache - Hazelcast Instance Integration</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../jcache/icache">Hazelcast JCache Extension - ICache</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../jcache/tck">Testing for JCache Specification Compliance</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/topic">Topic</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/reliable-topic">Reliable Topic</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/queue">Queue</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/priority-queue">Priority Queue</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/multimap">MultiMap</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/replicated-map">Replicated Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/set">Set</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/list">List</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/ringbuffer">Ringbuffer</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/flake-id-generator">Flake ID Generator</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/pn-counter">PN Counter</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">CP data structures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/cpmap">CPMap</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/fencedlock">FencedLock</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/iatomiclong">IAtomicLong</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/iatomicreference">IAtomicReference</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/icountdownlatch">ICountDownLatch</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/isemaphore">ISemaphore</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Streaming data structures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/event-journal">Event Journal</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">AI/ML data structures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../data-structures/cardinality-estimator-service">Cardinality Estimator Service</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ beta
+            " href="../data-structures/vector-collections">Vector Collection</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+ beta
+            " href="../data-structures/vector-search-overview">Data Structure Design</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../computing/distributed-computing">Distributed Computing</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Executor services</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../computing/executor-service">Java Executor Service</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../computing/durable-executor-service">Durable Executor Service</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../computing/scheduled-executor-service">Scheduled Executor Service</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="user-code-namespaces">User Code Namespaces</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="ucn-enable">Enable User Code Namespaces</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="ucn-static-config">Static Configuration</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="ucn-member-side">Member Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="ucn-data-structures">Data Structures</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="ucn-static-programmatic">Programmatic Configuration</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="ucn-dynamic-config">Dynamic Configuration API</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="ucn-dynamic-client">Configure Client</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="ucn-non-associated">Non-associated Namespaces</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="ucn-security">Security</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="ucn-migrate-ucd">Migrate from User Code Deployment</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="legacy-ucd">User Code Deployment</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="deploying-code-on-member">Deploying User Code on the Member</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="deploying-code-from-clients">Deploying User Code from Clients</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="accessing-domain-objects">Accessing Domain Objects Without Domain Classes</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Data ingestion and query</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../ingest/overview">Ingesting Data from External Sources</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../query/overview">Running Distributed Queries</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../mapstore/working-with-external-data">Building a Cache with MapStore</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../mapstore/configuring-a-generic-maploader">Using the generic MapLoader</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../mapstore/configuring-a-generic-mapstore">Using the generic MapStore</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../mapstore/implement-a-mapstore">Implementing a Custom MapStore</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../mapstore/configuration-guide">Configuring a MapStore</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../mapstore/mapstore-triggers">Map Operations that Trigger Methods on a MapStore</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Building data pipelines</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/overview">About Data Pipelines</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Get started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/stream-processing-embedded">Get Started with Stream Processing (Embedded)</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/stream-processing-client">Get Started with Stream Processing (Client/Server)</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Ingesting data from sources</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/ingesting-from-sources">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-stream-source">Creating a Custom Streaming Source</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-batch-source">Adding Batching to a Custom Source</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Processing data</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/transforms">Transforms</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-aggregate-operation">Building a Custom Aggregate Operation</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/python">Apply a Custom Transform with Python</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Sending results to sinks</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/sending-data-to-sinks">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/custom-sink">Create a Custom Sink</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Stream processing</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/building-pipelines">About Stream Processing Pipelines</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/windowing">Apply Windowed Aggregation</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/stream-imap">Subscribe to Changes to a Map</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/map-join">Enrich a Stream</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-overview">Change Data Capture (CDC)</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-database-setup">Setting Up a Database for Change Data Capture</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc">Capture Changes from MySQL</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-postgres">Capture Changes from PostgreSQL</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/cdc-join">Join Change Data Capture Records</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../pipelines/etl-overview">Extract Transform Load (ETL)</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/kafka">Connect to Apache Kafka</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/kinesis">Connect to Amazon Kinesis</a>
+              </li>
+      <li class="nav-item" data-depth="4">
+            <a class="nav-link
+
+            " href="../pipelines/pulsar">Group Messages from Apache Pulsar</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/serialization">Serializing Pipelines</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-placement-control">Jet Job Placement Control</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/configuring-jobs">Configuring Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-security">Securing Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/submitting-jobs">Submitting Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-management">Managing Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-monitoring">Monitoring Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/job-update">Updating Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../pipelines/xa">Testing Sources and Sinks for XA Transaction Support</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Data connections</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-connections/data-connections-configuration">Configure data connections</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-connections/data-connection-service">Use Data Connection service</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-connections/build-map-loader-data-connection">Build MapLoader</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-connections/build-pipeline-service-data-connection">Build pipeline service</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">SQL</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/sql-overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL over maps</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/get-started-sql">Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/querying-maps-sql">Queries</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-maps">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL over Kafka</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/learn-sql">Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-kafka">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL over file systems</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/get-started-sql-files">Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-a-file-system">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL over JDBC</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-jdbc">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">SQL over MongoDB</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/mapping-to-mongo">Mappings</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/working-with-json">Working with JSON</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/querying-streams">Stream processing</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/parameterized-queries">Query parameters</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/finding-mappings">Finding mappings</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/improving-performance">Improving performance</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/sql-reflection-configuration">Configuring reflection</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/troubleshooting">Troubleshooting</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Statements</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/sql-statements">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/alter-job"><code>ALTER JOB</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-data-connection"><code>CREATE DATA CONNECTION</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-index"><code>CREATE INDEX</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-job"><code>CREATE JOB</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-mapping"><code>CREATE MAPPING</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-snapshot"><code>CREATE SNAPSHOT</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/create-view"><code>CREATE VIEW</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/delete"><code>DELETE</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-data-connection"><code>DROP DATA CONNECTION</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-job"><code>DROP JOB</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-mapping"><code>DROP MAPPING</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-snapshot"><code>DROP SNAPSHOT</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/drop-view"><code>DROP VIEW</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/explain"><code>EXPLAIN</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/sink-into"><code>INSERT INTO</code>/<code>SINK INTO</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/select"><code>SELECT</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/show-jobs"><code>SHOW JOBS</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/show-resources"><code>SHOW RESOURCES</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/show-mappings"><code>SHOW MAPPINGS</code></a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/update"><code>UPDATE</code></a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/functions-and-operators">Functions and expressions</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/data-types">SQL Data Types</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../sql/user-defined-types">User-Defined Types in SQL</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Optimizing SQL queries</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../sql/partition-pruning">Partition pruning</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../query/predicate-overview">Predicates API</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Improving query performance</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../query/indexing-maps">Indexing Maps</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../performance/caching-deserialized-values">Caching Deserialized Values</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../data-structures/preventing-out-of-memory">Preventing Out of Memory Exceptions when Querying a Map</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Serialization</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/serialization">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/compact-serialization">Compact Serialization</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../compact-binary-specification">Compact Serialization Binary Specification</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/serializing-json">HazelcastJsonValue</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/custom-serialization">Custom Serialization</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Other serialization options</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../serialization/implementing-identifieddataserializable">IdentifiedDataSerializable</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../serialization/implementing-dataserializable">DataSerializable</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../serialization/implementing-java-serializable">Java Serializable and Externalizable</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../serialization/implementing-portable-serialization">Portable</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../serialization/global-serializer">Global Serializer</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../serialization/implementing-hazelcastinstanceaware">HazelcastInstanceAware</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../serialization/serialization-configuration">Configuring Serializers</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Listening to events</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/distributed-events">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/cluster-events">Cluster Events</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/event-listeners-for-clients">Event Listeners for Hazelcast Clients</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/global-event-configuration">Global Event Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../events/object-events">Distributed Object Events</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Transactions</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../transactions/creating-a-transaction-interface">Creating a Transaction Interface</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../transactions/providing-xa-transactions">Providing XA Transactions</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Testing applications</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../test/testing-apps">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../test/testing">Testing Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../simulator">Hazelcast Simulator</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Troubleshooting</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/troubleshooting">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/error-handling">Error Handling Strategies for Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/remedies-for-alerts">Actions and Remedies for Alerts</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/recovery-members">Recovery from a Partial or Total Failure</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../troubleshoot/recovery-clients">Recovery from Client Connection Failures</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../common-exception-types">Common Exception Types</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Operate and manage</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../configuration/understanding-configuration">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Static configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-declaratively">Member Configuration Files</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-programmatically">Configuring Hazelcast in Embedded Mode</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-with-system-properties">System Props and Environment Variables</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/jvm-parameters">JVM Parameters</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/configuring-within-spring">Configuring Hazelcast in Spring</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/pattern-matcher">Configuration Pattern Matcher</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/using-wildcards">Using Wildcards</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Dynamic configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config-programmatic-api">Programmatic API</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config-update-and-reload">Update and Reload with REST</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../configuration/dynamic-config-persistence">Configuration Options</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../phone-homes">Phone Homes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../maintain-cluster/logging">Configuring Logging</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../configuration/jet-configuration">Configuring the Jet Engine</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Maintaining a cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/rolling-upgrades">Rolling Upgrades</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/monitoring">Monitoring</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/cluster-member-states">Cluster and Member States</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/member-attributes">Filtering Members with Attributes</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/lite-members">Lite Members</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/shutdown">Shutting Down</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../management/cluster-utilities">Cluster Utilities</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Partition groups and networking</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="creating-clusters">Grouping clusters</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="partition-group-configuration">Grouping partitions</a>
+              </li>
+      <li class="nav-item is-current-page" data-depth="2">
+            <a class="nav-link
+
+            " href="network-configuration">Networking</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Securing a cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/overview">Security Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">TLS</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/tls-ssl">TLS/SSL Basics</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/integrating-openssl">Integrating OpenSSL / BoringSSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/tls-configuration">Other TLS-Related Configurations</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../secure-cluster/security-defaults">Security Defaults</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/enable-security">Enabling Security</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Authentication</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/authentication-overview">Authentication overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/simple-authentication">Simple Authentication</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/ldap-authentication">LDAP Authentication</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/kerberos-authentication">Kerberos Authentication</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/tls-authentication">TLS Authentication</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/identity-configuration">Identity configuration</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/jaas-authentication">JAAS Authentication</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/default-authentication">Default authentication</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../security/client-authorization">Client Authorization</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Advanced security features</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/logging-auditable-events">Logging Auditable Events</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/validating-secrets">Validating Secrets Using Strength Policy</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/fips-140-2">FIPS 140-2</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/security-debugging">Security Debugging</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/encryption">Encryption</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/socket-interceptor">Socket Interceptor</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../security/security-interceptor">Security Interceptor</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../secure-cluster/hardening-recommendations">Security Hardening Recommendations</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Fault tolerance</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../fault-tolerance/backups">Backups</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Persistence</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/persistence">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/configuring-persistence">Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/backing-up-persistence">Backups</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/triggering-force-start">Force-start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/triggering-partial-start">Partial-start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/persistence-on-intel">Intel Optane DC</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/copying-persistence">Copying Data</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/performance">Performance Benchmark</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../storage/persistence-design">Design Details</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Detecting failures</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="failure-detector-configuration">Failure Detectors</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="deadline-detector">Deadline Failure Detector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="phi-accrual-detector">Phi Accrual Failure Detector</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="ping-detector">Ping Failure Detector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../fault-tolerance/timeouts">Connection Timeouts</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../fault-tolerance/fault-tolerance">Fault Tolerance for Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Handling network partitions</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/network-partitioning">Network Partitioning</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/partial-network-partitions">Partial Network Partitions</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/dealing-with-network-partitions">Dealing with Network Partitions</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/split-brain-protection">Split-Brain Protection</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../network-partitioning/split-brain-recovery">Split-Brain Recovery</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">CP Subsystem</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/cp-subsystem">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/configuration">Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/management">Management</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../cp-subsystem/best-practices">Best Practices</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../storage/high-density-memory">High-Density Memory Store</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Tiered Storage</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../tiered-storage/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../tiered-storage/capacity-planning">Capacity Planning</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../tiered-storage/configuration">Configuration</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../tiered-storage/compactor">Compactor</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../tiered-storage/performance">Performance</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../tiered-storage/troubleshooting">Troubleshooting</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../cluster-performance/thread-per-core-tpc">Thread-Per-Core (TPC)</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Synchronizing data across clusters</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/wan">WAN Replication Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/modes">WAN Replication Modes</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/quick-start">WAN Quickstart</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/defining-wan-replication">Configuring WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/configuring-for-map-and-cache">Configuring for IMap and ICache</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/advanced-features">Advanced Features</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/tuning">Fine-Tuning WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/failures">Failure Detection and Recovery</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../wan/rest-api">REST API for WAN Wrap-Up</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/extending-hazelcast">Extending Hazelcast</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/operationparker">OperationParker</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/discovery-spi">Discovery SPI</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../extending-hazelcast/config-properties-spi">Config Properties SPI</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../osgi/osgi">OSGI</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/osgi-support">OSGI Support</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/api">API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/configuring-osgi-support">Configuring Hazelcast OSGI Support</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/design">Design</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../osgi/using-osgi-service">Using Hazelcast OSGI Service</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Connectors</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../integrate/connectors">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Messaging system connectors</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/messaging-system-connectors">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/kafka-connector">Apache Kafka Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/kinesis-connector">Amazon Kinesis Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/jms-connector">JMS Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../integrate/database-connectors">Database and CDC connectors</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/jdbc-connector">JDBC Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/cdc-connectors">CDC Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/legacy-cdc-connectors">Legacy CDC Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/elasticsearch-connector">Elasticsearch Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/mongodb-connector">MongoDB Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">File Connectors</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/file-connector">Unified File Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/legacy-file-connector">Legacy File Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Hazelcast Data Structure Connectors</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/map-connector">Map Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/jcache-connector">JCache Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/list-connector">List Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/reliable-topic-connector">Reliable Topic Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ beta
+            " href="../integrate/vector-collection-connector">Vector Collection Connector</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../integrate/kafka-connect-connectors">Kafka Connect Source Connectors</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../integrate/socket-connector">Socket Connectors</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../integrate/test-connectors">Test Source Connectors</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../integrate/custom-connectors">Custom Connectors</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Community Connectors</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/pulsar-connector">Apache Pulsar Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/http-connector">HTTP Listener Connector</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/influxdb-connector">InfluxDB Connector</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Clients and APIs</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../clients/client-overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Clients</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/java">Java Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/dotnet">.NET Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/python">Python Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/cplusplus">C++ Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/go">Go Client</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/nodejs">Node.js Client</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">APIs</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../maintain-cluster/enterprise-rest-api">REST API</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-rest-api-with-docker">Get started using Docker</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../getting-started/get-started-rest-api-with-java">Get started using Java</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../maintain-cluster/rest-api-swagger">Swagger UI for REST API</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+            " href="../maintain-cluster/dynamic-config-via-rest">Dynamic configuration tutorial</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../clients/memcache">Memcache</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Frameworks and plugins</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../spring/overview">Integrate with Spring</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/configuration">Configure Hazelcast in Spring</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/springaware">Enable SpringAware data structures</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/add-caching">Add caching to Spring</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/hibernate">Configure Hibernate second-level cache</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../spring/transaction-manager">Configure Hazelcast Transaction Manager</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../integrate/integrate-with-feast">Integrate with Feast</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/install-connect">Install and connect Feast</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/feast-config">Configure Feature Store</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/feature-engineering-with-feast">Get started with Feast batch features</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/streaming-features-with-feast">Get started with Feast streaming features</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../integrate/integrate-with-vertx">Integrate with Vert.x</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../integrate/get-started-with-vertx">Get started with Vert.x</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../plugins/hazelcast-plugins">Hazelcast Plugins</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/cloud-discovery">Cloud Discovery Plugins</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/web-session-replication">Web Session Replication Plugins</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/framework-integration">Framework Integration Plugins</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+            " href="../plugins/other-integrations">Other Integrations</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Reference</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../glossary">Glossary</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../system-properties">System Properties</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../faq">Frequently Asked Questions</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+            " href="../list-of-metrics">Metrics</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+  </div>
+    </div>
+  </aside>
+</div>
+<div id="hide-nav">
+  <button>
+    <span>
+      ᐸ
+    </span>
+  </button>
+</div>
+  <main class="article">
+    <div class="article-banner prerelease" id="latest-banner">
+      <div class="prerelease">
+      <p>This is a prerelease version.</p>
+          <a class="btn" href="../../5.5/clusters/network-configuration">View latest</a>
+      </div>
+      <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
+    </div>
+  <div class="content">
+    <article class="doc">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../">Hazelcast Platform</a></li>
+    <li>Operate and manage</li>
+    <li>Partition groups and networking</li>
+    <li><a href="network-configuration">Networking</a></li>
+  </ul>
+</nav>
+    <button class="nav-toggle"></button>
+      <h1 class="page">Network Configurations</h1>
+    <div class="page-versions">
+    <button class="version-menu-toggle" title="Show other versions of page">Version 6.0-SNAPSHOT</button>
+    <div class="version-menu">
+          <a class="version is-current" href="network-configuration">6.0-SNAPSHOT</a>
+          <a class="version" href="../../5.5/clusters/network-configuration">5.5</a>
+          <a class="version" href="../../5.4/clusters/network-configuration">5.4</a>
+          <a class="version" href="../../5.3/clusters/network-configuration">5.3</a>
+          <a class="version" href="../../5.2/clusters/network-configuration">5.2</a>
+          <a class="version" href="../../5.1/clusters/network-configuration">5.1</a>
+          <a class="version" href="../../5.0/clusters/network-configuration">5.0</a>
+    </div>
+  </div>
+  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>All network related configurations are performed via the <code>network</code> element
+in the Hazelcast XML configuration file or the class <code>NetworkConfig</code>
+when using programmatic configuration. Following subsections describe the
+available configurations that you can perform under the <code>network</code> element.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="public-address"><a class="anchor" href="#public-address"></a>Public Address</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>public-address</code> overrides the public address of a member. By default, a member
+selects its socket address as its public address. But behind a network address translation (NAT),
+two endpoints (members) may not be able to see/access each other.
+If both members set their public addresses to their defined addresses on NAT,
+then that way they can communicate with each other. In this case, their public addresses
+are not an address of a local network interface but a virtual address defined by NAT.
+It is optional to set and useful when you have a private cloud.
+Note that, the value for this element should be given in the format <strong><code>host IP address:port number</code></strong>.
+See the following examples.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset1_yaml"></a>YAML</p>
+</li>
+<li>
+<p><a id="tabset1_java"></a>Java</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;network&gt;
+        &lt;public-address&gt;11.22.33.44:5555&lt;/public-address&gt;
+    &lt;/network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  network:
+    public-address: 11.22.33.44:5555</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Config config = new Config();
+config.getNetworkConfig()
+    .setPublicAddress( "11.22.33.44:5555" );</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="port"><a class="anchor" href="#port"></a>Port</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can specify the ports that Hazelcast uses to communicate between cluster members.
+Its default value is <code>5701</code>. A port number of <code>0</code> will let the system pick up an ephemeral port. The following are example configurations.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset2_yaml"></a>YAML</p>
+</li>
+<li>
+<p><a id="tabset2_java"></a>Java</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;network&gt;
+        &lt;port port-count="20" auto-increment="true"&gt;5701&lt;/port&gt;
+    &lt;/network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  network:
+    port:
+      auto-increment: true
+      port-count: 20
+      port: 5701</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">Config config = new Config();
+config.getNetworkConfig().setPort( 5701 )
+    .setPortAutoIncrement( true ).setPortCount( 20 );</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>According to the above example, Hazelcast tries to find free ports between 5701 and 5720.</p>
+</div>
+<div class="paragraph">
+<p><code>port</code> has the following attributes.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>port-count</code>: By default, Hazelcast tries 100 ports to bind. Meaning that,
+if you set the value of port as 5701, as members are joining to the cluster,
+Hazelcast tries to find ports between 5701 and 5801. You can choose to change the
+port count in the cases like having large instances on a single machine or
+willing to have only a few ports to be assigned. The parameter <code>port-count</code>
+is used for this purpose, whose default value is 100.</p>
+</li>
+<li>
+<p><code>auto-increment</code>:  In some cases you may want to choose to use only one port.
+In that case, you can disable the auto-increment feature of <code>port</code> by setting
+<code>auto-increment</code> to <code>false</code>. The <code>port-count</code> attribute is not used when
+auto-increment feature is disabled.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="outbound-ports"><a class="anchor" href="#outbound-ports"></a>Outbound Ports</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, Hazelcast lets the system pick up an ephemeral port during socket bind operation.
+But security policies/firewalls may require you to restrict outbound ports to be
+used by Hazelcast-enabled applications. To fulfill this requirement, you can configure
+Hazelcast to use only defined outbound ports. The following are example configurations.</p>
+</div>
+<div class="paragraph">
+<p><strong>Declarative Configuration:</strong></p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset3_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset3_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset3_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;network&gt;
+        &lt;outbound-ports&gt;
+            &lt;!-- ports between 33000 and 35000 --&gt;
+            &lt;ports&gt;33000-35000&lt;/ports&gt;
+            &lt;!-- comma separated ports --&gt;
+            &lt;ports&gt;37000,37001,37002,37003&lt;/ports&gt;
+            &lt;ports&gt;38000,38500-38600&lt;/ports&gt;
+        &lt;/outbound-ports&gt;
+    &lt;/network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  network:
+    outbound-ports:
+      - 33000-35000
+      - 37000,37001,37002,37003
+      - 38000,38500-38600</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Programmatic Configuration:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">...
+NetworkConfig networkConfig = config.getNetworkConfig();
+// ports between 35000 and 35100
+networkConfig.addOutboundPortDefinition("35000-35100");
+// comma separated ports
+networkConfig.addOutboundPortDefinition("36001, 36002, 36003");
+networkConfig.addOutboundPort(37000);
+networkConfig.addOutboundPort(37001);
+...</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can use port ranges and/or comma separated ports.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As shown in the programmatic configuration, you use the method <code>addOutboundPort</code>
+to add only one port. If you need to add a group of ports, then use the method <code>addOutboundPortDefinition</code>.</p>
+</div>
+<div class="paragraph">
+<p>In the declarative configuration, the element <code>ports</code> can be used for both single and
+multiple port definitions. When you set this element to  <code>0</code> or  <code>*</code>,
+your operating system (not Hazelcast) selects a free port from the ephemeral range.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="reuse-address"><a class="anchor" href="#reuse-address"></a>Reuse Address</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you shutdown a cluster member, the server socket port goes into the
+<code>TIME_WAIT</code> state for the next couple of minutes. If you start the member right after
+shutting it down, you may not be able to bind it to the same port because it is in the
+<code>TIME_WAIT</code> state. If you set the <code>reuse-address</code> element to <code>true</code>, the <code>TIME_WAIT</code> state
+is ignored and you can bind the member to the same port again.</p>
+</div>
+<div class="paragraph">
+<p>The following are example configurations.</p>
+</div>
+<div class="paragraph">
+<p><strong>Declarative Configuration:</strong></p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset4_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset4_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset4_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;network&gt;
+        &lt;reuse-address&gt;true&lt;/reuse-address&gt;
+    &lt;/network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset4_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  network:
+    reuse-address: true</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Programmatic Configuration:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">...
+NetworkConfig networkConfig = config.getNetworkConfig();
+
+networkConfig.setReuseAddress( true );
+...</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="join"><a class="anchor" href="#join"></a>Join</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>join</code> configuration element is used to discover Hazelcast members and enable them
+to form a cluster. Hazelcast provides Auto Detection, Multicast, TCP/IP, AWS, Kubernetes, Azure, GCP, Eureka, and more.
+These mechanisms are explained the <a href="discovery-mechanisms" class="xref page">Discovery Mechanisms section</a>.
+This section describes all the sub-elements and attributes of <code>join</code> element.
+The following are example configurations.</p>
+</div>
+<div class="paragraph">
+<p><strong>Declarative Configuration:</strong></p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset5_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset5_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset5_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;network&gt;
+        &lt;join&gt;
+            &lt;auto-detection enabled="true" /&gt;
+            &lt;multicast enabled="false"&gt;
+                &lt;multicast-group&gt;224.2.2.3&lt;/multicast-group&gt;
+                &lt;multicast-port&gt;54327&lt;/multicast-port&gt;
+                &lt;multicast-time-to-live&gt;32&lt;/multicast-time-to-live&gt;
+                &lt;multicast-timeout-seconds&gt;2&lt;/multicast-timeout-seconds&gt;
+                &lt;trusted-interfaces&gt;
+                    &lt;interface&gt;192.168.1.102&lt;/interface&gt;
+                &lt;/trusted-interfaces&gt;
+            &lt;/multicast&gt;
+            &lt;tcp-ip enabled="false"&gt;
+                &lt;required-member&gt;192.168.1.104&lt;/required-member&gt;
+                &lt;member&gt;192.168.1.104&lt;/member&gt;
+                &lt;members&gt;192.168.1.105,192.168.1.106&lt;/members&gt;
+            &lt;/tcp-ip&gt;
+            &lt;aws enabled="false"&gt;
+                &lt;access-key&gt;my-access-key&lt;/access-key&gt;
+                &lt;secret-key&gt;my-secret-key&lt;/secret-key&gt;
+                &lt;region&gt;us-west-1&lt;/region&gt;
+                &lt;host-header&gt;ec2.amazonaws.com&lt;/host-header&gt;
+                &lt;security-group-name&gt;hazelcast-sg&lt;/security-group-name&gt;
+                &lt;tag-key&gt;type&lt;/tag-key&gt;
+                &lt;tag-value&gt;hz-members&lt;/tag-value&gt;
+            &lt;/aws&gt;
+            &lt;discovery-strategies&gt;
+                &lt;discovery-strategy ... /&gt;
+            &lt;/discovery-strategies&gt;
+        &lt;/join&gt;
+    &lt;/network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset5_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  network:
+    join:
+      auto-detection:
+        enabled: true
+      multicast:
+        enabled: false
+        multicast-group: 224.2.2.3
+        multicast-port: 54327
+        multicast-time-to-live: 32
+        multicast-timeout-seconds: 2
+        trusted-interfaces:
+          - 192.168.1.102
+      tcp-ip:
+        enabled: false
+        required-member: 192.168.1.104
+        member-list:
+          - 192.168.1.104
+          - 192.168.1.105,192.168.1.106
+      aws:
+        enabled: false
+        access-key: my-access-key
+        secret-key: my-secret-key
+        region: us-west-1
+        host-header: ec2.amazonaws.com
+        security-group-name: hazelcast-sg
+        tag-key: type
+        tag-value: hz-nodes
+      discovery-strategies:
+        discovery-strategy:
+          ...</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Programmatic Configuration:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Config config = new Config();
+NetworkConfig network = config.getNetworkConfig();
+JoinConfig join = network.getJoin();
+join.getTcpIpConfig().addMember( "10.45.67.32" ).addMember( "10.45.67.100" )
+            .setRequiredMember( "192.168.10.100" ).setEnabled( true );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>join</code> element has the following sub-elements and attributes.</p>
+</div>
+<div class="sect2">
+<h3 id="auto-detection-element"><a class="anchor" href="#auto-detection-element"></a>auto-detection element</h3>
+<div class="paragraph">
+<p>The <code>auto-detection</code> element includes the following parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>enabled</code>: Enables <a href="discovery-mechanisms#auto-detection.adoc" class="xref page">Hazelcast Auto Detection</a>, <code>true</code> by default.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="multicast-element"><a class="anchor" href="#multicast-element"></a>multicast element</h3>
+<div class="paragraph">
+<p>The <code>multicast</code> element includes parameters to fine tune the multicast join mechanism.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>enabled</code>: Specifies whether the multicast discovery is enabled or not, <code>true</code> or <code>false</code>.</p>
+</li>
+<li>
+<p><code>multicast-group</code>: The multicast group IP address. Specify it when you want to create
+clusters within the same network. Values can be between 224.0.0.0 and 239.255.255.255.
+Its default value is 224.2.2.3.</p>
+</li>
+<li>
+<p><code>multicast-port</code>: The multicast socket port that the Hazelcast member listens to and
+sends discovery messages through. Its default value is 54327.</p>
+</li>
+<li>
+<p><code>multicast-time-to-live</code>: Time-to-live value for multicast packets sent out to control
+the scope of multicasts. See more information, see <a href="http://www.tldp.org/HOWTO/Multicast-HOWTO-2.html" target="_blank" rel="noopener">The Linux Documentation Project</a>.</p>
+</li>
+<li>
+<p><code>multicast-timeout-seconds</code>: Only when the members are starting up, this timeout (in seconds)
+specifies the period during which a member waits for a multicast response from another member.
+For example, if you set it as 60 seconds, each member waits for 60 seconds until a leader
+member is selected. Its default value is 2 seconds.</p>
+</li>
+<li>
+<p><code>trusted-interfaces</code>: Includes IP addresses of trusted members. When a member wants to
+join to the cluster, its join request is rejected if it is not a trusted member. You can
+give an IP addresses range using the wildcard (*) on the last digit of IP address,
+e.g., 192.168.1.* or 192.168.1.100-110.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you prefer to use the multicast mechanism, make sure that your network is enclosed and secure. See the <a href="discovery-mechanisms#multicast" class="xref page">Multicast section</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tcp-ip-element"><a class="anchor" href="#tcp-ip-element"></a>tcp-ip element</h3>
+<div class="paragraph">
+<p>The <code>tcp-ip</code> element includes parameters to fine tune the TCP/IP join mechanism.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>enabled</code>: Specifies whether the TCP/IP discovery is enabled or not.
+Values can be <code>true</code> or <code>false</code>.</p>
+</li>
+<li>
+<p><code>required-member</code>: IP address of the required member. Cluster is only
+formed if the member with this IP address is found.</p>
+</li>
+<li>
+<p><code>member</code>: IP address(es) of one or more well known members. Once members
+are connected to these well known ones, all member addresses are communicated
+with each other. You can also give comma separated IP addresses using the <code>members</code> element.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>tcp-ip</code> element also accepts the <code>interface</code> parameter. See the
+<a href="#interfaces">Interfaces element description</a>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><code>connection-timeout-seconds</code>: Defines the connection timeout in seconds.
+This is the maximum amount of time Hazelcast is going to try to connect to a well
+known member before giving up. Setting it to a too low value could mean that a
+member is not able to connect to a cluster. Setting it to a too high value means
+that member startup could slow down because of longer timeouts, for example when
+a well known member is not up. Increasing this value is recommended if you have many
+IPs listed and the members cannot properly build up the cluster. Its default value is 5 seconds.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="aws-element"><a class="anchor" href="#aws-element"></a>aws element</h3>
+<div class="paragraph">
+<p>The <code>aws</code> element includes parameters to allow the members to form a cluster
+on the Amazon EC2 and ECS environments.</p>
+</div>
+<div class="paragraph">
+<p>For details, see <a href="../deploy/deploying-on-aws" class="xref page">Deploying a Cluster on Amazon AWS</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="azure-element"><a class="anchor" href="#azure-element"></a>azure element</h3>
+<div class="paragraph">
+<p>The <code>azure</code> element includes parameters to allow the members to form a cluster on the Azure VM machines.</p>
+</div>
+<div class="paragraph">
+<p>For details, see <a href="../deploy/deploying-on-azure" class="xref page">Deploying a Cluster on Microsoft Azure</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gcp-element"><a class="anchor" href="#gcp-element"></a>gcp element</h3>
+<div class="paragraph">
+<p>The <code>gcp</code> element includes parameters to allow the members to form a cluster on the GCP Compute VM instances.</p>
+</div>
+<div class="paragraph">
+<p>For details, see <a href="../deploy/deploying-on-gcp" class="xref page">Deploying a Cluster on Google Cloud Platform</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="kubernetes-element"><a class="anchor" href="#kubernetes-element"></a>kubernetes element</h3>
+<div class="paragraph">
+<p>The <code>kubernetes</code> element includes parameters to allow the members to form a cluster on the Kubernetes environment.</p>
+</div>
+<div class="paragraph">
+<p>For details, see <a href="../kubernetes/deploying-in-kubernetes" class="xref page">Deploying on Kubernetes</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="discovery-strategies-element"><a class="anchor" href="#discovery-strategies-element"></a>discovery-strategies element</h3>
+<div class="paragraph">
+<p>The <code>discovery-strategies</code> element configures internal or external discovery
+strategies based on the Hazelcast Discovery SPI. For further information, see
+the <a href="../extending-hazelcast/discovery-spi" class="xref page">Discovery SPI section</a> and the vendor documentation of
+the used discovery strategy.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="interfaces"><a class="anchor" href="#interfaces"></a>Interfaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can specify which network interfaces that Hazelcast should use.
+Servers mostly have more than one network interface, so you may want to list
+the valid IPs. <strong>Range characters <code>"*"</code> and <code>"-"</code></strong> can be used for simplicity.
+For instance, 10.3.10.* refers to IPs between 10.3.10.0 and 10.3.10.255.
+Interface 10.3.10.4-18 refers to IPs between 10.3.10.4 and 10.3.10.18
+(4 and 18 included). If network interface configuration is enabled
+(it is disabled by default) and if Hazelcast cannot find a matching interface,
+then it prints a message on the console and does not start on that member.</p>
+</div>
+<div class="paragraph">
+<p>The following are example configurations.</p>
+</div>
+<div class="paragraph">
+<p><strong>Declarative Configuration:</strong></p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset6_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset6_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset6_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;network&gt;
+        &lt;interfaces enabled="true"&gt;
+            &lt;interface&gt;10.3.16.*&lt;/interface&gt;
+            &lt;interface&gt;10.3.10.4-18&lt;/interface&gt;
+            &lt;interface&gt;192.168.1.3&lt;/interface&gt;
+        &lt;/interfaces&gt;
+    &lt;/network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset6_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  network:
+    interfaces:
+      enabled: true
+      interfaces:
+        - 10.3.16.*
+        - 10.3.10.4-18
+        - 192.168.1.3</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Programmatic Configuration:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Config config = new Config();
+NetworkConfig network = config.getNetworkConfig();
+InterfacesConfig interfaceConfig = network.getInterfaces();
+interfaceConfig.setEnabled( true )
+            .addInterface( "192.168.1.3" );</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ipv6-support"><a class="anchor" href="#ipv6-support"></a>IPv6 Support</h3>
+<div class="paragraph">
+<p>Hazelcast supports IPv6 addresses seamlessly (This support is switched
+off by default, see the note at the end of this section).</p>
+</div>
+<div class="paragraph">
+<p>All you need is to define IPv6 addresses or interfaces in the network
+configuration. The only current limitation is that you cannot define
+wildcard IPv6 addresses in the TCP/IP join configuration (<code>tcp-ip</code> element).
+<a href="#interfaces">Interfaces</a> configuration does not have this limitation,
+you can configure wildcard IPv6 interfaces in the same way as IPv4 interfaces.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset7_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset7_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset7_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;network&gt;
+        &lt;port auto-increment="true"&gt;5701&lt;/port&gt;
+        &lt;join&gt;
+            &lt;multicast enabled="false"&gt;
+                &lt;multicast-group&gt;FF02:0:0:0:0:0:0:1&lt;/multicast-group&gt;
+                &lt;multicast-port&gt;54327&lt;/multicast-port&gt;
+            &lt;/multicast&gt;
+            &lt;tcp-ip enabled="true"&gt;
+                &lt;member&gt;[fe80::223:6cff:fe93:7c7e]:5701&lt;/member&gt;
+                &lt;interface&gt;192.168.1.0-7&lt;/interface&gt;
+                &lt;interface&gt;192.168.1.*&lt;/interface&gt;
+                &lt;interface&gt;fe80:0:0:0:45c5:47ee:fe15:493a&lt;/interface&gt;
+            &lt;/tcp-ip&gt;
+        &lt;/join&gt;
+        &lt;interfaces enabled="true"&gt;
+            &lt;interface&gt;10.3.16.*&lt;/interface&gt;
+            &lt;interface&gt;10.3.10.4-18&lt;/interface&gt;
+            &lt;interface&gt;fe80:0:0:0:45c5:47ee:fe15:*&lt;/interface&gt;
+            &lt;interface&gt;fe80::223:6cff:fe93:0-5555&lt;/interface&gt;
+        &lt;/interfaces&gt;
+    &lt;/network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset7_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  network:
+    port:
+      auto-increment: true
+      port: 5701
+    join:
+      multicast:
+        enabled: false
+        multicast-group: FF02:0:0:0:0:0:0:1
+        multicast-port: 54327
+      tcp-ip:
+        enabled: true
+        member: [fe80::223:6cff:fe93:7c7e]:5701
+        interface: 192.168.1.0-7
+        interface: 192.168.1.*
+        interface: fe80:0:0:0:45c5:47ee:fe15:493a
+    interfaces:
+      enabled: true
+      interfaces:
+        - 10.3.16.*
+        - 10.3.10.4-18
+        - fe80:0:0:0:45c5:47ee:fe15:*
+        - fe80::223:6cff:fe93:0-5555</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>JVM has two system properties for setting the preferred protocol stack
+(IPv4 or IPv6) as well as the preferred address family types (inet4 or inet6).
+On a dual stack machine, IPv6 stack is preferred by default, you can change this
+through the <code>java.net.preferIPv4Stack=&lt;true|false&gt;</code> system property. When querying
+name services, JVM prefers IPv4 addresses over IPv6 addresses and returns an IPv4
+address if possible. You can change this through <code>java.net.preferIPv6Addresses=&lt;true|false&gt;</code>
+system property.</p>
+</div>
+<div class="paragraph">
+<p>See also additional <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/net/ipv6_guide/" target="_blank" rel="noopener">details on IPv6 support in Java</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+By default, IPv6 support has been switched off. Some platforms have issues
+using the IPv6 stack. Other platforms have no IPv6 support at all. To enable IPv6 support,
+just set the configuration property <code>hazelcast.prefer.ipv4.stack</code> to <code>false</code>.
+See the <a href="../system-properties" class="xref page">System Properties appendix</a> for details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="member-address-provides-spi"><a class="anchor" href="#member-address-provides-spi"></a>Member Address Provider SPI</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This SPI is not intended to provide addresses of other cluster members with
+which the Hazelcast instance forms a cluster. To do that, see the
+<a href="#other-network-configurations">previous sections</a> above.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>By default, Hazelcast chooses the public and bind address. You can influence on the
+choice by defining a <code>public-address</code> in the configuration or by using other
+properties mentioned above. In some cases, though, these properties are not
+enough and the default address picking strategy chooses wrong addresses.
+This may be the case when deploying Hazelcast in some cloud environments,
+such as AWS, when using Docker or when the instance is deployed behind a NAT
+and the <code>public-address</code> property is not enough (see the <a href="#public-address">Public Address section</a>).</p>
+</div>
+<div class="paragraph">
+<p>In these cases, it is possible to configure the bind and public address
+in a more advanced way. You can provide an implementation of the
+<code>com.hazelcast.spi.MemberAddressProvider</code> interface which provides
+the bind and public address. The implementation may then choose these
+addresses in any way - it may read from a system property or file or
+even invoke a web service to retrieve the public and private address.</p>
+</div>
+<div class="paragraph">
+<p>The details of the implementation depend heavily on the environment in which
+Hazelcast is deployed. As such, we now demonstrate how to configure Hazelcast
+to use a simplified custom member address provider SPI implementation.
+An example implementation is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static final class SimpleMemberAddressProvider implements MemberAddressProvider {
+    @Override
+    public InetSocketAddress getBindAddress() {
+        // determine the address using some configuration, calling an API, ...
+        return new InetSocketAddress(hostname, port);
+    }
+
+    @Override
+    public InetSocketAddress getPublicAddress() {
+        // determine the address using some configuration, calling an API, ...
+        return new InetSocketAddress(hostname, port);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that if the bind address port is <code>0</code> then it uses a port as configured
+in the Hazelcast network configuration (see the <a href="#port">Port section</a>).
+If the public address port is set to <code>0</code> then it broadcasts the same port that
+it is bound to. If you wish to bind to any local interface, you may return
+<code>new InetSocketAddress((InetAddress) null, port)</code> from the <code>getBindAddress()</code> address.</p>
+</div>
+<div class="paragraph">
+<p>The following configuration examples contain properties that are provided to the
+constructor of the provider class. If you do not provide any properties, the class
+may have either a no-arg constructor or a constructor accepting a single
+<code>java.util.Properties</code> instance. On the other hand, if you do provide properties
+in the configuration, the class must have a constructor accepting a single
+<code>java.util.Properties</code> instance.</p>
+</div>
+<div class="paragraph">
+<p><strong>Declarative Configuration:</strong></p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset8_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset8_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset8_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;network&gt;
+        &lt;member-address-provider enabled="true"&gt;
+            &lt;class-name&gt;SimpleMemberAddressProvider&lt;/class-name&gt;
+            &lt;properties&gt;
+                &lt;property name="prop1"&gt;prop1-value&lt;/property&gt;
+                &lt;property name="prop2"&gt;prop2-value&lt;/property&gt;
+            &lt;/properties&gt;
+        &lt;/member-address-provider&gt;
+        &lt;!-- other network configurations --&gt;
+    &lt;/network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset8_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  network:
+    member-address-provider:
+      enabled: true
+      class-name: SimpleMemberAddressProvider
+      properties:
+        prop1: prop1-value
+        prop2: prop2-value
+    ...</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Programmatic Configuration:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Config config = new Config();
+MemberAddressProviderConfig memberAddressProviderConfig = config.getNetworkConfig().getMemberAddressProviderConfig();
+memberAddressProviderConfig
+      .setEnabled(true)
+      .setClassName(MemberAddressProviderWithStaticProperties.class.getName());
+Properties properties = memberAddressProviderConfig.getProperties();
+properties.setProperty("prop1", "prop1-value");
+properties.setProperty("prop2", "prop2-value");
+
+config.getNetworkConfig().getJoin().getAutoDetectionConfig().setEnabled(false);
+
+// perform other configuration
+
+Hazelcast.newHazelcastInstance(config);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="advanced-network-configuration"><a class="anchor" href="#advanced-network-configuration"></a>Advanced Network Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With the default configuration, Hazelcast members use a single server socket for all kinds
+of connections: cluster members, Hazelcast clients implementing the Open Binary Client
+Protocol and HTTP protocol clients connect to a single server socket that handles all the protocols.</p>
+</div>
+<div class="paragraph">
+<p>You can also configure the Hazelcast members with
+separate server sockets using a different network configuration for different protocols.
+This configuration scheme allows more flexibility when deploying Hazelcast as described
+in the following cases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For security, it is possible to bind the member protocol server socket on a protected
+internal network interface, while the client connections can be established on another
+network interface accessible by the Hazelcast clients.</p>
+</li>
+<li>
+<p>Different kinds of network connections can be established with different socket options.
+For example varying send/receive window size to optimize the network usage, TLS for
+connections over WAN while member-to-member connections may remain unencrypted, etc.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the following example we introduce the advanced network configuration for a
+member to listen for member-to-member connections on the default port <code>5701</code> while
+listening for client connections on the port <code>9090</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">        Config config = new Config();
+        config.getAdvancedNetworkConfig().setEnabled(true);
+        config.getAdvancedNetworkConfig().setClientEndpointConfig(
+                new ServerSocketEndpointConfig().setPort(9090)
+        );
+        HazelcastInstance instance = Hazelcast.newHazelcastInstance(config);
+        System.out.println(instance.getCluster().getLocalMember().getAddressMap());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Running this example prints something similar to the following output,
+indicating that the member listens for the specified protocols on the respective configured ports:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{EndpointQualifier{type='CLIENT'}=[10.212.134.156]:9090, EndpointQualifier{type='MEMBER'}=[10.212.134.156]:5701}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following is the equivalent declarative configuration:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset9_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset9_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset9_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;advanced-network enabled="true"&gt;
+        &lt;member-server-socket-endpoint-config&gt;
+            &lt;port&gt;5701&lt;/port&gt;
+        &lt;/member-server-socket-endpoint-config&gt;
+        &lt;client-server-socket-endpoint-config&gt;
+            &lt;port&gt;9090&lt;/port&gt;
+        &lt;/client-server-socket-endpoint-config&gt;
+    &lt;/advanced-network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset9_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  advanced-network:
+    enabled: true
+    member-server-socket-endpoint-config:
+      port:
+        - 5701
+    client-server-socket-endpoint-config:
+      port:
+        - 9090</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-up-cluster-members-for-advanced-network-configuration"><a class="anchor" href="#setting-up-cluster-members-for-advanced-network-configuration"></a>Setting Up Cluster Members for Advanced Network Configuration</h3>
+<div class="paragraph">
+<p>Advanced network configuration and single-socket network configuration are
+mutually exclusive: either an enabled <code>AdvancedNetworkConfig</code> or the <code>NetworkConfig</code>
+object is used to configure a member&#8217;s networking, including the joiner, discovery,
+failure detectors, etc. as described in the previous sections of this chapter.</p>
+</div>
+<div class="paragraph">
+<p>You cannot define both elements in the declarative configuration, i.e., the <code>network</code>
+and <code>advanced-network</code> elements cannot be configured at the same time. In the
+programmatic configuration, an enabled <code>AdvancedNetworkConfig</code> takes precedence over
+the <code>NetworkConfig</code>. <code>AdvancedNetworkConfig</code> is disabled by default, therefore the
+single socket member configuration under <code>NetworkConfig</code> is used in the default case.</p>
+</div>
+<div class="paragraph">
+<p>When using the advanced network configuration, the following configurations are defined
+member-wide:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Joiner and cluster discovery (Multicast, TCP/IP, AWS, Azure, GCP, Kubernetes, Eureka, etc.)</p>
+</li>
+<li>
+<p><code>MemberAddressProvider</code> configuration</p>
+</li>
+<li>
+<p>Failure detector configuration</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition to the above, the advanced network configuration allows the
+configuration of multiple endpoints: each endpoint configuration applies for a
+specific protocol, e.g., <code>MEMBER</code> and <code>CLIENT</code>. An additional optional identifier
+can be configured to separate the configuration of multiple <code>WAN</code> protocol endpoints.</p>
+</div>
+<div class="paragraph">
+<p>The supported protocols are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MEMBER</code>: A member server socket is required for Hazelcast to operate. The default
+advanced network configuration defines a member endpoint configuration listening on
+port 5701 (same as the single-socket Hazelcast member configuration).</p>
+</li>
+<li>
+<p><code>CLIENT</code>: A single server socket handling the Hazelcast Open Binary Client Protocol
+can be optionally configured. If no such endpoint is configured, then the clients will
+not be able to connect to the Hazelcast member.</p>
+</li>
+<li>
+<p><code>REST</code>: A REST server socket is optional.</p>
+</li>
+<li>
+<p><code>MEMCACHE</code>: When accessing a Hazelcast cluster over the Memcache text protocol, an
+endpoint listening to <code>MEMCACHE</code> protocol must be defined.</p>
+</li>
+<li>
+<p><code>WAN</code>: Multiple WAN endpoint configurations can be defined to determine the network
+settings of outgoing connections (from the members of a source cluster to the target
+WAN cluster members) or to establish server sockets on which a target WAN member can
+listen for the incoming connections from the source cluster.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When using the advanced network configuration and defining separate endpoints for
+<code>WAN</code> and <code>MEMBER</code> protocols, you must ensure that endpoint ranges do not overlap.
+Each protocol must be configured with unique endpoints that are not used in other protocols,
+otherwise WAN replication can cause the cluster to
+become unstable if IPs are reused.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="server-socket-endpoint-configuration"><a class="anchor" href="#server-socket-endpoint-configuration"></a>Server Socket Endpoint Configuration</h3>
+<div class="paragraph">
+<p>The server socket endpoint configuration is common for all protocols. The elements
+comprising a server socket endpoint configuration are identical to their single-socket
+network configuration counterparts.</p>
+</div>
+<div class="paragraph">
+<p>The following declarative configuration example includes all the common server
+socket endpoint elements:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset10_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset10_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset10_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+   ...
+   &lt;advanced-network enabled="true"&gt;
+       &lt;member-server-socket-endpoint-config&gt;
+           &lt;port auto-increment="true" port-count="100"&gt;5701&lt;/port&gt;
+           &lt;outbound-ports&gt;
+               &lt;ports&gt;33000-35000&lt;/ports&gt;
+               &lt;ports&gt;37000,37001,37002,37003&lt;/ports&gt;
+               &lt;ports&gt;38000,38500-38600&lt;/ports&gt;
+           &lt;/outbound-ports&gt;
+           &lt;interfaces enabled="true"&gt;
+               &lt;interface&gt;10.10.1.*&lt;/interface&gt;
+           &lt;/interfaces&gt;
+           &lt;ssl enabled="true"&gt;
+               &lt;factory-class-name&gt;com.hazelcast.examples.MySSLContextFactory&lt;/factory-class-name&gt;
+               &lt;properties&gt;
+                   &lt;property name="foo"&gt;bar&lt;/property&gt;
+               &lt;/properties&gt;
+           &lt;/ssl&gt;
+           &lt;symmetric-encryption&gt;
+               &lt;algorithm&gt;ALGO&lt;/algorithm&gt;
+               &lt;salt&gt;SALT&lt;/salt&gt;
+               &lt;password&gt;PASS&lt;/password&gt;
+               &lt;iteration-count&gt;10000&lt;/iteration-count&gt;
+           &lt;/symmetric-encryption&gt;
+           &lt;socket-interceptor enabled="true"&gt;
+               &lt;class-name&gt;com.hazelcast.examples.MySocketInterceptor&lt;/class-name&gt;
+               &lt;properties&gt;
+                   &lt;property name="foo"&gt;bar&lt;/property&gt;
+               &lt;/properties&gt;
+           &lt;/socket-interceptor&gt;
+           &lt;socket-options&gt;
+               &lt;buffer-direct&gt;true&lt;/buffer-direct&gt;
+               &lt;tcp-no-delay&gt;true&lt;/tcp-no-delay&gt;
+               &lt;keep-alive&gt;true&lt;/keep-alive&gt;
+               &lt;connect-timeout-seconds&gt;64&lt;/connect-timeout-seconds&gt;
+               &lt;send-buffer-size-kb&gt;25&lt;/send-buffer-size-kb&gt;
+               &lt;receive-buffer-size-kb&gt;33&lt;/receive-buffer-size-kb&gt;
+               &lt;linger-seconds&gt;99&lt;/linger-seconds&gt;
+           &lt;/socket-options&gt;
+           &lt;public-address&gt;dummy&lt;/public-address&gt;
+           &lt;reuse-address&gt;true&lt;/reuse-address&gt;
+        &lt;/member-server-socket-endpoint-config&gt;
+    &lt;/advanced-network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset10_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  advanced-network
+    enabled: true
+    member-server-socket-endpoint-config:
+    port:
+      auto-increment: true
+      port-count: 100
+      port: 5701
+    outbound-ports:
+      - 33000-35000
+      - 37000,37001,37002,37003
+      - 38000,38500-38600
+    interfaces:
+      enabled: true
+      interfaces:
+        - 10.10.1.*
+    ssl:
+      enabled: true
+      factory-class-name: com.hazelcast.examples.MySSLContextFactory
+      properties:
+        foo: bar
+    symmetric-encryption:
+      algorithm: ALGO
+      salt: SALT
+      password: PASS
+      iteration-count: 10000
+    socket-interceptor:
+      enabled: true
+      class-name: com.hazelcast.examples.MySocketInterceptor
+      properties:
+        foo: bar
+    socket-options:
+      buffer-direct: true
+      tcp-no-delay: true
+      keep-alive: true
+      connect-timeout-seconds: 64
+      send-buffer-size-kb: 25
+      receive-buffer-size-kb: 33
+      linger-seconds: 99
+    public-address: dummy
+    reuse-address: true</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>When using the declarative configuration, specific element names introduce the
+server socket endpoint configuration for each protocol:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>member-server-socket-endpoint-config</code> for <code>MEMBER</code> protocol</p>
+</li>
+<li>
+<p><code>client-server-socket-endpoint-config</code> for <code>CLIENT</code> protocol</p>
+</li>
+<li>
+<p><code>rest-server-socket-endpoint-config</code> for <code>REST</code> endpoint</p>
+</li>
+<li>
+<p><code>memcache-server-socket-endpoint-config</code> for <code>MEMCACHE</code> endpoint</p>
+</li>
+<li>
+<p><code>wan-server-socket-endpoint-config</code> for <code>WAN</code> endpoints</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When using the programmatic configuration, corresponding methods set the
+respective server socket endpoint configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">        config.getAdvancedNetworkConfig().setMemberEndpointConfig(
+                new ServerSocketEndpointConfig()
+                    .setPort(5701)
+                    .setPortAutoIncrement(false)
+                    .setSSLConfig(new SSLConfig())
+                    .setReuseAddress(true)
+                    .setSocketTcpNoDelay(true)
+        );</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-up-rest-server-socket-endpoint-configuration"><a class="anchor" href="#setting-up-rest-server-socket-endpoint-configuration"></a>Setting Up REST Server Socket Endpoint Configuration</h3>
+<div class="paragraph">
+<p>In addition to the common server socket configuration described above, the REST
+endpoint configuration includes certain additional elements which are used to
+enable/disable the REST functionality groups.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">        config.getAdvancedNetworkConfig().setRestEndpointConfig(
+                new RestServerEndpointConfig()
+                    .setPort(8080)
+                    .setPortAutoIncrement(false)
+                    .enableGroups(WAN, CLUSTER_READ, HEALTH_CHECK)
+        );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following is the equivalent declarative configuration:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset11_xml"></a>XML</p>
+</li>
+<li>
+<p><a id="tabset11_yaml"></a>YAML</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset11_xml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;advanced-network enabled="true"&gt;
+        &lt;rest-server-socket-endpoint-config&gt;
+            &lt;port auto-increment="false"&gt;8080&lt;/port&gt;
+            &lt;endpoint-groups&gt;
+                &lt;endpoint-group name="WAN" enabled="true"/&gt;
+                &lt;endpoint-group name="CLUSTER_READ" enabled="true"/&gt;
+                &lt;endpoint-group name="HEALTH_CHECK" enabled="true"/&gt;
+            &lt;/endpoint-groups&gt;
+        &lt;/rest-server-socket-endpoint-config&gt;
+    &lt;/advanced-network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset11_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  advanced-network:
+    enabled: true
+    rest-server-socket-endpoint-config:
+      port:
+        auto-increment: false
+        port: 8080
+      endpoint-groups:
+        WAN:
+          enabled: true
+        CLUSTER_READ:
+          enabled: true
+        HEALTH_CHECK:
+          enabled: true</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">Deprecation Notice for the Community Edition REST API</div>
+<div class="paragraph">
+<p>The Community Edition REST API has been deprecated and will be removed as of Hazelcast version 7.0. An improved Enterprise version of this feature is available and actively being developed. For more info, see <a href="../maintain-cluster/enterprise-rest-api" class="xref page">Enterprise REST API</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-tcp-keep-alive"><a class="anchor" href="#configuring-tcp-keep-alive"></a>Configuring TCP Keep-Alive</h3>
+<div class="paragraph">
+<p>You can specify TCP keep-alive options for each socket for use cases such as preventing the connections over WAN to be dropped due to inactivity.</p>
+</div>
+<div class="paragraph">
+<p>These options are generally supported by macOS and Linux systems (not Windows OS).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+TCP keep-alive feature may not be supported on specific builds of the above systems as there is no official JDK documentation guaranteeing such.
+In this case, Hazelcast logs a warning suggesting to upgrade to the latest JDK. If upgrading does not work either, you should check with your JDK vendor.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can set up the following keep-alive socket options.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset12_xml-advanced-network-configuration"></a>XML (Advanced Network Configuration)</p>
+</li>
+<li>
+<p><a id="tabset12_yaml-advanced-network-configuration"></a>YAML (Advanced Network Configuration)</p>
+</li>
+<li>
+<p><a id="tabset12_system-properties"></a>System Properties</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset12_xml-advanced-network-configuration">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;advanced-network enabled="true"&gt;
+        &lt;member-server-socket-endpoint-config&gt;
+            &lt;socket-options&gt;
+                ...
+                &lt;keep-alive&gt;true&lt;/keep-alive&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+                &lt;keep-count&gt;10&lt;/keep-count&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+                &lt;keep-idle-seconds&gt;600&lt;/keep-idle-seconds&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+                &lt;keep-interval-seconds&gt;15&lt;/keep-interval-seconds&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+            &lt;/socket-options&gt;
+        &lt;/member-server-socket-endpoint-config&gt;
+    &lt;/advanced-network&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset12_yaml-advanced-network-configuration">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">hazelcast:
+  advanced-network:
+    enabled: true
+    member-server-socket-endpoint-config:
+      socket-options:
+        ...
+        keep-alive: true <i class="conum" data-value="1"></i><b>(1)</b>
+        keep-count: 10 <i class="conum" data-value="2"></i><b>(2)</b>
+        keep-idle-seconds: 600 <i class="conum" data-value="3"></i><b>(3)</b>
+        keep-interval-seconds: 15 <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset12_system-properties">
+<div class="paragraph">
+<p>You can use this configuration approach when you don&#8217;t need or want to use the advanced network configuration.
+See <a href="../configuration/configuring-with-system-properties" class="xref page">Configuring with System Properties</a> to see the alternative options.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;hazelcast&gt;
+    ...
+    &lt;properties&gt;
+        &lt;property name="hazelcast.socket.keep.alive"&gt;true&lt;/property&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+        &lt;property name="hazelcast.socket.keep.count"&gt;10&lt;/property&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+        &lt;property name="hazelcast.socket.keep.idle"&gt;600&lt;/property&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+        &lt;property name="hazelcast.socket.keep.interval"&gt;15&lt;/property&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+    &lt;/properties&gt;
+    ...
+&lt;/hazelcast&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Specifies whether <a href="https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/overview.html" target="_blank" rel="noopener">TCP keep-alive</a> should be enabled. The default value is <code>true</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The number of unacknowledged TCP keep-alive probes to be sent before declaring a connection dead. Configuration is valid when <code>keep-alive</code> is <code>true.</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The duration, in seconds, to wait after the last packet was sent before sending a TCP keep-alive probe. Configuration is valid when <code>keep-alive</code> is <code>true.</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The duration, in seconds, to wait between the TCP keep-alive probes. Configuration is valid when <code>keep-alive</code> is <code>true.</code></td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>See <a href="../wan/defining-wan-replication#keeping-wan-connections-alive-across-firewalls" class="xref page">Keeping WAN Connections Alive Across Firewalls</a> on how to set the keep-alive options for your WAN replicated clusters.</p>
+</div>
+<div class="paragraph">
+<p>The keep-alive options are defined under the <code>member-server-socket-endpoint-config</code> parent element in the above examples. The same options also exist under the
+<code>wan-server-socket-endpoint-config</code> and <code>wan-endpoint-config</code> parent elements in case you want to configure TCP keep-alive for WAN replication.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-up-wan-endpoints-configuration"><a class="anchor" href="#setting-up-wan-endpoints-configuration"></a>Setting Up WAN Endpoints Configuration</h3>
+<div class="paragraph">
+<p>Multiple WAN endpoint configurations can be defined to configure the outgoing
+connections and server sockets, depending on the role of the member in the WAN
+replication. See the <a href="../wan/advanced-features#securing-wan-connections.adoc" class="xref page">Securing the Connections for WAN Replication section</a> for the configuration examples.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="advanced-network-configuration-faq"><a class="anchor" href="#advanced-network-configuration-faq"></a>Advanced Network Configuration FAQ</h3>
+<div class="qlist qanda">
+<ol>
+<li>
+<p><em>Can I multiplex protocols on a single advanced network endpoint? For example, can I use a single server socket to listen for <code>MEMBER</code> and <code>CLIENT</code> protocols?</em></p>
+<p>No, each endpoint configuration that defines a server socket must bind to a different socket address.</p>
+</li>
+<li>
+<p><em>Can I mix single socket and advanced network members in the same cluster?</em></p>
+<p>No, the results will be undefined.</p>
+</li>
+<li>
+<p><em>Can I configure multiple server socket endpoints for the same protocol?</em></p>
+<p>You can only configure multiple server socket endpoints for <code>WAN</code> protocol. For other protocols (<code>MEMBER</code>, <code>CLIENT</code>, <code>REST</code>, <code>MEMCACHE</code>), a single server socket can be configured.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="partition-group-configuration">Grouping partitions</a></span>
+  <span class="next"><a href="../security/overview">Security Overview</a></span>
+</nav>
+</article>
+    <div class="toc-container">
+  <aside class="toc sidebar" data-title="Contents" data-levels="1">
+    <div class="toc-menu"></div>
+  </aside>
+  <div class="feedback-prompt">
+    <a class="edit-this-page feedback-button" href="https://github.com/hazelcast/hz-docs/edit/main/docs/modules/clusters/pages/network-configuration.adoc" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/hz-docs/issues/new?title=Docs: Feedback for Network Configurations&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/hz-docs/edit/main/docs/modules/clusters/pages/network-configuration.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <div class="feedback-form-container">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
+    <span class="helpful-feedback-title">Was this helpful?</span>
+    <div class="helpful-feedback-buttons">
+      <label for="positive-feedback-starter" class="feedback-button yes-button">
+        <img src="../../../_/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
+      </label>
+      <label for="negative-feedback-starter" class="feedback-button no-button">
+        <img src="../../../_/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
+      </label>
+    </div>
+  </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
+
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue or answer a question.
+        </span>
+      </span>
+          </label>
+                <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Precisely describes the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Well written and easy to follow.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Helped me decide to use the product
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to try or adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another positive reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
+
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
+
+          <label for="could-not-find" class="feedback-radio-button-label">
+            <input type="radio" id="could-not-find" name="feedback" value="Couldn't find what I was looking for">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Couldn't find what I was looking for
+              </span>
+              <span class="radio-btn-description">
+                Missing important information or didn't answer my question.
+              </span>
+            </span>
+          </label>
+          <label for="inaccurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="inaccurate-radio-feedback" name="feedback" value="Inaccurate">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Inaccurate
+              </span>
+              <span class="radio-btn-description">
+                Doesn't accurately describe the product or feature.
+              </span>
+            </span>
+          </label>
+
+          <label for="hard-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="hard-to-understand" name="feedback" value="Hard to understand">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Hard to understand
+              </span>
+              <span class="radio-btn-description">
+                Too complicated or badly written.
+              </span>
+            </span>
+          </label>
+          <label for="code-sample-errors" class="feedback-radio-button-label">
+            <input type="radio" id="code-sample-errors" name="feedback" value="Code sample errors">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Code sample error
+              </span>
+              <span class="radio-btn-description">
+                Incorrect or missing code sample(s).
+               </span>
+            </span>
+          </label>
+          <label for="another-negative-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-negative-reason" name="feedback" value="Another negative reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="(Optional) Please provide specific examples or suggestions!"
+          rows="6"
+        ></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</main>
+
+</div>
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../../../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/hz-docs/issues/new?title=Docs: Feedback for Network Configurations&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/hz-docs/edit/main/docs/modules/clusters/pages/network-configuration.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+    <footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch(["tags:hazelcast-6.0-snapshot"]);
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+      }
+    }
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet')
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:hazelcast-6.0-snapshot",
+          "tags:management-center-6.0-snapshot",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:hazelcast-6.0-snapshot"]);
+      }
+    }
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>

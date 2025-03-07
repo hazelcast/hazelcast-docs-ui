@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Managing Client Connections | Hazelcast Documentation</title>
+    <link rel="canonical" href="https://docs.hazelcast.com/management-center/5.7/clusters/client-filtering">
+    <link rel="prev" href="clients">
+    <link rel="next" href="create-filter-lists-ui">
+    <meta name="description" content="When you use failover clients, you can disconnect them from one cluster and connect them to another, using client filtering in Management Center.">
+    <meta name="generator" content="Antora 3.1.10">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<!-- Apply the site styles after the docsearch ones -->
+<link rel="stylesheet" href="../../../_/css/site.css">
+<style>
+  .nav-item[data-depth="1"] {
+  color: #6d7480;
+}
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="3gaMIo4Cp94mol0v1ae9PNYw9xYLbP4O_IrQxSvnS7E" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQ59XD6');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Kapa snippet -->
+  <script
+    src="https://widget.kapa.ai/kapa-widget.bundle.js"
+    data-website-id="6b326171-dd1e-40c6-a948-1f9bb6c0ed52"
+    data-project-name="Hazelcast"
+    data-project-color="#000000"
+    data-project-logo="/_/img/kapa/kapa-logo.png"
+    data-modal-z-index="10001"
+    data-modal-title="Ask AI"
+    data-modal-header-bg-color="#71808A"
+    data-modal-title-color="#fff"
+    data-modal-disclaimer-text-color="#10A4B3"
+    data-modal-image-width="40"
+    data-modal-image-height="40"
+    data-modal-title-font-family="PP Telegraf"
+    data-modal-title-font-size="30px"
+    data-modal-title-font-weight="400"
+    data-modal-disclaimer="This is an experimental custom LLM for answering technical questions about Hazelcast. Answers are based **only** on Hazelcast documentation and support sources, but may not be fully accurate so please use your best judgement. Don't forget to rate the answers and give feedback!"
+    data-modal-example-questions="How do I get started with Hazelcast?,What are Enterprise-only features?,What is the best serialization strategy?,What is the CP Subsystem?"
+    data-button-image-width="40"
+    data-button-image-height="40"
+    data-button-border="1px solid #AFE922"
+    data-button-border-radius="10px"
+    data-button-bg-color="#0b2b39"
+    data-button-text-font-family="PP Telegraf"
+    data-button-text-font-size="16px"
+    data-button-text-font-weight="400"
+    data-search-mode-enabled="true"
+    data-search-display-num-results="10"
+    data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
+  ></script>
+  <!-- End Kapa snippet -->
+
+<script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+      <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ59XD6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="header">
+  <nav class="navbar navbar-brand">
+    <div class="navbar-start">
+      <a class="navbar-item navbar-logo-item" href="/">
+        <img class="navbar-logo-item-img" src="../../../_/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      </a>
+      <p class="navbar-item navbar-app-title">
+        Documentation
+      </p>
+    </div>
+
+    <div class="navbar-end">
+        <div id="search-input" class="navbar-item searchbox"></div>
+          <label class="filter checkbox">
+            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
+          </label>
+        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button navbar-button">Get Hazelcast</button>
+        </a>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+  <div class="nav-container" data-component="management-center" data-version="5.5">
+  <aside class="nav">
+    <div id="navVersionPicker" class="nav-version-picker" data-active-toggle>
+  <div class="navbar-product-name">
+    <a id="navbarProductName" class="nav-version-picker-toggle nav-version-picker-toggle-components" data-toggle-value="product"  title="Management Center">
+      Management Center
+    </a>
+  </div>
+
+    <div class="navbar-product-version">
+      <a id="navbarProductVersion" class="nav-version-picker-toggle nav-version-picker-toggle-versions" data-toggle-value="version" title="5.5">
+        5.5
+      </a>
+    </div>
+
+  <ul class="nav-version-picker-components" id="navbarProductsList">
+      <span>hazelcast</span>
+        <li class="component">
+              <a href="../../../hazelcast/5.5/">
+                Hazelcast Platform
+              </a>
+        </li>
+      <span>management-center</span>
+        <li class="component is-current">
+              <a href="../../5.7/">
+                Management Center
+              </a>
+        </li>
+      <span>home</span>
+      <span>privacy</span>
+      <span>templates</span>
+      <span>tutorials</span>
+        <li class="component">
+              <a href="../../../tutorials/">
+                Tutorials
+              </a>
+        </li>
+  </ul>
+
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+            <li
+              class="version"
+            >
+              <a href="../../6.0-snapshot/clusters/client-filtering">6.0-SNAPSHOT</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.7/clusters/client-filtering">5.7</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.6/clusters/client-filtering">5.6</a>
+            </li>
+            <li
+              class="version is-current"
+            >
+              <a href="client-filtering">5.5</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.4/clusters/client-filtering">5.4</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.3/clusters/client-filtering">5.3</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.2/clusters/client-filtering">5.2</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.1/clusters/client-filtering">5.1</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../5.0/clusters/client-filtering">5.0</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../4.2022.01/">4.2022.01</a>
+            </li>
+            <li
+              class="version"
+            >
+              <a href="../../4.2021.12/">4.2021.12</a>
+            </li>
+      </ul>
+</div>
+    <div class="panels">
+  <div class="nav-panel-menu is-active" data-panel="menu">
+    <nav class="nav-menu">
+        <ul class="nav-list">
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Get Started</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../whats-new">What&#8217;s new in 5.5</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/install">Installing and Starting</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../getting-started/get-started">Docker Compose Tutorial</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">User Interface Overview</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/user-interface">Top Bar and Side Bar</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/graphs">Graphs</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../getting-started/tables">Tables</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Deploy and Manage</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/production-checklist">Production Checklist</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Configuration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/configuring">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/system-properties">System Properties and Environment Variables</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/mc-conf">Management Center Configuration Tool</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/variable-replacers">Variable Replacers</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/logging">Logging</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Cluster Connections</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/cluster-connections">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/connecting-to-clusters-mc-conf">Connecting to a Cluster with the hz-mc conf Tool</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/connecting-to-clusters-ui">Connecting to a Cluster from the UI</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">License Management</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/license-management">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/updating-mc-license-ui">Updating an Enterprise License for Management Center</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Security</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/security">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">TLS</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/tls-security">TLS/SSL</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/serving-https">Serving Management Center over HTTPS</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/serve-mc-over-https">Tutorial</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">User Authentication</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/security-providers">Security Providers</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/dev-mode">Dev Mode</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/local-security-provider">Local Security Provider</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/active-directory">Active Directory</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/ldap">LDAP</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/jaas">JAAS</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/saml">SAML</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/openid">OpenID Connect</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/switching-security-provider">Switching to a New Security Provider</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/sessions">Securing User Sessions</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/user-management">User Management</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/historical-metrics">Historical Metrics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../deploy-manage/phone-homes">Phone Homes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Integrate</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../integrate/integrations">Integrations</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/prometheus-monitoring">Prometheus Monitoring</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Clustered JMX</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/jmx">Get Started</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/jmx-api">Clustered JMX Objects and Attributes</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Clustered REST</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/clustered-rest">Get Started</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/client-filtering">Client Filtering API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/cluster-metrics">Cluster Metrics API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/cluster-connections">Cluster Connections API</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="../integrate/wan-replication">WAN Replication API</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Tools</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/sql-browser">Executing SQL Queries</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/console">Executing Console Commands</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../tools/scripting">Scripting</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Cluster</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="dashboard">Dashboard</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="clients">Clients</a>
+              </li>
+      <li class="nav-item is-current-page" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="client-filtering">Client Filtering</a>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="create-filter-lists-ui">Deploying a Client Filter List from the UI</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="create-filter-lists-rest">Deploying a Client Filter List with the REST API</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="members">Members</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+              <span class="nav-text">Administration</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="administration">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Cluster States</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="cluster-state">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="changing-cluster-state">Changing the Cluster State</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+
+
+            " href="shutting-down-cluster">Shutting Down Members and Clusters</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+
+
+            " href="cluster-license">Viewing a Cluster License</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="triggering-rolling-upgrade">Rolling Upgrade</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+            <a class="nav-link
+ enterprise
+
+            " href="update-config">Update Config</a>
+              </li>
+      <li class="nav-item" data-depth="2">
+              <span class="nav-text">Persistence</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="persistence">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="triggering-force-start">Triggering a Force-Start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="triggering-partial-start">Triggering a Partial-Start</a>
+              </li>
+      <li class="nav-item" data-depth="3">
+            <a class="nav-link
+ enterprise
+
+            " href="triggering-hot-backup">Triggering Hot Backups</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="wan-replication">WAN Replication</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+ enterprise
+
+            " href="healthcheck">Healthcheck</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="namespaces">Namespaces</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Storage, Compute &amp; Messaging</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/overview">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/vector-collection">Vector Collections</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/map">Maps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/replicated-map">Replicated Maps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/cache">Caches</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/multimap">MultiMaps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/list">Lists</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/set">Sets</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/queue">Queues</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/topic">Topics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/reliable-topic">Reliable Topics</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/executor">Executors</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/pn-counter">PN Counters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../data-structures/flake-id-gen">Flake ID Generators</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Streaming</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/dashboard">Dashboard Page</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/jobs">Jobs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/snapshots">Snapshots</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../monitor-streaming/sql-tasks">SQL Tasks</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">CP Subsystem</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/dashboard">Dashboard</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/cpmap">CPMaps</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/atomic-long">Atomic Longs</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/semaphore">Semaphores</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/atomic-ref">Atomic References</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/countdown-latch">Countdown Latches</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../cp-subsystem/fenced-lock">Fenced Locks</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Troubleshoot</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../troubleshoot/hazelcast-clusters">Hazelcast Clusters</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../troubleshoot/management-center">Management Center</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Upgrade</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../migration-guides">Upgrading to Management Center 5.2.x</a>
+              </li>
+  </ul>
+      </li>
+      <li class="nav-item" data-depth="0">
+              <span class="nav-text">Release Notes</span>
+              <button class="nav-item-toggle"></button>
+          <ul class="nav-list">
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/releases">Overview</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-5-2">5.5.2</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-5-1">5.5.1</a>
+              </li>
+      <li class="nav-item" data-depth="1">
+            <a class="nav-link
+
+
+            " href="../release-notes/5-5-0">5.5.0</a>
+              </li>
+  </ul>
+      </li>
+  </ul>
+    </nav>
+  </div>
+    </div>
+  </aside>
+</div>
+<div id="hide-nav">
+  <button>
+    <span>
+      ᐸ
+    </span>
+  </button>
+</div>
+  <main class="article">
+    <div class="article-banner prerelease" id="latest-banner">
+      <div class="prerelease">
+        <p>A newer version of Management Center is available.</p>
+        <a class="btn" href="../../5.7/clusters/client-filtering">View latest</a>
+      </div>
+            <button onclick="closeBanner()" style="color:white; font-size: 2em; background:none; border:none; align-self: flex-start;">&times;</button>
+    </div>
+  <div class="content">
+    <article class="doc">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../">Management Center</a></li>
+    <li>Cluster</li>
+    <li><a href="client-filtering">Client Filtering</a></li>
+  </ul>
+</nav>
+    <button class="nav-toggle"></button>
+      <h1 class="page enterprise">Managing Client Connections</h1>
+    <div class="page-versions">
+    <button class="version-menu-toggle" title="Show other versions of page">Version 5.5</button>
+    <div class="version-menu">
+          <a class="version" href="../../6.0-snapshot/clusters/client-filtering">6.0-SNAPSHOT</a>
+          <a class="version" href="../../5.7/clusters/client-filtering">5.7</a>
+          <a class="version" href="../../5.6/clusters/client-filtering">5.6</a>
+          <a class="version is-current" href="client-filtering">5.5</a>
+          <a class="version" href="../../5.4/clusters/client-filtering">5.4</a>
+          <a class="version" href="../../5.3/clusters/client-filtering">5.3</a>
+          <a class="version" href="../../5.2/clusters/client-filtering">5.2</a>
+          <a class="version" href="../../5.1/clusters/client-filtering">5.1</a>
+          <a class="version" href="../../5.0/clusters/client-filtering">5.0</a>
+          <a class="version is-missing" href="../../4.2022.01/">4.2022.01</a>
+          <a class="version is-missing" href="../../4.2021.12/">4.2021.12</a>
+    </div>
+  </div>
+  <div id="preamble">
+<div class="sectionbody">
+<div id="changing-cluster-client-filtering" class="paragraph">
+<p>If you configure clients with one or more <a href="../../../hazelcast/5.5/getting-started/blue-green" class="xref page">failover clusters</a>, you can use Management Center to force selected clients to disconnect from one cluster and connect to another without any downtime. For example, you may connect clients to another cluster to do the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Prepare for planned maintenance on the primary cluster.</p>
+</li>
+<li>
+<p>Balance the load across multiple clusters.</p>
+</li>
+<li>
+<p>Shift the clients’ connection back from a failover cluster to its primary cluster.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Moving clients from one cluster to another is most useful when your clusters replicate data across each other. See <a href="wan-replication" class="xref page">WAN Replication</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="filter-lists"><a class="anchor" href="#filter-lists"></a>Filter Lists</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Clusters allow or disallow client connections, using rules that are defined in a filter list. You can deploy filter lists to your connected clusters, using the UI or the REST API in Management Center.</p>
+</div>
+<div class="paragraph">
+<p>When a cluster receives a filter list, it applies the rules to any new or existing client connections.</p>
+</div>
+<div class="paragraph">
+<p>Management Center supports the following types of filter list:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Allow list</strong>: Clients that <strong>are allowed</strong> to connect to the cluster.</p>
+</li>
+<li>
+<p><strong>Deny list</strong>: Clients that <strong>are not allowed</strong> to connect to the cluster.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To adjust the modes see <a href="../deploy-manage/system-properties#hazelcast-mc-client-client-filtering-modes" class="xref page">system-properties</a></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ClientFilteringView.png" alt="Client Filtering View"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="client-address-types"><a class="anchor" href="#client-address-types"></a>Client Address Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can filter clients, using the following types:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Address types</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 60%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Address type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>Label</strong> (recommended)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A string that matches the client label in the client&#8217;s configuration. This string can include
+wildcard characters (<code>\*</code>). See <a href="../../../hazelcast/5.5/clients/java#defining-client-labels" class="xref page">Defining Client Labels</a> in the Platform documentation.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>green*</code> refers to any label
+values that start with the <code>green</code> string.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Instance Name</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A string that matches the client&#8217;s name in the client&#8217;s configuration. This string can include
+wildcard characters (<code>\*</code>).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>*-client</code> refers
+to any instance name that end with the <code>-client</code> string.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>IP Address</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>IP address of a client (IPv4 or
+IPv6) with optional range characters (<code>\*</code> and <code>-</code>) instead of any
+byte group.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>10.3.10.*</code> refers to IPs between <code>10.3.10.0</code>
+and <code>10.3.10.255</code>. The <code>10.3.10.4-18</code> refers to IPs between <code>10.3.10.4</code>
+and <code>10.3.10.18</code> (4 and 18 included).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+It&#8217;s useful to assign roles to your clients by configuring them with labels. These labels are displayed in Management Center. You can filter clients that have certain labels.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When a cluster member receives the deployed filter list, it immediately applies the list to
+all currently connected clients and then uses it for newly connecting
+clients. Clients on the deny-list connect to another cluster
+only if they are configured with a failover cluster. Otherwise,
+clients on the deny-list shut down.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If some cluster members are not reachable from Management Center, those members keep using the last filter list that they received.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="client-filtering-preview"><a class="anchor" href="#client-filtering-preview"></a>Client filtering preview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Shows the result of applying filter lists on currently connected clients in real time. Can be hidden by a toggle control (<strong>visible by default</strong>).</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ClientFilteringPreview.png" alt="Client Filtering Preview"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Allowed clients</strong> - clients that remain connected.</p>
+</div>
+<div class="paragraph">
+<p><strong>Denied clients</strong> - clients that disconnect.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Default table view</caption>
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Column name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Name</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Client name.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>UUID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Client unique identifier.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>IP Address</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Client IP address without hostname.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Labels</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of client labels.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Extra columns (can be used in custom views)</caption>
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Column name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Client address.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Host Name</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Canonical client hostname.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Client Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type of client. This field typically denotes the client’s programming language and indicates whether it is an Enterprise Java client. Although non-Java clients can also connect to Enterprise clusters, the Java client includes Enterprise features that non-Java clients do not.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Client Version</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Version of the client codebase.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cleint-filtering-deploy-confirmation"><a class="anchor" href="#cleint-filtering-deploy-confirmation"></a>Deploy confirmation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ClientFilteringDeployConfirmation.png" alt="Client Filtering Deploy Comfirmation"></span></p>
+</div>
+<div class="paragraph">
+<p>The deployment of filter lists must be confirmed by clicking the <strong>Confirm Deploy</strong> button.
+A summary of client connectivity is shown after the current filter lists have been applied.
+<a href="#client-filtering-preview">Preview</a> can be enabled by clicking a toggle control.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If the current filter lists disconnect all clients, the warning (<strong>All clients will be blocked if you apply current client filtering configuration</strong>) is displayed on the top of a modal.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="client-filtering-synchronization"><a class="anchor" href="#client-filtering-synchronization"></a>Synchronization of Filter Lists Across Multiple Instances of Management Center</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you have more than one instance of Management Center connected to the same cluster, the cluster synchronizes changes to its filter lists among all Management Center instances. When you create, update, or delete an active filter list, the cluster receives the filter list and sends it to the other connected instances of Management Center. Any existing filter lists on those instances of Management Center are overwritten.</p>
+</div>
+<div class="paragraph">
+<p>When another Management Center instance deploys a new filter list, the following message is displayed in the app and the <strong>Client Filtering Settings</strong> and
+<strong>Filter Lists</strong> data is automatically refreshed:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Client filtering
+configuration was updated by another Management Center instance</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/ClientFilteringUpdated.png" alt="Client Filtering Updated"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="reconnecting-clients-to-the-primary-cluster"><a class="anchor" href="#reconnecting-clients-to-the-primary-cluster"></a>Reconnecting Clients to the Primary Cluster</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you disconnect a client from its primary cluster using a filter list, that client cannot automatically reconnect to the primary cluster.</p>
+</div>
+<div class="paragraph">
+<p>You must deploy a new filter list to the cluster to update the client connection.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="related-resources"><a class="anchor" href="#related-resources"></a>Related Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>See
+<a href="../../../hazelcast/5.5/clients/java#blue-green-deployment-and-disaster-recovery" class="xref page">Blue-Green Deployment and Disaster Recovery</a>
+in the Platform documentation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="changing-cluster-client-filtering-example"><a class="anchor" href="#changing-cluster-client-filtering-example"></a>Next Steps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="create-filter-lists-ui" class="xref page">Deploying a Client Filter List from the UI</a>.</p>
+</li>
+<li>
+<p><a href="create-filter-lists-rest" class="xref page">Deploying a Client Filter List with the REST API</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="clients">Clients</a></span>
+  <span class="next"><a href="create-filter-lists-ui">Deploying a Client Filter List from the UI</a></span>
+</nav>
+</article>
+    <div class="toc-container">
+  <aside class="toc sidebar" data-title="Contents" data-levels="1">
+    <div class="toc-menu"></div>
+  </aside>
+  <div class="feedback-prompt">
+    <a class="edit-this-page feedback-button" href="https://github.com/hazelcast/management-center-docs/edit/v/5.5/docs/modules/clusters/pages/client-filtering.adoc" target="_blank">
+      <span class="feedback-button-text git-pull">
+        Edit this page
+      </span>
+    </a>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Managing Client Connections&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/clusters/pages/client-filtering.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <div class="feedback-form-container">
+  <div id="helpful-feedback-widget" class="helpful-feedback">
+    <span class="helpful-feedback-title">Was this helpful?</span>
+    <div class="helpful-feedback-buttons">
+      <label for="positive-feedback-starter" class="feedback-button yes-button">
+        <img src="../../../_/img/thumbs-up.svg" alt="like" class="like-img"/>
+        <input type="radio" id="positive-feedback-starter" value="yes"/>
+      </label>
+      <label for="negative-feedback-starter" class="feedback-button no-button">
+        <img src="../../../_/img/thumbs-down.svg" alt="like" class="like-img"/>
+        <input type="radio" id="negative-feedback-starter" value="no"/>
+      </label>
+    </div>
+  </div>
+  <p id="feedback-submit-success" class="feedback-submit-success hidden">
+    Thank you for your feedback.
+  </p>
+</div>
+<div id="feedback-overlay" class="overlay feedback-overlay">
+  <div class="overlay-content feedback-overlay-content">
+    <span id="close-feedback-overlay" class="close-overlay">&times;</span>
+    <h2 class="feedback-overlay-title">Send us your feedback</h2>
+    <p class="feedback-overlay-description">Thank you for helping us improve Hazelcast documentation.</p>
+    <div>
+      <form name="detailed-docs-feedback" id="feedback-form" netlify-honeypot="bot-field" method="POST"
+            data-netlify="true">
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
+        </p>
+        <div id="positive-feedback-form-container"
+             class="feedback-form-container positive-feedback-form-container hidden">
+          <label for="yes" class="hidden">
+            <input type="radio" id="yes" name="helpful" value="yes">
+          </label>
+
+          <label for="solved-my-problem-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="solved-my-problem-feedback" name="feedback" value="Solved my problem">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Solved my problem
+        </span>
+          <span class="radio-btn-description">
+          Helped me resolve an issue or answer a question.
+        </span>
+      </span>
+          </label>
+                <label for="accurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="accurate-radio-feedback" name="feedback" value="Accurate"/>
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Accurate
+              </span>
+              <span class="radio-btn-description">
+                Precisely describes the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="easy-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="easy-to-understand" name="feedback" value="Easy to understand">
+            <span class="feedback-description">
+        <span class="radio-btn-title">
+          Easy to understand
+        </span>
+        <span class="radio-btn-description">
+          Well written and easy to follow.
+        </span>
+      </span>
+          </label>
+          <label for="helped-in-decision" class="feedback-radio-button-label">
+            <input type="radio" id="helped-in-decision" name="feedback" value="Helped me decide to use the product">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Helped me decide to use the product
+              </span>
+              <span class="radio-btn-description">
+                Convinced me to try or adopt the product or feature.
+              </span>
+            </span>
+          </label>
+          <label for="another-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-reason" name="feedback" value="Another positive reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div id="negative-feedback-form-container"
+             class="feedback-form-container negative-feedback-form-container hidden">
+
+          <label for="no" class="hidden">
+            <input type="radio" id="no" name="helpful" value="no">
+          </label>
+
+          <label for="could-not-find" class="feedback-radio-button-label">
+            <input type="radio" id="could-not-find" name="feedback" value="Couldn't find what I was looking for">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Couldn't find what I was looking for
+              </span>
+              <span class="radio-btn-description">
+                Missing important information or didn't answer my question.
+              </span>
+            </span>
+          </label>
+          <label for="inaccurate-radio-feedback" class="feedback-radio-button-label">
+            <input type="radio" id="inaccurate-radio-feedback" name="feedback" value="Inaccurate">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Inaccurate
+              </span>
+              <span class="radio-btn-description">
+                Doesn't accurately describe the product or feature.
+              </span>
+            </span>
+          </label>
+
+          <label for="hard-to-understand" class="feedback-radio-button-label">
+            <input type="radio" id="hard-to-understand" name="feedback" value="Hard to understand">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Hard to understand
+              </span>
+              <span class="radio-btn-description">
+                Too complicated or badly written.
+              </span>
+            </span>
+          </label>
+          <label for="code-sample-errors" class="feedback-radio-button-label">
+            <input type="radio" id="code-sample-errors" name="feedback" value="Code sample errors">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Code sample error
+              </span>
+              <span class="radio-btn-description">
+                Incorrect or missing code sample(s).
+               </span>
+            </span>
+          </label>
+          <label for="another-negative-reason" class="feedback-radio-button-label">
+            <input type="radio" id="another-negative-reason" name="feedback" value="Another negative reason">
+            <span class="feedback-description">
+              <span class="radio-btn-title">
+                Another reason
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="feedback-form-submit-container">
+          <button type="submit" id="feedback-form-submit-btn" class="feedback-form-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        <textarea
+          id="additional-textual-feedback"
+          name="additional-textual-feedback"
+          class="additional-textual-feedback"
+          placeholder="(Optional) Please provide specific examples or suggestions!"
+          rows="6"
+        ></textarea>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</main>
+
+</div>
+    <div class="feedback-footer-container">
+  <div class="feedback-footer">
+    <div class="card-header">
+      <img class="card-img" src="../../../_/img/lifebuoy.svg" alt="lifebuoy" />
+      <h4 class="card-title">Help and support</h4>
+    </div>
+      <a class="additional-feedback feedback-button" href="https://github.com/hazelcast/management-center-docs/issues/new?title=Docs: Feedback for Managing Client Connections&body=Hi, I have some feedback about [this page](https://github.com/hazelcast/management-center-docs/edit/main/docs/modules/clusters/pages/client-filtering.adoc)%0D%0A" target="_blank">
+        <span class="feedback-button-text git">
+          Report an issue
+        </span>
+      </a>
+    <a class="additional-feedback feedback-button" href="https://slack.hazelcast.com/" target="_blank">
+      <span class="feedback-button-text command">
+        Ask Community
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://training.hazelcast.com/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text training">
+        Online Training
+      </span>
+    </a>
+    <a class="additional-feedback feedback-button" href="https://support.hazelcast.com/s/?utm_source=docs-website" target="_blank">
+      <span class="feedback-button-text mail">
+        Contact Support
+      </span>
+    </a>
+  </div>
+</div>
+    <footer class="footer">
+  <a href="https://hazelcast.com/terms-of-use/?utm_source=docs-website">Terms of service</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="https://hazelcast.com/contact/?utm_source=docs-website">Contact us</a>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+
+<script>
+  const hzDocSearch = (facetFilters, placeholder) => {
+    docsearch({
+      apiKey: 'ef7bd9485eafbd75d6e8425949eda1f5',
+      indexName: 'prod_hazelcast_docs',
+      appId: 'QK2EAH8GB0',
+      container: '#search-input',
+      // Set debug to true to inspect the dropdown
+      debug: false,
+      searchParameters: { facetFilters: facetFilters },
+      translations: {
+        button: {
+          buttonText: placeholder,
+          buttonAriaLabel: placeholder,
+        },
+      },
+    })
+  };
+</script>
+
+<!-- SEARCH CONFIGURATIONS -->
+<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
+  <!-- TUTORIALS -->
+  <script>
+    hzDocSearch(["tags:management-center-5.5"]);
+  </script>
+  <script>
+    function closeBanner() {
+      var banner = document.getElementById('latest-banner')
+      if (banner) {
+        banner.style.display = 'none'
+      }
+    }
+  </script>
+  <script>
+  function applyFacetedSearch(){
+      var checkbox = document.getElementById('facet');
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-5.5",
+          "tags:management-center-5.7",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-5.5"]);
+      }
+      if (checkbox.checked) {
+        hzDocSearch([[
+          "tags:management-center-5.5",
+          "tags:hazelcast-5.5",
+          "tags:cloud",
+          "tags:flow-",
+        ]], 'Search all docs...');
+      } else {
+        hzDocSearch(["tags:management-center-5.5"]);
+      }
+    }
+  </script>
+
+<script>
+  feather.replace();
+</script>
+  </body>
+</html>
