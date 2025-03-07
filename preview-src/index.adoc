@@ -1,4 +1,4 @@
 = What are you looking for?
-:page-layout: privacy
+:page-layout: home
 :!sectids:
 :!toc:
