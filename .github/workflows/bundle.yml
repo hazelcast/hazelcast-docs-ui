@@ -59,6 +59,7 @@ jobs:
           auto_increment_type: patch
           prerelease: true
           prerelease_suffix: beta
+          tag_schema: semantic
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
