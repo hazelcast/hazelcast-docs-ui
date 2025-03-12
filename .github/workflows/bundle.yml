@@ -24,7 +24,6 @@ on:
           - patch
           - prerelease
           - premajor
-  pull_request:
   push:
     branches: [ master ]
 
@@ -80,5 +79,4 @@ jobs:
     needs: release
     steps:
       - name: Trigger build
-        run: echo "curl -X POST -d {} https://api.netlify.com/build_hooks/673db01c3496b5513b30c92e"
-#        run: curl -X POST -d {} https://api.netlify.com/build_hooks/673db01c3496b5513b30c92e
+        run: curl -X POST -d {} https://api.netlify.com/build_hooks/673db01c3496b5513b30c92e
