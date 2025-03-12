@@ -4,8 +4,7 @@
   "homepage": "https://github.com/hazelcast/hazelcast-docs-ui",
   "scripts": {
     "bundle": "gulp bundle",
-    "dev": "gulp preview",
-    "build": ""
+    "dev": "gulp preview"
   },
   "license": "MPL-2.0",
   "repository": {
