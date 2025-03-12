@@ -1,5 +1,7 @@
-# This workflow builds the UI and commits the ui-bundle.zip file
-# When the file is attached to a release, the documentation site can use it as its UI
+# This workflow:
+# 1. builds the UI as build/ui-bundle.zip file
+# 2. creates a new patch release
+# 3. triggers production build
 
 name: Publish
 
@@ -13,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: 22
     - name: Bundle UI
       run: |
         npm i
-        gulp bundle
+        npm run bundle
     - name: Commit files
       run: |
         git config --global user.name ${{ secrets.USER_NAME }}
