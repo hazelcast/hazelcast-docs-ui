@@ -2,13 +2,32 @@
   <nav class="navbar navbar-brand">
     <div class="navbar-start">
       <a class="navbar-item navbar-logo-item" href="/">
-        <img class="navbar-logo-item-img" src="{{{uiRootPath}}}/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+        <img class="navbar-logo-item-img" src="https://hazelcast.com/wp-content/themes/hazelcast/assets/img/hazelcast-logo.svg" alt="Hazelcast Logo" />
       </a>
-      <p class="navbar-item navbar-app-title">
-        Documentation
-      </p>
     </div>
-
+     <div id="menu-holder" class="top-bar">
+            <ul class="mega-menu">
+                <li class="mega-menu-item">
+                    <a class="mega-menu-link" href="https://hazelcast.com/products/">Platform</a>
+                </li>
+                <li class="mega-menu-item">
+                    <a class="mega-menu-link" href="https://hazelcast.com//use-cases/">Solutions</a>
+                </li>
+                <li class="mega-menu-item">
+                    <a class="mega-menu-link" href="https://hazelcast.com/resource-center/">Resources</a>
+                </li>
+                <li class="mega-menu-item">
+                    <a class="mega-menu-link" href="https://hazelcast.com/developers/">Developers</a>
+                </li>
+                <li class="mega-menu-item mega-menu-item-docs active">
+                    <a class="mega-menu-link" href="https://docs.hazelcast.com/">Docs</a>
+                </li>
+                <!--
+                <li class="mega-menu-item-search" id="search-input">
+                  <a class="mega-search mega-menu-link" href="#" tabindex="0" aria-label="Search"></a></li>-->
+            </ul>
+        </div>   
+            
     <div class="navbar-end">
       {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing') (not-eq page.layout 'privacy') (not-eq page.component.name 'imdg'))}}
         <div id="search-input" class="navbar-item searchbox"></div>
@@ -17,18 +36,14 @@
             <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
           </label>
         {{/if}}
-      {{else}}
-        <a href="https://hazelcast.com/?utm_source=docs-website" class="hazelcast-link" target="_blank">
-          hazelcast.com
-        </a>
       {{/if}}
       {{#if (eq page.component.name 'cloud')}}
         <a class="navbar-item" href="{{{page.attributes.cloud-console}}}sign-up" target="_blank">
-          <button class="button navbar-button">Try Free</button>
+          <button class="button small custom-4">Try Free</button>
         </a>
       {{else}}
-        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
-          <button class="button navbar-button">Get Hazelcast</button>
+        <a class="navbar-item" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
+          <button class="button small custom-4">Try Hazelcast</button>
         </a>
       {{/if}}
     </div>

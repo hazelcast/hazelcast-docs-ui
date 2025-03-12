@@ -1,6 +1,70 @@
+/*! Hazelcast Docs UI - v1.0.0 */
+
+/* ================================
+   General Styles & Body
+================================ */
+
 body {
-  /* important so the Kapa widget does not overwrite it */
+  /* Important so the Kapa widget does not overwrite it */
   padding-top: var(--navbar-height) !important;
+}
+
+/* ================================
+   Header
+================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  z-index: var(--z-index-navbar);
+  background: var(--header-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: height 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.header.shrink {
+  height: 60px;
+}
+
+/* ================================
+   Navbar
+================================ */
+
+.navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--navbar-height);
+  padding: 0 10px;
+}
+
+.navbar-item {
+  color: var(--neutral-white);
+  display: block;
+  padding: 0 20px;
+}
+
+.navbar-start,
+.navbar-end {
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  color: var(--neutral-white);
+  text-decoration: none;
+  letter-spacing: 1px;
 }
 
 .navbar .button.navbar-button {
@@ -12,6 +76,21 @@ body {
   letter-spacing: 1px;
 }
 
+.navbar-brand .navbar-item.navbar-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-logo-item-img {
+  height: 1.375rem;
+  width: 10.5625rem;
+}
+
+/* ================================
+   Filter Checkbox
+================================ */
+
 .filter.checkbox {
   color: var(--neutral-white);
   font-size: 0.875em;
@@ -22,84 +101,122 @@ body {
   padding-bottom: 0;
 }
 
-.navbar {
-  background: var(--header-color);
-  color: var(--neutral-white);
-  font-family: var(--nav-font-family);
-  height: var(--navbar-height);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  word-wrap: break-word;
-  z-index: var(--z-index-navbar);
+/* ================================
+   Mega Menu
+================================ */
+
+.mega-menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
 }
 
-.navbar a {
-  color: var(--neutral-white);
+.mega-menu-item {
+  display: inline-block;
+  margin: 0 15px;
+  position: relative;
+}
+
+.mega-menu-item a {
   text-decoration: none;
-  letter-spacing: 1px;
+  color: var(--neutral-white);
+  padding: 10px 15px;
+  display: inline-block;
+  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+  border-bottom: 4px solid transparent;
+  font-family: "PP Telegraf", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
 }
 
-.navbar-brand .navbar-item.navbar-logo-item {
+.mega-menu-item a:hover,
+.mega-menu-item > a.mega-menu-link:hover,
+.mega-menu-item-docs > a.mega-menu-link {
+  border-bottom: 4px solid #c6ff3a !important;
+}
+
+/* ================================
+   Search
+================================ */
+
+.mega-search {
+  background-image: url(//hazelcast.com/wp-content/uploads/2023/08/search.svg);
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  line-height: 1;
 }
 
-.navbar-logo-item-img {
-  width: 180px;
-  height: auto;
-}
-
-.navbar-logo-item-title {
-  margin: 0;
-  color: var(--accent);
-}
-
-.get-hazelcast-link {
+li.mega-menu-item-search {
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 55px;
+  padding: 0 15px;
 }
 
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--navbar-height);
-  padding: 0 10px;
+/* ================================
+   Custom Button (custom-4)
+================================ */
+
+nav .button.custom-4 {
+  background-clip: padding-box;
+  background-color: #c6ff3a;
+  border: 1px solid transparent;
+  color: #0b2b39;
+  font-weight: 600;
+  font-family: "PP Telegraf", Arial, Helvetica, sans-serif;
+  font-size: 0.875rem !important;
+  padding: 8px 22px;
+  transition: all 0.4s ease-in-out;
 }
 
-.navbar-start,
-.navbar-end {
-  display: flex;
-  align-items: center;
+nav .button.custom-4:hover {
+  background-image: linear-gradient(90deg, #c6ff3a, #00c5d1);
 }
 
-.navbar-app-title {
-  font-size: 20px;
-  border-left: 1px solid var(--neutral-white);
-}
-
-.navbar-item {
-  color: var(--neutral-white);
-  display: block;
-  padding: 0 20px;
-}
+/* ================================
+   Responsive Media Queries
+================================ */
 
 @media (max-width: 930px) {
   .filter.checkbox {
     display: none;
   }
-}
-
-@media (max-width: 800px) {
-  .DocSearch-Button-Keys,
-  .DocSearch-Button-Placeholder {
-    display: none;
-  }
 
   .navbar-item {
     padding: 0 10px;
+  }
+
+  #menu-holder {
+    display: none;
+  }
+
+  .navbar-end {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mega-menu-item-search {
+    display: flex;
+  }
+  
+  .DocSearch-Button-Keys,
+  .DocSearch-Button-Placeholder,
+  .navbar-app-title {
+    display: none;
+  }
+
+  .navbar-brand {
+    justify-content: space-between;
   }
 }
 
@@ -115,8 +232,6 @@ body {
   }
 }
 
-@media (max-width: 480px) {
-  .navbar-logo-item-img {
-    width: 110px;
-  }
-}
+/* ================================
+   Fix: Ensure Newline at End of File
+================================ */

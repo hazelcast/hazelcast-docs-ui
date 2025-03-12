@@ -1,16 +1,14 @@
 <div class="home">
-  <div class="hero-background">
-    <h1 class="hero-background-heading">
+  <div class="home-background">
+    <h1 class="home-background-heading">
       Hazelcast Documentation
     </h1>
-    <p class="hero-background-subheading">
+    <p class="home-background-subheading">
       Find user guides, code samples, tutorials, API reference, and more.
     </p>
     <div id="search-input" class="search-container searchbox">
     </div>
-  </div>
-  <main data-ceiling="topbar">
-    <article class="article">
+    <section class="featured-cards">
       <div class="card">
         <div class="card-header">
           <i data-feather="zap" class="card-img"></i>
@@ -47,13 +45,6 @@
           <li class="card-list-item">
             <a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/editions">Community vs. Enterprise</a>
           </li>
-<!--      <li class="card-list-item">
-            <a href="{{{siteRootPath}}}/getting-started/editions">Install and upgrade</a>
-          </li>
-          <li class="card-list-item">
-            <a href="{{{siteRootPath}}}/getting-started/editions">Feature overview</a>
-          </li>
-!-->
           <li class="card-list-item">
             <a href="{{{siteRootPath}}}/hazelcast/latest/deploy/deploying-in-cloud">Cloud deployment</a>
           </li>
@@ -77,29 +68,7 @@
           </li>
           <li class="card-list-item">
             <a href="{{{siteRootPath}}}/hazelcast/latest/cluster-performance/best-practices">Best practices</a>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <!-- <img class="card-img" src="{{{uiRootPath}}}/img/team.svg" alt="team" /> -->
-          <i data-feather="target" class="card-img"></i>
-          <h4 class="card-title">Operate and manage</h4>
-        </div>
-        <ul class="card-list">
-          <li class="card-list-item">
-            <a href="{{{siteRootPath}}}/hazelcast/latest/configuration/understanding-configuration">Configuration</a>
-          </li>
-          <li class="card-list-item">
-            <a href="{{{siteRootPath}}}/hazelcast/latest/security/overview">Security</a>
-          </li>
-          <li class="card-list-item">
-            <a href="{{{siteRootPath}}}/hazelcast/latest/cp-subsystem/cp-subsystem">CP Subsystem</a>
-          </li>
-          <li class="card-list-item">
-            <a href="{{{siteRootPath}}}/hazelcast/latest/wan/wan">WAN Replication</a>
-          </li>
-        </ul>
+          </ul>
       </div>
 
       <div class="card">
@@ -129,6 +98,49 @@
           </li>
           <li class="card-list-item">
             <a href="{{{siteRootPath}}}/hazelcast/latest/clients/hazelcast-clients">All libraries & APIs (C#, Go...)</a>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector("nav.navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+    });
+  </script>
+
+  <!-- Promo Banner: Pull from Wordpress -->
+  <div id="promo-banner-container">
+  </div>
+
+  <main data-ceiling="topbar">
+    <article class="article bottom-padding">
+      <div class="card">
+        <div class="card-header">
+          <!-- <img class="card-img" src="{{{uiRootPath}}}/img/team.svg" alt="team" /> -->
+          <i data-feather="target" class="card-img"></i>
+          <h4 class="card-title">Operate and manage</h4>
+        </div>
+        <ul class="card-list">
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/configuration/understanding-configuration">Configuration</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/security/overview">Security</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/cp-subsystem/cp-subsystem">CP Subsystem</a>
+          </li>
+          <li class="card-list-item">
+            <a href="{{{siteRootPath}}}/hazelcast/latest/wan/wan">WAN Replication</a>
           </li>
         </ul>
       </div>
@@ -202,10 +214,9 @@
         </ul>
       </div>
 
-
     </article>
 
-    <aside class="additional-cards">
+    <aside class="additional-cards light-section">
       <div class="additional-card">
         <div class="card-header">
           <i data-feather="book-open" class="card-img"></i>
@@ -290,6 +301,34 @@
 </div>
 
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch('https://hazelcast.com/wp-json/wp/v2/pages?slug=docs-site-promo-banner')
+      .then(response => response.json())
+      .then(data => {
+        const html = data[0]?.content?.rendered;
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+
+        const promoBanner = tempDiv.querySelector('.promo-banner');
+        const container = document.getElementById('promo-banner-container');
+
+        container.innerHTML = ''; // remove loading
+
+        if (promoBanner) {
+          container.appendChild(promoBanner.cloneNode(true));
+        } else {
+          console.warn('No .promo-banner found in fetched content');
+        }
+      })
+      .catch(error => {
+        console.error('Failed to load promo banner:', error);
+        const container = document.getElementById('promo-banner-container');
+        container.innerHTML = ''; // fallback
+      });
+  });
+
+  // feather icons
   feather.replace();
+
 </script>
 

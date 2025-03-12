@@ -24,6 +24,20 @@
     }
   }
 
+  function handleScroll () {
+    const header = document.querySelector('.header')
+    if (!header) return
+
+    if (window.scrollY > 50) {
+      header.classList.add('shrink')
+    } else {
+      header.classList.remove('shrink')
+    }
+  }
+
+  // Listen for scroll events
+  window.addEventListener('scroll', handleScroll)
+
   if (document.getElementsByClassName('nav-container').length > 0) {
     var navContainer = document.querySelector('.nav-container')
     var navToggle = document.querySelector('.nav-toggle')
