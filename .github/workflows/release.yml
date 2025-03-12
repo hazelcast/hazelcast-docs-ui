@@ -55,12 +55,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ui-bundle
-      - name: Debug
-        run: |
-          echo ${{ github.event.inputs.release_type == 'prerelease' || github.event.inputs.release_type == 'premajor' }}
-          echo ${{ github.event_name }}
-          echo ${{ github.event.inputs.skip_publish }}
-          echo ${{ github.event.inputs.skip_publish == false }}
       - name: Create release
         id: create_release
         uses: zendesk/action-create-release@v1
