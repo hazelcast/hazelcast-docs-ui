@@ -1,5 +1,5 @@
-console.log(process.env.NETLIFY)
-console.log(process.env.CONTEXT)
+console.log('process.env.NETLIFY', process.env.NETLIFY)
+console.log('process.env.CONTEXT', process.env.CONTEXT)
 console.log('process.env.BRANCH', process.env.BRANCH)
 console.log('process.env.REPOSITORY_URL', process.env.REPOSITORY_URL)
 console.log('process.env.HEAD', process.env.HEAD)
