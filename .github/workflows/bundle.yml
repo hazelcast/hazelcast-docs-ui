@@ -43,8 +43,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    permissions: write-all
     needs: build
     steps:
       - name: Download bundle
@@ -53,23 +52,15 @@ jobs:
           name: ui-bundle
       - name: View content
         run: ls -R
-      - name: Create GitHub release
-        id: create-new-release
-        uses: actions/create-release@v1
+      - name: Create release
+        id: create_release
+        uses: zendesk/action-create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
-#      - name: Create release
-#        id: create_release
-#        uses: zendesk/action-create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          auto_increment_type: patch
-#          prerelease: true
-#          prerelease_suffix: beta
+          auto_increment_type: patch
+          prerelease: true
+          prerelease_suffix: beta
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
