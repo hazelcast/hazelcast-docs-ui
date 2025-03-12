@@ -68,3 +68,10 @@ jobs:
           asset_path: ui-bundle.zip
           asset_name: ui-bundle.zip
           asset_content_type: application/zip
+  publish:
+    runs-on: ubuntu-latest
+    needs: release
+    steps:
+      - name: Trigger build
+        run: echo "curl -X POST -d {} https://api.netlify.com/build_hooks/673db01c3496b5513b30c92e"
+#        run: curl -X POST -d {} https://api.netlify.com/build_hooks/673db01c3496b5513b30c92e
