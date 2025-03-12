@@ -18,6 +18,7 @@ on:
           - minor
           - patch
           - prerelease
+  pull_request:
   push:
     branches: [ master ]
 
