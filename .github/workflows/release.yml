@@ -3,7 +3,7 @@
 # 2. creates a new patch release
 # 3. triggers production build
 
-name: Publish
+name: Release
 
 on:
   workflow_dispatch:
