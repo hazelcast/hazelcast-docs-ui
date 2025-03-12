@@ -50,8 +50,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ui-bundle
-      - name: View content
-        run: ls -R
       - name: Create release
         id: create_release
         uses: zendesk/action-create-release@v1
