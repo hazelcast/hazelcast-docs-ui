@@ -61,8 +61,9 @@ jobs:
           auto_increment_type: patch
           prerelease: true
           prerelease_suffix: beta
+      - run: echo ${{ secrets.GH_TOKEN }}
       - name: Upload release asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
