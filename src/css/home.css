@@ -127,7 +127,7 @@ dd {
   flex-wrap: wrap;
 }
 
-.card-header-padding{
+.card-header-padding {
   padding: var(--cards-padding);
 }
 
@@ -141,7 +141,7 @@ dd {
   box-sizing: border-box;
 }
 
-.additional-card{
+.additional-card {
   border-radius: 10px;
   background-color: #fff;
   flex-basis: 100%;
@@ -223,7 +223,6 @@ dd {
   border-top-right-radius: 10px;
 }
 
-
 /* ================================
    Feedback Section
 ================================ */
@@ -282,8 +281,8 @@ dd {
 ================================ */
 
 .promo-banner {
-  background: linear-gradient(90deg, #C6FF3A 0%, #C6FF3A 100%);
-  color: #051A27;
+  background: linear-gradient(90deg, #c6ff3a 0%, #c6ff3a 100%);
+  color: #051a27;
   padding: 16px 24px;
   font-size: 16px;
   font-weight: 400;
@@ -298,7 +297,6 @@ dd {
   text-decoration: none;
   width: 100%;
   cursor: pointer;
-
   transition: background 0.8s ease, color 0.6s ease;
 }
 
@@ -308,7 +306,7 @@ dd {
 }
 
 .promo-banner a {
-  color: #051A27;
+  color: #051a27;
   font-weight: 500;
   margin-left: 8px;
   text-decoration: none;
@@ -316,13 +314,13 @@ dd {
 }
 
 .promo-banner:hover {
-  background: linear-gradient(90deg, #C6FF3A 0%, #FFFFFF 100%);
-  color: #0B2B39;
+  background: linear-gradient(90deg, #c6ff3a 0%, #fff 100%);
+  color: #0b2b39;
 }
 
 .promo-banner:hover strong,
 .promo-banner:hover a {
-  color: #0B2B39;
+  color: #0b2b39;
 }
 
 .promo-banner:hover a {
@@ -330,7 +328,7 @@ dd {
 }
 
 .promo-banner .p-btn {
-  color: #0080A9;
+  color: #0080a9;
   font-weight: 500;
   text-decoration: none;
   position: relative;
@@ -351,7 +349,7 @@ dd {
 }
 
 .promo-banner:hover .p-btn {
-  color: #0B2B39;
+  color: #0b2b39;
   text-decoration: underline;
 }
 
@@ -360,7 +358,7 @@ dd {
 }
 
 .grad-text {
-  background: linear-gradient(90deg, #0080A9, #0B2B39);
+  background: linear-gradient(90deg, #0080a9, #0b2b39);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 500;
@@ -385,7 +383,8 @@ dd {
     flex-basis: calc(50% - var(--cards-gap) / 2);
   }
 
-  .home .card-title, .feedback-footer .card-title {
+  .home .card-title,
+  .feedback-footer .card-title {
     text-align: left;
   }
 
@@ -400,7 +399,9 @@ dd {
     right: 40px;
     top: 0;
   }
-  .home .card-title, .feedback-footer .card-title {
+
+  .home .card-title,
+  .feedback-footer .card-title {
     text-align: left;
   }
 }
@@ -440,8 +441,8 @@ dd {
 }
 
 /* Mobile Stacking for Featured Cards */
-@media (max-width: 768px) {
 
+@media (max-width: 768px) {
   .home .additional-cards {
     padding: 20px;
   }

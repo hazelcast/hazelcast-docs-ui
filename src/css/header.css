@@ -281,17 +281,12 @@ nav .button.custom-4:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* Desktop */
-.navbar-burger {
-  display: none;
-}
-
 /* ================================
    Responsive Layout for Mobile
    Breakpoint: max-width 900px
 ================================ */
 
-@media (max-width: 1100px) {
+@media (max-width: 1300px) {
   /* Show hamburger */
   .navbar-burger {
     display: flex;
