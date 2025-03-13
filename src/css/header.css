@@ -182,21 +182,135 @@ nav .button.custom-4:hover {
   background-image: linear-gradient(90deg, #c6ff3a, #00c5d1);
 }
 
+/*! Hazelcast Docs UI - Mobile Menu Styles */
+
 /* ================================
-   Responsive Media Queries
+   Mobile Menu Styles (Global)
 ================================ */
 
-@media (max-width: 930px) {
-  .filter.checkbox {
+.navbar-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  z-index: var(--z-index-navbar);
+}
+
+.navbar-burger span {
+  width: 24px;
+  height: 2px;
+  background-color: var(--neutral-white);
+  display: block;
+  border-radius: 1px;
+}
+
+#menu-holder.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: var(--header-color);
+  z-index: 999;
+  padding: 20px 20px 20px; /* matches .header height */
+  overflow-y: auto;
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.mobile-menu-logo img {
+  height: 1.5rem;
+}
+
+#menu-holder.mobile-menu.active {
+  display: block;
+}
+
+/* Close button inside mobile menu */
+.menu-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 32px;
+  color: var(--neutral-white);
+  cursor: pointer;
+  z-index: var(--z-index-navbar);
+}
+
+/* Mobile Menu Links */
+#menu-holder.mobile-menu .mega-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#menu-holder.mobile-menu .mega-menu-item {
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* subtle divider */
+}
+
+#menu-holder.mobile-menu .mega-menu-link {
+  display: block;
+  padding: 16px 20px;
+  color: var(--neutral-white);
+  text-decoration: none;
+  font-size: 18px;
+  text-align: left;
+  width: 100%;
+  transition: background 0.2s ease;
+}
+
+#menu-holder.mobile-menu .mega-menu-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Desktop */
+.navbar-burger {
+  display: none;
+}
+
+/* ================================
+   Responsive Layout for Mobile
+   Breakpoint: max-width 900px
+================================ */
+
+@media (max-width: 1100px) {
+  /* Show hamburger */
+  .navbar-burger {
+    display: flex;
+  }
+
+  /* Hide desktop nav */
+  #desktop-holder,
+  nav .mega-menu,
+  .filter.checkbox,
+  .DocSearch-Button-Keys,
+  .DocSearch-Button-Placeholder,
+  .navbar-app-title,
+  .hazelcast-link {
     display: none;
   }
 
+  /* Adjust spacing for mobile */
   .navbar-item {
     padding: 0 10px;
-  }
-
-  #menu-holder {
-    display: none;
   }
 
   .navbar-end {
@@ -205,33 +319,11 @@ nav .button.custom-4:hover {
     gap: 10px;
   }
 
-  .mega-menu-item-search {
-    display: flex;
-  }
-  
-  .DocSearch-Button-Keys,
-  .DocSearch-Button-Placeholder,
-  .navbar-app-title {
-    display: none;
-  }
-
   .navbar-brand {
     justify-content: space-between;
   }
-}
 
-@media (max-width: 750px) {
-  .navbar-app-title {
-    display: none;
+  .mega-menu-item-search {
+    display: flex;
   }
 }
-
-@media (max-width: 550px) {
-  .hazelcast-link {
-    display: none;
-  }
-}
-
-/* ================================
-   Fix: Ensure Newline at End of File
-================================ */

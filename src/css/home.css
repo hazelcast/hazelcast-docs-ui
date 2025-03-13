@@ -123,16 +123,27 @@ dd {
   display: flex;
   justify-content: center;
   gap: var(--cards-gap);
-  flex-wrap: wrap;
   padding: var(--cards-gap) var(--cards-gap) 0;
+  flex-wrap: wrap;
+}
+
+.card-header-padding{
+  padding: var(--cards-padding);
 }
 
 .home .card,
-.home .additional-card,
 .feedback-footer {
   border-radius: 10px;
   background-color: #fff;
+  flex-basis: 100%;
   padding: var(--cards-padding);
+  border: 1px solid var(--neutral-light);
+  box-sizing: border-box;
+}
+
+.additional-card{
+  border-radius: 10px;
+  background-color: #fff;
   flex-basis: 100%;
   border: 1px solid var(--neutral-light);
   box-sizing: border-box;
@@ -204,6 +215,14 @@ dd {
   margin: 0 0 0.5rem;
   text-align: left;
 }
+
+.card-header-colored {
+  background-color: #f1f6fd; /* soft blue background */
+  padding: 16px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
 
 /* ================================
    Feedback Section
