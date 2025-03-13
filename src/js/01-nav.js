@@ -36,7 +36,13 @@
   }
 
   // Listen for scroll events
-  window.addEventListener('scroll', handleScroll)
+  if (document.body.classList.contains('page-home')) {
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // run once on load
+  } else {
+    const header = document.querySelector('.header')
+    if (header) header.classList.add('shrink')
+  }
 
   if (document.getElementsByClassName('nav-container').length > 0) {
     var navContainer = document.querySelector('.nav-container')
