@@ -281,6 +281,13 @@ nav .button.custom-4:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* Always highlight Docs link in mobile menu */
+.mega-menu-link.docs-highlight {
+  color: #c6ff3a;
+  border-left: 4px solid #c6ff3a;
+  font-weight: bold;
+}
+
 /* ================================
    Responsive Layout for Mobile
    Breakpoint: max-width 900px
