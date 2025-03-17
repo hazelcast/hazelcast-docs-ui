@@ -1,5 +1,7 @@
 /node_modules/
 /public/
 /build/
+/docs/
 .DS_Store
 .idea
+global-antora-playbook.yml
