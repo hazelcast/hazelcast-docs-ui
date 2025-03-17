@@ -4,6 +4,7 @@
   "homepage": "https://github.com/hazelcast/hazelcast-docs-ui",
   "scripts": {
     "bundle": "gulp bundle",
+    "build": "npm run bundle && load-docs-ui-playbook && antora --to-dir docs --fetch global-antora-playbook.yml",
     "dev": "gulp preview"
   },
   "license": "MPL-2.0",
@@ -41,6 +42,7 @@
     "gulp-uglify": "~3.0",
     "gulp-vinyl-zip": "~2.2",
     "handlebars": "~4.7",
+    "hazelcast-docs-tools": "github:hazelcast/hazelcast-docs-tools#v2.0.0",
     "highlight.js": "~9.18",
     "js-yaml": "~3.13",
     "merge-stream": "~2.0",
@@ -56,6 +58,5 @@
     "typeface-roboto-mono": "0.0.75",
     "vinyl-buffer": "~1.0",
     "vinyl-fs": "~3.0"
-  },
-  "dependencies": {}
+  }
 }
