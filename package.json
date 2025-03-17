@@ -19,6 +19,7 @@
     "last 2 versions"
   ],
   "devDependencies": {
+    "asciidoctor-kroki": "^0.15.0",
     "@antora/cli": "^3.1.1",
     "@antora/site-generator": "^3.1.1",
     "asciidoctor.js": "1.5.9",
