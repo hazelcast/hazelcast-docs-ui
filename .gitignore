@@ -1,7 +1,7 @@
 /node_modules/
 /public/
 /build/
+/docs/
 .DS_Store
 .idea
-/build/ui-bundle.zip
-/.gitignore
+global-antora-playbook.yml

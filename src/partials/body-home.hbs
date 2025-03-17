@@ -306,29 +306,37 @@
 
 <script>
   // Promo Banner: Pull from Wordpress
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById('promo-banner-container');
+    if (!container) return;
+
     fetch('https://hazelcast.com/wp-json/wp/v2/pages?slug=docs-site-promo-banner')
-      .then(response => response.json())
+      .then(res => res.ok ? res.json() : Promise.reject(res))
       .then(data => {
-        const html = data[0]?.content?.rendered;
+        const rawHtml = data?.[0]?.content?.rendered;
+        if (!rawHtml) {
+          console.warn("Promo banner content not found.");
+          return;
+        }
+
+        // Clean up any accidental <br> or whitespace
+        const cleanHtml = rawHtml.replace(/^\s*<br\s*\/?>/i, '').trim();
+
         const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
+        tempDiv.innerHTML = cleanHtml;
 
         const promoBanner = tempDiv.querySelector('.promo-banner');
-        const container = document.getElementById('promo-banner-container');
-
-        container.innerHTML = ''; // remove loading
+        container.innerHTML = ''; // Clear any fallback/loading
 
         if (promoBanner) {
           container.appendChild(promoBanner.cloneNode(true));
         } else {
-          console.warn('No .promo-banner found in fetched content');
+          console.warn("No .promo-banner found in fetched content.");
         }
       })
-      .catch(error => {
-        console.error('Failed to load promo banner:', error);
-        const container = document.getElementById('promo-banner-container');
-        container.innerHTML = ''; // fallback
+      .catch(err => {
+        console.error("Failed to load promo banner:", err);
+        container.innerHTML = ''; // fallback or leave empty
       });
   });
 

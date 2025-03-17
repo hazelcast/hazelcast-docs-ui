@@ -291,7 +291,8 @@ dd {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 0.25em;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   text-decoration: none;
@@ -315,16 +316,13 @@ dd {
 
 .promo-banner:hover {
   background: linear-gradient(90deg, #c6ff3a 0%, #fff 100%);
+  text-decoration: none !important;
   color: #0b2b39;
 }
 
 .promo-banner:hover strong,
 .promo-banner:hover a {
   color: #0b2b39;
-}
-
-.promo-banner:hover a {
-  text-decoration: underline;
 }
 
 .promo-banner .p-btn {
