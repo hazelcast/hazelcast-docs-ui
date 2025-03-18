@@ -48,7 +48,7 @@ dd {
   font-weight: 500;
   font-size: 50px;
   letter-spacing: 1px;
-  line-height: 1.0;
+  line-height: 1;
   margin: 0;
   background: linear-gradient(270deg, var(--accent4), var(--accent));
   background-clip: text;
