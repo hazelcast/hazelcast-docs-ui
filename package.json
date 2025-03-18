@@ -4,7 +4,10 @@
   "homepage": "https://github.com/hazelcast/hazelcast-docs-ui",
   "scripts": {
     "bundle": "gulp bundle",
-    "build": "npm run bundle && load-docs-ui-playbook && antora --to-dir docs --fetch global-antora-playbook.yml",
+    "build": "npm run bundle && load-docs-ui-playbook && antora --to-dir docs --fetch global-antora-playbook.yml && cp _redirects docs",
+    "build-local": "npm run bundle && load-docs-ui-playbook --skip-private-repos && antora --to-dir docs --fetch global-antora-playbook.yml",
+    "serve": "serve docs",
+    "expose": "ngrok http 3000",
     "dev": "gulp preview"
   },
   "license": "MPL-2.0",
@@ -19,9 +22,9 @@
     "last 2 versions"
   ],
   "devDependencies": {
-    "asciidoctor-kroki": "^0.15.0",
     "@antora/cli": "^3.1.1",
     "@antora/site-generator": "^3.1.1",
+    "asciidoctor-kroki": "^0.15.0",
     "asciidoctor.js": "1.5.9",
     "autoprefixer": "~9.7",
     "browser-pack-flat": "~3.4",
@@ -45,7 +48,7 @@
     "gulp-uglify": "~3.0",
     "gulp-vinyl-zip": "~2.2",
     "handlebars": "~4.7",
-    "hazelcast-docs-tools": "github:hazelcast/hazelcast-docs-tools#v2.0.0",
+    "hazelcast-docs-tools": "github:hazelcast/hazelcast-docs-tools#v2.1.0",
     "highlight.js": "~9.18",
     "js-yaml": "~3.13",
     "merge-stream": "~2.0",
@@ -56,9 +59,11 @@
     "prettier-eslint": "~9.0",
     "require-directory": "~2.1",
     "require-from-string": "~2.0",
+    "serve": "^13.0.2",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "~20.0",
     "typeface-roboto-mono": "0.0.75",
+    "ngrok": "^5.0.0-beta.2",
     "vinyl-buffer": "~1.0",
     "vinyl-fs": "~3.0"
   }
