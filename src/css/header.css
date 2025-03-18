@@ -299,12 +299,14 @@ nav .button.custom-4:hover {
     display: flex;
   }
 
+ .DocSearch-Button-Placeholder {
+    display: inline;
+  }
+
   /* Hide desktop nav */
   #desktop-holder,
   nav .mega-menu,
   .filter.checkbox,
-  .DocSearch-Button-Keys,
-  .DocSearch-Button-Placeholder,
   .navbar-app-title,
   .hazelcast-link {
     display: none;

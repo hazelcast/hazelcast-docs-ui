@@ -18,9 +18,8 @@ body.body-dark {
 }
 
 dd {
-  margin-inline-start: 0; /* Remove default left margin */
-  display: inline; /* Or flex, inline-block, etc. */
-  unicode-bidi: normal; /* Reset text behavior */
+  display: block;
+  margin-inline-start: 0; /* Keep this */
 }
 
 /* ================================
@@ -41,7 +40,6 @@ dd {
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  gap: var(--cards-gap);
 }
 
 /* Background Heading & Subheading */
@@ -50,7 +48,7 @@ dd {
   font-weight: 500;
   font-size: 50px;
   letter-spacing: 1px;
-  line-height: 1.2;
+  line-height: 1.0;
   margin: 0;
   background: linear-gradient(270deg, var(--accent4), var(--accent));
   background-clip: text;
@@ -132,19 +130,12 @@ dd {
 }
 
 .home .card,
-.feedback-footer {
-  border-radius: 10px;
-  background-color: #fff;
-  flex-basis: 100%;
-  padding: var(--cards-padding);
-  border: 1px solid var(--neutral-light);
-  box-sizing: border-box;
-}
-
+.feedback-footer,
 .additional-card {
   border-radius: 10px;
   background-color: #fff;
   flex-basis: 100%;
+  padding: var(--cards-padding);
   border: 1px solid var(--neutral-light);
   box-sizing: border-box;
 }
@@ -156,7 +147,6 @@ dd {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
 }
 
 .home .card-title,
@@ -175,11 +165,17 @@ dd {
 .home .card-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   justify-content: center;
   flex: 1 66%;
   padding: 0;
+  gap: 0;
   margin: 10px 0 0;
+}
+
+.home ul.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .home .card-list-item {
@@ -212,15 +208,8 @@ dd {
 
 .home .card-list-item-description {
   color: var(--secondary-text);
-  margin: 0 0 0.5rem;
+  margin: 0 0 1rem;
   text-align: left;
-}
-
-.card-header-colored {
-  background-color: #f1f6fd; /* soft blue background */
-  padding: 16px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 }
 
 /* ================================
@@ -283,7 +272,7 @@ dd {
 .promo-banner {
   background: linear-gradient(90deg, #c6ff3a 0%, #c6ff3a 100%);
   color: #051a27;
-  padding: 16px 24px;
+  padding: 10px 24px;
   font-size: 16px;
   font-weight: 400;
   text-align: center;
@@ -384,10 +373,6 @@ dd {
   .home .card-title,
   .feedback-footer .card-title {
     text-align: left;
-  }
-
-  .bottom-padding {
-    padding-bottom: 20px !important;
   }
 }
 
