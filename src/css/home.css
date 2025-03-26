@@ -152,7 +152,7 @@ dd {
 .home .card-title,
 .feedback-footer .card-title {
   font-weight: 500;
-  font-size: 21px;
+  font-size: 1.3rem;
   text-align: center;
   margin: 0;
 }
@@ -273,7 +273,7 @@ dd {
   background: linear-gradient(90deg, #c6ff3a 0%, #c6ff3a 100%);
   color: #051a27;
   padding: 10px 24px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   text-align: center;
   line-height: 1.5;
