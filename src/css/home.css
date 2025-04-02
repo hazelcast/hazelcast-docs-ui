@@ -28,18 +28,27 @@ dd {
 
 .home .home-background {
   position: relative;
-  background-image: url('../img/home/green-flow.jpg');
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: cover;
-  background-color: #061827;
-  padding-top: 70px;
-  padding-bottom: 0;
+  overflow: hidden;
+  min-height: 160px;
+  padding: 2rem 1rem; /* adjust padding as needed */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 300px;
+}
+
+.home .home-background::before {
+  content: "";
+  position: absolute;
+  top: 0; /* Shift image up */
+  left: 0;
+  width: 100%;
+  height: calc(100% + 50px);
+  background-image: url('../img/home/green-flow.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  z-index: -1;
 }
 
 /* Background Heading & Subheading */

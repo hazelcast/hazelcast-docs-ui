@@ -8,7 +8,26 @@
     </p>
     <div id="search-input" class="search-container searchbox">
     </div>
-    <section class="featured-cards">
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector("nav.navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+    });
+  </script>
+
+  <!-- Promo Banner: Pull from Wordpress -->
+  <div id="promo-banner-container">
+  </div>
+
+  <main data-ceiling="topbar">
+    <article class="article bottom-padding">
       <div class="card">
         <div class="card-header">
           <i data-feather="zap" class="card-img"></i>
@@ -93,27 +112,6 @@
         </ul>
       </div>
 
-    </section>
-  </div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      window.addEventListener("scroll", function () {
-        const navbar = document.querySelector("nav.navbar");
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-    });
-  </script>
-
-  <!-- Promo Banner: Pull from Wordpress -->
-  <div id="promo-banner-container">
-  </div>
-
-  <main data-ceiling="topbar">
-    <article class="article bottom-padding">
       <div class="card">
         <div class="card-header">
           <!-- <img class="card-img" src="{{{uiRootPath}}}/img/team.svg" alt="team" /> -->
