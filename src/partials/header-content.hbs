@@ -1,12 +1,19 @@
 <header class="header">
   <nav class="navbar navbar-brand">
     <div class="navbar-start">
-      <a class="navbar-item navbar-logo-item" href="/">
-        <img class="navbar-logo-item-img" src="{{{uiRootPath}}}/img/hazelcast-logo-white.png" alt="Hazelcast Logo" />
+      <a class="navbar-item navbar-logo-item" href="https://hazelcast.com/?utm_source=docs-website&utm_term=home-logo">
+        <img class="navbar-logo-item-img" src="https://hazelcast.com/wp-content/themes/hazelcast/assets/img/hazelcast-logo.svg" alt="Hazelcast Logo" />
       </a>
-      <p class="navbar-item navbar-app-title">
-        Documentation
-      </p>
+    </div>
+
+    <div id="desktop-holder" class="top-bar">
+      <ul class="mega-menu">
+        <li class="mega-menu-item"><a class="mega-menu-link" href="https://hazelcast.com/products/?utm_source=docs-website&utm_term=platform">Platform</a></li>
+        <li class="mega-menu-item"><a class="mega-menu-link" href="https://hazelcast.com//use-cases/?utm_source=docs-website&utm_term=solutions">Solutions</a></li>
+        <li class="mega-menu-item"><a class="mega-menu-link" href="https://hazelcast.com/resource-center/?utm_source=docs-website&utm_term=resources">Resources</a></li>
+        <li class="mega-menu-item"><a class="mega-menu-link" href="https://hazelcast.com/developers/?utm_source=docs-website&utm_term=developers">Developers</a></li>
+        <li class="mega-menu-item mega-menu-item-docs active"><a class="mega-menu-link" href="https://docs.hazelcast.com/?utm_source=docs-website&utm_term=docs">Docs</a></li>
+      </ul>
     </div>
 
     <div class="navbar-end">
@@ -17,20 +24,40 @@
             <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
           </label>
         {{/if}}
-      {{else}}
-        <a href="https://hazelcast.com/?utm_source=docs-website" class="hazelcast-link" target="_blank">
-          hazelcast.com
-        </a>
       {{/if}}
+
       {{#if (eq page.component.name 'cloud')}}
         <a class="navbar-item" href="{{{page.attributes.cloud-console}}}sign-up" target="_blank">
-          <button class="button navbar-button">Try Free</button>
+          <button class="button small custom-4">Try Free</button>
         </a>
       {{else}}
-        <a class="navbar-item get-hazelcast-link" href="https://hazelcast.com/get-started/?utm_source=docs-website" target="_blank">
-          <button class="button navbar-button">Get Hazelcast</button>
+      <a class="navbar-item" href="https://hazelcast.com/get-started/?utm_source=docs-website&utm_term=get-started" target="_blank">
+          <button class="button small custom-4">Try Hazelcast</button>
         </a>
+        <!-- Hamburger menu trigger (just one!) -->
+        <div class="navbar-burger" id="burger" aria-label="menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       {{/if}}
     </div>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div id="menu-holder" class="mobile-menu">
+    <div class="mobile-menu-header">
+      <a href="https://hazelcast.com/?utm_source=docs-website&utm_term=home-logo" class="mobile-menu-logo">
+          <img class="navbar-logo-item-img"src="https://hazelcast.com/wp-content/themes/hazelcast/assets/img/hazelcast-logo.svg" alt="Hazelcast Logo" />
+      </a>
+      <button class="menu-close" id="menu-close" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mega-menu">
+      <li class="mega-menu-item"><a class="mega-menu-link" href="https://hazelcast.com/products/?utm_source=docs-website&utm_term=platform">Platform</a></li>
+      <li class="mega-menu-item"><a class="mega-menu-link" href="https://hazelcast.com/use-cases/?utm_source=docs-website&utm_term=solutions">Solutions</a></li>
+      <li class="mega-menu-item"><a class="mega-menu-link" href="https://hazelcast.com/resource-center/?utm_source=docs-website&utm_term=resources">Resources</a></li>
+      <li class="mega-menu-item"><a class="mega-menu-link" href="https://hazelcast.com/developers/?utm_source=docs-website&utm_term=developers">Developers</a></li>
+      <li class="mega-menu-item"><a class="mega-menu-link docs-highlight" href="https://docs.hazelcast.com/?utm_source=docs-website&utm_term=docs">Docs</a></li>
+    </ul>
+  </div>
 </header>

@@ -1,55 +1,82 @@
+/*! Hazelcast Docs UI - v1.0.0 */
+
+/* ================================
+   General Styles
+================================ */
+
+body.body-dark {
+  background-color: #061827;
+}
+
 .home {
   --cards-padding: 15px;
   --search-container-height: 36px;
 
-  width: 100%;
   margin: 0 auto;
   text-align: center;
+  width: 100%;
 }
 
-.home .hero-background {
-  background-image: url('../img/home/hazelcast-banner-back.jpeg'), linear-gradient(160deg, #061827 33%, #1b2939 66%, #0686b3 100%);
-  background-repeat: no-repeat;
-  background-position-x: center;
-  background-position-y: 0;
-  background-size: cover;
-  background-color: #061827;
-  padding: 0 0 1.5rem;
+dd {
+  display: block;
+  margin-inline-start: 0; /* Keep this */
+}
+
+/* ================================
+   Background Styles
+================================ */
+
+.home .home-background {
   position: relative;
+  overflow: hidden;
+  min-height: 160px;
+  padding: 2rem 1rem; /* adjust padding as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (min-width: 1120px) {
-  .home .hero-background {
-    background-position-y: -50px;
-  }
+.home .home-background::before {
+  content: "";
+  position: absolute;
+  top: 0; /* Shift image up */
+  left: 0;
+  width: 100%;
+  height: calc(100% + 50px);
+  background-image: url('../img/home/green-flow.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  z-index: -1;
 }
 
-@media (min-width: 1600px) {
-  .home .hero-background {
-    background-position-y: -160px;
-  }
-}
-
-.home .hero-background-heading {
+/* Background Heading & Subheading */
+.home .home-background-heading {
   color: #fff;
   font-weight: 500;
   font-size: 50px;
   letter-spacing: 1px;
-  line-height: 1.2;
+  line-height: 1;
   margin: 0;
   background: linear-gradient(270deg, var(--accent4), var(--accent));
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.home .hero-background-subheading {
+.home .home-background-subheading {
   color: #fff;
   font-size: var(--body-font-size);
   font-family: var(--heading-font-family);
   font-weight: 300;
+  padding: 0 30px;
   letter-spacing: 1px;
-  margin: 0 0 1rem;
+  margin: 1 0 1rem;
 }
+
+/* ================================
+   Search & AI Button
+================================ */
 
 .home .search-buttons {
   width: 100%;
@@ -61,6 +88,19 @@
   position: relative;
 }
 
+.home .search-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.home .DocSearch-Button {
+  width: 40%;
+}
+
+/* AI Button */
 .ai-button {
   color: var(--neutral-white);
   background-color: var(--accent);
@@ -79,62 +119,51 @@
   stroke-width: 1.5;
 }
 
-.home .search-container {
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-}
+/* ================================
+   Article Cards
+================================ */
 
-.home .DocSearch-Button {
-  width: 40%;
-}
-
-.home .article {
-  padding: var(--cards-gap) var(--cards-gap) 0;
+.home .article,
+.light-section {
   background-color: #f2f5f9;
   text-align: left;
   display: flex;
   justify-content: center;
   gap: var(--cards-gap);
+  padding: var(--cards-gap) var(--cards-gap) 0;
   flex-wrap: wrap;
 }
 
+.card-header-padding {
+  padding: var(--cards-padding);
+}
+
 .home .card,
-.home .additional-card,
-.feedback-footer {
+.feedback-footer,
+.additional-card {
   border-radius: 10px;
   background-color: #fff;
-  padding: var(--cards-padding);
   flex-basis: 100%;
+  padding: var(--cards-padding);
   border: 1px solid var(--neutral-light);
   box-sizing: border-box;
 }
 
-.home .additional-card .card-list {
-  gap: 5px;
-}
-
-.home .card-list-item-description:last-child {
-  margin-bottom: 0;
-}
-
+/* Card Titles */
 .home .card-header,
 .feedback-footer .card-header {
   color: var(--doc-font-color);
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
 }
 
 .home .card-title,
 .feedback-footer .card-title {
   font-weight: 500;
-  margin: 0;
-  font-size: 21px;
+  font-size: 1.3rem;
   text-align: center;
+  margin: 0;
 }
 
 .home .card-title a {
@@ -142,44 +171,20 @@
   text-decoration: none !important;
 }
 
-@media (min-width: 480px) {
-  .home .card {
-    flex-basis: calc(50% - calc(var(--cards-gap) * 1 / 2));
-  }
-}
-
-@media (min-width: 550px) {
-  .ai-button {
-    position: absolute;
-    right: 40px;
-    top: 0;
-  }
-}
-
-@media (min-width: 840px) {
-  .home .card {
-    flex-basis: calc(33% - calc(var(--cards-gap) * 2 / 3));
-  }
-
-  .home .additional-card {
-    flex-basis: calc(50% - calc(var(--cards-gap) * 1 / 2));
-  }
-}
-
-@media (min-width: 1400px) {
-  .home .card {
-    flex-basis: calc(25% - calc(var(--cards-gap) * 3 / 4));
-  }
-}
-
 .home .card-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   justify-content: center;
   flex: 1 66%;
   padding: 0;
+  gap: 0;
   margin: 10px 0 0;
+}
+
+.home ul.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .home .card-list-item {
@@ -212,9 +217,13 @@
 
 .home .card-list-item-description {
   color: var(--secondary-text);
-  margin: 0 0 0.5rem;
+  margin: 0 0 1rem;
   text-align: left;
 }
+
+/* ================================
+   Feedback Section
+================================ */
 
 .feedback-footer-container {
   padding: 0 var(--cards-gap) var(--cards-gap);
@@ -234,17 +243,203 @@
   gap: 10px;
 }
 
+/* ================================
+   Featured Cards
+================================ */
+
+.home .featured-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Default: 4 columns */
+  gap: var(--cards-gap);
+  width: 100%;
+  margin: 60px 0 40px 0;
+  padding: 0 20px;
+}
+
+/* 2 columns at medium widths */
+@media (max-width: 1100px) {
+  .home .featured-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 1 column on narrow screens */
+@media (max-width: 600px) {
+  .home .featured-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.home .featured-cards .card {
+  box-sizing: border-box;
+}
+
+/* ================================
+   Promo Banner
+================================ */
+
+.promo-banner {
+  background: linear-gradient(90deg, #c6ff3a 0%, #c6ff3a 100%);
+  color: #051a27;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.25em;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.8s ease, color 0.6s ease;
+}
+
+.promo-banner strong {
+  font-weight: 500;
+  transition: color 0.8s ease;
+}
+
+.promo-banner a {
+  color: #051a27;
+  font-weight: 500;
+  margin-left: 8px;
+  text-decoration: none;
+  transition: color 0.8s ease, text-decoration 0.8s ease;
+}
+
+.promo-banner:hover {
+  background: linear-gradient(90deg, #c6ff3a 0%, #fff 100%);
+  text-decoration: none !important;
+  color: #0b2b39;
+}
+
+.promo-banner:hover strong,
+.promo-banner:hover a {
+  color: #0b2b39;
+}
+
+.promo-banner .p-btn {
+  color: #0080a9;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  margin-left: 8px;
+  padding-right: 1em; /* space for arrow */
+  transition: color 0.3s ease;
+}
+
+.promo-banner .p-btn::after {
+  content: '→';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.95em;
+  transition: transform 0.3s ease;
+}
+
+.promo-banner:hover .p-btn {
+  color: #0b2b39;
+  text-decoration: underline;
+}
+
+.promo-banner:hover .p-btn::after {
+  transform: translateY(-50%) translateX(4px);
+}
+
+.grad-text {
+  background: linear-gradient(90deg, #0080a9, #0b2b39);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  transition: background-position 0.6s ease;
+  background-size: 200% auto;
+  background-position: left center;
+}
+
+.grad-text:hover {
+  background-position: right center;
+}
+
+/* ================================
+   Responsive Media Queries
+================================ */
+
+@media (min-width: 480px) {
+  .home .card {
+    flex-basis: calc(50% - var(--cards-gap) / 2);
+  }
+
+  .home .card-title,
+  .feedback-footer .card-title {
+    text-align: left;
+  }
+}
+
+@media (min-width: 550px) {
+  .ai-button {
+    position: absolute;
+    right: 40px;
+    top: 0;
+  }
+
+  .home .card-title,
+  .feedback-footer .card-title {
+    text-align: left;
+  }
+}
+
+@media (min-width: 840px) {
+  .home .card {
+    flex-basis: calc(50% - var(--cards-gap) / 2);
+  }
+
+  .home .additional-card {
+    flex-basis: calc(50% - var(--cards-gap) / 2);
+  }
+}
+
+@media (max-width: 768px) {
+  .home .DocSearch-Button {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1120px) {
+  .home .home-background {
+    background-position-y: 0;
+  }
+}
+
 @media (min-width: 1300px) {
   .feedback-footer {
     gap: 30px;
   }
 }
 
-.feedback-footer .card-header {
-  margin-bottom: 0;
+@media (min-width: 1400px) {
+  .home .card {
+    flex-basis: calc(25% - (var(--cards-gap) * 3 / 4));
+  }
 }
 
-.home .feedback-button,
-.home .helpful-feedback {
-  margin-top: 0;
+/* Mobile Stacking for Featured Cards */
+
+@media (max-width: 768px) {
+  .home .additional-cards {
+    padding: 20px;
+  }
 }
+
+/* ================================
+   Fix: Ensure Newline at End of File
+================================ */

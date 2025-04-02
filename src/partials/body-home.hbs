@@ -1,16 +1,33 @@
 <div class="home">
-  <div class="hero-background">
-    <h1 class="hero-background-heading">
+  <div class="home-background">
+    <h1 class="home-background-heading">
       Hazelcast Documentation
     </h1>
-    <p class="hero-background-subheading">
+    <p class="home-background-subheading">
       Find user guides, code samples, tutorials, API reference, and more.
     </p>
     <div id="search-input" class="search-container searchbox">
     </div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector("nav.navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+    });
+  </script>
+
+  <!-- Promo Banner: Pull from Wordpress -->
+  <div id="promo-banner-container">
+  </div>
+
   <main data-ceiling="topbar">
-    <article class="article">
+    <article class="article bottom-padding">
       <div class="card">
         <div class="card-header">
           <i data-feather="zap" class="card-img"></i>
@@ -47,13 +64,6 @@
           <li class="card-list-item">
             <a href="{{{siteRootPath}}}/hazelcast/latest/getting-started/editions">Community vs. Enterprise</a>
           </li>
-<!--      <li class="card-list-item">
-            <a href="{{{siteRootPath}}}/getting-started/editions">Install and upgrade</a>
-          </li>
-          <li class="card-list-item">
-            <a href="{{{siteRootPath}}}/getting-started/editions">Feature overview</a>
-          </li>
-!-->
           <li class="card-list-item">
             <a href="{{{siteRootPath}}}/hazelcast/latest/deploy/deploying-in-cloud">Cloud deployment</a>
           </li>
@@ -77,7 +87,7 @@
           </li>
           <li class="card-list-item">
             <a href="{{{siteRootPath}}}/hazelcast/latest/cluster-performance/best-practices">Best practices</a>
-        </ul>
+          </ul>
       </div>
 
       <div class="card">
@@ -132,7 +142,7 @@
           </li>
         </ul>
       </div>
-
+      
       <div class="card">
         <div class="card-header">
           <img class="card-img" src="{{{uiRootPath}}}/img/streaming.svg" alt="team" />
@@ -202,47 +212,46 @@
         </ul>
       </div>
 
-
     </article>
 
-    <aside class="additional-cards">
+    <aside class="additional-cards light-section">
       <div class="additional-card">
         <div class="card-header">
           <i data-feather="book-open" class="card-img"></i>
           <h4 class="card-title"><a href="{{{siteRootPath}}}/tutorials">Tutorials</a></h4>
         </div>
-        <dl class="card-list">
-          <dt class="card-list-item">
-            <a href="{{{siteRootPath}}}/tutorials/java-client-getting-started">Get Started with Java Client</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Use Hazelcast Cloud to get started with a Java client and manipulate a map.
-          </dd>
-          <dt class="card-list-item">
-            <a href="{{{siteRootPath}}}/hazelcast/latest/tutorials/kubernetes">Deploy Hazelcast using Kubernetes</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Deploy a Hazelcast cluster to Kubernetes and connect it to a Kubernetes application.
-          </dd>
-          <dt class="card-list-item">
-            <a href="https://training.hazelcast.com/vector-search-on-hazelcast?utm_source=docs-website">Free Training: Vector Search on Hazelcast</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Learn how to use Hazelcast to create real-time applications using our fast data storage and distributed computing engine.
-          </dd>
-          <dt class="card-list-item">
-            <a href="{{{siteRootPath}}}/tutorials/airline-connections">Build Airline Connections Demo using Hazelcast Cloud</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Create an application that uses streaming data to correlate flight details with stored data.
-          </dd>
-          <dt class="card-list-item">
-            <a href="{{{siteRootPath}}}/tutorials/spring-boot-client">Create a Spring Boot Application for Hazelcast Cloud</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Deploy a Spring Boot application that uses Hazelcast as a cache manager.
-          </dd>
-        </dl>
+            <dl class="card-list">
+              <dt class="card-list-item">
+                <a href="{{{siteRootPath}}}/tutorials/java-client-getting-started">Get Started with Java Client</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Use Hazelcast Cloud to get started with a Java client and manipulate a map.
+              </dd>
+              <dt class="card-list-item">
+                <a href="{{{siteRootPath}}}/hazelcast/latest/tutorials/kubernetes">Deploy Hazelcast using Kubernetes</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Deploy a Hazelcast cluster to Kubernetes and connect it to a Kubernetes application.
+              </dd>
+              <dt class="card-list-item">
+                <a href="https://training.hazelcast.com/vector-search-on-hazelcast?utm_source=docs-website">Free Training: Vector Search on Hazelcast</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Learn how to use Hazelcast to create real-time applications using our fast data storage and distributed computing engine.
+              </dd>
+              <dt class="card-list-item">
+                <a href="{{{siteRootPath}}}/tutorials/airline-connections">Build Airline Connections Demo using Hazelcast Cloud</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Create an application that uses streaming data to correlate flight details with stored data.
+              </dd>
+              <dt class="card-list-item">
+                <a href="{{{siteRootPath}}}/tutorials/spring-boot-client">Create a Spring Boot Application for Hazelcast Cloud</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Deploy a Spring Boot application that uses Hazelcast as a cache manager.
+              </dd>
+            </dl>
       </div>
 
       <div class="additional-card">
@@ -250,38 +259,38 @@
           <i data-feather="award" class="card-img"></i>
           <h4 class="card-title">New and Popular</h4>
         </div>
-        <dl class="card-list">
-          <dt class="card-list-item">
-            <a href="https://hazelcast.com/blog/navigating-consistency-in-distributed-systems-choosing-the-right-trade-offs/?utm_source=docs-website">Blog: Navigating Consistency in Distributed Systems</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Every distributed system faces a critical question: should we prioritize consistency or availability?
-          </dd>
-         <dt class="card-list-item">
-            <a href="{{{siteRootPath}}}/hazelcast/latest/integrate/integrate-with-feast">Integrate with Feast</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Start using Feast integration to serve real-time online features.
-          </dd>
-          <dt class="card-list-item">
-            <a href="https://hazelcast.com/blog/dynamic-configuration-no-restarts-required/?utm_source=docs-website">Blog: Dynamic Configuration: No Restarts Required</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Dynamic configuration enables you to add new data structure configurations at runtime without restarting the cluster.
-          </dd>
-          <dt class="card-list-item">
-            <a href="https://hazelcast.com/blog/get-instant-answers-with-ask-ai-on-hazelcast-documentation/?utm_source=docs-website">Blog: Get Instant Answers with Ask AI on Hazelcast Documentation</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Get instant answers to all your questions about Hazelcast with our new Ask AI feature on docs.hazelcast.com.
-          </dd>
-          <dt class="card-list-item">
-            <a href="https://hazelcast.com/blog/announcing-hazelcast-platform-5-5-release/?utm_source=docs-website">Blog: What’s New in Hazelcast 5.5</a>
-          </dt>
-          <dd class="card-list-item-description">
-            Discover our latest improvements, including vector search, compute isolation, multi-member routing, dynamic configuration using REST API, and much more.
-          </dd>
-        </dl>
+            <dl class="card-list">
+              <dt class="card-list-item">
+                <a href="https://hazelcast.com/blog/navigating-consistency-in-distributed-systems-choosing-the-right-trade-offs/?utm_source=docs-website">Blog: Navigating Consistency in Distributed Systems</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Every distributed system faces a critical question: should we prioritize consistency or availability?
+              </dd>
+            <dt class="card-list-item">
+                <a href="{{{siteRootPath}}}/hazelcast/latest/integrate/integrate-with-feast">Integrate with Feast</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Start using Feast integration to serve real-time online features.
+              </dd>
+              <dt class="card-list-item">
+                <a href="https://hazelcast.com/blog/dynamic-configuration-no-restarts-required/?utm_source=docs-website">Blog: Dynamic Configuration: No Restarts Required</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Dynamic configuration enables you to add new data structure configurations at runtime without restarting the cluster.
+              </dd>
+              <dt class="card-list-item">
+                <a href="https://hazelcast.com/blog/get-instant-answers-with-ask-ai-on-hazelcast-documentation/?utm_source=docs-website">Blog: Get Instant Answers with Ask AI on Hazelcast Documentation</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Get instant answers to all your questions about Hazelcast with our new Ask AI feature on docs.hazelcast.com.
+              </dd>
+              <dt class="card-list-item">
+                <a href="https://hazelcast.com/blog/announcing-hazelcast-platform-5-5-release/?utm_source=docs-website">Blog: What’s New in Hazelcast 5.5</a>
+              </dt>
+              <dd class="card-list-item-description">
+                Discover our latest improvements, including vector search, compute isolation, multi-member routing, dynamic configuration using REST API, and much more.
+              </dd>
+          </dl>
       </div>
     </aside>
 
@@ -290,6 +299,43 @@
 </div>
 
 <script>
+  // Promo Banner: Pull from Wordpress
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById('promo-banner-container');
+    if (!container) return;
+
+    fetch('https://hazelcast.com/wp-json/wp/v2/pages?slug=docs-site-promo-banner')
+      .then(res => res.ok ? res.json() : Promise.reject(res))
+      .then(data => {
+        const rawHtml = data?.[0]?.content?.rendered;
+        if (!rawHtml) {
+          console.warn("Promo banner content not found.");
+          return;
+        }
+
+        // Clean up any accidental <br> or whitespace
+        const cleanHtml = rawHtml.replace(/^\s*<br\s*\/?>/i, '').trim();
+
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = cleanHtml;
+
+        const promoBanner = tempDiv.querySelector('.promo-banner');
+        container.innerHTML = ''; // Clear any fallback/loading
+
+        if (promoBanner) {
+          container.appendChild(promoBanner.cloneNode(true));
+        } else {
+          console.warn("No .promo-banner found in fetched content.");
+        }
+      })
+      .catch(err => {
+        console.error("Failed to load promo banner:", err);
+        container.innerHTML = ''; // fallback or leave empty
+      });
+  });
+
+  // feather icons
   feather.replace();
+
 </script>
 

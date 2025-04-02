@@ -58,11 +58,11 @@
               "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
               "tags:cloud",
               "tags:flow-{{site.components.flow.latest.version}}",
-            ]], 'Search all docs...');
+            ]], 'Search');
           } else {
             hzDocSearch([
               "tags:tutorials",
-            ], 'Search all docs...');
+            ], 'Search');
           }
         }
     </script>
@@ -91,7 +91,7 @@
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]);
       }
@@ -130,7 +130,7 @@
           "tags:management-center-{{site.components.management-center.latest.version}}",
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}"]);
       }
@@ -147,7 +147,7 @@
           "tags:management-center-{{page.attributes.latest-supported-mc}}",
           "tags:cloud",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
@@ -163,7 +163,7 @@
           "tags:management-center-{{site.components.management-center.latest.version}}",
           "tags:cloud",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
@@ -180,7 +180,7 @@
           "tags:management-center-{{site.components.management-center.latest.version}}",
           "tags:cloud",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
@@ -190,7 +190,7 @@
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
@@ -206,7 +206,7 @@
           "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}",
           "tags:cloud",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
@@ -222,7 +222,7 @@
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
@@ -239,7 +239,7 @@
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
@@ -256,7 +256,7 @@
           "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
           "tags:cloud",
           "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search all docs...');
+        ]], 'Search');
       } else {
         hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
       }
@@ -270,10 +270,40 @@
       "tags:management-center-{{site.components.management-center.latest.version}}",
       "tags:cloud",
       "tags:flow-{{site.components.flow.latest.version}}",
-    ]], 'Search all docs...');
+    ]], 'Search');
   </script>
 {{/if}}
+<script>
+  // Mobile Menu
+  document.addEventListener('DOMContentLoaded', function () {
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu-holder');
+    const closeBtn = document.getElementById('menu-close');
 
+    if (burger && menu && closeBtn) {
+      burger.addEventListener('click', function () {
+        menu.classList.add('active');
+        burger.style.display = 'none';
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeBtn.addEventListener('click', function () {
+        menu.classList.remove('active');
+        burger.style.display = 'flex';
+        document.body.style.overflow = '';
+      });
+
+      // Reset burger on resize
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 1100) {
+          burger.style.display = ''; // Remove inline style so CSS takes over
+          menu.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  });
+</script>
 <script>
   feather.replace();
 </script>
