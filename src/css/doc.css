@@ -216,6 +216,11 @@ strong.beta {
   font-size: inherit;
 }
 
+.doc .tableblock thead,
+.doc .tableblock tr:has(p>strong) {
+  background-color: var(--neutral-grey);
+}
+
 .doc a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
 .home .article a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
 .home .additional-cards a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
