@@ -13,6 +13,29 @@ new Crawler({
       indexName: "algolia_crawler_articles_for_instant_search",
       pathsToMatch: ["https://docs.hazelcast.com/hazelcast/5.5/clients/**"],
       recordExtractor: ({ url, $ }) => {
+        const RECORD_TYPE = {
+          TITLE: 0,
+          CONTENT: 1,
+          DESCRIPTION: 2,
+          SECTION_TITLE: 3,
+          OPENAPI: 4,
+        };
+        // const contentSelectors = [".paragraph", ".admonitionblock td.content"];
+        const isImdg = /\/imdg\//.test(url.pathname);
+        const title = $(".doc  h1").text().trim();
+        const version = $("#navbarProductVersion").text().trim();
+        const product = $("#navbarProductName").text().trim();
+        const records = [];
+
+        const recordBase = {
+          title: title,
+          sections: [],
+          version: version,
+          product: product,
+          pageRank: isImdg ? "-1000" : "0",
+        };
+
+
         const getBreadcrumbs = () => {
           return $(".breadcrumbs")
             .find("li")
@@ -111,26 +134,6 @@ new Crawler({
             });
           return subsectionRecords;
         };
-        const RECORD_TYPE = {
-          TITLE: 0,
-          CONTENT: 1,
-          DESCRIPTION: 2,
-          SECTION_TITLE: 3,
-          OPENAPI: 4,
-        };
-        const isImdg = /\/imdg\//.test(url.pathname);
-        const title = $(".doc  h1").text().trim();
-        const version = $("#navbarProductVersion").text().trim();
-        const product = $("#navbarProductName").text().trim();
-        const records = [];
-
-        const recordBase = {
-          title: title,
-          sections: [],
-          version: version,
-          product: product,
-          pageRank: isImdg ? "-1000" : "0",
-        };
 
         records.push(createRecord(RECORD_TYPE.TITLE, [], null, url));
         records.push(
@@ -179,5 +182,5 @@ new Crawler({
       attributesForFaceting: ["product", "version"],
     },
   },
-  apiKey: "5747ec3f93ee66da2d518af3eb239294",
+  apiKey: "",
 });
