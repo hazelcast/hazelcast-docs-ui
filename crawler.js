@@ -12,16 +12,62 @@ new Crawler({
     {
       indexName: "algolia_crawler_articles_for_instant_search",
       pathsToMatch: [
-        "https://docs.hazelcast.com/management-center/5.8/getting-started/**",
+        "https://docs.hazelcast.com/hazelcast/5.5/clients/**",
       ],
       recordExtractor: ({ url, $ }) => {
+        const createRecord = (type, sections, content, recordUrl) => {
+          const record = {
+            ...recordBase,
+            type: type,
+            sections: sections,
+            url: recordUrl,
+          };
+          if (content) {
+            record.content = content;
+          }
+          return record;
+        };
+
+        const processParagraphs = (containerEl, sections, baseUrl) => {
+          const paragraphRecords = [];
+          containerEl.each((_i, contentEl) => {
+            const content = $(contentEl).text().trim();
+            if (content) {
+              paragraphRecords.push(createRecord(RECORD_TYPE.CONTENT, sections, content, baseUrl));
+            }
+          });
+          return paragraphRecords;
+        };
+
+        const processSubsections = (sectionEl, sectionTitle) => {
+          const subsectionRecords = [];
+          $(sectionEl).find(".sect2").each((_i, subsectionEl) => {
+            const subsectionTitle = $(subsectionEl).find("h3").text().trim();
+            const subsectionAnchor = $(subsectionEl).find("h3>a.anchor").attr("href");
+            const subsectionUrl = `${url}${subsectionAnchor}`;
+            const subsectionSections = [sectionTitle, subsectionTitle];
+            
+            subsectionRecords.push(createRecord(RECORD_TYPE.SECTION_TITLE, subsectionSections, null, subsectionUrl));
+            subsectionRecords.push(...processParagraphs($(subsectionEl).find(".paragraph"), subsectionSections, subsectionUrl));
+            
+            $(subsectionEl).find(".sect3").each((_i, subsubsectionEl) => {
+              const subsubsectionTitle = $(subsubsectionEl).find("h4").text().trim();
+              const subsubsectionAnchor = $(subsubsectionEl).find("h4>a.anchor").attr("href");
+              const subsubsectionUrl = `${url}${subsubsectionAnchor}`;
+              const subsubsectionSections = [sectionTitle, subsectionTitle, subsubsectionTitle];
+              
+              subsectionRecords.push(createRecord(RECORD_TYPE.SECTION_TITLE, subsubsectionSections, null, subsubsectionUrl));
+              subsectionRecords.push(...processParagraphs($(subsubsectionEl).find(".paragraph"), subsubsectionSections, subsubsectionUrl));
+            });
+          });
+          return subsectionRecords;
+        };
         const RECORD_TYPE = {
           TITLE: 0,
           CONTENT: 1,
           DESCRIPTION: 2,
           SECTION_TITLE: 3,
-          SUBSECTION_TITLE: 4,
-          OPENAPI: 5,
+          OPENAPI: 4,
         };
         const isImdg = /\/imdg\//.test(url.pathname);
         const title = $(".doc  h1").text().trim();
@@ -31,88 +77,24 @@ new Crawler({
 
         const recordBase = {
           title: title,
+          sections: [],
           version: version,
           product: product,
           pageRank: isImdg ? "-1000" : "0",
         };
 
-        // main title
-        records.push({
-          ...recordBase,
-          type: RECORD_TYPE.TITLE,
-          url: url,
-        });
-
-        // description, aka #preamble
-        records.push({
-          ...recordBase,
-          type: RECORD_TYPE.DESCRIPTION,
-          content: $("#preamble").text().trim(),
-          url: url,
-        });
+        records.push(createRecord(RECORD_TYPE.TITLE, [], null, url));
+        records.push(createRecord(RECORD_TYPE.DESCRIPTION, [], $("#preamble").text().trim(), url));
 
         $(".sect1").each((_i, sectionEl) => {
           const sectionTitle = $(sectionEl).find("h2").text().trim();
           const sectionAnchor = $(sectionEl).find("h2>a.anchor").attr("href");
-          // section title
-          records.push({
-            ...recordBase,
-            type: RECORD_TYPE.SECTION_TITLE,
-            section: sectionTitle,
-            url: `${url}${sectionAnchor}`,
-          });
-          // add immediate paragraphs
-          $(sectionEl)
-            .find(".sectionbody>.paragraph")
-            .each((_i, contentEl) => {
-              const content = $(contentEl).text().trim();
-              // filter out 'empty' elements like images
-              if (content) {
-                records.push({
-                  ...recordBase,
-                  section: sectionTitle,
-                  subsection: "subsection", // .sect2
-                  type: RECORD_TYPE.CONTENT,
-                  content: content,
-                  url: `${url}${sectionAnchor}`,
-                });
-              }
-            });
-
-          // add paragraphs from subsections
-          $(sectionEl)
-            .find(".sect2")
-            .each((_i, subsectionEl) => {
-              const subsectionTitle = $(subsectionEl).find("h3").text().trim();
-              const subsectionAnchor = $(subsectionEl)
-                .find("h3>a.anchor")
-                .attr("href");
-              // subsection title
-              records.push({
-                ...recordBase,
-                type: RECORD_TYPE.SUBSECTION_TITLE,
-                section: sectionTitle,
-                subsection: subsectionTitle,
-                url: `${url}${subsectionAnchor}`,
-              });
-              // add immediate paragraphs
-              $(subsectionEl)
-                .find(".paragraph")
-                .each((_i, contentEl) => {
-                  const content = $(contentEl).text().trim();
-                  // filter out 'empty' elements like images
-                  if (content) {
-                    records.push({
-                      ...recordBase,
-                      section: sectionTitle,
-                      subsection: subsectionTitle,
-                      type: RECORD_TYPE.CONTENT,
-                      content: content,
-                      url: `${url}${subsectionAnchor}`,
-                    });
-                  }
-                });
-            });
+          const sectionUrl = `${url}${sectionAnchor}`;
+          const sectionSections = [sectionTitle];
+          
+          records.push(createRecord(RECORD_TYPE.SECTION_TITLE, sectionSections, null, sectionUrl));
+          records.push(...processParagraphs($(sectionEl).find(".sectionbody>.paragraph"), sectionSections, sectionUrl));
+          records.push(...processSubsections(sectionEl, sectionTitle));
         });
 
         return records;
