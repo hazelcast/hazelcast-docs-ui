@@ -1,278 +1,73 @@
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.30.0/dist/lite/builds/browser.umd.js" integrity="sha256-w/rbJ5CGTW5rub22bQ/VEoIHxypNh4NZPdkIJvGMZlI=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.79.0/dist/instantsearch.production.min.js" integrity="sha256-FOU2owonNoOmNxF4I8jLR4D8w/vziYNi64GUN2boXRQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@1"></script>
+
 
 <script>
-  const hzDocSearch = (facetFilters, placeholder) => {
-    docsearch({
-      apiKey: '{{site.keys.docsearchApi}}',
-      indexName: '{{site.keys.docsearchIndex}}',
-      appId: '{{site.keys.docsearchId}}',
-      container: '#search-input',
-      // Set debug to true to inspect the dropdown
-      debug: false,
-      searchParameters: { facetFilters: facetFilters },
-      translations: {
-        button: {
-          buttonText: placeholder,
-          buttonAriaLabel: placeholder,
+  
+  const { autocomplete } = window['@algolia/autocomplete-js'];
+  const { liteClient: algoliasearch } = window['algoliasearch/lite'];
+  
+  const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
+  
+  autocomplete({
+    container: '#search-input',
+    placeholder: 'Search',
+    openOnFocus: true,
+    getSources({ query }) {
+      return [
+        {
+          sourceId: 'algolia',
+          getItems() {
+            return searchClient.search([
+              {
+                indexName: '{{site.keys.docsearchIndex}}',
+                query,
+                params: {
+                  //facetFilters: [
+                  //  "tags:tutorials",
+                  //  "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
+                  //  "tags:cloud",
+                  //  "tags:flow-{{site.components.flow.latest.version}}",
+                  //],
+                  hitsPerPage: 10,
+                },
+              },
+            ]);
+          },
+          templates: {
+            item({ item, components, html }) {
+              console.log(item)
+              return html`<div class="aa-ItemWrapper">
+                <div class="aa-ItemContent">
+                  <div class="aa-ItemIcon">
+                    <svg viewBox="0 0 20 20" width="20" height="20">
+                      <path d="m14.386 14.386 4.088 4.088-4.088-4.088A7.533 7.533 0 1 1 3.733 3.733a7.533 7.533 0 0 1 10.653 10.653z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </div>
+                  <div class="aa-ItemContentBody">
+                    <div class="aa-ItemContentTitle">
+                      ${components.Highlight({ hit: item, attribute: 'title' })}
+                    </div>
+                    <div class="aa-ItemContentDescription">
+                      ${components.Snippet({ hit: item, attribute: 'content' })}
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+            },
+          },
+          getItemUrl({ item }) {
+            return item.url;
+          },
         },
-      },
-    })
-  };
+      ];
+    },
+  });
 </script>
 
-<!-- SEARCH CONFIGURATIONS -->
-<!-- 404 is not a component, so we avoid reading the component versions and names from it -->
-{{#if (not-eq page.title 'Page Not Found')}}
-  <!-- TUTORIALS -->
-  {{#if (eq page.component.name 'tutorials')}}
-  <!-- Filter tutorials by product using the query parameters in the URL -->
-    <script>
-      var queryParams = new URLSearchParams(window.location.search);
-      var product = queryParams.get("product");
-      if (product) {
-        params.product = product
-        document.getElementById(product).click()
-        updateCards(params)
-      }
-    </script>
-    <!-- Unused feature that displays multi-path tutorial steps as a stream of boxes -->
-    {{#with page.attributes.box-number}}
-    <script>
-      if (document.getElementsByClassName('box').length > 0) {
-        var activeBox = document.getElementsByClassName('box box{{this}}')[0]
-        activeBox.classList.add('active')
-      }
-    </script>
-    {{/with}}
-    <script>
-      hzDocSearch(["tags:tutorials"]);
-    </script>
-    <script>
-      function applyFacetedSearch(){
-          var checkbox = document.getElementById('facet')
-          if (checkbox.checked) {
-            hzDocSearch([[
-              "tags:tutorials",
-              "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-              "tags:cloud",
-              "tags:flow-{{site.components.flow.latest.version}}",
-            ]], 'Search');
-          } else {
-            hzDocSearch([
-              "tags:tutorials",
-            ], 'Search');
-          }
-        }
-    </script>
-  <!--HOME PAGE-->
-  {{else if (or (eq page.component.name 'home') (eq page.layout 'home'))}}
-  <script>
-    hzDocSearch([[
-      "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-      "tags:management-center-{{site.components.management-center.latest.version}}",
-      "tags:clc-{{site.components.clc.latest.version}}",
-      "tags:operator-{{site.components.operator.latest.version}}",
-      "tags:cloud",
-      "tags:flow-{{site.components.flow.latest.version}}",
-    ]], 'Search all docs...');
-  </script>
-  {{else if (and (eq page.component.name 'management-center') (lt page.componentVersion.version '4.2020.12'))}}
-    <script>
-      hzDocSearch(["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]);
-  </script>
-  <script>
-    function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{site.components.management-center.latest.version}}",
-          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{site.components.management-center.latest.version}}"]);
-      }
-    }
-  </script>
-  <script>
-    function closeBanner() {
-      var banner = document.getElementById('latest-banner')
-      if (banner) {
-        banner.style.display = 'none'
-      }
-    }
-  </script>
-  {{else if (and (not-eq page.component.name 'home') (not-eq page.component.name 'cloud'))}}
-  <script>
-    hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-  </script>
-  <script>
-    function closeBanner() {
-      var banner = document.getElementById('latest-banner')
-      if (banner) {
-        banner.style.display = 'none'
-      }
-    }
-  </script>
-  {{else if (eq page.component.name 'cloud')}}
-  <script>
-    hzDocSearch(["tags:{{page.component.name}}"]);
-  </script>
-  <script>
-  function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}",
-          "tags:management-center-{{site.components.management-center.latest.version}}",
-          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}"]);
-      }
-    }
-  </script>
-  {{/if}}
-  {{#if (and (eq page.component.name 'hazelcast') page.attributes.latest-supported-mc)}}
-  <script>
-  function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:management-center-{{page.attributes.latest-supported-mc}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-      }
-    }
-  </script>
-  {{else if (eq page.component.name 'hazelcast')}}
-  <script>
-  function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:management-center-{{site.components.management-center.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-      }
-    }
-  </script>
-  {{/if}}
-  {{#if (eq page.component.name 'management-center')}}
-  <script>
-  function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet');
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:management-center-{{site.components.management-center.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-      }
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-      }
-    }
-  </script>
-  {{else if (and (eq page.component.name 'management-center') page.attributes.latest-supported-hazelcast)}}
-  <script>
-  function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:hazelcast-{{page.attributes.latest-supported-hazelcast}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-      }
-    }
-  </script>
-  {{else if (and (eq page.component.name 'management-center') (gte page.componentVersion.version '4.2020.12'))}}
-  <script>
-  function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-      }
-    }
-  </script>
-  {{/if}}
-  {{#if (eq page.component.name 'jdbc-driver')}}
-    <script>
-      function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-      }
-    }
-  </script>
-  {{/if}}
-  {{#if (eq page.component.name 'flow')}}
-    <script>
-      function applyFacetedSearch(){
-      var checkbox = document.getElementById('facet')
-      if (checkbox.checked) {
-        hzDocSearch([[
-          "tags:{{page.component.name}}-{{page.componentVersion.version}}",
-          "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-          "tags:cloud",
-          "tags:flow-{{site.components.flow.latest.version}}",
-        ]], 'Search');
-      } else {
-        hzDocSearch(["tags:{{page.component.name}}-{{page.componentVersion.version}}"]);
-      }
-    }
-  </script>
-  {{/if}}
-{{else}}
-  <script>
-    hzDocSearch([[
-      "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-      "tags:management-center-{{site.components.management-center.latest.version}}",
-      "tags:cloud",
-      "tags:flow-{{site.components.flow.latest.version}}",
-    ]], 'Search');
-  </script>
-{{/if}}
 <script>
   // Mobile Menu
   document.addEventListener('DOMContentLoaded', function () {

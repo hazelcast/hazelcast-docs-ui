@@ -1,30 +1,73 @@
-.DocSearch-Container {
-  z-index: 10000 !important;
-  position: fixed !important;
-}
-
-.DocSearch-Button-Keys {
-  display: none;
-}
-
-.DocSearch-Button-Container {
+.aa-Autocomplete {
   width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
 }
 
-.DocSearch-Button {
+.aa-Input {
   background: var(--neutral-lighter);
   border-radius: 5px;
   border: 1px solid var(--neutral-light);
-  margin: 0;
-}
-
-.DocSearch-Button .DocSearch-Search-Icon {
-  color: var(--accent);
-}
-
-.DocSearch-Button .DocSearch-Button-Placeholder {
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 14px;
   font-weight: 400;
+}
+
+.aa-Input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.aa-Panel {
+  z-index: 10000 !important;
+  position: absolute !important;
+  background: white;
+  border: 1px solid var(--neutral-light);
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow-y: auto;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.aa-ItemWrapper {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--neutral-light);
+}
+
+.aa-ItemWrapper:last-child {
+  border-bottom: none;
+}
+
+.aa-ItemWrapper:hover {
+  background: var(--neutral-lighter);
+}
+
+.aa-ItemContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.aa-ItemIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.aa-ItemContentBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.aa-ItemContentTitle {
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.aa-ItemContentDescription {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
