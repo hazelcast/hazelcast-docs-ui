@@ -1,13 +1,20 @@
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic@1.19.2/dist/theme.min.css"
+  integrity="sha256-4Wtj6dqgMBT/Ji+vI49GON0NbfDlaJH06SUD7TH4yYg="
+  crossorigin="anonymous"
+/>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.30.0/dist/lite/builds/browser.umd.js" integrity="sha256-w/rbJ5CGTW5rub22bQ/VEoIHxypNh4NZPdkIJvGMZlI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.79.0/dist/instantsearch.production.min.js" integrity="sha256-FOU2owonNoOmNxF4I8jLR4D8w/vziYNi64GUN2boXRQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@1"></script>
 
 
+
 <script>
   
-  const { autocomplete } = window['@algolia/autocomplete-js'];
+  const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
   
   const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
@@ -21,25 +28,28 @@
         {
           sourceId: 'algolia',
           getItems() {
-            return searchClient.search([
+            return getAlgoliaResults({
+            searchClient,
+            queries: [
               {
                 indexName: '{{site.keys.docsearchIndex}}',
-                query,
                 params: {
+                  query,
+                  hitsPerPage: 5,
                   //facetFilters: [
                   //  "tags:tutorials",
                   //  "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
                   //  "tags:cloud",
                   //  "tags:flow-{{site.components.flow.latest.version}}",
                   //],
-                  hitsPerPage: 10,
+                  attributesToSnippet: ['name:10', 'description:35'],
+                  snippetEllipsisText: '…',
                 },
-              },
-            ]);
+              }],
+            });
           },
           templates: {
             item({ item, components, html }) {
-              console.log(item)
               return html`<div class="aa-ItemWrapper">
                 <div class="aa-ItemContent">
                   <div class="aa-ItemIcon">

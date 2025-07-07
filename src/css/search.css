@@ -18,16 +18,20 @@
 }
 
 .aa-Panel {
-  z-index: 10000 !important;
+  z-index: 10000;
   position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
   background: white;
   border: 1px solid var(--neutral-light);
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-height: 400px;
-  overflow-y: auto;
-  width: 100%;
-  margin-top: 4px;
+  /* max-height: 400px; */
+  /* overflow-y: auto; */
+}
+
+.aa-ItemContent mark {
+  background-color: yellow !important;
 }
 
 .aa-ItemWrapper {

@@ -19,11 +19,6 @@
     <div class="navbar-end">
       {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing') (not-eq page.layout 'privacy') (not-eq page.component.name 'imdg'))}}
         <div id="search-input" class="navbar-item searchbox"></div>
-        {{#if (not-eq page.layout '404')}}
-          <label class="filter checkbox">
-            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
-          </label>
-        {{/if}}
       {{/if}}
 
       {{#if (eq page.component.name 'cloud')}}
