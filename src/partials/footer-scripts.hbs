@@ -10,10 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.79.0/dist/instantsearch.production.min.js" integrity="sha256-FOU2owonNoOmNxF4I8jLR4D8w/vziYNi64GUN2boXRQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@1"></script>
 
-
-
 <script>
-
   const { autocomplete, getAlgoliaResults, getAlgoliaFacets } = window['@algolia/autocomplete-js'];
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
 
@@ -89,35 +86,27 @@
                    <ul>
                      ${Object.keys(window.CURRENT_ALGOLIA_FACETS[key]).map(name => {
                        const isChecked = window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name] === true;
+                       console.log(`Rendering ${key}:${name}, isChecked: ${isChecked}, value: ${window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name]}`);
 
-                       if (isChecked) {
-                         return html`<li>
+                       return html`<li>
                            <label>
-                             <input
+                             ${isChecked ? html`<input
                                type="checkbox"
                                name="${key}"
                                id="${name}"
                                data-facet-key="${key}"
                                data-facet-value="${name}"
                                checked
-                             />
-                             ${name}
-                           </label>
-                         </li>`;
-                       } else {
-                         return html`<li>
-                           <label>
-                             <input
+                             />` : html`<input
                                type="checkbox"
                                name="${key}"
                                id="${name}"
                                data-facet-key="${key}"
                                data-facet-value="${name}"
-                             />
+                             />`}
                              ${name}
                            </label>
                          </li>`;
-                       }
                      })}
                    </ul>`
                   )}
