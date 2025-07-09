@@ -13,12 +13,12 @@
 
 
 <script>
-  
+
   const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
-  
+
   const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
-  
+
   autocomplete({
     container: '#search-input',
     placeholder: 'Search',
@@ -36,13 +36,11 @@
                 params: {
                   query,
                   hitsPerPage: 5,
-                  //facetFilters: [
-                  //  "tags:tutorials",
-                  //  "tags:hazelcast-{{site.components.hazelcast.latest.version}}",
-                  //  "tags:cloud",
-                  //  "tags:flow-{{site.components.flow.latest.version}}",
-                  //],
-                  attributesToSnippet: ['name:10', 'description:35'],
+                  facetFilters: [
+                    "product:Management Center",
+                    "version:5.8",
+                  ],
+                  attributesToSnippet: ['title:10', 'content:35'],
                   snippetEllipsisText: '…',
                 },
               }],
@@ -50,7 +48,8 @@
           },
           templates: {
             item({ item, components, html }) {
-              return html`<div class="aa-ItemWrapper">
+              return html`
+              <div class="aa-ItemWrapper">
                 <div class="aa-ItemContent">
                   <div class="aa-ItemIcon">
                     <svg viewBox="0 0 20 20" width="20" height="20">

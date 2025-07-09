@@ -11,7 +11,10 @@ new Crawler({
   actions: [
     {
       indexName: "algolia_crawler_articles_for_instant_search",
-      pathsToMatch: ["https://docs.hazelcast.com/hazelcast/5.5/clients/**"],
+      pathsToMatch: [
+        "https://docs.hazelcast.com/hazelcast/5.5/clients/java",
+        "https://docs.hazelcast.com/management-center/5.8/clusters/dashboard",
+      ],
       recordExtractor: ({ url, $ }) => {
         const RECORD_TYPE = {
           TITLE: 0,
@@ -20,7 +23,6 @@ new Crawler({
           SECTION_TITLE: 3,
           OPENAPI: 4,
         };
-        // const contentSelectors = [".paragraph", ".admonitionblock td.content"];
         const isImdg = /\/imdg\//.test(url.pathname);
         const title = $(".doc  h1").text().trim();
         const version = $("#navbarProductVersion").text().trim();
@@ -35,13 +37,13 @@ new Crawler({
           pageRank: isImdg ? "-1000" : "0",
         };
 
-
         const getBreadcrumbs = () => {
           return $(".breadcrumbs")
             .find("li")
             .map(function () {
               return $(this).text().trim();
-            }).toArray();
+            })
+            .toArray();
         };
         const createRecord = (type, sections, content, recordUrl) => {
           const record = {
@@ -177,8 +179,10 @@ new Crawler({
     algolia_crawler_articles_for_instant_search: {
       distinct: true,
       attributeForDistinct: "url",
-      searchableAttributes: ["unordered(title)", "unordered(content)", "url"],
-      customRanking: ["asc(depth)"],
+      searchableAttributes: [
+        "content",
+        "title sections",
+      ],
       attributesForFaceting: ["product", "version"],
     },
   },
