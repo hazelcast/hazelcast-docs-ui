@@ -19,7 +19,7 @@
 
 .aa-Panel {
   z-index: 10000;
-  position: absolute !important;
+  position: fixed !important;
   left: 0 !important;
   right: 0 !important;
   background: white;
@@ -74,4 +74,56 @@
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.4;
+}
+
+.facet-filters {
+  padding: 12px;
+  border-bottom: 1px solid var(--neutral-light);
+  background: var(--neutral-lighter);
+}
+
+.facet-filters h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.facet-filters ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.facet-filters ul:last-child {
+  margin-bottom: 0;
+}
+
+.facet-filters li {
+  margin: 0;
+}
+
+.facet-filters label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: white;
+  border: 1px solid var(--neutral-light);
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.facet-filters label:hover {
+  background: var(--neutral-lighter);
+}
+
+.facet-filters input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
 }

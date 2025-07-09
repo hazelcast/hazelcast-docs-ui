@@ -14,39 +14,116 @@
 
 <script>
 
-  const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
+  const { autocomplete, getAlgoliaResults, getAlgoliaFacets } = window['@algolia/autocomplete-js'];
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
+
+  window.CURRENT_ALGOLIA_FACETS = {};
+  window.SELECTED_FACETS = {};
+
+  const getFacetFilters = () => {
+    return Object.keys(window.SELECTED_FACETS)
+      .reduce((acc, key) => {
+        const values = Object.keys(window.SELECTED_FACETS[key])
+          .filter(value => window.SELECTED_FACETS[key][value])
+          .map((value) => `${key}:${value}`);
+        acc.push(...values);
+        return acc;
+      }, []);
+  };
+
+  const updateFacetState = () => {
+    Object.keys(window.CURRENT_ALGOLIA_FACETS).forEach(key => {
+      if (!window.SELECTED_FACETS[key]) {
+        window.SELECTED_FACETS[key] = {};
+      }
+      Object.keys(window.CURRENT_ALGOLIA_FACETS[key]).forEach(name => {
+        if (!(name in window.SELECTED_FACETS[key])) {
+          window.SELECTED_FACETS[key][name] = false;
+        }
+      });
+    });
+  };
 
   const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
 
-  autocomplete({
+  const {
+    refresh,
+  } = autocomplete({
     container: '#search-input',
     placeholder: 'Search',
     openOnFocus: true,
+    defaultActiveItemId: 0,
     getSources({ query }) {
       return [
         {
           sourceId: 'algolia',
           getItems() {
             return getAlgoliaResults({
-            searchClient,
-            queries: [
-              {
-                indexName: '{{site.keys.docsearchIndex}}',
-                params: {
-                  query,
-                  hitsPerPage: 5,
-                  facetFilters: [
-                    "product:Management Center",
-                    "version:5.8",
-                  ],
-                  attributesToSnippet: ['title:10', 'content:35'],
-                  snippetEllipsisText: '…',
+              searchClient,
+              transformResponse({ results, hits }) {
+                window.CURRENT_ALGOLIA_FACETS = results[0]?.facets || {};
+                updateFacetState();
+                return hits;
+              },
+              queries: [
+                {
+                  indexName: '{{site.keys.docsearchIndex}}',
+                  params: {
+                    query,
+                    hitsPerPage: 5,
+                    facets: ['product', 'version'],
+                    facetFilters: getFacetFilters(),
+                    attributesToSnippet: ['title:10', 'content:35'],
+                    snippetEllipsisText: '…',
+                  },
                 },
-              }],
+              ],
             });
           },
           templates: {
+            header({ html }) {
+              return html`
+                <div class="facet-filters">
+                  ${Object.keys(window.CURRENT_ALGOLIA_FACETS).map(key =>
+                    html`<h4 class="capitalize">${key}</h4>
+                   <ul>
+                     ${Object.keys(window.CURRENT_ALGOLIA_FACETS[key]).map(name => {
+                       const isChecked = window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name] === true;
+
+                       if (isChecked) {
+                         return html`<li>
+                           <label>
+                             <input
+                               type="checkbox"
+                               name="${key}"
+                               id="${name}"
+                               data-facet-key="${key}"
+                               data-facet-value="${name}"
+                               checked
+                             />
+                             ${name}
+                           </label>
+                         </li>`;
+                       } else {
+                         return html`<li>
+                           <label>
+                             <input
+                               type="checkbox"
+                               name="${key}"
+                               id="${name}"
+                               data-facet-key="${key}"
+                               data-facet-value="${name}"
+                             />
+                             ${name}
+                           </label>
+                         </li>`;
+                       }
+                     })}
+                   </ul>`
+                  )}
+                </div>
+              `;
+            },
             item({ item, components, html }) {
               return html`
               <div class="aa-ItemWrapper">
@@ -74,6 +151,27 @@
         },
       ];
     },
+    // render({ children, render }, root) {
+    //   console.log(root);
+    //   render(children, root);
+    // },
+  });
+
+  document.addEventListener('change', function(event) {
+    if (event.target.type === 'checkbox' && event.target.dataset.facetKey) {
+      const facetKey = event.target.dataset.facetKey;
+      const facetValue = event.target.dataset.facetValue;
+
+      if (!window.SELECTED_FACETS[facetKey]) {
+        window.SELECTED_FACETS[facetKey] = {};
+      }
+
+      window.SELECTED_FACETS[facetKey][facetValue] = event.target.checked;
+
+      if (refresh) {
+        refresh();
+      }
+    }
   });
 </script>
 
