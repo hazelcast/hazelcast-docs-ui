@@ -14,7 +14,6 @@
   const { autocomplete, getAlgoliaResults, getAlgoliaFacets } = window['@algolia/autocomplete-js'];
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
 
-  window.CURRENT_ALGOLIA_FACETS = {};
   window.SELECTED_FACETS = {};
 
   const getFacetFilters = () => {
@@ -28,17 +27,15 @@
       }, []);
   };
 
-  const updateFacetState = () => {
-    Object.keys(window.CURRENT_ALGOLIA_FACETS).forEach(key => {
-      if (!window.SELECTED_FACETS[key]) {
-        window.SELECTED_FACETS[key] = {};
-      }
-      Object.keys(window.CURRENT_ALGOLIA_FACETS[key]).forEach(name => {
-        if (!(name in window.SELECTED_FACETS[key])) {
-          window.SELECTED_FACETS[key][name] = false;
-        }
+  const updateFacetState = (facets) => {
+    const newState = {};
+    Object.keys(facets).forEach(key => {
+      newState[key] = {};
+      Object.keys(facets[key]).forEach(name => {
+        newState[key][name] = window.SELECTED_FACETS[key]?.[name] || false;
       });
     });
+    window.SELECTED_FACETS = newState;
   };
 
   const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
@@ -58,8 +55,7 @@
             return getAlgoliaResults({
               searchClient,
               transformResponse({ results, hits }) {
-                window.CURRENT_ALGOLIA_FACETS = results[0]?.facets || {};
-                updateFacetState();
+                updateFacetState(results[0]?.facets || {});
                 return hits;
               },
               queries: [
@@ -81,10 +77,10 @@
             header({ html }) {
               return html`
                 <div class="facet-filters">
-                  ${Object.keys(window.CURRENT_ALGOLIA_FACETS).map(key =>
+                  ${Object.keys(window.SELECTED_FACETS).map(key =>
                     html`<h4 class="capitalize">${key}</h4>
                    <ul>
-                     ${Object.keys(window.CURRENT_ALGOLIA_FACETS[key]).map(name => {
+                     ${Object.keys(window.SELECTED_FACETS[key]).map(name => {
                        const isChecked = window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name] === true;
                        console.log(`Rendering ${key}:${name}, isChecked: ${isChecked}, value: ${window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name]}`);
 
