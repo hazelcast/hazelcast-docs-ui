@@ -45,13 +45,14 @@ new Crawler({
             })
             .toArray();
         };
-        const createRecord = (type, sections, content, recordUrl) => {
+        const createRecord = (type, sections, content, anchor) => {
           const record = {
             ...recordBase,
             type: type,
             sections: sections,
             breadcrumbs: getBreadcrumbs(),
-            url: recordUrl,
+            url: url,
+            anchor: anchor,
           };
           if (content) {
             record.content = content;
@@ -59,13 +60,13 @@ new Crawler({
           return record;
         };
 
-        const processParagraphs = (containerEl, sections, baseUrl) => {
+        const processParagraphs = (containerEl, sections, anchor) => {
           const paragraphRecords = [];
           containerEl.each((_i, contentEl) => {
             const content = $(contentEl).text().trim();
             if (content) {
               paragraphRecords.push(
-                createRecord(RECORD_TYPE.CONTENT, sections, content, baseUrl),
+                createRecord(RECORD_TYPE.CONTENT, sections, content, anchor),
               );
             }
           });
@@ -81,7 +82,6 @@ new Crawler({
               const subsectionAnchor = $(subsectionEl)
                 .find("h3>a.anchor")
                 .attr("href");
-              const subsectionUrl = `${url}${subsectionAnchor}`;
               const subsectionSections = [sectionTitle, subsectionTitle];
 
               subsectionRecords.push(
@@ -89,14 +89,14 @@ new Crawler({
                   RECORD_TYPE.SECTION_TITLE,
                   subsectionSections,
                   null,
-                  subsectionUrl,
+                  subsectionAnchor,
                 ),
               );
               subsectionRecords.push(
                 ...processParagraphs(
                   $(subsectionEl).find(".paragraph"),
                   subsectionSections,
-                  subsectionUrl,
+                  subsectionAnchor,
                 ),
               );
 
@@ -110,7 +110,6 @@ new Crawler({
                   const subsubsectionAnchor = $(subsubsectionEl)
                     .find("h4>a.anchor")
                     .attr("href");
-                  const subsubsectionUrl = `${url}${subsubsectionAnchor}`;
                   const subsubsectionSections = [
                     sectionTitle,
                     subsectionTitle,
@@ -122,14 +121,14 @@ new Crawler({
                       RECORD_TYPE.SECTION_TITLE,
                       subsubsectionSections,
                       null,
-                      subsubsectionUrl,
+                      subsubsectionAnchor,
                     ),
                   );
                   subsectionRecords.push(
                     ...processParagraphs(
                       $(subsubsectionEl).find(".paragraph"),
                       subsubsectionSections,
-                      subsubsectionUrl,
+                      subsubsectionAnchor,
                     ),
                   );
                 });
@@ -137,20 +136,19 @@ new Crawler({
           return subsectionRecords;
         };
 
-        records.push(createRecord(RECORD_TYPE.TITLE, [], null, url));
+        records.push(createRecord(RECORD_TYPE.TITLE, [], null, ""));
         records.push(
           createRecord(
             RECORD_TYPE.DESCRIPTION,
             [],
             $("#preamble").text().trim(),
-            url,
+            "",
           ),
         );
 
         $(".sect1").each((_i, sectionEl) => {
           const sectionTitle = $(sectionEl).find("h2").text().trim();
           const sectionAnchor = $(sectionEl).find("h2>a.anchor").attr("href");
-          const sectionUrl = `${url}${sectionAnchor}`;
           const sectionSections = [sectionTitle];
 
           records.push(
@@ -158,14 +156,14 @@ new Crawler({
               RECORD_TYPE.SECTION_TITLE,
               sectionSections,
               null,
-              sectionUrl,
+              sectionAnchor,
             ),
           );
           records.push(
             ...processParagraphs(
               $(sectionEl).find(".sectionbody>.paragraph"),
               sectionSections,
-              sectionUrl,
+              sectionAnchor,
             ),
           );
           records.push(...processSubsections(sectionEl, sectionTitle));
@@ -179,10 +177,7 @@ new Crawler({
     algolia_crawler_articles_for_instant_search: {
       distinct: true,
       attributeForDistinct: "url",
-      searchableAttributes: [
-        "content",
-        "title sections",
-      ],
+      searchableAttributes: ["content", "title sections"],
       attributesForFaceting: ["product", "version"],
     },
   },
