@@ -82,8 +82,6 @@
                    <ul>
                      ${Object.keys(window.SELECTED_FACETS[key]).map(name => {
                        const isChecked = window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name] === true;
-                       console.log(`Rendering ${key}:${name}, isChecked: ${isChecked}, value: ${window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name]}`);
-
                        return html`<li>
                            <label>
                              ${isChecked ? html`<input
@@ -109,7 +107,7 @@
                 </div>
               ` : html``;
             },
-            item({ item, components, html }) {
+            item({ item, components, html, state }) {
               return html`
               <div class="aa-ItemWrapper">
                 <div class="aa-ItemContent">
@@ -134,11 +132,25 @@
                   <a class="aa-ItemLink" href="${item.url+item.anchor}" target="_self">
                     <div class="aa-ItemContentBody">
                       <h4 class="aa-ItemContentTitle">
-                        ${components.Highlight({ hit: item, attribute: 'title' })}
+                        <span>${components.Highlight({ hit: item, attribute: 'title' })}</span>
+                        ${item.sections?.length ? item._highlightResult.sections
+                          .map(({ value }) => html`
+                            <span>${value.split(/(?:__aa-)|(?:__\/aa-highlight__)/)
+                              .map((chunk) => {
+                                if (chunk.startsWith('highlight__')) {
+                                  return html`<mark>${chunk.replace('highlight__', '')}</mark>`;
+                                } else {
+                                  return chunk;
+                                }
+                              })}
+                            </span>`) : ''}
                       </h4>
                       <p class="aa-ItemContentDescription">
                         ${components.Snippet({ hit: item, attribute: 'content' })}
                       </p>
+                      <div class="aa-ItemContentBreadcrumbs">
+                        ${item.breadcrumbs ? item.breadcrumbs.join(' > ') : ''}
+                      </div>
                     </div>
                   </a>
                 </div>
@@ -154,10 +166,6 @@
         },
       ];
     },
-    // render({ children, render }, root) {
-    //   console.log(root);
-    //   render(children, root);
-    // },
   });
 
   document.addEventListener('change', function(event) {

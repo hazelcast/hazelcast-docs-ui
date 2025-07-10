@@ -69,7 +69,11 @@ a.aa-ItemLink:hover {
 .aa-ItemContentTitle {
   font-weight: 500;
   color: var(--text);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.aa-ItemContentTitle > *:not(:last-child)::after {
+  content: " > ";
 }
 
 .aa-ItemContentDescription {
@@ -77,6 +81,11 @@ a.aa-ItemLink:hover {
   color: var(--secondary-text) !important;
   line-height: 1.4;
   margin: 0;
+}
+
+.aa-ItemContentBreadcrumbs {
+  color: var(--neutral-light);
+  font-size: 12px;
 }
 
 .facet-filters {
