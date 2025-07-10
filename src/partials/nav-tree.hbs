@@ -5,7 +5,6 @@
         {{#if ./content}}
           {{#if ./url}}
             <a class="nav-link
-              {{#if (eq @root.page.component.name 'management-center')}}
               {{~#if (is-enterprise ./url)}} enterprise{{/if}}
               {{/if}}
               {{~#if (is-beta ./url)}} beta{{/if}}
