@@ -5,7 +5,7 @@
         {{#if ./content}}
           {{#if ./url}}
             <a class="nav-link
-             {{#if (and (eq @root.page.component.name 'management-center') (eq @root.page.component.name 'hazelcast')) }}
+             {{#if (or (eq @root.page.component.name 'management-center') (eq @root.page.component.name 'hazelcast')) }}
               {{~#if (is-enterprise ./url)}} enterprise{{/if}}
               {{/if}}
               {{~#if (is-beta ./url)}} beta{{/if}}
