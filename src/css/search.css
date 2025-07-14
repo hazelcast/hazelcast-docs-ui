@@ -139,3 +139,7 @@ a.aa-ItemLink:hover {
   margin: 0;
   cursor: pointer;
 }
+
+.aa-PanelSections {
+  display: flex;
+}

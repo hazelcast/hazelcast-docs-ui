@@ -27,6 +27,63 @@
       }, []);
   };
 
+  function flatten(values) {
+    return values.reduce((a, b) => {
+      return a.concat(b);
+    }, []);
+  }
+
+  function normalizeReshapeSources(sources) {
+    return flatten(sources).filter(Boolean);
+  }
+
+  const groupBy = (predicate, options) => {
+    return function runGroupBy(...rawSources) {
+      const sources = normalizeReshapeSources(rawSources);
+
+      if (sources.length === 0) {
+        return [];
+      }
+
+      // Since we create multiple sources from a single one, we take the first one
+      // as reference to create the new sources from.
+      const referenceSource = sources[0];
+      const items = flatten(sources.map((source) => source.getItems()));
+      const groupedItems = items.reduce((acc, item) => {
+        const key = predicate(item);
+
+        if (!acc.hasOwnProperty(key)) {
+          acc[key] = [];
+        }
+
+        acc[key].push(item);
+
+        return acc;
+      }, {});
+
+      return Object.entries(groupedItems).map(([groupName, groupItems]) => {
+        const userSource = options.getSource({
+          name: groupName,
+          items: groupItems,
+        });
+
+        return {
+          ...referenceSource,
+          sourceId: groupName,
+          getItems() {
+            return groupItems;
+          },
+          ...userSource,
+          templates: {
+            ...referenceSource.templates,
+            ...userSource.templates,
+          },
+        };
+      });
+    };
+  };
+
+
   const updateFacetState = (facets) => {
     const newState = {};
     Object.keys(facets).forEach(key => {
@@ -40,6 +97,25 @@
 
   const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
 
+  const groupByProduct = groupBy((hit) => hit.product, {
+    getSource({ name, items }) {
+      return {
+        getItems() {
+          return items;
+        },
+        templates: {
+          header({ html }) {
+            return html`
+                <span class="aa-SourceHeaderTitle">${name}</span>
+                <div class="aa-SourceHeaderLine" />
+              `
+            ;
+          },
+        },
+      };
+    },
+  });
+
   const {
     refresh,
   } = autocomplete({
@@ -47,6 +123,14 @@
     placeholder: 'Search',
     openOnFocus: true,
     defaultActiveItemId: 0,
+    reshape({ sourcesBySourceId }) {
+      const { algolia, ...rest } =
+        sourcesBySourceId;
+      return [
+        groupByProduct(algolia),
+        Object.values(rest),
+      ];
+    },
     getSources({ query }) {
       return [
         {
@@ -74,39 +158,6 @@
             });
           },
           templates: {
-            header({ html }) {
-              return Object.keys(window.SELECTED_FACETS).length > 0 ? html`
-                <div class="facet-filters">
-                  ${Object.keys(window.SELECTED_FACETS).map(key =>
-                    html`<h4 class="capitalize">${key}</h4>
-                   <ul>
-                     ${Object.keys(window.SELECTED_FACETS[key]).map(name => {
-                       const isChecked = window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name] === true;
-                       return html`<li>
-                           <label>
-                             ${isChecked ? html`<input
-                               type="checkbox"
-                               name="${key}"
-                               id="${name}"
-                               data-facet-key="${key}"
-                               data-facet-value="${name}"
-                               checked
-                             />` : html`<input
-                               type="checkbox"
-                               name="${key}"
-                               id="${name}"
-                               data-facet-key="${key}"
-                               data-facet-value="${name}"
-                             />`}
-                             ${name}
-                           </label>
-                         </li>`;
-                     })}
-                   </ul>`
-                  )}
-                </div>
-              ` : html``;
-            },
             item({ item, components, html, state }) {
               return html`
               <div class="aa-ItemWrapper">
@@ -165,6 +216,54 @@
           },
         },
       ];
+    },
+    render({ elements, render, html }, root) {
+      console.log(elements);
+      const dataSources = Object.values(elements);
+
+      render(
+        html`<div class="aa-PanelLayout aa-Panel--scrollable">
+        <div class="aa-PanelSections">
+          <div class="aa-PanelSection aa-PanelSection--left">
+            ${Object.keys(window.SELECTED_FACETS).length > 0 ? html`
+                <div class="facet-filters">
+                  ${Object.keys(window.SELECTED_FACETS).map(key =>
+                   html`<h4 class="capitalize">${key}</h4>
+                   <ul>
+                     ${Object.keys(window.SELECTED_FACETS[key]).map(name => {
+                        const isChecked = window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name] === true;
+                          return html`<li>
+                           <label>
+                             ${isChecked ? html`<input
+                               type="checkbox"
+                               name="${key}"
+                               id="${name}"
+                               data-facet-key="${key}"
+                               data-facet-value="${name}"
+                               checked
+                             />` : html`<input
+                               type="checkbox"
+                               name="${key}"
+                               id="${name}"
+                               data-facet-key="${key}"
+                               data-facet-value="${name}"
+                             />`}
+                             ${name}
+                           </label>
+                         </li>`;
+                     })}
+                   </ul>`
+                  )}
+                </div>
+              ` : html``}
+          </div>
+          <div class="aa-PanelSection aa-PanelSection--right">
+            ${dataSources}
+          </div>
+        </div>
+      </div>`,
+        root
+      );
     },
   });
 
