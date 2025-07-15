@@ -11,30 +11,30 @@ site:
     docsearchApi: 'e0a570340810ad57e7359c2004463654'
     docsearchIndex: '_test_algolia_crawler_articles_for_instant_search'
   components:
-  - name: abc
-    title: Hazelcast IMDG
+  - name: hazelcast
+    title: Hazelcast Platform
     url: '/java.html'
     versions:
-    - &latest_version_abc
+    - &latest_version_hazelcast
       url: '/java.html'
       version: '4.1'
       displayVersion: '4.1'
     - url: '/java.html'
       version: '4.0'
       displayVersion: '4.0'
-    latestVersion: *latest_version_abc
-  - name: tutorial
-    title: How to HZ
+    latestVersion: *latest_version_hazelcast
+  - name: clc
+    title: Hazelcast CLC
     url: '/how-to-hz.html'
     versions:
-    - &latest_version_hz
+    - &latest_version_clc
       url: '/how-to-hz.html'
       version: '4.1'
       displayVersion: '4.1'
     - url: '/how-to-hz.html'
       version: '4.0'
       displayVersion: '4.0'
-    latestVersion: *latest_version_hz
+    latestVersion: *latest_version_clc
   - name: tutorials
     title: Tutorials
     url: '/tutorials.html'
@@ -47,18 +47,18 @@ site:
         version: '4.0'
         displayVersion: '4.0'
     latestVersion: *latest_version_tutorials
-  - name: def
+  - name: mc
     title: Management Center
     url: '/java.html'
     versions:
-      - &latest_version_def
+      - &latest_version_mc
         url: '/java.html'
         version: '4.1'
         displayVersion: '4.1'
       - url: '/java.html'
         version: '4.0'
         displayVersion: '4.0'
-    latestVersion: *latest_version_def
+    latestVersion: *latest_version_mc
   - &component
     name: home
     title: &component_title Home
@@ -73,8 +73,9 @@ page:
   home: true
   title: Java Client
   component:
-    title: Dev Preview
-  componentVersion: *latest_version_abc
+    name: abc
+    title: Hazelcast IMDG
+  componentVersion: *latest_version_hazelcast
   version: '4.1'
   displayVersion: '4.1'
   module: ROOT

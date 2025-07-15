@@ -1,2 +1,8 @@
+<script>
+  <!-- Put Antora site data to window so it is reachable in browser JS -->
+  const jsonSiteData = '{{get-antora-site}}'.replace(/&quot;/g, '"');
+  window.ANTORA_SITE_DATA = JSON.parse(jsonSiteData)
+</script>
+
 {{> header-scripts}}
 {{> header-content}}
