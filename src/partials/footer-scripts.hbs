@@ -16,13 +16,13 @@
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
 
   const currentComponentVersion = '{{@root.page.component.title}}_{{@root.page.displayVersion}}';
-  console.log(currentComponentVersion);
+  console.debug('currentComponentVersion', currentComponentVersion);
 
   const publicComponentsJsonString = '{{sort-components site.components 'name' page.attributes.component-order true}}'
     .replace(/&quot;/g, '"')
     .replace(String.fromCharCode(92), `${String.fromCharCode(92)}${String.fromCharCode(92)}`);
   const publicComponents = JSON.parse(publicComponentsJsonString)
-  console.debug(publicComponents, currentComponentVersion);
+  console.debug('publicComponents', publicComponents);
 
   const selectedFacets = publicComponents.reduce((acc, component) => {
     acc[component.title] = component.versions.reduce((versionAcc, { displayVersion }) => {
@@ -31,8 +31,6 @@
     }, {});
     return acc;
   }, {});
-
-  console.log(selectedFacets);
 
   const getFacetFilters = () => {
     return Object.keys(selectedFacets)
