@@ -30,6 +30,25 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.aa-Panel--scrollable {
+  padding: 0 !important;
+}
+
+.aa-PanelSections {
+  display: flex;
+  align-items: stretch;
+}
+
+.aa-PanelSection--left {
+  min-width: 175px;
+  flex: 0;
+}
+
+.aa-PanelSection--right {
+  flex: 1;
+  padding-left: 12px;
+}
+
 .aa-ItemContent mark {
   background-color: yellow !important;
 }
@@ -89,8 +108,8 @@ a.aa-ItemLink:hover {
 }
 
 .facet-filters {
+  height: 100%;
   padding: 12px;
-  border-bottom: 1px solid var(--neutral-light);
   background: var(--neutral-lighter);
 }
 
@@ -140,6 +159,3 @@ a.aa-ItemLink:hover {
   cursor: pointer;
 }
 
-.aa-PanelSections {
-  display: flex;
-}

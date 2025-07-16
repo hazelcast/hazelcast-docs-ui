@@ -20,7 +20,7 @@
 
   const publicComponentsJsonString = '{{sort-components site.components 'name' page.attributes.component-order true}}'
     .replace(/&quot;/g, '"')
-    .replace(String.fromCharCode(92), `${String.fromCharCode(92)}${String.fromCharCode(92)}`);
+    .replaceAll(String.fromCharCode(92), `${String.fromCharCode(92)}${String.fromCharCode(92)}`);
   const publicComponents = JSON.parse(publicComponentsJsonString)
   console.debug('publicComponents', publicComponents);
 
