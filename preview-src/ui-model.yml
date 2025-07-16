@@ -76,10 +76,10 @@ page:
     component-order: '!home, !templates, !imdg, !privacy, hazelcast, management-center, cloud, *'
   component:
     name: abc
-    title: Hazelcast IMDG
+    title: Management Center
   componentVersion: *latest_version_hazelcast
-  version: '4.1'
-  displayVersion: '4.1'
+  version: '5.8'
+  displayVersion: '5.8'
   module: ROOT
   relativeSrcPath: java.adoc
   editUrl: https://github.com/hazelcast/hazelcast-docs-ui/blob/master/preview-src/java.adoc

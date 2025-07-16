@@ -15,19 +15,24 @@
   const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
 
+  const currentComponentVersion = '{{@root.page.component.title}}_{{@root.page.displayVersion}}';
+  console.log(currentComponentVersion);
+
   const publicComponentsJsonString = '{{sort-components site.components 'name' page.attributes.component-order true}}'
     .replace(/&quot;/g, '"')
     .replace(String.fromCharCode(92), `${String.fromCharCode(92)}${String.fromCharCode(92)}`);
   const publicComponents = JSON.parse(publicComponentsJsonString)
-  console.debug(publicComponents);
+  console.debug(publicComponents, currentComponentVersion);
 
   const selectedFacets = publicComponents.reduce((acc, component) => {
     acc[component.title] = component.versions.reduce((versionAcc, { displayVersion }) => {
-      versionAcc[displayVersion] = false;
+      versionAcc[displayVersion] = currentComponentVersion === `${component.title}_${displayVersion}`;
       return versionAcc;
     }, {});
     return acc;
   }, {});
+
+  console.log(selectedFacets);
 
   const getFacetFilters = () => {
     return Object.keys(selectedFacets)
