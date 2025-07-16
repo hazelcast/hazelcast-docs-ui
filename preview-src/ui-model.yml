@@ -17,12 +17,12 @@ site:
     versions:
     - &latest_version_hazelcast
       url: '/java.html'
-      version: '4.1'
-      displayVersion: '4.1'
+      version: '5.5'
+      displayVersion: '5.5'
     - url: '/java.html'
       version: '4.0'
       displayVersion: '4.0'
-    latestVersion: *latest_version_hazelcast
+    latest: *latest_version_hazelcast
   - name: clc
     title: Hazelcast CLC
     url: '/how-to-hz.html'
@@ -34,7 +34,7 @@ site:
     - url: '/how-to-hz.html'
       version: '4.0'
       displayVersion: '4.0'
-    latestVersion: *latest_version_clc
+    latest: *latest_version_clc
   - name: tutorials
     title: Tutorials
     url: '/tutorials.html'
@@ -46,34 +46,34 @@ site:
       - url: '/tutorials.html'
         version: '4.0'
         displayVersion: '4.0'
-    latestVersion: *latest_version_tutorials
+    latest: *latest_version_tutorials
   - name: mc
     title: Management Center
     url: '/java.html'
     versions:
       - &latest_version_mc
         url: '/java.html'
-        version: '4.1'
-        displayVersion: '4.1'
+        version: '5.8'
+        displayVersion: '5.8'
       - url: '/java.html'
-        version: '4.0'
-        displayVersion: '4.0'
-    latestVersion: *latest_version_mc
-  - &component
-    name: home
-    title: &component_title Home
+        version: '5.5'
+        displayVersion: '5.5'
+    latest: *latest_version_mc
+  - name: home
+    title: Home
     url: /index.html
     versions:
     - &latest_version_home
       url: /index.html
-      version: 'master'
-      displayVersion: 'master'
+      version: '4.1'
+      displayVersion: '4.1'
+    latest: *latest_version_home
 page:
   url: *home_url
   home: true
   title: Java Client
   attributes:
-    component-order: 'hazelcast, management-center, cloud, *'
+    component-order: '!home, !templates, !imdg, !privacy, hazelcast, management-center, cloud, *'
   component:
     name: abc
     title: Hazelcast IMDG

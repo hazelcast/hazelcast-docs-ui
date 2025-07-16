@@ -11,10 +11,17 @@
 <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@1"></script>
 
 <script>
-  const { autocomplete, getAlgoliaResults, getAlgoliaFacets } = window['@algolia/autocomplete-js'];
+(() => {
+  const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
 
-  window.SELECTED_FACETS = window.ANTORA_SITE_DATA.components.reduce((acc, component) => {
+  const publicComponentsJsonString = '{{sort-components site.components 'name' page.attributes.component-order true}}'
+    .replace(/&quot;/g, '"')
+    .replace(String.fromCharCode(92), `${String.fromCharCode(92)}${String.fromCharCode(92)}`);
+  const publicComponents = JSON.parse(publicComponentsJsonString)
+  console.debug(publicComponents);
+
+  const selectedFacets = publicComponents.reduce((acc, component) => {
     acc[component.title] = component.versions.reduce((versionAcc, { displayVersion }) => {
       versionAcc[displayVersion] = false;
       return versionAcc;
@@ -22,15 +29,13 @@
     return acc;
   }, {});
 
-  console.log(window.SELECTED_FACETS);
-
   const getFacetFilters = () => {
-    return Object.keys(window.SELECTED_FACETS)
-      .reduce((acc, key) => {
-        const values = Object.keys(window.SELECTED_FACETS[key])
-          .filter(value => window.SELECTED_FACETS[key][value])
-          .map((value) => `${key}:${value}`);
-        acc.push(...values);
+    return Object.keys(selectedFacets)
+      .reduce((acc, product) => {
+        const facets = Object.keys(selectedFacets[product])
+          .filter(version => selectedFacets[product][version])
+          .map((version) => `componentVersion:${product}_${version}`);
+        acc.push(...facets);
         return acc;
       }, []);
   };
@@ -91,21 +96,9 @@
     };
   };
 
-
-  const updateFacetState = (facets) => {
-    const newState = {};
-    Object.keys(facets).forEach(key => {
-      newState[key] = {};
-      Object.keys(facets[key]).forEach(name => {
-        newState[key][name] = window.SELECTED_FACETS[key]?.[name] || false;
-      });
-    });
-    window.SELECTED_FACETS = newState;
-  };
-
   const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
 
-  const groupByProduct = groupBy((hit) => hit.product, {
+  const groupByProduct = groupBy((hit) => hit.componentVersion.split('_')[0], {
     getSource({ name, items }) {
       return {
         getItems() {
@@ -117,7 +110,7 @@
                 <span class="aa-SourceHeaderTitle">${name}</span>
                 <div class="aa-SourceHeaderLine" />
               `
-            ;
+              ;
           },
         },
       };
@@ -146,18 +139,13 @@
           getItems() {
             return getAlgoliaResults({
               searchClient,
-              transformResponse({ results, hits }) {
-                updateFacetState(results[0]?.facets || {});
-                return hits;
-              },
               queries: [
                 {
                   indexName: '{{site.keys.docsearchIndex}}',
                   params: {
                     query,
                     hitsPerPage: 5,
-                    facets: ['product', 'version'],
-                    facetFilters: getFacetFilters(),
+                    facetFilters: [getFacetFilters()],
                     attributesToSnippet: ['title:10', 'content:35'],
                     snippetEllipsisText: '…',
                   },
@@ -193,15 +181,15 @@
                       <h4 class="aa-ItemContentTitle">
                         <span>${components.Highlight({ hit: item, attribute: 'title' })}</span>
                         ${item.sections?.length ? item._highlightResult.sections
-                          .map(({ value }) => html`
+                .map(({ value }) => html`
                             <span>${value.split(/(?:__aa-)|(?:__\/aa-highlight__)/)
-                              .map((chunk) => {
-                                if (chunk.startsWith('highlight__')) {
-                                  return html`<mark>${chunk.replace('highlight__', '')}</mark>`;
-                                } else {
-                                  return chunk;
-                                }
-                              })}
+                  .map((chunk) => {
+                    if (chunk.startsWith('highlight__')) {
+                      return html`<mark>${chunk.replace('highlight__', '')}</mark>`;
+                    } else {
+                      return chunk;
+                    }
+                  })}
                             </span>`) : ''}
                       </h4>
                       <p class="aa-ItemContentDescription">
@@ -232,35 +220,35 @@
         html`<div class="aa-PanelLayout aa-Panel--scrollable">
         <div class="aa-PanelSections">
           <div class="aa-PanelSection aa-PanelSection--left">
-            ${Object.keys(window.SELECTED_FACETS).length > 0 ? html`
+            ${Object.keys(selectedFacets).length > 0 ? html`
                 <div class="facet-filters">
-                  ${Object.keys(window.SELECTED_FACETS).map(key =>
-                   html`<h4 class="capitalize">${key}</h4>
+                  ${Object.keys(selectedFacets).map(product =>
+          html`<h4 class="capitalize">${product}</h4>
                    <ul>
-                     ${Object.keys(window.SELECTED_FACETS[key]).map(name => {
-                        const isChecked = window.SELECTED_FACETS[key] && window.SELECTED_FACETS[key][name] === true;
-                          return html`<li>
+                     ${Object.keys(selectedFacets[product]).map(version => {
+            const isChecked = selectedFacets[product] && selectedFacets[product][version] === true;
+            return html`<li>
                            <label>
                              ${isChecked ? html`<input
                                type="checkbox"
-                               name="${key}"
-                               id="${name}"
-                               data-facet-key="${key}"
-                               data-facet-value="${name}"
+                               name="${product}"
+                               id="${version}"
+                               data-facet-product="${product}"
+                               data-facet-version="${version}"
                                checked
                              />` : html`<input
                                type="checkbox"
-                               name="${key}"
-                               id="${name}"
-                               data-facet-key="${key}"
-                               data-facet-value="${name}"
+                               name="${product}"
+                               id="${version}"
+                               data-facet-product="${product}"
+                               data-facet-version="${version}"
                              />`}
-                             ${name}
+                             ${version}
                            </label>
                          </li>`;
-                     })}
+          })}
                    </ul>`
-                  )}
+        )}
                 </div>
               ` : html``}
           </div>
@@ -275,17 +263,18 @@
   });
 
   document.addEventListener('change', function(event) {
-    if (event.target.type === 'checkbox' && event.target.dataset.facetKey) {
-      const facetKey = event.target.dataset.facetKey;
-      const facetValue = event.target.dataset.facetValue;
+    if (event.target.type === 'checkbox' && event.target.dataset.facetProduct) {
+      const facetProduct = event.target.dataset.facetProduct;
+      const facetVersion = event.target.dataset.facetVersion;
 
-      window.SELECTED_FACETS[facetKey][facetValue] = event.target.checked;
+      selectedFacets[facetProduct][facetVersion] = event.target.checked;
 
       if (refresh) {
         refresh();
       }
     }
   });
+})()
 </script>
 
 <script>

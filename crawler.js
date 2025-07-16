@@ -32,8 +32,7 @@ new Crawler({
         const recordBase = {
           title: title,
           sections: [],
-          version: version,
-          product: product,
+          componentVersion: `${product}_${version}`,
           pageRank: isImdg ? "-1000" : "0",
         };
 
@@ -178,7 +177,7 @@ new Crawler({
       distinct: true,
       attributeForDistinct: "url",
       searchableAttributes: ["content", "title sections"],
-      attributesForFaceting: ["product", "version"],
+      attributesForFaceting: ["componentVersion"],
     },
   },
   apiKey: "",
