@@ -72,6 +72,8 @@ page:
   url: *home_url
   home: true
   title: Java Client
+  attributes:
+    component-order: 'hazelcast, management-center, cloud, *'
   component:
     name: abc
     title: Hazelcast IMDG

@@ -20,5 +20,7 @@ module.exports = (collection, property, orderSpec) => {
     return accum
   }, [])
   if (~restIdx) targetCollection.splice(restIdx, 0, ...sourceCollection.values())
+
+  console.log('===targetCollection===', targetCollection)
   return targetCollection
 }

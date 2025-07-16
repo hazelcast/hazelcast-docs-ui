@@ -14,7 +14,15 @@
   const { autocomplete, getAlgoliaResults, getAlgoliaFacets } = window['@algolia/autocomplete-js'];
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
 
-  window.SELECTED_FACETS = {};
+  window.SELECTED_FACETS = window.ANTORA_SITE_DATA.components.reduce((acc, component) => {
+    acc[component.title] = component.versions.reduce((versionAcc, { displayVersion }) => {
+      versionAcc[displayVersion] = false;
+      return versionAcc;
+    }, {});
+    return acc;
+  }, {});
+
+  console.log(window.SELECTED_FACETS);
 
   const getFacetFilters = () => {
     return Object.keys(window.SELECTED_FACETS)
