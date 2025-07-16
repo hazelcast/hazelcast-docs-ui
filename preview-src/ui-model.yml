@@ -10,6 +10,7 @@ site:
     docsearchId: 'FMY8D84KMI'
     docsearchApi: 'e0a570340810ad57e7359c2004463654'
     docsearchIndex: '_test_algolia_crawler_articles_for_instant_search'
+    #    clarity: 'l8c076m4u9'
   components:
   - name: hazelcast
     title: Hazelcast Platform
