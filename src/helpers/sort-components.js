@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = (collection, property, orderSpec, exportJson = false, smth) => {
+module.exports = (collection, property, orderSpec) => {
   if (orderSpec == null || orderSpec === '*') return Object.values(collection)
   const sourceCollection = Object.values(collection).reduce((accum, it) => accum.set(it[property], it), new Map())
   const order = orderSpec
@@ -21,5 +21,5 @@ module.exports = (collection, property, orderSpec, exportJson = false, smth) => 
   }, [])
   if (~restIdx) targetCollection.splice(restIdx, 0, ...sourceCollection.values())
 
-  return exportJson ? JSON.stringify(targetCollection) : targetCollection
+  return targetCollection
 }

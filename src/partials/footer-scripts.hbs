@@ -10,27 +10,16 @@
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.79.0/dist/instantsearch.production.min.js" integrity="sha256-FOU2owonNoOmNxF4I8jLR4D8w/vziYNi64GUN2boXRQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@1"></script>
 
+{{#if page.component}}
 <script>
 (() => {
   const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
   const { liteClient: algoliasearch } = window['algoliasearch/lite'];
 
-  const currentComponentVersion = '{{@root.page.component.title}}_{{@root.page.displayVersion}}';
-  console.debug('currentComponentVersion', currentComponentVersion);
-
-  const publicComponentsJsonString = '{{sort-components site.components 'name' page.attributes.component-order true}}'
-    .replace(/&quot;/g, '"')
-    .replaceAll(String.fromCharCode(92), `${String.fromCharCode(92)}${String.fromCharCode(92)}`);
-  const publicComponents = JSON.parse(publicComponentsJsonString)
-  console.debug('publicComponents', publicComponents);
-
-  const selectedFacets = publicComponents.reduce((acc, component) => {
-    acc[component.title] = component.versions.reduce((versionAcc, { displayVersion }) => {
-      versionAcc[displayVersion] = currentComponentVersion === `${component.title}_${displayVersion}`;
-      return versionAcc;
-    }, {});
-    return acc;
-  }, {});
+  const selectedFacets = window.UTILS.parseHbsJsonString(
+    '{{get-facets-from-components (sort-components site.components 'name' page.attributes.component-order) @root.page}}'
+  );
+  console.log(selectedFacets);
 
   const getFacetFilters = () => {
     return Object.keys(selectedFacets)
@@ -279,6 +268,7 @@
   });
 })()
 </script>
+{{/if}}
 
 <script>
   // Mobile Menu

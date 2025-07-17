@@ -115,6 +115,7 @@ a.aa-ItemLink:hover {
   height: 100%;
   padding: 12px;
   background: var(--neutral-lighter);
+  border-right: 1px solid var(--neutral-grey);
 }
 
 .facet-filters h4 {
