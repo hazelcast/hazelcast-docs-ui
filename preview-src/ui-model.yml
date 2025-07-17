@@ -44,12 +44,8 @@ site:
       - &latest_version_tutorials
         title: Tutorials
         url: '/tutorials.html'
-        version: '4.1'
-        displayVersion: '4.1'
-      - url: '/tutorials.html'
-        title: Tutorials
-        version: '4.0'
-        displayVersion: '4.0'
+        version: 'default'
+        displayVersion: 'default'
     latest: *latest_version_tutorials
   - name: mc
     url: '/java.html'
