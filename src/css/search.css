@@ -30,6 +30,10 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.page-home .aa-Panel {
+  position: absolute !important;
+}
+
 .aa-Panel--scrollable {
   padding: 0 !important;
 }
