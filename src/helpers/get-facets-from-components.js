@@ -6,7 +6,7 @@ module.exports = (components, page) => {
     if (component.versions?.length) {
       const title = component.versions?.[0].title
       acc[title] = component.versions
-        .slice(0, 10)
+        .slice(0, page.attributes['last-versions-count'])
         .reduce((versionAcc, { displayVersion }) => {
           versionAcc[displayVersion] = currentComponentVersion === `${title}_${displayVersion}`
           return versionAcc

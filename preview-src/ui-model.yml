@@ -79,6 +79,7 @@ page:
   title: Java Client
   attributes:
     component-order: '!home, !templates, !imdg, !privacy, hazelcast, management-center, cloud, *'
+    last-versions-count: 10
   component:
     name: abc
     title: Management Center

@@ -282,6 +282,7 @@ asciidoc:
   attributes:
     page-component-order: "!home, !templates, !imdg, !privacy, !jdbc-driver,
       hazelcast, management-center, cloud, *"
+    page-last-versions-count: 10
     page-pagination: true@
     page-experimental: true
     idprefix: ""
