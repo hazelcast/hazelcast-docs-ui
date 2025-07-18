@@ -1,7 +1,13 @@
+pre.highlightjs {
+  user-select: none;
+  cursor: pointer;
+}
+
 .copy-code-button {
   color: var(--pre-annotation-font-color);
-  cursor: pointer;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   position: relative;
@@ -10,25 +16,29 @@
 a.copy-code-button:focus,
 a.copy-code-button:hover {
   color: var(--neutral-lighter);
+  text-decoration: none;
 }
 
-.copy-code-button:hover::after {
-  content: attr(data-title);
-  line-height: 1;
-  position: absolute;
-  top: -26px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  margin: 0;
-  padding: 5px;
-  text-align: center;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
-  background: var(--neutral-lighter);
-  color: var(--secondary-text);
-  border: 1px solid var(--pre-border-color);
-  box-sizing: border-box;
+.copy-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--success);
+  color: white;
+  padding: 12px 20px;
   border-radius: 8px;
-  min-width: 80px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease-out;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .doc .listingblock code /*[data-lang]*/ + .source-type-box {
