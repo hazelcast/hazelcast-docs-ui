@@ -27,7 +27,7 @@ a.copy-code-button:hover {
 
 .copy-toast {
   position: fixed;
-  bottom: 20px;
+  top: calc(var(--navbar-height) + 20px);
   right: 20px;
   background: var(--success);
   color: white;
@@ -36,15 +36,15 @@ a.copy-code-button:hover {
   font-size: 14px;
   font-weight: 500;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
+  z-index: 100001;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateX(100px);
   transition: all 300ms ease-out;
 }
 
 .copy-toast.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
   transition-duration: 150ms;
 }
 
