@@ -3,14 +3,20 @@ pre.highlightjs {
   cursor: pointer;
 }
 
+pre.highlightjs:hover .copy-code-button {
+  background-color: var(--neutral-grey);
+}
+
 .copy-code-button {
   color: var(--pre-annotation-font-color);
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0.25rem 0.25rem 0 0;
   position: relative;
+  transition: background-color 300ms ease;
 }
 
 a.copy-code-button:focus,
