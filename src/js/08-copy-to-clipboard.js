@@ -9,14 +9,14 @@
 
     setTimeout(() => {
       toast.classList.add('show')
-    }, 10)
+    }, 100)
 
     setTimeout(() => {
       toast.classList.remove('show')
       setTimeout(() => {
         document.body.removeChild(toast)
       }, 300)
-    }, 2000)
+    }, 2500)
   }
 
   const getOnCopySuccess = (copyButton) => () => {

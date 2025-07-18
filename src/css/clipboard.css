@@ -14,7 +14,7 @@ pre.highlightjs:hover .copy-code-button {
   gap: 5px;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  border-radius: 0.25rem 0.25rem 0 0;
+  border-radius: 3px 3px 0 0;
   position: relative;
   transition: background-color 300ms ease;
 }
@@ -39,12 +39,13 @@ a.copy-code-button:hover {
   z-index: 1000;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.3s ease-out;
+  transition: all 300ms ease-out;
 }
 
 .copy-toast.show {
   opacity: 1;
   transform: translateY(0);
+  transition-duration: 150ms;
 }
 
 .doc .listingblock code /*[data-lang]*/ + .source-type-box {
