@@ -118,8 +118,11 @@
     reshape({ sourcesBySourceId }) {
       const { algolia, ...rest } =
         sourcesBySourceId;
+      const groupedSources = groupByProduct(algolia);
+      // if there are no sources return the default algolia source, to show the "No Results" template
+      const resultingSources = groupedSources.length > 0 ? groupedSources : algolia;
       return [
-        groupByProduct(algolia),
+        resultingSources,
         Object.values(rest),
       ];
     },
@@ -195,6 +198,7 @@
               </div>`;
             },
             noResults({ html }) {
+              console.log('no results');
               return html`<p class="search-no-results">No results found.</p>`;
             },
           },
@@ -204,7 +208,7 @@
         },
       ];
     },
-    render({ elements, render, html }, root) {
+    render({ elements, render, html, ...rest }, root) {
       const dataSources = Object.values(elements);
 
       render(
