@@ -113,8 +113,9 @@
     refresh,
   } = autocomplete({
     container: '#search-input',
-    placeholder: 'Search',
+    placeholder: '',
     defaultActiveItemId: 0,
+    detachedMediaQuery: '',
     reshape({ sourcesBySourceId }) {
       const { algolia, ...rest } =
         sourcesBySourceId;

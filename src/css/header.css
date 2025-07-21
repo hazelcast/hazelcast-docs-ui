@@ -287,10 +287,6 @@ nav .button.custom-4:hover {
   font-weight: bold;
 }
 
-.searchbox {
-  min-width: 165px;
-}
-
 @media (max-width: 1450px) {
   /* Show hamburger */
   .navbar-burger {
