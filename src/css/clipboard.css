@@ -1,34 +1,51 @@
+pre.highlightjs {
+  user-select: none;
+  cursor: pointer;
+}
+
+pre.highlightjs:hover .copy-code-button {
+  background-color: var(--neutral-grey);
+}
+
 .copy-code-button {
   color: var(--pre-annotation-font-color);
-  cursor: pointer;
-  display: inline-block;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 3px 3px 0 0;
   position: relative;
+  transition: background-color 300ms ease;
 }
 
 a.copy-code-button:focus,
 a.copy-code-button:hover {
   color: var(--neutral-lighter);
+  text-decoration: none;
 }
 
-.copy-code-button:hover::after {
-  content: attr(data-title);
-  line-height: 1;
-  position: absolute;
-  top: -26px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  margin: 0;
-  padding: 5px;
-  text-align: center;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
-  background: var(--neutral-lighter);
-  color: var(--secondary-text);
-  border: 1px solid var(--pre-border-color);
-  box-sizing: border-box;
+.copy-toast {
+  position: fixed;
+  top: calc(var(--navbar-height) + 20px);
+  right: 20px;
+  background: var(--success);
+  color: white;
+  padding: 12px 20px;
   border-radius: 8px;
-  min-width: 80px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100001;
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 300ms ease-out;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(0);
+  transition-duration: 150ms;
 }
 
 .doc .listingblock code /*[data-lang]*/ + .source-type-box {

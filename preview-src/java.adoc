@@ -169,3 +169,32 @@ As the final step, if and when you are done with your client, you can shut it do
 ```
 client.shutdown();
 ```
+
+
+== Test code source with annotations
+
+You'll start the first member in a cluster called `hello-world`. Run the following Docker command:
+
+[source,shell,subs="attributes+"]
+----
+docker run \
+    --name first-member --network hazelcast-network \
+    --rm \
+    -e HZ_NETWORK_PUBLICADDRESS=<host_ip>:5701 \ <1>
+    -e HZ_CLUSTERNAME=hello-world \
+    -e HZ_LICENSEKEY=<your license key> \ <2>
+    -e HZ_PERSISTENCE_ENABLED=true \ <3>
+    -e HZ_MAP_MYDISTRIBUTEDMAP_DATAPERSISTENCE_ENABLED=true \ <4>
+    -v ~/persist:/opt/hazelcast/persistence \ <5>
+    -p 5701:5701 hazelcast/hazelcast-enterprise:{ee-version}
+----
+<1> Replace the `<host_ip>` placeholder with the IP address of your Docker host.
+<2> Replace the `<your license key>` placeholder with your Hazelcast {enterprise-product-name} license key.
+<3> The environment variable to enable the persistence feature for the member
+<4> The environment variable to enable the persistence feature for a map
+<5> By default, the persistence feature creates the `/opt/hazelcast/persistence` directory to store the persisted data.
+However, using a Docker image, you cannot create any files inside the container. This line of the command mounts a directory
+on your local to the container, which in this case is `persist` under the home directory. This way, the container will use this local
+directory to save the persisted data.
+
+
