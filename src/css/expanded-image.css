@@ -26,7 +26,7 @@
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 100000; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 70px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -40,8 +40,8 @@
 .doc .modal-image {
   margin: auto;
   display: block;
-  width: 100%;
-  max-width: 2000px !important;
+  max-width: 95%;
+  height: auto;
 }
 
 /* Add Animation - Zoom in the Modal */
@@ -68,6 +68,7 @@
   color: #f1f1f1;
   font-size: 40px;
   font-weight: bold;
+  line-height: 1;
   transition: 0.3s;
 }
 
