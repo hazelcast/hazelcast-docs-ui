@@ -10,5 +10,6 @@
     }],
     "max-len": [1, 120, 2],
     "spaced-comment": "off"
-  }
+  },
+  "ignorePatterns": ["crawler.js"]
 }

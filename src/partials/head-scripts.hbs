@@ -1,3 +1,15 @@
+<script>
+  window.UTILS = {
+    parseHbsJsonString(str) {
+      return JSON.parse(
+        str
+        .replace(/&quot;/g, '"')
+        .replaceAll(String.fromCharCode(92), `${String.fromCharCode(92)}${String.fromCharCode(92)}`)
+      );
+    }
+  }
+</script>
+
 {{#with site.keys.googleAnalytics}}
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
