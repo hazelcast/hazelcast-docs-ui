@@ -8,6 +8,19 @@ functionality by proxying each operation through a Hazelcast member.
 It can access and change distributed data and it can listen to distributed
 events of an already established Hazelcast cluster from another Java application.
 
+Content in document.
+
+image:cluster-connected.png[]
+
+Content in document
+
+Content in document.
+
+image:connect-cluster.png[]
+
+Content in document
+
+
 Hundreds or even thousands of clients can be connected to the cluster.
 By default, there are `core count * 20` threads on the server side that
 handle all the requests, e.g., if the server has 4 cores, there will be 80 threads.
