@@ -118,6 +118,12 @@ a.aa-ItemLink:hover {
   content: " > ";
 }
 
+.aa-ItemPageGroupItem {
+  list-style-type: none;
+  border: 1px solid var(--neutral-light);
+  margin-bottom: 10px;
+}
+
 .aa-ItemContentDescription {
   font-size: 13px;
   color: var(--secondary-text) !important;
