@@ -287,12 +287,7 @@ nav .button.custom-4:hover {
   font-weight: bold;
 }
 
-/* ================================
-   Responsive Layout for Mobile
-   Breakpoint: max-width 900px
-================================ */
-
-@media (max-width: 1300px) {
+@media (max-width: 1450px) {
   /* Show hamburger */
   .navbar-burger {
     display: flex;

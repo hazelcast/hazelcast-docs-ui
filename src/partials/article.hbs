@@ -1,6 +1,6 @@
 <article class="doc">
 {{#if (eq page.layout '404')}}
-  <h1 class="page">{{{or page.title 'Page Not Found'}}}</h1>
+  <h1 class="page" id="articleTitle">{{{or page.title 'Page Not Found'}}}</h1>
   <div class="paragraph">
     <p>The page you&#8217;re looking for does not exist. It may have been moved.</p>
   </div>
@@ -30,7 +30,9 @@
   {{/if}}
   {{#if (not-eq page.layout 'swagger')}}
     {{#with page.title}}
-      <h1 class="page
+      <h1
+        id="articleTitle"
+        class="page
       {{~#if (eq @root.page.attributes.enterprise 'true')}} enterprise{{/if}}
       {{~#if (eq @root.page.attributes.beta 'true')}} beta{{/if}}
       {{~#if (eq @root.page.attributes.dedicated 'true')}} dedicated{{/if}}
@@ -45,13 +47,15 @@
     </div>
   {{/if}}
   {{> page-versions}}
-  {{{page.contents}}}
+  <div id="articleContent">
+    {{{page.contents}}}
+  </div>
   {{#if page.attributes.include-tutorial-list}}
     <ul style="padding-top:20px;">
     {{#each (get-tutorial-pages 'cloud')}}
       <li><a href="{{{this.pub.url}}}">{{this.asciidoc.attributes.doctitle}}</a></li>
     {{/each}}
-    </ul> 
+    </ul>
   {{/if}}
 {{/if}}
 {{> pagination}}

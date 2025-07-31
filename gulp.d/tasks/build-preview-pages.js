@@ -48,7 +48,7 @@ module.exports = (src, previewSrc, previewDest, sink = () => map()) => (done) =>
                 .reduce((accum, [name, val]) => {
                   accum[name.substr(5)] = val
                   return accum
-                }, {})
+                }, uiModel.page.attributes)
               uiModel.page.layout = doc.getAttribute('page-layout', 'default')
               uiModel.page.title = doc.getDocumentTitle()
               uiModel.page.contents = Buffer.from(doc.convert())
