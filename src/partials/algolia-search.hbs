@@ -123,6 +123,7 @@
 
       const {
         refresh,
+        setIsOpen,
       } = autocomplete({
         container: '#search-input',
         placeholder: '',
@@ -225,7 +226,7 @@
 
           render(
             html`<div class="aa-PanelLayout aa-Panel--scrollable">
-              ${ window.Kapa ? html`<p>Can't find what you're looking for? Click <button id="askAIBtn" class="aa-AskAI-btn">here</button> to <strong>Ask AI</strong></p>` : ''}
+              ${ window.Kapa ? html`<p class="aa-AskAISection">Can't find what you're looking for? Click <button id="askAIBtn" class="aa-AskAIBtn">here</button> to <strong>Ask AI</strong></p>` : ''}
         <div class="aa-PanelSections">
           <div class="aa-PanelSection aa-PanelSection--left">
             ${Object.keys(selectedFacets).length > 0 ? html`
@@ -283,12 +284,14 @@
         }
       });
 
-      document.addEventListener('click', (event) => {
-        if (event.target.id === 'askAIBtn') {
-          event.preventDefault();
-          window.Kapa.open({ query: document.querySelector('input.aa-Input').value });
-        }
-      });
+
+        document.addEventListener('click', (event) => {
+          if (event.target.id === 'askAIBtn') {
+            event.preventDefault();
+            window.Kapa.open({ query: document.querySelector('input.aa-Input').value });
+            setIsOpen(false);
+          }
+        });
     })()
   </script>
 {{/if}}

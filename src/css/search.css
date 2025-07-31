@@ -108,6 +108,15 @@ a.aa-ItemLink:hover {
   min-width: 0;
 }
 
+.aa-AskAISection {
+  text-align: center;
+}
+
+.aa-AskAIBtn {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
 .aa-ItemContentTitle {
   font-weight: 500;
   color: var(--text);
