@@ -57,20 +57,7 @@
   padding: 0 !important;
 }
 
-.aa-PanelSections {
-  display: flex;
-  align-items: stretch;
-}
 
-.aa-PanelSection--left {
-  min-width: 175px;
-  flex: 0;
-}
-
-.aa-PanelSection--right {
-  flex: 1;
-  padding-left: 12px;
-}
 
 .aa-ItemContent mark {
   background-color: yellow !important;
