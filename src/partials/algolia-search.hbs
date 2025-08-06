@@ -13,20 +13,32 @@
     (() => {
       const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
       const { liteClient: algoliasearch } = window['algoliasearch/lite'];
+      const initialFacet = [{ title: 'All', versions: ['default'] }];
+      let currentComponent = '{{page.component.title}}';
+      let currentVersion = '{{page.displayVersion}}';
 
-      const selectedFacets = window.UTILS.parseHbsJsonString(
-        '{{get-facets-from-components (sort-components site.components 'name' page.attributes.component-order) @root.page}}'
-      );
+      const selectedFacets = [
+        ...initialFacet,
+        ...window.UTILS.parseHbsJsonString(
+          '{{get-facets-from-components (sort-components site.components 'name' page.attributes.component-order) @root.page}}'
+        )
+      ];
+
+      console.log(selectedFacets);
+
+      const getComponentOptions = (html) => selectedFacets
+        .map(({ title }) => title === currentComponent
+          ? html`<option value="${title}" selected>${title}</option>`
+          : html`<option value="${title}">${title}</option>`);
+
+      const getComponentVersionOptions = (html) => selectedFacets
+        .find(({ title }) => title === currentComponent).versions
+        .map(version => version === currentVersion
+          ? html`<option value="${version}" selected>${version}</option>`
+          : html`<option value="${version}">${version}</option>`);
 
       const getFacetFilters = () => {
-        return Object.keys(selectedFacets)
-          .reduce((acc, product) => {
-            const facets = Object.keys(selectedFacets[product])
-              .filter(version => selectedFacets[product][version])
-              .map((version) => `componentVersion:${product}_${version}`);
-            acc.push(...facets);
-            return acc;
-          }, []);
+        return [`componentVersion:${currentComponent}_${currentVersion}`];
       };
 
       function flatten(values) {
@@ -211,71 +223,54 @@
 
           render(
             html`<div class="aa-PanelLayout aa-Panel--scrollable">
-              ${ window.Kapa ? html`<p class="aa-AskAISection">Can't find what you're looking for? Click <button id="askAIBtn" class="aa-AskAIBtn">here</button> to <strong>Ask AI</strong></p>` : ''}
-        <div class="aa-PanelSections">
-          <div class="aa-PanelSection aa-PanelSection--top">
-            ${Object.keys(selectedFacets).length > 0 ? html`
-                <div class="facet-filters">
-                  ${Object.keys(selectedFacets).map(product =>
-              html`<h4 class="capitalize">${product}</h4>
-                   <ul>
-                     ${Object.keys(selectedFacets[product]).map(version => {
-                const isChecked = selectedFacets[product] && selectedFacets[product][version] === true;
-                return html`<li>
-                           <label>
-                             ${isChecked ? html`<input
-                               type="checkbox"
-                               name="${product}"
-                               id="${version}"
-                               data-facet-product="${product}"
-                               data-facet-version="${version}"
-                               checked
-                             />` : html`<input
-                               type="checkbox"
-                               name="${product}"
-                               id="${version}"
-                               data-facet-product="${product}"
-                               data-facet-version="${version}"
-                             />`}
-                             ${version}
-                           </label>
-                         </li>`;
-              })}
-                   </ul>`
-            )}
+              <div class="aa-PanelSection aa-PanelSection--top">
+                <div class="aa--ComponentversionPicker">
+                  <div class="select">
+                    <select id="componentSelect">
+                      ${getComponentOptions(html)}
+                    </select>
+                    <span class="focus"></span>
+                  </div>
+                  <div class="select">
+                    <select id="componentVersionSelect">
+                      ${getComponentVersionOptions(html)}
+                    </select>
+                    <span class="focus"></span>
+                  </div>
                 </div>
-              ` : html``}
-          </div>
-          <div class="aa-PanelSection aa-PanelSection--bottom">
-            ${dataSources}
-          </div>
-        </div>
-      </div>`,
+                ${ window.Kapa ? html`<p class="aa-AskAISection">Can't find what you're looking for? <button id="askAIBtn" class="aa-AskAIBtn"><strong>Ask AI</strong></button></p>` : ''}
+              </div>
+              <div class="aa-PanelSection aa-PanelSection--bottom">
+                ${dataSources}
+              </div>
+            </div>`,
             root
           );
         },
       });
 
-      document.addEventListener('change', function(event) {
-        if (event.target.type === 'checkbox' && event.target.dataset.facetProduct) {
-          const facetProduct = event.target.dataset.facetProduct;
-          const facetVersion = event.target.dataset.facetVersion;
+      // document.addEventListener('change', function(event) {
+      //   if (event.target.type === 'checkbox' && event.target.dataset.facetProduct) {
+      //     const facetProduct = event.target.dataset.facetProduct;
+      //     const facetVersion = event.target.dataset.facetVersion;
+      //
+      //     selectedFacets[facetProduct][facetVersion] = event.target.checked;
+      //
+      //     if (refresh) {
+      //       refresh();
+      //     }
+      //   }
+      // });
 
-          selectedFacets[facetProduct][facetVersion] = event.target.checked;
-
-          if (refresh) {
-            refresh();
-          }
-        }
-      });
-
-      document.addEventListener('click', (event) => {
-        if (event.target.id === 'askAIBtn') {
+      document.addEventListener('mousedown', (event) => {
+        if (event.target.id === 'componentSelect' || event.target.id === 'componentVersionSelect') {
+          event.stopImmediatePropagation();
+        } else if (event.target.id === 'askAIBtn') {
           event.preventDefault();
           window.Kapa.open({ query: document.querySelector('input.aa-Input').value });
           setIsOpen(false);
         }
-      });
+      }, true);
     })()
   </script>
 {{/if}}
