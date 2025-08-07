@@ -37,19 +37,24 @@
   z-index: calc(var(--z-index-navbar) + 1) !important;
 }
 
-.aa-DetachedContainer--modal {
+.aa-DetachedContainer--modal.aa-DetachedContainer--modal {
   top: calc(var(--navbar-height) + 10px) !important;
+  background-color: var(--body-background);
+  border-bottom: none;
 }
 
-.aa-Panel {
+div.aa-DetachedFormContainer {
+  border-bottom: none;
+}
+
+.aa-DetachedContainer--modal.aa-DetachedContainer--modal .aa-Panel {
   --aa-icon-size: 30px;
+  --aa-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   left: 0 !important;
   right: 0 !important;
-  background: white;
-  border: 1px solid var(--neutral-light);
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--aa-box-shadow);
+  background-color: var(--body-background);
 }
 
 .aa-Panel--scrollable {
@@ -61,12 +66,20 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .aa--ComponentversionPicker {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.aa-Item {
+  background-color: var(--neutral-white);
+  box-shadow: var(--aa-box-shadow);
+  margin-bottom: 1rem;
+  border-radius: 5px;
 }
 
 .aa-ItemContent mark {
@@ -89,7 +102,7 @@
 }
 
 .aa-ItemIcon {
-  color: var(--accent);
+  color: var(--neutral-light) !important;
   flex-shrink: 0;
   margin-top: 2px;
   box-shadow: none !important;
@@ -107,11 +120,33 @@ a.aa-ItemLink:hover {
 
 .aa-AskAISection {
   text-align: center;
+  margin: 0;
 }
 
-.aa-AskAIBtn {
-  text-decoration: underline;
-  color: var(--accent);
+.aa-Panel .aa-AskAIBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  background-color: var(--neutral-white);
+  border-radius: 5px;
+  padding: 5px 10px;
+  box-shadow: var(--aa-box-shadow);
+  transition: transform 200ms ease-in-out;
+}
+
+.aa-Panel .aa-AskAIBtn:hover {
+  transform: translateY(-2px);
+}
+
+.aa-AskAIBtnIcon {
+  color: var(--accent-light);
+  display: flex;
+  align-items: center;
+}
+
+.aa-AskAIHeading {
+  color: var(--accent-light);
 }
 
 .aa-ItemContentTitle {
@@ -188,8 +223,8 @@ select,
   margin-bottom: 0.2em;
   width: 0.5em;
   height: 0.5em;
-  border-right: 2px solid var(--accent);
-  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent-light);
+  border-bottom: 2px solid var(--accent-light);
   transform: rotate(45deg);
   transform-origin: center;
 }
