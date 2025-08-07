@@ -11,34 +11,55 @@
 {{#if page.component}}
   <script>
     (() => {
+      const UI_TYPE = {
+        ITEM: 0,
+        HEADING: 1,
+        SUBITEM: 2,
+      };
+      const getArticleSVG = (html) => html`
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>`
+
+      const getHashtagSVG = (html) => html`
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 9H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 15H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 3L8 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 3L14 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`
+
       const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
       const { liteClient: algoliasearch } = window['algoliasearch/lite'];
-      const initialFacet = [{ title: 'All', versions: ['default'] }];
+      const ALL_VERSIONS_TITLE = 'All';
+      const initialFacet = [{ title: ALL_VERSIONS_TITLE, versions: ['default'] }];
       let currentComponent = '{{page.component.title}}';
       let currentVersion = '{{page.displayVersion}}';
 
-      const selectedFacets = [
+      const componentVersions = [
         ...initialFacet,
         ...window.UTILS.parseHbsJsonString(
           '{{get-facets-from-components (sort-components site.components 'name' page.attributes.component-order) @root.page}}'
         )
       ];
 
-      console.log(selectedFacets);
-
-      const getComponentOptions = (html) => selectedFacets
+      const getComponentOptions = (html) => componentVersions
         .map(({ title }) => title === currentComponent
           ? html`<option value="${title}" selected>${title}</option>`
           : html`<option value="${title}">${title}</option>`);
 
-      const getComponentVersionOptions = (html) => selectedFacets
+      const getComponentVersionOptions = (html) => componentVersions
         .find(({ title }) => title === currentComponent).versions
         .map(version => version === currentVersion
           ? html`<option value="${version}" selected>${version}</option>`
           : html`<option value="${version}">${version}</option>`);
 
       const getFacetFilters = () => {
-        return [`componentVersion:${currentComponent}_${currentVersion}`];
+        return currentComponent === ALL_VERSIONS_TITLE ? [] : [`componentVersion:${currentComponent}_${currentVersion}`];
       };
 
       function flatten(values) {
@@ -104,17 +125,22 @@
           return {
             getItems() {
               const sorted = items.sort((a, b) => `${a.title}${a.type}${a.section}`.localeCompare(`${b.title}${b.type}${b.section}`))
-              let prev = null;
-              const grouped = sorted.reduce((acc, next) => {
-                if (prev?.title === next.title) {
-                  const { subItems, ...rest } = prev;
-                  prev.subItems = subItems || [{
-                    ...rest,
-                  }];
-                  prev.subItems.push(next);
+              let prevIndex = null;
+              const grouped = sorted.reduce((acc, next, i) => {
+                // if is subitem
+                if (prevIndex !== null && sorted[prevIndex].title === next.title) {
+                  // if is immediate subitem
+                  if (i - prevIndex === 1) {
+                    acc[prevIndex].uiType = UI_TYPE.SUBITEM;
+                    acc.splice(prevIndex, 0, { ...sorted[prevIndex], uiType: UI_TYPE.HEADING });
+                    acc.push({ ...next, uiType: UI_TYPE.SUBITEM });
+                  // if second or > subitem
+                  } else {
+                    acc.push({ ...next, uiType: UI_TYPE.SUBITEM });
+                  }
                 } else {
-                  acc.push(next);
-                  prev = next;
+                  acc.push({ ...next, uiType: UI_TYPE.ITEM });
+                  prevIndex = i;
                 }
                 return acc;
               }, [])
@@ -122,11 +148,10 @@
             },
             templates: {
               header({ html }) {
-                return html`
+                return currentComponent === ALL_VERSIONS_TITLE ? html`
                 <span class="aa-SourceHeaderTitle">${name}</span>
                 <div class="aa-SourceHeaderLine" />
-              `
-                  ;
+              ` : '';
               },
             },
           };
@@ -178,8 +203,9 @@
                   return html`
               <div class="aa-ItemWrapper">
                 <div class="aa-ItemContent">
-<!--                  <div class="aa-ItemIcon">-->
-<!--                  </div>-->
+                  <div class="aa-ItemIcon">
+                    ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? getArticleSVG(html) : getHashtagSVG(html)}
+                  </div>
                   <a class="aa-ItemLink" href="${item.url}" target="_self">
                     <div class="aa-ItemContentBody">
                       <h4 class="aa-ItemContentTitle">
@@ -231,12 +257,12 @@
                     </select>
                     <span class="focus"></span>
                   </div>
-                  <div class="select">
+                  ${getComponentVersionOptions(html).length > 1 ? html`<div class="select">
                     <select id="componentVersionSelect">
                       ${getComponentVersionOptions(html)}
                     </select>
                     <span class="focus"></span>
-                  </div>
+                  </div>` : ''}
                 </div>
                 ${ window.Kapa ? html`<p class="aa-AskAISection">Can't find what you're looking for? <button id="askAIBtn" class="aa-AskAIBtn"><strong>Ask AI</strong></button></p>` : ''}
               </div>
@@ -249,19 +275,6 @@
         },
       });
 
-      // document.addEventListener('change', function(event) {
-      //   if (event.target.type === 'checkbox' && event.target.dataset.facetProduct) {
-      //     const facetProduct = event.target.dataset.facetProduct;
-      //     const facetVersion = event.target.dataset.facetVersion;
-      //
-      //     selectedFacets[facetProduct][facetVersion] = event.target.checked;
-      //
-      //     if (refresh) {
-      //       refresh();
-      //     }
-      //   }
-      // });
-
       document.addEventListener('mousedown', (event) => {
         if (event.target.id === 'componentSelect' || event.target.id === 'componentVersionSelect') {
           event.stopImmediatePropagation();
@@ -271,6 +284,18 @@
           setIsOpen(false);
         }
       }, true);
+
+      document.addEventListener('change', (event) => {
+        if (event.target.id === 'componentSelect') {
+          console.log('componentSelect', event.target.value);
+          currentComponent = event.target.value;
+          currentVersion = componentVersions.find(({ title }) => title === currentComponent).versions[0];
+          refresh();
+        } else if (event.target.id === 'componentVersionSelect') {
+          currentVersion = event.target.value;
+          refresh();
+        }
+      });
     })()
   </script>
 {{/if}}

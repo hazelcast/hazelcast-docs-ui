@@ -50,11 +50,10 @@
   border: 1px solid var(--neutral-light);
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px !important;
 }
 
 .aa-Panel--scrollable {
-  padding: 0 !important;
+  padding: 10px 16px !important;
 }
 
 .aa-PanelSection--top {
@@ -125,12 +124,6 @@ a.aa-ItemLink:hover {
   content: " > ";
 }
 
-.aa-ItemPageGroupItem {
-  list-style-type: none;
-  border: 1px solid var(--neutral-light);
-  margin-bottom: 10px;
-}
-
 .aa-ItemContentDescription {
   font-size: 13px;
   color: var(--secondary-text) !important;
@@ -177,7 +170,7 @@ select::-ms-expand {
   border-radius: 4px;
   padding: 0;
   cursor: pointer;
-  line-height: 1.1;
+  line-height: 1.2;
   background-color: #fff;
   background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 }
