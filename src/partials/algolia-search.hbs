@@ -148,10 +148,10 @@
           return {
             getItems() {
               const sorted = items.sort((a, b) => `${a.title}${a.type}${a.section}`.localeCompare(`${b.title}${b.type}${b.section}`))
-              let prevIndex = null;
-              const grouped = sorted.reduce((acc, next, i) => {
+              let prevIndex = 0;
+              const grouped = sorted.reduce((acc, next) => {
                 // if is subitem
-                if (prevIndex !== null && sorted[prevIndex].title === next.title) {
+                if (acc.length > 0 && acc[prevIndex].title === next.title) {
                   // if is immediate subitem
                   if (acc[acc.length - 1].uiType === UI_TYPE.ITEM) {
                     acc[prevIndex].uiType = UI_TYPE.SUBITEM;
@@ -159,13 +159,12 @@
                     acc.push({ ...next, uiType: UI_TYPE.LAST_SUBITEM });
                   // if second or > subitem
                   } else {
-                    console.log(next.content);
                     acc[acc.length - 1].uiType = UI_TYPE.SUBITEM;
                     acc.push({ ...next, uiType: UI_TYPE.LAST_SUBITEM });
                   }
                 } else {
                   acc.push({ ...next, uiType: UI_TYPE.ITEM });
-                  prevIndex = i;
+                  prevIndex = acc.length - 1;
                 }
                 return acc;
               }, [])
@@ -176,7 +175,6 @@
               header({ html }) {
                 return currentComponent === ALL_VERSIONS_TITLE ? html`
                 <span class="aa-SourceHeaderTitle">${name}</span>
-                <div class="aa-SourceHeaderLine" />
               ` : '';
               },
             },
@@ -227,37 +225,35 @@
               templates: {
                 item({ item, components, html }) {
                   return html`
+            <a class="aa-ItemLink" href="${item.uiType === UI_TYPE.HEADING ? item.url.split('#')[0] : item.url}" target="_self">
               <div class="aa-ItemWrapper">
                 <div class="aa-ItemContent">
                   ${item.uiType === UI_TYPE.SUBITEM ? getMiddleSubitemSVG(html) : item.uiType === UI_TYPE.LAST_SUBITEM ? getEndSubitemSVG(html) : ''}
                   ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? getArticleSVG(html) : getHashtagSVG(html)}
-                  <a class="aa-ItemLink" href="${item.url}" target="_self">
                     <div class="aa-ItemContentBody">
+                    ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? html`
                       <h4 class="aa-ItemContentTitle">
                         <span>${components.Highlight({ hit: item, attribute: 'title' })}</span>
-                        ${item.section && !item.subItems ? html`<span>${components.Highlight({hit: item, attribute: 'section'})}</span>` : ''}
                       </h4>
-                      ${item.subItems ?
-                        html`<ul class="aa-ItemPageGroup">
-                            ${item.subItems.map((subItem) => html`<a class="aa-ItemLink" href="${subItem.url}" target="_self" key="${subItem.url}">
-                                <li class="aa-ItemPageGroupItem">
-                                  <h5 class="aa-ItemContentTitle">${components.Highlight({ hit: subItem, attribute: 'section' })}</h5>
-                                  <p class="aa-ItemContentDescription">
-                                    ${components.Snippet({hit: subItem, attribute: 'content'})}
-                                  </p>
-                                </li>
-                            </a>`)}
-                        </ul>` :
+                    ` : ''}
+                      ${item.uiType === UI_TYPE.HEADING || !item.section ? '' : html`
+                        <h5 class="aa-ItemContentSection">
+                            <span>${components.Highlight({hit: item, attribute: 'section'})}</span>
+                        </h5>
+                      `}
+                      ${item.uiType === UI_TYPE.HEADING ? '' :
                         html`<p class="aa-ItemContentDescription">
                           ${components.Snippet({hit: item, attribute: 'content'})}
                         </p>`}
-                      <div class="aa-ItemContentBreadcrumbs">
-                        ${item.breadcrumbs ? item.breadcrumbs.join(' > ') : ''}
-                      </div>
+                      ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? html`
+                        <div class="aa-ItemContentBreadcrumbs">
+                          ${item.breadcrumbs ? item.breadcrumbs.join(' > ') : ''}
+                        </div>
+                      ` : ''}
                     </div>
-                  </a>
+                  </div>
                 </div>
-              </div>`;
+              </a>`;
                 },
                 noResults({ html }) {
                   return html`<p class="search-no-results">No results found.</p>`;
@@ -322,7 +318,6 @@
 
       document.addEventListener('change', (event) => {
         if (event.target.id === 'componentSelect') {
-          console.log('componentSelect', event.target.value);
           currentComponent = event.target.value;
           currentVersion = componentVersions.find(({ title }) => title === currentComponent).versions[0];
           refresh();

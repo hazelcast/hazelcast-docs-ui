@@ -47,6 +47,17 @@ div.aa-DetachedFormContainer {
   border-bottom: none;
 }
 
+.aa-Source div.aa-SourceHeader {
+  margin: 1rem 0;
+}
+
+.aa-SourceHeader .aa-SourceHeaderTitle {
+  font-weight: bold;
+  color: var(--text);
+  background-color: transparent;
+  font-size: 1rem;
+}
+
 .aa-DetachedContainer--modal.aa-DetachedContainer--modal .aa-Panel {
   --aa-icon-size: 30px;
   --aa-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -75,11 +86,16 @@ div.aa-DetachedFormContainer {
   gap: 1rem;
 }
 
-.aa-Item {
+.aa-List .aa-Item {
   background-color: var(--neutral-white);
   box-shadow: var(--aa-box-shadow);
   margin-bottom: 1rem;
   border-radius: 5px;
+  padding: 0;
+}
+
+.aa-ItemLink {
+  padding: 4px;
 }
 
 .aa-ItemContent mark {
@@ -150,13 +166,16 @@ a.aa-ItemLink:hover {
 }
 
 .aa-ItemContentTitle {
+  font-size: 1.2em;
   font-weight: 500;
   color: var(--text);
   margin-bottom: 8px;
 }
 
-.aa-ItemContentTitle > *:not(:last-child)::after {
-  content: " > ";
+.aa-ItemContentSection {
+  font-weight: 500;
+  font-size: 1em;
+  margin: 0 0 4px;
 }
 
 .aa-ItemContentDescription {
