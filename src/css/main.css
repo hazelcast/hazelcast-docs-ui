@@ -1,7 +1,3 @@
-html {
-  scroll-padding-top: var(--navbar-height);
-}
-
 .article-banner {
   align-items: center;
   background-color: var(--info);
