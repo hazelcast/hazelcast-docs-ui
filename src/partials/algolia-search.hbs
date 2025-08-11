@@ -61,6 +61,9 @@
       const ALL_VERSIONS_TITLE = 'All';
       const initialFacet = [{ title: ALL_VERSIONS_TITLE, versions: ['default'], latestVersion: 'default' }];
       let currentComponent = '{{page.component.title}}';
+      if (currentComponent === 'Home') {
+        currentComponent = ALL_VERSIONS_TITLE;
+      }
       let currentVersion = '{{page.displayVersion}}';
 
       const componentVersions = [
@@ -76,7 +79,7 @@
           : html`<option value="${title}">${title}</option>`);
 
       const getComponentVersionOptions = (html) => componentVersions
-        .find(({ title }) => title === currentComponent).versions
+        .find(({ title }) => title === currentComponent)?.versions
         .map(version => version === currentVersion
           ? html`<option value="${version}" selected>${version}</option>`
           : html`<option value="${version}">${version}</option>`);
