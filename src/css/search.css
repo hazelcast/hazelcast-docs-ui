@@ -143,7 +143,7 @@ a.aa-ItemLink:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: .5rem;
+  gap: 0.5rem;
   background-color: var(--neutral-white);
   border-radius: 5px;
   padding: 5px 10px;
