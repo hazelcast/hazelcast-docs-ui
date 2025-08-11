@@ -155,6 +155,14 @@ a.aa-ItemLink:hover {
   transform: translateY(-2px);
 }
 
+.aa-Panel .aa-SourceNoResults {
+  padding: 0 !important;
+}
+
+.aa-Autocomplete .aa-DetachedSearchButtonQuery {
+  display: none;
+}
+
 .aa-AskAIBtnIcon {
   color: var(--accent-light);
   display: flex;

@@ -59,7 +59,7 @@
       const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
       const { liteClient: algoliasearch } = window['algoliasearch/lite'];
       const ALL_VERSIONS_TITLE = 'All';
-      const initialFacet = [{ title: ALL_VERSIONS_TITLE, versions: ['default'] }];
+      const initialFacet = [{ title: ALL_VERSIONS_TITLE, versions: ['default'], latestVersion: 'default' }];
       let currentComponent = '{{page.component.title}}';
       let currentVersion = '{{page.displayVersion}}';
 
@@ -168,7 +168,6 @@
                 }
                 return acc;
               }, [])
-              console.log(grouped);
               return grouped;
             },
             templates: {
@@ -187,7 +186,7 @@
         setIsOpen,
       } = autocomplete({
         container: '#search-input',
-        placeholder: '',
+        openOnFocus: true,
         defaultActiveItemId: 0,
         detachedMediaQuery: '',
         reshape({ sourcesBySourceId }) {
@@ -319,7 +318,7 @@
       document.addEventListener('change', (event) => {
         if (event.target.id === 'componentSelect') {
           currentComponent = event.target.value;
-          currentVersion = componentVersions.find(({ title }) => title === currentComponent).versions[0];
+          currentVersion = componentVersions.find(({ title }) => title === currentComponent).latestVersion;
           refresh();
         } else if (event.target.id === 'componentVersionSelect') {
           currentVersion = event.target.value;
