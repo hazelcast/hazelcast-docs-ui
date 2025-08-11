@@ -159,7 +159,7 @@ a.aa-ItemLink:hover {
   padding: 0 !important;
 }
 
-.aa-Autocomplete .aa-DetachedSearchButtonQuery {
+.aa-Autocomplete .aa-DetachedSearchButtonPlaceholder {
   display: none;
 }
 
