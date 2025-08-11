@@ -147,7 +147,7 @@
         getSource({ name, items }) {
           return {
             getItems() {
-              const sorted = items.sort((a, b) => `${a.title}${a.type}${a.section}`.localeCompare(`${b.title}${b.type}${b.section}`))
+              const sorted = items.sort((a, b) => `${a.title}${a.type}`.localeCompare(`${b.title}${b.type}`))
               let prevIndex = 0;
               const grouped = sorted.reduce((acc, next) => {
                 // if is subitem
