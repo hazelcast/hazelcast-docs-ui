@@ -183,7 +183,6 @@
         defaultActiveItemId: 0,
         detachedMediaQuery: '',
         reshape({ sourcesBySourceId, state }) {
-          console.log(state.query);
           const { algolia, ...rest } =
             sourcesBySourceId;
           const groupedSources = groupByProduct(algolia);
