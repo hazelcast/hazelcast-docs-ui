@@ -43,6 +43,10 @@
   border-bottom: none;
 }
 
+.home ~ .aa-DetachedOverlay .aa-DetachedContainer--modal.aa-DetachedContainer--modal {
+  top: 165px !important;
+}
+
 div.aa-DetachedFormContainer {
   border-bottom: none;
 }
