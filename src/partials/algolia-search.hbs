@@ -28,16 +28,6 @@
           </svg>
         </div>`
 
-      const getHashtagSVG = (html) => html`
-        <div class="aa-ItemIcon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 9H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M4 15H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M10 3L8 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16 3L14 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>`
-
       const getMiddleSubitemSVG = (html) => html`
         <div class="aa-ItemIcon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="20" height="40">
@@ -232,8 +222,10 @@
             <a class="aa-ItemLink" href="${item.uiType === UI_TYPE.HEADING ? item.url.split('#')[0] : item.url}" target="_self">
               <div class="aa-ItemWrapper">
                 <div class="aa-ItemContent">
-                  ${item.uiType === UI_TYPE.SUBITEM ? getMiddleSubitemSVG(html) : item.uiType === UI_TYPE.LAST_SUBITEM ? getEndSubitemSVG(html) : ''}
-                  ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? getArticleSVG(html) : getHashtagSVG(html)}
+                  ${item.uiType === UI_TYPE.SUBITEM
+                    ? getMiddleSubitemSVG(html)
+                    : item.uiType === UI_TYPE.LAST_SUBITEM
+                      ? getEndSubitemSVG(html) : getArticleSVG(html)}
                     <div class="aa-ItemContentBody">
                     ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? html`
                       <h4 class="aa-ItemContentTitle">
