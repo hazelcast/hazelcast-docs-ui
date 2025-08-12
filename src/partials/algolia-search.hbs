@@ -182,7 +182,7 @@
         openOnFocus: true,
         defaultActiveItemId: 0,
         detachedMediaQuery: '',
-        reshape({ sourcesBySourceId, state }) {
+        reshape({ sourcesBySourceId }) {
           const { algolia, ...rest } =
             sourcesBySourceId;
           const groupedSources = groupByProduct(algolia);
