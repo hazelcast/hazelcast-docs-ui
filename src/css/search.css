@@ -37,9 +37,12 @@
   z-index: calc(var(--z-index-navbar) + 1) !important;
 }
 
-.aa-DetachedContainer--modal.aa-DetachedContainer--modal {
-  top: calc(var(--navbar-height) + 10px) !important;
+.aa-DetachedOverlay .aa-DetachedContainer {
   background-color: var(--body-background);
+}
+
+.aa-DetachedOverlay .aa-DetachedContainer--modal {
+  top: calc(var(--navbar-height) + 10px) !important;
   border-bottom: none;
 }
 
@@ -62,7 +65,7 @@ div.aa-DetachedFormContainer {
   font-size: 1rem;
 }
 
-.aa-DetachedContainer--modal.aa-DetachedContainer--modal .aa-Panel {
+.aa-DetachedOverlay .aa-DetachedContainer .aa-Panel {
   --aa-icon-size: 30px;
   --aa-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
@@ -78,16 +81,31 @@ div.aa-DetachedFormContainer {
 
 .aa-PanelSection--top {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
-.aa--ComponentversionPicker {
+.aa--ComponentVersionPicker {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
   gap: 1rem;
+}
+
+@media screen and (min-width: 800px) {
+  .aa-PanelSection--top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .aa--ComponentVersionPicker {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .aa-List .aa-Item {
