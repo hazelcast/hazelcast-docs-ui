@@ -142,6 +142,11 @@ div.aa-DetachedFormContainer {
   background-color: transparent !important;
 }
 
+.aa-List .aa-ItemIcon.aa-ItemArticleIcon {
+  margin-top: 0;
+  align-self: start;
+}
+
 a.aa-ItemLink:hover {
   text-decoration: none;
 }
