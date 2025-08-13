@@ -156,6 +156,10 @@ a.aa-ItemLink:hover {
   margin: 0;
 }
 
+.aa-DetachedContainer--modal .aa-PanelLayout {
+  height: 500px;
+}
+
 .aa-Panel .aa-AskAIBtn {
   display: flex;
   align-items: center;
@@ -181,14 +185,9 @@ a.aa-ItemLink:hover {
   display: none;
 }
 
-.aa-AskAIBtnIcon {
-  color: var(--accent-light);
-  display: flex;
-  align-items: center;
-}
-
 .aa-AskAIHeading {
   color: var(--accent-light);
+  font-size: 1rem;
 }
 
 .aa-ItemContentTitle {

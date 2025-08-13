@@ -280,15 +280,9 @@
                     <span class="focus"></span>
                   </div>` : ''}
                 </div>
-                ${ window.Kapa ? html`<button id="askAIBtn" class="aa-AskAIBtn">
-                    <span class="aa-AskAIBtnIcon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="30" height="30">
-                          <line x1="20" y1="10" x2="20" y2="90" stroke="currentColor" stroke-width="15" stroke-linecap="round"/>
-                          <line x1="80" y1="10" x2="80" y2="90" stroke="currentColor" stroke-width="15" stroke-linecap="round"/>
-                          <line x1="20" y1="50" x2="80" y2="50" stroke="currentColor" stroke-width="15" stroke-linecap="round"/>
-                        </svg>
-                    </span>
-                    <p class="aa-AskAISection">Can't find what you're looking for?</p>
+                ${ window.Kapa ? html`
+                <button id="askAIBtn" class="aa-AskAIBtn">
+                  <p class="aa-AskAISection">Can't find what you're looking for?</p>
                   <strong class="aa-AskAIHeading">Ask AI</strong>
                 </button>` : ''}
               </div>
@@ -304,7 +298,7 @@
       document.addEventListener('mousedown', (event) => {
         if (event.target.id === 'componentSelect' || event.target.id === 'componentVersionSelect') {
           event.stopImmediatePropagation();
-        } else if (event.target.id === 'askAIBtn') {
+        } else if (event.target.id === 'askAIBtn' || event.target.parentNode.id === 'askAIBtn') {
           event.preventDefault();
           window.Kapa.open({ query: document.querySelector('input.aa-Input').value });
           setIsOpen(false);
