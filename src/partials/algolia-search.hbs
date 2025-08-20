@@ -48,19 +48,20 @@
 
       const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
       const { liteClient: algoliasearch } = window['algoliasearch/lite'];
-      const ALL_VERSIONS_TITLE = 'All';
-      const initialFacet = [{ title: ALL_VERSIONS_TITLE, versions: ['default'], latestVersion: 'default' }];
+      const ALL_COMPONENTS_TITLE = 'All';
+      const ALL_VERSIONS_TITLE = 'All Versions';
+      const initialFacet = [{ title: ALL_COMPONENTS_TITLE, versions: ['default'], latestVersion: 'default' }];
       let currentComponent = '{{page.component.title}}';
       if (currentComponent === 'Home') {
-        currentComponent = ALL_VERSIONS_TITLE;
+        currentComponent = ALL_COMPONENTS_TITLE;
       }
       let currentVersion = '{{page.displayVersion}}';
 
       const componentVersions = [
-        ...initialFacet,
         ...window.UTILS.parseHbsJsonString(
           '{{get-facets-from-components (sort-components site.components 'name' page.attributes.component-order) @root.page}}'
-        )
+        ),
+        ...initialFacet,
       ];
 
       const getComponentOptions = (html) => componentVersions
@@ -68,14 +69,29 @@
           ? html`<option value="${title}" selected>${title}</option>`
           : html`<option value="${title}">${title}</option>`);
 
-      const getComponentVersionOptions = (html) => componentVersions
-        .find(({ title }) => title === currentComponent)?.versions
-        .map(version => version === currentVersion
-          ? html`<option value="${version}" selected>${version}</option>`
-          : html`<option value="${version}">${version}</option>`);
+      const getComponentVersionOptions = (html) => {
+        let versions = componentVersions.find(({ title }) => title === currentComponent)?.versions || []
+        if (versions.length > 1) {
+          versions = versions.concat([ALL_VERSIONS_TITLE])
+        }
+        return versions.map(version => version === currentVersion
+            ? html`<option value="${version}" selected>${version}</option>`
+            : html`<option value="${version}">${version}</option>`);
+      }
+
+      const getAllComponentsLatestVersionsFacets = () => componentVersions
+        .map(({ title, latestVersion }) => `componentVersion:${title}_${latestVersion}`);
+
+      const getAllComponentsVersionsFacets = () => componentVersions
+        .find(({ title }) => title === currentComponent).versions
+        .map(version => `componentVersion:${currentComponent}_${version}`);
 
       const getFacetFilters = () => {
-        return currentComponent === ALL_VERSIONS_TITLE ? [] : [`componentVersion:${currentComponent}_${currentVersion}`];
+        return currentComponent === ALL_COMPONENTS_TITLE
+          ? getAllComponentsLatestVersionsFacets()
+          : currentVersion === ALL_VERSIONS_TITLE ?
+            getAllComponentsVersionsFacets()
+            : [`componentVersion:${currentComponent}_${currentVersion}`];
       };
 
       function flatten(values) {
@@ -165,7 +181,7 @@
             },
             templates: {
               header({ html }) {
-                return currentComponent === ALL_VERSIONS_TITLE ? html`
+                return currentComponent === ALL_COMPONENTS_TITLE ? html`
                 <span class="aa-SourceHeaderTitle">${name}</span>
               ` : '';
               },
@@ -267,13 +283,13 @@
             html`<div class="aa-PanelLayout aa-Panel--scrollable">
               <div class="aa-PanelSection aa-PanelSection--top">
                 <div class="aa--ComponentVersionPicker">
-                  <div class="select">
+                  <div class="select aa-ComponentSelect">
                     <select id="componentSelect">
                       ${getComponentOptions(html)}
                     </select>
                     <span class="focus"></span>
                   </div>
-                  ${getComponentVersionOptions(html).length > 1 ? html`<div class="select">
+                  ${getComponentVersionOptions(html).length > 1 ? html`<div class="select aa-VersionSelect">
                     <select id="componentVersionSelect">
                       ${getComponentVersionOptions(html)}
                     </select>
@@ -286,9 +302,13 @@
                   <strong class="aa-AskAIHeading">Ask AI</strong>
                 </button>` : ''}
               </div>
-              <div class="aa-PanelSection aa-PanelSection--bottom">
-                ${dataSources}
-              </div>
+              ${dataSources.length > 0 ? html`
+                <div class="aa-PanelSection aa-PanelSection--bottom">
+                  ${dataSources}
+                </div>` : html`
+                <div class="aa-ImagePlaceholder">
+                  <img class="aa-ImagePlaceholderImage" src="{{{uiRootPath}}}/img/hazelcast-logo-original.svg" alt="lifebuoy" />
+                </div>`}
             </div>`,
             root
           );

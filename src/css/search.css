@@ -2,6 +2,15 @@
   width: 100%;
 }
 
+.aa-DetachedOverlay {
+  --aa-detached-modal-max-width: 800px;
+  --aa-primary-color-rgb: 0, 128, 169;
+  --aa-icon-size: 30px;
+  --aa-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  z-index: calc(var(--z-index-navbar) + 1) !important;
+}
+
 .aa-Input {
   background: var(--neutral-lighter);
   border-radius: 5px;
@@ -31,10 +40,8 @@
   color: var(--neutral-light);
 }
 
-.aa-DetachedOverlay {
-  --aa-detached-modal-max-width: 1200px;
-
-  z-index: calc(var(--z-index-navbar) + 1) !important;
+.aa-SubmitIcon {
+  color: var(--accent) !important;
 }
 
 .aa-DetachedOverlay .aa-DetachedContainer {
@@ -66,9 +73,6 @@ div.aa-DetachedFormContainer {
 }
 
 .aa-DetachedOverlay .aa-DetachedContainer .aa-Panel {
-  --aa-icon-size: 30px;
-  --aa-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
   left: 0 !important;
   right: 0 !important;
   box-shadow: var(--aa-box-shadow);
@@ -266,8 +270,6 @@ select::-ms-expand {
   grid-template-areas: "select";
   align-items: center;
   position: relative;
-  min-width: 20ch;
-  max-width: 40ch;
   border: 1px solid var(--neutral);
   border-radius: 4px;
   padding: 0;
@@ -275,6 +277,16 @@ select::-ms-expand {
   line-height: 1.2;
   background-color: #fff;
   background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+}
+
+.aa-ComponentSelect {
+  min-width: 20ch;
+  max-width: 40ch;
+}
+
+.aa-VersionSelect {
+  min-width: 10ch;
+  max-width: 20ch;
 }
 
 select,
@@ -304,4 +316,21 @@ select:focus + .focus {
   bottom: -1px;
   border: 2px solid var(--accent-light);
   border-radius: inherit;
+}
+
+.aa-ImagePlaceholder {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aa-ImagePlaceholderImage {
+  width: 70%;
+  height: auto;
+  opacity: 0.2;
 }
