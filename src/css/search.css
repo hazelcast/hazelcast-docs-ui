@@ -6,7 +6,7 @@
   --aa-detached-modal-max-width: 800px;
   --aa-primary-color-rgb: 0, 128, 169;
   --aa-icon-size: 30px;
-  --aa-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --aa-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 
   z-index: calc(var(--z-index-navbar) + 1) !important;
 }
@@ -118,6 +118,7 @@ div.aa-DetachedFormContainer {
   margin-bottom: 1rem;
   border-radius: 5px;
   padding: 0;
+  position: relative;
 }
 
 .aa-List .aa-Item[aria-selected=true] {
@@ -240,6 +241,24 @@ a.aa-ItemLink:hover {
 .aa-ItemContentBreadcrumbs {
   color: var(--neutral-light);
   font-size: 12px;
+}
+
+.aa-ItemVersion {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background-color: var(--accent-light);
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 12px;
+  line-height: 1.2;
+}
+
+.aa-List .aa-Item[aria-selected=true] .aa-ItemVersion {
+  background-color: var(--neutral-white);
+  color: var(--accent-light);
 }
 
 /* Component Version Select */

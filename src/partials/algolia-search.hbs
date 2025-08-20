@@ -233,6 +233,8 @@
               },
               templates: {
                 item({ item, components, html }) {
+                  const version = item.componentVersion ? item.componentVersion.split('_')[1] : '';
+                  const showVersion = currentVersion === ALL_VERSIONS_TITLE && version && version !== 'default';
                   return html`
             <a class="aa-ItemLink" href="${item.uiType === UI_TYPE.HEADING ? item.url.split('#')[0] : item.url}" target="_self">
               <div class="aa-ItemWrapper">
@@ -262,6 +264,11 @@
                         </div>
                       ` : ''}
                     </div>
+                    ${showVersion ? html`
+                      <div class="aa-ItemVersion">
+                        ${version}
+                      </div>
+                    ` : ''}
                   </div>
                 </div>
               </a>`;
