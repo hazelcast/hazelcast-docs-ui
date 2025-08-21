@@ -283,7 +283,7 @@
             },
           ];
         },
-        render({ elements, render, html, ...rest }, root) {
+        render({ elements, render, html, state }, root) {
           const dataSources = Object.values(elements);
 
           render(
@@ -305,8 +305,8 @@
                 </div>
                 ${ window.Kapa ? html`
                 <button id="askAIBtn" class="aa-AskAIBtn">
-                  <p class="aa-AskAISection">Can't find what you're looking for?</p>
-                  <strong class="aa-AskAIHeading">Ask AI</strong>
+                  <img class="aa-AskAIIcon" src="{{{uiRootPath}}}/img/kapa/ask-ai-icon.svg" alt="ask ai" />
+                  <span class="aa-AskAIHeading">Ask AI${state.query ? html`: ${state.query}` : html``}</span>
                 </button>` : ''}
               </div>
               ${dataSources.length > 0 ? html`
@@ -314,7 +314,7 @@
                   ${dataSources}
                 </div>` : html`
                 <div class="aa-ImagePlaceholder">
-                  <img class="aa-ImagePlaceholderImage" src="{{{uiRootPath}}}/img/hazelcast-logo-original.svg" alt="lifebuoy" />
+                  <img class="aa-ImagePlaceholderImage" src="{{{uiRootPath}}}/img/hazelcast-logo-original.svg" alt="hazelcast" />
                 </div>`}
             </div>`,
             root
