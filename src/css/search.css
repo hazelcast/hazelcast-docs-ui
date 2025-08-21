@@ -4,9 +4,10 @@
 
 .aa-DetachedOverlay {
   --aa-detached-modal-max-width: 800px;
-  --aa-primary-color-rgb: 0, 128, 169;
+  --aa-primary-color-rgb: 16, 164, 179;
   --aa-icon-size: 30px;
   --aa-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  --aa-scrollbar-thumb-background-color-rgb: var(--aa-primary-color-rgb);
 
   z-index: calc(var(--z-index-navbar) + 1) !important;
 }
@@ -80,7 +81,7 @@ div.aa-DetachedFormContainer {
 }
 
 .aa-Panel--scrollable {
-  padding: 10px 16px !important;
+  padding: 10px 16px 0 !important;
 }
 
 .aa-PanelSection--top {
@@ -357,4 +358,71 @@ select:focus + .focus {
   width: 70%;
   height: auto;
   opacity: 0.2;
+}
+
+/* Footer */
+.aa-Panel .aa-PanelFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-top: 1px solid var(--neutral-lighter);
+  gap: 1rem;
+}
+
+.aa-Panel .aa-KeyboardShortcuts {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 12px;
+  color: var(--secondary-text);
+}
+
+.aa-Panel .aa-Key {
+  display: block;
+  border-radius: 0.25rem;
+  background: linear-gradient(to top left, var(--neutral-lighter), var(--neutral-grey));
+  border: 1px solid var(--neutral-white);
+  border-bottom: 2px solid var(--neutral-white);
+  box-shadow: 0 4px 11px 0 var(--neutral-grey), 0 1px 3px 0 var(--neutral-light);
+  color: var(--secondary-text);
+  padding: 2px 6px;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.aa-Panel .aa-KeyLabel {
+  color: var(--secondary-text);
+  font-size: 11px;
+}
+
+.aa-Panel .aa-AlgoliaLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.aa-Panel .aa-AlgoliaText {
+  font-size: 11px;
+  color: var(--secondary-text);
+}
+
+.aa-Panel .aa-AlgoliaIcon {
+  width: 60px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .aa-PanelFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .aa-KeyboardShortcuts {
+    flex-wrap: wrap;
+  }
 }
