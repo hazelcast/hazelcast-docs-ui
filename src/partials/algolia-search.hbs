@@ -156,11 +156,12 @@
         getSource({ name, items }) {
           return {
             getItems() {
-              const sorted = items.sort((a, b) => `${a.title}${a.type}`.localeCompare(`${b.title}${b.type}`))
+              console.log('items', items);
+              const sorted = items.sort((a, b) => `${a.title}${a.type}${a.componentVersion}`.localeCompare(`${b.title}${b.type}${a.componentVersion}`))
               let prevIndex = 0;
               const grouped = sorted.reduce((acc, next) => {
                 // if is subitem
-                if (acc.length > 0 && acc[prevIndex].title === next.title) {
+                if (acc.length > 0 && acc[prevIndex].title === next.title && acc[prevIndex].componentVersion === next.componentVersion) {
                   // if is immediate subitem
                   if (acc[acc.length - 1].uiType === UI_TYPE.ITEM) {
                     acc[prevIndex].uiType = UI_TYPE.SUBITEM;
