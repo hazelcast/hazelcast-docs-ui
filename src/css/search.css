@@ -41,8 +41,13 @@
   color: var(--neutral-light);
 }
 
-.aa-SubmitIcon {
-  color: var(--accent) !important;
+.aa-Form .aa-SubmitIcon {
+  color: var(--accent);
+}
+
+.aa-Form .aa-SubmitButton {
+  padding: 6px 0 0;
+  width: 3rem;
 }
 
 .aa-DetachedOverlay .aa-DetachedContainer {
@@ -60,7 +65,12 @@
 
 div.aa-DetachedFormContainer {
   border-bottom: none;
+  padding: 12px 16px 6px;
 }
+
+/*.aa-DetachedSearchButtonIcon .aa-SubmitIcon {*/
+/*  color: var(--neutral-white);*/
+/*}*/
 
 .aa-Source div.aa-SourceHeader {
   margin: 1rem 0;
@@ -144,7 +154,7 @@ div.aa-DetachedFormContainer {
 }
 
 .aa-ItemWrapper {
-  padding: 8px 12px;
+  padding: 8px 12px 8px 6px;
   border-bottom: 1px solid var(--neutral-light);
 }
 
@@ -152,10 +162,10 @@ div.aa-DetachedFormContainer {
   border-bottom: none;
 }
 
-.aa-ItemContent {
+.aa-ItemWrapper .aa-ItemContent {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: center;
+  gap: 0;
 }
 
 .aa-List .aa-ItemIcon {
