@@ -448,3 +448,9 @@ select:focus + .focus {
     flex-wrap: wrap;
   }
 }
+
+@media screen and (max-width: 679px) {
+  .aa-Panel .aa-PanelFooter {
+    display: none;
+  }
+}

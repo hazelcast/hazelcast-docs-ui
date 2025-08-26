@@ -156,7 +156,6 @@
         getSource({ name, items }) {
           return {
             getItems() {
-              console.log('items', items);
               const sorted = items.sort((a, b) => `${a.title}${a.type}${a.componentVersion}`.localeCompare(`${b.title}${b.type}${a.componentVersion}`))
               let prevIndex = 0;
               const grouped = sorted.reduce((acc, next) => {
@@ -165,7 +164,7 @@
                   // if is immediate subitem
                   if (acc[acc.length - 1].uiType === UI_TYPE.ITEM) {
                     acc[prevIndex].uiType = UI_TYPE.SUBITEM;
-                    acc.splice(prevIndex, 0, { ...sorted[prevIndex], uiType: UI_TYPE.HEADING });
+                    acc.splice(prevIndex, 0, { ...acc[prevIndex], uiType: UI_TYPE.HEADING });
                     acc.push({ ...next, uiType: UI_TYPE.LAST_SUBITEM });
                   // if second or > subitem
                   } else {
@@ -206,6 +205,9 @@
           const groupedSources = groupByProduct(algolia);
           // if there are no sources, return the default algolia source, to show the "No Results" template
           const resultingSources = groupedSources.length > 0 ? groupedSources : algolia;
+          if (groupedSources[0]?.getItems) {
+            console.log(groupedSources[0].getItems());
+          }
           return [
             resultingSources,
             Object.values(rest),
