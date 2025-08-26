@@ -213,10 +213,6 @@ a.aa-ItemLink:hover {
   transform: translateY(-2px);
 }
 
-.aa-Panel .aa-SourceNoResults {
-  padding: 0 !important;
-}
-
 .aa-Autocomplete .aa-DetachedSearchButtonPlaceholder,
 .aa-Autocomplete .aa-DetachedSearchButtonQuery {
   display: none;
@@ -419,6 +415,26 @@ select:focus + .focus {
   display: block;
   flex-shrink: 0;
   margin-left: 0.5rem;
+}
+
+.aa-Panel .aa-SourceNoResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+.aa-NoResultsIcon {
+  height: 3rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+  color: var(--neutral-light);
+  stroke: currentColor;
+  margin-bottom: 1rem;
+}
+
+.aa-NoResultsMessage {
+  margin: 0;
 }
 
 @media screen and (max-width: 600px) {

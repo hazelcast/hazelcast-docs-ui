@@ -275,8 +275,12 @@
                 </div>
               </a>`;
                 },
-                noResults({ html }) {
-                  return html`<p class="search-no-results">No results found.</p>`;
+                noResults({ html, state }) {
+                  return html`
+                    <svg viewBox="0 0 20 20" fill="none" class="aa-NoResultsIcon"><path d="M15.5 4.8c2 3 1.7 7-1 9.7h0l4.3 4.3-4.3-4.3a7.8 7.8 0 01-9.8 1m-2.2-2.2A7.8 7.8 0 0113.2 2.4M2 18L18 2"></path></svg>
+                    <p class="aa-NoResultsMessage">No results found for <strong>${state.query}</strong>.</p>
+                    <p class="aa-NoResultsNote">You could try expanding your search terms or asking AI...</p>
+                  `;
                 },
               },
               getItemUrl({ item }) {
