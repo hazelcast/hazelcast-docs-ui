@@ -313,7 +313,7 @@
                 ${ window.Kapa ? html`
                 <button id="askAIBtn" class="aa-AskAIBtn">
                   <img class="aa-AskAIIcon" src="{{{uiRootPath}}}/img/kapa/ask-ai-icon.svg" alt="ask ai" />
-                  <span class="aa-AskAIHeading">Ask AI${state.query ? html`about "${state.query}"` : html``}</span>
+                  <span class="aa-AskAIHeading">Ask AI${state.query ? html` about "${state.query}"` : html``}</span>
                 </button>` : ''}
               </div>
               ${dataSources.length > 0 ? html`
