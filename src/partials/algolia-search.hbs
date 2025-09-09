@@ -93,10 +93,10 @@
       }
 
       const getAllComponentsLatestVersionsFacets = () => componentVersions
-        .map(({ title, latestVersion }) => `tags:${title}-${latestVersion.toLowerCase()}`);
+        .map(({ name, latestVersion }) => `tags:${name}-${latestVersion.toLowerCase()}`);
 
       const getAllComponentsVersionsFacets = () => componentVersions
-        .find(({ title }) => title === currentComponent).versions
+        .find(({ name }) => name === currentComponent).versions
         .map(version => `tags:${currentComponent}-${version.toLowerCase()}`);
 
       const getFacetFilters = () => {
