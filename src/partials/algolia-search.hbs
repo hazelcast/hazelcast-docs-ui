@@ -17,6 +17,7 @@
         SUBITEM: 2,
         LAST_SUBITEM: 3,
       };
+
       const getArticleSVG = (html) => html`
         <div class="aa-ItemIcon aa-ItemArticleIcon">
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,13 +47,23 @@
         </div>
       `
 
+      const getSectionKeyFromHierarchy = ({ lvl4, lvl3 }) => {
+        return lvl4 ? 'lvl4' : lvl3 ? 'lvl3' : null;
+      }
+
       const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
       const { liteClient: algoliasearch } = window['algoliasearch/lite'];
       const ALL_COMPONENTS_TITLE = 'All';
       const ALL_VERSIONS_TITLE = 'All Versions';
-      const initialFacet = [{ title: ALL_COMPONENTS_TITLE, versions: ['default'], latestVersion: 'default' }];
-      let currentComponent = '{{page.component.title}}';
-      if (currentComponent === 'Home') {
+      const NO_VERSIONS_TITLE = 'default';
+      const initialFacet = [{
+        name: ALL_COMPONENTS_TITLE,
+        title: ALL_COMPONENTS_TITLE,
+        versions: [NO_VERSIONS_TITLE],
+        latestVersion: NO_VERSIONS_TITLE,
+      }];
+      let currentComponent = '{{page.component.name}}';
+      if (currentComponent === 'home') {
         currentComponent = ALL_COMPONENTS_TITLE;
       }
       let currentVersion = '{{page.displayVersion}}';
@@ -64,13 +75,15 @@
         ...initialFacet,
       ];
 
+      console.debug('component versions: ', componentVersions);
+
       const getComponentOptions = (html) => componentVersions
-        .map(({ title }) => title === currentComponent
-          ? html`<option value="${title}" selected>${title}</option>`
-          : html`<option value="${title}">${title}</option>`);
+        .map(({ name, title }) => name === currentComponent
+          ? html`<option value="${name}" selected>${title}</option>`
+          : html`<option value="${name}">${title}</option>`);
 
       const getComponentVersionOptions = (html) => {
-        let versions = componentVersions.find(({ title }) => title === currentComponent)?.versions || []
+        let versions = componentVersions.find(({ name }) => name === currentComponent)?.versions || []
         if (versions.length > 1) {
           versions = versions.concat([ALL_VERSIONS_TITLE])
         }
@@ -80,18 +93,18 @@
       }
 
       const getAllComponentsLatestVersionsFacets = () => componentVersions
-        .map(({ title, latestVersion }) => `componentVersion:${title}_${latestVersion}`);
+        .map(({ title, latestVersion }) => `tags:${title}-${latestVersion.toLowerCase()}`);
 
       const getAllComponentsVersionsFacets = () => componentVersions
         .find(({ title }) => title === currentComponent).versions
-        .map(version => `componentVersion:${currentComponent}_${version}`);
+        .map(version => `tags:${currentComponent}-${version.toLowerCase()}`);
 
       const getFacetFilters = () => {
         return currentComponent === ALL_COMPONENTS_TITLE
           ? getAllComponentsLatestVersionsFacets()
           : currentVersion === ALL_VERSIONS_TITLE ?
             getAllComponentsVersionsFacets()
-            : [`componentVersion:${currentComponent}_${currentVersion}`];
+            : [`tags:${currentComponent}-${currentVersion.toLowerCase()}`];
       };
 
       function flatten(values) {
@@ -152,15 +165,26 @@
 
       const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
 
-      const groupByProduct = groupBy((hit) => hit.componentVersion.split('_')[0], {
+      const groupByProduct = groupBy((hit) => hit.hierarchy.lvl0, {
         getSource({ name, items }) {
           return {
             getItems() {
-              const sorted = items.sort((a, b) => `${a.title}${a.type}${a.componentVersion}`.localeCompare(`${b.title}${b.type}${a.componentVersion}`))
+              const withSection = items.map(item => {
+                const sectionKey = getSectionKeyFromHierarchy(item.hierarchy)
+                return {
+                  ...item,
+                  _highlightResult: {
+                    ...item._highlightResult,
+                    title: item._highlightResult.hierarchy.lvl2,
+                    section: sectionKey ? item._highlightResult.hierarchy[sectionKey] : null,
+                  },
+                }})
+              const sorted = withSection.sort((a, b) => `${a.hierarchy.lvl2}${a.type}${a.hierarchy.lvl0}${a.version}`
+                .localeCompare(`${b.hierarchy.lvl2}${b.type}${a.hierarchy.lvl0}${a.version}`))
               let prevIndex = 0;
               const grouped = sorted.reduce((acc, next) => {
                 // if is subitem
-                if (acc.length > 0 && acc[prevIndex].title === next.title && acc[prevIndex].componentVersion === next.componentVersion) {
+                if (acc.length > 0 && acc[prevIndex].hierarchy.lvl2 === next.hierarchy.lvl2 && acc[prevIndex].componentVersion === next.componentVersion) {
                   // if is immediate subitem
                   if (acc[acc.length - 1].uiType === UI_TYPE.ITEM) {
                     acc[prevIndex].uiType = UI_TYPE.SUBITEM;
@@ -190,6 +214,13 @@
         },
       });
 
+      const getLeftIcon = (item, html) => {
+        return item.uiType === UI_TYPE.SUBITEM
+          ? getMiddleSubitemSVG(html)
+          : item.uiType === UI_TYPE.LAST_SUBITEM
+            ? getEndSubitemSVG(html) : getArticleSVG(html);
+      }
+
       const {
         refresh,
         setIsOpen,
@@ -206,7 +237,7 @@
           // if there are no sources, return the default algolia source, to show the "No Results" template
           const resultingSources = groupedSources.length > 0 ? groupedSources : algolia;
           if (groupedSources[0]?.getItems) {
-            console.log(groupedSources[0].getItems());
+            console.debug('current items: ', groupedSources[0].getItems());
           }
           return [
             resultingSources,
@@ -228,7 +259,7 @@
                         query,
                         hitsPerPage: 10,
                         facetFilters: [getFacetFilters()],
-                        attributesToSnippet: ['title:10', 'content:35'],
+                        attributesToSnippet: ['hierarchy.lvl2:10', 'content:35'],
                         snippetEllipsisText: '…',
                       },
                     },
@@ -237,23 +268,21 @@
               },
               templates: {
                 item({ item, components, html }) {
-                  const version = item.componentVersion ? item.componentVersion.split('_')[1] : '';
-                  const showVersion = currentVersion === ALL_VERSIONS_TITLE && version && version !== 'default';
+                  // const version = item.componentVersion ? item.componentVersion.split('_')[1] : '';
+                  const version = item.version;
+                  const showVersion = currentVersion === ALL_VERSIONS_TITLE && version && version !== NO_VERSIONS_TITLE;
                   return html`
             <a class="aa-ItemLink" href="${item.uiType === UI_TYPE.HEADING ? item.url.split('#')[0] : item.url}" target="_self">
               <div class="aa-ItemWrapper">
                 <div class="aa-ItemContent">
-                  ${item.uiType === UI_TYPE.SUBITEM
-                    ? getMiddleSubitemSVG(html)
-                    : item.uiType === UI_TYPE.LAST_SUBITEM
-                      ? getEndSubitemSVG(html) : getArticleSVG(html)}
+                  ${(getLeftIcon(item, html))}
                     <div class="aa-ItemContentBody">
                     ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? html`
                       <h4 class="aa-ItemContentTitle">
                         <span>${components.Highlight({ hit: item, attribute: 'title' })}</span>
                       </h4>
                     ` : ''}
-                      ${item.uiType === UI_TYPE.HEADING || !item.section ? '' : html`
+                      ${item.uiType === UI_TYPE.HEADING || !item._highlightResult.section ? '' : html`
                         <h5 class="aa-ItemContentSection">
                             <span>${components.Highlight({hit: item, attribute: 'section'})}</span>
                         </h5>
@@ -262,9 +291,9 @@
                         html`<p class="aa-ItemContentDescription">
                           ${components.Snippet({hit: item, attribute: 'content'})}
                         </p>`}
-                      ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? html`
+                      ${item.breadcrumbs && (item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM) ? html`
                         <div class="aa-ItemContentBreadcrumbs">
-                          ${item.breadcrumbs ? item.breadcrumbs.join(' > ') : ''}
+                          ${item.breadcrumbs.join(' > ')}
                         </div>
                       ` : ''}
                     </div>

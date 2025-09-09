@@ -5,11 +5,11 @@ site:
   homeUrl: &home_url /index.html
 #  uncomment below to test analytics locally
   keys:
-#    googleAnalytics: 'GTM-MQ59XD6'
-    aiSearchId: '6b326171-dd1e-40c6-a948-1f9bb6c0ed52'
-    docsearchId: 'FMY8D84KMI'
-    docsearchApi: 'e0a570340810ad57e7359c2004463654'
-    docsearchIndex: '_test_algolia_crawler_articles_for_instant_search'
+    #    googleAnalytics: 'GTM-MQ59XD6'
+        aiSearchId: 'ad664bf0-07e2-42e7-9150-2e1b04b15cca'
+        docsearchId: 'QK2EAH8GB0'
+        docsearchApi: 'ef7bd9485eafbd75d6e8425949eda1f5'
+        docsearchIndex: 'prod_hazelcast_docs'
     #    clarity: 'l8c076m4u9'
   components:
   - name: hazelcast
@@ -47,14 +47,14 @@ site:
         version: 'default'
         displayVersion: 'default'
     latest: *latest_version_tutorials
-  - name: mc
+  - name: management-center
     url: '/java.html'
     versions:
       - &latest_version_mc
         title: Management Center
         url: '/java.html'
-        version: '5.8'
-        displayVersion: '5.8'
+        version: '5.9-SNAPSHOT'
+        displayVersion: '5.9-SNAPSHOT'
       - url: '/java.html'
         title: Management Center
         version: '5.5'
@@ -77,11 +77,11 @@ page:
     component-order: '!home, !templates, !imdg, !privacy, hazelcast, management-center, cloud, *'
     last-versions-count: 10
   component:
-    name: abc
+    name: management-center
     title: Management Center
   componentVersion: *latest_version_hazelcast
-  version: '5.8'
-  displayVersion: '5.8'
+  version: '5.9-SNAPSHOT'
+  displayVersion: '5.9-SNAPSHOT'
   module: ROOT
   relativeSrcPath: java.adoc
   editUrl: https://github.com/hazelcast/hazelcast-docs-ui/blob/master/preview-src/java.adoc
