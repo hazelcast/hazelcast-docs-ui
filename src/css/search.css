@@ -205,7 +205,7 @@ a.aa-ItemLink:hover {
   padding: 5px 14px;
   box-shadow: var(--aa-box-shadow);
   transition: transform 200ms ease-in-out;
-  max-width: 100%;
+  max-width: 380px;
   min-width: 0;
 }
 
