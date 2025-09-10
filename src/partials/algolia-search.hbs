@@ -92,19 +92,23 @@
             : html`<option value="${version}">${version}</option>`);
       }
 
+      const buildFacetFrom = (name, version) => {
+        return version === NO_VERSIONS_TITLE ? `tags:${name}` : `tags:${name}-${version.toLowerCase()}`
+      }
+
       const getAllComponentsLatestVersionsFacets = () => componentVersions
-        .map(({ name, latestVersion }) => `tags:${name}-${latestVersion.toLowerCase()}`);
+        .map(({ name, latestVersion }) => buildFacetFrom(name, latestVersion));
 
       const getAllComponentsVersionsFacets = () => componentVersions
         .find(({ name }) => name === currentComponent).versions
-        .map(version => `tags:${currentComponent}-${version.toLowerCase()}`);
+        .map(version => buildFacetFrom(currentComponent, version));
 
       const getFacetFilters = () => {
         return currentComponent === ALL_COMPONENTS_TITLE
           ? getAllComponentsLatestVersionsFacets()
           : currentVersion === ALL_VERSIONS_TITLE ?
             getAllComponentsVersionsFacets()
-            : [`tags:${currentComponent}-${currentVersion.toLowerCase()}`];
+            : [buildFacetFrom(currentComponent, currentVersion)];
       };
 
       function flatten(values) {
@@ -390,7 +394,7 @@
       document.addEventListener('change', (event) => {
         if (event.target.id === 'componentSelect') {
           currentComponent = event.target.value;
-          currentVersion = componentVersions.find(({ title }) => title === currentComponent).latestVersion;
+          currentVersion = componentVersions.find(({ name }) => name === currentComponent).latestVersion;
           refresh();
         } else if (event.target.id === 'componentVersionSelect') {
           currentVersion = event.target.value;
