@@ -1,5 +1,6 @@
 'use strict'
 
+// filter out excluded versions
 const excludeComponentVersions = (targetCollection, page) => {
   if (page.attributes['excluded-versions']) {
     const excludedComponentVersions = page.attributes['excluded-versions']
