@@ -5,16 +5,23 @@ const excludeComponentVersions = (targetCollection, page) => {
   if (page.attributes['excluded-versions']) {
     const excludedComponentVersions = page.attributes['excluded-versions']
       .split(',').map((it) => it.trim())
+    console.debug('[DEBUG:SORT_COMPONENTS] excluding versions: ', excludedComponentVersions)
     excludedComponentVersions.forEach((componentVersion, index) => {
       const [componentName, versionName] = componentVersion.split(':')
       const component = targetCollection.find(({ name }) => name === componentName)
       if (!component) {
         console.warn(`No component found for excluded-versions[${index}] -> ${componentVersion}`)
       } else {
-        component.versions = component.versions.filter(({ version }) => version !== versionName)
+        component.versions = component.versions.map((nextVersion) => {
+          return {
+            ...nextVersion,
+            isHidden: nextVersion.version === versionName,
+          }
+        })
       }
     })
   }
+  console.log(targetCollection.find(({ name }) => name === 'management-center'))
   return targetCollection
 }
 
