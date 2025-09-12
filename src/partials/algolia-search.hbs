@@ -70,12 +70,12 @@
 
       const componentVersions = [
         ...window.UTILS.parseHbsJsonString(
-          '{{get-facets-from-components (sort-components site.components 'name' page.attributes.component-order) @root.page}}'
+          '{{get-facets-from-components (sort-components site.components 'name' page.attributes.component-order)}}'
         ),
         ...initialFacet,
       ];
 
-      console.debug('component versions: ', componentVersions);
+      console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
 
       const getComponentOptions = (html) => componentVersions
         .map(({ name, title }) => name === currentComponent
@@ -87,7 +87,9 @@
         if (versions.length > 1) {
           versions = versions.concat([ALL_VERSIONS_TITLE])
         }
-        return versions.map(version => version === currentVersion
+        return versions
+          .filter(({ isHidden }) => !isHidden)
+          .map(version => version === currentVersion
             ? html`<option value="${version}" selected>${version}</option>`
             : html`<option value="${version}">${version}</option>`);
       }
@@ -241,7 +243,7 @@
           // if there are no sources, return the default algolia source, to show the "No Results" template
           const resultingSources = groupedSources.length > 0 ? groupedSources : algolia;
           if (groupedSources[0]?.getItems) {
-            console.debug('current items: ', groupedSources[0].getItems());
+            console.debug('[DEBUG:ALGOLIA_SEARCH] current items: ', groupedSources[0].getItems());
           }
           return [
             resultingSources,
