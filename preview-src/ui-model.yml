@@ -3,81 +3,86 @@ site:
   url: http://localhost:5252
   title: Documentation Preview
   homeUrl: &home_url /index.html
-#  uncomment below to test analytics locally
+  #  uncomment below to test analytics locally
   keys:
-#    googleAnalytics: 'GTM-MQ59XD6'
+    #    googleAnalytics: 'GTM-MQ59XD6'
 #    aiSearchId: 'ad664bf0-07e2-42e7-9150-2e1b04b15cca'
 #    docsearchId: 'QK2EAH8GB0'
 #    docsearchApi: 'ef7bd9485eafbd75d6e8425949eda1f5'
 #    docsearchIndex: 'prod_hazelcast_docs'
-#    clarity: 'l8c076m4u9'
+    #    clarity: 'l8c076m4u9'
   components:
-  - name: abc
-    title: Hazelcast IMDG
-    url: '/java.html'
-    versions:
-    - &latest_version_abc
+    - name: hazelcast
       url: '/java.html'
-      version: '4.1'
-      displayVersion: '4.1'
-    - url: '/java.html'
-      version: '4.0'
-      displayVersion: '4.0'
-    latestVersion: *latest_version_abc
-  - name: tutorial
-    title: How to HZ
-    url: '/how-to-hz.html'
-    versions:
-    - &latest_version_hz
+      versions:
+        - &latest_version_hazelcast
+          url: '/java.html'
+          title: Hazelcast Platform
+          version: '5.5'
+          displayVersion: '5.5'
+        - url: '/java.html'
+          title: Hazelcast Platform
+          version: '4.0'
+          displayVersion: '4.0'
+      latest: *latest_version_hazelcast
+    - name: clc
       url: '/how-to-hz.html'
-      version: '4.1'
-      displayVersion: '4.1'
-    - url: '/how-to-hz.html'
-      version: '4.0'
-      displayVersion: '4.0'
-    latestVersion: *latest_version_hz
-  - name: tutorials
-    title: Tutorials
-    url: '/tutorials.html'
-    versions:
-      - &latest_version_tutorials
-        url: '/tutorials.html'
-        version: '4.1'
-        displayVersion: '4.1'
-      - url: '/tutorials.html'
-        version: '4.0'
-        displayVersion: '4.0'
-    latestVersion: *latest_version_tutorials
-  - name: def
-    title: Management Center
-    url: '/java.html'
-    versions:
-      - &latest_version_def
-        url: '/java.html'
-        version: '4.1'
-        displayVersion: '4.1'
-      - url: '/java.html'
-        version: '4.0'
-        displayVersion: '4.0'
-    latestVersion: *latest_version_def
-  - &component
-    name: home
-    title: &component_title Home
-    url: /index.html
-    versions:
-    - &latest_version_home
+      versions:
+        - &latest_version_clc
+          url: '/how-to-hz.html'
+          title: Hazelcast CLC
+          version: '4.1'
+          displayVersion: '4.1'
+        - url: '/how-to-hz.html'
+          title: Hazelcast CLC
+          version: '4.0'
+          displayVersion: '4.0'
+      latest: *latest_version_clc
+    - name: tutorials
+      url: '/tutorials.html'
+      versions:
+        - &latest_version_tutorials
+          title: Tutorials
+          url: '/tutorials.html'
+          version: 'default'
+          displayVersion: 'default'
+      latest: *latest_version_tutorials
+    - name: management-center
+      url: '/java.html'
+      versions:
+        - &latest_version_mc
+          title: Management Center
+          url: '/java.html'
+          version: '5.9-SNAPSHOT'
+          displayVersion: '5.9-SNAPSHOT'
+        - url: '/java.html'
+          title: Management Center
+          version: '5.5'
+          displayVersion: '5.5'
+      latest: *latest_version_mc
+    - name: home
       url: /index.html
-      version: 'master'
-      displayVersion: 'master'
+      versions:
+        - &latest_version_home
+          title: Home
+          url: /index.html
+          version: '4.1'
+          displayVersion: '4.1'
+      latest: *latest_version_home
 page:
   url: *home_url
   home: true
   title: Java Client
+  attributes:
+    component-order: '!home, !templates, !imdg, !privacy, hazelcast, management-center, cloud, *'
+    excluded-versions: 'management-center:5.5'
+    last-versions-count: 10
   component:
-    title: Dev Preview
-  componentVersion: *latest_version_abc
-  version: '4.1'
-  displayVersion: '4.1'
+    name: management-center
+    title: Management Center
+  componentVersion: *latest_version_hazelcast
+  version: '5.9-SNAPSHOT'
+  displayVersion: '5.9-SNAPSHOT'
   module: ROOT
   relativeSrcPath: java.adoc
   editUrl: https://github.com/hazelcast/hazelcast-docs-ui/blob/master/preview-src/java.adoc
@@ -92,51 +97,51 @@ page:
     url: '#'
     urlType: 'internal'
   breadcrumbs:
-  - content: Hazelcast Clients
-    url: '#'
-    urlType: fragment
-  - content: Java Client
-    url: /java.html
-    urlType: internal
-  versions:
-  - version: '4.1'
-    displayVersion: '4.1'
-    url: '#'
-  - version: '4.0'
-    displayVersion: '4.0'
-    url: '#'
-  navigation:
-  - root: true
-  - content: Quickstart
-    url: '#1'
-    urlType: internal
-    items:
-      - content: Java Client
-        url: '/java.html'
-        urlType: internal
-      - content: C++ Client
-        url: '#3'
-        urlType: internal
-      - content: How to HZ
-        url: '/how-to-hz.html#4'
-        urlType: internal
-  - content: Hazelcast Clients
-    url: '#2'
-    urlType: internal
-    items:
-    - content: Java Client
-      url: '/java.html'
-      urlType: internal
-    - content: C++ Client
-      url: '#3'
-      urlType: internal
-    - content: Hazelcast Deep Client. Pretty long
-      url: '#4'
+    - content: Hazelcast Clients
+      url: '#'
       urlType: fragment
+    - content: Java Client
+      url: /java.html
+      urlType: internal
+  versions:
+    - version: '4.1'
+      displayVersion: '4.1'
+      url: '#'
+    - version: '4.0'
+      displayVersion: '4.0'
+      url: '#'
+  navigation:
+    - root: true
+    - content: Quickstart
+      url: '#1'
+      urlType: internal
       items:
-       - content: Java Client 2
-         url: '/java2.html'
-         urlType: internal
-       - content: C++ Client
-         url: '#5'
-         urlType: internal
+        - content: Java Client
+          url: '/java.html'
+          urlType: internal
+        - content: C++ Client
+          url: '#3'
+          urlType: internal
+        - content: How to HZ
+          url: '/how-to-hz.html#4'
+          urlType: internal
+    - content: Hazelcast Clients
+      url: '#2'
+      urlType: internal
+      items:
+        - content: Java Client
+          url: '/java.html'
+          urlType: internal
+        - content: C++ Client
+          url: '#3'
+          urlType: internal
+        - content: Hazelcast Deep Client. Pretty long
+          url: '#4'
+          urlType: fragment
+          items:
+            - content: Java Client 2
+              url: '/java2.html'
+              urlType: internal
+            - content: C++ Client
+              url: '#5'
+              urlType: internal
