@@ -45,5 +45,6 @@ module.exports = (collection, property, orderSpec, { data: { root } }) => {
   }, [])
   if (~restIdx) targetCollection.splice(restIdx, 0, ...sourceCollection.values())
   targetCollection = excludeComponentVersions(targetCollection, root.page)
+  console.debug('[DEBUG:SORT_COMPONENTS] targetCollection: ', targetCollection)
   return targetCollection
 }
