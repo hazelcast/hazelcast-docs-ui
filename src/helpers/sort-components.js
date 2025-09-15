@@ -21,7 +21,6 @@ const excludeComponentVersions = (targetCollection, page) => {
       }
     })
   }
-  console.log(targetCollection.find(({ name }) => name === 'management-center'))
   return targetCollection
 }
 
