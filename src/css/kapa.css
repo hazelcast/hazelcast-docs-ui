@@ -1,7 +1,7 @@
 .mantine-Modal-close {
-  color: #f8f9fa;
+  color: var(--neutral-white) !important;
 }
 
 .mantine-Modal-close:hover {
-  color: #868e96;
+  color: var(--neutral-lighter) !important;
 }
