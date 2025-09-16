@@ -184,7 +184,7 @@ li.mega-menu-item-search {
 }
 
 .home .aa-DetachedSearchButton {
-  min-width: 220px;
+  min-width: 330px;
 }
 
 .home .aa-SubmitIcon {
@@ -383,6 +383,10 @@ nav .button.ask-ai-button {
   .navbar-item:has(> .try-product-button) {
     display: none !important;
   }
+
+  .home .aa-DetachedSearchButton {
+    min-width: max-content;
+  }
 }
 
 /* ================================
@@ -399,10 +403,6 @@ nav .button.ask-ai-button {
 
   .header .aa-SubmitIcon {
     margin-right: 0;
-  }
-
-  .home .aa-DetachedSearchButton {
-    min-width: max-content;
   }
 }
 
