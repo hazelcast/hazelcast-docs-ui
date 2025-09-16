@@ -2,13 +2,14 @@
   width: 100%;
 }
 
-.aa-DetachedOverlay {
+body .aa-DetachedOverlay {
   --aa-detached-modal-max-width: 800px;
   --aa-primary-color-rgb: 16, 164, 179;
   --aa-icon-size: 30px;
   --aa-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   --aa-scrollbar-thumb-background-color-rgb: var(--aa-primary-color-rgb);
 
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: calc(var(--z-index-navbar) + 1) !important;
 }
 
@@ -82,6 +83,8 @@ div.aa-DetachedFormContainer {
   align-items: start;
   gap: 1rem;
   margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .aa--ComponentVersionPicker {
