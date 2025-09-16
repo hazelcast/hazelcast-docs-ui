@@ -51,7 +51,7 @@ body {
 .navbar-item {
   color: var(--neutral-white);
   display: block;
-  padding: 0 20px;
+  padding: 0 6px;
 }
 
 .navbar-start,
@@ -133,7 +133,7 @@ body {
 .mega-menu-item a:hover,
 .mega-menu-item > a.mega-menu-link:hover,
 .mega-menu-item-docs > a.mega-menu-link {
-  border-bottom: 4px solid #c6ff3a !important;
+  border-bottom: 4px solid var(--accent4) !important;
 }
 
 /* ================================
@@ -161,24 +161,111 @@ li.mega-menu-item-search {
   padding: 0 15px;
 }
 
-/* ================================
-   Custom Button (custom-4)
-================================ */
+.home .home-background-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  color: var(--neutral-white);
+}
 
-nav .button.custom-4 {
+.header .aa-DetachedSearchButton,
+.home .aa-DetachedSearchButton,
+.home .button.ask-ai-button {
   background-clip: padding-box;
-  background-color: #c6ff3a;
   border: 1px solid transparent;
-  color: #0b2b39;
+  border-radius: 50px;
+  height: 28px;
+  padding: 8px 22px;
+  font-weight: 600;
+  font-family: "PP Telegraf", Arial, Helvetica, sans-serif;
+  font-size: 0.875rem !important;
+}
+
+.home .aa-DetachedSearchButton {
+  min-width: 220px;
+}
+
+.home .aa-SubmitIcon {
+  margin-right: 10px;
+}
+
+.home .button.ask-ai-button {
+  background-color: var(--accent-light);
+  color: var(--neutral-white);
+  display: flex;
+  align-items: center;
+}
+
+.home .navbar-item:has(>.button.ask-ai-button):hover {
+  text-decoration: none;
+}
+
+.header .aa-DetachedSearchButton {
+  background-image: linear-gradient(45deg, var(--neutral-white) 50%, var(--neutral-white) 75%, var(--accent-light));
+  background-size: 200% 200%;
+  transition: background-position-x 0.2s ease-out;
+}
+
+.header .aa-DetachedSearchButtonIcon,
+.home .aa-DetachedSearchButtonIcon {
+  color: var(--accent-light);
+  cursor: pointer;
+  width: max-content;
+}
+
+.header .aa-DetachedSearchButtonIcon::after,
+.home .aa-DetachedSearchButtonIcon::after {
+  content: "Search";
+  color: var(--accent);
+}
+
+.header .aa-SubmitIcon {
+  color: var(--accent);
+  margin-right: 8px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.header .aa-DetachedSearchButton:hover .aa-DetachedSearchButtonIcon {
+  color: var(--neutral-light);
+}
+
+.aa-Autocomplete .aa-DetachedSearchButtonPlaceholder,
+.aa-Autocomplete .aa-DetachedSearchButtonQuery {
+  display: none;
+}
+
+nav .button.header-button {
+  background-clip: padding-box;
+  border: 1px solid transparent;
   font-weight: 600;
   font-family: "PP Telegraf", Arial, Helvetica, sans-serif;
   font-size: 0.875rem !important;
   padding: 8px 22px;
-  transition: all 0.4s ease-in-out;
+  background-size: 200% 200%;
+  transition: background-position-x 0.2s ease-out;
 }
 
-nav .button.custom-4:hover {
-  background-image: linear-gradient(90deg, #c6ff3a, #00c5d1);
+nav .button.try-product-button {
+  color: var(--text);
+  background-image: linear-gradient(45deg, var(--accent4) 50%, var(--accent4) 75%, var(--accent-light));
+}
+
+nav .button.ask-ai-button {
+  color: var(--neutral-white);
+  background-image: linear-gradient(45deg, var(--accent-light) 50%, var(--accent-light) 75%, var(--accent4));
+}
+
+.header-button-icon {
+  margin-right: 8px;
+}
+
+nav .button.header-button:hover,
+.header .aa-DetachedSearchButton:hover {
+  background-position-x: 100%;
 }
 
 /*! Hazelcast Docs UI - Mobile Menu Styles */
@@ -282,9 +369,48 @@ nav .button.custom-4:hover {
 
 /* Always highlight Docs link in mobile menu */
 .mega-menu-link.docs-highlight {
-  color: #c6ff3a;
-  border-left: 4px solid #c6ff3a;
+  color: var(--accent4);
+  border-left: 4px solid var(--accent4);
   font-weight: bold;
+}
+
+/* ================================
+   Hide "Ask AI" button
+================================ */
+@media (max-width: 690px) {
+  .header .navbar-item:has(> .ask-ai-button) {
+    display: none !important;
+  }
+}
+
+/* ================================
+   Hide "Try *" button
+================================ */
+@media (max-width: 560px) {
+  .navbar-item:has(> .try-product-button) {
+    display: none !important;
+  }
+}
+
+/* ================================
+   Reduce search button
+================================ */
+@media (max-width: 460px) {
+  .header .aa-DetachedSearchButton {
+    padding: 8px 10px;
+  }
+
+  .header .aa-DetachedSearchButtonIcon::after {
+    content: "";
+  }
+
+  .header .aa-SubmitIcon {
+    margin-right: 0;
+  }
+
+  .home .aa-DetachedSearchButton {
+    min-width: max-content;
+  }
 }
 
 @media (max-width: 1450px) {
@@ -304,11 +430,6 @@ nav .button.custom-4:hover {
   .navbar-app-title,
   .hazelcast-link {
     display: none;
-  }
-
-  /* Adjust spacing for mobile */
-  .navbar-item {
-    padding: 0 10px;
   }
 
   .navbar-end {

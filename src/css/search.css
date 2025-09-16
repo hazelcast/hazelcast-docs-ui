@@ -27,20 +27,6 @@
   border-color: var(--accent);
 }
 
-.header .aa-DetachedSearchButton {
-  background-color: transparent;
-  border: none;
-}
-
-.header .aa-DetachedSearchButtonIcon {
-  color: var(--neutral-white);
-  cursor: pointer;
-}
-
-.header .aa-DetachedSearchButton:hover .aa-DetachedSearchButtonIcon {
-  color: var(--neutral-light);
-}
-
 .aa-Form .aa-SubmitIcon {
   color: var(--accent);
 }
@@ -211,11 +197,6 @@ a.aa-ItemLink:hover {
 
 .aa-Panel .aa-AskAIBtn:hover {
   transform: translateY(-2px);
-}
-
-.aa-Autocomplete .aa-DetachedSearchButtonPlaceholder,
-.aa-Autocomplete .aa-DetachedSearchButtonQuery {
-  display: none;
 }
 
 .aa-AskAIHeading {

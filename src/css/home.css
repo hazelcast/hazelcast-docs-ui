@@ -71,33 +71,7 @@ dd {
   font-weight: 300;
   padding: 0 30px;
   letter-spacing: 1px;
-  margin: 1 0 1rem;
-}
-
-/* ================================
-   Search & AI Button
-================================ */
-
-.home .search-buttons {
-  width: 100%;
-  min-height: var(--search-container-height);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-}
-
-.home .search-container {
-  min-width: 200px;
-  width: 30%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-}
-
-.home .DocSearch-Button {
-  width: 40%;
+  margin: 1rem 0 1rem;
 }
 
 /* AI Button */
