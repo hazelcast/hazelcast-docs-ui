@@ -210,7 +210,7 @@ li.mega-menu-item-search {
 
 .header .aa-DetachedSearchButtonIcon,
 .home .aa-DetachedSearchButtonIcon {
-  color: var(--accent-light);
+  color: var(--accent);
   cursor: pointer;
   width: max-content;
 }
@@ -245,27 +245,20 @@ nav .button.header-button {
   font-family: "PP Telegraf", Arial, Helvetica, sans-serif;
   font-size: 0.875rem !important;
   padding: 8px 22px;
-  background-size: 200% 200%;
-  transition: background-position-x 0.2s ease-out;
 }
 
 nav .button.try-product-button {
   color: var(--text);
-  background-image: linear-gradient(45deg, var(--accent4) 50%, var(--accent4) 75%, var(--accent-light));
+  background-color: var(--accent4);
 }
 
 nav .button.ask-ai-button {
   color: var(--neutral-white);
-  background-image: linear-gradient(45deg, var(--accent-light) 50%, var(--accent-light) 75%, var(--accent4));
+  background-color: var(--accent-light);
 }
 
 .header-button-icon {
   margin-right: 8px;
-}
-
-nav .button.header-button:hover,
-.header .aa-DetachedSearchButton:hover {
-  background-position-x: 100%;
 }
 
 /*! Hazelcast Docs UI - Mobile Menu Styles */
