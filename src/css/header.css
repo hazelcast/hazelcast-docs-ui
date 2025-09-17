@@ -177,7 +177,7 @@ li.mega-menu-item-search {
   border: 1px solid transparent;
   border-radius: 50px;
   height: 28px;
-  padding: 8px 22px;
+  padding: 0 22px;
   font-weight: 600;
   font-family: "PP Telegraf", Arial, Helvetica, sans-serif;
   font-size: 0.875rem !important;
@@ -244,7 +244,7 @@ nav .button.header-button {
   font-weight: 600;
   font-family: "PP Telegraf", Arial, Helvetica, sans-serif;
   font-size: 0.875rem !important;
-  padding: 8px 22px;
+  padding: 0 22px;
 }
 
 nav .button.try-product-button {

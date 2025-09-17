@@ -185,8 +185,8 @@
                     section: sectionKey ? item._highlightResult.hierarchy[sectionKey] : null,
                   },
                 }})
-              const sorted = withSection.sort((a, b) => `${a.hierarchy.lvl2}${a.type}${a.hierarchy.lvl0}${a.version}`
-                .localeCompare(`${b.hierarchy.lvl2}${b.type}${a.hierarchy.lvl0}${a.version}`))
+              const sorted = withSection.sort((a, b) => `${b.hierarchy.lvl0}${b.version}${b.hierarchy.lvl2}${b.type}`
+                .localeCompare(`${a.hierarchy.lvl0}${a.version}${a.hierarchy.lvl2}${a.type}`))
               let prevIndex = 0;
               const grouped = sorted.reduce((acc, next) => {
                 // if is subitem
@@ -303,7 +303,7 @@
                         </div>
                       ` : ''}
                     </div>
-                    ${showVersion ? html`
+                    ${showVersion && (item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM) ? html`
                       <div class="aa-ItemVersion">
                         ${version}
                       </div>

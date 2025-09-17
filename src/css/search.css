@@ -215,12 +215,16 @@ a.aa-ItemLink:hover {
   font-weight: 500;
   color: var(--text);
   margin-bottom: 8px;
+  /* to not overlap with version label */
+  padding-right: 70px;
 }
 
 .aa-ItemContentSection {
   font-weight: 500;
   font-size: 1em;
   margin: 0 0 4px;
+  /* to not overlap with version label */
+  padding-right: 70px;
 }
 
 .aa-List .aa-ItemContentDescription {
@@ -237,8 +241,8 @@ a.aa-ItemLink:hover {
 
 .aa-ItemVersion {
   position: absolute;
-  top: 8px;
-  right: 12px;
+  top: 6px;
+  right: 6px;
   background-color: var(--accent-light);
   color: white;
   font-size: 11px;
