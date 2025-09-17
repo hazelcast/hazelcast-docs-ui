@@ -32,16 +32,19 @@
   <!-- End Clarity snippet -->
 {{/with}}
 
-{{#with site.keys.aiSearchId}}
+{{#if site.keys.aiSearchId}}
   <!-- Kapa snippet -->
   <script
     src="https://widget.kapa.ai/kapa-widget.bundle.js"
     data-button-hide="true"
-    data-website-id="{{this}}"
+    data-website-id="{{site.keys.aiSearchId}}"
     data-project-name="Hazelcast"
     data-project-color="#000000"
     data-project-logo="/_/img/kapa/ask-ai-icon.svg"
     data-modal-z-index="10001"
+    data-modal-size="800px"
+    data-FANTOM="{{page.layout}}"
+    data-modal-y-offset="{{#if (eq page.layout 'home')}}165px{{else}}70px{{/if}}"
     data-modal-title="Ask AI"
     data-modal-title-font-size="24px"
     data-modal-header-bg-color="#10a4b3"
@@ -60,7 +63,7 @@
     data-user-analytics-cookie-enabled="false"
   ></script>
   <!-- End Kapa snippet -->
-{{/with}}
+{{/if}}
 
 <script src="https://app.enzuzo.com/scripts/cookiebar/85a261c2-e311-11ef-b8c9-bb6cda60a835"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
