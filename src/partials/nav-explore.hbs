@@ -26,16 +26,14 @@
   {{#with page.versions}}
     {{#if (and (not-eq @root.page.component.name 'cloud') (not-eq @root.page.component.name 'home') (not-eq @root.page.component.name 'templates'))}}
       <ul class="nav-version-picker-versions" id="navbarVersionsList">
-        {{#each this}}
-          {{#unless ./isHidden}}
-            {{#if (lte @index 10)}}
-              <li
-                class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
-              >
-                <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-              </li>
-            {{/if}}
-          {{/unless}}
+        {{#each (filter-out-excluded-versions)}}
+          {{#if (lte @index 10)}}
+            <li
+              class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
+            >
+              <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+            </li>
+          {{/if}}
         {{/each}}
       </ul>
     {{/if}}
