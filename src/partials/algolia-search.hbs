@@ -75,7 +75,7 @@
         ...initialFacet,
       ];
 
-      // console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
+      console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
 
       const getComponentOptions = (html) => componentVersions
         .map(({ name, title }) => name === currentComponent
@@ -242,9 +242,9 @@
           const groupedSources = groupByProduct(algolia);
           // if there are no sources, return the default algolia source, to show the "No Results" template
           const resultingSources = groupedSources.length > 0 ? groupedSources : algolia;
-          // if (groupedSources[0]?.getItems) {
-          //   console.debug('[DEBUG:ALGOLIA_SEARCH] current items: ', groupedSources[0].getItems());
-          // }
+          if (groupedSources[0]?.getItems) {
+            console.debug('[DEBUG:ALGOLIA_SEARCH] current items: ', groupedSources[0].getItems());
+          }
           return [
             resultingSources,
             Object.values(rest),

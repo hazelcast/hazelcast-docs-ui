@@ -80,7 +80,7 @@ div.aa-DetachedFormContainer {
 .aa-PanelSection--top {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
   position: relative;
@@ -90,7 +90,7 @@ div.aa-DetachedFormContainer {
 .aa--ComponentVersionPicker {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   gap: 1rem;
 }
 

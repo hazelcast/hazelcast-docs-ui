@@ -5,15 +5,18 @@ const excludeComponentVersions = (targetCollection, page) => {
   if (page.attributes['excluded-versions']) {
     const excludedComponentVersions = page.attributes['excluded-versions']
       .split(',').map((it) => it.trim())
-    // console.debug('[DEBUG:SORT_COMPONENTS] excluding versions: ', excludedComponentVersions)
+    console.debug('[DEBUG:SORT_COMPONENTS] excluding versions: ', excludedComponentVersions)
     excludedComponentVersions.forEach((componentVersion, index) => {
       const [componentName, versionName] = componentVersion.split(':')
       const component = targetCollection.find(({ name }) => name === componentName)
       if (!component) {
         console.warn(`No component found for excluded-versions[${index}] -> ${componentVersion}`)
       } else {
-        component.versions = component.versions.filter(({ version }) => {
-          return version !== versionName
+        component.versions = component.versions.map((nextVersion) => {
+          return {
+            ...nextVersion,
+            isHidden: nextVersion.version === versionName,
+          }
         })
       }
     })
@@ -33,7 +36,7 @@ module.exports = (collection, orderSpec, { data: { root } }) => {
     })
   const restIdx = order.indexOf('*')
   if (~restIdx) order.splice(restIdx, 1)
-  const targetCollection = order.reduce((accum, key) => {
+  let targetCollection = order.reduce((accum, key) => {
     if (sourceCollection.has(key)) {
       accum.push(sourceCollection.get(key))
       sourceCollection.delete(key)
@@ -41,5 +44,6 @@ module.exports = (collection, orderSpec, { data: { root } }) => {
     return accum
   }, [])
   if (~restIdx) targetCollection.splice(restIdx, 0, ...sourceCollection.values())
-  return excludeComponentVersions(targetCollection, root.page)
+  targetCollection = excludeComponentVersions(targetCollection, root.page)
+  return targetCollection
 }
