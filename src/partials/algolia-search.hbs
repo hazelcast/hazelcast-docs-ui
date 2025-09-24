@@ -70,7 +70,7 @@
 
       const componentVersions = [
         ...window.UTILS.parseHbsJsonString(
-          '{{get-facets-from-components (sort-components site.components 'name' page.attributes.component-order)}}'
+          '{{get-facets-from-components (sort-components site.components page.attributes.component-order)}}'
         ),
         ...initialFacet,
       ];

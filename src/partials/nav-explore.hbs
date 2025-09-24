@@ -14,7 +14,7 @@
   {{/if}}
 
   <ul class="nav-version-picker-components" id="navbarProductsList">
-    {{#each (sort-components site.components 'name' page.attributes.component-order)}}
+    {{#each (sort-components site.components page.attributes.component-order)}}
       <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
         <a href="{{{relativize ./latest.url}}}">
           {{{./latest.title}}}
@@ -26,16 +26,14 @@
   {{#with page.versions}}
     {{#if (not-eq @root.page.component.name 'cloud')}}
       <ul class="nav-version-picker-versions" id="navbarVersionsList">
-        {{#each this}}
-          {{#unless ./isHidden}}
-            {{#if (lte @index @root.page.attributes.last-versions-count)}}
-              <li
-                class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
-              >
-                <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-              </li>
-            {{/if}}
-          {{/unless}}
+        {{#each (filter-out-excluded-versions)}}
+          {{#if (lte @index @root.page.attributes.last-versions-count)}}
+            <li
+              class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
+            >
+              <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+            </li>
+          {{/if}}
         {{/each}}
       </ul>
     {{/if}}
