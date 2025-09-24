@@ -88,7 +88,6 @@
           versions = versions.concat([ALL_VERSIONS_TITLE])
         }
         return versions
-          .filter(({ isHidden }) => !isHidden)
           .map(version => version === currentVersion
             ? html`<option value="${version}" selected>${version}</option>`
             : html`<option value="${version}">${version}</option>`);
