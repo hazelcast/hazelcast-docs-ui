@@ -6,7 +6,6 @@ module.exports = ({ data: { root } }) => {
   const currentComponentName = root.page.component.name
   if (excludedVersions) {
     const excludedComponentVersions = excludedVersions.split(',').map((it) => it.trim())
-    // console.debug('[DEBUG:SORT_COMPONENTS] excluding versions: ', excludedComponentVersions)
     excludedComponentVersions.forEach((componentVersion) => {
       const [componentName, excludedVersionName] = componentVersion.split(':')
       if (currentComponentName === componentName) {

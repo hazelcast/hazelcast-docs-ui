@@ -5,7 +5,6 @@ const excludeComponentVersions = (targetCollection, page) => {
   if (page.attributes['excluded-versions']) {
     const excludedComponentVersions = page.attributes['excluded-versions']
       .split(',').map((it) => it.trim())
-    console.debug('[DEBUG:SORT_COMPONENTS] excluding versions: ', excludedComponentVersions)
     excludedComponentVersions.forEach((componentVersion, index) => {
       const [componentName, versionName] = componentVersion.split(':')
       const component = targetCollection.find(({ name }) => name === componentName)
