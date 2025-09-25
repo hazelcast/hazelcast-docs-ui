@@ -10,6 +10,7 @@ body {
 }
 
 html {
+  scroll-padding-top: var(--navbar-height);
   box-sizing: border-box;
   font-size: var(--body-font-size);
   -webkit-text-size-adjust: 100%;

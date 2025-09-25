@@ -3,7 +3,7 @@
     <button class="version-menu-toggle" title="Show other versions of page">Version {{@root.page.componentVersion.displayVersion}}</button>
     <div class="version-menu">
       {{#each (filter-out-excluded-versions)}}
-        {{#if (lte @index 10)}}
+        {{#if (lte @index @root.page.attributes.last-versions-count)}}
           <a class="version
             {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}
             {{~#if ./missing}} is-missing{{/if}}" href="{{{relativize ./url}}}">{{./displayVersion}}</a>

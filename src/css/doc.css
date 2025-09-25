@@ -352,16 +352,20 @@ strong.beta {
   padding: 0.5rem;
 }
 
-.doc .halign-left {
+.doc .align-left {
   text-align: left;
 }
 
-.doc .halign-right {
+.doc .align-right {
   text-align: right;
 }
 
-.doc .halign-center {
+.doc .align-center {
   text-align: center;
+}
+
+.doc .capitalize {
+  text-transform: capitalize;
 }
 
 .doc .valign-top {

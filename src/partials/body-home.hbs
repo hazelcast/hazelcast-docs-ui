@@ -1,12 +1,22 @@
 <div class="home">
   <div class="home-background">
-    <h1 class="home-background-heading">
+    <h1 id="articleTitle" class="home-background-heading">
       Hazelcast Documentation
     </h1>
     <p class="home-background-subheading">
       Find user guides, code samples, tutorials, API reference, and more.
     </p>
-    <div id="search-input" class="search-container searchbox">
+    <div class="home-background-buttons">
+      <div id="search-input" class="search-container searchbox"></div>
+      {{#if site.keys.aiSearchId}}
+        <p>or</p>
+        <a class="navbar-item" href="#">
+          <button class="button small header-button ask-ai-button" id="askAIHeaderBtn">
+            <img class="header-button-icon" src="{{{uiRootPath}}}/img/kapa/ask-ai-icon.svg" alt="ask ai" />
+            Ask AI
+          </button>
+        </a>
+      {{/if}}
     </div>
   </div>
   <script>
@@ -142,7 +152,7 @@
           </li>
         </ul>
       </div>
-      
+
       <div class="card">
         <div class="card-header">
           <img class="card-img" src="{{{uiRootPath}}}/img/streaming.svg" alt="team" />

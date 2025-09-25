@@ -19,20 +19,26 @@
     <div class="navbar-end">
       {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing') (not-eq page.layout 'privacy') (not-eq page.component.name 'imdg'))}}
         <div id="search-input" class="navbar-item searchbox"></div>
-        {{#if (not-eq page.layout '404')}}
-          <label class="filter checkbox">
-            <input id="facet" type="checkbox" onclick="applyFacetedSearch()"> Search all docs
-          </label>
+      {{/if}}
+
+      {{#if site.keys.aiSearchId}}
+        {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing') (not-eq page.layout 'privacy') (not-eq page.component.name 'imdg'))}}
+          <a class="navbar-item" href="#">
+            <button class="button small header-button ask-ai-button" id="askAIHeaderBtn">
+              <img class="header-button-icon" src="{{{uiRootPath}}}/img/kapa/ask-ai-icon.svg" alt="ask ai" />
+              Ask AI
+            </button>
+          </a>
         {{/if}}
       {{/if}}
 
       {{#if (eq page.component.name 'cloud')}}
         <a class="navbar-item" href="{{{page.attributes.cloud-console}}}sign-up" target="_blank">
-          <button class="button small custom-4">Try Free</button>
+          <button class="button small header-button try-product-button">Try Free</button>
         </a>
       {{else}}
       <a class="navbar-item" href="https://hazelcast.com/get-started/?utm_source=docs-website&utm_term=get-started" target="_blank">
-          <button class="button small custom-4">Try Hazelcast</button>
+          <button class="button small header-button try-product-button">Try Hazelcast</button>
         </a>
         <!-- Hamburger menu trigger (just one!) -->
         <div class="navbar-burger" id="burger" aria-label="menu" aria-expanded="false">

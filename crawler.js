@@ -1,0 +1,188 @@
+new Crawler({
+  appId: "FMY8D84KMI",
+  indexPrefix: "_test_",
+  rateLimit: 10,
+  maxUrls: 40,
+  schedule: "on the first day of the month",
+  startUrls: [],
+  sitemaps: ["https://docs.hazelcast.com/sitemap.xml"],
+  saveBackup: false,
+  ignoreQueryParams: [],
+  ignoreCanonicalTo: true,
+  actions: [
+    {
+      indexName: "algolia_crawler_articles_for_instant_search",
+      pathsToMatch: [
+        "https://docs.hazelcast.com/management-center/5.8/clusters/dashboard",
+        "https://docs.hazelcast.com/management-center/5.8/clusters/clients",
+        "https://docs.hazelcast.com/management-center/5.7/clusters/dashboard",
+        "https://docs.hazelcast.com/management-center/5.7/clusters/clients",
+        "https://docs.hazelcast.com/hazelcast/5.5/clients/java",
+        "https://docs.hazelcast.com/hazelcast/5.4/clients/java",
+      ],
+      recordExtractor: ({ url, $ }) => {
+        const RECORD_TYPE = {
+          TITLE: 0,
+          CONTENT: 1,
+          DESCRIPTION: 2,
+          SECTION_TITLE: 3,
+          OPENAPI: 4,
+        };
+        const isImdg = /\/imdg\//.test(url.pathname);
+        const title = $(".doc  h1").text().trim();
+        const version = $("#navbarProductVersion").text().trim();
+        const product = $("#navbarProductName").text().trim();
+        const records = [];
+
+        const recordBase = {
+          title: title,
+          sections: [],
+          componentVersion: `${product}_${version}`,
+          pageRank: isImdg ? "-1000" : "0",
+        };
+
+        const getBreadcrumbs = () => {
+          return $(".breadcrumbs")
+            .find("li")
+            .map(function () {
+              return $(this).text().trim();
+            })
+            .toArray();
+        };
+        const createRecord = (type, sections, content, anchor) => {
+          const record = {
+            ...recordBase,
+            type: type,
+            sections: sections,
+            breadcrumbs: getBreadcrumbs(),
+            url: `${url}${anchor}`,
+          };
+          if (content) {
+            record.content = content;
+          }
+          return record;
+        };
+
+        const processParagraphs = (containerEl, sections, anchor) => {
+          const paragraphRecords = [];
+          containerEl.each((_i, contentEl) => {
+            const content = $(contentEl).text().trim();
+            if (content) {
+              paragraphRecords.push(
+                createRecord(RECORD_TYPE.CONTENT, sections, content, anchor),
+              );
+            }
+          });
+          return paragraphRecords;
+        };
+
+        const processSubsections = (sectionEl, sectionTitle) => {
+          const subsectionRecords = [];
+          $(sectionEl)
+            .find(".sect2")
+            .each((_i, subsectionEl) => {
+              const subsectionTitle = $(subsectionEl).find("h3").text().trim();
+              const subsectionAnchor = $(subsectionEl)
+                .find("h3>a.anchor")
+                .attr("href");
+              const subsectionSections = [sectionTitle, subsectionTitle];
+
+              subsectionRecords.push(
+                createRecord(
+                  RECORD_TYPE.SECTION_TITLE,
+                  subsectionSections,
+                  null,
+                  subsectionAnchor,
+                ),
+              );
+              subsectionRecords.push(
+                ...processParagraphs(
+                  $(subsectionEl).find(".paragraph"),
+                  subsectionSections,
+                  subsectionAnchor,
+                ),
+              );
+
+              $(subsectionEl)
+                .find(".sect3")
+                .each((_i, subsubsectionEl) => {
+                  const subsubsectionTitle = $(subsubsectionEl)
+                    .find("h4")
+                    .text()
+                    .trim();
+                  const subsubsectionAnchor = $(subsubsectionEl)
+                    .find("h4>a.anchor")
+                    .attr("href");
+                  const subsubsectionSections = [
+                    sectionTitle,
+                    subsectionTitle,
+                    subsubsectionTitle,
+                  ];
+
+                  subsectionRecords.push(
+                    createRecord(
+                      RECORD_TYPE.SECTION_TITLE,
+                      subsubsectionSections,
+                      null,
+                      subsubsectionAnchor,
+                    ),
+                  );
+                  subsectionRecords.push(
+                    ...processParagraphs(
+                      $(subsubsectionEl).find(".paragraph"),
+                      subsubsectionSections,
+                      subsubsectionAnchor,
+                    ),
+                  );
+                });
+            });
+          return subsectionRecords;
+        };
+
+        records.push(createRecord(RECORD_TYPE.TITLE, [], null, ""));
+        records.push(
+          createRecord(
+            RECORD_TYPE.DESCRIPTION,
+            [],
+            $("#preamble").text().trim(),
+            "",
+          ),
+        );
+
+        $(".sect1").each((_i, sectionEl) => {
+          const sectionTitle = $(sectionEl).find("h2").text().trim();
+          const sectionAnchor = $(sectionEl).find("h2>a.anchor").attr("href");
+          const sectionSections = [sectionTitle];
+
+          records.push(
+            createRecord(
+              RECORD_TYPE.SECTION_TITLE,
+              sectionSections,
+              null,
+              sectionAnchor,
+            ),
+          );
+          records.push(
+            ...processParagraphs(
+              $(sectionEl).find(".sectionbody>.paragraph"),
+              sectionSections,
+              sectionAnchor,
+            ),
+          );
+          records.push(...processSubsections(sectionEl, sectionTitle));
+        });
+
+        return records;
+      },
+    },
+  ],
+  initialIndexSettings: {
+    algolia_crawler_articles_for_instant_search: {
+      distinct: true,
+      attributeForDistinct: "url",
+      searchableAttributes: ["content", "title sections"],
+      attributesForFaceting: ["componentVersion"],
+    },
+  },
+  apiKey: "",
+});
