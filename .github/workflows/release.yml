@@ -57,7 +57,7 @@ jobs:
           name: ui-bundle
       - name: Create release
         id: create_release
-        uses: zendesk/action-create-release@v1
+        uses: zendesk/action-create-release@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
