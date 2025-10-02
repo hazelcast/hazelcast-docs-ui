@@ -398,6 +398,8 @@
         const isModifierPressed = isMac ? event.metaKey : event.ctrlKey;
         if (isModifierPressed && event.key === "k") {
           setIsOpen(true);
+          event.stopImmediatePropagation();
+          event.preventDefault();
         }
       });
 
