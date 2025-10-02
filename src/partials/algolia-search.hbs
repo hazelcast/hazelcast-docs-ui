@@ -6,7 +6,7 @@
 />
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.30.0/dist/lite/builds/browser.umd.js" integrity="sha256-w/rbJ5CGTW5rub22bQ/VEoIHxypNh4NZPdkIJvGMZlI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.79.0/dist/instantsearch.production.min.js" integrity="sha256-FOU2owonNoOmNxF4I8jLR4D8w/vziYNi64GUN2boXRQ=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@1"></script>
+<script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@1.19.4/dist/umd/index.production.js" integrity="VaQwRODmAHrukHfV+gCLjVfzWyj0veQpSK9hu77pt6A=" crossorigin="anonymous"></script>
 
 {{#if page.component}}
   <script>
@@ -235,6 +235,7 @@
         openOnFocus: true,
         defaultActiveItemId: 0,
         detachedMediaQuery: '',
+        enterKeyHint: 'search',
         reshape({ sourcesBySourceId }) {
           const { algolia, ...rest } =
             sourcesBySourceId;
@@ -391,6 +392,14 @@
           setIsOpen(false);
         }
       }, true);
+
+      window.addEventListener("keydown", (event) => {
+        const isMac = 'platform' in navigator && navigator.platform.toLowerCase().includes('mac');
+        const isModifierPressed = isMac ? event.metaKey : event.ctrlKey;
+        if (isModifierPressed && event.key === "k") {
+          setIsOpen(true);
+        }
+      });
 
       document.addEventListener('change', (event) => {
         if (event.target.id === 'componentSelect') {
