@@ -80,4 +80,4 @@ jobs:
     needs: release
     steps:
       - name: Trigger build
-        run: curl -d {} https://api.netlify.com/build_hooks/673db01c3496b5513b30c92e
+        run: curl -d {} https://api.netlify.com/build_hooks/${{ secrets.NETLIFY_BUILD_HOOK_ID }}
