@@ -211,3 +211,22 @@ on your local to the container, which in this case is `persist` under the home d
 directory to save the persisted data.
 
 
+|===
+|Column 1 |Column 2 |Column 3
+
+^.>|The specifier for this cell is `^.>`.
+The content is centered horizontally and aligned to the bottom of the cell.
+|There aren't any alignment operators on this cell's specifier, so the cell falls back to the default alignments.
+The default horizontal alignment is the left side of the cell.
+The default vertical alignment is the top of the cell.
+>.^|The specifier for this cell is `>.^`.
+The content is aligned to the right side of the cell and centered vertically.
+
+2.3+^.^|The specifier for this cell is `pass:[2.3+^.^]`.
+It spans two columns and three rows.
+
+Its content is centered horizontally and vertically.
+3*.>|The specifier for this cell is `3*.>`.
+The cell is duplicated in three consecutive rows in the same column.
+It's content is aligned to the bottom of the cell.
+|===
