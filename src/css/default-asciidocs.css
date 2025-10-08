@@ -1,0 +1,29 @@
+th.halign-left,
+td.halign-left {
+  text-align: left;
+}
+
+th.halign-right,
+td.halign-right {
+  text-align: right;
+}
+
+th.halign-center,
+td.halign-center {
+  text-align: center;
+}
+
+th.valign-top,
+td.valign-top {
+  vertical-align: top;
+}
+
+th.valign-bottom,
+td.valign-bottom {
+  vertical-align: bottom;
+}
+
+th.valign-middle,
+td.valign-middle {
+  vertical-align: middle;
+}
