@@ -368,6 +368,10 @@
                 <kbd class="aa-Key">↑</kbd>
                 <kbd class="aa-Key">↓</kbd>
                 <span class="aa-KeyLabel">to navigate</span>
+                <kbd class="aa-Key">
+                  ${'platform' in navigator && navigator.platform.toLowerCase().includes('mac') ? html`⌘+K` : html`ctrl+K`}
+                </kbd>
+                <span class="aa-KeyLabel">to open</span>
                 <kbd class="aa-Key">esc</kbd>
                 <span class="aa-KeyLabel">to close</span>
               </div>
