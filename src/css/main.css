@@ -3,10 +3,7 @@
   background-color: var(--info);
   display: none;
   line-height: 1.2;
-  padding-top: 1rem;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 1rem;
+  padding: 1rem 10px;
   color: white;
   font-size: 0.75em;
   flex-wrap: wrap;
@@ -82,7 +79,7 @@ main > .content {
   background-color: #fff;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (width >= 1024px) {
   .article {
     flex-grow: 2;
   }
@@ -103,7 +100,7 @@ main > .content {
   }
 }
 
-@media (min-width: 1600px) {
+@media (width >= 1600px) {
   .article-banner .beta-imdg {
     max-width: 100%;
   }

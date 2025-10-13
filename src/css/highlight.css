@@ -59,6 +59,7 @@
   color: #990073;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 .hljs-built_in,
 .hljs-builtin-name {
   color: #0086b3;

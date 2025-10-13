@@ -44,7 +44,7 @@ dd {
   left: 0;
   width: 100%;
   height: calc(100% + 50px);
-  background-image: url('../img/home/green-flow.jpg');
+  background-image: url("../img/home/green-flow.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -71,7 +71,7 @@ dd {
   font-weight: 300;
   padding: 0 30px;
   letter-spacing: 1px;
-  margin: 1rem 0 1rem;
+  margin: 1rem 0;
 }
 
 /* AI Button */
@@ -226,19 +226,19 @@ dd {
   grid-template-columns: repeat(4, 1fr); /* Default: 4 columns */
   gap: var(--cards-gap);
   width: 100%;
-  margin: 60px 0 40px 0;
+  margin: 60px 0 40px;
   padding: 0 20px;
 }
 
 /* 2 columns at medium widths */
-@media (max-width: 1100px) {
+@media (width <= 1100px) {
   .home .featured-cards {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 /* 1 column on narrow screens */
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .home .featured-cards {
     grid-template-columns: 1fr;
   }
@@ -266,7 +266,7 @@ dd {
   flex-wrap: nowrap;
   overflow-x: auto;
   gap: 0.25em;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
   text-decoration: none;
   width: 100%;
   cursor: pointer;
@@ -329,7 +329,6 @@ dd {
 
 .grad-text {
   background: linear-gradient(90deg, #0080a9, #0b2b39);
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 500;
   background-clip: text;
@@ -348,7 +347,7 @@ dd {
    Responsive Media Queries
 ================================ */
 
-@media (min-width: 480px) {
+@media (width >= 480px) {
   .home .card {
     flex-basis: calc(50% - var(--cards-gap) / 2);
   }
@@ -359,7 +358,7 @@ dd {
   }
 }
 
-@media (min-width: 550px) {
+@media (width >= 550px) {
   .ai-button {
     position: absolute;
     right: 40px;
@@ -372,7 +371,7 @@ dd {
   }
 }
 
-@media (min-width: 840px) {
+@media (width >= 840px) {
   .home .card {
     flex-basis: calc(50% - var(--cards-gap) / 2);
   }
@@ -382,25 +381,26 @@ dd {
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
+  /* stylelint-disable-next-line selector-class-pattern */
   .home .DocSearch-Button {
     width: 60%;
   }
 }
 
-@media (min-width: 1120px) {
+@media (width >= 1120px) {
   .home .home-background {
     background-position-y: 0;
   }
 }
 
-@media (min-width: 1300px) {
+@media (width >= 1300px) {
   .feedback-footer {
     gap: 30px;
   }
 }
 
-@media (min-width: 1400px) {
+@media (width >= 1400px) {
   .home .card {
     flex-basis: calc(25% - (var(--cards-gap) * 3 / 4));
   }
@@ -408,7 +408,7 @@ dd {
 
 /* Mobile Stacking for Featured Cards */
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .home .additional-cards {
     padding: 20px;
   }

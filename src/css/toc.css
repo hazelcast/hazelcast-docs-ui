@@ -26,7 +26,7 @@
   width: 0;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (width >= 1024px) {
   aside.toc.embedded {
     display: none;
   }
@@ -35,10 +35,9 @@
     display: block;
     flex: 0 0 var(--toc-width);
     min-width: 222px;
-    overflow-y: auto;
+    overflow: hidden auto;
     height: max-content;
     max-height: var(--toc-height);
-    overflow-x: hidden;
   }
 
   .toc .toc-menu ul {
@@ -46,7 +45,7 @@
   }
 }
 
-@media screen and (min-width: 1800px) {
+@media screen and (width >= 1800px) {
   aside.toc.sidebar {
     min-width: 300px;
   }

@@ -35,7 +35,7 @@ a.copy-code-button:hover {
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
   z-index: 100001;
   opacity: 0;
   transform: translateX(100px);
@@ -85,13 +85,6 @@ a.copy-code-button:hover {
   position: absolute;
   right: 1px;
   top: 0;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  /* Safari and Chrome */
-  .doc .listingblock pre .fade-shadow {
-    height: calc(100% - 8px);
-  }
 }
 
 code::-webkit-scrollbar {

@@ -8,7 +8,7 @@
   }
 
   html {
-    font-size: var(--body-font-size--print);
+    font-size: var(--body-font-size-print);
   }
 
   a {
@@ -26,7 +26,7 @@
   img,
   object,
   svg {
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   thead {

@@ -42,7 +42,7 @@
   /* fonts */
   --rem-base: 18; /* used to compute rem value from desired pixel value (e.g., calc(18 / var(--rem-base) * 1rem) = 18px) */
   --body-font-size: 1em; /* 16px */
-  --body-font-size--print: 0.9375em; /* 15px */
+  --body-font-size-print: 0.9375em; /* 15px */
   --body-line-height: 1.4;
   --body-font-color: var(--text);
   --header-color: #061827;
@@ -62,13 +62,11 @@
   /* navbar */
   --navbar-background: var(--neutral-white);
   --navbar-font-color: #24292e;
-  --navbar_hover-background: var(--neutral-lighter);
   --navbar-button-background: var(--accent-light);
   --navbar-button-font-color: var(--neutral-white);
   --navbar-menu-border-color: var(--panel-border-color);
   --navbar-menu-background: var(--neutral-white);
   --navbar-menu-font-color: var(--body-font-color);
-  --navbar-menu_hover-background: var(--neutral-lighter);
   /* nav */
   --nav-background: var(--panel-background);
   --nav-border-color: #dadada;
@@ -102,18 +100,18 @@
   /* doc */
   --doc-font-color: var(--text);
   --doc-font-size: inherit;
-  --doc-font-size--desktop: 16px;
+  --doc-font-size-desktop: 16px;
   --doc-line-height: 1.6;
   --doc-margin: 0 auto;
-  --doc-margin--desktop: 0 2rem;
-  --doc-margin--desktop-large: 0 3rem;
+  --doc-margin-desktop: 0 2rem;
+  --doc-margin-desktop-large: 0 3rem;
   --heading-font-color: var(--text);
   --heading-font-weight: normal;
   --alt-heading-font-weight: var(--body-font-weight-bold);
   --section-divider-color: var(--panel-border-color);
   --link-font-color: var(--primary);
-  --link_hover-font-color: var(--primary);
-  --link_unresolved-font-color: var(--important-color);
+  --link-hover-font-color: var(--primary);
+  --link-unresolved-font-color: var(--important-color);
   --abstract-background: var(--neutral-light);
   --abstract-font-color: var(--secondary-text);
   --abstract-border-color: var(--panel-border-color);
@@ -133,7 +131,7 @@
   --quote-background: var(--panel-background);
   --quote-border-color: var(--color-gray-70);
   --quote-font-color: var(--secondary-text);
-  --quote-attribution-font-color: var(--csecondary-text);
+  --quote-attribution-font-color: var(--secondary-text);
   --sidebar-background: var(--panel-background);
   --table-border-color: var(--panel-border-color);
   /* footer */
@@ -153,7 +151,7 @@
   --toc-height: 400px;
   --toc-margin-right: 0.75rem;
   --doc-max-width: calc(720 / var(--rem-base) * 1rem);
-  --doc-max-width--desktop: calc(1500 / var(--rem-base) * 1rem);
+  --doc-max-width-desktop: calc(1500 / var(--rem-base) * 1rem);
   --border-radius: 5px;
   --cards-gap: 24px;
   /* stacking */

@@ -1,10 +1,8 @@
-@import "admonition.css";
+@import url("admonition.css");
 
 .doc {
   color: var(--doc-font-color);
   font-size: var(--doc-font-size);
-  -webkit-hyphens: manual;
-  -moz-hyphens: manual;
   hyphens: manual;
   line-height: var(--doc-line-height);
   margin: var(--doc-margin);
@@ -118,12 +116,12 @@ strong.beta {
   cursor: pointer;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (width >= 1024px) {
   .doc {
     flex: auto;
-    font-size: var(--doc-font-size--desktop);
-    margin: var(--doc-margin--desktop);
-    max-width: var(--doc-max-width--desktop);
+    font-size: var(--doc-font-size-desktop);
+    margin: var(--doc-margin-desktop);
+    max-width: var(--doc-max-width-desktop);
     min-width: 0;
   }
 }
@@ -145,7 +143,7 @@ strong.beta {
   margin: 1.5rem 0;
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (width >= 769px) {
   .doc > h1.page:first-child {
     margin-top: 2.5rem;
   }
@@ -225,7 +223,7 @@ strong.beta {
 .home .article a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
 .home .additional-cards a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
 .nav-item a[href*="//"]:not([href*="docs.hazelcast.com"])::after {
-  content: url('/_/img/external-link.svg');
+  content: url("/_/img/external-link.svg");
   position: relative;
   margin-left: 2px;
 }
@@ -262,11 +260,11 @@ strong.beta {
 }
 
 .doc a:hover {
-  color: var(--link_hover-font-color);
+  color: var(--link-hover-font-color);
 }
 
 .doc a.unresolved {
-  color: var(--link_unresolved-font-color);
+  color: var(--link-unresolved-font-color);
 }
 
 .doc i.fa {
@@ -400,7 +398,7 @@ strong.beta {
   max-width: 250px;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (width >= 500px) {
   .doc .imageblock img,
   .doc .image > img {
     height: auto;
@@ -408,14 +406,14 @@ strong.beta {
   }
 }
 
-@media screen and (min-width: 1224px) {
+@media screen and (width >= 1224px) {
   .doc .imageblock img,
   .doc .image > img {
     max-width: 450px;
   }
 }
 
-@media screen  and (min-width: 1450px) {
+@media screen  and (width >= 1450px) {
   .doc .imageblock img,
   .doc .image > img {
     max-width: 550px;
@@ -665,7 +663,7 @@ strong.beta {
 }
 
 .doc .conum[data-value] {
-  border: 1px solid currentColor;
+  border: 1px solid currentcolor;
   border-radius: 100%;
   display: inline-block;
   font-family: var(--body-font-family);
@@ -768,7 +766,7 @@ strong.beta {
 
 .doc th.tableblock,
 .doc td.tableblock {
-  word-break: break-word; /* overflow-wrap for table cells; gives space higher precedence than hyphen opportunity */
+  overflow-wrap: anywhere;
 }
 
 .doc .tabs ul {

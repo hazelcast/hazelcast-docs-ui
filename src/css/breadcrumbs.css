@@ -4,7 +4,7 @@
   color: var(--secondary-text);
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (width >= 1024px) {
   .breadcrumbs {
     display: block;
     margin-top: 15px;
