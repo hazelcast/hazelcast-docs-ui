@@ -9,14 +9,10 @@
 }
 
 .paragraph.find {
-  display: -webkit-flex;
   display: flex;
   flex: 1 100%;
   z-index: -1;
-  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -39,15 +35,13 @@ input[type='text'] {
   margin-top: 20px;
 }
 
-@media (min-width: 820px) {
+@media (width >= 820px) {
   .paragraph.find {
     flex: 1 50%;
   }
 
   .find-item:first-child > ul {
     columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
   }
 
   .find-item {

@@ -1,11 +1,13 @@
 {
   "name": "hazelcast-docs-ui",
+  "version": "4.3.3",
   "description": "A modified version of the default Antora UI, which includes design components for the Hazelcast documentation site",
   "homepage": "https://github.com/hazelcast/hazelcast-docs-ui",
   "scripts": {
     "bundle": "gulp bundle",
     "build": "npm run bundle && load-docs-ui-playbook && antora --to-dir docs --fetch global-antora-playbook.yml && cp _redirects docs",
     "build-local": "npm run bundle && load-docs-ui-playbook --skip-private-repos --skip-redirects-download && antora --to-dir docs --fetch global-antora-playbook.yml",
+    "lint:style": "stylelint \"**/*.css\"",
     "serve": "serve docs",
     "expose": "ngrok http 3000",
     "dev": "gulp preview"
@@ -44,7 +46,7 @@
     "gulp-eslint": "~6.0",
     "gulp-imagemin": "~6.2",
     "gulp-postcss": "~8.0",
-    "gulp-stylelint": "~11.0",
+    "gulp-stylelint-esm": "^3.0.0",
     "gulp-uglify": "~3.0",
     "gulp-vinyl-zip": "~2.2",
     "handlebars": "~4.7",
@@ -52,6 +54,7 @@
     "highlight.js": "~9.18",
     "js-yaml": "~3.13",
     "merge-stream": "~2.0",
+    "ngrok": "^5.0.0-beta.2",
     "postcss-calc": "~7.0",
     "postcss-custom-properties": "~9.1",
     "postcss-import": "~12.0",
@@ -60,10 +63,9 @@
     "require-directory": "~2.1",
     "require-from-string": "~2.0",
     "serve": "^13.0.2",
-    "stylelint": "^10.1.0",
-    "stylelint-config-standard": "~20.0",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard": "^39.0.1",
     "typeface-roboto-mono": "0.0.75",
-    "ngrok": "^5.0.0-beta.2",
     "vinyl-buffer": "~1.0",
     "vinyl-fs": "~3.0"
   }

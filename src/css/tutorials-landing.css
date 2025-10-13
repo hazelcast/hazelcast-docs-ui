@@ -9,8 +9,7 @@
 
 .tut-cards {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-flow: column wrap;
 }
 
 .tut-card {
@@ -19,8 +18,7 @@
   border: 1px solid #dbdbdb;
   display: flex;
   flex: 1;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-flow: column wrap;
   padding: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
@@ -42,7 +40,7 @@
 }
 
 .button.git span {
-  background: transparent url(../img/github.svg) center left / contain no-repeat;
+  background: transparent url("../img/github.svg") center left / contain no-repeat;
   width: 20px;
   height: 20px;
 }
@@ -63,9 +61,8 @@
 
 .dropdown-toggle {
   display: flex;
-  justify-items: flex-end;
+  place-items: center flex-end;
   justify-content: space-between;
-  align-items: center;
   background: #fafafa;
   border: 1px solid #b7c1cb;
   box-sizing: border-box;
@@ -130,7 +127,6 @@
 .lang-filter-list {
   background: #f1f1f1;
   border: 1px solid #f1f1f1;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   vertical-align: middle;
   padding: 4px 14px;
@@ -161,7 +157,7 @@
 }
 
 .dropdown-toggle span {
-  background: url(../img/caret-blue.svg) no-repeat 40%/37%;
+  background: url("../img/caret-blue.svg") no-repeat 40%/37%;
   width: 40px;
   height: 30px;
 }
@@ -199,8 +195,7 @@
 .dropdown .dropdown-content.show#categories {
   display: flex;
   z-index: 1;
-  flex-wrap: wrap;
-  flex-direction: row;
+  flex-flow: row wrap;
 }
 
 .tutorials-header {
@@ -301,7 +296,7 @@
   overflow: auto;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (width >= 900px) {
   .tut-cards {
     flex-direction: row;
     justify-content: space-between;
@@ -312,13 +307,13 @@
   }
 }
 
-@media screen and (min-width: 1100px) {
+@media screen and (width >= 1100px) {
   .row.tutorials > * {
     flex: 1 1 33%;
   }
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (width >= 1500px) {
   .tut .cards {
     margin: auto;
   }

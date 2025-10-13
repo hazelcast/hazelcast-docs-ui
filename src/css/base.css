@@ -1,3 +1,7 @@
+/*:root {*/
+/*  color-scheme: light dark;*/
+/*}*/
+
 html,
 body {
   height: 100%;
@@ -13,7 +17,7 @@ html {
   scroll-padding-top: var(--navbar-height);
   box-sizing: border-box;
   font-size: var(--body-font-size);
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -42,7 +46,7 @@ a:hover {
 }
 
 a:active {
-  background-color: none;
+  background-color: transparent;
 }
 
 code,
@@ -100,12 +104,8 @@ button::-moz-focus-inner {
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: #ccc;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -117,7 +117,6 @@ button::-moz-focus-inner {
   left: 2px;
   bottom: 1px;
   background-color: white;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -130,8 +129,6 @@ input:focus + .slider {
 }
 
 input:checked + .slider::before {
-  -webkit-transform: translateX(18px);
-  -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 

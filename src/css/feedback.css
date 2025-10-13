@@ -19,7 +19,7 @@
   z-index: 199;
 }
 
-@media screen and (max-height: 670px) {
+@media screen and (height <= 670px) {
   .feedback-prompt {
     display: none;
   }
@@ -126,23 +126,23 @@ a.feedback-button:hover {
 }
 
 .git {
-  background: transparent url(../img/github.svg) center left / contain no-repeat;
+  background: transparent url("../img/github.svg") center left / contain no-repeat;
 }
 
 .git-pull {
-  background: transparent url(../img/edit.svg) center left / contain no-repeat;
+  background: transparent url("../img/edit.svg") center left / contain no-repeat;
 }
 
 .command {
-  background: transparent url(../img/command.svg) center left / contain no-repeat;
+  background: transparent url("../img/command.svg") center left / contain no-repeat;
 }
 
 .training {
-  background: transparent url(../img/training.png) center left / contain no-repeat;
+  background: transparent url("../img/training.png") center left / contain no-repeat;
 }
 
 .mail {
-  background: transparent url(../img/mail.svg) center left / contain no-repeat;
+  background: transparent url("../img/mail.svg") center left / contain no-repeat;
 }
 
 .feedback-form-submit-container {

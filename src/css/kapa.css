@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 .mantine-Modal-close {
   color: var(--neutral-white) !important;
 }
@@ -5,3 +6,4 @@
 .mantine-Modal-close:hover {
   color: var(--neutral-lighter) !important;
 }
+/* stylelint-enable selector-class-pattern */
