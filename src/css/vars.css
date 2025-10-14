@@ -55,7 +55,10 @@
   --heading-font-family: "PP Telegraf", sans-serif;
   --monospace-font-weight-bold: 500;
   /* base */
-  --body-background: #f2f5f9;
+  --body-background-light: #f2f5f9;
+  --body-background-dark: #24262E;
+  --body-background: light-dark(var(--body-background-light), var(--body-background-dark));
+  --content-background: light-dark(var(--neutral-white), var(--body-background-dark));
   --panel-background: var(--neutral-lighter);
   --panel-border-color: var(--neutral);
   --scrollbar-thumb-color: var(--neutral-light);

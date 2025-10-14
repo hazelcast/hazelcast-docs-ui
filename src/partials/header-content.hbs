@@ -17,6 +17,15 @@
     </div>
 
     <div class="navbar-end">
+      <section>
+        <button id="lightModeOnBtn" class="light-mode-on-btn" type="button">
+          Light
+        </button>
+        <button id="darkModeOnBtn" class="dark-mode-on-btn" type="button">
+          Dark
+        </button>
+      </section>
+
       {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing') (not-eq page.layout 'privacy') (not-eq page.component.name 'imdg'))}}
         <div id="search-input" class="navbar-item searchbox"></div>
       {{/if}}

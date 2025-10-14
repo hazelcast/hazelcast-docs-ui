@@ -417,6 +417,8 @@ nav .button.ask-ai-button {
     display: inline;
   }
 
+  /* stylelint-enable selector-class-pattern */
+
   /* Hide desktop nav */
   #desktop-holder,
   nav .mega-menu,
@@ -441,4 +443,4 @@ nav .button.ask-ai-button {
   }
 }
 
-/* stylelint-enable selector-class-pattern */
+
