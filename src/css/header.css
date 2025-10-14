@@ -443,4 +443,26 @@ nav .button.ask-ai-button {
   }
 }
 
+.color-theme-switcher {
+  position: relative;
+  height: 28px;
+  width: 36px;
+}
 
+.color-theme-btn {
+  position: absolute;
+  inset: 0;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--neutral-white);
+}
+
+head:has(meta[content="light"]) ~ body .light-mode-on-btn,
+head:has(meta[content="dark"]) ~ body .dark-mode-on-btn {
+  visibility: hidden;
+  z-index: -1;
+}
