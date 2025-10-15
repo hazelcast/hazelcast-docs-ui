@@ -25,6 +25,7 @@
   --accent5: #0019fe;
   --accent5-light: #e0e8ff;
   --info-light: #f0f6ff;
+  --info-light-dark: #374151;
   --info: #4a71c4;
   --accessibility-outline: #2160c0;
   --error: #b00020;
@@ -56,10 +57,10 @@
   --nav-font-weight: 500;
   --monospace-font-family: "Roboto Mono", monospace;
   --heading-font-family: "PP Telegraf", sans-serif;
-  --monospace-font-weight-bold: 500;
+  --code-font-weight-bold: 500;
   /* base */
   --body-background-light: #f2f5f9;
-  --body-background-dark: #24262E;
+  --body-background-dark: #1a1d29;
   --body-background: light-dark(var(--body-background-light), var(--body-background-dark));
   --content-background: light-dark(var(--neutral-white), var(--body-background-dark));
   --panel-background: var(--neutral-lighter);
@@ -124,8 +125,8 @@
   --admonition-label-font-weight: var(--body-font-weight-bold);
   --caption-font-color: var(--secondary-text);
   --caption-font-weight: var(--body-font-weight-bold);
-  --code-background: #f1f3f4;
-  --code-font-color: #37474f;
+  --code-background: light-dark(#f1f3f4, #37474f);
+  --code-font-color: light-dark(#37474f, #f1f3f4);
   --example-background: var(--neutral-white);
   --example-border-color: var(--color-gray-70);
   --kbd-background: var(--panel-background);

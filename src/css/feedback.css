@@ -40,7 +40,7 @@
   padding: 0.5rem 0.7rem;
   font-family: var(--heading-font-family);
   font-size: 14px;
-  background-color: var(--info-light);
+  background-color: light-dark(var(--info-light), var(--info-light-dark));
   border-radius: 10px;
   cursor: pointer;
 }
@@ -101,11 +101,11 @@ a.feedback-button:hover {
   display: block;
   padding-right: 0.5rem;
   font-family: var(--body-font-family);
-  color: var(--secondary-text-light);
+  color: light-dark(var(--secondary-text-light), var(--neutral-white));
 }
 
 .additional-feedback a {
-  color: var(--primary-light);
+  color: var(--accent);
   font-size: calc(14 / var(--rem-base) * 1rem);
 }
 
@@ -113,7 +113,7 @@ a.feedback-button:hover {
   display: block;
   padding-right: 0.5rem;
   font-family: var(--body-font-family);
-  color: var(--secondary-text-light);
+  color: light-dark(var(--secondary-text-light), var(--neutral-white));
 }
 
 .edit-this-page a {
@@ -129,20 +129,40 @@ a.feedback-button:hover {
   background: transparent url("../img/github.svg") center left / contain no-repeat;
 }
 
+head:has(meta[content="dark"]) ~ body .git {
+  background: transparent url("../img/github-white.svg") center left / contain no-repeat;
+}
+
 .git-pull {
   background: transparent url("../img/edit.svg") center left / contain no-repeat;
+}
+
+head:has(meta[content="dark"]) ~ body .git-pull {
+  background: transparent url("../img/edit-white.svg") center left / contain no-repeat;
 }
 
 .command {
   background: transparent url("../img/command.svg") center left / contain no-repeat;
 }
 
+head:has(meta[content="dark"]) ~ body .command {
+  background: transparent url("../img/command-white.svg") center left / contain no-repeat;
+}
+
 .training {
-  background: transparent url("../img/training.png") center left / contain no-repeat;
+  background: transparent url("../img/training.svg") center left / contain no-repeat;
+}
+
+head:has(meta[content="dark"]) ~ body .training {
+  background: transparent url("../img/training-white.svg") center left / contain no-repeat;
 }
 
 .mail {
   background: transparent url("../img/mail.svg") center left / contain no-repeat;
+}
+
+head:has(meta[content="dark"]) ~ body .mail {
+  background: transparent url("../img/mail-white.svg") center left / contain no-repeat;
 }
 
 .feedback-form-submit-container {

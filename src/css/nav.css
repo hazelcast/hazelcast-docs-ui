@@ -32,7 +32,7 @@
   border-radius: 40px;
   cursor: pointer;
   border: 0.5px solid #dadada;
-  background-color: var(--body-background);
+  background-color: light-dark(var(--body-background-light), var(--info-light-dark));
 }
 
 .nav-container.is-active {
@@ -77,7 +77,7 @@
 }
 
 .nav-menu a {
-  color: var(--secondary-text);
+  color: light-dark(var(--secondary-text-light), var(--neutral-white));
 }
 
 .nav-list {
@@ -141,6 +141,10 @@
   width: 30px;
   padding: 0;
   right: 0;
+}
+
+head:has(meta[content="dark"]) ~ body .nav-item-toggle {
+  background: transparent url("../img/caret-white.svg") center no-repeat;
 }
 
 .nav-item[data-depth="0"] > .nav-item-toggle {
@@ -236,9 +240,9 @@
 .nav-version-picker-toggle {
   position: relative;
   border-radius: 5px;
-  color: var(--accent);
-  border: 2px solid var(--accent);
-  background-color: var(--info-light);
+  color: light-dark(var(--accent), var(--neutral-white));
+  border: 2px solid light-dark(var(--accent), var(--neutral-white));
+  background-color: light-dark(var(--info-light), var(--info-light-dark));
   padding: 6px 30px 6px 10px;
   text-decoration: none !important;
   cursor: pointer;
@@ -260,6 +264,10 @@
   background: transparent url("../img/caret-blue.svg") center no-repeat;
   width: 30px;
   height: 15px;
+}
+
+head:has(meta[content="dark"]) ~ body .nav-version-picker-toggle::after {
+  background: transparent url("../img/caret-white.svg") center no-repeat;
 }
 
 .nav-version-picker-toggle-versions {

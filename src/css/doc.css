@@ -228,6 +228,13 @@ strong.beta {
   margin-left: 2px;
 }
 
+head:has(meta[content="dark"]) ~ body .doc a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
+head:has(meta[content="dark"]) ~ body .home .article a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
+head:has(meta[content="dark"]) ~ body .home .additional-cards a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
+head:has(meta[content="dark"]) ~ body .nav-item a[href*="//"]:not([href*="docs.hazelcast.com"])::after {
+  content: url("/_/img/external-link-white.svg");
+}
+
 .doc a[href*="cloud.hazelcast.com"] {
   background: var(--navbar-button-background);
   padding: 0 10px;

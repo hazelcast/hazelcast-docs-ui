@@ -13,14 +13,12 @@
 
 .page-versions .version-menu-toggle {
   color: var(--accent);
-  background: url("../img/chevron.svg") no-repeat;
-  background-position: right 0.5rem top 50%;
+  background: url("../img/chevron.svg") no-repeat right 0.5rem top 50%;
   background-size: auto 0.75em;
   border: none;
   outline: none;
   line-height: inherit;
-  padding: 0.5rem 1.5rem 0.5rem 0.5rem;
-  padding-left: 0;
+  padding: 0.5rem 1.5rem 0.5rem 0;
   position: relative;
 }
 
