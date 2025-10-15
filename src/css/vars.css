@@ -5,7 +5,9 @@
   --neutral: #e4e2e2;
   --neutral-grey: #f2f2f2;
   --neutral-light: #b7c1cb;
-  --secondary-text: #707482;
+  --secondary-text-light: #707482;
+  --secondary-text-dark: #94a3b8;
+  --secondary-text: light-dark(var(--secondary-text-light), var(--secondary-text-dark));
   --text-light: #041a3b;
   --text-dark: #e2e8f0;
   --text: light-dark(var(--text-light), var(--text-dark));
@@ -48,7 +50,6 @@
   --body-line-height: 1.4;
   --body-font-color: var(--text);
   --header-color: #061827;
-  --footer-color: #0b2b39;
   --body-font-family: "Open Sans", sans-serif;
   --body-font-weight-bold: 500;
   --nav-font-family: "PP Telegraf", sans-serif;
@@ -77,7 +78,6 @@
   --nav-border-color: #dadada;
   --nav-line-height: 1.35;
   --nav-heading-font-color: var(--color-jet-30);
-  --nav-muted-color: var(--color-gray-70);
   --nav-panel-divider-color: var(--neutral);
   --nav-secondary-background: var(--neutral-lighter);
   /* toolbar */
@@ -87,7 +87,7 @@
   --toolbar-muted-color: var(--color-gray-30);
   --page-version-missing-font-color: var(--color-gray-30);
   /* toc */
-  --toc-font-color: var(--nav-muted-color);
+  --toc-font-color: light-dark(var(--secondary-text-light), var(--secondary-text-dark));
   --toc-heading-font-color: var(--doc-font-color);
   --toc-border-color: var(--panel-border-color);
   --toc-line-height: 1.2;
@@ -114,7 +114,7 @@
   --heading-font-weight: normal;
   --alt-heading-font-weight: var(--body-font-weight-bold);
   --section-divider-color: var(--panel-border-color);
-  --link-font-color: var(--primary);
+  --link-font-color: var(--accent);
   --link-hover-font-color: var(--primary);
   --link-unresolved-font-color: var(--important-color);
   --abstract-background: var(--neutral-light);
@@ -141,7 +141,6 @@
   --table-border-color: var(--panel-border-color);
   /* footer */
   --footer-line-height: var(--doc-line-height);
-  --footer-font-color: #fafafa;
   /* dimensions and positioning */
   --navbar-height: 60px;
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);

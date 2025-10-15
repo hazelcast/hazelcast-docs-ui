@@ -9,7 +9,7 @@
 .feedback-prompt {
   width: var(--toc-width);
   font-family: var(--body-font-family);
-  color: var(--nav-muted-color);
+  color: var(--secondary-text);
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -101,7 +101,7 @@ a.feedback-button:hover {
   display: block;
   padding-right: 0.5rem;
   font-family: var(--body-font-family);
-  color: var(--nav-muted-color);
+  color: var(--secondary-text-light);
 }
 
 .additional-feedback a {
@@ -113,7 +113,7 @@ a.feedback-button:hover {
   display: block;
   padding-right: 0.5rem;
   font-family: var(--body-font-family);
-  color: var(--nav-muted-color);
+  color: var(--secondary-text-light);
 }
 
 .edit-this-page a {

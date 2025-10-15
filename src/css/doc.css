@@ -216,7 +216,7 @@ strong.beta {
 
 .doc .tableblock thead,
 .doc .tableblock tr:has(p>strong) {
-  background-color: var(--neutral-grey);
+  background-color: light-dark(var(--neutral-grey), var(--color-jet-30));
 }
 
 .doc a[href*="//"]:not([href*="docs.hazelcast.com"])::after,
@@ -269,6 +269,10 @@ strong.beta {
 
 .doc i.fa {
   font-style: normal;
+}
+
+code {
+  scrollbar-color: var(--accent) transparent;
 }
 
 .doc p code,

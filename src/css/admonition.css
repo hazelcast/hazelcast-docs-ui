@@ -5,6 +5,7 @@
   border-left-style: solid;
   padding: 15px 10px 15px 20px;
   margin-top: 1rem;
+  color: var(--text-light);
 }
 
 /* to override CSS when admonition is inside a table */

@@ -249,7 +249,7 @@ nav .button.header-button {
 }
 
 nav .button.try-product-button {
-  color: var(--text);
+  color: var(--text-light);
   background-color: var(--accent4);
 }
 
@@ -458,7 +458,13 @@ nav .button.ask-ai-button {
   justify-content: center;
   background: transparent;
   border: none;
+  border-radius: 8px;
   color: var(--neutral-white);
+  transition: background 0.2s ease;
+}
+
+.color-theme-btn:hover {
+  background: var(--color-jet-30);
 }
 
 head:has(meta[content="light"]) ~ body .light-mode-on-btn,

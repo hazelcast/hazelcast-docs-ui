@@ -32,12 +32,7 @@
   border-radius: 40px;
   cursor: pointer;
   border: 0.5px solid #dadada;
-  background-color: #fafafa;
-}
-
-#hide-nav button:hover {
-  border: 0.5px solid #fafafa;
-  background-color: #dadada;
+  background-color: var(--body-background);
 }
 
 .nav-container.is-active {
@@ -45,7 +40,7 @@
 }
 
 .nav {
-  background-color: #fff;
+  background-color: var(--content-background);
   position: relative;
   top: 0;
   height: var(--nav-height);
@@ -162,7 +157,7 @@
 }
 
 .is-current-page {
-  background-color: var(--info-light);
+  background-color: light-dark(var(--info-light), transparent);
   border-radius: 10px;
   font-weight: 500;
 }
@@ -215,7 +210,6 @@
   .nav-container {
     position: static;
     visibility: visible;
-    padding-bottom: 60px;
     border-right: none;
   }
 

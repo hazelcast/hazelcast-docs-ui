@@ -41,10 +41,6 @@ a:hover {
   text-decoration: underline;
 }
 
-a:active {
-  background-color: transparent;
-}
-
 code,
 kbd,
 pre {
