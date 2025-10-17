@@ -32,7 +32,7 @@
   border-radius: 40px;
   cursor: pointer;
   border: 0.5px solid #dadada;
-  background-color: light-dark(var(--body-background-light), var(--info-light-dark));
+  background-color: light-dark(var(--body-background-light), var(--neutral-dark));
 }
 
 .nav-container.is-active {
@@ -69,7 +69,7 @@
 }
 
 .nav-menu h3.title {
-  color: var(--nav-heading-font-color);
+  color: var(--text);
   font-size: inherit;
   font-weight: var(--body-font-weight-bold);
   margin: 0;
@@ -241,8 +241,8 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
   position: relative;
   border-radius: 5px;
   color: light-dark(var(--accent), var(--neutral-white));
-  border: 2px solid light-dark(var(--accent), var(--neutral-white));
-  background-color: light-dark(var(--info-light), var(--info-light-dark));
+  border: 2px solid light-dark(var(--accent), var(--secondary-text-dark));
+  background-color: light-dark(var(--info-light), var(--neutral-dark));
   padding: 6px 30px 6px 10px;
   text-decoration: none !important;
   cursor: pointer;

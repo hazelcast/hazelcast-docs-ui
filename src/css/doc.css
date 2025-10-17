@@ -216,7 +216,7 @@ strong.beta {
 
 .doc .tableblock thead,
 .doc .tableblock tr:has(p>strong) {
-  background-color: light-dark(var(--neutral-grey), var(--color-jet-30));
+  background-color: light-dark(var(--neutral-grey), var(--neutral-dark));
 }
 
 .doc a[href*="//"]:not([href*="docs.hazelcast.com"])::after,

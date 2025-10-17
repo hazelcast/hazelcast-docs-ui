@@ -40,13 +40,13 @@
   padding: 0.5rem 0.7rem;
   font-family: var(--heading-font-family);
   font-size: 14px;
-  background-color: light-dark(var(--info-light), var(--info-light-dark));
+  background-color: light-dark(var(--info-light), var(--neutral-dark));
   border-radius: 10px;
   cursor: pointer;
 }
 
 .feedback-button:hover {
-  background-color: var(--accent5-light);
+  background-color: light-dark(var(--accent5-light), var(--secondary-text-light));
 }
 
 a.feedback-button:hover {

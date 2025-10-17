@@ -3,6 +3,7 @@
   --neutral-white: #fff;
   --neutral-lighter: #fafafa;
   --neutral: #e4e2e2;
+  --neutral-dark: #374151;
   --neutral-grey: #f2f2f2;
   --neutral-light: #b7c1cb;
   --secondary-text-light: #707482;
@@ -25,7 +26,6 @@
   --accent5: #0019fe;
   --accent5-light: #e0e8ff;
   --info-light: #f0f6ff;
-  --info-light-dark: #374151;
   --info: #4a71c4;
   --accessibility-outline: #2160c0;
   --error: #b00020;
@@ -38,11 +38,6 @@
   --color-gray-30: #8e8e8e;
   --color-gray-50: #808080;
   --color-gray-70: #5d5d5d;
-  --color-jet-20: #4a4a4a;
-  --color-jet-30: #424242;
-  --color-jet-50: #333;
-  --color-jet-70: #222;
-  --color-jet-80: #191919;
   --color-black: #000;
   /* fonts */
   --rem-base: 18; /* used to compute rem value from desired pixel value (e.g., calc(18 / var(--rem-base) * 1rem) = 18px) */
@@ -64,7 +59,7 @@
   --body-background: light-dark(var(--body-background-light), var(--body-background-dark));
   --content-background: light-dark(var(--neutral-white), var(--body-background-dark));
   --panel-background: var(--neutral-lighter);
-  --panel-border-color: var(--neutral);
+  --panel-border-color: light-dark(var(--neutral), var(--neutral-dark));
   --scrollbar-thumb-color: var(--neutral-light);
   /* navbar */
   --navbar-background: var(--neutral-white);
@@ -78,7 +73,6 @@
   --nav-background: var(--panel-background);
   --nav-border-color: #dadada;
   --nav-line-height: 1.35;
-  --nav-heading-font-color: var(--color-jet-30);
   --nav-panel-divider-color: var(--neutral);
   --nav-secondary-background: var(--neutral-lighter);
   /* toolbar */

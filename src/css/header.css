@@ -464,7 +464,7 @@ nav .button.ask-ai-button {
 }
 
 .color-theme-btn:hover {
-  background: var(--color-jet-30);
+  background: var(--neutral-dark);
 }
 
 head:has(meta[content="light"]) ~ body .light-mode-on-btn,
