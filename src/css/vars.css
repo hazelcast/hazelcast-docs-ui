@@ -61,8 +61,11 @@
   --body-background-dark: #191d29;
   --body-background: light-dark(var(--body-background-light), var(--body-background-dark));
   --content-background: light-dark(var(--neutral-white), var(--body-background-dark));
+  --border-color-light: var(--neutral-light);
+  --border-color-dark: var(--neutral-dark);
+  --border-color: light-dark(var(--border-color-light), var(--border-color-dark));
   --panel-background: var(--neutral-lighter);
-  --panel-border-color: light-dark(var(--neutral), var(--neutral-dark));
+  --panel-border-color: light-dark(var(--neutral), var(--border-color-dark));
   --scrollbar-thumb-color: var(--neutral-light);
   /* navbar */
   --navbar-background: var(--neutral-white);
@@ -74,9 +77,9 @@
   --navbar-menu-font-color: var(--body-font-color);
   /* nav */
   --nav-background: var(--panel-background);
-  --nav-border-color: light-dark(var(--neutral), var(--neutral-dark));
+  --nav-border-color: light-dark(var(--neutral-light), var(--border-color-dark));
   --nav-line-height: 1.35;
-  --nav-panel-divider-color: var(--neutral);
+  --nav-panel-divider-color: var(--neutral-light);
   --nav-secondary-background: var(--neutral-lighter);
   /* toolbar */
   --toolbar-background: var(--panel-background);

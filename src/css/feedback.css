@@ -190,7 +190,7 @@ input[name="feedback"] {
   border-radius: 50%;
   width: 16px;
   height: 16px;
-  border: 1px solid var(--neutral-light);
+  border: 1px solid var(--border-color);
   transition: 0.2s border-width linear;
   margin: 0;
   position: relative;

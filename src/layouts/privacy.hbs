@@ -104,10 +104,6 @@
 <body>
 {{> header-content}}
 <div class="privacy">
-  <!--  to load scripts from /js folder  -->
-  <div style="display: none">
-    {{{page.contents}}}
-  </div>
   <p class="loading" id="loading-message">Loading privacy policy...</p>
   <div id="privacy-policy"></div>
 </div>
@@ -129,6 +125,8 @@
       document.getElementById("loading-message").style.display = "none";
     });
 </script>
+
+<script src="{{{uiRootPath}}}/js/site.js"></script>
 
 </body>
 </html>

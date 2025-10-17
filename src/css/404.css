@@ -20,7 +20,7 @@
   position: relative;
   flex: 1 100%;
   margin-top: 10px;
-  border: 1px solid var(--neutral-light);
+  border: 1px solid var(--border-color);
   padding: 5%;
   border-radius: var(--border-radius);
 }

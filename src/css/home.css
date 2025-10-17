@@ -119,7 +119,7 @@ dd {
   background-color: var(--content-background);
   flex-basis: 100%;
   padding: var(--cards-padding);
-  border: 1px solid light-dark(var(--neutral-light), var(--neutral-dark));
+  border: 1px solid var(--border-color);
   box-sizing: border-box;
 }
 

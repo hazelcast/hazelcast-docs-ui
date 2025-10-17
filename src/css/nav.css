@@ -241,7 +241,7 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
   position: relative;
   border-radius: 5px;
   color: light-dark(var(--accent), var(--text-dark));
-  border: 2px solid light-dark(var(--accent), var(--neutral-dark));
+  border: 2px solid light-dark(var(--accent), var(--border-color-dark));
   background-color: light-dark(var(--info-light), var(--action-item-background-dark));
   padding: 6px 30px 6px 10px;
   text-decoration: none !important;
@@ -311,15 +311,15 @@ head:has(meta[content="dark"]) ~ body .nav-version-picker-toggle::after {
   margin: var(--nav-x-padding);
   z-index: 100;
   list-style-type: none;
-  background-color: var(--info-light);
+  border: 2px solid light-dark(var(--accent), var(--border-color-dark));
+  background-color: light-dark(var(--info-light), var(--action-item-background-dark));
   border-radius: 5px;
-  border: 2px solid var(--accent);
   padding: 4px 6px;
 }
 
 .nav-version-picker-components a,
 .nav-version-picker-versions a {
-  color: var(--accent) !important;
+  color: light-dark(var(--accent), var(--text-dark));
   display: block;
   width: 100%;
 }

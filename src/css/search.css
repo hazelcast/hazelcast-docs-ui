@@ -30,6 +30,14 @@ body .aa-DetachedOverlay {
   border-color: var(--accent);
 }
 
+.aa-DetachedOverlay .aa-Form {
+  background-color: light-dark(var(--neutral-white), var(--action-item-background-dark));
+}
+
+.aa-Form .aa-Input {
+  color: var(--secondary-text);
+}
+
 .aa-Form .aa-SubmitIcon {
   color: var(--accent);
 }
@@ -287,13 +295,12 @@ select::-ms-expand {
   grid-template-areas: "select";
   align-items: center;
   position: relative;
-  border: 1px solid var(--neutral);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 0;
   cursor: pointer;
   line-height: 1.2;
-  background-color: #fff;
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  background-color: light-dark(#fff, var(--action-item-background-dark));
 }
 
 .aa-ComponentSelect {
@@ -344,6 +351,29 @@ select:focus + .focus {
   width: 70%;
   height: auto;
   opacity: 0.2;
+}
+
+.aa-DetachedOverlay .aa-DetachedCancelButton {
+  color: var(--secondary-text);
+}
+
+head:has(meta[content="dark"]) ~ body .aa-ImagePlaceholderImageLight {
+  display: none;
+}
+
+head:has(meta[content="light"]) ~ body .aa-ImagePlaceholderImageDark {
+  display: none;
+}
+
+.aa-DetachedOverlay .aa-Autocomplete,
+.aa-DetachedOverlay .aa-DetachedFormContainer,
+.aa-DetachedOverlay .aa-Panel {
+  color: var(--secondary-text);
+}
+
+.aa-DetachedOverlay .aa-ClearButton:focus,
+.aa-DetachedOverlay .aa-ClearButton:hover {
+  color: var(--border-color);
 }
 
 /* Footer */
