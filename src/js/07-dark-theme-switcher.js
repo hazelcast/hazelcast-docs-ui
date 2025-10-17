@@ -3,7 +3,7 @@
 
   const LOCAL_STORAGE_KEY = 'HZ_DOCS:COLOR_MODE'
 
-  function resetWronglyPersistedColorMode() {
+  const resetWronglyPersistedColorMode = () => {
     const persistedColorMode = window.localStorage.getItem(LOCAL_STORAGE_KEY)
 
     if (persistedColorMode !== 'dark' && persistedColorMode !== 'light') {

@@ -40,13 +40,15 @@
   padding: 0.5rem 0.7rem;
   font-family: var(--heading-font-family);
   font-size: 14px;
-  background-color: light-dark(var(--info-light), var(--neutral-dark));
+  background-color: light-dark(var(--info-light), var(--action-item-background-dark));
+  border: 1px solid light-dark(var(--info-light), var(--neutral-dark));
   border-radius: 10px;
   cursor: pointer;
 }
 
 .feedback-button:hover {
-  background-color: light-dark(var(--accent5-light), var(--secondary-text-light));
+  background-color: light-dark(var(--accent5-light), var(--action-item-hover-dark));
+  color: light-dark(var(--text-light), var(--text-dark-accent));
 }
 
 a.feedback-button:hover {

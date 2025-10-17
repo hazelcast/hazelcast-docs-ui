@@ -8,9 +8,12 @@
   --neutral-light: #b7c1cb;
   --secondary-text-light: #707482;
   --secondary-text-dark: #94a3b8;
+  --action-item-background-dark: #222835;
+  --action-item-hover-dark: #282f3d;
   --secondary-text: light-dark(var(--secondary-text-light), var(--secondary-text-dark));
   --text-light: #041a3b;
   --text-dark: #e2e8f0;
+  --text-dark-accent: #f8fafc;
   --text: light-dark(var(--text-light), var(--text-dark));
   --primary-light: #2d7de4;
   --primary: #2160c0;
@@ -55,7 +58,7 @@
   --code-font-weight-bold: 500;
   /* base */
   --body-background-light: #f2f5f9;
-  --body-background-dark: #1a1d29;
+  --body-background-dark: #191d29;
   --body-background: light-dark(var(--body-background-light), var(--body-background-dark));
   --content-background: light-dark(var(--neutral-white), var(--body-background-dark));
   --panel-background: var(--neutral-lighter);
@@ -71,14 +74,13 @@
   --navbar-menu-font-color: var(--body-font-color);
   /* nav */
   --nav-background: var(--panel-background);
-  --nav-border-color: #dadada;
+  --nav-border-color: light-dark(var(--neutral), var(--neutral-dark));
   --nav-line-height: 1.35;
   --nav-panel-divider-color: var(--neutral);
   --nav-secondary-background: var(--neutral-lighter);
   /* toolbar */
   --toolbar-background: var(--panel-background);
   --toolbar-border-color: var(--panel-border-color);
-  --toolbar-font-color: var(--color-gray-70);
   --toolbar-muted-color: var(--color-gray-30);
   --page-version-missing-font-color: var(--color-gray-30);
   /* toc */

@@ -240,9 +240,9 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
 .nav-version-picker-toggle {
   position: relative;
   border-radius: 5px;
-  color: light-dark(var(--accent), var(--neutral-white));
-  border: 2px solid light-dark(var(--accent), var(--secondary-text-dark));
-  background-color: light-dark(var(--info-light), var(--neutral-dark));
+  color: light-dark(var(--accent), var(--text-dark));
+  border: 2px solid light-dark(var(--accent), var(--neutral-dark));
+  background-color: light-dark(var(--info-light), var(--action-item-background-dark));
   padding: 6px 30px 6px 10px;
   text-decoration: none !important;
   cursor: pointer;
