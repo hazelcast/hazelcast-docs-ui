@@ -85,8 +85,16 @@ a.feedback-button:hover {
   margin-top: 0;
 }
 
+.yes-button {
+  color: light-dark(var(--success), var(--neutral-white));
+}
+
 .yes-button:hover .like-img {
   transform: translateY(-3px);
+}
+
+.no-button {
+  color: light-dark(var(--error), var(--neutral-white));
 }
 
 .no-button:hover .like-img {

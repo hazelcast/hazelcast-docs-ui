@@ -12,7 +12,7 @@
 }
 
 .page-versions .version-menu-toggle {
-  color: var(--accent);
+  color: light-dark(var(--accent), var(--accent-dark));
   background: url("../img/chevron.svg") no-repeat right 0.5rem top 50%;
   background-size: auto 0.75em;
   border: none;
@@ -22,18 +22,21 @@
   position: relative;
 }
 
+head:has(meta[content="dark"]) ~ body .page-versions .version-menu-toggle {
+  background-image: url("../img/chevron-dark.svg");
+}
+
 .page-versions .version-menu {
   font-size: calc(14 / var(--rem-base) * 1rem);
   z-index: 1;
-  background-color: #fff;
+  background-color: light-dark(var(--neutral-white), var(--body-background-dark));
   position: absolute;
   margin-top: 30px;
   top: 0;
   left: 0;
   width: 100%;
-  border: 1px solid var(--nav-border-color);
-  border-top-color: transparent;
-  border-radius: 0 0 5px 5px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
 }
 
 .page-versions:not(.is-active) .version-menu {

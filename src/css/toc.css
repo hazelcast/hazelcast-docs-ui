@@ -64,7 +64,7 @@
 }
 
 .toc .toc-menu a {
-  color: inherit;
+  color: light-dark(var(--secondary-text-light), var(--neutral-white));
   border-left: 2px solid var(--toc-border-color);
   display: inline-block;
   padding: 7px 0 7px 8px;
@@ -81,8 +81,8 @@
 }
 
 .toc .toc-menu a.is-active {
-  border-left-color: var(--accent);
-  color: var(--accent);
+  border-left-color: var(--link-font-color);
+  color: var(--link-font-color);
 }
 
 .toc .toc-menu .is-hidden-toc {

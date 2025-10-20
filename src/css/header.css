@@ -25,6 +25,10 @@ body {
   transition: height 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+.article .header {
+  border-bottom: 1px solid var(--border-color);
+}
+
 .header.shrink {
   height: 60px;
 }

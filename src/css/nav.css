@@ -168,7 +168,7 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
 
 .is-current-page > .nav-link,
 .is-current-page > .nav-text {
-  color: var(--accent);
+  color: light-dark(var(--accent), var(--accent-dark));
 }
 
 .nav-link,
@@ -240,7 +240,7 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
 .nav-version-picker-toggle {
   position: relative;
   border-radius: 5px;
-  color: light-dark(var(--accent), var(--text-dark));
+  color: light-dark(var(--accent), var(--neutral-white));
   border: 2px solid light-dark(var(--accent), var(--border-color-dark));
   background-color: light-dark(var(--info-light), var(--action-item-background-dark));
   padding: 6px 30px 6px 10px;
