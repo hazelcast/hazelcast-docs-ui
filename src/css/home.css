@@ -168,7 +168,7 @@ dd {
 }
 
 .home .card-list-item a {
-  color: var(--accent);
+  color: light-dark(var(--accent), var(--accent-dark));
   display: flex;
   align-items: center;
   width: 100%;

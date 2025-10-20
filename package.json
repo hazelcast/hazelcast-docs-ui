@@ -10,7 +10,7 @@
     "lint:style": "stylelint \"**/*.css\"",
     "serve": "serve docs",
     "expose": "ngrok http 3000",
-    "dev": "gulp preview"
+    "dev": "LIVERELOAD=true gulp preview"
   },
   "license": "MPL-2.0",
   "repository": {
