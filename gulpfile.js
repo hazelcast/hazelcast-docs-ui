@@ -99,6 +99,7 @@ const previewBuildTask = createTask({
   desc: 'Process and stage the UI assets and generate pages for the preview',
   call: livereload
     ? series(parallel(buildTask, buildPreviewPagesTask), (done) => {
+      // still not working without a manual reload trigger
       livereload()
       done()
     })
