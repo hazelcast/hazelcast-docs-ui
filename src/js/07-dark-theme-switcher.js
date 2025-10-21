@@ -3,21 +3,21 @@
 
   const LOCAL_STORAGE_KEY = 'HZ_DOCS:COLOR_MODE'
 
-  const resetWronglyPersistedColorMode = () => {
-    const persistedColorMode = window.localStorage.getItem(LOCAL_STORAGE_KEY)
+  const getPersistedOrSystemColorMode = () => {
+    let persistedColorMode = window.localStorage.getItem(LOCAL_STORAGE_KEY)
 
     if (persistedColorMode !== 'dark' && persistedColorMode !== 'light') {
       const isDarkModePreferredBySystem = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      window.localStorage.setItem(LOCAL_STORAGE_KEY, isDarkModePreferredBySystem ? 'dark' : 'light')
+      persistedColorMode = isDarkModePreferredBySystem ? 'dark' : 'light'
     }
 
-    return window.localStorage.getItem(LOCAL_STORAGE_KEY)
+    return persistedColorMode
   }
 
   const lightThemeOnBtn = document.getElementById('lightModeOnBtn')
   const darkThemeOnBtn = document.getElementById('darkModeOnBtn')
 
-  const persistedColorMode = resetWronglyPersistedColorMode()
+  const persistedColorMode = getPersistedOrSystemColorMode()
 
   const colorScheme = document.querySelector('meta[name=color-scheme]')
 
