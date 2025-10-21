@@ -3,15 +3,24 @@
   --neutral-white: #fff;
   --neutral-lighter: #fafafa;
   --neutral: #e4e2e2;
+  --neutral-dark: #374151;
   --neutral-grey: #f2f2f2;
   --neutral-light: #b7c1cb;
-  --secondary-text: #707482;
-  --text: #041a3b;
+  --secondary-text-light: #707482;
+  --secondary-text-dark: #94a3b8;
+  --action-item-background-dark: #222835;
+  --action-item-hover-dark: #282f3d;
+  --secondary-text: light-dark(var(--secondary-text-light), var(--secondary-text-dark));
+  --text-light: #041a3b;
+  --text-dark: #e2e8f0;
+  --text-dark-accent: #f8fafc;
+  --text: light-dark(var(--text-light), var(--text-dark));
   --primary-light: #2d7de4;
   --primary: #2160c0;
   --primary-dark: #003b87;
   --accent: #0080a9;
   --accent-light: #10a4b3;
+  --accent-dark: #00D9FF;
   --accent2: #c91268;
   --accent2-light: #ffe3e3;
   --accent3: #f5911e;
@@ -33,31 +42,31 @@
   --color-gray-30: #8e8e8e;
   --color-gray-50: #808080;
   --color-gray-70: #5d5d5d;
-  --color-jet-20: #4a4a4a;
-  --color-jet-30: #424242;
-  --color-jet-50: #333;
-  --color-jet-70: #222;
-  --color-jet-80: #191919;
-  --color-black: #000;
   /* fonts */
   --rem-base: 18; /* used to compute rem value from desired pixel value (e.g., calc(18 / var(--rem-base) * 1rem) = 18px) */
   --body-font-size: 1em; /* 16px */
+  --body-font-size-small: 13px;
   --body-font-size-print: 0.9375em; /* 15px */
   --body-line-height: 1.4;
   --body-font-color: var(--text);
   --header-color: #061827;
-  --footer-color: #0b2b39;
   --body-font-family: "Open Sans", sans-serif;
   --body-font-weight-bold: 500;
   --nav-font-family: "PP Telegraf", sans-serif;
   --nav-font-weight: 500;
   --monospace-font-family: "Roboto Mono", monospace;
   --heading-font-family: "PP Telegraf", sans-serif;
-  --monospace-font-weight-bold: 500;
+  --code-font-weight-bold: 500;
   /* base */
-  --body-background: #f2f5f9;
+  --body-background-light: #f2f5f9;
+  --body-background-dark: #191d29;
+  --body-background: light-dark(var(--body-background-light), var(--body-background-dark));
+  --content-background: light-dark(var(--neutral-white), var(--body-background-dark));
+  --border-color-light: var(--neutral-light);
+  --border-color-dark: var(--neutral-dark);
+  --border-color: light-dark(var(--border-color-light), var(--border-color-dark));
   --panel-background: var(--neutral-lighter);
-  --panel-border-color: var(--neutral);
+  --panel-border-color: light-dark(var(--neutral), var(--border-color-dark));
   --scrollbar-thumb-color: var(--neutral-light);
   /* navbar */
   --navbar-background: var(--neutral-white);
@@ -69,20 +78,16 @@
   --navbar-menu-font-color: var(--body-font-color);
   /* nav */
   --nav-background: var(--panel-background);
-  --nav-border-color: #dadada;
   --nav-line-height: 1.35;
-  --nav-heading-font-color: var(--color-jet-30);
-  --nav-muted-color: var(--color-gray-70);
-  --nav-panel-divider-color: var(--neutral);
+  --nav-panel-divider-color: var(--neutral-light);
   --nav-secondary-background: var(--neutral-lighter);
   /* toolbar */
   --toolbar-background: var(--panel-background);
   --toolbar-border-color: var(--panel-border-color);
-  --toolbar-font-color: var(--color-gray-70);
   --toolbar-muted-color: var(--color-gray-30);
   --page-version-missing-font-color: var(--color-gray-30);
   /* toc */
-  --toc-font-color: var(--nav-muted-color);
+  --toc-font-color: light-dark(var(--secondary-text-light), var(--secondary-text-dark));
   --toc-heading-font-color: var(--doc-font-color);
   --toc-border-color: var(--panel-border-color);
   --toc-line-height: 1.2;
@@ -109,8 +114,8 @@
   --heading-font-weight: normal;
   --alt-heading-font-weight: var(--body-font-weight-bold);
   --section-divider-color: var(--panel-border-color);
-  --link-font-color: var(--primary);
-  --link-hover-font-color: var(--primary);
+  --link-font-color: light-dark(var(--accent), var(--accent-dark));
+  --link-hover-font-color: light-dark(var(--accent), var(--accent-dark));
   --link-unresolved-font-color: var(--important-color);
   --abstract-background: var(--neutral-light);
   --abstract-font-color: var(--secondary-text);
@@ -119,11 +124,11 @@
   --admonition-label-font-weight: var(--body-font-weight-bold);
   --caption-font-color: var(--secondary-text);
   --caption-font-weight: var(--body-font-weight-bold);
-  --code-background: #f1f3f4;
-  --code-font-color: #37474f;
+  --code-background: light-dark(#f1f3f4, #37474f);
+  --code-font-color: light-dark(#37474f, #f1f3f4);
   --example-background: var(--neutral-white);
   --example-border-color: var(--color-gray-70);
-  --kbd-background: var(--panel-background);
+  --kbd-background: light-dark(var(--panel-background), var(--body-background-dark));
   --kbd-border-color: var(--neutral-light);
   --pre-background: var(--panel-background);
   --pre-border-color: var(--panel-border-color);
@@ -136,7 +141,6 @@
   --table-border-color: var(--panel-border-color);
   /* footer */
   --footer-line-height: var(--doc-line-height);
-  --footer-font-color: #fafafa;
   /* dimensions and positioning */
   --navbar-height: 60px;
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);

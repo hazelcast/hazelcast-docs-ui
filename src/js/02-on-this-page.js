@@ -16,7 +16,9 @@
     var links = {}
     var list = headings.reduce(function (accum, heading) {
       var link = document.createElement('a')
-      link.textContent = heading.textContent
+      // get only direct textNode of the heading not the text of its HTML children
+      link.textContent = [...heading.childNodes]
+        .map((node) => node.nodeType === 3 ? node.nodeValue : '').join('')
       links[(link.href = '#' + heading.id)] = link
       var listItem = document.createElement('li')
       listItem.dataset.level = parseInt(heading.nodeName.slice(1)) - 1

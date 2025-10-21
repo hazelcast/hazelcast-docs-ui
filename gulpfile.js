@@ -91,13 +91,19 @@ const packTask = createTask({
 
 const buildPreviewPagesTask = createTask({
   name: 'preview:build-pages',
-  call: task.buildPreviewPages(srcDir, previewSrcDir, previewDestDir, livereload),
+  call: task.buildPreviewPages(srcDir, previewSrcDir, previewDestDir),
 })
 
 const previewBuildTask = createTask({
   name: 'preview:build',
   desc: 'Process and stage the UI assets and generate pages for the preview',
-  call: parallel(buildTask, buildPreviewPagesTask),
+  call: livereload
+    ? series(parallel(buildTask, buildPreviewPagesTask), (done) => {
+      // still not working without a manual reload trigger
+      livereload()
+      done()
+    })
+    : parallel(buildTask, buildPreviewPagesTask),
 })
 
 const previewServeTask = createTask({

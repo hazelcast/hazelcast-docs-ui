@@ -4,7 +4,7 @@
    General Styles
 ================================ */
 
-body.body-dark {
+body.page-home {
   background-color: #061827;
 }
 
@@ -99,7 +99,7 @@ dd {
 
 .home .article,
 .light-section {
-  background-color: #f2f5f9;
+  background-color: var(--body-background);
   text-align: left;
   display: flex;
   justify-content: center;
@@ -116,17 +116,17 @@ dd {
 .feedback-footer,
 .additional-card {
   border-radius: 10px;
-  background-color: #fff;
+  background-color: var(--content-background);
   flex-basis: 100%;
   padding: var(--cards-padding);
-  border: 1px solid var(--neutral-light);
+  border: 1px solid var(--border-color);
   box-sizing: border-box;
 }
 
 /* Card Titles */
 .home .card-header,
 .feedback-footer .card-header {
-  color: var(--doc-font-color);
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -168,7 +168,7 @@ dd {
 }
 
 .home .card-list-item a {
-  color: var(--primary-light);
+  color: light-dark(var(--accent), var(--accent-dark));
   display: flex;
   align-items: center;
   width: 100%;
@@ -205,7 +205,7 @@ dd {
 
 .article .feedback-footer-container {
   padding-top: var(--cards-gap);
-  background-color: var(--neutral-white);
+  background-color: var(--content-background);
 }
 
 .feedback-footer {

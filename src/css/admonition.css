@@ -5,6 +5,15 @@
   border-left-style: solid;
   padding: 15px 10px 15px 20px;
   margin-top: 1rem;
+  color: var(--text-light);
+}
+
+.doc .admonitionblock a {
+  color: var(--accent);
+}
+
+.doc .admonitionblock a[href*="//"]:not([href*="docs.hazelcast.com"])::after {
+  content: url("/_/img/external-link.svg") !important;
 }
 
 /* to override CSS when admonition is inside a table */

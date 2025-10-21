@@ -9,7 +9,7 @@
 .feedback-prompt {
   width: var(--toc-width);
   font-family: var(--body-font-family);
-  color: var(--nav-muted-color);
+  color: var(--secondary-text);
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -40,13 +40,15 @@
   padding: 0.5rem 0.7rem;
   font-family: var(--heading-font-family);
   font-size: 14px;
-  background-color: var(--info-light);
+  background-color: light-dark(var(--info-light), var(--action-item-background-dark));
+  border: 1px solid light-dark(var(--info-light), var(--neutral-dark));
   border-radius: 10px;
   cursor: pointer;
 }
 
 .feedback-button:hover {
-  background-color: var(--accent5-light);
+  background-color: light-dark(var(--accent5-light), var(--action-item-hover-dark));
+  color: light-dark(var(--text-light), var(--text-dark-accent));
 }
 
 a.feedback-button:hover {
@@ -83,8 +85,16 @@ a.feedback-button:hover {
   margin-top: 0;
 }
 
+.yes-button {
+  color: light-dark(var(--success), var(--neutral-white));
+}
+
 .yes-button:hover .like-img {
   transform: translateY(-3px);
+}
+
+.no-button {
+  color: light-dark(var(--error), var(--neutral-white));
 }
 
 .no-button:hover .like-img {
@@ -101,11 +111,11 @@ a.feedback-button:hover {
   display: block;
   padding-right: 0.5rem;
   font-family: var(--body-font-family);
-  color: var(--nav-muted-color);
+  color: light-dark(var(--secondary-text-light), var(--neutral-white));
 }
 
 .additional-feedback a {
-  color: var(--primary-light);
+  color: var(--accent);
   font-size: calc(14 / var(--rem-base) * 1rem);
 }
 
@@ -113,7 +123,7 @@ a.feedback-button:hover {
   display: block;
   padding-right: 0.5rem;
   font-family: var(--body-font-family);
-  color: var(--nav-muted-color);
+  color: light-dark(var(--secondary-text-light), var(--neutral-white));
 }
 
 .edit-this-page a {
@@ -129,20 +139,40 @@ a.feedback-button:hover {
   background: transparent url("../img/github.svg") center left / contain no-repeat;
 }
 
+head:has(meta[content="dark"]) ~ body .git {
+  background: transparent url("../img/github-white.svg") center left / contain no-repeat;
+}
+
 .git-pull {
   background: transparent url("../img/edit.svg") center left / contain no-repeat;
+}
+
+head:has(meta[content="dark"]) ~ body .git-pull {
+  background: transparent url("../img/edit-white.svg") center left / contain no-repeat;
 }
 
 .command {
   background: transparent url("../img/command.svg") center left / contain no-repeat;
 }
 
+head:has(meta[content="dark"]) ~ body .command {
+  background: transparent url("../img/command-white.svg") center left / contain no-repeat;
+}
+
 .training {
-  background: transparent url("../img/training.png") center left / contain no-repeat;
+  background: transparent url("../img/training.svg") center left / contain no-repeat;
+}
+
+head:has(meta[content="dark"]) ~ body .training {
+  background: transparent url("../img/training-white.svg") center left / contain no-repeat;
 }
 
 .mail {
   background: transparent url("../img/mail.svg") center left / contain no-repeat;
+}
+
+head:has(meta[content="dark"]) ~ body .mail {
+  background: transparent url("../img/mail-white.svg") center left / contain no-repeat;
 }
 
 .feedback-form-submit-container {
@@ -168,7 +198,7 @@ input[name="feedback"] {
   border-radius: 50%;
   width: 16px;
   height: 16px;
-  border: 1px solid var(--neutral-light);
+  border: 1px solid var(--secondary-text);
   transition: 0.2s border-width linear;
   margin: 0;
   position: relative;

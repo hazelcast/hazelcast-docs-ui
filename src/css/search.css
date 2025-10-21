@@ -30,6 +30,14 @@ body .aa-DetachedOverlay {
   border-color: var(--accent);
 }
 
+.aa-DetachedOverlay .aa-Form {
+  background-color: light-dark(var(--neutral-white), var(--action-item-background-dark));
+}
+
+.aa-Form .aa-Input {
+  color: var(--secondary-text);
+}
+
 .aa-Form .aa-SubmitIcon {
   color: var(--accent);
 }
@@ -111,7 +119,7 @@ div.aa-DetachedFormContainer {
 }
 
 .aa-List .aa-Item {
-  background-color: var(--neutral-white);
+  background-color: light-dark(var(--neutral-white), var(--action-item-background-dark));
   box-shadow: var(--aa-box-shadow);
   margin-bottom: 1rem;
   border-radius: 5px;
@@ -287,13 +295,12 @@ select::-ms-expand {
   grid-template-areas: "select";
   align-items: center;
   position: relative;
-  border: 1px solid var(--neutral);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 0;
   cursor: pointer;
   line-height: 1.2;
-  background-color: #fff;
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  background-color: light-dark(#fff, var(--action-item-background-dark));
 }
 
 .aa-ComponentSelect {
@@ -346,13 +353,38 @@ select:focus + .focus {
   opacity: 0.2;
 }
 
+.aa-DetachedOverlay .aa-DetachedCancelButton {
+  color: var(--secondary-text);
+}
+
+head:has(meta[content="dark"]) ~ body .aa-ImagePlaceholderImageLight {
+  display: none;
+}
+
+head:has(meta[content="light"]) ~ body .aa-ImagePlaceholderImageDark {
+  display: none;
+}
+
+.aa-DetachedOverlay .aa-Autocomplete,
+.aa-DetachedOverlay .aa-DetachedFormContainer,
+.aa-DetachedOverlay .aa-Panel {
+  color: var(--secondary-text);
+}
+
+.aa-DetachedOverlay .aa-ClearButton:focus,
+.aa-DetachedOverlay .aa-ClearButton:hover {
+  color: var(--border-color);
+}
+
 /* Footer */
 .aa-Panel .aa-PanelFooter {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  border-top: 1px solid var(--neutral-lighter);
+  color: var(--secondary-text);
+  border-top: 1px solid var(--border-color);
+  background-color: light-dark(var(--neutral-white), var(--body-background-dark));
   gap: 1rem;
 }
 
@@ -367,10 +399,10 @@ select:focus + .focus {
 .aa-Panel .aa-Key {
   display: block;
   border-radius: 0.25rem;
-  background: linear-gradient(to top left, var(--neutral-lighter), var(--neutral-grey));
-  border: 1px solid var(--neutral-white);
-  border-bottom: 2px solid var(--neutral-white);
-  box-shadow: 0 4px 11px 0 var(--neutral-grey), 0 1px 3px 0 var(--neutral-light);
+  background: linear-gradient(to top left, light-dark(var(--neutral-lighter), var(--action-item-background-dark)), light-dark(var(--neutral-grey), var(--neutral-dark)));
+  border: 1px solid light-dark(var(--neutral-white), var(--action-item-background-dark));
+  border-bottom-width: 2px;
+  box-shadow: 0 4px 11px 0 light-dark(var(--neutral-grey), var(--neutral-dark)), 0 1px 3px 0 light-dark(var(--neutral-light), var(--action-item-background-dark));
   color: var(--secondary-text);
   padding: 2px 6px;
   font-weight: 500;

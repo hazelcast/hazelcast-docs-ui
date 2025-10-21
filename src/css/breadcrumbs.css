@@ -8,7 +8,7 @@
   .breadcrumbs {
     display: block;
     margin-top: 15px;
-    font-size: smaller;
+    font-size: var(--body-font-size-small);
   }
 }
 

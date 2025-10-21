@@ -1,7 +1,3 @@
-/* :root { */
-/*  color-scheme: light dark; */
-/* } */
-
 html,
 body {
   height: 100%;
@@ -43,10 +39,6 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-a:active {
-  background-color: transparent;
 }
 
 code,

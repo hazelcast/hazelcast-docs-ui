@@ -74,7 +74,7 @@ page:
   home: true
   title: Java Client
   attributes:
-    component-order: '!home, !templates, !imdg, !privacy, hazelcast, management-center, cloud, *'
+    component-order: '!home, !templates, !imdg, !privacy, management-center, clc, hazelcast, cloud, *'
     excluded-versions: 'management-center:4.0'
     last-versions-count: 10
   component:

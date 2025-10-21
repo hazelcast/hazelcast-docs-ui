@@ -25,6 +25,10 @@ body {
   transition: height 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+.article .header {
+  border-bottom: 1px solid var(--border-color);
+}
+
 .header.shrink {
   height: 60px;
 }
@@ -249,7 +253,7 @@ nav .button.header-button {
 }
 
 nav .button.try-product-button {
-  color: var(--text);
+  color: var(--text-light);
   background-color: var(--accent4);
 }
 
@@ -417,6 +421,8 @@ nav .button.ask-ai-button {
     display: inline;
   }
 
+  /* stylelint-enable selector-class-pattern */
+
   /* Hide desktop nav */
   #desktop-holder,
   nav .mega-menu,
@@ -441,4 +447,32 @@ nav .button.ask-ai-button {
   }
 }
 
-/* stylelint-enable selector-class-pattern */
+.color-theme-switcher {
+  position: relative;
+  height: 28px;
+  width: 36px;
+}
+
+.color-theme-btn {
+  position: absolute;
+  inset: 0;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--neutral-white);
+  transition: background 0.2s ease;
+}
+
+.color-theme-btn:hover {
+  background: var(--action-item-hover-dark);
+}
+
+head:has(meta[content="light"]) ~ body .light-mode-on-btn,
+head:has(meta[content="dark"]) ~ body .dark-mode-on-btn {
+  visibility: hidden;
+  z-index: -1;
+}

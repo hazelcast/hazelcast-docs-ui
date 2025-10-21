@@ -58,7 +58,7 @@
 }
 
 .article-banner a.btn {
-  border: 1px solid var(--neutral);
+  border: 1px solid var(--border-color);
   text-align: center;
   padding: 4px;
   text-decoration: none;
@@ -76,7 +76,7 @@
 }
 
 main > .content {
-  background-color: #fff;
+  background-color: var(--content-background);
 }
 
 @media screen and (width >= 1024px) {

@@ -11,22 +11,6 @@
   {{> head-scripts}}
   {{> head-icons}}
   <style>
-    /* Load PP Telegraf (Make sure the font file is available) */
-    @font-face {
-      font-family: "PP Telegraf";
-      src: url("https://hazelcast.com/wp-content/themes/hazelcast/assets/fonts/PPTelegraf-Regular.woff2") format("woff2"),
-      url("https://hazelcast.com/wp-content/themes/hazelcast/assets/fonts/PPTelegraf-Regular.woff") format("woff");
-      font-weight: normal;
-      font-style: normal;
-    }
-    /* Apply global font settings */
-    body {
-      font-family: "PP Telegraf", Arial, Helvetica, sans-serif;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #0b2b39;
-    }
     .privacy {
       padding: 20px;
       max-width: 1800px;
@@ -37,7 +21,8 @@
     }
     .loading {
       font-style: italic;
-      color: gray;
+      color: var(--secondary-text);
+      text-align: center;
     }
     .error {
       color: red;
@@ -53,24 +38,24 @@
     th, td {
       padding: 10px;
       text-align: left;
-      border-bottom: 1px solid #ddd; /* Row borders */
-      white-space: normal; /* Allows text wrapping */
-      overflow-wrap: break-word; /* Break long words properly */
+      border-bottom: 1px solid var(--border-color);
+      white-space: normal;
+      overflow-wrap: break-word;
     }
 
     th {
-      background-color: #c6ff3a;
-      color: #0b2b39;
+      background-color: light-dark(var(--accent4), var(--accent));
+      color: var(--text);
       font-weight: bold;
     }
 
       /* Alternating row colors */
     tr:nth-child(even) {
-      background-color: #f9f9f9;
+      background-color: light-dark(#f9f9f9, var(--action-item-background-dark));
     }
 
     tr:nth-child(odd) {
-      background-color: #ffffff;
+      background-color: light-dark(var(--neutral-white), var(--body-background-dark));
     }
 
     ul {
@@ -81,6 +66,10 @@
 
     li {
       margin-bottom: 0.5em; /* Adds spacing between list items */
+    }
+
+    a {
+      color: var(--link-font-color);
     }
   </style>
   <script>
@@ -125,6 +114,8 @@
       document.getElementById("loading-message").style.display = "none";
     });
 </script>
+
+<script src="{{{uiRootPath}}}/js/site.js"></script>
 
 </body>
 </html>
