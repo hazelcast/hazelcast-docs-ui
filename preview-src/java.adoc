@@ -6,7 +6,9 @@ It is offered both with Hazelcast IMDG and Hazelcast IMDG Enterprise.
 The main idea behind the Java client is to provide the same Hazelcast
 functionality by proxying each operation through a Hazelcast member.
 It can access and change distributed data and it can listen to distributed
-events of an already established Hazelcast cluster from another Java application.
+events of an already established Hazelcast cluster from another Java application the link:https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config[Prometheus configuration documentation].
+
+TIP: For guidance, see the link:https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config[Prometheus configuration documentation].
 
 Content in document.
 
