@@ -128,7 +128,7 @@
   --code-font-color: light-dark(#37474f, #f1f3f4);
   --example-background: var(--neutral-white);
   --example-border-color: var(--color-gray-70);
-  --kbd-background: var(--panel-background);
+  --kbd-background: light-dark(var(--panel-background), var(--body-background-dark));
   --kbd-border-color: var(--neutral-light);
   --pre-background: var(--panel-background);
   --pre-border-color: var(--panel-border-color);
