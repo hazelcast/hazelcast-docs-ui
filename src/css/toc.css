@@ -64,7 +64,7 @@
 }
 
 .toc .toc-menu a {
-  color: light-dark(var(--secondary-text-light), var(--neutral-white));
+  color: var(--navbar-font-color);
   border-left: 2px solid var(--toc-border-color);
   display: inline-block;
   padding: 7px 0 7px 8px;
