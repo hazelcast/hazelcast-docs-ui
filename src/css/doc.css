@@ -577,8 +577,8 @@ code {
 }
 
 .doc .imageblock .title {
-  margin-top: 0.5rem;
   padding-bottom: 0;
+  margin-bottom: 6px;
 }
 
 .doc .exampleblock > .content {

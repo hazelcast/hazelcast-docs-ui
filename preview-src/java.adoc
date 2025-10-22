@@ -13,11 +13,12 @@ events of an already established Hazelcast cluster from another Java application
 
 TIP: For guidance, see the link:https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config[Prometheus configuration documentation].
 
-Content in document.
+Content in document terminals in which the members are running or press terminals in which the members are running or press image:cluster-connected.png[Cluster Connected]
 
 terminals in which the members are running or press kbd:[Ctrl+C] in each terminal.
 
-image:cluster-connected.png[Cluster Connected]
+.Full Hello world
+image::cluster-connected.png[Cluster Connected]
 
 Content in document
 
