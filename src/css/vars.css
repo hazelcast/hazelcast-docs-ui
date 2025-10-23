@@ -70,7 +70,7 @@
   --scrollbar-thumb-color: var(--neutral-light);
   /* navbar */
   --navbar-background: var(--neutral-white);
-  --navbar-font-color: #24292e;
+  --navbar-font-color: light-dark(var(--secondary-text-light), var(--neutral-white));
   --navbar-button-background: var(--accent-light);
   --navbar-button-font-color: var(--neutral-white);
   --navbar-menu-border-color: var(--panel-border-color);
