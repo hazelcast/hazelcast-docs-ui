@@ -1,14 +1,4 @@
-pre.highlightjs {
-  user-select: none;
-  cursor: pointer;
-}
-
-pre.highlightjs:hover .copy-code-button {
-  background-color: var(--code-background);
-}
-
 .copy-code-button {
-  color: var(--pre-annotation-font-color);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -17,6 +7,12 @@ pre.highlightjs:hover .copy-code-button {
   border-radius: 3px 3px 0 0;
   position: relative;
   transition: background-color 300ms ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.doc a.copy-code-button:hover {
+  color: light-dark(var(--accent-light), var(--accent-light));
 }
 
 a.copy-code-button:focus,
