@@ -59,6 +59,12 @@
     const fadeShadow = document.createElement('span')
     fadeShadow.className = 'fade-shadow'
 
+    codeBlock.addEventListener('copy', (event) => {
+      const selection = document.getSelection()
+      event.clipboardData.setData('text/plain', normalizeBashCode(selection.toString()))
+      event.preventDefault()
+    })
+
     copyButton.addEventListener('click', function () {
       let codeString = normalizeBashCode(codeBlock.innerText)
       if (codeString.charAt(0) === '$') {
