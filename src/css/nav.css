@@ -76,8 +76,14 @@
   padding: 0.25em 0 0.125em;
 }
 
-.nav-menu a {
-  color: light-dark(var(--secondary-text-light), var(--neutral-white));
+.nav-item > .nav-text,
+.nav-item > .nav-link {
+  color: var(--navbar-font-color);
+}
+
+.nav-item[data-depth="0"] > .nav-text,
+.nav-item[data-depth="0"] > .nav-link {
+  color: var(--body-font-color);
 }
 
 .nav-list {
