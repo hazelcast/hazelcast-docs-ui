@@ -686,6 +686,7 @@ code {
   width: 1.25em;
   letter-spacing: -0.25ex;
   text-indent: -0.25ex;
+  margin-left: 1em;
 }
 
 .doc .conum[data-value]::after {

@@ -42,24 +42,30 @@
   }
 
   document.querySelectorAll('pre > code').forEach(function (codeBlock) {
-    var sourceTypeBox = document.createElement('div')
+    const sourceTypeBox = document.createElement('div')
     sourceTypeBox.className = 'source-type-box'
-    var copyButton = document.createElement('a')
+    const copyButton = document.createElement('a')
     copyButton.className = 'copy-code-button'
     copyButton.dataset.title = 'Copy'
     copyButton.innerText = 'Copy'
     copyButton.appendChild(document.createElement('i')).className = 'fa-regular fa-copy'
-    var dataSource = document.createElement('span')
+    const dataSource = document.createElement('span')
     dataSource.className = 'data-source'
     if (codeBlock.dataset.lang) {
       dataSource.innerHTML += codeBlock.dataset.lang
     } else {
       dataSource.innerHTML += ' '
     }
-    var fadeShadow = document.createElement('span')
+    const fadeShadow = document.createElement('span')
     fadeShadow.className = 'fade-shadow'
 
-    codeBlock.parentNode.addEventListener('click', function () {
+    codeBlock.addEventListener('copy', (event) => {
+      const selection = document.getSelection()
+      event.clipboardData.setData('text/plain', normalizeBashCode(selection.toString()))
+      event.preventDefault()
+    })
+
+    copyButton.addEventListener('click', function () {
       let codeString = normalizeBashCode(codeBlock.innerText)
       if (codeString.charAt(0) === '$') {
         codeString = trimCode(codeString)
@@ -69,7 +75,7 @@
         getOnCopyError(copyButton)
       )
     })
-    var pre = codeBlock.parentNode
+    const pre = codeBlock.parentNode
     pre.appendChild(sourceTypeBox)
     sourceTypeBox.appendChild(dataSource)
     sourceTypeBox.appendChild(copyButton)
