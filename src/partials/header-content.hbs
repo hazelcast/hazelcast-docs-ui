@@ -42,7 +42,9 @@
       </section>
 
       {{#if (and (not-eq page.layout 'home') (not-eq page.layout 'tutorials-landing') (not-eq page.layout 'privacy') (not-eq page.component.name 'imdg'))}}
-        <div id="search-input" class="navbar-item searchbox"></div>
+        <div id="search-input" class="navbar-item searchbox">
+          {{> algolia-search-loader }}
+        </div>
       {{/if}}
 
       {{#if site.keys.aiSearchId}}
