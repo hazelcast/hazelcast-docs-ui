@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Roboto Mono";
   font-style: normal;
+  font-display: swap;
   font-weight: 400;
   src:
     local("Roboto Mono Regular"),
@@ -12,6 +13,7 @@
 @font-face {
   font-family: "Roboto Mono";
   font-style: normal;
+  font-display: swap;
   font-weight: 500;
   src:
     local("Roboto Mono Medium"),

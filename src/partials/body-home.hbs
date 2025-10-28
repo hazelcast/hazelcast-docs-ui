@@ -7,7 +7,9 @@
       Find user guides, code samples, tutorials, API reference, and more.
     </p>
     <div class="home-background-buttons">
-      <div id="search-input" class="search-container searchbox"></div>
+      <div id="search-input" class="search-container searchbox">
+        {{> algolia-search-loader }}
+      </div>
       {{#if site.keys.aiSearchId}}
         <p>or</p>
         <a class="navbar-item" href="#">
@@ -350,10 +352,9 @@
         console.error("Failed to load promo banner:", err);
         container.innerHTML = ''; // fallback or leave empty
       });
-  });
 
-  // feather icons
-  feather.replace();
+    feather.replace();
+  });
 
 </script>
 

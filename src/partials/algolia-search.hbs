@@ -4,13 +4,45 @@
   integrity="sha256-4Wtj6dqgMBT/Ji+vI49GON0NbfDlaJH06SUD7TH4yYg="
   crossorigin="anonymous"
 />
-<script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.30.0/dist/lite/builds/browser.umd.js" integrity="sha256-w/rbJ5CGTW5rub22bQ/VEoIHxypNh4NZPdkIJvGMZlI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.79.0/dist/instantsearch.production.min.js" integrity="sha256-FOU2owonNoOmNxF4I8jLR4D8w/vziYNi64GUN2boXRQ=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@1"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/algoliasearch@5.30.0/dist/lite/builds/browser.umd.js"
+  integrity="sha256-w/rbJ5CGTW5rub22bQ/VEoIHxypNh4NZPdkIJvGMZlI="
+  crossorigin="anonymous"
+  id="algoliasearchScript"
+  defer
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.79.0/dist/instantsearch.production.min.js"
+  integrity="sha256-FOU2owonNoOmNxF4I8jLR4D8w/vziYNi64GUN2boXRQ="
+  crossorigin="anonymous"
+  id="instantsearchScript"
+  defer
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js@1"
+  id="autocompleteScript"
+  defer
+></script>
 
 {{#if page.component}}
   <script>
-    (() => {
+    (async () => {
+      const waitForScriptWithIdToLoad = (id) => new Promise((resolve, reject) => {
+        try {
+          const script = document.getElementById(id);
+          script.addEventListener('load', resolve);
+          script.addEventListener('error', reject);
+        } catch (e) {
+          reject();
+        }
+      });
+
+      await Promise.all([
+        waitForScriptWithIdToLoad('algoliasearchScript'),
+        waitForScriptWithIdToLoad('instantsearchScript'),
+        waitForScriptWithIdToLoad('autocompleteScript'),
+      ])
+
       const UI_TYPE = {
         ITEM: 0,
         HEADING: 1,

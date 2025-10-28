@@ -1,4 +1,12 @@
 /* stylelint-disable selector-class-pattern */
+.aa-AutocompletePlaceholder:not(:only-child) {
+  display: none;
+}
+
+.aa-DetachedSearchButton[disabled] {
+  opacity: 0.9;
+  cursor: wait;
+}
 
 .aa-Autocomplete {
   width: 100%;
