@@ -256,4 +256,9 @@ It's content is aligned to the bottom of the cell.
 |&#10060;
 |Get full access to all Management Center features.
 
+|Management Center
+|✅
+|❌
+|Get full access to all Management Center features.
+
 |===
