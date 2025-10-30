@@ -99,7 +99,7 @@ module.exports = (src, dest, preview) => () => {
     vfs
       .src(['css/site.css', 'css/vendor/*.css'], { ...opts, sourcemaps })
       .pipe(postcss((file) => ({ plugins: postcssPlugins, options: { file } }))),
-    vfs.src('font/*.{ttf,woff*(2)}', opts),
+    vfs.src('font/*.{ttf,woff*(2),svg}', opts),
     vfs
       .src('img/**/*.{gif,ico,jpg,jpeg,png,svg,jpeg}', opts)
       .pipe(

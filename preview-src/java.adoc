@@ -249,11 +249,19 @@ It's content is aligned to the bottom of the cell.
 
 [cols="<30%,<15%,<15%,<40%", options="header"]
 |===
-|[align=left]*Core Hazelcast Capabilities*|[align=left]*{enterprise-product-name}*|[align=left]*{open-source-product-name}*|[align=left]*Description*
+|[align=left]*Core Hazelcast Capabilities*
+|[align=left]*Hey*
+|[align=left]*Hi*
+|[align=left]*Description*
 
 |Management Center
-|&#9989;
-|&#10060;
+|icon:check-circle[size=lg,role=success]
+|icon:times[size=lg,role=error]
+|Get full access to all Management Center features.
+
+|Management Center
+|✅
+|❌
 |Get full access to all Management Center features.
 
 |===
