@@ -24,26 +24,6 @@
     }
   }
 
-  function handleScroll () {
-    const header = document.querySelector('.header')
-    if (!header) return
-
-    if (window.scrollY > 50) {
-      header.classList.add('shrink')
-    } else {
-      header.classList.remove('shrink')
-    }
-  }
-
-  // Listen for scroll events
-  if (document.body.classList.contains('page-home')) {
-    window.addEventListener('scroll', handleScroll)
-    handleScroll() // run once on load
-  } else {
-    const header = document.querySelector('.header')
-    if (header) header.classList.add('shrink')
-  }
-
   if (document.getElementsByClassName('nav-container').length > 0) {
     var navContainer = document.querySelector('.nav-container')
     var navToggle = document.querySelector('.nav-toggle')

@@ -1,0 +1,2329 @@
+openapi: 3.0.1
+info:
+  title: Hazelcast Rest API
+  description: Hazelcast Rest API.
+  version: v1
+servers:
+  - url: http://localhost:8081
+    description: Generated server url
+security:
+  - Bearer Authentication: []
+paths:
+  /hazelcast/rest/api/v1/wan/sync-map/{wanReplicationName}/{publisherId}/{mapName}:
+    post:
+      tags:
+        - WAN Controller
+      summary: Initiate wan sync for a specific map.
+      description: Initiate wan sync for a specific map.
+      operationId: syncMap
+      parameters:
+        - name: wanReplicationName
+          in: path
+          description: The name of the wan replication configuration
+          required: true
+          schema:
+            type: string
+        - name: publisherId
+          in: path
+          description: ID of the WAN replication publisher
+          required: true
+          schema:
+            type: string
+        - name: mapName
+          in: path
+          description: The name of the map to sync
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: UUID of the WAN sync operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WanSyncResultModel'
+              examples:
+                OK:
+                  description: WAN sync map operation has been initiated successfully.
+                  value:
+                    syncId: e7b3b3b3-4b3b-4b3b-4b3b-4b3b3b3b3b3b
+        "400":
+          description: Wan replication configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Wan replication configuration not found.
+                  value:
+                    statusCode: 400
+                    message: Wan replication configuration not found.
+        "503":
+          description: There is an ongoing anti-entropy event being processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Service Unavailable:
+                  description: if there is an ongoing anti-entropy event being processed.
+                  value:
+                    statusCode: 503
+                    message: There is an ongoing anti-entropy event being processed.
+  /hazelcast/rest/api/v1/wan/sync-all-maps/{wanReplicationName}/{publisherId}:
+    post:
+      tags:
+        - WAN Controller
+      summary: Initiate wan sync for all maps.
+      description: Initiate wan sync for all maps.
+      operationId: syncAllMaps
+      parameters:
+        - name: wanReplicationName
+          in: path
+          description: The name of the wan replication configuration
+          required: true
+          schema:
+            type: string
+        - name: publisherId
+          in: path
+          description: ID of the WAN replication publisher
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: WAN sync all maps operation has been initiated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WanSyncResultModel'
+              examples:
+                OK:
+                  description: UUID of the WAN sync operation.
+                  value:
+                    syncId: e7b3b3b3-4b3b-4b3b-4b3b-4b3b3b3b3b3b
+        "400":
+          description: Wan replication configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Wan replication configuration not found.
+                  value:
+                    statusCode: 400
+                    message: Wan replication configuration not found.
+  /hazelcast/rest/api/v1/wan/stop-publisher/{wanReplicationName}/{publisherId}:
+    post:
+      tags:
+        - WAN Controller
+      summary: Stops WAN publisher.
+      description: |-
+        Stops WAN replication for the given wanReplicationName and
+        wanPublisherId on this Hazelcast instance.
+        Silently skips publishers not supporting stopping.
+      operationId: stopWanPublisher
+      parameters:
+        - name: wanReplicationName
+          in: path
+          description: The name of the wan replication configuration
+          required: true
+          schema:
+            type: string
+        - name: publisherId
+          in: path
+          description: ID of the WAN replication publisher
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Wan publisher has been stopped successfully.
+        "400":
+          description: Wan replication configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Wan replication configuration not found.
+                  value:
+                    statusCode: 400
+                    message: Wan replication configuration not found.
+  /hazelcast/rest/api/v1/wan/resume-publisher/{wanReplicationName}/{publisherId}:
+    post:
+      tags:
+        - WAN Controller
+      summary: Resumes WAN publisher.
+      description: Resumes WAN replication for the given wanReplicationName and wanPublisherId
+        on this Hazelcast instance. Silently skips publishers not supporting resuming.
+      operationId: resumeWanPublisher
+      parameters:
+        - name: wanReplicationName
+          in: path
+          description: The name of the wan replication configuration
+          required: true
+          schema:
+            type: string
+        - name: publisherId
+          in: path
+          description: ID of the WAN replication publisher
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Wan publisher has been resumed successfully.
+        "400":
+          description: Wan replication configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Wan replication configuration not found.
+                  value:
+                    statusCode: 400
+                    message: Wan replication configuration not found.
+  /hazelcast/rest/api/v1/wan/pause-publisher/{wanReplicationName}/{publisherId}:
+    post:
+      tags:
+        - WAN Controller
+      summary: Pauses WAN publisher.
+      description: Pauses WAN replication for the given wanReplicationName and wanPublisherId
+        on this Hazelcast instance. Silently skips publishers not supporting pausing.
+      operationId: pauseWanPublisher
+      parameters:
+        - name: wanReplicationName
+          in: path
+          description: The name of the wan replication configuration
+          required: true
+          schema:
+            type: string
+        - name: publisherId
+          in: path
+          description: ID of the WAN replication publisher
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Wan publisher has been paused successfully.
+        "400":
+          description: Wan replication configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Wan replication configuration not found.
+                  value:
+                    statusCode: 400
+                    message: Wan replication configuration not found.
+  /hazelcast/rest/api/v1/wan/map-consistency-check/{wanReplicationName}/{publisherId}/{mapName}:
+    post:
+      tags:
+        - WAN Controller
+      summary: Initiate WAN consistency check for a specific map.
+      description: Initiate WAN consistency check for a specific map.
+      operationId: mapConsistencyCheck
+      parameters:
+        - name: wanReplicationName
+          in: path
+          description: The name of the wan replication configuration
+          required: true
+          schema:
+            type: string
+        - name: publisherId
+          in: path
+          description: ID of the WAN replication publisher
+          required: true
+          schema:
+            type: string
+        - name: mapName
+          in: path
+          description: The name of the map to check
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Map consistency check has been initiated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WanSyncResultModel'
+              examples:
+                OK:
+                  description: UUID of the WAN sync operation.
+                  value:
+                    syncId: e7b3b3b3-4b3b-4b3b-4b3b-4b3b3b3b3b3b
+        "400":
+          description: Wan replication configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Wan replication configuration not found.
+                  value:
+                    statusCode: 400
+                    message: Wan replication configuration not found.
+  /hazelcast/rest/api/v1/wan/clear-queues/{wanReplicationName}/{publisherId}:
+    post:
+      tags:
+        - WAN Controller
+      summary: Clears WAN replication queues.
+      description: |-
+        Removes all WAN events awaiting replication for the given wanReplicationName
+        for the given target.
+      operationId: clearWanQueues
+      parameters:
+        - name: wanReplicationName
+          in: path
+          description: The name of the wan replication configuration
+          required: true
+          schema:
+            type: string
+        - name: publisherId
+          in: path
+          description: ID of the WAN replication publisher
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Wan replication queues has been cleared successfully.
+        "400":
+          description: Wan replication configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Wan replication configuration not found.
+                  value:
+                    statusCode: 400
+                    message: Wan replication configuration not found.
+  /hazelcast/rest/api/v1/wan/add-config:
+    post:
+      tags:
+        - WAN Controller
+      summary: Add WAN replication configuration.
+      description: Add WAN replication configuration.
+      operationId: addWanConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WanReplicationConfigModel'
+        required: true
+      responses:
+        "200":
+          description: WAN replication configuration added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddWanConfigResultModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    addedPublisherIds:
+                      - publisher1
+                      - publisher2
+                    ignoredPublisherIds:
+                      - publisher3
+  /hazelcast/rest/api/v1/token:
+    post:
+      tags:
+        - JWT Token Controller
+      summary: Get JWT token
+      description: Endpoint for user authentication to obtain a JWT token.
+      operationId: getToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwtTokenModel'
+              examples:
+                OK:
+                  description: JWT token has been retrieved successfully.
+                  value:
+                    token: <token>
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                OK:
+                  description: Username/password provided don't match the expected
+                    values.
+                  value:
+                    statusCode: 401
+                    message: Username/password provided don't match the expected values.
+  /hazelcast/rest/api/v1/queue/{queueName}:
+    post:
+      tags:
+        - Data Controller
+      summary: Add item to the queue
+      description: Add item to the queue
+      operationId: offerQueueItemAsString_1
+      parameters:
+        - name: queueName
+          in: path
+          description: Name of the queue
+          required: true
+          schema:
+            type: string
+        - name: timeoutSec
+          in: query
+          description: Timeout in seconds. Default is 0 second. It means how long to
+            wait before giving up to add the item. -1 for infinite timeout.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: Value to be added. The content type must be either `application/json`
+                or `text/plain`.
+          application/json:
+            schema:
+              type: string
+              description: Value to be added. The content type must be either `application/json`
+                or `text/plain`.
+        required: true
+      responses:
+        "200":
+          description: Item added successfully
+          content:
+            application/json:
+              schema:
+                type: string
+              example: |
+                {
+                    "name": "John Doe",
+                    age: 30,
+                    "address": {
+                        "street": "123 Main St",
+                        "city": "New York"
+                    }
+                }
+        "500":
+          description: Queue is full
+    delete:
+      tags:
+        - Data Controller
+      summary: Pool an item from the queue
+      description: Retrieves and removes the head of this queue in given timeout.
+        The default timeout value is 0 second.
+      operationId: poolQueueItem
+      parameters:
+        - name: queueName
+          in: path
+          description: Name of the queue
+          required: true
+          schema:
+            type: string
+        - name: timeoutSec
+          in: query
+          description: Timeout in seconds. Default is 0 second. It means how long to
+            wait before giving up to pool the item.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: The value retrieved successfully. The content can be text or
+            json based on stored type.
+          content:
+            application/json:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+        "204":
+          description: Queue is empty or request timed out
+          content:
+            application/json:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+  /hazelcast/rest/api/v1/map/{mapName}/{key}:
+    get:
+      tags:
+        - Data Controller
+      summary: Get value from map
+      description: Get value from map
+      operationId: getMapValue
+      parameters:
+        - name: mapName
+          in: path
+          description: Name of the map
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: path
+          description: Key of the value
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The value retrieved successfully. The content can be text or
+            json based on stored type.
+          content:
+            application/json:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+        "204":
+          description: The value is null or empty
+          content:
+            application/json:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+        "404":
+          description: Map with the given name does not exist in the cluster.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Not Found:
+                  description: No map with the provided name exists in the cluster.
+                  value:
+                    statusCode: 404
+                    message: Map 'mapName' does not exists in the cluster.
+    post:
+      tags:
+        - Data Controller
+      summary: Add value to map
+      description: "Creates a new key-value pair if the key does not exist. If the\
+        \ key exists, updates the value and returns the old value."
+      operationId: mapPutAsString_1
+      parameters:
+        - name: mapName
+          in: path
+          description: Name of the map
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: path
+          description: Key of the value
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: Value to be added. The content type must be either `application/json`
+                or `text/plain`.
+          application/json:
+            schema:
+              type: string
+              description: Value to be added. The content type must be either `application/json`
+                or `text/plain`.
+        required: true
+      responses:
+        "200":
+          description: Value updated successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: John Doe
+            application/json:
+              schema:
+                type: string
+        "201":
+          description: Key-value pair created successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Invalid JSON object.
+          content:
+            application/json:
+              schema:
+                type: string
+        "500":
+          description: Value cannot be serialized over REST.
+          content:
+            application/json:
+              schema:
+                type: string
+    delete:
+      tags:
+        - Data Controller
+      summary: Delete value from map
+      description: Delete value from map
+      operationId: deleteMapEntry
+      parameters:
+        - name: mapName
+          in: path
+          description: Name of the map
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: path
+          description: Key of the value
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Value deleted successfully
+  /hazelcast/rest/api/v1/cp/reset:
+    post:
+      tags:
+        - CP Controller
+      summary: Reset CP Subsystem.
+      description: Endpoint to reset CP subsystem. It wipes and resets the whole CP
+        Subsystem state and initializes it as if the Hazelcast cluster is starting
+        up initially.
+      operationId: resetCPSubsystem
+      responses:
+        "200":
+          description: CP Subsystem is reset.
+        "500":
+          description: Not enough cluster members to reset CP Subsystem or Current
+            member is not master - only master can reset CP Subsystem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: Not enough cluster members to reset CP Subsystem!
+  /hazelcast/rest/api/v1/cluster/version:
+    get:
+      tags:
+        - Cluster Controller
+      summary: Retrieve the cluster version
+      description: Endpoint to retrieve the cluster version.
+      operationId: getClusterVersion
+      responses:
+        "200":
+          description: Cluster version has been retrieved successfully.
+          content:
+            application/json:
+              examples:
+                OK:
+                  description: Cluster version has been retrieved successfully.
+                  value:
+                    major: 5
+                    minor: 4
+    post:
+      tags:
+        - Cluster Controller
+      summary: Change the cluster version
+      description: Endpoint to change the cluster version.
+      operationId: changeClusterVersion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterVersionModel'
+        required: true
+      responses:
+        "200":
+          description: Cluster version is updated successfully.
+        "400":
+          description: Given cluster version is invalid.
+  /hazelcast/rest/api/v1/cluster/state:
+    get:
+      tags:
+        - Cluster Controller
+      summary: Retrieve the cluster state
+      description: Endpoint to retrieve the cluster state.
+      operationId: getClusterState
+      responses:
+        "200":
+          description: Cluster state has been retrieved successfully.
+          content:
+            application/json:
+              examples:
+                OK:
+                  description: Cluster state has been retrieved successfully.
+                  value:
+                    state: ACTIVE
+    post:
+      tags:
+        - Cluster Controller
+      summary: Change the cluster state
+      description: Endpoint to change the cluster state.
+      operationId: changeClusterState
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterStateModel'
+        required: true
+      responses:
+        "200":
+          description: Cluster state is updated successfully.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+        "400":
+          description: Given cluster state is invalid.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+  /hazelcast/rest/api/v1/cluster/persistence/trigger-partial-start:
+    post:
+      tags:
+        - Persistence Controller
+      summary: Triggers partial start if the cluster cannot be started with full recovery.
+      description: |-
+        Triggers partial start if the cluster cannot be started with full recovery and
+        HotRestartPersistenceConfig#clusterDataRecoveryPolicy is set accordingly.
+      operationId: triggerPartialStart
+      responses:
+        "200":
+          description: Partial start triggered successfully.
+          content:
+            '*/*':
+              schema:
+                type: string
+        "503":
+          description: Partial start failed.
+          content:
+            '*/*':
+              schema:
+                type: string
+  /hazelcast/rest/api/v1/cluster/persistence/trigger-force-start:
+    post:
+      tags:
+        - Persistence Controller
+      summary: Triggers node to force start by skipping hot-restart.
+      description: |-
+        Forces node to start by skipping hot-restart completely and removing all hot-restart data
+        even if node is still on validation phase or loading hot-restart data.
+      operationId: triggerForceStart
+      responses:
+        "200":
+          description: Force start triggered successfully.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+        "503":
+          description: Forced start failed.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+  /hazelcast/rest/api/v1/cluster/persistence/trigger-backup:
+    post:
+      tags:
+        - Persistence Controller
+      summary: Triggers an attempt to perform a cluster-wide data backup.
+      description: |-
+        Attempts to perform a cluster-wide data backup. Each node will create a directory under the defined backup dir with the name `backup-` followed by the cluster time defined by this node. The backup request is performed transactionally. This method will throw an exception if another request (transaction) is already in progress. If a node is already performing a backup (there is a file indicating a backup is in progress),
+        the node will only log a warning and ignore the backup request.
+      operationId: triggerBackup
+      responses:
+        "200":
+          description: Backup attempt triggered successfully.
+          content:
+            '*/*':
+              schema:
+                type: string
+  /hazelcast/rest/api/v1/cluster/persistence/trigger-backup-interrupt:
+    post:
+      tags:
+        - Persistence Controller
+      summary: Triggers an attempt to interrupt the backup tasks on each cluster member
+        if one is currently running.
+      description: Interrupts the backup tasks on each cluster member if one is currently
+        running. The contents of the target backup directories will be left as-is.
+      operationId: backupInterrupt
+      responses:
+        "200":
+          description: Backup interrupt attempt triggered successfully.
+          content:
+            '*/*':
+              schema:
+                type: string
+  /hazelcast/rest/api/v1/cluster/members:
+    get:
+      tags:
+        - Member Controller
+      summary: Retrieve details of Members
+      description: Endpoint to retrieve details of all Members in the cluster.
+      operationId: getMembers
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemberDetailModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    - address: "[10.212.134.155]:5701"
+                      liteMember: false
+                      localMember: true
+                      uuid: 11111111-1111-1111-1111-111111111111
+                      memberVersion: 5.4.0
+    post:
+      tags:
+        - Member Controller
+      summary: Update the member list of TCP-IP join config
+      description: Updates the cluster wide configuration for TCP-IP join config dynamically
+        at runtime.
+      operationId: setMembers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              description: List of member addresses.
+              items:
+                type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetMemberListResultModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    persistenceEnabled: true
+                    member-list:
+                      - 10.12.13.1:5701
+                      - 10.12.13.2:5701
+                      - 10.12.13.3:5701
+  /hazelcast/rest/api/v1/cluster/log-level:
+    get:
+      tags:
+        - Cluster Controller
+      summary: Retrieve the log level
+      description: Endpoint to retrieve the log level.
+      operationId: getLogLevel
+      responses:
+        "200":
+          description: Log level has been retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogLevelModel'
+              examples:
+                OK:
+                  description: Log level has been retrieved successfully.
+                  value:
+                    logLevel: INFO
+    post:
+      tags:
+        - Cluster Controller
+      summary: Set the log level
+      description: "Endpoint to set the log level. Possible values are OFF, SEVERE,\
+        \ WARNING, INFO, CONFIG, FINE, FINER, FINEST. Note that log-level actions\
+        \ are localized and, affects only the single member where the REST server\
+        \ is running, not the entire cluster."
+      operationId: setLogLevel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogLevelModel'
+        required: true
+      responses:
+        "200":
+          description: Log level has been set successfully.
+        "400":
+          description: "Invalid log level, known levels are: OFF, SEVERE, WARNING,\
+            \ INFO, CONFIG, FINE, FINER, FINEST"
+    delete:
+      tags:
+        - Cluster Controller
+      summary: Reset the log level
+      description: "Endpoint to reset the levels of all the loggers known to the logging\
+        \ service back to the default reconfigured values. Basically, reverts changes\
+        \ made by previous setLevel(Level) calls or POST requests to /hazelcast/rest/api/v1/cluster/log-level,\
+        \ if any. Note that log-level actions are localized and, affects only the\
+        \ single member where the REST server is running, not the entire cluster."
+      operationId: resetLogLevel
+      responses:
+        "200":
+          description: Log level has been reset successfully.
+  /hazelcast/rest/api/v1/cluster/license:
+    get:
+      tags:
+        - Cluster Controller
+      summary: Retrieve the license
+      description: Endpoint to retrieve the license.
+      operationId: getClusterLicense
+      responses:
+        "200":
+          description: License has been retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseInfoModel'
+              examples:
+                OK:
+                  description: License has been retrieved successfully.
+                  value:
+                    expirationTimeMs: 4097606399999
+                    maxNodeCountAllowed: 99
+                    allowedTieredStoreSize: 0
+                    allowedNativeMemorySize: 100
+                    allowedTpcCores: 0
+                    keyHash: 9ZAG+TXHy0PrAEakoikYri8WNTFeaJYMeLvsGavEp48=
+                    features:
+                      - Management Center
+                      - Clustered JMX
+                      - Clustered REST
+                      - Security
+                      - WAN Replication
+                      - High Density Memory
+                      - Persistence
+                      - Rolling Upgrade
+                      - Cluster Client Filtering
+                      - CP Subsystem Persistence
+    post:
+      tags:
+        - Cluster Controller
+      summary: Update the license key
+      description: Endpoint to update the license key.
+      operationId: updateLicense
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseKeyModel'
+        required: true
+      responses:
+        "200":
+          description: License has been updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetLicenseInfoResultModel'
+              examples:
+                OK:
+                  description: License has been updated successfully.
+                  value:
+                    persistenceEnabled: true
+                    message: License updated at run time.
+        "400":
+          description: Provided license is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    statusCode: 400
+                    message: Invalid license key!
+  /hazelcast/rest/api/v1/cluster/config/update:
+    post:
+      tags:
+        - Cluster Controller
+      summary: Update the configuration with the provided string format in either
+        YAML or XML.
+      description: Endpoint to update the configuration with the provided string format
+        in either YAML or XML. Updating means dynamically changing all the differences
+        dynamically changeable.
+      operationId: updateConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: Configuration update successfully finished.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigActionResultModel'
+              examples:
+                OK:
+                  description: Configuration update successfully finished.
+                  value:
+                    addedConfigs:
+                      - sectionName: map
+                        configName: my-map
+                    ignoredConfigs:
+                      - sectionName: local-device
+                        configName: default-tiered-store-device
+        "400":
+          description: Invalid configuration exception or configuration parsing exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    statusCode: 400
+                    message: The resource is neither valid XML nor valid YAML.
+        "500":
+          description: Invalid license exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: Invalid License Key!
+  /hazelcast/rest/api/v1/cluster/config/reload:
+    post:
+      tags:
+        - Config Controller
+      summary: Reload server configuration from declarative config
+      description: Updates the configuration with the declarative configuration. Updating
+        means dynamically changing all the differences dynamically changeable.
+      operationId: reload
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigActionResultModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    addedConfigs:
+                      - sectionName: cp-subsystem
+                        configName: enabled
+                      - sectionName: network
+                        configName: public-address
+                    ignoredConfigs:
+                      - sectionName: network
+                        configName: join
+                      - sectionName: network
+                        configName: outbound-ports
+        "500":
+          description: Invalid license exception or configuration validation exception
+            or configuration parsing exception.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: The feature Dynamic Configuration is not enabled for
+                      your license.
+  /hazelcast/rest/api/v1/wan/progress/{uuid}:
+    get:
+      tags:
+        - WAN Controller
+      summary: Retrieve wan sync result.
+      description: Retrieve wan sync result.
+      operationId: getWanSyncProgress
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the WAN sync operation
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: "WAN sync progress has been retrieved successfully. Possible\
+            \ states are STARTED, IN_PROGRESS, FINISHED or FAILED."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WanSyncStatusModel'
+              examples:
+                OK:
+                  description: WAN sync progress.
+                  value:
+                    messages:
+                      - message: message1
+                    stage: STARTED
+                    progress: 50
+                    wanReplicationName: wanReplicationName
+                    wanPublisherId: wanPublisherId
+                    creationTime: 1234567890
+        "404":
+          description: Wan replication configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Not Found:
+                  description: Wan replication configuration not found.
+                  value:
+                    statusCode: 404
+                    message: Wan replication configuration not found.
+  /hazelcast/rest/api/v1/ready:
+    get:
+      tags:
+        - Health Controller
+      summary: Retrieve member ready information
+      description: Endpoint to retrieve the readiness state of the current member
+      operationId: getReady
+      responses:
+        "200":
+          description: Member is ready
+        "503":
+          description: Member is not ready
+  /hazelcast/rest/api/v1/queue/{queueName}/size:
+    get:
+      tags:
+        - Data Controller
+      summary: Get size of the queue
+      description: Get size of the queue
+      operationId: getQueueSize
+      parameters:
+        - name: queueName
+          in: path
+          description: Name of the queue
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Queue size retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueSizeResultModel'
+        "404":
+          description: Queue with the given name does not exist in the cluster.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Not Found:
+                  description: No queue with the provided name exists in the cluster.
+                  value:
+                    statusCode: 404
+                    message: Queue 'queueName' does not exists in the cluster.
+  /hazelcast/rest/api/v1/health:
+    get:
+      tags:
+        - Health Controller
+      summary: Retrieve member health data
+      description: Endpoint to retrieve the health data of the current member
+      operationId: getHealth
+      parameters:
+        - name: check
+          in: query
+          description: |-
+            Allowed values:
+            nodeState - check the node state
+            clusterState - check the cluster state
+            numberOfMembers - check the number of members in the cluster
+            memberSafe - check if the partition table on the member is safe
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - nodeState
+                - clusterState
+                - numberOfMembers
+                - memberSafe
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberHealthModel'
+              examples:
+                Default health checks:
+                  description: Default health checks
+                  value:
+                    - nodeState: ACTIVE
+                      clusterState: NO_MIGRATION
+                      numberOfMembers: 3
+  /hazelcast/rest/api/v1/cp/members:
+    get:
+      tags:
+        - CP Controller
+      summary: Returns the current list of CP members in the cluster.
+      description: Endpoint to retrieve the current list of CP members in the cluster.
+        Returns 500 response if CP Subsystem is not enabled.
+      operationId: getCPMembers
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CPMemberModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    - uuid: 11111111-1111-1111-1111-111111111111
+                      address: "[10.212.134.155]:5701"
+        "500":
+          description: CP subsystem is disabled at the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: CP Subsystem is not enabled!
+  /hazelcast/rest/api/v1/cp/members/local:
+    get:
+      tags:
+        - CP Controller
+      summary: Retrieve local CP member.
+      description: "Endpoint to retrieve local CP member in the cluster. Returns the\
+        \ local CP member if the member is part of CP Subsystem, returns 404 response\
+        \ otherwise. Returns 500 response if CP Subsystem is not enabled."
+      operationId: getLocalCPMember
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CPMemberModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    uuid: 11111111-1111-1111-1111-111111111111
+                    address: "[10.212.134.155]:5701"
+        "404":
+          description: Local member is not part of CP Subsystem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Not Found:
+                  description: Not Found
+                  value:
+                    statusCode: 404
+                    message: Local member is not part of CP Subsystem.
+        "500":
+          description: CP subsystem is disabled at the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: CP Subsystem is not enabled!
+  /hazelcast/rest/api/v1/cp/groups:
+    get:
+      tags:
+        - CP Controller
+      summary: Retrieve all available CP groups.
+      description: Endpoint to retrieve all available CP groups in the cluster.
+      operationId: getCPGroups
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CPGroupIdModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    - name: my-cp-group
+                      id: 320
+        "500":
+          description: CP subsystem is disabled at the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: CP Subsystem is not enabled!
+  /hazelcast/rest/api/v1/cp/groups/{group-name}:
+    get:
+      tags:
+        - CP Controller
+      summary: Returns the active CP group with the given name.
+      description: Endpoint to retrieve the active CP group with the given name. There
+        can be at most one active CP group with a given name.
+      operationId: getCPGroupByName
+      parameters:
+        - name: group-name
+          in: path
+          description: Name of the CP group to find
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CPGroupModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    cpGroupId:
+                      name: my-cp-group
+                      id: 320
+                    status: ACTIVE
+                    members:
+                      - uuid: e4b7b1b1-1b1b-4b1b-8b1b-1b1b1b1b1b1b
+                        address: 10.112.125.2:5701
+                      - uuid: c4b8b2b2-2a1b-4b1b-8b1b-1b1b1b3c2a2b
+                        address: 10.112.125.3:5702
+        "404":
+          description: CP group with provided name could not be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Not Found:
+                  description: Not Found
+                  value:
+                    statusCode: 404
+                    message: CP group with provided name could not be found.
+        "500":
+          description: CP subsystem is disabled at the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: CP Subsystem is not enabled!
+    delete:
+      tags:
+        - CP Controller
+      summary: Unconditionally destroys the given active CP group without using the
+        Raft algorithm mechanics.
+      description: Endpoint to destroy the given active CP group unconditionally.
+      operationId: destroyCPGroupByName
+      parameters:
+        - name: group-name
+          in: path
+          description: Name of the CP group to destroy
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: CP group is destroyed.
+        "400":
+          description: Meta data CP group can not be destroyed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    statusCode: 400
+                    message: "Meta data CP group [METADATA] cannot be destroyed."
+        "500":
+          description: CP subsystem is disabled at the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: CP Subsystem is not enabled!
+  /hazelcast/rest/api/v1/cp/groups/{group-name}/sessions:
+    get:
+      tags:
+        - CP Controller
+      summary: Get CP sessions in the given CP group.
+      description: Endpoint to retrieve a non-null collection of CP sessions that
+        are currently active in the given CP group.
+      operationId: getCPSessions
+      parameters:
+        - name: group-name
+          in: path
+          description: Name of the CP group
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CPSessionModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    - id: 1
+                      creationTime: 1712834575860
+                      expirationTime: 1712834630874
+                      version: 50
+                      endpoint: "[192.168.0.24]:5701"
+                      endpointType: SERVER
+                      endpointName: null
+        "400":
+          description: The group name provided is either 'METADATA' or an invalid
+            value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    statusCode: 400
+                    message: Cannot query CP sessions on the METADATA CP group!
+        "500":
+          description: CP subsystem is disabled at the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: CP Subsystem is not enabled!
+  /hazelcast/rest/api/v1/cluster:
+    get:
+      tags:
+        - Cluster Controller
+      summary: Retrieve cluster status
+      description: Endpoint to retrieve the cluster status.
+      operationId: getClusterStatus
+      responses:
+        "200":
+          description: Cluster status has been retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatusModel'
+              examples:
+                OK:
+                  description: Cluster status has been retrieved successfully.
+                  value:
+                    members:
+                      - address: "[192.168.0.24]:5701"
+                        liteMember: false
+                        localMember: true
+                        uuid: 11111111-1111-1111-1111-111111111111
+                        memberVersion: 5.4.0
+                    clientCount: 0
+                    allConnectionCount: 0
+                    state: ACTIVE
+                    version: "5.4"
+  /hazelcast/rest/api/v1/cluster/members/{member-uuid}:
+    get:
+      tags:
+        - Member Controller
+      summary: Retrieve details of a Member by UUID
+      description: Endpoint to retrieve details of a Member based on its UUID in the
+        cluster.
+      operationId: getMemberWithUuid
+      parameters:
+        - name: member-uuid
+          in: path
+          description: The UUID of the member
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberDetailModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    address: "[10.212.134.155]:5701"
+                    liteMember: false
+                    localMember: true
+                    uuid: 11111111-1111-1111-1111-111111111111
+                    memberVersion: 5.4.0
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    statusCode: 400
+                    message: '''member-uuid'' should be a valid ''UUID'''
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Not Found:
+                  description: Not Found
+                  value:
+                    statusCode: 404
+                    message: "Member could not be found with the UUID: 11111111-1111-1111-1111-111111111111"
+  /hazelcast/rest/api/v1/cluster/members/self:
+    get:
+      tags:
+        - Member Controller
+      summary: Retrieve details of current/local Member
+      description: Endpoint to retrieve details of the current/local Member in the
+        cluster.
+      operationId: getCurrentMember
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberDetailModel'
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    address: "[10.212.134.155]:5701"
+                    liteMember: false
+                    localMember: true
+                    uuid: 11111111-1111-1111-1111-111111111111
+                    memberVersion: 5.4.0
+  /hazelcast/rest/api/v1/cluster/config:
+    get:
+      tags:
+        - Cluster Controller
+      summary: Retrieve the server configuration from file (XML/YAML).
+      description: |
+        Endpoint to retrieve the server configuration as loaded from XML or YAML files.
+
+        Notes:
+        - If the server was started without a configuration file (XML/YAML),
+          the configuration value will always be an empty string.
+        - Runtime configuration changes (via programmatic setup, MC, REST API etc.) are
+          **not included** in the response.
+        - If dynamic configuration persistence is enabled, then any runtime changes made
+          after member startup will be written back to the original configuration file,
+          and therefore, will appear in the response. Runtime changes made before member
+          startup are not persisted.
+      operationId: getMemberConfigs
+      responses:
+        "200":
+          description: Configuration has been retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemberConfigResponseModel'
+              examples:
+                OK:
+                  description: |
+                    Example response showing member UUIDs mapped to configuration
+                    file contents (empty string if no file was used).
+                  value:
+                    - memberId: 11111111-1111-1111-1111-111111111111
+                      configuration: <hazelcast>...</hazelcast>
+                    - memberId: 22222222-2222-2222-2222-222222222222
+                      configuration: ""
+  /hazelcast/rest/api/v1/cluster/config/{member-uuid}:
+    get:
+      tags:
+        - Cluster Controller
+      summary: Retrieve the server configuration for a specific member from file (XML/YAML).
+      description: |
+        Endpoint to retrieve the server configuration for the given member UUID as loaded from XML or YAML files.
+
+        Notes:
+        - If the server was started without a configuration file (XML/YAML),
+          the configuration value will always be an empty string.
+        - Runtime configuration changes (via programmatic setup, MC, REST API etc.) are
+          **not included** in the response.
+        - If dynamic configuration persistence is enabled, then any runtime changes made
+          after member startup will be written back to the original configuration file,
+          and therefore, will appear in the response. Runtime changes made before member
+          startup are not persisted.
+      operationId: getMemberConfigByUuid
+      parameters:
+        - name: member-uuid
+          in: path
+          description: The UUID of the member
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Configuration has been retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberConfigResponseModel'
+              examples:
+                OK:
+                  description: |
+                    Example response showing configuration for a single member UUID
+                    (empty string if no file was used).
+                  value:
+                    memberId: 11111111-1111-1111-1111-111111111111
+                    configuration: ""
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Not Found:
+                  description: No member with the UUID exists in the cluster.
+                  value:
+                    statusCode: 404
+                    message: No member with UUID exists in cluster.
+  /hazelcast/rest/api/v1/map/{mapName}:
+    delete:
+      tags:
+        - Data Controller
+      summary: Clear all values in a map
+      description: Clear all values in a map
+      operationId: clearMap
+      parameters:
+        - name: mapName
+          in: path
+          description: Name of the map
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Map cleared successfully
+  /hazelcast/rest/api/v1/cp/members/{cp-member-uuid}:
+    delete:
+      tags:
+        - CP Controller
+      summary: Remove CP member.
+      description: "Endpoint to remove the given unreachable CP member from the active\
+        \ CP members list and all CP groups it belongs to. If any other active CP\
+        \ member is available, it replaces the removed CP member in its CP groups.\
+        \ Otherwise, CP groups which the removed CP member is a member of shrinks\
+        \ and their majority values are recalculated."
+      operationId: removeCPMemberWithUuid
+      parameters:
+        - name: cp-member-uuid
+          in: path
+          description: CP member uuid
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: CP member with given uuid is removed.
+        "400":
+          description: The given CP member is already removed from CP Subsystem or
+            the provided uuid is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Bad Request:
+                  description: Bad Request
+                  value:
+                    statusCode: 400
+                    message: "No CPMember found with uuid: 11111111-1111-1111-1111-111111111111"
+        "500":
+          description: CP subsystem is disabled at the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: CP Subsystem is not enabled!
+  /hazelcast/rest/api/v1/cp/groups/{group-name}/sessions/{session-id}:
+    delete:
+      tags:
+        - CP Controller
+      summary: Close CP session.
+      description: "Endpoint to close a CP session matching the provided group name\
+        \ and session id. If a Hazelcast instance that owns a CP session crashes,\
+        \ its CP session is not terminated immediately. Instead, the session is closed\
+        \ after CPSubsystemConfig.getSessionTimeToLiveSeconds() passes. If it is known\
+        \ for sure that the session owner is not partitioned away and actually crashed,\
+        \ this endpoint can be used for closing the session and releasing its resources\
+        \ immediately."
+      operationId: closeCPSession
+      parameters:
+        - name: group-name
+          in: path
+          description: Name of the CP group
+          required: true
+          schema:
+            type: string
+        - name: session-id
+          in: path
+          description: CP session ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: CP session is closed.
+        "404":
+          description: No session matches with the provided group name or session
+            ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Not Found:
+                  description: Not Found
+                  value:
+                    statusCode: 404
+                    message: No session matches with the provided group name or session
+                      ID.
+        "500":
+          description: CP subsystem is disabled at the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusCodeAndMessage'
+              examples:
+                Internal Server Error:
+                  description: Internal Server Error
+                  value:
+                    statusCode: 500
+                    message: CP Subsystem is not enabled!
+components:
+  schemas:
+    WanSyncResultModel:
+      type: object
+      properties:
+        syncId:
+          type: string
+      description: WAN sync result
+    StatusCodeAndMessage:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: The status code of the response.
+          format: int32
+        message:
+          type: string
+          description: Human readable descriptions of what happened.
+    AddWanConfigResultModel:
+      type: object
+      properties:
+        addedPublisherIds:
+          type: array
+          items:
+            type: string
+        ignoredPublisherIds:
+          type: array
+          items:
+            type: string
+      description: Result of adding WAN replication configuration.
+    AliasedDiscoveryConfigModel:
+      type: object
+      properties:
+        tag:
+          type: string
+        enabled:
+          type: boolean
+        usePublicIp:
+          type: boolean
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+      description: DTP representation of AliasedDiscoveryConfig.
+    CustomWanPublisherConfigModel:
+      type: object
+      properties:
+        publisherId:
+          type: string
+        className:
+          type: string
+      description: DTO of WanCustomPublisherConfig.
+    DiscoveryConfig:
+      type: object
+      properties:
+        nodeFilterClass:
+          type: string
+        discoveryStrategies:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoveryStrategyConfigModel'
+      description: DTP representation of DiscoveryStrategyConfig.
+    DiscoveryStrategyConfigModel:
+      type: object
+      properties:
+        className:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+      description: DTP representation of DiscoveryStrategyConfig.
+    WanBatchPublisherConfigModel:
+      type: object
+      properties:
+        clusterName:
+          type: string
+        publisherId:
+          type: string
+        batchSize:
+          type: integer
+          format: int32
+        batchMaxDelayMillis:
+          type: integer
+          format: int32
+        responseTimeoutMillis:
+          type: integer
+          format: int32
+        acknowledgeType:
+          type: string
+          enum:
+            - ACK_ON_RECEIPT
+            - ACK_ON_OPERATION_COMPLETE
+        initialPublisherState:
+          type: string
+          enum:
+            - REPLICATING
+            - PAUSED
+            - STOPPED
+        snapshotEnabled:
+          type: boolean
+        idleMinParkNs:
+          type: integer
+          format: int64
+        idleMaxParkNs:
+          type: integer
+          format: int64
+        maxConcurrentInvocations:
+          type: integer
+          format: int32
+        discoveryPeriodSeconds:
+          type: integer
+          format: int32
+        useEndpointPrivateAddress:
+          type: boolean
+        queueFullBehavior:
+          type: string
+          enum:
+            - DISCARD_AFTER_MUTATION
+            - THROW_EXCEPTION
+            - THROW_EXCEPTION_ONLY_IF_REPLICATION_ACTIVE
+        maxTargetEndpoints:
+          type: integer
+          format: int32
+        queueCapacity:
+          type: integer
+          format: int32
+        targetEndpoints:
+          type: string
+        aws:
+          $ref: '#/components/schemas/AliasedDiscoveryConfigModel'
+        gcp:
+          $ref: '#/components/schemas/AliasedDiscoveryConfigModel'
+        azure:
+          $ref: '#/components/schemas/AliasedDiscoveryConfigModel'
+        kubernetes:
+          $ref: '#/components/schemas/AliasedDiscoveryConfigModel'
+        eureka:
+          $ref: '#/components/schemas/AliasedDiscoveryConfigModel'
+        discovery:
+          $ref: '#/components/schemas/DiscoveryConfig'
+        endpoint:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        sync:
+          $ref: '#/components/schemas/WanSyncConfigModel'
+      description: WAN batch publisher configuration. DTP representation of WanBatchPublisherConfig.
+    WanConsumerConfigModel:
+      type: object
+      properties:
+        className:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        persistWanReplicatedData:
+          type: boolean
+      description: DTO of WanConsumerConfig.
+    WanReplicationConfigModel:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the WAN replication configuration
+        consumer:
+          $ref: '#/components/schemas/WanConsumerConfigModel'
+        batchPublishers:
+          type: array
+          description: List of WAN batch publisher configurations
+          items:
+            $ref: '#/components/schemas/WanBatchPublisherConfigModel'
+        customPublishers:
+          type: array
+          description: List of custom WAN publisher configurations
+          items:
+            $ref: '#/components/schemas/CustomWanPublisherConfigModel'
+      description: WAN replication configuration
+    WanSyncConfigModel:
+      type: object
+      properties:
+        consistencyCheckStrategy:
+          type: string
+          enum:
+            - NONE
+            - MERKLE_TREES
+      description: DTO representation of WanSyncConfig.
+    JwtTokenModel:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The jwt token.
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      description: User credentials
+    ClusterVersionModel:
+      type: object
+      properties:
+        major:
+          minimum: 0
+          type: integer
+          description: The major version at which the cluster operates. This ensures
+            that cluster members are able to communicate using the same cluster protocol
+            and determines the feature set exposed by the cluster.
+          format: int32
+        minor:
+          minimum: 0
+          type: integer
+          description: The minor version at which the cluster operates. This ensures
+            that cluster members are able to communicate using the same cluster protocol
+            and determines the feature set exposed by the cluster.
+          format: int32
+    ClusterStateModel:
+      required:
+        - state
+      type: object
+      properties:
+        state:
+          type: string
+          description: "The state of the cluster. Possible values are ACTIVE, NO_MIGRATION,\
+            \ FROZEN, PASSIVE."
+          enum:
+            - ACTIVE
+            - NO_MIGRATION
+            - FROZEN
+            - PASSIVE
+            - IN_TRANSITION
+    SetMemberListResultModel:
+      required:
+        - memberList
+      type: object
+      properties:
+        persistenceEnabled:
+          type: boolean
+          description: True if Dynamic Configuration Persistence is enabled on this
+            member.
+        memberList:
+          type: array
+          description: The new member list.
+          items:
+            type: string
+            description: The new member list.
+    LogLevelModel:
+      type: object
+      properties:
+        logLevel:
+          type: string
+          description: "The log level of the cluster, specified using java.util.logging.Level.\
+            \ Possible values include OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER,\
+            \ FINEST."
+    SetLicenseInfoResultModel:
+      type: object
+      properties:
+        persistenceEnabled:
+          type: boolean
+          description: True if Dynamic Configuration Persistence is enabled on this
+            member.
+        message:
+          type: string
+          description: The message returned for successful responses.
+    LicenseKeyModel:
+      type: object
+      properties:
+        licenseKey:
+          type: string
+          description: The license key.
+    ConfigActionResultModel:
+      type: object
+      properties:
+        addedConfigs:
+          type: array
+          description: Newly added configs.
+          items:
+            $ref: '#/components/schemas/ConfigNamespaceModel'
+        ignoredConfigs:
+          type: array
+          description: "Ignored configs, since an equal config already exist."
+          items:
+            $ref: '#/components/schemas/ConfigNamespaceModel'
+      description: Result of server configuration reload.
+    ConfigNamespaceModel:
+      type: object
+      properties:
+        sectionName:
+          type: string
+          description: The configuration section name as in ConfigSections class.
+        configName:
+          type: string
+          description: The name of the configuration
+      description: Unique identifier of a single configuration
+    WanSyncStatusModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          description: Error messages collected during sync messages. This field will
+            be absent from the response if there are no errors.
+          items:
+            type: string
+            description: Error messages collected during sync messages. This field
+              will be absent from the response if there are no errors.
+        stage:
+          type: string
+          description: Current stage of the WAN sync process.
+        progress:
+          type: integer
+          description: Progress of the WAN sync process.
+          format: int32
+        wanReplicationName:
+          type: string
+          description: WAN replication name.
+        wanPublisherId:
+          type: string
+          description: Publisher ID.
+        creationTime:
+          type: integer
+          description: Creation time of the WAN sync process in milliseconds.
+          format: int64
+      description: WAN sync status model
+    QueueSizeResultModel:
+      type: object
+      properties:
+        size:
+          type: integer
+          description: The size of the queue
+          format: int32
+      description: The size of the queue
+    MemberHealthModel:
+      type: object
+      properties:
+        nodeState:
+          type: string
+          description: Node state
+        clusterState:
+          type: string
+          description: Cluster state
+        numberOfMembers:
+          type: integer
+          description: Number of members in the cluster
+          format: int32
+        memberSafe:
+          type: boolean
+      description: Member health
+    CPMemberModel:
+      required:
+        - uuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: The CP member uuid
+          format: uuid
+        address:
+          type: string
+          description: The CP member address
+      description: current members of the CP group
+    CPGroupIdModel:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the CP group
+        id:
+          type: integer
+          description: The unique CP group id in the cluster
+          format: int64
+      description: The CP group id
+    CPGroupModel:
+      required:
+        - cpGroupId
+      type: object
+      properties:
+        cpGroupId:
+          $ref: '#/components/schemas/CPGroupIdModel'
+        status:
+          type: string
+          description: "The CP group status. Possible values are: ACTIVE, DESTROYING,\
+            \ DESTROYED"
+        members:
+          type: array
+          description: current members of the CP group
+          items:
+            $ref: '#/components/schemas/CPMemberModel'
+    CPSessionModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The id of the session.
+          format: int64
+        creationTime:
+          type: integer
+          description: The timestamp in epoch milliseconds of when the session was
+            created.
+          format: int64
+        expirationTime:
+          type: integer
+          description: The timestamp in epoch milliseconds of when the session will
+            expire.
+          format: int64
+        version:
+          type: integer
+          description: The version of the session. A session's version is incremented
+            on each heartbeat.
+          format: int64
+        endpoint:
+          type: string
+          description: The endpoint that has created the session.
+        endpointType:
+          type: string
+          description: "The type of the endpoint that has created the session. Possible\
+            \ values are SERVER, CLIENT."
+        endpointName:
+          type: string
+          description: The name of the endpoint that has created the session.
+    ClusterStatusModel:
+      type: object
+      properties:
+        members:
+          type: array
+          description: Details of the members in the cluster.
+          items:
+            $ref: '#/components/schemas/MemberDetailModel'
+        clientCount:
+          type: integer
+          description: The count of connected clients.
+          format: int32
+        allConnectionCount:
+          type: integer
+          description: The count of all connections (clients + members).
+          format: int32
+        state:
+          type: string
+          description: "The state of the cluster. Possible values are ACTIVE, NO_MIGRATION,\
+            \ FROZEN, PASSIVE, IN_TRANSITION."
+        version:
+          type: string
+          description: The major.minor version at which the cluster operates. This
+            ensures that cluster members are able to communicate using the same cluster
+            protocol and determines the feature set exposed by the cluster.
+      description: Cluster status
+    MemberDetailModel:
+      type: object
+      properties:
+        address:
+          type: string
+          description: The address of the member (IP address + port number).
+        liteMember:
+          type: boolean
+          description: "True if the member is a lite member; otherwise, false."
+        localMember:
+          type: boolean
+          description: "True if the member is the member to which the REST call is\
+            \ performed; otherwise, false."
+        uuid:
+          type: string
+          description: UUID of the member.
+        memberVersion:
+          type: string
+          description: "Version of the member; it may or may not be different from\
+            \ the version reported by Cluster.getClusterVersion(), for example when\
+            \ a node with a different codebase version is added to an existing cluster."
+      description: Details of the member
+    LicenseInfoModel:
+      type: object
+      properties:
+        expirationTimeMs:
+          type: integer
+          description: "The expiration time in milliseconds since epoch, of the license\
+            \ key assigned on the node."
+          format: int64
+        maxNodeCount:
+          type: integer
+          description: "The maximum number of nodes in the cluster, allowed for the\
+            \ license key assigned on the node."
+          format: int32
+        allowedTieredStoreSize:
+          type: integer
+          description: "The maximum size of tiered store in the cluster, allowed for\
+            \ the license key assigned on the node."
+          format: int32
+        allowedNativeMemorySize:
+          type: integer
+          description: "The maximum size of native memory in the cluster, allowed\
+            \ for the license key assigned on the node."
+          format: int32
+        allowedTpcCores:
+          type: integer
+          description: "The maximum number of TPC cores, allowed for the license key\
+            \ assigned on the node."
+          format: int32
+        keyHash:
+          type: string
+          description: "Hash of the license key assigned on the node, computed as\
+            \ SHA-256 hash of the key encoded as a Base64 string."
+        features:
+          type: array
+          description: Licensed features of the license key assigned on the node.
+          items:
+            type: string
+            description: Licensed features of the license key assigned on the node.
+    MemberConfigResponseModel:
+      type: object
+      properties:
+        memberId:
+          type: string
+          description: UUID of the member.
+          format: uuid
+        configuration:
+          type: string
+          description: Yaml/xml configuration.
+      description: Result of server configuration reload.
+  securitySchemes:
+    Bearer Authentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
