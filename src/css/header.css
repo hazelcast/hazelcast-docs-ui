@@ -4,17 +4,12 @@
    General Styles & Body
 ================================ */
 
-body {
-  /* Important so the Kapa widget does not overwrite it */
-  padding-top: var(--navbar-height) !important;
-}
-
 /* ================================
    Header
 ================================ */
 
 .header {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   z-index: var(--z-index-navbar);
@@ -25,12 +20,12 @@ body {
   transition: height 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.article .header {
-  border-bottom: 1px solid var(--border-color);
+.swagger .header {
+  position: static;
 }
 
-.header.shrink {
-  height: 60px;
+.article .header {
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* ================================
