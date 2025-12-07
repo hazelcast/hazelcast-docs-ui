@@ -5,7 +5,12 @@
   </head>
   <body class="swagger">
     {{> header}}
-    {{{page.contents}}}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+    <redoc
+      spec-url="http://localhost:5252/swagger/api-docs.yaml"
+      scroll-y-offset="60"
+    ></redoc>
+    <script src="https://cdn.redoc.ly/redoc/v2.1.4/bundles/redoc.standalone.js"></script>
     {{> footer}}
   </body>
 </html>
