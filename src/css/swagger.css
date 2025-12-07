@@ -1,16 +1,3 @@
-/*.information-container.wrapper {*/
-/*  display: none !important;*/
-/*}*/
-
-/*.swagger-ui .wrapper {*/
-/*  padding: 0 !important;*/
-/*}*/
-
-/*.opblock-summary-path {*/
-/*  max-width: none !important;*/
-/*  flex-shrink: unset !important;*/
-/*}*/
-
 .api-content {
   background-color: var(--body-background-light);
 }
