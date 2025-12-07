@@ -444,6 +444,10 @@ nav .button.ask-ai-button {
   width: 36px;
 }
 
+.swagger .color-theme-switcher {
+  display: none;
+}
+
 .color-theme-btn {
   position: absolute;
   inset: 0;
