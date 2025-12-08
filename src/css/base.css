@@ -16,11 +16,11 @@ html:has(.swagger) {
 }
 
 body {
+  margin: 0;
   background: var(--body-background);
   color: var(--body-font-color);
   font-family: var(--body-font-family);
   line-height: var(--body-line-height);
-  margin: 0;
 }
 
 h1,
