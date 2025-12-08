@@ -50,7 +50,7 @@
     "gulp-uglify": "~3.0",
     "gulp-vinyl-zip": "~2.2",
     "handlebars": "~4.7",
-    "hazelcast-docs-tools": "github:hazelcast/hazelcast-docs-tools#v2.1.0",
+    "hazelcast-docs-tools": "github:hazelcast/hazelcast-docs-tools#semver:2.3.0",
     "highlight.js": "~9.18",
     "js-yaml": "~3.13",
     "merge-stream": "~2.0",
