@@ -4,17 +4,12 @@
    General Styles & Body
 ================================ */
 
-body {
-  /* Important so the Kapa widget does not overwrite it */
-  padding-top: var(--navbar-height) !important;
-}
-
 /* ================================
    Header
 ================================ */
 
 .header {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   z-index: var(--z-index-navbar);
@@ -27,10 +22,6 @@ body {
 
 .article .header {
   border-bottom: 1px solid var(--border-color);
-}
-
-.header.shrink {
-  height: 60px;
 }
 
 /* ================================
@@ -451,6 +442,10 @@ nav .button.ask-ai-button {
   position: relative;
   height: 28px;
   width: 36px;
+}
+
+.swagger .color-theme-switcher {
+  display: none;
 }
 
 .color-theme-btn {

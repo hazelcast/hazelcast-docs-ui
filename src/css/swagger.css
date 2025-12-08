@@ -1,12 +1,7 @@
-.information-container.wrapper {
-  display: none !important;
+.swagger .api-content {
+  background-color: var(--body-background-light);
 }
 
-.swagger-ui .wrapper {
-  padding: 0 !important;
-}
-
-.opblock-summary-path {
-  max-width: none !important;
-  flex-shrink: unset !important;
+.swagger .menu-content span:not(.operation-type) {
+  font-size: 15px;
 }

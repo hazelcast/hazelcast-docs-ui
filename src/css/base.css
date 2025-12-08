@@ -1,8 +1,3 @@
-html,
-body {
-  height: 100%;
-}
-
 *,
 *::before,
 *::after {
@@ -14,6 +9,10 @@ html {
   box-sizing: border-box;
   font-size: var(--body-font-size);
   text-size-adjust: 100%;
+}
+
+html:has(.swagger) {
+  scroll-padding-top: 0;
 }
 
 body {

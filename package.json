@@ -9,7 +9,7 @@
     "build-local": "npm run bundle && load-docs-ui-playbook --skip-private-repos --skip-redirects-download && antora --to-dir docs --fetch global-antora-playbook.yml",
     "lint:style": "stylelint \"**/*.css\"",
     "serve": "serve docs",
-    "expose": "ngrok http 3000",
+    "expose": "ngrok http 5252",
     "dev": "LIVERELOAD=true gulp preview"
   },
   "license": "MPL-2.0",
@@ -50,7 +50,7 @@
     "gulp-uglify": "~3.0",
     "gulp-vinyl-zip": "~2.2",
     "handlebars": "~4.7",
-    "hazelcast-docs-tools": "github:hazelcast/hazelcast-docs-tools#v2.1.0",
+    "hazelcast-docs-tools": "github:hazelcast/hazelcast-docs-tools#semver:2.3.0",
     "highlight.js": "~9.18",
     "js-yaml": "~3.13",
     "merge-stream": "~2.0",
