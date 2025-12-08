@@ -9,7 +9,7 @@
     "build-local": "npm run bundle && load-docs-ui-playbook --skip-private-repos --skip-redirects-download && antora --to-dir docs --fetch global-antora-playbook.yml",
     "lint:style": "stylelint \"**/*.css\"",
     "serve": "serve docs",
-    "expose": "ngrok http 3000",
+    "expose": "ngrok http 5252",
     "dev": "LIVERELOAD=true gulp preview"
   },
   "license": "MPL-2.0",

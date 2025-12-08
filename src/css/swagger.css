@@ -1,3 +1,7 @@
-.api-content {
+.swagger .api-content {
   background-color: var(--body-background-light);
+}
+
+.swagger .menu-content span:not(.operation-type) {
+  font-size: 15px;
 }
