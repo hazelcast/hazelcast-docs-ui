@@ -1,0 +1,8 @@
+@media screen and (width <= 1600px) {
+  .img-inline-block .image {
+    float: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
