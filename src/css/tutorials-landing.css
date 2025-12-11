@@ -3,6 +3,10 @@
   padding: 20px 20px 30px;
 }
 
+.tut.home .card-header {
+  color: var(--text-light);
+}
+
 /* stylelint-disable-next-line selector-class-pattern */
 .tut .aa-Autocomplete {
   width: 300px;
