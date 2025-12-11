@@ -18,8 +18,8 @@ site:
     - &latest_version_hazelcast
       url: '/java.html'
       title: Hazelcast Platform
-      version: '5.5'
-      displayVersion: '5.5'
+      version: '5.6'
+      displayVersion: '5.6'
     - url: '/java.html'
       title: Hazelcast Platform
       version: '4.0'
@@ -53,12 +53,12 @@ site:
       - &latest_version_mc
         title: Management Center
         url: '/java.html'
-        version: '5.9-SNAPSHOT'
-        displayVersion: '5.9-SNAPSHOT'
+        version: '5.10-SNAPSHOT'
+        displayVersion: '5.10-SNAPSHOT'
       - url: '/java.html'
         title: Management Center
-        version: '5.5'
-        displayVersion: '5.5'
+        version: '5.6'
+        displayVersion: '5.6'
     latest: *latest_version_mc
   - name: home
     url: /index.html
@@ -81,8 +81,8 @@ page:
     name: management-center
     title: Management Center
   componentVersion: *latest_version_hazelcast
-  version: '5.9-SNAPSHOT'
-  displayVersion: '5.9-SNAPSHOT'
+  version: '5.10-SNAPSHOT'
+  displayVersion: '5.10-SNAPSHOT'
   module: ROOT
   relativeSrcPath: java.adoc
   editUrl: https://github.com/hazelcast/hazelcast-docs-ui/blob/master/preview-src/java.adoc

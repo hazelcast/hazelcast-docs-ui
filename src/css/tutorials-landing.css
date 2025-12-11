@@ -1,3 +1,14 @@
+.tut .hero-background {
+  position: relative;
+  padding: 20px 20px 30px;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.tut .aa-Autocomplete {
+  width: 300px;
+  margin: 0 auto;
+}
+
 .tut.home .filter > * {
   font-size: medium;
 }
@@ -59,7 +70,7 @@
   margin-left: 10px;
 }
 
-.dropdown-toggle {
+.tut .dropdown-toggle {
   display: flex;
   place-items: center flex-end;
   justify-content: space-between;
@@ -76,18 +87,18 @@
   vertical-align: middle;
   font-size: 1.1em;
   text-indent: 10px;
+  color: var(--text-light);
 }
 
 .dropdown-toggle.filters {
   width: fit-content;
-  min-width: 25ch;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  position: absolute;
   bottom: 0;
   left: 30px;
-  position: absolute;
   height: 25px;
-  border: none;
+  border: 1px solid var(--neutral-light);
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -107,7 +118,7 @@
   background: #fafafa;
   border: 1px solid #b7c1cb;
   box-sizing: border-box;
-  color: var(--secondary-text);
+  color: var(--secondary-text-light);
   border-bottom: 3px solid var(--secondary-text);
   border-radius: 5px;
 }
@@ -130,7 +141,7 @@
   box-sizing: border-box;
   vertical-align: middle;
   padding: 4px 14px;
-  color: #333;
+  color: var(--secondary-text-light);
   border-radius: 1em;
   margin: 0 10px 10px 0;
   align-self: center;
@@ -188,7 +199,7 @@
 }
 
 .dropdown .dropdown-content li:hover {
-  background-color: #f1f1f1;
+  background-color: var(--neutral-grey);
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
@@ -260,6 +271,7 @@
 .row.tutorials.filter .card-header {
   display: flex;
   align-items: center;
+  color: var(--text-light);
 }
 
 .row.tutorials.search .card:first-child {
@@ -273,6 +285,11 @@
 .tut-card .card-header {
   display: flex;
   align-items: center;
+  color: var(--text-light);
+}
+
+.tut-card .card-summary {
+  color: var(--text-light);
 }
 
 .tut-card .card-header h3 {
