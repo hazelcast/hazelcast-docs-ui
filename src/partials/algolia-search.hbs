@@ -178,7 +178,7 @@
             return acc;
           }, {});
 
-          console.log('groupedItems', groupedItems);
+          // console.log('groupedItems', groupedItems);
 
           return Object.entries(groupedItems).map(([groupName, groupItems]) => {
             const userSource = options.getSource({
@@ -206,7 +206,7 @@
 
       const groupByProduct = groupBy((hit) => hit.hierarchy.lvl0, {
         getSource({ name, items }) {
-          console.log('groupByProduct:items -> ', items);
+          // console.log('groupByProduct:items -> ', items);
           return {
             getItems() {
               const withSection = items.map(item => {
