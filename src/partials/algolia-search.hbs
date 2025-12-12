@@ -178,6 +178,8 @@
             return acc;
           }, {});
 
+          // console.log('groupedItems', groupedItems);
+
           return Object.entries(groupedItems).map(([groupName, groupItems]) => {
             const userSource = options.getSource({
               name: groupName,
@@ -204,6 +206,7 @@
 
       const groupByProduct = groupBy((hit) => hit.hierarchy.lvl0, {
         getSource({ name, items }) {
+          // console.log('groupByProduct:items -> ', items);
           return {
             getItems() {
               const withSection = items.map(item => {
@@ -216,8 +219,8 @@
                     section: sectionKey ? item._highlightResult.hierarchy[sectionKey] : null,
                   },
                 }})
-              const sorted = withSection.sort((a, b) => `${b.hierarchy.lvl0}${b.version}${b.hierarchy.lvl2}${b.type}`
-                .localeCompare(`${a.hierarchy.lvl0}${a.version}${a.hierarchy.lvl2}${a.type}`))
+              const sorted = withSection.sort((a, b) => `${b.version}${b.hierarchy.lvl2}${b.type}`
+                .localeCompare(`${a.version}${a.hierarchy.lvl2}${a.type}`))
               let prevIndex = 0;
               const grouped = sorted.reduce((acc, next) => {
                 // if is subitem
