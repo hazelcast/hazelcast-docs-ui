@@ -214,8 +214,8 @@ strong.beta {
   font-size: inherit;
 }
 
-.doc .tableblock thead,
-.doc .tableblock tr:has(p>strong) {
+.doc .tableblock thead tr,
+.doc .tableblock.multiple-headed-table tr:has(p>strong) {
   background-color: light-dark(var(--neutral-grey), var(--neutral-dark));
 }
 
