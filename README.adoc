@@ -32,6 +32,45 @@ To automate some elements of the build process, this repository includes the fol
 
 |===
 
+== Custom CSS classes
+The UI supports adding custom CSS classes to various elements of the documentation site.
+
+=== `.multiple-headed-table`
+Use this class on tables that have multiple header rows to ensure proper styling. Apply the class to the table element as shown below:
+
+[source=asciidoc]
+----
+  [.multiple-headed-table, cols="x,x,x" ...]
+  |===
+  |[align=left]*Core Hazelcast Capabilities*
+  |[align=left]*Hey*
+  |[align=left]*Hi*
+  |[align=left]*Description*
+
+  |Management Center
+  |✅
+  |❌
+  |Get full access to all Management Center features.
+
+  |*Management Center*
+  |*Foo*
+  |*Bar*
+  |*Get full access to all Management Center features.*
+
+  |===
+----
+
+The last column in the example above will be styled correctly as a header row since it contains bold text.
+
+=== `.img-inline-block`
+Use this class on inline image elements to display them as inline-block elements, allowing text to wrap around them on bigger screens (> 1600px) but showing them as block elements on smaller screens. Apply the class to the image element as shown below:
+
+[source=asciidoc]
+----
+  [.img-inline-block]
+  image:hazelcast-overview.png[Hazelcast Overview,role="related thumb right"]
+----
+
 == Contributing
 
 To learn how to develop the UI and preview it locally, see our link:{url-contributing}[contributing guide].
