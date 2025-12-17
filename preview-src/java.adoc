@@ -245,7 +245,39 @@ It's content is aligned to the bottom of the cell.
 |===
 
 
-== Key features and benefits
+=== Table with `.multiple-headed-table` class
+
+[.multiple-headed-table, cols="<30%,<15%,<15%,<40%", options="header"]
+|===
+|[align=left]*Core Hazelcast Capabilities*
+|[align=left]*Hey*
+|[align=left]*Hi*
+|[align=left]*Description*
+
+|Management Center
+|icon:check-circle[size=lg,role=success]
+|icon:times[size=lg,role=error]
+|Get full access to all Management Center features.
+
+|Management Center
+|✅
+|❌
+|Get full access to all Management Center features.
+
+s|Management Center
+s|Foo
+|Bar
+s|Get full access to all Management Center features.
+
+
+|*Management Center*
+|*Foo*
+|*Bar*
+|*Get full access to all Management Center features.*
+
+|===
+
+=== Table without `.multiple-headed-table` class
 
 [cols="<30%,<15%,<15%,<40%", options="header"]
 |===
@@ -263,5 +295,16 @@ It's content is aligned to the bottom of the cell.
 |✅
 |❌
 |Get full access to all Management Center features.
+
+s|Management Center
+s|Foo
+|Bar
+s|Get full access to all Management Center features.
+
+
+|*Management Center*
+|*Foo*
+|*Bar*
+|*Get full access to all Management Center features.*
 
 |===
