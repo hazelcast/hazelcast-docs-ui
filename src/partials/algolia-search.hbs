@@ -218,36 +218,15 @@
                     title: item._highlightResult.hierarchy.lvl2,
                     section: sectionKey ? item._highlightResult.hierarchy[sectionKey] : null,
                   },
+                  uiType: UI_TYPE.ITEM,
                 }})
-              const sorted = withSection.sort((a, b) => `${b.version}${b.hierarchy.lvl2}${b.type}`
-                .localeCompare(`${a.version}${a.hierarchy.lvl2}${a.type}`))
-              let prevIndex = 0;
-              const grouped = sorted.reduce((acc, next) => {
-                // if is subitem
-                if (acc.length > 0 && acc[prevIndex].hierarchy.lvl2 === next.hierarchy.lvl2 && acc[prevIndex].componentVersion === next.componentVersion) {
-                  // if is immediate subitem
-                  if (acc[acc.length - 1].uiType === UI_TYPE.ITEM) {
-                    acc[prevIndex].uiType = UI_TYPE.SUBITEM;
-                    acc.splice(prevIndex, 0, { ...acc[prevIndex], uiType: UI_TYPE.HEADING });
-                    acc.push({ ...next, uiType: UI_TYPE.LAST_SUBITEM });
-                  // if second or > subitem
-                  } else {
-                    acc[acc.length - 1].uiType = UI_TYPE.SUBITEM;
-                    acc.push({ ...next, uiType: UI_TYPE.LAST_SUBITEM });
-                  }
-                } else {
-                  acc.push({ ...next, uiType: UI_TYPE.ITEM });
-                  prevIndex = acc.length - 1;
-                }
-                return acc;
-              }, [])
-              return grouped;
+              return withSection;
             },
             templates: {
               header({ html }) {
                 return currentComponent === ALL_COMPONENTS_TITLE ? html`
-                <span class="aa-SourceHeaderTitle">${name}</span>
-              ` : '';
+                  <span class="aa-SourceHeaderTitle">${name}</span>
+                ` : '';
               },
             },
           };
