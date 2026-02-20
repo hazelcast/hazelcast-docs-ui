@@ -76,7 +76,7 @@ page:
   attributes:
     component-order: '!home, !templates, !imdg, !privacy, management-center, clc, hazelcast, cloud, *'
     excluded-versions: 'management-center:4.0'
-    last-versions-count: 10
+    last-versions-count: 6
   component:
     name: management-center
     title: Management Center

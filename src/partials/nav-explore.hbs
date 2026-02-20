@@ -27,7 +27,7 @@
     {{#if (not-eq @root.page.component.name 'cloud')}}
       <ul class="nav-version-picker-versions" id="navbarVersionsList">
         {{#each (filter-out-excluded-versions)}}
-          {{#if (lte @index @root.page.attributes.last-versions-count)}}
+          {{#if (lt @index @root.page.attributes.last-versions-count)}}
             <li
               class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
             >
