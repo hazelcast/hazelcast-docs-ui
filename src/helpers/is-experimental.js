@@ -3,8 +3,8 @@
 module.exports = (navUrl, { data: { root } }) => {
   const { contentCatalog, page } = root
   if (!contentCatalog) return false
-  let pages = contentCatalog.navGroup
-  const cp = contentCatalog.cp
+  var pages = contentCatalog.navGroup
+  var cp = contentCatalog.cp
   if (!pages || cp !== page.component.name) {
     pages = contentCatalog.findBy({ component: page.component.name, family: 'page' })
     contentCatalog.navGroup = pages
@@ -12,8 +12,7 @@ module.exports = (navUrl, { data: { root } }) => {
   }
   for (let i = 0; i < pages.length; i++) {
     if (pages[i].pub.url === navUrl &&
-      pages[i].asciidoc.attributes['page-experimental'] === 'true') {
-      console.log(`[HZ:DEBUG] experimental detected for ${navUrl}`)
+      pages[i].asciidoc.attributes['page-experimental-feature'] === 'true') {
       return true
     }
   }

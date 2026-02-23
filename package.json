@@ -6,7 +6,7 @@
   "scripts": {
     "bundle": "gulp bundle",
     "build": "npm run bundle && load-docs-ui-playbook && antora --to-dir docs --fetch global-antora-playbook.yml && cp _redirects docs",
-    "build-local": "npm run bundle && load-docs-ui-playbook --skip-private-repos --skip-redirects-download && antora --to-dir docs --fetch global-antora-playbook.yml",
+    "build-local": "npm run bundle && antora --to-dir docs --fetch global-antora-playbook.yml",
     "lint:style": "stylelint \"**/*.css\"",
     "serve": "serve docs",
     "expose": "ngrok http 5252",

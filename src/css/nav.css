@@ -185,7 +185,7 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
 
 .nav-link.enterprise::after,
 .nav-link.beta::after,
-.nav-link.enterprise.beta::after {
+.nav-link.experimental::after {
   padding: 4px;
   margin-left: 5px;
   border-radius: 10px;
@@ -212,7 +212,7 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
 }
 
 .nav-link.experimental::after {
-  content: 'Beta';
+  content: 'Experimental';
   color: white;
   background: light-dark(purple, mediumpurple);
 }
