@@ -37,7 +37,7 @@ Imagine a trading application where all the trading data are stored and
 managed in a Hazelcast cluster with tens of members. Swing/Web applications
 at the traders' desktops can use clients to access and modify the data in the Hazelcast cluster.
 
-== Getting Started with Java Client
+== Getting Started with Java Client [.experimental]*Experimental*
 
 NOTE: You do not need to set a license key for your Java clients for which you want to
 use Hazelcast IMDG Enterprise features. Hazelcast IMDG Enterprise license keys are
