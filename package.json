@@ -5,7 +5,7 @@
   "homepage": "https://github.com/hazelcast/hazelcast-docs-ui",
   "scripts": {
     "bundle": "gulp bundle",
-    "build": "npm run bundle && load-docs-ui-playbook && antora --to-dir docs --fetch global-antora-playbook.yml && cp _redirects docs",
+    "build": "npm run bundle && load-docs-ui-playbook --skip-private-repos --skip-redirects-download && load-docs-ui-playbook && antora --to-dir docs --fetch global-antora-playbook.yml && cp _redirects docs",
     "build-local": "npm run bundle && antora --to-dir docs --fetch global-antora-playbook.yml",
     "lint:style": "stylelint \"**/*.css\"",
     "serve": "serve docs",
