@@ -79,6 +79,24 @@ strong.enterprise {
   vertical-align: middle;
 }
 
+.doc > h1.page.experimental::after {
+  content: 'EXPERIMENTAL';
+  padding: 4px;
+  margin-left: 15px;
+  font-weight: 500;
+  color: light-dark(purple, mediumpurple);
+  font-size: medium;
+  vertical-align: middle;
+}
+
+strong.experimental {
+  padding: 4px;
+  color: light-dark(purple, mediumpurple);
+  font-size: smaller;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
 .doc > h1.page.beta::after {
   content: 'BETA';
   border: none;

@@ -183,37 +183,38 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
   position: relative;
 }
 
-.nav-link.enterprise::after {
-  content: 'Enterprise';
-  background: var(--primary-dark);
+.nav-link.enterprise::after,
+.nav-link.beta::after,
+.nav-link.enterprise.beta::after {
   padding: 4px;
   margin-left: 5px;
-  color: white;
   border-radius: 10px;
   font-size: 0.7em;
   vertical-align: middle;
+}
+
+.nav-link.enterprise::after {
+  content: 'Enterprise';
+  color: white;
+  background: var(--primary-dark);
 }
 
 .nav-link.beta::after {
   content: 'Beta';
   color: #041a3b;
   background: var(--success-light);
-  padding: 4px;
-  margin-left: 5px;
-  border-radius: 10px;
-  font-size: 0.7em;
-  vertical-align: middle;
 }
 
 .nav-link.enterprise.beta::after {
   content: 'Enterprise Beta';
   color: #041a3b;
   background: var(--success-light);
-  padding: 4px;
-  margin-left: 5px;
-  border-radius: 10px;
-  font-size: 0.7em;
-  vertical-align: middle;
+}
+
+.nav-link.experimental::after {
+  content: 'Beta';
+  color: white;
+  background: light-dark(purple, mediumpurple);
 }
 
 @media screen and (width >= 1024px) {

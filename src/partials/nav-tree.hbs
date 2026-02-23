@@ -9,6 +9,7 @@
               {{~#if (is-enterprise ./url)}} enterprise{{/if}}
               {{/if}}
               {{~#if (is-beta ./url)}} beta{{/if}}
+              {{~#if (is-experimental ./url)}} experimental{{/if}}
             " href="
             {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
             {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>

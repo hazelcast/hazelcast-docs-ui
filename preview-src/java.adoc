@@ -1,5 +1,5 @@
 = Java Client
-[[java-client]]
+:page-experimental: true
 
 The Java client is **the most full featured** Hazelcast native client.
 It is offered both with Hazelcast IMDG and Hazelcast IMDG Enterprise.
