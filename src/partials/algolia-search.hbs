@@ -5,8 +5,8 @@
   crossorigin="anonymous"
 />
 <script
-  src="https://cdn.jsdelivr.net/npm/algoliasearch@5.30.0/dist/lite/builds/browser.umd.js"
-  integrity="sha256-w/rbJ5CGTW5rub22bQ/VEoIHxypNh4NZPdkIJvGMZlI="
+  src="https://cdn.jsdelivr.net/npm/algoliasearch@5.49.2/dist/algoliasearch.umd.min.js"
+  integrity="sha384-2WzvzL21521Acm1aegZo+6/oTAfRxqRFGUDrM1ORqJPxUoKUbJsZ5udvvqR+3NGq"
   crossorigin="anonymous"
   id="algoliasearchScript"
   defer
@@ -84,10 +84,11 @@
       }
 
       const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
-      const { liteClient: algoliasearch } = window['algoliasearch/lite'];
+      const { algoliasearch } = window['algoliasearch'];
       const ALL_COMPONENTS_TITLE = 'All';
       const ALL_VERSIONS_TITLE = 'All Versions';
       const NO_VERSIONS_TITLE = 'default';
+      const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
       const initialFacet = [{
         name: ALL_COMPONENTS_TITLE,
         title: ALL_COMPONENTS_TITLE,
@@ -100,12 +101,49 @@
       }
       let currentVersion = '{{page.displayVersion}}';
 
-      const componentVersions = [
+      let componentVersions = [
         ...window.UTILS.parseHbsJsonString(
           '{{get-facets-from-components (sort-components site.components page.attributes.component-order)}}'
         ),
         ...initialFacet,
       ];
+
+      console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
+
+      const tags = await searchClient.searchForFacetValues({ indexName: '{{site.keys.docsearchIndex}}', facetName: 'tags', searchForFacetValuesRequest: { maxFacetHits: 100 } });
+
+      console.debug('[DEBUG:ALGOLIA_SEARCH] facets: ', tags.facetHits);
+
+      componentVersions = componentVersions.map((componentVersion) => {
+        const parse = (v) => {
+          const snapshot = v.toLowerCase().includes('snapshot');
+          const nums = v.replace(/-snapshot/i, '').split('.').map(Number);
+          return { nums, snapshot };
+        };
+
+        const sortFn = (a, b) => {
+          const pa = parse(a);
+          const pb = parse(b);
+          const len = Math.max(pa.nums.length, pb.nums.length);
+          for (let i = 0; i < len; i++) {
+            const na = pa.nums[i] ?? 0;
+            const nb = pb.nums[i] ?? 0;
+            if (na !== nb) return nb - na; // descending
+          }
+          if (pa.snapshot && !pb.snapshot) return -1;
+          if (!pa.snapshot && pb.snapshot) return 1;
+          return 0;
+        };
+
+        const versions = tags.facetHits
+          .filter(hit => hit.value.startsWith(componentVersion.name))
+          .map(hit => hit.value.replace(`${componentVersion.name}-`, ''));
+        versions.sort(sortFn);
+        return {
+          ...componentVersion,
+          versions,
+        };
+      })
 
       console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
 
@@ -201,8 +239,6 @@
           });
         };
       };
-
-      const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
 
       const groupByProduct = groupBy((hit) => hit.hierarchy.lvl0, {
         getSource({ name, items }) {
