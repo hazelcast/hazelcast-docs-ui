@@ -22,7 +22,6 @@
     </div>
   </div>
   {{> nav-toggle}}
-  {{> page-versions}}
 {{else}}
   {{> breadcrumbs}}
   {{#if (not-eq page.layout 'tutorial')}}
@@ -47,7 +46,6 @@
       </a>
     </div>
   {{/if}}
-  {{> page-versions}}
   <div id="articleContent">
     {{{page.contents}}}
   </div>
