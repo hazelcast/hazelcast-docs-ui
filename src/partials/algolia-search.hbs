@@ -114,7 +114,7 @@
 
       componentVersions = componentVersions.map((componentVersion) => ({
         ...componentVersion,
-        versions: algoliaVersions[componentVersion.name] || [],
+        versions: algoliaVersions[componentVersion.name]?.map(({version}) => version) || [],
       }));
 
       console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);

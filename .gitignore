@@ -6,3 +6,4 @@
 .idea
 global-antora-playbook.yml
 _redirects
+/src/helpers/get-algolia-versions.js

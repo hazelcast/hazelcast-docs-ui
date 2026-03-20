@@ -22,6 +22,21 @@ const uglify = require('gulp-uglify')
 const vfs = require('vinyl-fs')
 
 module.exports = (src, dest, preview) => () => {
+  if (preview) {
+    // Write a stub for helpers injected by Antora extensions at build time.
+    // The stub is gitignored and only exists during local UI development.
+    const stub = `'use strict'
+const MOCK = [
+  { version: '5.7-snapshot', url: '/hazelcast/5.7-snapshot/' },
+  { version: '5.6', url: '/hazelcast/5.6/' },
+  { version: '5.5', url: '/hazelcast/5.5/' },
+  { version: '5.4', url: '/hazelcast/5.4/' },
+]
+module.exports = (componentName) => typeof componentName === 'string' ? MOCK : []
+`
+    fs.outputFileSync(ospath.join(src, 'helpers/get-algolia-versions.js'), stub)
+  }
+
   const opts = { base: src, cwd: src }
   const sourcemaps = preview || process.env.SOURCEMAPS === 'true'
   const postcssPlugins = [
