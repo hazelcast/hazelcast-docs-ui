@@ -110,12 +110,40 @@
 
       console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
 
-      const algoliaVersions = window.UTILS.parseHbsJsonString('{{get-algolia-versions}}');
+      const tags = await searchClient.searchForFacetValues({ indexName: '{{site.keys.docsearchIndex}}', facetName: 'tags', searchForFacetValuesRequest: { maxFacetHits: 100 } });
 
-      componentVersions = componentVersions.map((componentVersion) => ({
-        ...componentVersion,
-        versions: algoliaVersions[componentVersion.name]?.map(({version}) => version) || [],
-      }));
+      console.debug('[DEBUG:ALGOLIA_SEARCH] facets: ', tags.facetHits);
+
+      componentVersions = componentVersions.map((componentVersion) => {
+        const parse = (v) => {
+          const snapshot = v.toLowerCase().includes('snapshot');
+          const nums = v.replace(/-snapshot/i, '').split('.').map(Number);
+          return { nums, snapshot };
+        };
+
+        const sortFn = (a, b) => {
+          const pa = parse(a);
+          const pb = parse(b);
+          const len = Math.max(pa.nums.length, pb.nums.length);
+          for (let i = 0; i < len; i++) {
+            const na = pa.nums[i] ?? 0;
+            const nb = pb.nums[i] ?? 0;
+            if (na !== nb) return nb - na; // descending
+          }
+          if (pa.snapshot && !pb.snapshot) return -1;
+          if (!pa.snapshot && pb.snapshot) return 1;
+          return 0;
+        };
+
+        const versions = tags.facetHits
+          .filter(hit => hit.value.startsWith(componentVersion.name))
+          .map(hit => hit.value.replace(`${componentVersion.name}-`, ''));
+        versions.sort(sortFn);
+        return {
+          ...componentVersion,
+          versions,
+        };
+      })
 
       console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
 
@@ -299,39 +327,39 @@
                   const version = item.version;
                   const showVersion = currentVersion === ALL_VERSIONS_TITLE && version && version !== NO_VERSIONS_TITLE;
                   return html`
-            <a class="aa-ItemLink" href="${item.uiType === UI_TYPE.HEADING ? item.url.split('#')[0] : item.url}" target="_self">
-              <div class="aa-ItemWrapper">
-                <div class="aa-ItemContent">
-                  ${(getLeftIcon(item, html))}
-                    <div class="aa-ItemContentBody">
-                    ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? html`
-                      <h4 class="aa-ItemContentTitle">
-                        <span>${components.Highlight({ hit: item, attribute: 'title' })}</span>
-                      </h4>
-                    ` : ''}
-                      ${item.uiType === UI_TYPE.HEADING || !item._highlightResult.section ? '' : html`
-                        <h5 class="aa-ItemContentSection">
-                            <span>${components.Highlight({hit: item, attribute: 'section'})}</span>
-                        </h5>
-                      `}
-                      ${item.uiType === UI_TYPE.HEADING ? '' :
-                        html`<p class="aa-ItemContentDescription">
-                          ${components.Snippet({hit: item, attribute: 'content'})}
-                        </p>`}
-                      ${item.breadcrumbs && (item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM) ? html`
-                        <div class="aa-ItemContentBreadcrumbs">
-                          ${item.breadcrumbs.join(' > ')}
+                    <a class="aa-ItemLink" href="${item.uiType === UI_TYPE.HEADING ? item.url.split('#')[0] : item.url}" target="_self">
+                      <div class="aa-ItemWrapper">
+                        <div class="aa-ItemContent">
+                          ${(getLeftIcon(item, html))}
+                          <div class="aa-ItemContentBody">
+                            ${item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM ? html`
+                              <h4 class="aa-ItemContentTitle">
+                                <span>${components.Highlight({ hit: item, attribute: 'title' })}</span>
+                              </h4>
+                            ` : ''}
+                            ${item.uiType === UI_TYPE.HEADING || !item._highlightResult.section ? '' : html`
+                              <h5 class="aa-ItemContentSection">
+                                <span>${components.Highlight({hit: item, attribute: 'section'})}</span>
+                              </h5>
+                            `}
+                            ${item.uiType === UI_TYPE.HEADING ? '' :
+                              html`<p class="aa-ItemContentDescription">
+                                ${components.Snippet({hit: item, attribute: 'content'})}
+                              </p>`}
+                            ${item.breadcrumbs && (item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM) ? html`
+                              <div class="aa-ItemContentBreadcrumbs">
+                                ${item.breadcrumbs.join(' > ')}
+                              </div>
+                            ` : ''}
+                          </div>
+                          ${showVersion && (item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM) ? html`
+                            <div class="aa-ItemVersion">
+                              ${version}
+                            </div>
+                          ` : ''}
                         </div>
-                      ` : ''}
-                    </div>
-                    ${showVersion && (item.uiType === UI_TYPE.HEADING || item.uiType === UI_TYPE.ITEM) ? html`
-                      <div class="aa-ItemVersion">
-                        ${version}
                       </div>
-                    ` : ''}
-                  </div>
-                </div>
-              </a>`;
+                    </a>`;
                 },
                 noResults({ html, state }) {
                   return html`
@@ -362,11 +390,11 @@
                     <span class="focus"></span>
                   </div>
                   ${getComponentVersionOptions(html).length > 1 ? html`<div class="select aa-VersionSelect">
-                    <select id="componentVersionSelect">
-                      ${getComponentVersionOptions(html)}
-                    </select>
-                    <span class="focus"></span>
-                  </div>` : ''}
+              <select id="componentVersionSelect">
+                ${getComponentVersionOptions(html)}
+              </select>
+              <span class="focus"></span>
+            </div>` : ''}
                 </div>
                 ${ window.Kapa ? html`
                 <button id="askAIBtn" class="aa-AskAIBtn">
@@ -375,9 +403,9 @@
                 </button>` : ''}
               </div>
               ${dataSources.length > 0 ? html`
-                <div class="aa-PanelSection aa-PanelSection--bottom">
-                  ${dataSources}
-                </div>` : html`
+              <div class="aa-PanelSection aa-PanelSection--bottom">
+                ${dataSources}
+              </div>` : html`
                 <div class="aa-ImagePlaceholder">
                   <img class="aa-ImagePlaceholderImage aa-ImagePlaceholderImageLight" src="{{{uiRootPath}}}/img/hazelcast-logo-original.svg" alt="hazelcast" />
                   <img class="aa-ImagePlaceholderImage aa-ImagePlaceholderImageDark" src="{{{uiRootPath}}}/img/hazelcast-logo-white.svg" alt="hazelcast" />

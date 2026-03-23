@@ -23,13 +23,19 @@
     {{/each}}
   </ul>
 
-  {{#if (not-eq @root.page.component.name 'cloud')}}
-    <ul class="nav-version-picker-versions" id="navbarVersionsList">
-      {{#each (get-algolia-versions page.component.name)}}
-        <li class="version {{~#if (eq this @root.page.version)}} is-current{{/if~}}">
-          <a href="{{{relativize this.url}}}">{{this.version}}</a>
-        </li>
-      {{/each}}
-    </ul>
-  {{/if}}
+  {{#with page.versions}}
+    {{#if (not-eq @root.page.component.name 'cloud')}}
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+        {{#each (filter-out-excluded-versions)}}
+          {{#if (lt @index @root.page.attributes.last-versions-count)}}
+            <li
+              class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
+            >
+              <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+            </li>
+          {{/if}}
+        {{/each}}
+      </ul>
+    {{/if}}
+  {{/with}}
 </div>
