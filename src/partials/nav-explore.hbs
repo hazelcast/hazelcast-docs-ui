@@ -25,13 +25,10 @@
 
   {{#with page.versions}}
     {{#if (not-eq @root.page.component.name 'cloud')}}
-      <ul class="nav-version-picker-versions" id="navbarVersionsList" data-last-versions-count="{{@root.page.attributes.last-versions-count}}">
+      <ul class="nav-version-picker-versions" id="navbarVersionsList">
         {{#each (filter-out-excluded-versions)}}
           {{#if (lt @index @root.page.attributes.last-versions-count)}}
-            <li
-              class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
-              data-version="{{./version}}"
-            >
+            <li class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}">
               <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
             </li>
           {{/if}}
@@ -49,17 +46,14 @@
 
     const componentName = '{{page.component.name}}';
     const currentVersion = '{{page.version}}';
-    const lastVersionsCount = parseInt(versionsList.dataset.lastVersionsCount, 10) || 10;
+    const lastVersionsCount = {{page.attributes.[last-versions-count]}} || 10;
 
-    // Build version -> { url, displayVersion } map from server-rendered list (component versions fallback)
-    const versionUrlMap = {};
-    versionsList.querySelectorAll('li[data-version]').forEach((li) => {
-      const version = li.dataset.version;
-      const a = li.querySelector('a');
-      if (a) {
-        versionUrlMap[version] = { url: a.getAttribute('href'), displayVersion: a.textContent.trim() };
-      }
-    });
+    // Full version -> { url, displayVersion } map embedded at build time from Antora
+    const versionUrlMap = {
+      {{#each page.versions}}
+      '{{./version}}': { url: '{{{relativize ./url}}}', displayVersion: '{{./displayVersion}}' },
+      {{/each}}
+    };
 
     const parse = (v) => {
       const snapshot = v.toLowerCase().includes('snapshot');
@@ -125,7 +119,6 @@
           const { url, displayVersion } = versionUrlMap[version];
           const li = document.createElement('li');
           li.className = 'version' + (version === currentVersion ? ' is-current' : '');
-          li.dataset.version = version;
           const a = document.createElement('a');
           a.href = url;
           a.textContent = displayVersion;
