@@ -84,10 +84,20 @@
     try {
       const waitForAlgolia = () => new Promise((resolve, reject) => {
         if (window['algoliasearch']) return resolve();
-        const script = document.getElementById('algoliasearchScript');
-        if (!script) return reject(new Error('algoliasearch script not found'));
-        script.addEventListener('load', resolve);
-        script.addEventListener('error', reject);
+
+        const attachListeners = () => {
+          if (window['algoliasearch']) return resolve();
+          const script = document.getElementById('algoliasearchScript');
+          if (!script) return reject(new Error('algoliasearch script not found'));
+          script.addEventListener('load', resolve, { once: true });
+          script.addEventListener('error', reject, { once: true });
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', attachListeners, { once: true });
+        } else {
+          attachListeners();
+        }
       });
 
       await waitForAlgolia();
