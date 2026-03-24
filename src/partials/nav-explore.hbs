@@ -25,11 +25,12 @@
 
   {{#with page.versions}}
     {{#if (not-eq @root.page.component.name 'cloud')}}
-      <ul class="nav-version-picker-versions" id="navbarVersionsList">
+      <ul class="nav-version-picker-versions" id="navbarVersionsList" data-last-versions-count="{{@root.page.attributes.last-versions-count}}">
         {{#each (filter-out-excluded-versions)}}
           {{#if (lt @index @root.page.attributes.last-versions-count)}}
             <li
               class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
+              data-version="{{./version}}"
             >
               <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
             </li>
@@ -39,3 +40,96 @@
     {{/if}}
   {{/with}}
 </div>
+
+{{#if (and page.component (not-eq page.component.name 'cloud') (not-eq page.component.name 'home'))}}
+<script>
+  (async () => {
+    const versionsList = document.getElementById('navbarVersionsList');
+    if (!versionsList) return;
+
+    const componentName = '{{page.component.name}}';
+    const currentVersion = '{{page.version}}';
+    const lastVersionsCount = parseInt(versionsList.dataset.lastVersionsCount, 10) || 10;
+
+    // Build version -> { url, displayVersion } map from server-rendered list (component versions fallback)
+    const versionUrlMap = {};
+    versionsList.querySelectorAll('li[data-version]').forEach((li) => {
+      const version = li.dataset.version;
+      const a = li.querySelector('a');
+      if (a) {
+        versionUrlMap[version] = { url: a.getAttribute('href'), displayVersion: a.textContent.trim() };
+      }
+    });
+
+    const parse = (v) => {
+      const snapshot = v.toLowerCase().includes('snapshot');
+      const nums = v.replace(/-snapshot/i, '').split('.').map(Number);
+      return { nums, snapshot };
+    };
+
+    const sortFn = (a, b) => {
+      const pa = parse(a);
+      const pb = parse(b);
+      const len = Math.max(pa.nums.length, pb.nums.length);
+      for (let i = 0; i < len; i++) {
+        const na = pa.nums[i] ?? 0;
+        const nb = pb.nums[i] ?? 0;
+        if (na !== nb) return nb - na;
+      }
+      if (pa.snapshot && !pb.snapshot) return -1;
+      if (!pa.snapshot && pb.snapshot) return 1;
+      return 0;
+    };
+
+    try {
+      const waitForAlgolia = () => new Promise((resolve, reject) => {
+        if (window['algoliasearch']) return resolve();
+        const script = document.getElementById('algoliasearchScript');
+        if (!script) return reject(new Error('algoliasearch script not found'));
+        script.addEventListener('load', resolve);
+        script.addEventListener('error', reject);
+      });
+
+      await waitForAlgolia();
+
+      const { algoliasearch } = window['algoliasearch'];
+      const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
+      const tags = await searchClient.searchForFacetValues({
+        indexName: '{{site.keys.docsearchIndex}}',
+        facetName: 'tags',
+        searchForFacetValuesRequest: { maxFacetHits: 100 },
+      });
+
+      const algoliaVersions = tags.facetHits
+        .filter((hit) => hit.value.startsWith(componentName + '-'))
+        .map((hit) => hit.value.replace(`${componentName}-`, ''));
+
+      if (algoliaVersions.length === 0) return;
+
+      algoliaVersions.sort(sortFn);
+
+      const newItems = algoliaVersions
+        .slice(0, lastVersionsCount)
+        .filter((version) => versionUrlMap[version])
+        .map((version) => {
+          const { url, displayVersion } = versionUrlMap[version];
+          const li = document.createElement('li');
+          li.className = 'version' + (version === currentVersion ? ' is-current' : '');
+          li.dataset.version = version;
+          const a = document.createElement('a');
+          a.href = url;
+          a.textContent = displayVersion;
+          li.appendChild(a);
+          return li;
+        });
+
+      if (newItems.length > 0) {
+        versionsList.innerHTML = '';
+        newItems.forEach((li) => versionsList.appendChild(li));
+      }
+    } catch (e) {
+      console.warn('[NAV] Could not fetch versions from Algolia, falling back to component versions.', e);
+    }
+  })();
+</script>
+{{/if}}
