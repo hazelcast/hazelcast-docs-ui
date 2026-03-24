@@ -28,9 +28,7 @@
       <ul class="nav-version-picker-versions" id="navbarVersionsList">
         {{#each (filter-out-excluded-versions)}}
           {{#if (lt @index @root.page.attributes.last-versions-count)}}
-            <li
-              class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}"
-            >
+            <li class="version {{~#if (eq ./version @root.page.version)}} is-current{{/if~}}">
               <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
             </li>
           {{/if}}
@@ -39,3 +37,104 @@
     {{/if}}
   {{/with}}
 </div>
+
+{{#if (and page.component (not-eq page.component.name 'cloud') (not-eq page.component.name 'home'))}}
+<script>
+  (async () => {
+    const versionsList = document.getElementById('navbarVersionsList');
+    if (!versionsList) return;
+
+    const componentName = '{{page.component.name}}';
+    const currentVersion = '{{page.version}}';
+
+    // Full version -> { url, displayVersion } map embedded at build time from Antora
+    const versionUrlMap = {
+      {{#each page.versions}}
+      '{{./version}}': { url: '{{{relativize ./url}}}', displayVersion: '{{./displayVersion}}' },
+      {{/each}}
+    };
+
+    const parse = (v) => {
+      const snapshot = v.toLowerCase().includes('snapshot');
+      const nums = v.replace(/-snapshot/i, '').split('.').map(Number);
+      return { nums, snapshot };
+    };
+
+    const sortFn = (a, b) => {
+      const pa = parse(a);
+      const pb = parse(b);
+      const len = Math.max(pa.nums.length, pb.nums.length);
+      for (let i = 0; i < len; i++) {
+        const na = pa.nums[i] ?? 0;
+        const nb = pb.nums[i] ?? 0;
+        if (na !== nb) return nb - na;
+      }
+      if (pa.snapshot && !pb.snapshot) return -1;
+      if (!pa.snapshot && pb.snapshot) return 1;
+      return 0;
+    };
+
+    try {
+      const waitForAlgolia = () => new Promise((resolve, reject) => {
+        if (window['algoliasearch']) return resolve();
+
+        const attachListeners = () => {
+          if (window['algoliasearch']) return resolve();
+          const script = document.getElementById('algoliasearchScript');
+          if (!script) return reject(new Error('algoliasearch script not found'));
+          script.addEventListener('load', resolve, { once: true });
+          script.addEventListener('error', reject, { once: true });
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', attachListeners, { once: true });
+        } else {
+          attachListeners();
+        }
+      });
+
+      await waitForAlgolia();
+
+      const { algoliasearch } = window['algoliasearch'];
+      const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
+      const tags = await searchClient.searchForFacetValues({
+        indexName: '{{site.keys.docsearchIndex}}',
+        facetName: 'tags',
+        searchForFacetValuesRequest: { maxFacetHits: 100 },
+      });
+
+      const algoliaVersions = tags.facetHits
+        .filter((hit) => hit.value.startsWith(componentName + '-'))
+        .map((hit) => hit.value.replace(`${componentName}-`, ''));
+
+      if (algoliaVersions.length === 0) return;
+
+      algoliaVersions.sort(sortFn);
+
+      const newItems = algoliaVersions
+        .filter((version) => versionUrlMap[version])
+        .map((version) => {
+          const { url, displayVersion } = versionUrlMap[version];
+          const li = document.createElement('li');
+          li.className = 'version' + (version === currentVersion ? ' is-current' : '');
+          const a = document.createElement('a');
+          a.href = url;
+          a.textContent = displayVersion;
+          li.appendChild(a);
+          return li;
+        });
+
+      if (newItems.length < algoliaVersions.length) {
+        console.warn('[NAV-EXPLORE] Some versions from Algolia were not found in the Antora version list and will be skipped:', algoliaVersions.filter((v) => !versionUrlMap[v]));
+      }
+
+      if (newItems.length > 0) {
+        versionsList.innerHTML = '';
+        newItems.forEach((li) => versionsList.appendChild(li));
+      }
+    } catch (e) {
+      console.warn('[NAV-EXPLORE] Could not fetch versions from Algolia, falling back to component versions.', e);
+    }
+  })();
+</script>
+{{/if}}
