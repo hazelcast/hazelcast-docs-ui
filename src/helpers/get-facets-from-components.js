@@ -6,7 +6,11 @@ module.exports = (components, { data: { root } }) => {
       const title = component.versions?.[0].title
       const name = component.name
       const latestVersion = component.latest.displayVersion
-      acc.push({ name, title, latestVersion })
+      const versions = component.versions
+        .filter(({ isHidden }) => !isHidden)
+        .slice(0, root.page.attributes['last-versions-count'])
+        .map(({ displayVersion }) => displayVersion)
+      acc.push({ name, title, versions, latestVersion })
     }
     return acc
   }, []))

@@ -110,42 +110,47 @@
 
       console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
 
-      const tags = await searchClient.searchForFacetValues({ indexName: '{{site.keys.docsearchIndex}}', facetName: 'tags', searchForFacetValuesRequest: { maxFacetHits: 100 } });
+      try {
+        const tags = await searchClient.searchForFacetValues({ indexName: '{{site.keys.docsearchIndex}}', facetName: 'tags', searchForFacetValuesRequest: { maxFacetHits: 100 } });
 
-      console.debug('[DEBUG:ALGOLIA_SEARCH] facets: ', tags.facetHits);
+        console.debug('[DEBUG:ALGOLIA_SEARCH] facets: ', tags.facetHits);
 
-      componentVersions = componentVersions.map((componentVersion) => {
-        const parse = (v) => {
-          const snapshot = v.toLowerCase().includes('snapshot');
-          const nums = v.replace(/-snapshot/i, '').split('.').map(Number);
-          return { nums, snapshot };
-        };
+        componentVersions = componentVersions.map((componentVersion) => {
+          const parse = (v) => {
+            const snapshot = v.toLowerCase().includes('snapshot');
+            const nums = v.replace(/-snapshot/i, '').split('.').map(Number);
+            return { nums, snapshot };
+          };
 
-        const sortFn = (a, b) => {
-          const pa = parse(a);
-          const pb = parse(b);
-          const len = Math.max(pa.nums.length, pb.nums.length);
-          for (let i = 0; i < len; i++) {
-            const na = pa.nums[i] ?? 0;
-            const nb = pb.nums[i] ?? 0;
-            if (na !== nb) return nb - na; // descending
-          }
-          if (pa.snapshot && !pb.snapshot) return -1;
-          if (!pa.snapshot && pb.snapshot) return 1;
-          return 0;
-        };
+          const sortFn = (a, b) => {
+            const pa = parse(a);
+            const pb = parse(b);
+            const len = Math.max(pa.nums.length, pb.nums.length);
+            for (let i = 0; i < len; i++) {
+              const na = pa.nums[i] ?? 0;
+              const nb = pb.nums[i] ?? 0;
+              if (na !== nb) return nb - na; // descending
+            }
+            if (pa.snapshot && !pb.snapshot) return -1;
+            if (!pa.snapshot && pb.snapshot) return 1;
+            return 0;
+          };
 
-        const versions = tags.facetHits
-          .filter(hit => hit.value.startsWith(componentVersion.name))
-          .map(hit => hit.value.replace(`${componentVersion.name}-`, ''));
-        versions.sort(sortFn);
-        return {
-          ...componentVersion,
-          versions,
-        };
-      })
+          const versions = tags.facetHits
+            .filter(hit => hit.value.startsWith(componentVersion.name))
+            .map(hit => hit.value.replace(`${componentVersion.name}-`, ''));
+          versions.sort(sortFn);
+          return {
+            ...componentVersion,
+            versions,
+          };
+        })
+      } catch (e) {
+        console.warn('Could not fetch facet values from Algolia.', e);
+        console.warn('Falling back to component versions.');
+      }
 
-      console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
+      console.debug('[DEBUG:ALGOLIA_SEARCH] FINAL component versions: ', componentVersions);
 
       const getComponentOptions = (html) => componentVersions
         .map(({ name, title }) => name === currentComponent
