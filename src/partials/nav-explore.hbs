@@ -46,7 +46,6 @@
 
     const componentName = '{{page.component.name}}';
     const currentVersion = '{{page.version}}';
-    const lastVersionsCount = {{page.attributes.[last-versions-count]}} || 10;
 
     // Full version -> { url, displayVersion } map embedded at build time from Antora
     const versionUrlMap = {
@@ -113,7 +112,6 @@
       algoliaVersions.sort(sortFn);
 
       const newItems = algoliaVersions
-        .slice(0, lastVersionsCount)
         .filter((version) => versionUrlMap[version])
         .map((version) => {
           const { url, displayVersion } = versionUrlMap[version];
