@@ -124,12 +124,16 @@
           return li;
         });
 
+      if (newItems.length < algoliaVersions.length) {
+        console.warn('[NAV-EXPLORE] Some versions from Algolia were not found in the Antora version list and will be skipped:', algoliaVersions.filter((v) => !versionUrlMap[v]));
+      }
+
       if (newItems.length > 0) {
         versionsList.innerHTML = '';
         newItems.forEach((li) => versionsList.appendChild(li));
       }
     } catch (e) {
-      console.warn('[NAV] Could not fetch versions from Algolia, falling back to component versions.', e);
+      console.warn('[NAV-EXPLORE] Could not fetch versions from Algolia, falling back to component versions.', e);
     }
   })();
 </script>
