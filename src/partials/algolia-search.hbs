@@ -118,13 +118,17 @@
         componentVersions = componentVersions.map((componentVersion) => {
           const parse = (v) => {
             const snapshot = v.toLowerCase().includes('snapshot');
-            const nums = v.replace(/-snapshot/i, '').split('.').map(Number);
-            return { nums, snapshot };
+            const nums = v.replace(/-snapshot/i, '').split('.').map(Number).filter((n) => !isNaN(n));
+            const isLatest = snapshot && nums.length === 0;
+            return { nums, snapshot, isLatest };
           };
 
           const sortFn = (a, b) => {
             const pa = parse(a);
             const pb = parse(b);
+            if (pa.isLatest && pb.isLatest) return 0;
+            if (pa.isLatest) return -1;
+            if (pb.isLatest) return 1;
             const len = Math.max(pa.nums.length, pb.nums.length);
             for (let i = 0; i < len; i++) {
               const na = pa.nums[i] ?? 0;
