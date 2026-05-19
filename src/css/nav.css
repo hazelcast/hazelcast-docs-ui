@@ -250,7 +250,7 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
   color: light-dark(var(--accent), var(--neutral-white));
   border: 2px solid light-dark(var(--accent), var(--border-color-dark));
   background-color: light-dark(var(--info-light), var(--action-item-background-dark));
-  padding: 6px 16px 6px 6px;
+  padding: 6px 30px 6px 10px;
   text-decoration: none !important;
   cursor: pointer;
   width: 100%;
@@ -260,18 +260,17 @@ head:has(meta[content="dark"]) ~ body .nav-item-toggle {
   white-space: nowrap;
   font-weight: 500;
   user-select: none;
-  font-size: 14px;
 }
 
 .nav-version-picker-toggle::after {
   content: '';
   position: absolute;
-  right: 2px;
+  right: 0;
   top: 50%;
   transform: translate(0, -50%);
   background: transparent url("../img/caret-blue.svg") center no-repeat;
-  width: 20px;
-  height: 12px;
+  width: 30px;
+  height: 15px;
 }
 
 head:has(meta[content="dark"]) ~ body .nav-version-picker-toggle::after {
@@ -288,16 +287,12 @@ head:has(meta[content="dark"]) ~ body .nav-version-picker-toggle::after {
 }
 
 .navbar-product-name {
-  flex-basis: 80%;
+  flex-basis: 70%;
   flex-grow: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .navbar-product-version {
-  flex-basis: 20%;
+  flex-basis: 30%;
 }
 
 .navbar-product-name,
