@@ -289,6 +289,10 @@ head:has(meta[content="dark"]) ~ body .nav-version-picker-toggle::after {
 .navbar-product-name {
   flex-basis: 70%;
   flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .navbar-product-version {
