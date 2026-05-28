@@ -32,20 +32,20 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 24
-        cache: 'npm'
-    - name: Install NPM dependencies
-      run: npm ci
-    - name: Bundle UI
-      run: npm run bundle
-    - name: Upload bundle
-      uses: actions/upload-artifact@v4
-      with:
-        name: ui-bundle
-        path: build/ui-bundle.zip
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+      - name: Install NPM dependencies
+        run: npm ci
+      - name: Bundle UI
+        run: npm run bundle
+      - name: Upload bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-bundle
+          path: build/ui-bundle.zip
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -77,6 +77,11 @@ jobs:
   publish:
     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' && github.event.inputs.skip_publish == false }}
     needs: release
-    uses: hazelcast/hz-docs/.github/workflows/build-site-workflow.yml@main
-    secrets:
-      netlify_build_hook_id: ${{ secrets.NETLIFY_BUILD_HOOK_ID }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger production build
+        run: |
+          gh api repos/hazelcast/hazelcast-docs/dispatches \
+            -f event_type=build-and-deploy
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
