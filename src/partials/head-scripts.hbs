@@ -6,6 +6,11 @@
         .replace(/&quot;/g, '"')
         .replaceAll(String.fromCharCode(92), `${String.fromCharCode(92)}${String.fromCharCode(92)}`)
       );
+    },
+    pushDataLayer(event, params) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: event }, params || {}));
+      if (window.console && console.debug) console.debug('[dataLayer]', event, params || {});
     }
   }
 </script>
@@ -36,6 +41,16 @@
 
 {{#if site.keys.aiSearchId}}
   <!-- Kapa snippet -->
+  <script>
+    // Preinitialization stub
+    (function () {
+      if (window.Kapa) return;
+      const stub = function () { stub.c(arguments); };
+      stub.q = [];
+      stub.c = function (args) { stub.q.push(args); };
+      window.Kapa = stub;
+    })();
+  </script>
   <script
     src="https://widget.kapa.ai/kapa-widget.bundle.js"
     data-button-hide="true"

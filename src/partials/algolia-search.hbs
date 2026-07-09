@@ -285,6 +285,14 @@
             ? getEndSubitemSVG(html) : getArticleSVG(html);
       }
 
+      const pushEvent = (event, params) => {
+        if (window.UTILS && typeof window.UTILS.pushDataLayer === 'function') {
+          window.UTILS.pushDataLayer(event, params);
+        }
+      };
+      let lastReportedQuery = '';
+      let searchDebounceTimer = null;
+
       const {
         refresh,
         setIsOpen,
@@ -294,6 +302,32 @@
         openOnFocus: true,
         defaultActiveItemId: 0,
         detachedMediaQuery: '',
+        onStateChange({ state }) {
+          if (state.status !== 'idle') return;
+          const query = state.query || '';
+          if (query.length < 2) {
+            clearTimeout(searchDebounceTimer);
+            lastReportedQuery = '';
+            return;
+          }
+          if (query === lastReportedQuery) return;
+          const resultsCount = (state.collections || []).reduce(
+            (total, collection) => total + (collection.items ? collection.items.length : 0),
+            0
+          );
+          // Debounce: typing "cluster" logs one event when the user pauses,
+          // not one per keystroke.
+          clearTimeout(searchDebounceTimer);
+          searchDebounceTimer = setTimeout(() => {
+            lastReportedQuery = query;
+            pushEvent('search_performed', {
+              search_provider: 'algolia',
+              search_term: query,
+              search_results_count: resultsCount,
+              search_component: currentComponent,
+            });
+          }, 700);
+        },
         reshape({ sourcesBySourceId }) {
           const { algolia, ...rest } =
             sourcesBySourceId;
@@ -447,10 +481,32 @@
           event.stopImmediatePropagation();
         } else if (event.target.id === 'askAIBtn' || event.target.parentNode.id === 'askAIBtn') {
           event.preventDefault();
-          window.Kapa.open({ query: document.querySelector('input.aa-Input').value });
+          const query = document.querySelector('input.aa-Input').value;
+          pushEvent('search_ask_ai_click', {
+            search_provider: 'algolia',
+            search_term: query,
+            search_component: currentComponent,
+          });
+          window.Kapa('open', { query: query });
           setIsOpen(false);
         }
       }, true);
+
+      document.addEventListener('click', (event) => {
+        const target = event.target.nodeType === 1 ? event.target : event.target.parentElement;
+        const link = target && target.closest('.aa-ItemLink');
+        if (!link) return;
+        const panel = link.closest('.aa-Panel') || document;
+        const links = Array.prototype.slice.call(panel.querySelectorAll('.aa-ItemLink'));
+        const input = document.querySelector('input.aa-Input');
+        pushEvent('search_result_click', {
+          search_provider: 'algolia',
+          search_term: input ? input.value : '',
+          link_url: link.getAttribute('href'),
+          link_position: links.indexOf(link) + 1,
+          search_component: currentComponent,
+        });
+      });
 
       document.addEventListener('change', (event) => {
         if (event.target.id === 'componentSelect') {
