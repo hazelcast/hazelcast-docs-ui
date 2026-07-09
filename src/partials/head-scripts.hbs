@@ -36,7 +36,12 @@
 
 {{#if site.keys.aiSearchId}}
   <!-- Kapa snippet -->
+  <!--
+    This script is a config placeholder. The actual widget is loaded using this config based on consent state.
+  -->
   <script
+    type="text/plain"
+    id="kapa-widget-config"
     src="https://widget.kapa.ai/kapa-widget.bundle.js"
     data-button-hide="true"
     data-mcp-enabled="true"
@@ -63,9 +68,80 @@
     data-search-mode-enabled="false"
     data-search-display-num-results="10"
     data-search-source-group-order='["docs.hazelcast.com", "Java API Docs", "C# API Docs", "Go Client Docs"]'
-    data-user-analytics-cookie-enabled="false"
-    defer
   ></script>
+  <script>
+    (function () {
+      var KAPA_COOKIE = 'kapa_web_id';
+
+      // True only when Enzuzo reports analytics consent as granted. Prefer the live API
+      // (current state); fall back to the first-party cookie, which is readable
+      // synchronously at load even before the Enzuzo script has initialised.
+      function analyticsGranted() {
+        try {
+          var api = window.__enzuzoApi;
+          if (api && api.consent && typeof api.consent.getConsent === 'function') {
+            var c = api.consent.getConsent();
+            if (c && typeof c.analytics === 'boolean') return c.analytics === true;
+          }
+        } catch (e) { /* fall through to cookie */ }
+        return /(?:^|;\s*)cookies-analytics=true(?:;|$)/.test(document.cookie);
+      }
+
+      // Expire kapa_web_id across every domain/path scope it could have been set with.
+      // Kapa can share the id across subdomains, so it may be host-only or on a parent
+      // domain (e.g. .hazelcast.com); we clear all variants to be safe.
+      function deleteKapaCookie() {
+        if (document.cookie.indexOf(KAPA_COOKIE + '=') === -1) return;
+        var host = location.hostname;
+        var domains = ['', host];
+        var parts = host.split('.');
+        for (var i = 0; i < parts.length - 1; i++) domains.push('.' + parts.slice(i).join('.'));
+        for (var d = 0; d < domains.length; d++) {
+          document.cookie = KAPA_COOKIE + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/'
+            + (domains[d] ? '; domain=' + domains[d] : '');
+        }
+      }
+
+      // Inject the widget with the analytics attribute set to the current consent state.
+      // Enabling takes effect from this load onward; if consent is not (yet) granted we
+      // also clear any stale kapa_web_id left from a previous consented session.
+      if (!analyticsGranted()) deleteKapaCookie();
+      var s = document.createElement('script');
+      s.async = true;
+      var cfg = document.getElementById('kapa-widget-config');
+      if (cfg) {
+        for (var i = 0; i < cfg.attributes.length; i++) {
+          var a = cfg.attributes[i];
+          // Skip the inert marker; copy src + every data-* through to the live script.
+          if (a.name === 'type' || a.name === 'id') continue;
+          s.setAttribute(a.name, a.value);
+        }
+      }
+      s.setAttribute('data-user-analytics-cookie-enabled', analyticsGranted() ? 'true' : 'false');
+      document.head.appendChild(s);
+
+      // React to a mid-session consent change: if the user withdraws analytics consent,
+      // delete kapa_web_id immediately. Enzuzo pushes `enzuzo_consent_update` to the GTM
+      // dataLayer on every change. We hook dataLayer.push on the load event (by which
+      // point GTM has installed its own push; hooking earlier is lost when GTM replaces it).
+      function watchConsent() {
+        var dl = window.dataLayer = window.dataLayer || [];
+        var push = dl.push;
+        dl.push = function () {
+          var r = push.apply(this, arguments);
+          try {
+            for (var i = 0; i < arguments.length; i++) {
+              var e = arguments[i];
+              if (e && e.event === 'enzuzo_consent_update' && !analyticsGranted()) deleteKapaCookie();
+            }
+          } catch (err) { /* no-op */ }
+          return r;
+        };
+      }
+      if (document.readyState === 'complete') watchConsent();
+      else window.addEventListener('load', watchConsent);
+    })();
+  </script>
   <!-- End Kapa snippet -->
 {{/if}}
 
