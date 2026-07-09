@@ -291,6 +291,8 @@
         }
       };
       let lastReportedQuery = '';
+      let latestQuery = '';
+      let latestResultsCount = 0;
       let searchDebounceTimer = null;
 
       const {
@@ -303,27 +305,28 @@
         defaultActiveItemId: 0,
         detachedMediaQuery: '',
         onStateChange({ state }) {
-          if (state.status !== 'idle') return;
           const query = state.query || '';
+          // Keep the freshest settled result count for the current query.
+          if (state.status === 'idle') {
+            latestResultsCount = (state.collections || []).reduce(
+              (total, collection) => total + (collection.items ? collection.items.length : 0),
+              0
+            );
+          }
+          if (query === latestQuery) return;
+          latestQuery = query;
+          clearTimeout(searchDebounceTimer);
           if (query.length < 2) {
-            clearTimeout(searchDebounceTimer);
             lastReportedQuery = '';
             return;
           }
-          if (query === lastReportedQuery) return;
-          const resultsCount = (state.collections || []).reduce(
-            (total, collection) => total + (collection.items ? collection.items.length : 0),
-            0
-          );
-          // Debounce: typing "cluster" logs one event when the user pauses,
-          // not one per keystroke.
-          clearTimeout(searchDebounceTimer);
           searchDebounceTimer = setTimeout(() => {
+            if (query === lastReportedQuery) return;
             lastReportedQuery = query;
             pushEvent('search_performed', {
               search_provider: 'algolia',
               search_term: query,
-              search_results_count: resultsCount,
+              search_results_count: latestResultsCount,
               search_component: currentComponent,
             });
           }, 700);
