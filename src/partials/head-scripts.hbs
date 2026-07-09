@@ -10,7 +10,6 @@
     pushDataLayer(event, params) {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(Object.assign({ event: event }, params || {}));
-      if (window.console && console.debug) console.debug('[dataLayer]', event, params || {});
     }
   }
 </script>

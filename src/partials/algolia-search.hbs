@@ -108,12 +108,8 @@
         ...initialFacet,
       ];
 
-      console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
-
       try {
         const tags = await searchClient.searchForFacetValues({ indexName: '{{site.keys.docsearchIndex}}', facetName: 'tags', searchForFacetValuesRequest: { maxFacetHits: 100 } });
-
-        console.debug('[DEBUG:ALGOLIA_SEARCH] facets: ', tags.facetHits);
 
         componentVersions = componentVersions.map((componentVersion) => {
           const parse = (v) => {
@@ -153,8 +149,6 @@
         console.warn('Could not fetch facet values from Algolia.', e);
         console.warn('Falling back to component versions.');
       }
-
-      console.debug('[DEBUG:ALGOLIA_SEARCH] FINAL component versions: ', componentVersions);
 
       const getComponentOptions = (html) => componentVersions
         .map(({ name, title }) => name === currentComponent
@@ -225,8 +219,6 @@
             return acc;
           }, {});
 
-          // console.log('groupedItems', groupedItems);
-
           return Object.entries(groupedItems).map(([groupName, groupItems]) => {
             const userSource = options.getSource({
               name: groupName,
@@ -251,7 +243,6 @@
 
       const groupByProduct = groupBy((hit) => hit.hierarchy.lvl0, {
         getSource({ name, items }) {
-          // console.log('groupByProduct:items -> ', items);
           return {
             getItems() {
               const withSection = items.map(item => {
@@ -337,9 +328,6 @@
           const groupedSources = groupByProduct(algolia);
           // if there are no sources, return the default algolia source, to show the "No Results" template
           const resultingSources = groupedSources.length > 0 ? groupedSources : algolia;
-          if (groupedSources[0]?.getItems) {
-            console.debug('[DEBUG:ALGOLIA_SEARCH] current items: ', groupedSources[0].getItems());
-          }
           return [
             resultingSources,
             Object.values(rest),
