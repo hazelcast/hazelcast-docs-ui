@@ -14,15 +14,12 @@
     push('kapa_modal_open', { search_provider: 'kapa' })
   })
 
-  // Kapa fires separate events for typed vs. example questions
-  function onQuestionSubmit (data) {
+  window.Kapa('onAskAIQuerySubmit', function (data) {
     push('kapa_question_submitted', {
       search_provider: 'kapa',
       question: (data && data.question) || '',
     })
-  }
-  window.Kapa('onAskAIQuerySubmit', onQuestionSubmit)
-  window.Kapa('onAskAIExampleQuerySubmit', onQuestionSubmit)
+  })
 
   window.Kapa('onAskAIAnswerCompleted', function (data) {
     push('kapa_answer_completed', {
