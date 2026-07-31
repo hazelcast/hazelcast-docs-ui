@@ -6,6 +6,10 @@
         .replace(/&quot;/g, '"')
         .replaceAll(String.fromCharCode(92), `${String.fromCharCode(92)}${String.fromCharCode(92)}`)
       );
+    },
+    pushDataLayer(event, params) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: event }, params || {}));
     }
   }
 </script>

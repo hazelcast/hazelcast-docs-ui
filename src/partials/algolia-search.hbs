@@ -108,12 +108,8 @@
         ...initialFacet,
       ];
 
-      console.debug('[DEBUG:ALGOLIA_SEARCH] component versions: ', componentVersions);
-
       try {
         const tags = await searchClient.searchForFacetValues({ indexName: '{{site.keys.docsearchIndex}}', facetName: 'tags', searchForFacetValuesRequest: { maxFacetHits: 100 } });
-
-        console.debug('[DEBUG:ALGOLIA_SEARCH] facets: ', tags.facetHits);
 
         componentVersions = componentVersions.map((componentVersion) => {
           const parse = (v) => {
@@ -153,8 +149,6 @@
         console.warn('Could not fetch facet values from Algolia.', e);
         console.warn('Falling back to component versions.');
       }
-
-      console.debug('[DEBUG:ALGOLIA_SEARCH] FINAL component versions: ', componentVersions);
 
       const getComponentOptions = (html) => componentVersions
         .map(({ name, title }) => name === currentComponent
@@ -225,8 +219,6 @@
             return acc;
           }, {});
 
-          // console.log('groupedItems', groupedItems);
-
           return Object.entries(groupedItems).map(([groupName, groupItems]) => {
             const userSource = options.getSource({
               name: groupName,
@@ -251,7 +243,6 @@
 
       const groupByProduct = groupBy((hit) => hit.hierarchy.lvl0, {
         getSource({ name, items }) {
-          // console.log('groupByProduct:items -> ', items);
           return {
             getItems() {
               const withSection = items.map(item => {
@@ -285,6 +276,16 @@
             ? getEndSubitemSVG(html) : getArticleSVG(html);
       }
 
+      const pushEvent = (event, params) => {
+        if (window.UTILS && typeof window.UTILS.pushDataLayer === 'function') {
+          window.UTILS.pushDataLayer(event, params);
+        }
+      };
+      let lastReportedQuery = '';
+      let latestQuery = '';
+      let latestResultsCount = 0;
+      let searchDebounceTimer = null;
+
       const {
         refresh,
         setIsOpen,
@@ -294,15 +295,39 @@
         openOnFocus: true,
         defaultActiveItemId: 0,
         detachedMediaQuery: '',
+        onStateChange({ state }) {
+          const query = state.query || '';
+          // Keep the freshest settled result count for the current query.
+          if (state.status === 'idle') {
+            latestResultsCount = (state.collections || []).reduce(
+              (total, collection) => total + (collection.items ? collection.items.length : 0),
+              0
+            );
+          }
+          if (query === latestQuery) return;
+          latestQuery = query;
+          clearTimeout(searchDebounceTimer);
+          if (query.length < 2) {
+            lastReportedQuery = '';
+            return;
+          }
+          searchDebounceTimer = setTimeout(() => {
+            if (query === lastReportedQuery) return;
+            lastReportedQuery = query;
+            pushEvent('search_performed', {
+              search_provider: 'algolia',
+              search_term: query,
+              search_results_count: latestResultsCount,
+              search_component: currentComponent,
+            });
+          }, 700);
+        },
         reshape({ sourcesBySourceId }) {
           const { algolia, ...rest } =
             sourcesBySourceId;
           const groupedSources = groupByProduct(algolia);
           // if there are no sources, return the default algolia source, to show the "No Results" template
           const resultingSources = groupedSources.length > 0 ? groupedSources : algolia;
-          if (groupedSources[0]?.getItems) {
-            console.debug('[DEBUG:ALGOLIA_SEARCH] current items: ', groupedSources[0].getItems());
-          }
           return [
             resultingSources,
             Object.values(rest),
@@ -447,10 +472,32 @@
           event.stopImmediatePropagation();
         } else if (event.target.id === 'askAIBtn' || event.target.parentNode.id === 'askAIBtn') {
           event.preventDefault();
-          window.Kapa.open({ query: document.querySelector('input.aa-Input').value });
+          const query = document.querySelector('input.aa-Input').value;
+          pushEvent('search_ask_ai_click', {
+            search_provider: 'algolia',
+            search_term: query,
+            search_component: currentComponent,
+          });
+          window.Kapa('open', { query: query });
           setIsOpen(false);
         }
       }, true);
+
+      document.addEventListener('click', (event) => {
+        const target = event.target.nodeType === 1 ? event.target : event.target.parentElement;
+        const link = target && target.closest('.aa-ItemLink');
+        if (!link) return;
+        const panel = link.closest('.aa-Panel') || document;
+        const links = Array.prototype.slice.call(panel.querySelectorAll('.aa-ItemLink'));
+        const input = document.querySelector('input.aa-Input');
+        pushEvent('search_result_click', {
+          search_provider: 'algolia',
+          search_term: input ? input.value : '',
+          link_url: link.getAttribute('href'),
+          link_position: links.indexOf(link) + 1,
+          search_component: currentComponent,
+        });
+      });
 
       document.addEventListener('change', (event) => {
         if (event.target.id === 'componentSelect') {

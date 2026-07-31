@@ -7,7 +7,7 @@
     askAIHeaderBtn.addEventListener('click', (e) => {
       e.preventDefault()
       e.stopPropagation()
-      window.Kapa.open()
+      window.Kapa('open')
     })
   }
 })()
