@@ -28,6 +28,15 @@
 
 {{#if site.keys.aiSearchId}}
   <!-- Kapa snippet -->
+  <script>
+    (function () {
+      if (window.Kapa) return;
+      var stub = function () { stub.c(arguments); };
+      stub.q = [];
+      stub.c = function (args) { stub.q.push(args); };
+      window.Kapa = stub;
+    })();
+  </script>
   <!--
     This script is a config placeholder. The actual widget is loaded using this config to toggle cookies based on consent state.
   -->
