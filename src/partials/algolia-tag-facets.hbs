@@ -1,0 +1,25 @@
+<script>
+  window.getTagFacetHits = window.getTagFacetHits || function () {
+    if (window.__tagFacetsPromise) return window.__tagFacetsPromise;
+
+    const CACHE_KEY = 'hz.tagFacets.v1';
+    try {
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) return (window.__tagFacetsPromise = Promise.resolve(JSON.parse(cached)));
+    } catch (e) { /* sessionStorage unavailable — fall through to fetch */ }
+
+    window.__tagFacetsPromise = (async () => {
+      const { algoliasearch } = window['algoliasearch'];
+      const client = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
+      const res = await client.searchForFacetValues({
+        indexName: '{{site.keys.docsearchIndex}}',
+        facetName: 'tags',
+        searchForFacetValuesRequest: { maxFacetHits: 100 },
+      });
+      try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(res.facetHits)); } catch (e) {}
+      return res.facetHits;
+    })();
+
+    return window.__tagFacetsPromise;
+  };
+</script>

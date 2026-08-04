@@ -78,66 +78,51 @@
       return 0;
     };
 
-    try {
-      const waitForAlgolia = () => new Promise((resolve, reject) => {
-        if (window['algoliasearch']) return resolve();
+    let populated = false;
+    const populateVersionsFromAlgolia = async () => {
+      if (populated) return;
+      populated = true;
+      try {
+        const facetHits = await window.getTagFacetHits(); // shared, cached, lazy
 
-        const attachListeners = () => {
-          if (window['algoliasearch']) return resolve();
-          const script = document.getElementById('algoliasearchScript');
-          if (!script) return reject(new Error('algoliasearch script not found'));
-          script.addEventListener('load', resolve, { once: true });
-          script.addEventListener('error', reject, { once: true });
-        };
+        const algoliaVersions = facetHits
+          .filter((hit) => hit.value.startsWith(componentName + '-'))
+          .map((hit) => hit.value.replace(`${componentName}-`, ''));
 
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', attachListeners, { once: true });
-        } else {
-          attachListeners();
+        if (algoliaVersions.length === 0) return;
+
+        algoliaVersions.sort(sortFn);
+
+        const newItems = algoliaVersions
+          .filter((version) => versionUrlMap[version])
+          .map((version) => {
+            const { url, displayVersion } = versionUrlMap[version];
+            const li = document.createElement('li');
+            li.className = 'version' + (version === currentVersion ? ' is-current' : '');
+            const a = document.createElement('a');
+            a.href = url;
+            a.textContent = displayVersion;
+            li.appendChild(a);
+            return li;
+          });
+
+        if (newItems.length < algoliaVersions.length) {
+          console.warn('[NAV-EXPLORE] Some versions from Algolia were not found in the Antora version list and will be skipped:', algoliaVersions.filter((v) => !versionUrlMap[v]));
         }
-      });
 
-      await waitForAlgolia();
-
-      const { algoliasearch } = window['algoliasearch'];
-      const searchClient = algoliasearch('{{site.keys.docsearchId}}', '{{site.keys.docsearchApi}}');
-      const tags = await searchClient.searchForFacetValues({
-        indexName: '{{site.keys.docsearchIndex}}',
-        facetName: 'tags',
-        searchForFacetValuesRequest: { maxFacetHits: 100 },
-      });
-
-      const algoliaVersions = tags.facetHits
-        .filter((hit) => hit.value.startsWith(componentName + '-'))
-        .map((hit) => hit.value.replace(`${componentName}-`, ''));
-
-      if (algoliaVersions.length === 0) return;
-
-      algoliaVersions.sort(sortFn);
-
-      const newItems = algoliaVersions
-        .filter((version) => versionUrlMap[version])
-        .map((version) => {
-          const { url, displayVersion } = versionUrlMap[version];
-          const li = document.createElement('li');
-          li.className = 'version' + (version === currentVersion ? ' is-current' : '');
-          const a = document.createElement('a');
-          a.href = url;
-          a.textContent = displayVersion;
-          li.appendChild(a);
-          return li;
-        });
-
-      if (newItems.length < algoliaVersions.length) {
-        console.warn('[NAV-EXPLORE] Some versions from Algolia were not found in the Antora version list and will be skipped:', algoliaVersions.filter((v) => !versionUrlMap[v]));
+        if (newItems.length > 0) {
+          versionsList.innerHTML = '';
+          newItems.forEach((li) => versionsList.appendChild(li));
+        }
+      } catch (e) {
+        populated = false; // allow a retry on the next open
+        console.warn('[NAV-EXPLORE] Could not fetch versions from Algolia, falling back to component versions.', e);
       }
+    };
 
-      if (newItems.length > 0) {
-        versionsList.innerHTML = '';
-        newItems.forEach((li) => versionsList.appendChild(li));
-      }
-    } catch (e) {
-      console.warn('[NAV-EXPLORE] Could not fetch versions from Algolia, falling back to component versions.', e);
+    const versionToggle = document.getElementById('navbarProductVersion');
+    if (versionToggle) {
+      versionToggle.addEventListener('click', populateVersionsFromAlgolia, { once: true });
     }
   })();
 </script>
