@@ -1,4 +1,4 @@
-= Hazelcast Documentation UI
+= Hazelcast Documentation UI [archived]
 // Settings:
 :experimental:
 :hide-uri-scheme:
@@ -10,8 +10,7 @@
 :url-hazelcast: https://hazelcast.com
 :toc: preamble
 
-
-image:https://img.shields.io/github/v/release/JakeSCahill/hazelcast-docs-ui?label=Release[Release version]
+> This repository is no longer being maintained. The content has been migrated to the new link:https://github.com/hazelcast/documentation[Hazelcast documentation] repository. Find the published documentation at link:https://docs.hazelcast.com[docs.hazelcast.com].
 
 This repository hosts the UI project for the {url-docs-playbook}[documentation playbook].
 
